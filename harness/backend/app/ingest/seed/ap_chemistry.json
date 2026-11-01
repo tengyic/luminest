@@ -1,0 +1,1009 @@
+{
+ "course": "AP Chemistry - Structure, Reactions and Thermodynamics",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "The AP Chemistry course framework: atomic structure and properties, compound structure and properties, properties of substances and mixtures, chemical reactions, kinetics, thermodynamics, equilibrium, acids and bases, and applications of thermodynamics.",
+ "expected_weeks": 34,
+ "strands": [
+  {
+   "strand": "Atomic Structure and Properties",
+   "units": [
+    {
+     "unit": "Atoms and the mole",
+     "topics": [
+      {
+       "topic": "Moles and atomic structure",
+       "concepts": [
+        {
+         "title": "Moles and molar mass",
+         "summary": "A mole is Avogadro's number of particles, which converts between mass and number of particles.",
+         "keywords": [
+          "mole",
+          "molar mass",
+          "Avogadro"
+         ]
+        },
+        {
+         "title": "Isotopes and average atomic mass",
+         "summary": "An element's atomic mass is the abundance-weighted average of its isotopes.",
+         "keywords": [
+          "isotope",
+          "abundance",
+          "atomic mass"
+         ],
+         "prerequisites": [
+          "Moles and molar mass"
+         ]
+        },
+        {
+         "title": "Mass spectrometry",
+         "summary": "A mass spectrum measures isotope masses and abundances, which gives atomic mass and can identify a molecule.",
+         "keywords": [
+          "mass spectrometry",
+          "molecular ion",
+          "isotope pattern"
+         ],
+         "prerequisites": [
+          "Isotopes and average atomic mass"
+         ]
+        },
+        {
+         "title": "The mole and empirical formulae",
+         "summary": "Percentage composition converts to a mole ratio, which gives the empirical formula.",
+         "keywords": [
+          "empirical formula",
+          "percent composition",
+          "mole ratio"
+         ],
+         "prerequisites": [
+          "Moles and molar mass"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Electrons in atoms",
+     "prerequisites": [
+      "Atoms and the mole"
+     ],
+     "topics": [
+      {
+       "topic": "Electronic structure",
+       "concepts": [
+        {
+         "title": "Electron configuration",
+         "summary": "Electrons fill orbitals in order of energy, following the aufbau principle and Hund's rule.",
+         "keywords": [
+          "electron configuration",
+          "orbital",
+          "aufbau"
+         ]
+        },
+        {
+         "title": "Photoelectron spectroscopy",
+         "summary": "A photoelectron spectrum reports the binding energy of each electron shell and subshell.",
+         "keywords": [
+          "photoelectron spectroscopy",
+          "binding energy",
+          "subshell"
+         ],
+         "prerequisites": [
+          "Electron configuration"
+         ]
+        },
+        {
+         "title": "Coulomb's law and atomic structure",
+         "summary": "The attraction between nucleus and electrons depends on charge and distance, which explains periodic trends.",
+         "keywords": [
+          "Coulomb's law",
+          "effective nuclear charge",
+          "shielding"
+         ],
+         "prerequisites": [
+          "Electron configuration"
+         ]
+        },
+        {
+         "title": "Periodic trends",
+         "summary": "Atomic radius, ionisation energy, electron affinity and electronegativity follow from nuclear charge and shielding.",
+         "keywords": [
+          "periodic trend",
+          "ionisation energy",
+          "electronegativity"
+         ],
+         "prerequisites": [
+          "Coulomb's law and atomic structure"
+         ]
+        },
+        {
+         "title": "Valence electrons and the periodic table",
+         "summary": "Group position gives the valence configuration, which predicts an element's chemistry.",
+         "keywords": [
+          "valence electron",
+          "group",
+          "periodic table"
+         ],
+         "prerequisites": [
+          "Periodic trends"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Compound Structure and Properties",
+   "units": [
+    {
+     "unit": "Bonding and geometry",
+     "prerequisites": [
+      "Electrons in atoms"
+     ],
+     "topics": [
+      {
+       "topic": "How atoms bond",
+       "concepts": [
+        {
+         "title": "Types of chemical bonds",
+         "summary": "Bonds range from ionic to covalent to metallic, and the type follows from electronegativity difference.",
+         "keywords": [
+          "ionic bond",
+          "covalent bond",
+          "metallic bond"
+         ]
+        },
+        {
+         "title": "Ionic bonding and lattice energy",
+         "summary": "Lattice energy grows with charge and shrinks with ion size, which controls melting point and solubility.",
+         "keywords": [
+          "lattice energy",
+          "ionic solid",
+          "Coulomb"
+         ],
+         "prerequisites": [
+          "Types of chemical bonds"
+         ]
+        },
+        {
+         "title": "Covalent bonding and Lewis structures",
+         "summary": "Lewis structures show shared and lone pairs and predict bond order and geometry.",
+         "keywords": [
+          "Lewis structure",
+          "lone pair",
+          "bond order"
+         ],
+         "prerequisites": [
+          "Types of chemical bonds"
+         ]
+        },
+        {
+         "title": "Resonance and formal charge",
+         "summary": "Resonance spreads electrons over several positions, and formal charge selects the best structure.",
+         "keywords": [
+          "resonance",
+          "formal charge"
+         ],
+         "prerequisites": [
+          "Covalent bonding and Lewis structures"
+         ]
+        },
+        {
+         "title": "VSEPR and molecular geometry",
+         "summary": "Electron domains repel and arrange as far apart as possible, which sets the shape.",
+         "keywords": [
+          "VSEPR",
+          "molecular geometry",
+          "bond angle"
+         ],
+         "prerequisites": [
+          "Covalent bonding and Lewis structures"
+         ]
+        },
+        {
+         "title": "Hybridisation and bonding models",
+         "summary": "Mixing atomic orbitals explains observed geometries and bond angles.",
+         "keywords": [
+          "hybridisation",
+          "sp",
+          "sp2",
+          "sp3"
+         ],
+         "prerequisites": [
+          "VSEPR and molecular geometry"
+         ]
+        },
+        {
+         "title": "Polarity and dipole moments",
+         "summary": "Polar bonds plus an asymmetric shape produce a net dipole, which controls intermolecular forces.",
+         "keywords": [
+          "polarity",
+          "dipole moment"
+         ],
+         "prerequisites": [
+          "VSEPR and molecular geometry"
+         ]
+        },
+        {
+         "title": "Intermolecular forces",
+         "summary": "London dispersion, dipole-dipole and hydrogen bonding set boiling point and solubility.",
+         "keywords": [
+          "intermolecular force",
+          "hydrogen bond",
+          "dispersion"
+         ],
+         "prerequisites": [
+          "Polarity and dipole moments"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Properties of Substances and Mixtures",
+   "units": [
+    {
+     "unit": "States, gases and solutions",
+     "prerequisites": [
+      "Bonding and geometry"
+     ],
+     "topics": [
+      {
+       "topic": "Bulk properties",
+       "concepts": [
+        {
+         "title": "Solids, liquids and gases",
+         "summary": "The kinetic energy of particles relative to intermolecular forces decides the state.",
+         "keywords": [
+          "states of matter",
+          "kinetic energy"
+         ]
+        },
+        {
+         "title": "Phase changes and phase diagrams",
+         "summary": "Heating and pressure change the balance of phases, which a phase diagram maps.",
+         "keywords": [
+          "phase change",
+          "phase diagram",
+          "triple point"
+         ],
+         "prerequisites": [
+          "Solids, liquids and gases"
+         ]
+        },
+        {
+         "title": "The ideal gas law",
+         "summary": "Pressure, volume, temperature and moles are linked by PV equals nRT.",
+         "keywords": [
+          "ideal gas law",
+          "PV=nRT",
+          "pressure"
+         ],
+         "prerequisites": [
+          "Solids, liquids and gases"
+         ]
+        },
+        {
+         "title": "Kinetic molecular theory",
+         "summary": "Gas pressure and temperature follow from particle collisions and average kinetic energy.",
+         "keywords": [
+          "kinetic molecular theory",
+          "collision",
+          "temperature"
+         ],
+         "prerequisites": [
+          "The ideal gas law"
+         ]
+        },
+        {
+         "title": "Deviations from ideal behaviour",
+         "summary": "Real gases deviate at high pressure and low temperature, where volume and attraction matter.",
+         "keywords": [
+          "real gas",
+          "van der Waals",
+          "deviation"
+         ],
+         "prerequisites": [
+          "Kinetic molecular theory"
+         ]
+        },
+        {
+         "title": "Solutions and solubility",
+         "summary": "Like dissolves like, and solubility depends on temperature and pressure.",
+         "keywords": [
+          "solubility",
+          "solute",
+          "solvent"
+         ]
+        },
+        {
+         "title": "Concentration and molarity",
+         "summary": "Molarity expresses moles of solute per litre of solution.",
+         "keywords": [
+          "molarity",
+          "concentration",
+          "dilution"
+         ],
+         "prerequisites": [
+          "Solutions and solubility"
+         ]
+        },
+        {
+         "title": "Separating mixtures",
+         "summary": "Distillation, filtration and chromatography separate by differing physical properties.",
+         "keywords": [
+          "distillation",
+          "chromatography",
+          "filtration"
+         ],
+         "prerequisites": [
+          "Concentration and molarity"
+         ]
+        },
+        {
+         "title": "Colligative properties",
+         "summary": "Vapour pressure, boiling point, freezing point and osmosis depend on particle count, not identity.",
+         "keywords": [
+          "colligative",
+          "boiling point elevation",
+          "osmotic pressure"
+         ],
+         "prerequisites": [
+          "Concentration and molarity"
+         ]
+        },
+        {
+         "title": "Spectrophotometry and the Beer-Lambert law",
+         "summary": "Absorbance is proportional to concentration and path length, which allows concentration to be measured.",
+         "keywords": [
+          "Beer-Lambert",
+          "absorbance",
+          "spectrophotometry"
+         ],
+         "prerequisites": [
+          "Concentration and molarity"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Chemical Reactions",
+   "units": [
+    {
+     "unit": "Reaction types and stoichiometry",
+     "prerequisites": [
+      "States, gases and solutions"
+     ],
+     "topics": [
+      {
+       "topic": "Writing and using reactions",
+       "concepts": [
+        {
+         "title": "Writing and balancing equations",
+         "summary": "Atoms are conserved, so coefficients must balance every element.",
+         "keywords": [
+          "balancing",
+          "chemical equation",
+          "conservation"
+         ]
+        },
+        {
+         "title": "Types of reactions",
+         "summary": "Synthesis, decomposition, combustion, precipitation and neutralisation predict products.",
+         "keywords": [
+          "reaction type",
+          "precipitation",
+          "combustion"
+         ],
+         "prerequisites": [
+          "Writing and balancing equations"
+         ]
+        },
+        {
+         "title": "Net ionic equations",
+         "summary": "Spectator ions are removed to show the species that actually change.",
+         "keywords": [
+          "net ionic equation",
+          "spectator ion",
+          "precipitate"
+         ],
+         "prerequisites": [
+          "Types of reactions"
+         ]
+        },
+        {
+         "title": "Stoichiometry and limiting reactants",
+         "summary": "Mole ratios from the balanced equation give theoretical yield, and the limiting reactant caps it.",
+         "keywords": [
+          "stoichiometry",
+          "limiting reactant",
+          "theoretical yield"
+         ],
+         "prerequisites": [
+          "Writing and balancing equations"
+         ]
+        },
+        {
+         "title": "Percent yield",
+         "summary": "Comparing actual with theoretical yield measures how complete and selective a reaction is.",
+         "keywords": [
+          "percent yield",
+          "actual yield"
+         ],
+         "prerequisites": [
+          "Stoichiometry and limiting reactants"
+         ]
+        },
+        {
+         "title": "Acid-base reactions",
+         "summary": "Proton transfer reactions neutralise acids and bases and can be followed by titration.",
+         "keywords": [
+          "acid-base",
+          "neutralisation",
+          "proton transfer"
+         ],
+         "prerequisites": [
+          "Types of reactions"
+         ]
+        },
+        {
+         "title": "Oxidation-reduction reactions",
+         "summary": "Electron transfer changes oxidation states, and half-reactions separate the two processes.",
+         "keywords": [
+          "redox",
+          "oxidation state",
+          "half-reaction"
+         ],
+         "prerequisites": [
+          "Net ionic equations"
+         ]
+        },
+        {
+         "title": "Titration",
+         "summary": "A titration uses a known concentration to find an unknown one at the equivalence point.",
+         "keywords": [
+          "titration",
+          "equivalence point",
+          "indicator"
+         ],
+         "prerequisites": [
+          "Acid-base reactions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Kinetics",
+   "units": [
+    {
+     "unit": "Reaction rates",
+     "prerequisites": [
+      "Reaction types and stoichiometry"
+     ],
+     "topics": [
+      {
+       "topic": "How fast reactions go",
+       "concepts": [
+        {
+         "title": "Reaction rate",
+         "summary": "Rate is the change in concentration of a reactant or product per unit time.",
+         "keywords": [
+          "reaction rate",
+          "concentration change"
+         ]
+        },
+        {
+         "title": "Rate laws and reaction order",
+         "summary": "The rate law is determined by experiment, and its orders need not match the stoichiometric coefficients.",
+         "keywords": [
+          "rate law",
+          "reaction order",
+          "rate constant"
+         ],
+         "prerequisites": [
+          "Reaction rate"
+         ]
+        },
+        {
+         "title": "Determining rate laws from data",
+         "summary": "Initial-rate and graphical methods extract orders and the rate constant.",
+         "keywords": [
+          "initial rate",
+          "method of initial rates"
+         ],
+         "prerequisites": [
+          "Rate laws and reaction order"
+         ]
+        },
+        {
+         "title": "Integrated rate laws and half-life",
+         "summary": "Integrating the rate law gives concentration against time and the half-life for each order.",
+         "keywords": [
+          "integrated rate law",
+          "half-life",
+          "first order"
+         ],
+         "prerequisites": [
+          "Determining rate laws from data"
+         ]
+        },
+        {
+         "title": "Collision theory and activation energy",
+         "summary": "Molecules must collide with enough energy and the right orientation to react.",
+         "keywords": [
+          "collision theory",
+          "activation energy",
+          "orientation"
+         ],
+         "prerequisites": [
+          "Reaction rate"
+         ]
+        },
+        {
+         "title": "The Arrhenius equation",
+         "summary": "Rate constants rise with temperature in a way that reveals activation energy.",
+         "keywords": [
+          "Arrhenius",
+          "activation energy",
+          "temperature dependence"
+         ],
+         "prerequisites": [
+          "Collision theory and activation energy"
+         ]
+        },
+        {
+         "title": "Reaction mechanisms",
+         "summary": "A mechanism is a sequence of elementary steps whose slowest step sets the overall rate.",
+         "keywords": [
+          "mechanism",
+          "elementary step",
+          "rate-determining step"
+         ],
+         "prerequisites": [
+          "Collision theory and activation energy"
+         ]
+        },
+        {
+         "title": "Catalysis",
+         "summary": "A catalyst provides a lower-energy path without being consumed, so it raises rate not yield.",
+         "keywords": [
+          "catalyst",
+          "homogeneous",
+          "heterogeneous"
+         ],
+         "prerequisites": [
+          "Reaction mechanisms"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Thermodynamics",
+   "units": [
+    {
+     "unit": "Energy and enthalpy",
+     "prerequisites": [
+      "Reaction rates"
+     ],
+     "topics": [
+      {
+       "topic": "Heat, work and enthalpy",
+       "concepts": [
+        {
+         "title": "Endothermic and exothermic processes",
+         "summary": "Energy is absorbed or released, and the sign of enthalpy change reports which.",
+         "keywords": [
+          "endothermic",
+          "exothermic",
+          "enthalpy"
+         ]
+        },
+        {
+         "title": "Heat capacity and calorimetry",
+         "summary": "Calorimetry measures heat exchanged using mass, specific heat and temperature change.",
+         "keywords": [
+          "calorimetry",
+          "specific heat",
+          "heat capacity"
+         ],
+         "prerequisites": [
+          "Endothermic and exothermic processes"
+         ]
+        },
+        {
+         "title": "Enthalpy of reaction and Hess's law",
+         "summary": "Enthalpy is a state function, so reactions can be added to find an unknown enthalpy.",
+         "keywords": [
+          "Hess's law",
+          "state function",
+          "enthalpy of reaction"
+         ],
+         "prerequisites": [
+          "Heat capacity and calorimetry"
+         ]
+        },
+        {
+         "title": "Bond enthalpies",
+         "summary": "Breaking bonds costs energy and forming bonds releases it, which gives an estimate of reaction enthalpy.",
+         "keywords": [
+          "bond enthalpy",
+          "bond breaking"
+         ],
+         "prerequisites": [
+          "Enthalpy of reaction and Hess's law"
+         ]
+        },
+        {
+         "title": "Entropy",
+         "summary": "Entropy measures dispersal of energy and matter, and it tends to increase.",
+         "keywords": [
+          "entropy",
+          "disorder",
+          "second law"
+         ],
+         "prerequisites": [
+          "Enthalpy of reaction and Hess's law"
+         ]
+        },
+        {
+         "title": "Gibbs free energy",
+         "summary": "Free energy combines enthalpy and entropy to decide thermodynamic favorability.",
+         "keywords": [
+          "Gibbs free energy",
+          "spontaneity"
+         ],
+         "prerequisites": [
+          "Entropy"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Equilibrium",
+   "units": [
+    {
+     "unit": "Dynamic equilibrium",
+     "prerequisites": [
+      "Energy and enthalpy"
+     ],
+     "topics": [
+      {
+       "topic": "Reversible reactions",
+       "concepts": [
+        {
+         "title": "Dynamic equilibrium",
+         "summary": "Forward and reverse rates become equal, so concentrations stop changing while reactions continue.",
+         "keywords": [
+          "dynamic equilibrium",
+          "reversible reaction"
+         ]
+        },
+        {
+         "title": "The equilibrium constant K",
+         "summary": "K expresses the ratio of products to reactants at equilibrium and its size reports the extent of reaction.",
+         "keywords": [
+          "equilibrium constant",
+          "K"
+         ],
+         "prerequisites": [
+          "Dynamic equilibrium"
+         ]
+        },
+        {
+         "title": "The reaction quotient Q",
+         "summary": "Comparing Q with K predicts the direction a system must shift to reach equilibrium.",
+         "keywords": [
+          "reaction quotient",
+          "Q",
+          "direction of shift"
+         ],
+         "prerequisites": [
+          "The equilibrium constant K"
+         ]
+        },
+        {
+         "title": "Le Chatelier's principle",
+         "summary": "A system at equilibrium shifts to partially oppose a change in concentration, pressure or temperature.",
+         "keywords": [
+          "Le Chatelier",
+          "stress",
+          "shift"
+         ],
+         "prerequisites": [
+          "The reaction quotient Q"
+         ]
+        },
+        {
+         "title": "Calculating equilibrium concentrations",
+         "summary": "ICE tables track initial, change and equilibrium amounts to solve for concentrations.",
+         "keywords": [
+          "ICE table",
+          "equilibrium concentration"
+         ],
+         "prerequisites": [
+          "The equilibrium constant K"
+         ]
+        },
+        {
+         "title": "Solubility equilibria and Ksp",
+         "summary": "A solubility product describes the equilibrium between a solid and its ions.",
+         "keywords": [
+          "Ksp",
+          "solubility product",
+          "common ion"
+         ],
+         "prerequisites": [
+          "Calculating equilibrium concentrations"
+         ]
+        },
+        {
+         "title": "Free energy and equilibrium",
+         "summary": "The standard free-energy change is related to K, which links thermodynamics and equilibrium.",
+         "keywords": [
+          "free energy",
+          "equilibrium constant",
+          "K"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Acids and Bases",
+   "units": [
+    {
+     "unit": "Proton transfer in water",
+     "prerequisites": [
+      "Dynamic equilibrium"
+     ],
+     "topics": [
+      {
+       "topic": "Acidity and pH",
+       "concepts": [
+        {
+         "title": "Acid-base definitions",
+         "summary": "Brønsted-Lowry acids donate protons and bases accept them, and Lewis definitions generalise to electron pairs.",
+         "keywords": [
+          "Brønsted-Lowry",
+          "Lewis acid",
+          "proton"
+         ]
+        },
+        {
+         "title": "pH and pOH",
+         "summary": "pH is the negative logarithm of hydrogen-ion concentration, and pH plus pOH is fourteen at 25 degrees.",
+         "keywords": [
+          "pH",
+          "pOH",
+          "logarithm"
+         ],
+         "prerequisites": [
+          "Acid-base definitions"
+         ]
+        },
+        {
+         "title": "Strong acids and bases",
+         "summary": "Strong acids and bases ionise completely, so concentration directly gives the ion concentration.",
+         "keywords": [
+          "strong acid",
+          "strong base",
+          "complete ionisation"
+         ],
+         "prerequisites": [
+          "pH and pOH"
+         ]
+        },
+        {
+         "title": "Weak acid and base equilibria",
+         "summary": "Weak acids ionise partially, so an equilibrium calculation is needed.",
+         "keywords": [
+          "weak acid",
+          "Ka",
+          "percent ionisation"
+         ],
+         "prerequisites": [
+          "Strong acids and bases"
+         ]
+        },
+        {
+         "title": "Ka, Kb and conjugate pairs",
+         "summary": "Ka and Kb of a conjugate pair multiply to the ion product of water.",
+         "keywords": [
+          "Ka",
+          "Kb",
+          "conjugate pair",
+          "Kw"
+         ],
+         "prerequisites": [
+          "Weak acid and base equilibria"
+         ]
+        },
+        {
+         "title": "Molecular structure and acid strength",
+         "summary": "Bond polarity and stability of the conjugate base explain why some acids are stronger.",
+         "keywords": [
+          "acid strength",
+          "inductive effect",
+          "conjugate base"
+         ],
+         "prerequisites": [
+          "Ka, Kb and conjugate pairs"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Buffers and titrations",
+     "prerequisites": [
+      "Proton transfer in water"
+     ],
+     "topics": [
+      {
+       "topic": "Controlling pH",
+       "concepts": [
+        {
+         "title": "Buffers",
+         "summary": "A weak acid and its conjugate base resist pH change by neutralising added acid or base.",
+         "keywords": [
+          "buffer",
+          "conjugate base",
+          "pH resistance"
+         ]
+        },
+        {
+         "title": "The Henderson-Hasselbalch equation",
+         "summary": "pH depends on pKa and the ratio of conjugate base to acid, which is the buffer calculation.",
+         "keywords": [
+          "Henderson-Hasselbalch",
+          "pKa",
+          "buffer ratio"
+         ],
+         "prerequisites": [
+          "Buffers"
+         ]
+        },
+        {
+         "title": "Acid-base titration curves",
+         "summary": "A titration curve's shape and equivalence pH depend on the strength of the acid and base.",
+         "keywords": [
+          "titration curve",
+          "equivalence point",
+          "half-equivalence"
+         ]
+        },
+        {
+         "title": "Buffer capacity and selection",
+         "summary": "A buffer works best near its pKa and within a limited capacity.",
+         "keywords": [
+          "buffer capacity",
+          "pKa",
+          "selection"
+         ],
+         "prerequisites": [
+          "The Henderson-Hasselbalch equation"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Applications of Thermodynamics",
+   "units": [
+    {
+     "unit": "Electrochemistry",
+     "prerequisites": [
+      "Buffers and titrations"
+     ],
+     "topics": [
+      {
+       "topic": "Electrons doing work",
+       "concepts": [
+        {
+         "title": "Galvanic cells",
+         "summary": "A spontaneous redox reaction separated into half-cells produces a voltage.",
+         "keywords": [
+          "galvanic cell",
+          "half-cell",
+          "anode",
+          "cathode"
+         ]
+        },
+        {
+         "title": "Cell potential and standard reduction potentials",
+         "summary": "Standard reduction potentials give the cell potential as cathode minus anode.",
+         "keywords": [
+          "standard reduction potential",
+          "cell potential",
+          "EMF"
+         ],
+         "prerequisites": [
+          "Galvanic cells"
+         ]
+        },
+        {
+         "title": "Free energy and cell potential",
+         "summary": "Cell potential is proportional to the free-energy change of the reaction.",
+         "keywords": [
+          "free energy",
+          "cell potential",
+          "faraday"
+         ],
+         "prerequisites": [
+          "Cell potential and standard reduction potentials"
+         ]
+        },
+        {
+         "title": "The Nernst equation",
+         "summary": "Non-standard concentrations change cell potential in a way the Nernst equation predicts.",
+         "keywords": [
+          "Nernst equation",
+          "concentration cell"
+         ],
+         "prerequisites": [
+          "Free energy and cell potential"
+         ]
+        },
+        {
+         "title": "Electrolytic cells",
+         "summary": "A non-spontaneous reaction can be driven by an external voltage.",
+         "keywords": [
+          "electrolytic cell",
+          "electrolysis",
+          "overpotential"
+         ],
+         "prerequisites": [
+          "Cell potential and standard reduction potentials"
+         ]
+        },
+        {
+         "title": "Faraday's laws and quantitative electrolysis",
+         "summary": "Charge passed relates to moles of electrons and so to mass deposited.",
+         "keywords": [
+          "Faraday",
+          "electrolysis",
+          "charge"
+         ],
+         "prerequisites": [
+          "Electrolytic cells"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

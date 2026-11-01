@@ -1,0 +1,64 @@
+name: native-learning-harness
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: harness
+      POSTGRES_USER: harness
+      POSTGRES_PASSWORD: ${HARNESS_POSTGRES_PASSWORD:?Set HARNESS_POSTGRES_PASSWORD to a strong password}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U harness -d harness']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  migrate:
+    # harness/ is the context, not harness/backend/: app/resources.py resolves web/
+    # and model/ by walking up from app/, so the image has to be able to COPY them.
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    environment:
+      HARNESS_ENV: production
+      HARNESS_DATABASE_URL: postgresql+psycopg://harness:${HARNESS_POSTGRES_PASSWORD:?Set HARNESS_POSTGRES_PASSWORD}@postgres:5432/harness
+      HARNESS_SECRET: ${HARNESS_SECRET:?Set HARNESS_SECRET to a strong random secret of at least 32 characters}
+      HARNESS_ALLOWED_HOSTS: ${HARNESS_ALLOWED_HOSTS:?Set explicit public hostname and localhost}
+    command: [python, scripts/init_db.py]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: 'no'
+  backend:
+    # harness/ is the context, not harness/backend/: app/resources.py resolves web/
+    # and model/ by walking up from app/, so the image has to be able to COPY them.
+    build:
+      context: ..
+      dockerfile: backend/Dockerfile
+    environment:
+      HARNESS_ENV: production
+      HARNESS_DATABASE_URL: postgresql+psycopg://harness:${HARNESS_POSTGRES_PASSWORD:?Set HARNESS_POSTGRES_PASSWORD}@postgres:5432/harness
+      HARNESS_SECRET: ${HARNESS_SECRET:?Set HARNESS_SECRET}
+      HARNESS_ALLOWED_HOSTS: ${HARNESS_ALLOWED_HOSTS:?Set explicit public hostname and localhost}
+      HARNESS_AUTO_CREATE: '0'
+      HARNESS_TUTOR_PROVIDER: ${HARNESS_TUTOR_PROVIDER:-offline}
+      HARNESS_TUTOR_URL: ${HARNESS_TUTOR_URL:-}
+      HARNESS_TUTOR_KEY: ${HARNESS_TUTOR_KEY:-}
+      HARNESS_TUTOR_MODEL: ${HARNESS_TUTOR_MODEL:-}
+    command: [python, -m, uvicorn, 'app.main:create_app', --factory, --host, '0.0.0.0', --port, '8000', --no-access-log, --proxy-headers, --forwarded-allow-ips, '${HARNESS_TRUSTED_PROXY_IPS:-127.0.0.1}']
+    ports:
+      - '127.0.0.1:${HARNESS_PORT:-8000}:8000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+volumes:
+  postgres-data:

@@ -1,0 +1,196 @@
+[
+  {
+    "slug": "math-area-model-multiplication",
+    "archetype": "area_model",
+    "title": "Area Model — Multiplication",
+    "course_id": "algebra_one_year",
+    "concept": "Integer multiplication and division",
+    "subjects": ["mathematics"],
+    "difficulty": "intro",
+    "minutes": 5,
+    "prompt": "Split 13 x 24 into its place-value parts and add them up.",
+    "learning_objective": "Compute a two-digit product by decomposing the rectangle into partial products, and see that the total is the same however the rectangle is split.",
+    "reference": "Area model of multiplication, as used in NRICH and Mathigon Polypad activities",
+    "tags": ["area", "multiplication", "distributive-property", "place-value"],
+    "spec": {
+      "title": "Area Model — 13 x 24",
+      "instruction": "The rectangle is 13 units wide and 24 units tall. Drag the dashed dividers to split it, then add the four sub-rectangles and enter the total area.",
+      "mode": "multiply",
+      "width": 13,
+      "height": 24,
+      "area": 312,
+      "tolerance": 0,
+      "seed": 101
+    }
+  },
+  {
+    "slug": "math-area-model-factoring",
+    "archetype": "area_model",
+    "title": "Area Model — Factoring",
+    "course_id": "algebra_one_year",
+    "concept": "Factors, multiples and divisibility",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Build a rectangle with an area of 36 square units.",
+    "learning_objective": "Find factor pairs of a whole number by building rectangles of a fixed area, and recognise that a number can have several factor pairs.",
+    "reference": "Factors, multiples and divisibility; the area model used in reverse",
+    "tags": ["area", "factoring", "factors", "divisibility"],
+    "spec": {
+      "title": "Area Model — Factor 36",
+      "instruction": "The target area is 36 square units. Drag the round side handles, or type the sides, until the rectangle has that area — then press Check.",
+      "mode": "factor",
+      "width": 2,
+      "height": 2,
+      "area": 36,
+      "tolerance": 0,
+      "seed": 102
+    }
+  },
+  {
+    "slug": "math-probability-lab-biased-coin",
+    "archetype": "probability_lab",
+    "title": "Probability Lab — Biased Coin",
+    "course_id": "algebra_2",
+    "concept": "Experimental probability and the law of large numbers",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "Run trials and watch the observed proportion settle on the theoretical one.",
+    "learning_objective": "Explain why the observed relative frequency approaches the theoretical probability as the number of trials grows, and predict that frequency for a fixed number of trials.",
+    "reference": "Experimental probability and the law of large numbers",
+    "tags": ["probability", "simulation", "law-of-large-numbers", "relative-frequency"],
+    "spec": {
+      "title": "Probability Lab — Biased Coin",
+      "instruction": "This coin comes up heads with probability 0.70. Run 1, 10, 100 and 1000 trials and watch the bars. Then predict the proportion of heads in a fresh run of 1000 trials.",
+      "outcomes": [
+        { "label": "Heads", "p": 0.7 },
+        { "label": "Tails", "p": 0.3 }
+      ],
+      "learner_sets": false,
+      "predict_trials": 1000,
+      "tolerance": 0.06,
+      "seed": 211
+    }
+  },
+  {
+    "slug": "math-probability-lab-fair-die",
+    "archetype": "probability_lab",
+    "title": "Probability Lab — Fair Die",
+    "course_id": "algebra_2",
+    "concept": "Probability distributions",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "Roll a fair die many times and predict how often each face lands.",
+    "learning_objective": "Compare an empirical distribution with a theoretical uniform distribution and predict the relative frequency of a single outcome after a fixed number of trials.",
+    "reference": "Probability distributions; simulation and probability models",
+    "tags": ["probability", "distribution", "simulation", "uniform"],
+    "spec": {
+      "title": "Probability Lab — Fair Die",
+      "instruction": "A fair six-sided die: every face has probability 1/6. Run the trials and watch six bars, each with its own theoretical line. Then predict the proportion of 1s in a fresh run of 600 rolls.",
+      "outcomes": [
+        { "label": "1", "p": 0.1666666667 },
+        { "label": "2", "p": 0.1666666667 },
+        { "label": "3", "p": 0.1666666667 },
+        { "label": "4", "p": 0.1666666667 },
+        { "label": "5", "p": 0.1666666667 },
+        { "label": "6", "p": 0.1666666667 }
+      ],
+      "learner_sets": false,
+      "predict_trials": 600,
+      "tolerance": 0.05,
+      "seed": 212
+    }
+  },
+  {
+    "slug": "math-pattern-sequence-growing-tiles",
+    "archetype": "pattern_sequence",
+    "title": "Growing Pattern — Tiles",
+    "course_id": "algebra_one_year",
+    "concept": "Arithmetic sequences as linear functions",
+    "subjects": ["mathematics"],
+    "difficulty": "intro",
+    "minutes": 6,
+    "prompt": "Extend the tile pattern, then state its rule.",
+    "learning_objective": "Extend an arithmetic sequence by one term and describe it as t(n) = a + (n - 1)d, naming the first term and the common difference.",
+    "reference": "Arithmetic sequences as linear functions",
+    "tags": ["sequences", "patterns", "arithmetic", "nth-term"],
+    "spec": {
+      "title": "Growing Pattern — Tiles",
+      "instruction": "Each row is one term of the pattern, one tile per unit. Work out the next term, then state the first term and the common difference.",
+      "first": 3,
+      "step": 4,
+      "shown": 4,
+      "seed": 301
+    }
+  },
+  {
+    "slug": "math-pattern-sequence-nth-term",
+    "archetype": "pattern_sequence",
+    "title": "Arithmetic Sequence — Find the Rule",
+    "course_id": "algebra_2",
+    "concept": "Arithmetic sequences and series",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Find the next term, then write the rule a + (n - 1)d.",
+    "learning_objective": "Derive the first term and common difference of an arithmetic sequence from its terms and use them to write the general term.",
+    "reference": "Arithmetic sequences and series",
+    "tags": ["sequences", "arithmetic", "nth-term", "general-term"],
+    "spec": {
+      "title": "Arithmetic Sequence — Find the Rule",
+      "instruction": "The first five terms of an arithmetic sequence are shown. Give the sixth term, then state the first term and the common difference.",
+      "first": 5,
+      "step": 3,
+      "shown": 5,
+      "seed": 302
+    }
+  },
+  {
+    "slug": "cs-step-algorithm-insertion-comparisons",
+    "archetype": "step_algorithm",
+    "title": "Step the Sort — Insertion Sort Comparisons",
+    "course_id": "computer_science",
+    "concept": "Algorithm efficiency and Big-O",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 8,
+    "prompt": "Step through insertion sort and predict its comparison count.",
+    "learning_objective": "Trace insertion sort one comparison at a time and explain why its comparison count depends on the data rather than only on the array length.",
+    "reference": "Comparison sorting algorithms; algorithm efficiency and Big-O",
+    "tags": ["algorithms", "sorting", "insertion-sort", "complexity"],
+    "spec": {
+      "title": "Insertion Sort — Count the Comparisons",
+      "instruction": "Step forward and back through the sort. The Comparisons chip counts every pair the algorithm looks at. Then predict the total.",
+      "array": [5, 2, 4, 6, 1, 3],
+      "algorithm": "insertion",
+      "predict": "comparisons",
+      "k": 0,
+      "seed": 401
+    }
+  },
+  {
+    "slug": "cs-step-algorithm-bubble-state",
+    "archetype": "step_algorithm",
+    "title": "Step the Sort — Bubble Sort State",
+    "course_id": "computer_science",
+    "concept": "Comparison sorting algorithms",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 8,
+    "prompt": "Step through bubble sort and predict the array part-way through.",
+    "learning_objective": "Trace bubble sort one comparison and swap at a time and predict the state of the array after a given number of steps.",
+    "reference": "Comparison sorting algorithms",
+    "tags": ["algorithms", "sorting", "bubble-sort", "trace"],
+    "spec": {
+      "title": "Bubble Sort — State After Five Steps",
+      "instruction": "Each step is one comparison; a swap moves the two highlighted bars. Step through, then predict the array after 5 steps.",
+      "array": [7, 3, 9, 1, 5],
+      "algorithm": "bubble",
+      "predict": "state_after_k",
+      "k": 5,
+      "seed": 402
+    }
+  }
+]

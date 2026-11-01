@@ -1,0 +1,4861 @@
+{
+ "schema": 1,
+ "name": "algebra_one_year",
+ "title": "Algebra I and Integrated Mathematics (one year)",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "topic",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Algebra I and Integrated Mathematics — one year",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A full-year integrated mathematics course: number and quantity, algebra, functions, geometry and measurement, statistics and probability."
+ },
+ "taxonomy": {
+  "strands": {
+   "Number & Quantity": {
+    "Number foundations": [
+     "Whole-number structure",
+     "Fractions as quantities",
+     "Signed numbers"
+    ],
+    "Ratios, rates and proportional reasoning": [
+     "Building and comparing ratios",
+     "Scaling and percent"
+    ],
+    "Exponents, radicals and irrational numbers": [
+     "Exponent structure",
+     "Radicals and scientific notation"
+    ]
+   },
+   "Algebra": {
+    "Algebraic expressions": [
+     "Expressions and notation",
+     "Structure of expressions",
+     "Polynomial structure"
+    ],
+    "Linear equations": [
+     "What a solution means",
+     "Multi-step and general linear equations",
+     "Equations from context"
+    ],
+    "Linear inequalities": [
+     "Inequality basics",
+     "Compound and absolute value inequalities",
+     "Inequalities in context"
+    ],
+    "Systems of linear equations": [
+     "Systems and their solutions",
+     "Algebraic solution methods",
+     "Systems in context"
+    ],
+    "Quadratic expressions and equations": [
+     "Quadratic structure",
+     "Factoring",
+     "Solving and applying"
+    ]
+   },
+   "Functions": {
+    "Coordinate plane and relations": [
+     "Coordinates and graphing",
+     "Relations, domain and range",
+     "Function concepts"
+    ],
+    "Linear functions": [
+     "Slope and rate of change",
+     "Forms of a linear equation",
+     "Linear models",
+     "Linear data"
+    ],
+    "Transformations and absolute value functions": [
+     "Function families and transformations",
+     "Absolute value and piecewise functions"
+    ],
+    "Exponential functions": [
+     "Exponential structure",
+     "Exponential models and inverses"
+    ]
+   },
+   "Geometry & Measurement": {
+    "Geometric foundations": [
+     "Lines, angles and triangles",
+     "Similarity and coordinate geometry"
+    ],
+    "Measurement and geometric modelling": [
+     "Perimeter, area and volume",
+     "Measurement reasoning"
+    ]
+   },
+   "Statistics & Probability": {
+    "Descriptive statistics": [
+     "Organising data",
+     "Centre and spread"
+    ],
+    "Bivariate data and inference": [
+     "Relationships between two variables",
+     "Categorical data and sampling"
+    ],
+    "Probability": [
+     "Foundations of probability",
+     "Conditional probability and counting"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Number & Quantity",
+    "units": [
+     "Number foundations",
+     "Ratios, rates and proportional reasoning",
+     "Exponents, radicals and irrational numbers"
+    ]
+   },
+   {
+    "strand": "Algebra",
+    "units": [
+     "Algebraic expressions",
+     "Linear equations",
+     "Linear inequalities",
+     "Systems of linear equations",
+     "Quadratic expressions and equations"
+    ]
+   },
+   {
+    "strand": "Functions",
+    "units": [
+     "Coordinate plane and relations",
+     "Linear functions",
+     "Transformations and absolute value functions",
+     "Exponential functions"
+    ]
+   },
+   {
+    "strand": "Geometry & Measurement",
+    "units": [
+     "Geometric foundations",
+     "Measurement and geometric modelling"
+    ]
+   },
+   {
+    "strand": "Statistics & Probability",
+    "units": [
+     "Descriptive statistics",
+     "Bivariate data and inference",
+     "Probability"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "absolute_value_as_distance",
+   "title": "Absolute value as distance",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Signed numbers",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "signed_numbers_on_the_number_line"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value",
+    "distance",
+    "magnitude"
+   ],
+   "summary": "Absolute value measures distance from zero and therefore discards direction while keeping size.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "absolute_value_equations",
+   "title": "Absolute value equations",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Multi-step and general linear equations",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "literal_equations_and_formulas"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value",
+    "extraneous solution",
+    "two cases"
+   ],
+   "summary": "An absolute value equation splits into two cases because two numbers sit at the same distance from zero.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "absolute_value_functions",
+   "title": "Absolute value functions",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Absolute value and piecewise functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "stretches_and_compressions"
+   ],
+   "keywords": [
+    "absolute value function",
+    "piecewise",
+    "vertex"
+   ],
+   "summary": "The absolute value function is two linear pieces joined at a vertex, which explains its V-shaped graph.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "absolute_value_inequalities",
+   "title": "Absolute value inequalities",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Compound and absolute value inequalities",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "absolute_value_equations",
+    "absolute_value_functions",
+    "interval_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value inequality",
+    "compound",
+    "distance"
+   ],
+   "summary": "Distance reasoning turns an absolute value inequality into a compound inequality rather than two separate cases.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "adding_and_subtracting_polynomials",
+   "title": "Adding and subtracting polynomials",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Polynomial structure",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "combining_like_terms",
+    "polynomial_vocabulary_and_degree"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "add polynomials",
+    "like terms",
+    "subtract polynomials"
+   ],
+   "summary": "Polynomials combine by matching like terms, and subtracting requires distributing the minus sign across every term.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "angle_relationships",
+   "title": "Angle relationships",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Lines, angles and triangles",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "points_lines_rays_and_planes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complementary",
+    "supplementary",
+    "vertical angles"
+   ],
+   "summary": "Complementary, supplementary and vertical angles are fixed arithmetic relationships, not estimates.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 121
+   }
+  },
+  {
+   "id": "applications_tax_tip_discount_and_interest",
+   "title": "Applications: tax, tip, discount and interest",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "percent_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discount",
+    "markup",
+    "tax",
+    "tip"
+   ],
+   "summary": "Everyday percent problems are one proportional structure wearing different words.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "arithmetic_sequences_as_linear_functions",
+   "title": "Arithmetic sequences as linear functions",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Linear models",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "interpreting_slope_and_intercept_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arithmetic sequence",
+    "common difference",
+    "linear"
+   ],
+   "summary": "An arithmetic sequence is a linear function restricted to whole-number inputs, with the common difference as slope.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "box_plots_and_five_number_summaries",
+   "title": "Box plots and five-number summaries",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "standard_deviation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "box plot",
+    "five number summary",
+    "median",
+    "quartile"
+   ],
+   "summary": "A box plot displays the five-number summary, which shows centre, spread and skew in one picture.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 143
+   }
+  },
+  {
+   "id": "choosing_an_efficient_method_for_quadratics",
+   "title": "Choosing an efficient method for quadratics",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Solving and applying",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "the_quadratic_formula_and_the_discriminant"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factoring",
+    "formula",
+    "method choice"
+   ],
+   "summary": "Factoring, completing the square and the formula all work, and the choice is a judgement about the numbers involved.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "choosing_an_efficient_solution_method",
+   "title": "Choosing an efficient solution method",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Algebraic solution methods",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "special_systems_no_solution_and_infinitely_many"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elimination",
+    "method choice",
+    "substitution"
+   ],
+   "summary": "Method choice is a judgement about which form the equations are already in, not a rule about correctness.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "circumference_and_area_of_circles",
+   "title": "Circumference and area of circles",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Perimeter, area and volume",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "perimeter_and_area_of_polygons"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area of circle",
+    "circumference",
+    "pi",
+    "radius"
+   ],
+   "summary": "Circle measurements are proportional to the radius and to its square respectively, which is why pi appears in both.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 130
+   }
+  },
+  {
+   "id": "combining_like_terms",
+   "title": "Combining like terms",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Structure of expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "terms_coefficients_and_constants"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combine",
+    "like terms",
+    "simplify"
+   ],
+   "summary": "Only terms with identical variable parts can be merged, because only they describe the same kind of quantity.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "comparing_distributions",
+   "title": "Comparing distributions",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "outliers_and_their_effect_on_summaries"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "centre",
+    "compare distributions",
+    "shape",
+    "spread"
+   ],
+   "summary": "Comparing two distributions requires centre, spread and shape together, because any one alone is misleading.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 145
+   }
+  },
+  {
+   "id": "comparing_linear_and_absolute_value_models",
+   "title": "Comparing linear and absolute value models",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Absolute value and piecewise functions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "step_functions_and_modelling"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value",
+    "compare models",
+    "linear"
+   ],
+   "summary": "Choosing between a linear and an absolute value model is a claim about the shape of the underlying relationship.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "comparing_linear_and_exponential_growth",
+   "title": "Comparing linear and exponential growth",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential structure",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "geometric_sequences"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compare growth",
+    "exponential",
+    "linear"
+   ],
+   "summary": "Linear growth adds a constant while exponential growth multiplies by one, and the ordering of the two eventually reverses.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "composite_figures_and_decomposition",
+   "title": "Composite figures and decomposition",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Measurement reasoning",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "density_and_measurement_unit_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area",
+    "composite figure",
+    "decompose"
+   ],
+   "summary": "Decomposing an unfamiliar region into familiar pieces is the standard route to its area.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 134
+   }
+  },
+  {
+   "id": "compound_events_and_the_addition_rule",
+   "title": "Compound events and the addition rule",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Foundations of probability",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "sample_spaces_and_outcomes",
+    "experimental_probability_and_the_law_of_large_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "addition rule",
+    "compound event",
+    "overlap",
+    "union"
+   ],
+   "summary": "The probability of either event requires subtracting the overlap, otherwise the intersection is counted twice.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 158
+   }
+  },
+  {
+   "id": "compound_inequalities",
+   "title": "Compound inequalities",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Compound and absolute value inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "reversing_the_inequality_symbol"
+   ],
+   "keywords": [
+    "and",
+    "compound inequality",
+    "interval",
+    "or"
+   ],
+   "summary": "An \"and\" compound restricts to an interval while an \"or\" compound allows two separate rays.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "compound_interest",
+   "title": "Compound interest",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential models and inverses",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "comparing_linear_and_exponential_growth"
+   ],
+   "keywords": [
+    "compound interest",
+    "principal",
+    "rate"
+   ],
+   "summary": "Compound interest is exponential growth where the base is one plus the periodic rate.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "computing_slope_from_graphs_tables_and_points",
+   "title": "Computing slope from graphs, tables and points",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Slope and rate of change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "slope_as_a_constant_rate_of_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rise over run",
+    "slope formula",
+    "two points"
+   ],
+   "summary": "The slope formula is a difference quotient, and the point order must be consistent in numerator and denominator.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "conditional_probability",
+   "title": "Conditional probability",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Conditional probability and counting",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "conditional_relative_frequency"
+   ],
+   "sequence_predecessors": [
+    "independent_events_and_the_multiplication_rule"
+   ],
+   "keywords": [
+    "conditional probability",
+    "given",
+    "restrict"
+   ],
+   "summary": "Conditional probability restricts the sample space to the known condition, which changes the denominator.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 160
+   }
+  },
+  {
+   "id": "conditional_relative_frequency",
+   "title": "Conditional relative frequency",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Categorical data and sampling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "two_way_frequency_tables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "column",
+    "conditional relative frequency",
+    "row"
+   ],
+   "summary": "Conditioning on a row or column converts counts into rates that can be compared across groups.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 151
+   }
+  },
+  {
+   "id": "congruence_and_rigid_motions",
+   "title": "Congruence and rigid motions",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Similarity and coordinate geometry",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "similar_figures_and_scale_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "congruent",
+    "rigid motion",
+    "transformation"
+   ],
+   "summary": "Congruent figures are related by translations, rotations and reflections, none of which change size or shape.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 125
+   }
+  },
+  {
+   "id": "consecutive_integer_and_age_problems",
+   "title": "Consecutive integer and age problems",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Equations from context",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "modelling_with_linear_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "age problem",
+    "consecutive integers",
+    "model"
+   ],
+   "summary": "These problems are linear equations in disguise, and the modelling step is where they are won or lost.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "correlation_and_causation",
+   "title": "Correlation and causation",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Linear data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "scatter_plots_and_lines_of_best_fit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "association",
+    "causation",
+    "correlation"
+   ],
+   "summary": "Two quantities moving together is evidence of association only, and association alone does not establish a cause.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "data_types_and_variables",
+   "title": "Data types and variables",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Organising data",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "correlation_and_causation",
+    "dimensional_analysis_and_unit_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "categorical",
+    "quantitative",
+    "variable"
+   ],
+   "summary": "Whether a variable is categorical or quantitative decides which summaries and displays are meaningful.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 137
+   }
+  },
+  {
+   "id": "decimals_fractions_and_percent_equivalence",
+   "title": "Decimals, fractions and percent equivalence",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Fractions as quantities",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "fraction_multiplication_and_division"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conversion",
+    "decimal",
+    "percent"
+   ],
+   "summary": "Decimals, fractions and percent are three notations for the same rational quantity, and converting between them is a routine move.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "density_and_measurement_unit_conversion",
+   "title": "Density and measurement unit conversion",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Measurement reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "volume_of_prisms_cylinders_and_spheres"
+   ],
+   "keywords": [
+    "conversion",
+    "density",
+    "mass",
+    "volume"
+   ],
+   "summary": "Density is a rate of mass per volume, so converting units converts the density too.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 133
+   }
+  },
+  {
+   "id": "dimensional_analysis_and_unit_conversion",
+   "title": "Dimensional analysis and unit conversion",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "direct_variation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dimensional analysis",
+    "rate",
+    "unit conversion"
+   ],
+   "summary": "Tracking units as if they were algebraic quantities catches conversion errors before they reach an answer.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "direct_variation",
+   "title": "Direct variation",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "applications_tax_tip_discount_and_interest"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constant of variation",
+    "direct variation",
+    "origin"
+   ],
+   "summary": "Direct variation is a proportional relationship written as an equation through the origin.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "discrete_and_continuous_domains",
+   "title": "Discrete and continuous domains",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Relations, domain and range",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "domain_and_range"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuous",
+    "discrete",
+    "interval"
+   ],
+   "summary": "A countable set of inputs gives a discrete domain while an unbroken interval gives a continuous one.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "domain_and_range",
+   "title": "Domain and range",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Relations, domain and range",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "relations_and_multiple_representations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "domain",
+    "input",
+    "output",
+    "range"
+   ],
+   "summary": "Domain collects the permitted inputs and range the resulting outputs, and both can be restricted by context.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "equations_with_fractions_and_decimals",
+   "title": "Equations with fractions and decimals",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Multi-step and general linear equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "equations_with_variables_on_both_sides"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "clear denominators",
+    "decimal",
+    "fraction coefficient"
+   ],
+   "summary": "Clearing denominators by multiplying every term by the common denominator removes fractions without changing the solution.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "equations_with_variables_on_both_sides",
+   "title": "Equations with variables on both sides",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Multi-step and general linear equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "multi_step_equations_with_distribution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "collect",
+    "linear",
+    "variables both sides"
+   ],
+   "summary": "Collecting variable terms on one side and constants on the other reduces any linear equation to a two-step form.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "estimating_and_locating_irrational_numbers",
+   "title": "Estimating and locating irrational numbers",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Radicals and scientific notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "rational_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "approximate",
+    "estimate",
+    "irrational"
+   ],
+   "summary": "Irrational numbers cannot be written as a ratio of integers, so they are placed by approximation rather than exact form.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "evaluating_expressions",
+   "title": "Evaluating expressions",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Expressions and notation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "translating_verbal_statements_into_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evaluate",
+    "substitute",
+    "value"
+   ],
+   "summary": "Substituting a value and computing is the direct test of what an expression means.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "evaluating_functions_and_reading_graphs",
+   "title": "Evaluating functions and reading graphs",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Function concepts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "function_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evaluate function",
+    "input output",
+    "read graph"
+   ],
+   "summary": "Evaluating a function and reading a value off its graph are the same act performed in two representations.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "expanding_products_of_binomials",
+   "title": "Expanding products of binomials",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Polynomial structure",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "simplifying_linear_expressions"
+   ],
+   "keywords": [
+    "binomial",
+    "expand",
+    "foil",
+    "product"
+   ],
+   "summary": "Every term of one factor multiplies every term of the other, so a two-by-two product produces four terms before simplification.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "expected_value",
+   "title": "Expected value",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Conditional probability and counting",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "probability_distributions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "expected value",
+    "long run",
+    "weighted average"
+   ],
+   "summary": "Expected value is a probability-weighted average outcome, which is what makes it a long-run prediction rather than a guarantee.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 163
+   }
+  },
+  {
+   "id": "experimental_probability_and_the_law_of_large_numbers",
+   "title": "Experimental probability and the law of large numbers",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Foundations of probability",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "theoretical_probability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "experimental probability",
+    "law of large numbers",
+    "trials"
+   ],
+   "summary": "Experimental probability converges towards theoretical probability as the number of trials grows, which is why small samples mislead.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 157
+   }
+  },
+  {
+   "id": "exponential_functions_and_their_graphs",
+   "title": "Exponential functions and their graphs",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential structure",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "domain_and_range",
+    "function_notation",
+    "exponential_growth_and_decay"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "asymptote",
+    "exponential function",
+    "ratio"
+   ],
+   "summary": "An exponential function has a constant ratio between successive outputs, which produces its characteristic curve.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "exponential_growth_and_decay",
+   "title": "Exponential growth and decay",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential structure",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "percent_change",
+    "correlation_and_causation",
+    "scientific_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decay",
+    "exponential growth",
+    "factor"
+   ],
+   "summary": "Repeated multiplication by a constant factor produces growth or decay, which is qualitatively different from repeated addition.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "exponential_modelling_in_context",
+   "title": "Exponential modelling in context",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential models and inverses",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "compound_interest"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "depreciation",
+    "half life",
+    "model",
+    "population"
+   ],
+   "summary": "Population, depreciation and radioactive decay all share the same multiplicative structure.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "factoring_out_a_common_monomial_factor",
+   "title": "Factoring out a common monomial factor",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Factoring",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_distributive_property"
+   ],
+   "sequence_predecessors": [
+    "the_zero_product_property"
+   ],
+   "keywords": [
+    "common factor",
+    "factor out",
+    "monomial"
+   ],
+   "summary": "Factoring begins by removing the largest shared factor, which is the distributive property run backwards.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "factoring_trinomials_with_leading_coefficient_one",
+   "title": "Factoring trinomials with leading coefficient one",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Factoring",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "expanding_products_of_binomials",
+    "factoring_out_a_common_monomial_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor trinomial",
+    "monic",
+    "sum and product"
+   ],
+   "summary": "For a monic quadratic, two numbers must meet a sum condition and a product condition simultaneously.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "factoring_trinomials_with_leading_coefficient_other_than_one",
+   "title": "Factoring trinomials with leading coefficient other than one",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Factoring",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "factoring_trinomials_with_leading_coefficient_one"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor trinomial",
+    "grouping",
+    "leading coefficient"
+   ],
+   "summary": "When the leading coefficient is not one, the factor pair search must also account for the leading term.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "factors_multiples_and_divisibility",
+   "title": "Factors, multiples and divisibility",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Whole-number structure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "place_value_and_base_ten_structure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "divisibility",
+    "factor",
+    "multiple"
+   ],
+   "summary": "Divisibility rules let you test factor structure without dividing, which speeds up later work with fractions and polynomials.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "fraction_addition_and_subtraction",
+   "title": "Fraction addition and subtraction",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Fractions as quantities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "fraction_equivalence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common denominator",
+    "sum",
+    "unlike denominators"
+   ],
+   "summary": "Fractions can only be combined once they name the same size of piece, so a common unit comes first.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "fraction_equivalence",
+   "title": "Fraction equivalence",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Fractions as quantities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "greatest_common_factor_and_least_common_multiple"
+   ],
+   "keywords": [
+    "common denominator",
+    "equivalent fractions"
+   ],
+   "summary": "Multiplying numerator and denominator by the same nonzero number renames a quantity without changing it.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "fraction_multiplication_and_division",
+   "title": "Fraction multiplication and division",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Fractions as quantities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "fraction_addition_and_subtraction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "divide fractions",
+    "multiply fractions",
+    "reciprocal"
+   ],
+   "summary": "Multiplication scales one fraction by another; division asks how many of one fraction fit inside another.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "frequency_tables_and_dot_plots",
+   "title": "Frequency tables and dot plots",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Organising data",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "data_types_and_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "count",
+    "dot plot",
+    "frequency table"
+   ],
+   "summary": "Counting how often each value occurs is the first step in every summary statistic.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 138
+   }
+  },
+  {
+   "id": "function_notation",
+   "title": "Function notation",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Function concepts",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "functions_and_the_vertical_line_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "f of x",
+    "function notation",
+    "rule"
+   ],
+   "summary": "Function notation names the rule and the input together, which makes substitution explicit.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "functions_and_the_vertical_line_test",
+   "title": "Functions and the vertical line test",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Function concepts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "discrete_and_continuous_domains"
+   ],
+   "keywords": [
+    "function",
+    "one output",
+    "vertical line test"
+   ],
+   "summary": "A relation is a function when each input has exactly one output, which the vertical line test detects graphically.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "geometric_modelling_with_algebraic_expressions",
+   "title": "Geometric modelling with algebraic expressions",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Measurement reasoning",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "perimeter_and_area_of_polygons",
+    "composite_figures_and_decomposition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area",
+    "expression",
+    "model",
+    "volume"
+   ],
+   "summary": "Expressing an area or volume with a variable turns a geometry question into an algebra question.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 135
+   }
+  },
+  {
+   "id": "geometric_sequences",
+   "title": "Geometric sequences",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential structure",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "exponential_functions_and_their_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common ratio",
+    "exponential",
+    "geometric sequence"
+   ],
+   "summary": "A geometric sequence is an exponential function restricted to whole-number inputs, with the common ratio as base.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 113
+   }
+  },
+  {
+   "id": "graphing_inequalities_on_the_number_line",
+   "title": "Graphing inequalities on the number line",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequality basics",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "inequality_notation_and_solution_sets"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closed circle",
+    "graph inequality",
+    "open circle"
+   ],
+   "summary": "An open circle excludes the boundary and a closed circle includes it, which is the visual record of strictness.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "graphing_linear_inequalities_in_two_variables",
+   "title": "Graphing linear inequalities in two variables",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequalities in context",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "modelling_constraints_with_inequalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary line",
+    "half plane",
+    "shading"
+   ],
+   "summary": "A two-variable inequality shades a half-plane bounded by the corresponding line.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "greatest_common_factor_and_least_common_multiple",
+   "title": "Greatest common factor and least common multiple",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Whole-number structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "prime_factorisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common factor",
+    "gcf",
+    "lcm"
+   ],
+   "summary": "The GCF is the largest shared divisor and the LCM the smallest shared multiple; both come straight out of prime factorisation.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "histograms_and_binning",
+   "title": "Histograms and binning",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Organising data",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "frequency_tables_and_dot_plots"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bin",
+    "distribution shape",
+    "histogram"
+   ],
+   "summary": "A histogram groups quantitative data into bins, and the bin width changes the shape you see.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 139
+   }
+  },
+  {
+   "id": "independent_and_dependent_variables",
+   "title": "Independent and dependent variables",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Function concepts",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "evaluating_functions_and_reading_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dependent variable",
+    "independent variable",
+    "model"
+   ],
+   "summary": "Naming which quantity drives which is a modelling decision, and it determines which axis carries which variable.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "independent_events_and_the_multiplication_rule",
+   "title": "Independent events and the multiplication rule",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Foundations of probability",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "compound_events_and_the_addition_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "and",
+    "independent",
+    "multiplication rule"
+   ],
+   "summary": "Independent events multiply because one event does not change the other probability.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 159
+   }
+  },
+  {
+   "id": "inequality_notation_and_solution_sets",
+   "title": "Inequality notation and solution sets",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequality basics",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "mixture_rate_and_work_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inequality",
+    "range",
+    "solution set"
+   ],
+   "summary": "An inequality describes a range of values rather than a single number, and the solution set is that whole range.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "integer_addition_and_subtraction",
+   "title": "Integer addition and subtraction",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Signed numbers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "absolute_value_as_distance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "integer",
+    "opposite",
+    "subtract negative"
+   ],
+   "summary": "Adding a signed number moves along the number line; subtracting a number is the same as adding its opposite.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "integer_exponents",
+   "title": "Integer exponents",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Exponent structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "dimensional_analysis_and_unit_conversion",
+    "integer_multiplication_and_division"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponent",
+    "power",
+    "repeated factors"
+   ],
+   "summary": "A positive integer exponent counts repeated factors, which is not the same as repeated addition.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "integer_multiplication_and_division",
+   "title": "Integer multiplication and division",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Signed numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "integer_addition_and_subtraction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "product",
+    "quotient",
+    "sign rules"
+   ],
+   "summary": "The sign rules for products and quotients follow from repeated addition, and they set up sign handling in algebra.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "interpreting_slope_and_intercept_in_context",
+   "title": "Interpreting slope and intercept in context",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Linear models",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "writing_equations_of_lines_from_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interpret intercept",
+    "interpret slope",
+    "units"
+   ],
+   "summary": "In a model the slope and intercept carry units and meaning, and misreading either produces a plausible but wrong claim.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "interpreting_slope_and_intercept_in_data_context",
+   "title": "Interpreting slope and intercept in data context",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Relationships between two variables",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "slope_as_a_constant_rate_of_change",
+    "interpreting_slope_and_intercept_in_context",
+    "lines_of_best_fit_and_residuals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intercept",
+    "interpret slope",
+    "prediction",
+    "units"
+   ],
+   "summary": "In a fitted model the slope is a predicted change per unit and the intercept a predicted baseline, both with units.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 149
+   }
+  },
+  {
+   "id": "interval_notation",
+   "title": "Interval notation",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Compound and absolute value inequalities",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "graphing_inequalities_on_the_number_line",
+    "compound_inequalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bracket",
+    "interval notation",
+    "parenthesis"
+   ],
+   "summary": "Interval notation compresses an inequality solution set into a compact pair of endpoints.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "introduction_to_linear_programming",
+   "title": "Introduction to linear programming",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Systems in context",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "graphing_linear_inequalities_in_two_variables",
+    "systems_as_simultaneous_constraints",
+    "systems_with_three_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "feasible region",
+    "linear programming",
+    "objective"
+   ],
+   "summary": "Optimising a linear objective under linear constraints is solved at the vertices of the feasible region.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "lines_of_best_fit_and_residuals",
+   "title": "Lines of best fit and residuals",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Relationships between two variables",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "scatter_plots_and_lines_of_best_fit",
+    "the_correlation_coefficient"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "best fit line",
+    "fit",
+    "residual"
+   ],
+   "summary": "A residual is the vertical gap between an observation and the fitted line, and its pattern diagnoses whether the line fits.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 148
+   }
+  },
+  {
+   "id": "literal_equations_and_formulas",
+   "title": "Literal equations and formulas",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Multi-step and general linear equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "equations_with_fractions_and_decimals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "formula",
+    "literal equation",
+    "solve for a variable"
+   ],
+   "summary": "Solving a formula for a different variable uses the same operations, treating the other variables as numbers.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "logarithms_as_inverses_of_exponentials",
+   "title": "Logarithms as inverses of exponentials",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential models and inverses",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "transforming_exponential_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponent",
+    "inverse",
+    "logarithm"
+   ],
+   "summary": "A logarithm answers what exponent produces a given value, which makes it the inverse of an exponential.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "making_and_critiquing_data_based_claims",
+   "title": "Making and critiquing data-based claims",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Categorical data and sampling",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "sampling_bias_and_variability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "claim",
+    "critique",
+    "inference",
+    "population"
+   ],
+   "summary": "A defensible claim names the population, the sample, the method and the uncertainty, and stops short of causation without a suitable design.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 154
+   }
+  },
+  {
+   "id": "measures_of_centre_mean_median_and_mode",
+   "title": "Measures of centre: mean, median and mode",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "histograms_and_binning"
+   ],
+   "keywords": [
+    "centre",
+    "mean",
+    "median",
+    "mode"
+   ],
+   "summary": "The mean uses every value, the median uses position and the mode records the most common value, and each is affected differently by skew.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 140
+   }
+  },
+  {
+   "id": "measures_of_spread_range_and_interquartile_range",
+   "title": "Measures of spread: range and interquartile range",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "measures_of_centre_mean_median_and_mode"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interquartile range",
+    "quartile",
+    "range",
+    "spread"
+   ],
+   "summary": "Range uses only the extremes while the interquartile range describes the middle half, which makes it resistant to outliers.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 141
+   }
+  },
+  {
+   "id": "mixture_rate_and_work_problems",
+   "title": "Mixture, rate and work problems",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Equations from context",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "consecutive_integer_and_age_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mixture",
+    "rate",
+    "work problem"
+   ],
+   "summary": "Rates and mixtures combine as weighted sums, which produce linear equations in one unknown.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "modelling_constraints_with_inequalities",
+   "title": "Modelling constraints with inequalities",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequalities in context",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "absolute_value_inequalities"
+   ],
+   "keywords": [
+    "at least",
+    "at most",
+    "constraint",
+    "model"
+   ],
+   "summary": "A constraint states a range the answer may occupy, which is naturally an inequality rather than an equation.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "modelling_with_linear_equations",
+   "title": "Modelling with linear equations",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Equations from context",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "absolute_value_equations"
+   ],
+   "keywords": [
+    "define variable",
+    "model",
+    "word problem"
+   ],
+   "summary": "Translating a situation into an equation requires naming the unknown and writing what the situation asserts.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "multi_step_equations_with_distribution",
+   "title": "Multi-step equations with distribution",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "Multi-step and general linear equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_distributive_property"
+   ],
+   "sequence_predecessors": [
+    "two_step_equations"
+   ],
+   "keywords": [
+    "combine",
+    "distribute",
+    "multi step"
+   ],
+   "summary": "Removing parentheses first turns a multi-step equation into a familiar linear one.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "one_step_equations",
+   "title": "One-step equations",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "What a solution means",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "solutions_and_equivalent_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse operation",
+    "isolate",
+    "one step"
+   ],
+   "summary": "A single inverse operation isolates the variable when only one operation is applied to it.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "outliers_and_their_effect_on_summaries",
+   "title": "Outliers and their effect on summaries",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "box_plots_and_five_number_summaries"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "effect",
+    "mean",
+    "median",
+    "outlier"
+   ],
+   "summary": "An outlier moves the mean much more than the median, so the choice of summary is a judgement about the data.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 144
+   }
+  },
+  {
+   "id": "parallel_and_perpendicular_lines",
+   "title": "Parallel and perpendicular lines",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Forms of a linear equation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "standard_form_and_intercepts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative reciprocal",
+    "parallel",
+    "perpendicular"
+   ],
+   "summary": "Parallel lines share a slope while perpendicular slopes multiply to negative one, both of which follow from the geometry.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "parallel_lines_and_transversals",
+   "title": "Parallel lines and transversals",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Lines, angles and triangles",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "angle_relationships"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "corresponding angles",
+    "parallel lines",
+    "transversal"
+   ],
+   "summary": "A transversal across parallel lines creates equal and supplementary angle pairs that let you transfer information.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 122
+   }
+  },
+  {
+   "id": "parent_functions_and_their_graphs",
+   "title": "Parent functions and their graphs",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Function families and transformations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "correlation_and_causation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "family",
+    "graph",
+    "parent function"
+   ],
+   "summary": "A parent function is the simplest member of a family, and every other member is a transformation of it.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "percent_as_a_rate_per_hundred",
+   "title": "Percent as a rate per hundred",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "scale_drawings_and_scale_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decimal",
+    "per hundred",
+    "percent"
+   ],
+   "summary": "Percent is a ratio with an implicit denominator of one hundred, which is why it converts directly to a decimal.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "percent_change",
+   "title": "Percent change",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "percent_as_a_rate_per_hundred"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decrease",
+    "increase",
+    "percent change"
+   ],
+   "summary": "Percent change compares the size of a change to the original quantity, so the base must be stated.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "perimeter_and_area_of_polygons",
+   "title": "Perimeter and area of polygons",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Perimeter, area and volume",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "adding_and_subtracting_polynomials",
+    "the_midpoint_formula"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area",
+    "perimeter",
+    "polygon",
+    "units"
+   ],
+   "summary": "Perimeter measures a boundary while area measures a region, and confusing the two changes the units of the answer.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 129
+   }
+  },
+  {
+   "id": "permutations_and_combinations",
+   "title": "Permutations and combinations",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Conditional probability and counting",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "conditional_probability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combination",
+    "order",
+    "permutation",
+    "selection"
+   ],
+   "summary": "Permutations count arrangements where order matters and combinations count selections where it does not.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 161
+   }
+  },
+  {
+   "id": "piecewise_defined_functions",
+   "title": "Piecewise-defined functions",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Absolute value and piecewise functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "absolute_value_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "domain",
+    "interval",
+    "piecewise"
+   ],
+   "summary": "A piecewise rule applies different formulas on different parts of the domain, and each piece needs its own interval.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "place_value_and_base_ten_structure",
+   "title": "Place value and base-ten structure",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Whole-number structure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "base ten",
+    "place value",
+    "regrouping"
+   ],
+   "summary": "Each digit carries a value set by its position, which is what makes regrouping possible.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "plotting_points_and_identifying_quadrants",
+   "title": "Plotting points and identifying quadrants",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Coordinates and graphing",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_coordinate_plane_and_ordered_pairs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "plot",
+    "quadrant",
+    "sign"
+   ],
+   "summary": "Quadrant location is determined by the signs of the coordinates, which makes sign errors visible immediately.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "point_slope_form",
+   "title": "Point-slope form",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Forms of a linear equation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "slope_intercept_form"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "point",
+    "point slope form",
+    "slope"
+   ],
+   "summary": "Point-slope form builds a line from one known point and the rate, which suits data with a natural starting observation.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "points_lines_rays_and_planes",
+   "title": "Points, lines, rays and planes",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Lines, angles and triangles",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "dimensional_analysis_and_unit_conversion",
+    "independent_and_dependent_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "line",
+    "plane",
+    "point",
+    "ray"
+   ],
+   "summary": "These undefined terms are the vocabulary every later geometric statement is built from.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 120
+   }
+  },
+  {
+   "id": "polynomial_vocabulary_and_degree",
+   "title": "Polynomial vocabulary and degree",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Polynomial structure",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "expanding_products_of_binomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "degree",
+    "leading coefficient",
+    "monomial",
+    "polynomial"
+   ],
+   "summary": "The degree is the highest exponent present and the leading coefficient governs end behaviour.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "power_of_a_power_and_power_of_a_product",
+   "title": "Power of a power and power of a product",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Exponent structure",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "product_and_quotient_rules_for_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribute exponent",
+    "parentheses",
+    "power of a power"
+   ],
+   "summary": "An outer exponent distributes over a product and multiplies against an inner exponent.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "precision_accuracy_and_significant_figures",
+   "title": "Precision, accuracy and significant figures",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Measurement reasoning",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "geometric_modelling_with_algebraic_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accuracy",
+    "precision",
+    "significant figures"
+   ],
+   "summary": "Precision describes the fineness of a measurement while accuracy describes its closeness to the true value, and they are independent.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 136
+   }
+  },
+  {
+   "id": "prime_factorisation",
+   "title": "Prime factorisation",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Whole-number structure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "factors_multiples_and_divisibility"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factorisation",
+    "fundamental theorem",
+    "prime"
+   ],
+   "summary": "Every whole number above one factors uniquely into primes, giving one canonical description of a number.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "probability_distributions",
+   "title": "Probability distributions",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Conditional probability and counting",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "permutations_and_combinations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribution",
+    "random variable",
+    "sum to one"
+   ],
+   "summary": "A probability distribution lists every value of a random variable with its probability, and the probabilities sum to one.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 162
+   }
+  },
+  {
+   "id": "product_and_quotient_rules_for_exponents",
+   "title": "Product and quotient rules for exponents",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Exponent structure",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "integer_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "like bases",
+    "product rule",
+    "quotient rule"
+   ],
+   "summary": "Multiplying like bases adds exponents because it concatenates two runs of identical factors.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "proportional_relationships",
+   "title": "Proportional relationships",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Building and comparing ratios",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "unit_rates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constant of proportionality",
+    "proportion",
+    "scale factor"
+   ],
+   "summary": "Two quantities are proportional when their ratio is constant, so scaling one scales the other by the same factor.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "quadratic_expressions_and_their_graphs",
+   "title": "Quadratic expressions and their graphs",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Quadratic structure",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "adding_and_subtracting_polynomials",
+    "mixture_rate_and_work_problems",
+    "scientific_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parabola",
+    "quadratic",
+    "squared term",
+    "vertex"
+   ],
+   "summary": "A quadratic has a nonzero squared term, and its graph is a parabola whose vertex is the turning point.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "quadratic_models_and_optimisation",
+   "title": "Quadratic models and optimisation",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Solving and applying",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "quadratic_expressions_and_their_graphs",
+    "choosing_an_efficient_method_for_quadratics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "maximum",
+    "minimum",
+    "quadratic model",
+    "vertex"
+   ],
+   "summary": "A quadratic models any quantity with a constant second difference, and its vertex is the maximum or minimum of that model.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "rational_exponents",
+   "title": "Rational exponents",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Radicals and scientific notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "simplifying_radical_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fractional exponent",
+    "rational exponent",
+    "root"
+   ],
+   "summary": "A fractional exponent names a root, which unifies radical notation with exponent rules.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ratios_as_comparisons",
+   "title": "Ratios as comparisons",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Building and comparing ratios",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "integer_multiplication_and_division"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "comparison",
+    "part to part",
+    "ratio"
+   ],
+   "summary": "A ratio compares two quantities of the same or different kinds, and the order of the terms carries meaning.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "reflections_of_graphs",
+   "title": "Reflections of graphs",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Function families and transformations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "translations_of_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "axis",
+    "negative",
+    "reflection"
+   ],
+   "summary": "A negative outside the function reflects vertically while a negative inside reflects horizontally.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "relations_and_multiple_representations",
+   "title": "Relations and multiple representations",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Relations, domain and range",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "plotting_points_and_identifying_quadrants"
+   ],
+   "keywords": [
+    "graph",
+    "relation",
+    "representation",
+    "table"
+   ],
+   "summary": "The same relation can be shown as a table, a graph, a set of pairs or an equation, and each view hides different things.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "reversing_the_inequality_symbol",
+   "title": "Reversing the inequality symbol",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequality basics",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "solving_one_and_two_step_inequalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative divisor",
+    "order",
+    "reverse inequality"
+   ],
+   "summary": "Multiplying or dividing by a negative number reverses order, which is why the symbol flips.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "sample_spaces_and_outcomes",
+   "title": "Sample spaces and outcomes",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Foundations of probability",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "comparing_distributions",
+    "dimensional_analysis_and_unit_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exhaustive",
+    "outcome",
+    "sample space"
+   ],
+   "summary": "A sample space lists every possible outcome, and the list must be exhaustive and mutually exclusive.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 155
+   }
+  },
+  {
+   "id": "sampling_bias_and_variability",
+   "title": "Sampling bias and variability",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Categorical data and sampling",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "sampling_methods"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bias",
+    "population",
+    "sample",
+    "variability"
+   ],
+   "summary": "A biased sample systematically misses part of the population, while variability is the unavoidable spread between samples.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 153
+   }
+  },
+  {
+   "id": "sampling_methods",
+   "title": "Sampling methods",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Categorical data and sampling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "conditional_relative_frequency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cluster",
+    "random",
+    "sampling method",
+    "stratified"
+   ],
+   "summary": "Simple random, systematic, stratified and cluster sampling each have different practical costs and assumptions.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 152
+   }
+  },
+  {
+   "id": "scale_drawings_and_scale_factor",
+   "title": "Scale drawings and scale factor",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Scaling and percent",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "solving_proportions"
+   ],
+   "keywords": [
+    "scale drawing",
+    "scale factor",
+    "similar"
+   ],
+   "summary": "A scale drawing preserves shape while changing size, and the scale factor connects drawing lengths to real lengths.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "scatter_plots_and_association",
+   "title": "Scatter plots and association",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Relationships between two variables",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "comparing_distributions",
+    "correlation_and_causation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "association",
+    "direction",
+    "form",
+    "scatter plot"
+   ],
+   "summary": "A scatter plot shows whether two quantitative variables are associated, and in which direction and form.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 146
+   }
+  },
+  {
+   "id": "scatter_plots_and_lines_of_best_fit",
+   "title": "Scatter plots and lines of best fit",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Linear data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "arithmetic_sequences_as_linear_functions"
+   ],
+   "keywords": [
+    "best fit",
+    "scatter plot",
+    "trend"
+   ],
+   "summary": "A line of best fit summarises a linear trend, and how close the points sit to it decides how much the summary is worth.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "scientific_notation",
+   "title": "Scientific notation",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Radicals and scientific notation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "estimating_and_locating_irrational_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mantissa",
+    "power of ten",
+    "scientific notation"
+   ],
+   "summary": "Scientific notation writes a number as a mantissa times a power of ten, which makes extreme magnitudes readable and comparable.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "signed_numbers_on_the_number_line",
+   "title": "Signed numbers on the number line",
+   "strand": "Number & Quantity",
+   "unit": "Number foundations",
+   "topic": "Signed numbers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "decimals_fractions_and_percent_equivalence"
+   ],
+   "keywords": [
+    "negative",
+    "number line",
+    "opposite"
+   ],
+   "summary": "A negative sign records direction relative to zero, not merely a subtraction waiting to happen.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "similar_figures_and_scale_factor",
+   "title": "Similar figures and scale factor",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Similarity and coordinate geometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "triangle_angle_sum_and_exterior_angles"
+   ],
+   "keywords": [
+    "proportion",
+    "scale factor",
+    "similar"
+   ],
+   "summary": "Similar figures share angles and have proportional sides, which is what makes indirect measurement possible.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 124
+   }
+  },
+  {
+   "id": "simplifying_linear_expressions",
+   "title": "Simplifying linear expressions",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Structure of expressions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_distributive_property"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equivalent",
+    "linear expression",
+    "simplify"
+   ],
+   "summary": "Simplifying means rewriting an expression in an equivalent but shorter form, verified by substitution.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "simplifying_radical_expressions",
+   "title": "Simplifying radical expressions",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Radicals and scientific notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "prime_factorisation",
+    "square_roots_and_perfect_squares"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "perfect square factor",
+    "radical",
+    "simplify radical"
+   ],
+   "summary": "A radical simplifies by pulling out the largest perfect-square factor, which is factoring under a root.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "simulation_and_probability_models",
+   "title": "Simulation and probability models",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Conditional probability and counting",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "expected_value"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "estimate",
+    "model",
+    "simulation",
+    "trials"
+   ],
+   "summary": "A simulation estimates a probability by generating many trials, which is useful when a theoretical model is hard to write down.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 164
+   }
+  },
+  {
+   "id": "slope_as_a_constant_rate_of_change",
+   "title": "Slope as a constant rate of change",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Slope and rate of change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "independent_and_dependent_variables",
+    "mixture_rate_and_work_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rate of change",
+    "slope",
+    "units"
+   ],
+   "summary": "Slope is the change in output per unit change in input, which is why it carries units.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "slope_intercept_form",
+   "title": "Slope-intercept form",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Forms of a linear equation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "computing_slope_from_graphs_tables_and_points"
+   ],
+   "keywords": [
+    "rate",
+    "slope intercept form",
+    "y intercept"
+   ],
+   "summary": "Writing a line as y equals mx plus b exposes the rate and the starting value directly.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "solutions_and_equivalent_equations",
+   "title": "Solutions and equivalent equations",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "What a solution means",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "adding_and_subtracting_polynomials",
+    "dimensional_analysis_and_unit_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equation",
+    "equivalent equations",
+    "solution"
+   ],
+   "summary": "An equation asserts equality, and applying the same reversible operation to both sides preserves the solution set.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "solving_one_and_two_step_inequalities",
+   "title": "Solving one- and two-step inequalities",
+   "strand": "Algebra",
+   "unit": "Linear inequalities",
+   "topic": "Inequality basics",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "graphing_inequalities_on_the_number_line"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary",
+    "inverse operation",
+    "solve inequality"
+   ],
+   "summary": "Inequalities solve with the same inverse operations as equations, with one exception.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "solving_proportions",
+   "title": "Solving proportions",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Building and comparing ratios",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "fraction_addition_and_subtraction",
+    "proportional_relationships"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cross multiplication",
+    "proportion",
+    "solve"
+   ],
+   "summary": "Cross multiplication is a shortcut that follows from multiplying both sides of an equality of ratios by the same product.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "solving_quadratic_equations_by_completing_the_square",
+   "title": "Solving quadratic equations by completing the square",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Solving and applying",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "square_roots_and_perfect_squares",
+    "solving_quadratic_equations_by_factoring"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "completing the square",
+    "perfect square",
+    "vertex"
+   ],
+   "summary": "Completing the square rewrites a quadratic as a perfect square plus a constant, which exposes the vertex and the roots.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "solving_quadratic_equations_by_factoring",
+   "title": "Solving quadratic equations by factoring",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Solving and applying",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "the_zero_product_property",
+    "factoring_trinomials_with_leading_coefficient_one"
+   ],
+   "sequence_predecessors": [
+    "special_products_difference_of_squares_and_perfect_squares"
+   ],
+   "keywords": [
+    "roots",
+    "solve by factoring",
+    "zero product"
+   ],
+   "summary": "Factoring converts a quadratic equation into two linear equations, each of which is easy to solve.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "solving_simple_exponential_equations",
+   "title": "Solving simple exponential equations",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential models and inverses",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "exponential_functions_and_their_graphs",
+    "logarithms_as_inverses_of_exponentials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common base",
+    "exponential equation",
+    "solve"
+   ],
+   "summary": "When both sides share a base, matching exponents solves the equation; otherwise estimation or logarithms are required.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "solving_systems_by_elimination",
+   "title": "Solving systems by elimination",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Algebraic solution methods",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "combining_like_terms",
+    "solving_systems_by_substitution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "add equations",
+    "cancel variable",
+    "elimination"
+   ],
+   "summary": "Elimination adds or subtracts multiples of equations so one variable cancels, leaving a single-variable equation.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "solving_systems_by_graphing",
+   "title": "Solving systems by graphing",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Systems and their solutions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "slope_as_a_constant_rate_of_change",
+    "systems_as_simultaneous_constraints"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coincident",
+    "graph system",
+    "intersection"
+   ],
+   "summary": "Graphing shows the solution as an intersection, which makes the meaning of no solution and infinite solutions visible.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "solving_systems_by_substitution",
+   "title": "Solving systems by substitution",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Algebraic solution methods",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "slope_intercept_form"
+   ],
+   "sequence_predecessors": [
+    "solving_systems_by_graphing"
+   ],
+   "keywords": [
+    "isolate",
+    "substitute",
+    "substitution"
+   ],
+   "summary": "Substitution replaces one variable with an equivalent expression so that a two-variable problem becomes one-variable.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "special_products_difference_of_squares_and_perfect_squares",
+   "title": "Special products: difference of squares and perfect squares",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Factoring",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "expanding_products_of_binomials",
+    "factoring_trinomials_with_leading_coefficient_other_than_one"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "difference of squares",
+    "perfect square trinomial",
+    "special product"
+   ],
+   "summary": "Recognising a special product pattern lets you factor in one step instead of searching for a factor pair.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "special_systems_no_solution_and_infinitely_many",
+   "title": "Special systems: no solution and infinitely many",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Algebraic solution methods",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "solving_systems_by_elimination"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coincident",
+    "infinitely many",
+    "no solution",
+    "parallel"
+   ],
+   "summary": "Parallel distinct lines share no point and coincident lines share every point, and the algebra reports both cases.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "square_roots_and_perfect_squares",
+   "title": "Square roots and perfect squares",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Radicals and scientific notation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "zero_and_negative_exponents"
+   ],
+   "keywords": [
+    "perfect square",
+    "radical",
+    "square root"
+   ],
+   "summary": "A square root reverses squaring, and perfect squares let you factor a root exactly.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "standard_deviation",
+   "title": "Standard deviation",
+   "strand": "Statistics & Probability",
+   "unit": "Descriptive statistics",
+   "topic": "Centre and spread",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "measures_of_centre_mean_median_and_mode",
+    "measures_of_spread_range_and_interquartile_range"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deviation",
+    "standard deviation",
+    "variance"
+   ],
+   "summary": "Standard deviation averages squared deviations from the mean, so it describes typical distance from centre.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 142
+   }
+  },
+  {
+   "id": "standard_factored_and_vertex_forms",
+   "title": "Standard, factored and vertex forms",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Quadratic structure",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "quadratic_expressions_and_their_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factored form",
+    "quadratic",
+    "standard form",
+    "vertex form"
+   ],
+   "summary": "The three forms of a quadratic each expose a different feature: intercepts, roots, or the vertex.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "standard_form_and_intercepts",
+   "title": "Standard form and intercepts",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Forms of a linear equation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "point_slope_form"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coefficients",
+    "intercepts",
+    "standard form"
+   ],
+   "summary": "Standard form makes the x and y intercepts easy to read, which is useful for constraints written as equations.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "step_functions_and_modelling",
+   "title": "Step functions and modelling",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Absolute value and piecewise functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "piecewise_defined_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discrete model",
+    "floor",
+    "step function"
+   ],
+   "summary": "A step function is constant on intervals, which fits any quantity that changes in discrete jumps.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "stretches_and_compressions",
+   "title": "Stretches and compressions",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Function families and transformations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "reflections_of_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compression",
+    "scale factor",
+    "stretch"
+   ],
+   "summary": "A factor outside the function stretches or compresses vertically, and its reciprocal does the same horizontally.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
+   }
+  },
+  {
+   "id": "surface_area_of_prisms_and_cylinders",
+   "title": "Surface area of prisms and cylinders",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Perimeter, area and volume",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "circumference_and_area_of_circles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cylinder",
+    "net",
+    "prism",
+    "surface area"
+   ],
+   "summary": "Surface area sums the areas of every face, and a net makes the individual faces countable.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 131
+   }
+  },
+  {
+   "id": "systems_as_simultaneous_constraints",
+   "title": "Systems as simultaneous constraints",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Systems and their solutions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "graphing_linear_inequalities_in_two_variables",
+    "mixture_rate_and_work_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intersection",
+    "simultaneous",
+    "system"
+   ],
+   "summary": "A solution to a system must satisfy every equation at once, which is why it is an intersection rather than a root.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "systems_modelling_two_constraints",
+   "title": "Systems modelling two constraints",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Systems in context",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "choosing_an_efficient_solution_method"
+   ],
+   "keywords": [
+    "constraint",
+    "model",
+    "two unknowns"
+   ],
+   "summary": "Two unknowns with two conditions produce a system, and each equation encodes one condition.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "systems_with_three_variables",
+   "title": "Systems with three variables",
+   "strand": "Algebra",
+   "unit": "Systems of linear equations",
+   "topic": "Systems in context",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "solving_systems_by_substitution",
+    "systems_modelling_two_constraints"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elimination",
+    "independent",
+    "three variables"
+   ],
+   "summary": "Three unknowns need three independent equations, and elimination extends to that case one variable at a time.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "terms_coefficients_and_constants",
+   "title": "Terms, coefficients and constants",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Structure of expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "evaluating_expressions"
+   ],
+   "keywords": [
+    "coefficient",
+    "constant",
+    "term"
+   ],
+   "summary": "An expression is a sum of terms, and each term carries its own sign and coefficient.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "the_coordinate_plane_and_ordered_pairs",
+   "title": "The coordinate plane and ordered pairs",
+   "strand": "Functions",
+   "unit": "Coordinate plane and relations",
+   "topic": "Coordinates and graphing",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "adding_and_subtracting_polynomials",
+    "integer_multiplication_and_division"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coordinate plane",
+    "ordered pair",
+    "x axis"
+   ],
+   "summary": "An ordered pair records horizontal then vertical position, and the order is part of the meaning.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "the_correlation_coefficient",
+   "title": "The correlation coefficient",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Relationships between two variables",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "scatter_plots_and_association"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "correlation coefficient",
+    "linear",
+    "strength"
+   ],
+   "summary": "The correlation coefficient measures the strength and direction of a linear association only, and it is not a percentage.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 147
+   }
+  },
+  {
+   "id": "the_distance_formula",
+   "title": "The distance formula",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Similarity and coordinate geometry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_pythagorean_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coordinate",
+    "distance",
+    "distance formula"
+   ],
+   "summary": "The distance formula is the Pythagorean theorem applied to a difference in coordinates.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 127
+   }
+  },
+  {
+   "id": "the_distributive_property",
+   "title": "The distributive property",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Structure of expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "combining_like_terms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distributive",
+    "expand",
+    "parentheses"
+   ],
+   "summary": "Multiplication distributes over addition, which is what lets you remove parentheses correctly.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "the_midpoint_formula",
+   "title": "The midpoint formula",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Similarity and coordinate geometry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_distance_formula"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average",
+    "coordinate",
+    "midpoint formula"
+   ],
+   "summary": "The midpoint formula averages coordinates, which places a point exactly halfway between two others.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 128
+   }
+  },
+  {
+   "id": "the_pythagorean_theorem",
+   "title": "The Pythagorean theorem",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Similarity and coordinate geometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "congruence_and_rigid_motions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hypotenuse",
+    "pythagorean theorem",
+    "right triangle"
+   ],
+   "summary": "In a right triangle the squares on the legs sum to the square on the hypotenuse, which converts between distances.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 126
+   }
+  },
+  {
+   "id": "the_quadratic_formula_and_the_discriminant",
+   "title": "The quadratic formula and the discriminant",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Solving and applying",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "factoring_trinomials_with_leading_coefficient_one",
+    "solving_quadratic_equations_by_completing_the_square"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discriminant",
+    "quadratic formula",
+    "real roots"
+   ],
+   "summary": "The quadratic formula solves every quadratic, and the discriminant reports how many real roots exist before you compute them.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "the_zero_product_property",
+   "title": "The zero-product property",
+   "strand": "Algebra",
+   "unit": "Quadratic expressions and equations",
+   "topic": "Quadratic structure",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "standard_factored_and_vertex_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor",
+    "roots",
+    "zero product property"
+   ],
+   "summary": "A product equals zero only when at least one factor equals zero, which is what turns factoring into a solution method.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "theoretical_probability",
+   "title": "Theoretical probability",
+   "strand": "Statistics & Probability",
+   "unit": "Probability",
+   "topic": "Foundations of probability",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "sample_spaces_and_outcomes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equally likely",
+    "favourable",
+    "theoretical probability"
+   ],
+   "summary": "Theoretical probability divides favourable equally likely outcomes by all equally likely outcomes.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 156
+   }
+  },
+  {
+   "id": "transforming_exponential_functions",
+   "title": "Transforming exponential functions",
+   "strand": "Functions",
+   "unit": "Exponential functions",
+   "topic": "Exponential models and inverses",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "exponential_modelling_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "shift",
+    "stretch",
+    "transform"
+   ],
+   "summary": "Shifts and stretches move an exponential curve without changing the fact that it is exponential.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "translating_verbal_statements_into_expressions",
+   "title": "Translating verbal statements into expressions",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Expressions and notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "variables_and_algebraic_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "translate",
+    "verbal expression",
+    "word phrase"
+   ],
+   "summary": "Moving from words to symbols requires deciding what each quantity is before choosing operations.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "translations_of_graphs",
+   "title": "Translations of graphs",
+   "strand": "Functions",
+   "unit": "Transformations and absolute value functions",
+   "topic": "Function families and transformations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "parent_functions_and_their_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "horizontal",
+    "shift",
+    "translation"
+   ],
+   "summary": "Adding inside the input shifts the graph horizontally in the opposite direction to the sign.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "triangle_angle_sum_and_exterior_angles",
+   "title": "Triangle angle sum and exterior angles",
+   "strand": "Geometry & Measurement",
+   "unit": "Geometric foundations",
+   "topic": "Lines, angles and triangles",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "parallel_lines_and_transversals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exterior angle",
+    "remote interior",
+    "triangle angle sum"
+   ],
+   "summary": "The interior angles of a triangle sum to a straight angle, and an exterior angle equals the sum of the two remote interior angles.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 123
+   }
+  },
+  {
+   "id": "two_step_equations",
+   "title": "Two-step equations",
+   "strand": "Algebra",
+   "unit": "Linear equations",
+   "topic": "What a solution means",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "one_step_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse",
+    "order of operations",
+    "two step"
+   ],
+   "summary": "Undo addition before multiplication, because the order of inverse operations reverses the order of the original operations.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "two_way_frequency_tables",
+   "title": "Two-way frequency tables",
+   "strand": "Statistics & Probability",
+   "unit": "Bivariate data and inference",
+   "topic": "Categorical data and sampling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "interpreting_slope_and_intercept_in_data_context"
+   ],
+   "keywords": [
+    "frequency",
+    "joint",
+    "marginal",
+    "two way table"
+   ],
+   "summary": "A two-way table cross-classifies two categorical variables, which makes joint and marginal counts visible.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 150
+   }
+  },
+  {
+   "id": "unit_rates",
+   "title": "Unit rates",
+   "strand": "Number & Quantity",
+   "unit": "Ratios, rates and proportional reasoning",
+   "topic": "Building and comparing ratios",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ratios_as_comparisons"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "per unit",
+    "rate",
+    "unit rate"
+   ],
+   "summary": "A unit rate divides a comparison down to a single unit of the second quantity, which makes prices and speeds comparable.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "variables_and_algebraic_notation",
+   "title": "Variables and algebraic notation",
+   "strand": "Algebra",
+   "unit": "Algebraic expressions",
+   "topic": "Expressions and notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "integer_multiplication_and_division",
+    "scientific_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coefficient",
+    "notation",
+    "variable"
+   ],
+   "summary": "A variable names a quantity that may vary, and juxtaposition is the conventional way to write multiplication.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "volume_of_prisms_cylinders_and_spheres",
+   "title": "Volume of prisms, cylinders and spheres",
+   "strand": "Geometry & Measurement",
+   "unit": "Measurement and geometric modelling",
+   "topic": "Perimeter, area and volume",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "surface_area_of_prisms_and_cylinders"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cylinder",
+    "prism",
+    "sphere",
+    "volume"
+   ],
+   "summary": "Volume multiplies a base area by a height, with the sphere formula as the notable exception.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 132
+   }
+  },
+  {
+   "id": "writing_equations_of_lines_from_context",
+   "title": "Writing equations of lines from context",
+   "strand": "Functions",
+   "unit": "Linear functions",
+   "topic": "Linear models",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "parallel_and_perpendicular_lines"
+   ],
+   "keywords": [
+    "context",
+    "model",
+    "write equation"
+   ],
+   "summary": "Turning a described situation into a line requires identifying the rate and one known point.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "zero_and_negative_exponents",
+   "title": "Zero and negative exponents",
+   "strand": "Number & Quantity",
+   "unit": "Exponents, radicals and irrational numbers",
+   "topic": "Exponent structure",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "power_of_a_power_and_power_of_a_product"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative exponent",
+    "reciprocal",
+    "zero exponent"
+   ],
+   "summary": "The rules extend to zero and negative exponents in exactly the way that keeps the quotient rule consistent.",
+   "has_lesson": false,
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra I and Integrated Mathematics — one year",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  }
+ ]
+}

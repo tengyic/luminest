@@ -1,0 +1,339 @@
+[
+  {
+    "slug": "sci-mitosis-sequence",
+    "archetype": "order_sequence",
+    "title": "The Stages of Mitosis",
+    "course_id": "biology",
+    "concept": "Cell cycle and mitosis",
+    "subjects": ["biology"],
+    "difficulty": "core",
+    "minutes": 5,
+    "prompt": "Put the stages of mitosis in order, from the first to the last.",
+    "learning_objective": "Order the stages of mitosis and describe what the chromosomes are doing at each one.",
+    "reference": "Cell cycle and mitosis, GCSE/A-level biology sequencing activity",
+    "tags": ["cell division", "mitosis", "sequence", "process"],
+    "spec": {
+      "title": "The Stages of Mitosis",
+      "instruction": "Drag the five stages from the shuffled column into the order a cell passes through them, then press Check.",
+      "prompt": "Put the stages of mitosis in order, from the first to the last.",
+      "why": "Mitosis is one continuous process; its stages are named for what the chromosomes are doing at each moment.",
+      "seed": 41,
+      "items": [
+        {
+          "id": "prophase",
+          "text": "Prophase",
+          "note": "Chromatin condenses into visible chromosomes and the spindle begins to form."
+        },
+        {
+          "id": "metaphase",
+          "text": "Metaphase",
+          "note": "Chromosomes line up single file along the cell's equator, attached to spindle fibres."
+        },
+        {
+          "id": "anaphase",
+          "text": "Anaphase",
+          "note": "Sister chromatids are pulled apart to opposite poles of the cell."
+        },
+        {
+          "id": "telophase",
+          "text": "Telophase",
+          "note": "Two nuclear envelopes re-form, one around each set of chromosomes."
+        },
+        {
+          "id": "cytokinesis",
+          "text": "Cytokinesis",
+          "note": "The cytoplasm divides, producing two genetically identical daughter cells."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "cs-linear-search-sequence",
+    "archetype": "order_sequence",
+    "title": "Linear Search, Step by Step",
+    "course_id": "computer_science",
+    "concept": "Linear and binary search",
+    "subjects": ["computer_science"],
+    "difficulty": "intro",
+    "minutes": 5,
+    "prompt": "In what order does a linear search work through a list?",
+    "learning_objective": "Trace the steps of a linear search and explain why its cost grows with the length of the list.",
+    "reference": "Linear and binary search, KS4/AP Computer Science algorithms",
+    "tags": ["algorithms", "search", "sequence", "tracing"],
+    "spec": {
+      "title": "Linear Search, Step by Step",
+      "instruction": "The steps of a linear search are shuffled. Drag them into the order the computer carries them out, then press Check.",
+      "prompt": "In what order does a linear search work through a list?",
+      "why": "A linear search checks items one at a time from one end, so its cost grows in step with the length of the list.",
+      "seed": 7,
+      "items": [
+        {
+          "id": "start",
+          "text": "Start at the first item in the list.",
+          "note": "A linear search always begins at one end and moves through in order."
+        },
+        {
+          "id": "compare",
+          "text": "Compare the current item with the target.",
+          "note": "Each item is tested once, against the value being searched for."
+        },
+        {
+          "id": "found",
+          "text": "If it matches, stop and report the position.",
+          "note": "A match ends the search early - there is no need to look any further."
+        },
+        {
+          "id": "next",
+          "text": "If not, move on to the next item.",
+          "note": "A miss advances the search by exactly one position."
+        },
+        {
+          "id": "loop",
+          "text": "Repeat until found or the list ends.",
+          "note": "This repetition is what makes it an algorithm rather than a single comparison."
+        },
+        {
+          "id": "absent",
+          "text": "If the list ends, report no match.",
+          "note": "Reaching the end without a match is the other way the algorithm can finish."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-enzyme-terms",
+    "archetype": "matching_pairs",
+    "title": "Enzymes: Match the Terms",
+    "course_id": "biology",
+    "concept": "Enzymes as biological catalysts",
+    "subjects": ["biology"],
+    "difficulty": "core",
+    "minutes": 5,
+    "prompt": "Match each enzyme term to its meaning.",
+    "learning_objective": "Define the key terms of enzyme action and link each to the idea of a specific active site.",
+    "reference": "Enzymes as biological catalysts, GCSE/A-level biology vocabulary",
+    "tags": ["enzymes", "vocabulary", "definitions", "proteins"],
+    "spec": {
+      "title": "Enzymes: Match the Terms",
+      "instruction": "Select a term on the left, then select its meaning on the right. A correct pair locks in; a wrong one bounces back.",
+      "prompt": "Match each enzyme term to its meaning.",
+      "seed": 12,
+      "pairs": [
+        {
+          "left": "Active site",
+          "right": "Where the substrate binds",
+          "note": "It is a small region whose shape is complementary to the substrate."
+        },
+        {
+          "left": "Substrate",
+          "right": "The molecule an enzyme acts on",
+          "note": "The substrate is what the enzyme converts into product."
+        },
+        {
+          "left": "Denaturation",
+          "right": "Loss of shape at high temperature",
+          "note": "Above the optimum, the bonds holding the active site's shape break."
+        },
+        {
+          "left": "Catalyst",
+          "right": "Speeds a reaction, is not used up",
+          "note": "Enzymes are biological catalysts and emerge unchanged from the reaction."
+        },
+        {
+          "left": "Specificity",
+          "right": "One enzyme, one kind of substrate",
+          "note": "Because the active site's shape must match, enzymes are highly specific."
+        },
+        {
+          "left": "Optimum pH",
+          "right": "The pH of fastest activity",
+          "note": "Away from the optimum pH, activity falls as the active site distorts."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-quantity-si-units",
+    "archetype": "matching_pairs",
+    "title": "Quantities and Their SI Units",
+    "course_id": "physics",
+    "concept": "Dimensional analysis",
+    "subjects": ["physics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Match each physical quantity to its SI unit.",
+    "learning_objective": "Match physical quantities to their SI units and recognise the base units those units are built from.",
+    "reference": "Dimensional analysis, SI base units (A-level physics)",
+    "tags": ["units", "si", "dimensional analysis", "definitions"],
+    "spec": {
+      "title": "Quantities and Their SI Units",
+      "instruction": "Select a quantity on the left, then its SI unit on the right. Correct pairs lock in; wrong ones bounce back.",
+      "prompt": "Match each physical quantity to its SI unit.",
+      "seed": 23,
+      "pairs": [
+        {
+          "left": "Force",
+          "right": "newton (kg m s^-2)",
+          "note": "One newton accelerates one kilogram at one metre per second squared."
+        },
+        {
+          "left": "Energy",
+          "right": "joule (kg m^2 s^-2)",
+          "note": "A joule is a newton-metre: a force acting through a distance."
+        },
+        {
+          "left": "Power",
+          "right": "watt (kg m^2 s^-3)",
+          "note": "A watt is one joule per second."
+        },
+        {
+          "left": "Electric charge",
+          "right": "coulomb (A s)",
+          "note": "One coulomb is the charge carried by one ampere for one second."
+        },
+        {
+          "left": "Potential difference",
+          "right": "volt (kg m^2 s^-3 A^-1)",
+          "note": "A volt is one joule per coulomb."
+        },
+        {
+          "left": "Resistance",
+          "right": "ohm (kg m^2 s^-3 A^-2)",
+          "note": "An ohm is one volt per ampere."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-animal-cell-diagram",
+    "archetype": "label_diagram",
+    "title": "Label the Animal Cell",
+    "course_id": "biology",
+    "concept": "Eukaryotic and prokaryotic cells",
+    "subjects": ["biology"],
+    "difficulty": "intro",
+    "minutes": 4,
+    "prompt": "Label the parts of the cell.",
+    "learning_objective": "Identify the main organelles of an animal cell and state the function of each.",
+    "reference": "Eukaryotic and prokaryotic cells, cell structure labelling",
+    "tags": ["cells", "organelles", "diagram", "labelling"],
+    "spec": {
+      "title": "Label the Animal Cell",
+      "instruction": "Drag each label from the tray onto the numbered hotspot that names it. A drop outside a hotspot returns to the tray.",
+      "prompt": "Label the parts of the cell.",
+      "seed": 5,
+      "shapes": [
+        { "kind": "circle", "x": 300, "y": 180, "w": 330, "h": 330, "colour": "a", "fill": "none" },
+        { "kind": "circle", "x": 240, "y": 150, "w": 104, "h": 104, "colour": "e", "fill": "light" },
+        { "kind": "circle", "x": 405, "y": 112, "w": 80, "h": 80, "colour": "d", "fill": "light" },
+        { "kind": "rect", "x": 350, "y": 225, "w": 90, "h": 40, "colour": "b", "fill": "light" },
+        { "kind": "circle", "x": 270, "y": 270, "w": 44, "h": 44, "colour": "c", "fill": "light" }
+      ],
+      "labels": [
+        {
+          "text": "Cell membrane",
+          "x": 135,
+          "y": 180,
+          "radius": 30,
+          "note": "The selectively permeable bilayer that controls what enters and leaves the cell."
+        },
+        {
+          "text": "Nucleus",
+          "x": 240,
+          "y": 150,
+          "radius": 44,
+          "note": "Contains the DNA and directs the cell's activities."
+        },
+        {
+          "text": "Vacuole",
+          "x": 405,
+          "y": 112,
+          "radius": 40,
+          "note": "A fluid-filled sac used for storage; in plant cells it also provides turgor."
+        },
+        {
+          "text": "Mitochondrion",
+          "x": 395,
+          "y": 245,
+          "radius": 44,
+          "note": "The site of aerobic respiration, releasing energy as ATP."
+        },
+        {
+          "text": "Ribosomes",
+          "x": 270,
+          "y": 270,
+          "radius": 30,
+          "note": "The site of protein synthesis."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "cs-star-network-diagram",
+    "archetype": "label_diagram",
+    "title": "Star Network Topology",
+    "course_id": "computer_science",
+    "concept": "Networks and topologies",
+    "subjects": ["computer_science"],
+    "difficulty": "intro",
+    "minutes": 4,
+    "prompt": "Label the devices in this star network.",
+    "learning_objective": "Identify the devices in a star topology and explain the role of the central switch.",
+    "reference": "Networks and topologies, star topology device labelling",
+    "tags": ["networks", "topology", "diagram", "labelling"],
+    "spec": {
+      "title": "Star Network Topology",
+      "instruction": "Drag each label from the tray onto the numbered hotspot for the device it names.",
+      "prompt": "Label the devices in this star network.",
+      "seed": 9,
+      "shapes": [
+        { "kind": "line", "x": 430, "y": 170, "w": 170, "h": 80, "colour": "edge" },
+        { "kind": "line", "x": 430, "y": 170, "w": 170, "h": 260, "colour": "edge" },
+        { "kind": "line", "x": 430, "y": 170, "w": 690, "h": 80, "colour": "edge" },
+        { "kind": "line", "x": 430, "y": 170, "w": 690, "h": 260, "colour": "edge" },
+        { "kind": "circle", "x": 430, "y": 170, "w": 90, "h": 90, "colour": "a", "fill": "light" },
+        { "kind": "circle", "x": 170, "y": 80, "w": 80, "h": 80, "colour": "b", "fill": "light" },
+        { "kind": "circle", "x": 170, "y": 260, "w": 80, "h": 80, "colour": "c", "fill": "light" },
+        { "kind": "circle", "x": 690, "y": 80, "w": 80, "h": 80, "colour": "d", "fill": "light" },
+        { "kind": "circle", "x": 690, "y": 260, "w": 80, "h": 80, "colour": "e", "fill": "light" }
+      ],
+      "labels": [
+        {
+          "text": "Switch",
+          "x": 430,
+          "y": 170,
+          "radius": 40,
+          "note": "The central device: every other device connects to it, which is what makes this a star."
+        },
+        {
+          "text": "Server",
+          "x": 170,
+          "y": 80,
+          "radius": 34,
+          "note": "Provides shared services and files to the other devices."
+        },
+        {
+          "text": "Workstation",
+          "x": 170,
+          "y": 260,
+          "radius": 34,
+          "note": "A user's own computer on the network."
+        },
+        {
+          "text": "Printer",
+          "x": 690,
+          "y": 80,
+          "radius": 34,
+          "note": "A shared peripheral, reachable by every workstation through the switch."
+        },
+        {
+          "text": "Access point",
+          "x": 690,
+          "y": 260,
+          "radius": 34,
+          "note": "Bridges wireless devices onto the wired network."
+        }
+      ]
+    }
+  }
+]

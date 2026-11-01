@@ -1,0 +1,4299 @@
+{
+ "schema": 1,
+ "name": "ap_psychology",
+ "title": "AP Psychology",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Psychology - Behaviour, Evidence and Explanation",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "The AP Psychology framework: the vocabulary of evidence, biological bases of behaviour, cognition, development and learning, social psychology and personality, and mental and physical health.",
+  "id_namespace": {
+   "prefix": "ap_psychology_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Foundations": {
+    "History and approaches": [
+     "Schools of thought"
+    ],
+    "Research methods": [
+     "Designing a study"
+    ],
+    "Statistics and ethics": [
+     "Reading the evidence"
+    ]
+   },
+   "Biological Bases of Behavior": {
+    "Heredity and environment": [
+     "Nature and nurture"
+    ],
+    "Neural communication": [
+     "How a neuron signals"
+    ],
+    "Nervous system and brain": [
+     "Systems and structures"
+    ],
+    "Sleep": [
+     "Rhythms and rest"
+    ],
+    "Sensation": [
+     "From stimulus to signal"
+    ]
+   },
+   "Cognition": {
+    "Perception": [
+     "Organising the input"
+    ],
+    "Memory": [
+     "Encoding, storage, retrieval"
+    ],
+    "Thinking and intelligence": [
+     "Reasoning and ability"
+    ]
+   },
+   "Development and Learning": {
+    "Development": [
+     "Change across the lifespan"
+    ],
+    "Learning": [
+     "Conditioning"
+    ]
+   },
+   "Social Psychology and Personality": {
+    "Social cognition": [
+     "Persons in situations"
+    ],
+    "Personality": [
+     "Theories and assessment"
+    ],
+    "Motivation and emotion": [
+     "Why we act and feel"
+    ]
+   },
+   "Mental and Physical Health": {
+    "Health and positive psychology": [
+     "Stress, coping and well-being"
+    ],
+    "Psychological disorders": [
+     "Classification and categories"
+    ],
+    "Treatment": [
+     "What helps"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Foundations",
+    "units": [
+     "History and approaches",
+     "Research methods",
+     "Statistics and ethics"
+    ]
+   },
+   {
+    "strand": "Biological Bases of Behavior",
+    "units": [
+     "Heredity and environment",
+     "Neural communication",
+     "Nervous system and brain",
+     "Sleep",
+     "Sensation"
+    ]
+   },
+   {
+    "strand": "Cognition",
+    "units": [
+     "Perception",
+     "Memory",
+     "Thinking and intelligence"
+    ]
+   },
+   {
+    "strand": "Development and Learning",
+    "units": [
+     "Development",
+     "Learning"
+    ]
+   },
+   {
+    "strand": "Social Psychology and Personality",
+    "units": [
+     "Social cognition",
+     "Personality",
+     "Motivation and emotion"
+    ]
+   },
+   {
+    "strand": "Mental and Physical Health",
+    "units": [
+     "Health and positive psychology",
+     "Psychological disorders",
+     "Treatment"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_psychology_acquisition_extinction_and_spontaneous_recovery",
+   "title": "Acquisition, extinction and spontaneous recovery",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_classical_conditioning"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acquisition",
+    "extinction",
+    "spontaneous recovery"
+   ],
+   "summary": "Acquisition builds the association, extinction weakens it when the pairing stops, and spontaneous recovery shows the original learning was suppressed rather than erased.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "ap_psychology_action_potential",
+   "title": "Action potential",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Neural communication",
+   "topic": "How a neuron signals",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_neuron_structure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "action potential",
+    "all-or-none",
+    "threshold"
+   ],
+   "summary": "A neuron fires all-or-none when excitation passes threshold, so intensity is coded by firing rate rather than by a bigger impulse.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_psychology_adolescent_brain_and_identity",
+   "title": "Adolescent brain and identity",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_erikson_psychosocial_stages"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_kohlberg_moral_development"
+   ],
+   "keywords": [
+    "adolescence",
+    "identity",
+    "prefrontal cortex"
+   ],
+   "summary": "The limbic system matures before the prefrontal cortex, so sensation seeking peaks before impulse control catches up.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "ap_psychology_ageing_and_cognitive_change",
+   "title": "Ageing and cognitive change",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_gender_and_sexual_orientation_development"
+   ],
+   "keywords": [
+    "ageing",
+    "crystallised intelligence",
+    "fluid intelligence"
+   ],
+   "summary": "Fluid abilities decline earlier than crystallised ones, so vocabulary can hold while processing speed falls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "ap_psychology_agonists_and_antagonists",
+   "title": "Agonists and antagonists",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Neural communication",
+   "topic": "How a neuron signals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_neurotransmitters"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "agonist",
+    "antagonist",
+    "drug action"
+   ],
+   "summary": "An agonist mimics or strengthens a neurotransmitter and an antagonist blocks it, which is how most psychiatric drugs change behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_psychology_algorithms_and_heuristics",
+   "title": "Algorithms and heuristics",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_concepts_and_prototypes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "algorithm",
+    "heuristic",
+    "problem solving"
+   ],
+   "summary": "An algorithm guarantees a solution by trying every option and a heuristic trades certainty for speed, which is why heuristics produce predictable errors.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "ap_psychology_anxiety_disorders",
+   "title": "Anxiety disorders",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_diathesis_stress_model"
+   ],
+   "keywords": [
+    "anxiety disorder",
+    "panic",
+    "phobia"
+   ],
+   "summary": "Generalised anxiety, panic disorder, phobia and social anxiety share excessive fear but differ in what triggers it and how it is avoided.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 131
+   }
+  },
+  {
+   "id": "ap_psychology_appraisal_and_coping",
+   "title": "Appraisal and coping",
+   "strand": "Mental and Physical Health",
+   "unit": "Health and positive psychology",
+   "topic": "Stress, coping and well-being",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "appraisal",
+    "coping",
+    "emotion-focused",
+    "problem-focused"
+   ],
+   "summary": "Lazarus held that stress depends on whether an event is appraised as threatening and whether resources are judged sufficient, so coping follows appraisal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 125
+   }
+  },
+  {
+   "id": "ap_psychology_assimilation_and_accommodation",
+   "title": "Assimilation and accommodation",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_piaget_stages_of_cognitive_development"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accommodation",
+    "assimilation",
+    "schema"
+   ],
+   "summary": "Assimilation fits new experience into an existing schema and accommodation changes the schema, and the tension between them drives stage change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "ap_psychology_attachment_and_the_strange_situation",
+   "title": "Attachment and the strange situation",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_vygotsky_and_the_zone_of_proximal_development"
+   ],
+   "keywords": [
+    "attachment",
+    "secure base",
+    "strange situation"
+   ],
+   "summary": "Attachment forms in the first year, and Ainsworth classified secure, avoidant and ambivalent patterns by how an infant reacts to separation and reunion.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "ap_psychology_attitudes_and_cognitive_dissonance",
+   "title": "Attitudes and cognitive dissonance",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_attribution_theory_and_the_fundamental_attribution"
+   ],
+   "keywords": [
+    "Festinger",
+    "attitude",
+    "cognitive dissonance"
+   ],
+   "summary": "An attitude is an evaluation that guides behaviour, and dissonance is the discomfort of holding inconsistent cognitions, usually resolved by changing the attitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
+   }
+  },
+  {
+   "id": "ap_psychology_attraction_and_interpersonal_factors",
+   "title": "Attraction and interpersonal factors",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_bystander_effect_and_altruism"
+   ],
+   "keywords": [
+    "mere exposure",
+    "proximity",
+    "similarity"
+   ],
+   "summary": "Proximity, physical attractiveness, similarity and reciprocity of liking predict attraction better than the idea of opposites attracting.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 113
+   }
+  },
+  {
+   "id": "ap_psychology_attribution_theory_and_the_fundamental_attribution",
+   "title": "Attribution theory and the fundamental attribution error",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "attribution",
+    "dispositional",
+    "fundamental attribution error"
+   ],
+   "summary": "People explain behaviour by disposition or situation, and the fundamental attribution error is over-weighting disposition when judging others.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "ap_psychology_audition_pitch_and_localisation",
+   "title": "Audition: pitch and localisation",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_vision_rods_cones_and_the_retina"
+   ],
+   "keywords": [
+    "audition",
+    "cochlea",
+    "localisation",
+    "pitch"
+   ],
+   "summary": "Place and frequency coding together explain pitch, and timing and loudness differences between the ears explain where a sound comes from.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "ap_psychology_availability_and_representativeness_heuristics",
+   "title": "Availability and representativeness heuristics",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_algorithms_and_heuristics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "availability heuristic",
+    "representativeness heuristic"
+   ],
+   "summary": "The availability heuristic judges likelihood by how easily examples come to mind and the representativeness heuristic judges it by resemblance to a stereotype.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "ap_psychology_behaviour_genetics_and_twin_studies",
+   "title": "Behaviour genetics and twin studies",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Heredity and environment",
+   "topic": "Nature and nurture",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "behaviour genetics",
+    "identical twins",
+    "twin study"
+   ],
+   "summary": "Comparing identical and fraternal twins separates the contribution of shared genes from shared environment, because both kinds of twin share a home but only one kind shares all its genes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_psychology_behavioural_therapy_and_exposure",
+   "title": "Behavioural therapy and exposure",
+   "strand": "Mental and Physical Health",
+   "unit": "Treatment",
+   "topic": "What helps",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_cognitive_behavioural_therapy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exposure therapy",
+    "extinction",
+    "systematic desensitisation"
+   ],
+   "summary": "Exposure works by preventing the avoidance that keeps a fear alive, so the extinction is experienced rather than argued.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 139
+   }
+  },
+  {
+   "id": "ap_psychology_behaviourist_perspective",
+   "title": "Behaviourist perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_psychoanalytic_perspective"
+   ],
+   "keywords": [
+    "Skinner",
+    "Watson",
+    "behaviourism",
+    "observable behaviour"
+   ],
+   "summary": "Behaviourism studies only what can be observed, and explains it by the consequences that followed it rather than by inner states.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_psychology_biological_constraints_on_conditioning",
+   "title": "Biological constraints on conditioning",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_classical_conditioning"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_latent_learning_and_cognitive_maps"
+   ],
+   "keywords": [
+    "biological constraint",
+    "preparedness",
+    "taste aversion"
+   ],
+   "summary": "Some associations form far more easily than others, so preparedness limits what can be conditioned in a species.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "ap_psychology_biological_perspective",
+   "title": "Biological perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_cognitive_perspective"
+   ],
+   "keywords": [
+    "biological",
+    "genes",
+    "neuroscience"
+   ],
+   "summary": "The biological perspective explains behaviour through genes, brain structures, neurotransmitters and hormones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_psychology_biomedical_treatments",
+   "title": "Biomedical treatments",
+   "strand": "Mental and Physical Health",
+   "unit": "Treatment",
+   "topic": "What helps",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_behavioural_therapy_and_exposure"
+   ],
+   "keywords": [
+    "SSRI",
+    "antipsychotic",
+    "lithium",
+    "psychopharmacology"
+   ],
+   "summary": "Psychopharmacology changes neurotransmitter signalling - SSRIs for depression, antipsychotics for psychosis, lithium for bipolar - and medication and therapy are often combined.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 140
+   }
+  },
+  {
+   "id": "ap_psychology_biopsychosocial_approach",
+   "title": "Biopsychosocial approach",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_cognitive_perspective",
+    "ap_psychology_biological_perspective",
+    "ap_psychology_sociocultural_perspective"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "biopsychosocial",
+    "levels of analysis"
+   ],
+   "summary": "A complete explanation combines biological, psychological and social levels rather than choosing one, because each level answers a different question about the same behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_psychology_bottom_up_and_top_down_processing",
+   "title": "Bottom-up and top-down processing",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_touch_pain_and_the_body_senses"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bottom-up",
+    "expectation",
+    "top-down"
+   ],
+   "summary": "Bottom-up processing builds a percept from features and top-down processing applies expectation, which is why a blurry word becomes readable in context.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "ap_psychology_brain_imaging_techniques",
+   "title": "Brain imaging techniques",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_neuroplasticity"
+   ],
+   "keywords": [
+    "EEG",
+    "MRI",
+    "PET",
+    "fMRI"
+   ],
+   "summary": "EEG records electrical activity quickly, MRI and CT show structure, and PET and fMRI show activity, so each technique answers a different question.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_psychology_brainstem_and_cerebellum",
+   "title": "Brainstem and cerebellum",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_endocrine_system_and_hormones"
+   ],
+   "keywords": [
+    "brainstem",
+    "cerebellum",
+    "medulla",
+    "pons"
+   ],
+   "summary": "The brainstem sustains automatic survival functions and the cerebellum coordinates movement and balance, which is why damage shows up as clumsiness rather than as lost knowledge.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_psychology_bystander_effect_and_altruism",
+   "title": "Bystander effect and altruism",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_prejudice_stereotypes_and_discrimination"
+   ],
+   "keywords": [
+    "altruism",
+    "bystander effect",
+    "diffusion of responsibility"
+   ],
+   "summary": "Helping drops as the number of witnesses rises, because responsibility is diffused and each person reads the others as not alarmed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "ap_psychology_central_and_peripheral_nervous_system",
+   "title": "Central and peripheral nervous system",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_psychology_reuptake_and_synaptic_plasticity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "central nervous system",
+    "peripheral nervous system"
+   ],
+   "summary": "The central nervous system is the brain and spinal cord; the peripheral system carries sensory input in and motor commands out.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_psychology_cerebral_cortex_and_lobes",
+   "title": "Cerebral cortex and lobes",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_limbic_system"
+   ],
+   "keywords": [
+    "cortex",
+    "frontal",
+    "occipital",
+    "parietal",
+    "temporal"
+   ],
+   "summary": "The occipital lobe processes vision, the temporal lobe hearing and language, the parietal lobe touch and spatial location, and the frontal lobe movement, planning and inhibition.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_psychology_chunking_and_working_memory_capacity",
+   "title": "Chunking and working-memory capacity",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_three_stage_model_of_memory"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_encoding_and_levels_of_processing"
+   ],
+   "keywords": [
+    "capacity",
+    "chunking",
+    "working memory"
+   ],
+   "summary": "Working memory holds about four chunks, and grouping items into larger units raises the amount carried without raising the capacity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "ap_psychology_circadian_rhythm",
+   "title": "Circadian rhythm",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sleep",
+   "topic": "Rhythms and rest",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_brain_imaging_techniques"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "biological clock",
+    "circadian rhythm",
+    "melatonin"
+   ],
+   "summary": "An internal clock of roughly twenty-four hours regulates alertness and body temperature, and light is what resets it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_psychology_classical_conditioning",
+   "title": "Classical conditioning",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_ageing_and_cognitive_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Pavlov",
+    "classical conditioning",
+    "conditioned stimulus"
+   ],
+   "summary": "A neutral stimulus paired repeatedly with an unconditioned stimulus comes to elicit the response alone, which is how a physiological reaction gets attached to a new cue.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "ap_psychology_classifying_disorder_the_dsm_and_diagnosis",
+   "title": "Classifying disorder: the DSM and diagnosis",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_resilience_and_social_support"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "DSM",
+    "classification",
+    "diagnosis"
+   ],
+   "summary": "A classification system names clusters of symptoms so clinicians agree on what they are treating; a diagnosis describes a pattern and is not a statement about the person.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 129
+   }
+  },
+  {
+   "id": "ap_psychology_cognitive_behavioural_therapy",
+   "title": "Cognitive-behavioural therapy",
+   "strand": "Mental and Physical Health",
+   "unit": "Treatment",
+   "topic": "What helps",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_psychodynamic_and_humanistic_therapy"
+   ],
+   "keywords": [
+    "CBT",
+    "behavioural activation",
+    "cognitive restructuring"
+   ],
+   "summary": "CBT changes the thoughts and behaviours that maintain a problem, and it has the strongest evidence base of the talking therapies for anxiety and depression.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 138
+   }
+  },
+  {
+   "id": "ap_psychology_cognitive_perspective",
+   "title": "Cognitive perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_humanistic_perspective"
+   ],
+   "keywords": [
+    "cognitive",
+    "information processing"
+   ],
+   "summary": "The cognitive perspective explains behaviour through the mental processes between stimulus and response: attention, encoding, retrieval and decision.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_psychology_concepts_and_prototypes",
+   "title": "Concepts and prototypes",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_spacing_testing_and_the_serial_position_effect"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "categorisation",
+    "concept",
+    "prototype"
+   ],
+   "summary": "A concept groups similar things and a prototype is the best example of the category, so categorisation is graded rather than all-or-nothing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "ap_psychology_confidentiality_and_protection_from_harm",
+   "title": "Confidentiality and protection from harm",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_informed_consent_and_debriefing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "IRB",
+    "confidentiality",
+    "protection from harm"
+   ],
+   "summary": "Data must be kept private and participants must leave the study no worse than they arrived, which is the standard an ethics board applies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_psychology_confirmation_bias_and_belief_perseverance",
+   "title": "Confirmation bias and belief perseverance",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_psychology_availability_and_representativeness_heuristics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "belief perseverance",
+    "confirmation bias"
+   ],
+   "summary": "People seek evidence that fits a existing belief and discount what contradicts it, so a wrong belief can survive disconfirming data.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "ap_psychology_conformity_and_normative_influence",
+   "title": "Conformity and normative influence",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_attitudes_and_cognitive_dissonance"
+   ],
+   "keywords": [
+    "Asch",
+    "conformity",
+    "normative influence"
+   ],
+   "summary": "Asch showed that people yield to a unanimous wrong majority, because fitting in and being right are separate pressures.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "ap_psychology_confounding_variables",
+   "title": "Confounding variables",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_independent_and_dependent_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "confound",
+    "internal validity"
+   ],
+   "summary": "A confound is an unintended difference between conditions that could produce the effect instead of the manipulated variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_psychology_correlation_coefficient",
+   "title": "Correlation coefficient",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_experimental_and_correlational_designs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coefficient",
+    "correlation",
+    "scatterplot"
+   ],
+   "summary": "A correlation coefficient runs from -1 to +1 and reports the strength and direction of a relationship; its size says nothing about causation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_psychology_creativity_and_divergent_thinking",
+   "title": "Creativity and divergent thinking",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_intelligence_as_psychometric_g"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_stereotype_threat_and_test_bias"
+   ],
+   "keywords": [
+    "creativity",
+    "divergent thinking",
+    "expertise"
+   ],
+   "summary": "Creativity combines expertise, imaginative thinking skills and a venturesome personality, so it is a profile rather than a single score.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "ap_psychology_defence_mechanisms",
+   "title": "Defence mechanisms",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_psychodynamic_structure_id_ego_and_superego"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "defence mechanism",
+    "projection",
+    "repression"
+   ],
+   "summary": "The ego reduces anxiety by distorting reality - repression, projection, displacement, rationalisation - which protects the self at the cost of accuracy.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "ap_psychology_depressive_and_bipolar_disorders",
+   "title": "Depressive and bipolar disorders",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_obsessive_compulsive_and_related_disorders"
+   ],
+   "keywords": [
+    "bipolar",
+    "major depression",
+    "mania"
+   ],
+   "summary": "Major depression is a sustained low mood or loss of interest, and bipolar disorder adds episodes of elevated mood, which is why the two are treated differently.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 133
+   }
+  },
+  {
+   "id": "ap_psychology_depth_perception_and_binocular_cues",
+   "title": "Depth perception and binocular cues",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_gestalt_principles_of_grouping"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "depth perception",
+    "monocular cue",
+    "retinal disparity"
+   ],
+   "summary": "Convergence and retinal disparity use two eyes, and relative size, interposition and linear perspective work with one, which is why depth survives closing an eye.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "ap_psychology_diathesis_stress_model",
+   "title": "Diathesis-stress model",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_classifying_disorder_the_dsm_and_diagnosis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "diathesis-stress",
+    "stressor",
+    "vulnerability"
+   ],
+   "summary": "Disorder appears when a vulnerability meets a stressor, which is why the same stressor harms one person and not another.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 130
+   }
+  },
+  {
+   "id": "ap_psychology_dissociative_and_somatic_symptom_disorders",
+   "title": "Dissociative and somatic symptom disorders",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_schizophrenia_spectrum"
+   ],
+   "keywords": [
+    "dissociative",
+    "somatic symptom"
+   ],
+   "summary": "Dissociative disorders involve disruption of identity or memory and somatic symptom disorders involve bodily complaints without a matching medical explanation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 135
+   }
+  },
+  {
+   "id": "ap_psychology_drive_reduction_and_arousal_theory",
+   "title": "Drive-reduction and arousal theory",
+   "strand": "Social Psychology and Personality",
+   "unit": "Motivation and emotion",
+   "topic": "Why we act and feel",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_projective_and_objective_personality_tests"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arousal",
+    "drive reduction",
+    "homeostasis"
+   ],
+   "summary": "Drive-reduction explains behaviour as restoring balance, and arousal theory explains it as seeking an optimal level of stimulation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 120
+   }
+  },
+  {
+   "id": "ap_psychology_effect_size",
+   "title": "Effect size",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_inferential_statistics_and_significance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "effect size",
+    "practical significance"
+   ],
+   "summary": "Effect size reports how large a difference is in standardised units, which is why a statistically significant result can still be trivial.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_psychology_encoding_and_levels_of_processing",
+   "title": "Encoding and levels of processing",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_three_stage_model_of_memory"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elaboration",
+    "encoding",
+    "levels of processing"
+   ],
+   "summary": "Deep, meaning-based encoding produces better retention than shallow structural encoding, which is why elaborating beats rereading.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "ap_psychology_endocrine_system_and_hormones",
+   "title": "Endocrine system and hormones",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_sympathetic_and_parasympathetic_division"
+   ],
+   "keywords": [
+    "adrenal",
+    "cortisol",
+    "endocrine",
+    "hormone"
+   ],
+   "summary": "Glands release hormones into the blood, so their effects are slower and longer-lasting than neural signals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_psychology_epigenetics",
+   "title": "Epigenetics",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Heredity and environment",
+   "topic": "Nature and nurture",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_gene_environment_interaction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "epigenetics",
+    "gene expression"
+   ],
+   "summary": "Experience can switch genes on or off without changing the DNA sequence, which is how stress or diet in one generation can shape expression in the next.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_psychology_erikson_psychosocial_stages",
+   "title": "Erikson psychosocial stages",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_parenting_styles"
+   ],
+   "keywords": [
+    "Erikson",
+    "identity",
+    "psychosocial crisis"
+   ],
+   "summary": "Each stage poses a crisis between two outcomes, and resolution shapes the next stage, which is why identity work dominates adolescence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "ap_psychology_evaluating_treatment_effectiveness",
+   "title": "Evaluating treatment effectiveness",
+   "strand": "Mental and Physical Health",
+   "unit": "Treatment",
+   "topic": "What helps",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_biomedical_treatments"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "efficacy",
+    "placebo control",
+    "randomised trial"
+   ],
+   "summary": "Improvement must be compared with no treatment and with placebo, because many conditions improve on their own and expectation alone produces change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 141
+   }
+  },
+  {
+   "id": "ap_psychology_evolutionary_perspective",
+   "title": "Evolutionary perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_biological_perspective"
+   ],
+   "keywords": [
+    "adaptation",
+    "evolutionary",
+    "natural selection"
+   ],
+   "summary": "The evolutionary perspective asks which adaptive problem a trait solved, so a behaviour is explained by the survival or reproductive advantage it once carried.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_psychology_experimental_and_correlational_designs",
+   "title": "Experimental and correlational designs",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_random_assignment_and_random_sampling"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "causation",
+    "correlational design",
+    "experiment"
+   ],
+   "summary": "An experiment manipulates a variable and can establish cause; a correlational study measures two variables as they occur and cannot.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_psychology_experimenter_and_demand_characteristics",
+   "title": "Experimenter and demand characteristics",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_placebo_and_double_blind_procedure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "demand characteristics",
+    "experimenter bias"
+   ],
+   "summary": "Cues in a study tell participants what is expected of them, so behaviour can reflect the hypothesis rather than the manipulation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_psychology_forgetting_decay_and_interference",
+   "title": "Forgetting: decay and interference",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_retrieval_recall_and_recognition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decay",
+    "forgetting",
+    "interference"
+   ],
+   "summary": "Traces fade with disuse and similar material interferes, with proactive interference blocking new learning and retroactive interference blocking old.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "ap_psychology_framing_and_loss_aversion",
+   "title": "Framing and loss aversion",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_psychology_confirmation_bias_and_belief_perseverance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "framing",
+    "loss aversion",
+    "prospect theory"
+   ],
+   "summary": "The same choice framed as a gain or a loss produces different decisions, because losses weigh more than equivalent gains.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "ap_psychology_functionalism",
+   "title": "Functionalism",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_structuralism_and_introspection"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "William James",
+    "adaptation",
+    "functionalism"
+   ],
+   "summary": "James asked what consciousness is for rather than what it is made of, so mental processes were explained by their adaptive value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_psychology_gender_and_sexual_orientation_development",
+   "title": "Gender and sexual orientation development",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_adolescent_brain_and_identity"
+   ],
+   "keywords": [
+    "gender identity",
+    "sexual orientation",
+    "socialisation"
+   ],
+   "summary": "Gender identity, expression and orientation develop from interacting biological, cognitive and social influences rather than one cause.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "ap_psychology_gene_environment_interaction",
+   "title": "Gene-environment interaction",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Heredity and environment",
+   "topic": "Nature and nurture",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_heritability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "gene-environment interaction",
+    "range of reaction"
+   ],
+   "summary": "Genes set a range of possible outcomes and environment decides where inside that range a person lands, so the same genotype can develop differently.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_psychology_generalisation_and_discrimination",
+   "title": "Generalisation and discrimination",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_classical_conditioning"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_acquisition_extinction_and_spontaneous_recovery"
+   ],
+   "keywords": [
+    "discrimination",
+    "generalisation"
+   ],
+   "summary": "A response generalises to stimuli similar to the conditioned one and discrimination narrows it to the one that predicts the outcome.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "ap_psychology_gestalt_principles_of_grouping",
+   "title": "Gestalt principles of grouping",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_perceptual_constancy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Gestalt",
+    "closure",
+    "grouping",
+    "proximity"
+   ],
+   "summary": "Proximity, similarity, continuity and closure describe how elements are grouped into wholes, because perception organises rather than records.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "ap_psychology_group_influence_facilitation_loafing_and_polarisat",
+   "title": "Group influence: facilitation, loafing and polarisation",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_obedience_to_authority"
+   ],
+   "keywords": [
+    "group polarisation",
+    "social facilitation",
+    "social loafing"
+   ],
+   "summary": "Presence of others improves simple performance and impairs complex performance, individual effort drops when it cannot be identified, and discussion pushes a group toward a more extreme position.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "ap_psychology_groupthink_and_deindividuation",
+   "title": "Groupthink and deindividuation",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_group_influence_facilitation_loafing_and_polarisat"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deindividuation",
+    "groupthink"
+   ],
+   "summary": "Groupthink suppresses dissent in the interest of harmony and deindividuation reduces self-awareness in a crowd, so both loosen restraint.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "ap_psychology_health_psychology_and_behaviour",
+   "title": "Health psychology and behaviour",
+   "strand": "Mental and Physical Health",
+   "unit": "Health and positive psychology",
+   "topic": "Stress, coping and well-being",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_appraisal_and_coping"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adherence",
+    "behavioural risk",
+    "health psychology"
+   ],
+   "summary": "Health psychology links behaviour - sleep, exercise, smoking, adherence - to physical outcomes, because most chronic disease has a behavioural component.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 126
+   }
+  },
+  {
+   "id": "ap_psychology_hemispheric_specialisation_and_split_brain",
+   "title": "Hemispheric specialisation and split brain",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_cerebral_cortex_and_lobes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "corpus callosum",
+    "hemisphere",
+    "lateralisation",
+    "split brain"
+   ],
+   "summary": "The hemispheres specialise, and when the connecting fibres are cut each half behaves as though it did not know what the other perceived.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_psychology_heritability",
+   "title": "Heritability",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Heredity and environment",
+   "topic": "Nature and nurture",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_behaviour_genetics_and_twin_studies"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "heritability",
+    "population",
+    "variation"
+   ],
+   "summary": "Heritability estimates how much of the variation in a group is explained by genetic differences; it is a property of a population, not a fixed share of one person.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_psychology_humanistic_perspective",
+   "title": "Humanistic perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_behaviourist_perspective"
+   ],
+   "keywords": [
+    "Maslow",
+    "Rogers",
+    "humanistic",
+    "self-actualisation"
+   ],
+   "summary": "Rogers and Maslow argued that people are driven toward growth and self-direction, so a person is not reducible to drives or reinforcement.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_psychology_humanistic_self_concept",
+   "title": "Humanistic self-concept",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_defence_mechanisms"
+   ],
+   "keywords": [
+    "congruence",
+    "self-concept",
+    "unconditional positive regard"
+   ],
+   "summary": "Rogers held that growth requires unconditional positive regard, and that a gap between the real and ideal self produces incongruence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "ap_psychology_hypothesis_and_operational_definition",
+   "title": "Hypothesis and operational definition",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_biopsychosocial_approach"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hypothesis",
+    "measurement",
+    "operational definition"
+   ],
+   "summary": "A hypothesis is a testable prediction, and an operational definition states exactly how a variable will be measured so another researcher could repeat it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_psychology_independent_and_dependent_variables",
+   "title": "Independent and dependent variables",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_hypothesis_and_operational_definition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dependent variable",
+    "independent variable"
+   ],
+   "summary": "The independent variable is what the researcher manipulates; the dependent variable is what is measured as the outcome.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_psychology_inferential_statistics_and_significance",
+   "title": "Inferential statistics and significance",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_normal_distribution_and_percentile_rank"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inferential statistics",
+    "p-value",
+    "significance"
+   ],
+   "summary": "A significance test estimates how often a difference this large would appear by chance alone; a small p-value is evidence against chance, not proof of importance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_psychology_informed_consent_and_debriefing",
+   "title": "Informed consent and debriefing",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_effect_size"
+   ],
+   "keywords": [
+    "debriefing",
+    "deception",
+    "informed consent"
+   ],
+   "summary": "Participants must agree to take part knowing the risks, and must be told the true purpose afterwards, especially when deception was used.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_psychology_intelligence_as_psychometric_g",
+   "title": "Intelligence as psychometric g",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_linguistic_relativity"
+   ],
+   "keywords": [
+    "factor analysis",
+    "g factor",
+    "psychometrics"
+   ],
+   "summary": "Scores on diverse mental tests correlate, which supports a general factor behind performance while leaving room for specific abilities.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "ap_psychology_intrinsic_and_extrinsic_motivation",
+   "title": "Intrinsic and extrinsic motivation",
+   "strand": "Social Psychology and Personality",
+   "unit": "Motivation and emotion",
+   "topic": "Why we act and feel",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_drive_reduction_and_arousal_theory"
+   ],
+   "keywords": [
+    "extrinsic motivation",
+    "intrinsic motivation",
+    "overjustification"
+   ],
+   "summary": "Intrinsic motivation comes from the activity itself and extrinsic from its consequences, and heavy external reward can undercut the first.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 121
+   }
+  },
+  {
+   "id": "ap_psychology_kohlberg_moral_development",
+   "title": "Kohlberg moral development",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_erikson_psychosocial_stages"
+   ],
+   "keywords": [
+    "Kohlberg",
+    "postconventional",
+    "preconventional"
+   ],
+   "summary": "Moral reasoning moves from consequences, to social approval and law, to abstract principle, and the stage is about the reason given rather than the choice made.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "ap_psychology_language_structure_and_development",
+   "title": "Language structure and development",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_framing_and_loss_aversion"
+   ],
+   "keywords": [
+    "language acquisition",
+    "morpheme",
+    "phoneme",
+    "syntax"
+   ],
+   "summary": "Phonemes, morphemes, syntax and semantics are separate levels, and children acquire them in a predictable order without explicit instruction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "ap_psychology_latent_learning_and_cognitive_maps",
+   "title": "Latent learning and cognitive maps",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_observational_learning"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Tolman",
+    "cognitive map",
+    "latent learning"
+   ],
+   "summary": "Learning can occur without performance and without reward, appearing only when an incentive makes it useful.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "ap_psychology_limbic_system",
+   "title": "Limbic system",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_brainstem_and_cerebellum"
+   ],
+   "keywords": [
+    "amygdala",
+    "hippocampus",
+    "hypothalamus",
+    "limbic system"
+   ],
+   "summary": "The amygdala tags emotional significance, the hippocampus forms new memories and the hypothalamus regulates drives, so emotion, memory and motivation share one circuit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_psychology_linguistic_relativity",
+   "title": "Linguistic relativity",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_language_structure_and_development"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Whorf",
+    "language and thought",
+    "linguistic relativity"
+   ],
+   "summary": "Language shapes the categories available for thought, so a distinction encoded in words is easier to notice and remember.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "ap_psychology_longitudinal_and_cross_sectional_designs",
+   "title": "Longitudinal and cross-sectional designs",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_survey_and_self_report_bias"
+   ],
+   "keywords": [
+    "cohort",
+    "cross-sectional",
+    "longitudinal"
+   ],
+   "summary": "A longitudinal design follows one group over time and a cross-sectional design compares age groups at one moment; cohort differences are the price of the faster design.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_psychology_maslow_hierarchy_of_needs",
+   "title": "Maslow hierarchy of needs",
+   "strand": "Social Psychology and Personality",
+   "unit": "Motivation and emotion",
+   "topic": "Why we act and feel",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_drive_reduction_and_arousal_theory"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_intrinsic_and_extrinsic_motivation"
+   ],
+   "keywords": [
+    "Maslow",
+    "hierarchy of needs",
+    "self-actualisation"
+   ],
+   "summary": "Needs are arranged from physiological to self-actualisation, and lower needs dominate attention until they are met.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 122
+   }
+  },
+  {
+   "id": "ap_psychology_measures_of_central_tendency",
+   "title": "Measures of central tendency",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_replication_and_publication_bias"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mean",
+    "median",
+    "mode",
+    "outlier"
+   ],
+   "summary": "Mean, median and mode summarise a distribution differently, and the mean is the one an outlier drags away from the centre.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_psychology_naturalistic_observation_and_case_study",
+   "title": "Naturalistic observation and case study",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_correlation_coefficient"
+   ],
+   "keywords": [
+    "case study",
+    "description",
+    "naturalistic observation"
+   ],
+   "summary": "Naturalistic observation watches behaviour where it happens, and a case study examines one person in depth; both describe richly but neither controls variables.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_psychology_neurodevelopmental_and_personality_disorders",
+   "title": "Neurodevelopmental and personality disorders",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_dissociative_and_somatic_symptom_disorders"
+   ],
+   "keywords": [
+    "autism spectrum",
+    "neurodevelopmental",
+    "personality disorder"
+   ],
+   "summary": "Neurodevelopmental disorders appear early and affect development, while personality disorders are enduring patterns of relating that are rigid and cause impairment.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 136
+   }
+  },
+  {
+   "id": "ap_psychology_neuron_structure",
+   "title": "Neuron structure",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Neural communication",
+   "topic": "How a neuron signals",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_epigenetics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "axon",
+    "dendrite",
+    "myelin",
+    "neuron"
+   ],
+   "summary": "A neuron receives at dendrites, integrates at the cell body and transmits down the axon to terminals, which is why damage to different parts produces different deficits.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_psychology_neuroplasticity",
+   "title": "Neuroplasticity",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_hemispheric_specialisation_and_split_brain"
+   ],
+   "keywords": [
+    "plasticity",
+    "reorganisation"
+   ],
+   "summary": "The brain reorganises its connections with experience, which is why recovery after injury and skill learning are possible at all.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_psychology_neurotransmitters",
+   "title": "Neurotransmitters",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Neural communication",
+   "topic": "How a neuron signals",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_action_potential"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "neurotransmitter",
+    "receptor",
+    "synapse"
+   ],
+   "summary": "Neurotransmitters cross the synapse and bind to receptors, turning the signal into excitation or inhibition in the next cell.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_psychology_normal_distribution_and_percentile_rank",
+   "title": "Normal distribution and percentile rank",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_variation_and_standard_deviation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribution",
+    "normal curve",
+    "percentile"
+   ],
+   "summary": "In a normal distribution most scores cluster near the mean and fall away symmetrically, so a percentile describes position rather than percentage correct.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_psychology_obedience_to_authority",
+   "title": "Obedience to authority",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_conformity_and_normative_influence"
+   ],
+   "keywords": [
+    "Milgram",
+    "authority",
+    "obedience"
+   ],
+   "summary": "Milgram showed that ordinary people follow an authority instruction that harms another person when the situation makes each step small and the authority takes responsibility.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "ap_psychology_object_permanence_and_conservation",
+   "title": "Object permanence and conservation",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_piaget_stages_of_cognitive_development"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_assimilation_and_accommodation"
+   ],
+   "keywords": [
+    "conservation",
+    "egocentrism",
+    "object permanence"
+   ],
+   "summary": "Object permanence is knowing a thing continues to exist unseen and conservation is knowing quantity survives a change of appearance; both fail in the young child and mark stage boundaries.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "ap_psychology_observational_learning",
+   "title": "Observational learning",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_schedules_of_reinforcement"
+   ],
+   "keywords": [
+    "Bandura",
+    "modelling",
+    "observational learning"
+   ],
+   "summary": "Bandura showed that behaviour is acquired by watching a model and its consequences, so learning can occur without the learner being reinforced.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "ap_psychology_obsessive_compulsive_and_related_disorders",
+   "title": "Obsessive-compulsive and related disorders",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_anxiety_disorders"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "OCD",
+    "compulsion",
+    "obsession"
+   ],
+   "summary": "Obsessions are intrusive thoughts and compulsions are repeated acts that reduce the distress, so the compulsion is maintained by relief rather than by pleasure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 132
+   }
+  },
+  {
+   "id": "ap_psychology_operant_conditioning",
+   "title": "Operant conditioning",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_generalisation_and_discrimination"
+   ],
+   "keywords": [
+    "Skinner",
+    "operant conditioning",
+    "punishment",
+    "reinforcement"
+   ],
+   "summary": "Behaviour is shaped by its consequences: reinforcement raises the probability of a response and punishment lowers it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "ap_psychology_parenting_styles",
+   "title": "Parenting styles",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_attachment_and_the_strange_situation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "authoritarian",
+    "authoritative",
+    "parenting style"
+   ],
+   "summary": "Authoritative parenting, high in warmth and demand, is associated with the best outcomes, while authoritarian, permissive and neglectful styles are not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "ap_psychology_perceptual_constancy",
+   "title": "Perceptual constancy",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_bottom_up_and_top_down_processing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constancy",
+    "shape constancy",
+    "size constancy"
+   ],
+   "summary": "Size, shape and colour stay stable across changing retinal images, so we see a door as rectangular while its image is a trapezoid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "ap_psychology_perceptual_set_and_context",
+   "title": "Perceptual set and context",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_selective_and_divided_attention"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "context",
+    "expectation",
+    "perceptual set"
+   ],
+   "summary": "Expectation, context and culture bias what is perceived, so the same ambiguous figure resolves differently for different observers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "ap_psychology_piaget_stages_of_cognitive_development",
+   "title": "Piaget stages of cognitive development",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_prenatal_development_and_teratogens"
+   ],
+   "keywords": [
+    "Piaget",
+    "concrete operations",
+    "formal operations",
+    "sensorimotor"
+   ],
+   "summary": "Children move from sensorimotor action to preoperational symbolism, then concrete operations, then formal operations, with each stage defined by what the child can now do that it could not before.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "ap_psychology_placebo_and_double_blind_procedure",
+   "title": "Placebo and double-blind procedure",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_experimental_and_correlational_designs"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_confidentiality_and_protection_from_harm"
+   ],
+   "keywords": [
+    "double-blind",
+    "expectancy",
+    "placebo"
+   ],
+   "summary": "A placebo control separates the effect of expecting improvement from the effect of the treatment, and blinding keeps the experimenter from communicating that expectation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_psychology_positive_and_negative_reinforcement",
+   "title": "Positive and negative reinforcement",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_operant_conditioning"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative reinforcement",
+    "positive reinforcement"
+   ],
+   "summary": "Both reinforcement types increase behaviour; positive adds a consequence and negative removes one, which is why negative reinforcement is not punishment.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "ap_psychology_positive_psychology_and_well_being",
+   "title": "Positive psychology and well-being",
+   "strand": "Mental and Physical Health",
+   "unit": "Health and positive psychology",
+   "topic": "Stress, coping and well-being",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_health_psychology_and_behaviour"
+   ],
+   "keywords": [
+    "flourishing",
+    "positive psychology",
+    "well-being"
+   ],
+   "summary": "Positive psychology studies what makes life go well rather than only what goes wrong, measuring engagement, relationships, meaning and accomplishment alongside pleasant feeling.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 127
+   }
+  },
+  {
+   "id": "ap_psychology_prejudice_stereotypes_and_discrimination",
+   "title": "Prejudice, stereotypes and discrimination",
+   "strand": "Social Psychology and Personality",
+   "unit": "Social cognition",
+   "topic": "Persons in situations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_groupthink_and_deindividuation"
+   ],
+   "keywords": [
+    "discrimination",
+    "ingroup",
+    "prejudice",
+    "stereotype"
+   ],
+   "summary": "A stereotype is a belief about a group, prejudice is an attitude toward it, and discrimination is behaviour; the three can occur separately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "ap_psychology_prenatal_development_and_teratogens",
+   "title": "Prenatal development and teratogens",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "critical period",
+    "prenatal",
+    "teratogen"
+   ],
+   "summary": "Development proceeds through germinal, embryonic and fetal stages, and a teratogen is any agent that damages the developing organism during a critical period.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "ap_psychology_projective_and_objective_personality_tests",
+   "title": "Projective and objective personality tests",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_trait_theory_and_the_big_five"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_social_cognitive_theory_and_locus_of_control"
+   ],
+   "keywords": [
+    "MMPI",
+    "projective test",
+    "self-report inventory"
+   ],
+   "summary": "Projective tests interpret ambiguous stimuli and objective tests score fixed items; the second is far more reliable, whatever the first claims to reveal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "ap_psychology_psychoanalytic_perspective",
+   "title": "Psychoanalytic perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_functionalism"
+   ],
+   "keywords": [
+    "Freud",
+    "psychoanalytic",
+    "unconscious"
+   ],
+   "summary": "Freud located behaviour in unconscious conflict and early experience, which is why the same situation can produce anxiety the person cannot explain.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_psychology_psychodynamic_and_humanistic_therapy",
+   "title": "Psychodynamic and humanistic therapy",
+   "strand": "Mental and Physical Health",
+   "unit": "Treatment",
+   "topic": "What helps",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_neurodevelopmental_and_personality_disorders"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "client-centred",
+    "insight",
+    "psychotherapy"
+   ],
+   "summary": "Psychodynamic therapy works on insight into unconscious patterns and humanistic therapy on self-acceptance and growth, so both aim at understanding rather than at a specific behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 137
+   }
+  },
+  {
+   "id": "ap_psychology_psychodynamic_structure_id_ego_and_superego",
+   "title": "Psychodynamic structure: id, ego and superego",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_attraction_and_interpersonal_factors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Freud",
+    "ego",
+    "id",
+    "superego"
+   ],
+   "summary": "The id seeks immediate gratification, the superego enforces internalised rules, and the ego negotiates between them and reality.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "ap_psychology_random_assignment_and_random_sampling",
+   "title": "Random assignment and random sampling",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_confounding_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "generalisation",
+    "random assignment",
+    "random sampling"
+   ],
+   "summary": "Random sampling decides who is in the study; random assignment decides which condition each participant enters. Only assignment supports a causal claim.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_psychology_reconstructive_memory_and_the_misinformation_effec",
+   "title": "Reconstructive memory and the misinformation effect",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_retrieval_recall_and_recognition"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_forgetting_decay_and_interference"
+   ],
+   "keywords": [
+    "eyewitness",
+    "misinformation effect",
+    "reconstruction"
+   ],
+   "summary": "Memory is rebuilt at retrieval, so misleading post-event information can be incorporated as though it had been witnessed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "ap_psychology_reliability_and_validity",
+   "title": "Reliability and validity",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_longitudinal_and_cross_sectional_designs"
+   ],
+   "keywords": [
+    "construct",
+    "reliability",
+    "validity"
+   ],
+   "summary": "Reliability is consistency of measurement and validity is whether the measure actually captures the construct, so a test can be reliable without being valid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_psychology_replication_and_publication_bias",
+   "title": "Replication and publication bias",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_reliability_and_validity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "file drawer",
+    "publication bias",
+    "replication"
+   ],
+   "summary": "A finding counts when independent researchers reproduce it; studies that fail to replicate tend to go unpublished, which inflates the published literature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_psychology_resilience_and_social_support",
+   "title": "Resilience and social support",
+   "strand": "Mental and Physical Health",
+   "unit": "Health and positive psychology",
+   "topic": "Stress, coping and well-being",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_positive_psychology_and_well_being"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "recovery",
+    "resilience",
+    "social support"
+   ],
+   "summary": "Resilience is the capacity to recover after adversity, and social support is one of the strongest predictors of recovery.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 128
+   }
+  },
+  {
+   "id": "ap_psychology_retrieval_recall_and_recognition",
+   "title": "Retrieval: recall and recognition",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_encoding_and_levels_of_processing"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_chunking_and_working_memory_capacity"
+   ],
+   "keywords": [
+    "recall",
+    "recognition",
+    "retrieval cue"
+   ],
+   "summary": "Recall reproduces information and recognition identifies it, and recognition is usually easier because the cue is present.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "ap_psychology_reuptake_and_synaptic_plasticity",
+   "title": "Reuptake and synaptic plasticity",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Neural communication",
+   "topic": "How a neuron signals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_neurotransmitters"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_agonists_and_antagonists"
+   ],
+   "keywords": [
+    "long-term potentiation",
+    "plasticity",
+    "reuptake"
+   ],
+   "summary": "Reuptake clears transmitter from the gap, and repeated signalling strengthens or weakens the synapse, which is the cellular basis of learning.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_psychology_schedules_of_reinforcement",
+   "title": "Schedules of reinforcement",
+   "strand": "Development and Learning",
+   "unit": "Learning",
+   "topic": "Conditioning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_operant_conditioning"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_positive_and_negative_reinforcement"
+   ],
+   "keywords": [
+    "fixed ratio",
+    "partial reinforcement",
+    "variable interval"
+   ],
+   "summary": "Ratio schedules count responses and interval schedules count time, and variable schedules resist extinction better than fixed ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "ap_psychology_schizophrenia_spectrum",
+   "title": "Schizophrenia spectrum",
+   "strand": "Mental and Physical Health",
+   "unit": "Psychological disorders",
+   "topic": "Classification and categories",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_depressive_and_bipolar_disorders"
+   ],
+   "keywords": [
+    "delusion",
+    "negative symptom",
+    "positive symptom",
+    "schizophrenia"
+   ],
+   "summary": "Positive symptoms add experience - hallucinations, delusions, disorganised speech - and negative symptoms subtract it, such as flat affect and withdrawal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 134
+   }
+  },
+  {
+   "id": "ap_psychology_selective_and_divided_attention",
+   "title": "Selective and divided attention",
+   "strand": "Cognition",
+   "unit": "Perception",
+   "topic": "Organising the input",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_depth_perception_and_binocular_cues"
+   ],
+   "keywords": [
+    "attention",
+    "cocktail party effect",
+    "multitasking"
+   ],
+   "summary": "Selective attention filters input by relevance and divided attention splits capacity, which is why two demanding tasks degrade together.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "ap_psychology_sensation_and_perception",
+   "title": "Sensation and perception",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_brain_imaging_techniques"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "perception",
+    "sensation"
+   ],
+   "summary": "Sensation is the detection of a stimulus and perception is its interpretation, so the same physical input can yield different experience.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_psychology_signal_detection_and_sensory_adaptation",
+   "title": "Signal detection and sensory adaptation",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_transduction_and_thresholds"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adaptation",
+    "response bias",
+    "signal detection"
+   ],
+   "summary": "Detection depends on both sensitivity and response bias, and adaptation means a constant stimulus fades from awareness.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_psychology_sleep_disorders",
+   "title": "Sleep disorders",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sleep",
+   "topic": "Rhythms and rest",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_sleep_stages"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "insomnia",
+    "narcolepsy",
+    "sleep apnoea"
+   ],
+   "summary": "Insomnia, narcolepsy and sleep apnoea are distinguished by what fails - falling asleep, staying awake, or breathing - not by how tired the person feels.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_psychology_sleep_stages",
+   "title": "Sleep stages",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sleep",
+   "topic": "Rhythms and rest",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_circadian_rhythm"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "EEG",
+    "REM",
+    "slow wave sleep"
+   ],
+   "summary": "Sleep cycles through light, deep and REM stages, and the EEG signature changes with each because brain activity differs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_psychology_social_cognitive_theory_and_locus_of_control",
+   "title": "Social-cognitive theory and locus of control",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_trait_theory_and_the_big_five"
+   ],
+   "keywords": [
+    "locus of control",
+    "reciprocal determinism",
+    "self-efficacy"
+   ],
+   "summary": "Behaviour results from the interaction of person, behaviour and environment, and locus of control is the belief that outcomes depend on one's own actions or on outside forces.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "ap_psychology_sociocultural_perspective",
+   "title": "Sociocultural perspective",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_evolutionary_perspective"
+   ],
+   "keywords": [
+    "culture",
+    "norms",
+    "sociocultural"
+   ],
+   "summary": "The sociocultural perspective explains behaviour through culture, norms and social situation, so the same act can mean different things in different groups.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_psychology_somatic_and_autonomic_nervous_system",
+   "title": "Somatic and autonomic nervous system",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_psychology_central_and_peripheral_nervous_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "autonomic",
+    "somatic"
+   ],
+   "summary": "The somatic division controls voluntary movement and the autonomic division runs involuntary functions, which is why arousal happens without a decision.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_psychology_spacing_testing_and_the_serial_position_effect",
+   "title": "Spacing, testing and the serial position effect",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_forgetting_decay_and_interference"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_reconstructive_memory_and_the_misinformation_effec"
+   ],
+   "keywords": [
+    "serial position",
+    "spacing effect",
+    "testing effect"
+   ],
+   "summary": "Distributed practice and retrieval practice beat massed rereading, and the primacy and recency effects show that position in a list changes what is remembered.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "ap_psychology_standardisation_reliability_and_validity_of_tests",
+   "title": "Standardisation, reliability and validity of tests",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_intelligence_as_psychometric_g"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "norms",
+    "standardisation",
+    "test validity"
+   ],
+   "summary": "A test is standardised on a norm group, and its scores are only interpretable if it measures consistently and predicts what it claims to predict.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "ap_psychology_stereotype_threat_and_test_bias",
+   "title": "Stereotype threat and test bias",
+   "strand": "Cognition",
+   "unit": "Thinking and intelligence",
+   "topic": "Reasoning and ability",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_standardisation_reliability_and_validity_of_tests"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "stereotype threat",
+    "test bias"
+   ],
+   "summary": "Awareness of a negative stereotype about one group can depress performance, so a group difference is not evidence about ability.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "ap_psychology_stress_and_the_general_adaptation_syndrome",
+   "title": "Stress and the general adaptation syndrome",
+   "strand": "Social Psychology and Personality",
+   "unit": "Motivation and emotion",
+   "topic": "Why we act and feel",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_psychology_theories_of_emotion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cortisol",
+    "general adaptation syndrome",
+    "stress"
+   ],
+   "summary": "Selye described alarm, resistance and exhaustion, which is why prolonged stress damages health rather than merely feeling unpleasant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 124
+   }
+  },
+  {
+   "id": "ap_psychology_structuralism_and_introspection",
+   "title": "Structuralism and introspection",
+   "strand": "Foundations",
+   "unit": "History and approaches",
+   "topic": "Schools of thought",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Titchener",
+    "Wundt",
+    "introspection",
+    "structuralism"
+   ],
+   "summary": "Wundt and Titchener tried to break conscious experience into its elements, training observers to report what a stimulus felt like rather than what it was.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_psychology_survey_and_self_report_bias",
+   "title": "Survey and self-report bias",
+   "strand": "Foundations",
+   "unit": "Research methods",
+   "topic": "Designing a study",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_naturalistic_observation_and_case_study"
+   ],
+   "keywords": [
+    "self-report",
+    "social desirability",
+    "survey"
+   ],
+   "summary": "Surveys depend on what people say about themselves, so wording, social desirability and inaccurate self-knowledge all distort the data.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_psychology_sympathetic_and_parasympathetic_division",
+   "title": "Sympathetic and parasympathetic division",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Nervous system and brain",
+   "topic": "Systems and structures",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_psychology_somatic_and_autonomic_nervous_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arousal",
+    "parasympathetic",
+    "sympathetic"
+   ],
+   "summary": "The sympathetic division mobilises the body for threat and the parasympathetic division restores and conserves, so they pull against each other.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_psychology_theories_of_dreaming",
+   "title": "Theories of dreaming",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sleep",
+   "topic": "Rhythms and rest",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_sleep_stages"
+   ],
+   "sequence_predecessors": [
+    "ap_psychology_sleep_disorders"
+   ],
+   "keywords": [
+    "activation-synthesis",
+    "dreaming",
+    "manifest content"
+   ],
+   "summary": "Freudian, activation-synthesis and cognitive views disagree about whether dreams express hidden conflict, assemble random activity into a story, or consolidate memory.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_psychology_theories_of_emotion",
+   "title": "Theories of emotion",
+   "strand": "Social Psychology and Personality",
+   "unit": "Motivation and emotion",
+   "topic": "Why we act and feel",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_maslow_hierarchy_of_needs"
+   ],
+   "keywords": [
+    "Cannon-Bard",
+    "James-Lange",
+    "appraisal",
+    "two-factor theory"
+   ],
+   "summary": "James-Lange says the body reaction comes first, Cannon-Bard says body and feeling occur together, and Schachter-Singer says arousal plus a cognitive label produces the emotion.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 123
+   }
+  },
+  {
+   "id": "ap_psychology_three_stage_model_of_memory",
+   "title": "Three-stage model of memory",
+   "strand": "Cognition",
+   "unit": "Memory",
+   "topic": "Encoding, storage, retrieval",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_perceptual_set_and_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "long-term memory",
+    "sensory memory",
+    "working memory"
+   ],
+   "summary": "Sensory memory holds a trace briefly, working memory holds a few items while they are used, and long-term memory stores effectively without limit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "ap_psychology_touch_pain_and_the_body_senses",
+   "title": "Touch, pain and the body senses",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_audition_pitch_and_localisation"
+   ],
+   "keywords": [
+    "gate control",
+    "kinesthetic",
+    "pain",
+    "vestibular"
+   ],
+   "summary": "Nociceptors signal tissue damage, gate control explains why attention changes pain, and the vestibular and kinesthetic senses report balance and limb position.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "ap_psychology_trait_theory_and_the_big_five",
+   "title": "Trait theory and the Big Five",
+   "strand": "Social Psychology and Personality",
+   "unit": "Personality",
+   "topic": "Theories and assessment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_humanistic_self_concept"
+   ],
+   "keywords": [
+    "Big Five",
+    "OCEAN",
+    "factor analysis",
+    "trait"
+   ],
+   "summary": "Trait models describe stable, continuous differences; the Big Five - openness, conscientiousness, extraversion, agreeableness, neuroticism - summarise them with better predictive validity than type labels.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "ap_psychology_transduction_and_thresholds",
+   "title": "Transduction and thresholds",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_psychology_sensation_and_perception"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute threshold",
+    "difference threshold",
+    "transduction"
+   ],
+   "summary": "Transduction converts one form of energy into neural signals, and the absolute and difference thresholds mark the weakest detectable stimulus and the smallest detectable change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_psychology_variation_and_standard_deviation",
+   "title": "Variation and standard deviation",
+   "strand": "Foundations",
+   "unit": "Statistics and ethics",
+   "topic": "Reading the evidence",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_psychology_measures_of_central_tendency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "range",
+    "standard deviation",
+    "variability"
+   ],
+   "summary": "Two groups can share a mean and differ completely in spread, which is why standard deviation is reported beside the average.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_psychology_vision_rods_cones_and_the_retina",
+   "title": "Vision: rods, cones and the retina",
+   "strand": "Biological Bases of Behavior",
+   "unit": "Sensation",
+   "topic": "From stimulus to signal",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_signal_detection_and_sensory_adaptation"
+   ],
+   "keywords": [
+    "cones",
+    "photoreceptor",
+    "retina",
+    "rods"
+   ],
+   "summary": "Rods work in dim light without colour and cones give colour and detail, so night vision is poor in colour and colour vision is poor in the dark.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_psychology_vygotsky_and_the_zone_of_proximal_development",
+   "title": "Vygotsky and the zone of proximal development",
+   "strand": "Development and Learning",
+   "unit": "Development",
+   "topic": "Change across the lifespan",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_psychology_object_permanence_and_conservation"
+   ],
+   "keywords": [
+    "Vygotsky",
+    "scaffolding",
+    "zone of proximal development"
+   ],
+   "summary": "Learning is social first, and the zone of proximal development is the gap between what a learner can do alone and with support, which is what scaffolding targets.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Psychology - Behaviour, Evidence and Explanation",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  }
+ ]
+}

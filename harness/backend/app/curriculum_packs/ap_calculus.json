@@ -1,0 +1,2448 @@
+{
+ "schema": 1,
+ "name": "ap_calculus",
+ "title": "AP Calculus",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Calculus - Limits, Derivatives, Integrals and Series",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "The AP Calculus AB and BC course framework: limits and continuity, differentiation and its applications, integration and accumulation, differential equations, applications of integration, and (BC) parametric, polar, vector and series topics.",
+  "id_namespace": {
+   "prefix": "ap_calculus_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Limits and Continuity": {
+    "Limits": [
+     "Approaching a value"
+    ],
+    "Continuity": [
+     "Where functions hold together"
+    ]
+   },
+   "Differentiation: Definition and Fundamental Properties": {
+    "The derivative": [
+     "Rates and rules"
+    ]
+   },
+   "Differentiation: Composite, Implicit and Inverse Functions": {
+    "Chain and implicit rules": [
+     "Composition and implicit relations"
+    ]
+   },
+   "Contextual Applications of Differentiation": {
+    "Derivatives in context": [
+     "Rates in the world"
+    ]
+   },
+   "Analytical Applications of Differentiation": {
+    "Shape of a graph": [
+     "Extrema and concavity"
+    ]
+   },
+   "Integration and Accumulation of Change": {
+    "Accumulation": [
+     "Adding up change"
+    ]
+   },
+   "Differential Equations": {
+    "Modelling change": [
+     "Equations involving a derivative"
+    ]
+   },
+   "Applications of Integration": {
+    "Using the integral": [
+     "Area, volume and totals"
+    ]
+   },
+   "Parametric, Polar and Vector Functions (BC)": {
+    "Other coordinate systems": [
+     "Curves beyond y equals f of x"
+    ]
+   },
+   "Infinite Sequences and Series (BC)": {
+    "Convergence": [
+     "Infinite sums and tests"
+    ],
+    "Representing functions as series": [
+     "Power and Taylor series"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Limits and Continuity",
+    "units": [
+     "Limits",
+     "Continuity"
+    ]
+   },
+   {
+    "strand": "Differentiation: Definition and Fundamental Properties",
+    "units": [
+     "The derivative"
+    ]
+   },
+   {
+    "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+    "units": [
+     "Chain and implicit rules"
+    ]
+   },
+   {
+    "strand": "Contextual Applications of Differentiation",
+    "units": [
+     "Derivatives in context"
+    ]
+   },
+   {
+    "strand": "Analytical Applications of Differentiation",
+    "units": [
+     "Shape of a graph"
+    ]
+   },
+   {
+    "strand": "Integration and Accumulation of Change",
+    "units": [
+     "Accumulation"
+    ]
+   },
+   {
+    "strand": "Differential Equations",
+    "units": [
+     "Modelling change"
+    ]
+   },
+   {
+    "strand": "Applications of Integration",
+    "units": [
+     "Using the integral"
+    ]
+   },
+   {
+    "strand": "Parametric, Polar and Vector Functions (BC)",
+    "units": [
+     "Other coordinate systems"
+    ]
+   },
+   {
+    "strand": "Infinite Sequences and Series (BC)",
+    "units": [
+     "Convergence",
+     "Representing functions as series"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_calculus_absolute_and_conditional_convergence",
+   "title": "Absolute and conditional convergence",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_the_alternating_series_test"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_the_ratio_test"
+   ],
+   "keywords": [
+    "absolute convergence",
+    "conditional convergence"
+   ],
+   "summary": "A series can converge while the series of absolute values diverges.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "ap_calculus_accumulated_change_in_context",
+   "title": "Accumulated change in context",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_average_value_of_a_function"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_arc_length"
+   ],
+   "keywords": [
+    "accumulated change",
+    "net change"
+   ],
+   "summary": "The integral of a rate gives the total change in the underlying quantity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "ap_calculus_accumulation_functions",
+   "title": "Accumulation functions",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_the_fundamental_theorem_of_calculus"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_properties_of_definite_integrals"
+   ],
+   "keywords": [
+    "accumulation function",
+    "derivative of integral"
+   ],
+   "summary": "An accumulation function's derivative is the integrand, which lets integrals be differentiated.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_calculus_antiderivatives_and_indefinite_integrals",
+   "title": "Antiderivatives and indefinite integrals",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_the_fundamental_theorem_of_calculus"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antiderivative",
+    "constant of integration",
+    "indefinite integral"
+   ],
+   "summary": "An antiderivative reverses differentiation, up to an additive constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_calculus_approximating_functions_with_polynomials",
+   "title": "Approximating functions with polynomials",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Representing functions as series",
+   "topic": "Power and Taylor series",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_power_series_and_radius_of_convergence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Taylor polynomial",
+    "approximation",
+    "error bound"
+   ],
+   "summary": "A Taylor polynomial approximates a function with a controllable error bound.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "ap_calculus_arc_length",
+   "title": "Arc length",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_volumes_of_revolution_shell_method"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arc length",
+    "length element"
+   ],
+   "summary": "Arc length integrates the length element derived from the Pythagorean theorem.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "ap_calculus_area_and_arc_length_in_polar_coordinates",
+   "title": "Area and arc length in polar coordinates",
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "unit": "Other coordinate systems",
+   "topic": "Curves beyond y equals f of x",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_polar_coordinates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "polar arc length",
+    "polar area"
+   ],
+   "summary": "Polar area uses sectors rather than rectangles, which changes the integrand.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "ap_calculus_area_between_curves",
+   "title": "Area between curves",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_average_value_of_a_function"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area between curves",
+    "upper lower"
+   ],
+   "summary": "Area between curves is the integral of the upper minus the lower function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_calculus_average_and_instantaneous_rate_of_change",
+   "title": "Average and instantaneous rate of change",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_the_intermediate_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate",
+    "instantaneous rate",
+    "secant"
+   ],
+   "summary": "The average rate is a secant slope and the instantaneous rate is the limit of secant slopes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_calculus_average_value_of_a_function",
+   "title": "Average value of a function",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_logistic_models"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average value",
+    "mean value"
+   ],
+   "summary": "The average value is the integral over the interval divided by the interval length.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_calculus_comparison_tests",
+   "title": "Comparison tests",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_the_integral_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "comparison test",
+    "limit comparison"
+   ],
+   "summary": "Bounding a series by a known one decides convergence term by term.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "ap_calculus_concavity_and_inflection_points",
+   "title": "Concavity and inflection points",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_first_derivative_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "concavity",
+    "inflection point",
+    "second derivative"
+   ],
+   "summary": "The sign of the second derivative reports concavity and where it changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_calculus_connecting_graphs_of_f_f_prime_and_f_double_prime",
+   "title": "Connecting graphs of f, f prime and f double prime",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_concavity_and_inflection_points"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_optimisation_problems"
+   ],
+   "keywords": [
+    "derivative graphs",
+    "graph relationships"
+   ],
+   "summary": "The signs and zeros of the first two derivatives describe the shape of the function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_calculus_constant_sum_and_difference_rules",
+   "title": "Constant, sum and difference rules",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_power_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constant rule",
+    "sum rule"
+   ],
+   "summary": "Derivatives distribute over sums and differences, and a constant differentiates to zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_calculus_continuity_at_a_point",
+   "title": "Continuity at a point",
+   "strand": "Limits and Continuity",
+   "unit": "Continuity",
+   "topic": "Where functions hold together",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_the_squeeze_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuity",
+    "limit equals value"
+   ],
+   "summary": "A function is continuous when its limit exists, its value exists, and the two agree.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_calculus_convergence_of_sequences",
+   "title": "Convergence of sequences",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_vector_valued_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convergence",
+    "limit",
+    "sequence"
+   ],
+   "summary": "A sequence converges when its terms approach a single finite limit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "ap_calculus_critical_points",
+   "title": "Critical points",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_extreme_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "critical point",
+    "stationary point"
+   ],
+   "summary": "Critical points are where the derivative is zero or undefined, and they candidate the extrema.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_calculus_defining_limits_and_limit_notation",
+   "title": "Defining limits and limit notation",
+   "strand": "Limits and Continuity",
+   "unit": "Limits",
+   "topic": "Approaching a value",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_estimating_limits_from_graphs_and_tables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "limit definition",
+    "notation",
+    "one-sided limit"
+   ],
+   "summary": "The formal definition makes \"approaches\" precise and distinguishes one-sided from two-sided limits.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_calculus_derivatives_of_exponential_functions",
+   "title": "Derivatives of exponential functions",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_the_chain_rule"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_derivatives_of_inverse_functions"
+   ],
+   "keywords": [
+    "e^x",
+    "exponential derivative"
+   ],
+   "summary": "The exponential function is its own derivative, and a base change brings down a factor.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_calculus_derivatives_of_inverse_functions",
+   "title": "Derivatives of inverse functions",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_implicit_differentiation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse function derivative",
+    "reciprocal"
+   ],
+   "summary": "The derivative of an inverse is the reciprocal of the original derivative at the corresponding point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_calculus_derivatives_of_inverse_trigonometric_functions",
+   "title": "Derivatives of inverse trigonometric functions",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_derivatives_of_inverse_functions"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_derivatives_of_logarithmic_functions"
+   ],
+   "keywords": [
+    "arcsin",
+    "inverse trig derivative"
+   ],
+   "summary": "Inverse trigonometric derivatives follow standard forms used in integration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_calculus_derivatives_of_logarithmic_functions",
+   "title": "Derivatives of logarithmic functions",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_derivatives_of_exponential_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ln x",
+    "logarithmic derivative"
+   ],
+   "summary": "The natural logarithm differentiates to one over x, and the chain rule extends it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_calculus_derivatives_of_trigonometric_functions",
+   "title": "Derivatives of trigonometric functions",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_constant_sum_and_difference_rules"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_the_quotient_rule"
+   ],
+   "keywords": [
+    "cosine",
+    "sine",
+    "trig derivative"
+   ],
+   "summary": "Sine and cosine differentiate into each other with a sign change, and the rest follow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_calculus_differentiability_and_continuity",
+   "title": "Differentiability and continuity",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_derivative_as_a_limit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuity",
+    "corner",
+    "differentiability"
+   ],
+   "summary": "Differentiable implies continuous, but continuity does not imply differentiability.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_calculus_estimating_limits_from_graphs_and_tables",
+   "title": "Estimating limits from graphs and tables",
+   "strand": "Limits and Continuity",
+   "unit": "Limits",
+   "topic": "Approaching a value",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "approach",
+    "graph",
+    "limit"
+   ],
+   "summary": "A limit describes the value a function approaches, which need not equal its value at the point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_calculus_exponential_models",
+   "title": "Exponential models",
+   "strand": "Differential Equations",
+   "unit": "Modelling change",
+   "topic": "Equations involving a derivative",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_separation_of_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decay",
+    "exponential growth",
+    "proportional rate"
+   ],
+   "summary": "A rate proportional to the amount gives exponential growth or decay.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_calculus_geometric_series",
+   "title": "Geometric series",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_introduction_to_series"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common ratio",
+    "geometric series"
+   ],
+   "summary": "A geometric series converges exactly when the common ratio is smaller than one in size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "ap_calculus_higher_order_derivatives",
+   "title": "Higher-order derivatives",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_derivative_as_a_limit"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_derivatives_of_trigonometric_functions"
+   ],
+   "keywords": [
+    "higher order",
+    "second derivative"
+   ],
+   "summary": "Repeated differentiation gives acceleration from velocity, and concavity from slope.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_calculus_implicit_differentiation",
+   "title": "Implicit differentiation",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_chain_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dy/dx",
+    "implicit differentiation"
+   ],
+   "summary": "Differentiating both sides of a relation and treating y as a function of x gives dy by dx.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_calculus_improper_integrals",
+   "title": "Improper integrals",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_partial_fractions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convergence",
+    "diverge",
+    "improper integral"
+   ],
+   "summary": "An integral over an infinite interval or with a singularity is defined by a limit and may diverge.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_calculus_increasing_and_decreasing_intervals",
+   "title": "Increasing and decreasing intervals",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_critical_points"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decreasing",
+    "increasing",
+    "sign of derivative"
+   ],
+   "summary": "The sign of the derivative reports where a function rises or falls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_calculus_integration_by_parts",
+   "title": "Integration by parts",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_integration_by_substitution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "integration by parts",
+    "product rule"
+   ],
+   "summary": "Integration by parts reverses the product rule.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_calculus_integration_by_substitution",
+   "title": "Integration by substitution",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_antiderivatives_and_indefinite_integrals"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_accumulation_functions"
+   ],
+   "keywords": [
+    "substitution",
+    "u-substitution"
+   ],
+   "summary": "Substitution reverses the chain rule and simplifies many integrals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_calculus_interpreting_derivatives_in_context",
+   "title": "Interpreting derivatives in context",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Derivatives in context",
+   "topic": "Rates in the world",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_selecting_differentiation_procedures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "derivative meaning",
+    "rate",
+    "units"
+   ],
+   "summary": "A derivative is a rate with units, and its sign reports direction of change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_calculus_introduction_to_series",
+   "title": "Introduction to series",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_convergence_of_sequences"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "partial sum",
+    "series"
+   ],
+   "summary": "A series is the sum of a sequence, and its partial sums decide convergence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "ap_calculus_l_hopital_s_rule",
+   "title": "L'Hôpital's rule",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Derivatives in context",
+   "topic": "Rates in the world",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_interpreting_derivatives_in_context"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_local_linearity_and_approximation"
+   ],
+   "keywords": [
+    "L'Hôpital",
+    "indeterminate form"
+   ],
+   "summary": "Indeterminate limits of quotients can be evaluated by differentiating numerator and denominator.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_calculus_limit_properties_and_algebraic_techniques",
+   "title": "Limit properties and algebraic techniques",
+   "strand": "Limits and Continuity",
+   "unit": "Limits",
+   "topic": "Approaching a value",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_defining_limits_and_limit_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factoring",
+    "indeterminate form",
+    "limit laws"
+   ],
+   "summary": "Limits combine by sum, product and quotient, and factoring or rationalising resolves indeterminate forms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_calculus_limits_at_infinity",
+   "title": "Limits at infinity",
+   "strand": "Limits and Continuity",
+   "unit": "Limits",
+   "topic": "Approaching a value",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_limit_properties_and_algebraic_techniques"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "end behaviour",
+    "horizontal asymptote",
+    "limits at infinity"
+   ],
+   "summary": "Limits at infinity describe end behaviour, including horizontal asymptotes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_calculus_local_linearity_and_approximation",
+   "title": "Local linearity and approximation",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Derivatives in context",
+   "topic": "Rates in the world",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_interpreting_derivatives_in_context"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_related_rates"
+   ],
+   "keywords": [
+    "approximation",
+    "local linearity"
+   ],
+   "summary": "Near a point a differentiable function behaves like its tangent line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_calculus_logarithmic_differentiation",
+   "title": "Logarithmic differentiation",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_derivatives_of_logarithmic_functions"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_derivatives_of_inverse_trigonometric_functions"
+   ],
+   "keywords": [
+    "logarithmic differentiation"
+   ],
+   "summary": "Taking a logarithm first turns products and powers into sums, which simplifies the derivative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_calculus_logistic_models",
+   "title": "Logistic models",
+   "strand": "Differential Equations",
+   "unit": "Modelling change",
+   "topic": "Equations involving a derivative",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_exponential_models"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carrying capacity",
+    "logistic growth"
+   ],
+   "summary": "A rate limited by a carrying capacity gives logistic growth.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_calculus_modelling_with_differential_equations",
+   "title": "Modelling with differential equations",
+   "strand": "Differential Equations",
+   "unit": "Modelling change",
+   "topic": "Equations involving a derivative",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_improper_integrals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "differential equation",
+    "model"
+   ],
+   "summary": "A differential equation states how a quantity changes in terms of the quantity itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_calculus_motion_with_parametric_and_vector_functions",
+   "title": "Motion with parametric and vector functions",
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "unit": "Other coordinate systems",
+   "topic": "Curves beyond y equals f of x",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_parametric_equations_and_derivatives"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "speed",
+    "vector function",
+    "velocity vector"
+   ],
+   "summary": "Velocity and acceleration become vector quantities with direction and magnitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "ap_calculus_optimisation_problems",
+   "title": "Optimisation problems",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_second_derivative_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constraint",
+    "optimisation"
+   ],
+   "summary": "A constraint reduces a quantity to one variable, and the derivative locates its optimum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_calculus_parametric_equations_and_derivatives",
+   "title": "Parametric equations and derivatives",
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "unit": "Other coordinate systems",
+   "topic": "Curves beyond y equals f of x",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_accumulated_change_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dy/dx",
+    "parameter",
+    "parametric"
+   ],
+   "summary": "Parametric curves describe x and y separately, and dy by dx is the ratio of their derivatives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "ap_calculus_partial_fractions",
+   "title": "Partial fractions",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_integration_by_parts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "partial fractions",
+    "rational integrand"
+   ],
+   "summary": "A rational integrand can be split into simpler fractions that integrate directly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_calculus_polar_coordinates",
+   "title": "Polar coordinates",
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "unit": "Other coordinate systems",
+   "topic": "Curves beyond y equals f of x",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_motion_with_parametric_and_vector_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conversion",
+    "polar coordinates"
+   ],
+   "summary": "Polar coordinates locate a point by distance and angle, and they convert to and from Cartesian.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "ap_calculus_power_series_and_radius_of_convergence",
+   "title": "Power series and radius of convergence",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Representing functions as series",
+   "topic": "Power and Taylor series",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_taylor_and_maclaurin_series"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interval",
+    "power series",
+    "radius of convergence"
+   ],
+   "summary": "A power series converges on an interval whose radius is found from the ratio test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "ap_calculus_properties_of_definite_integrals",
+   "title": "Properties of definite integrals",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_the_fundamental_theorem_of_calculus"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_antiderivatives_and_indefinite_integrals"
+   ],
+   "keywords": [
+    "additivity",
+    "integral properties"
+   ],
+   "summary": "Integrals split, reverse sign and combine linearly, which simplifies evaluation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_calculus_related_rates",
+   "title": "Related rates",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Derivatives in context",
+   "topic": "Rates in the world",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_straight_line_motion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "implicit differentiation",
+    "related rates"
+   ],
+   "summary": "When two quantities are linked, differentiating the relation in time connects their rates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_calculus_riemann_sums",
+   "title": "Riemann sums",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_connecting_graphs_of_f_f_prime_and_f_double_prime"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Riemann sum",
+    "area approximation"
+   ],
+   "summary": "A definite integral is the limit of sums of rectangular areas.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_calculus_selecting_differentiation_procedures",
+   "title": "Selecting differentiation procedures",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_logarithmic_differentiation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "procedure selection",
+    "rule choice"
+   ],
+   "summary": "Recognising the structure of an expression decides which rule applies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_calculus_separation_of_variables",
+   "title": "Separation of variables",
+   "strand": "Differential Equations",
+   "unit": "Modelling change",
+   "topic": "Equations involving a derivative",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_slope_fields"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "general solution",
+    "separation of variables"
+   ],
+   "summary": "Separating the variables allows each side to be integrated independently.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_calculus_slope_fields",
+   "title": "Slope fields",
+   "strand": "Differential Equations",
+   "unit": "Modelling change",
+   "topic": "Equations involving a derivative",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_modelling_with_differential_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "direction field",
+    "slope field"
+   ],
+   "summary": "A slope field draws the derivative at each point, which reveals solution curves.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_calculus_straight_line_motion",
+   "title": "Straight-line motion",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Derivatives in context",
+   "topic": "Rates in the world",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_interpreting_derivatives_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acceleration",
+    "position",
+    "velocity"
+   ],
+   "summary": "Position, velocity and acceleration are related by successive derivatives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_calculus_tangent_line_approximation",
+   "title": "Tangent line approximation",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_derivative_as_a_limit"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_higher_order_derivatives"
+   ],
+   "keywords": [
+    "linearisation",
+    "tangent line approximation"
+   ],
+   "summary": "The tangent line gives a local linear approximation of a function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_calculus_taylor_and_maclaurin_series",
+   "title": "Taylor and Maclaurin series",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Representing functions as series",
+   "topic": "Power and Taylor series",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_absolute_and_conditional_convergence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Maclaurin series",
+    "Taylor series",
+    "expansion"
+   ],
+   "summary": "A smooth function can be represented by a power series built from its derivatives at a point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "ap_calculus_the_alternating_series_test",
+   "title": "The alternating series test",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_comparison_tests"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alternating series",
+    "error bound"
+   ],
+   "summary": "Alternating terms that decrease to zero converge, with a bounded error.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "ap_calculus_the_chain_rule",
+   "title": "The chain rule",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Chain and implicit rules",
+   "topic": "Composition and implicit relations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_tangent_line_approximation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chain rule",
+    "composite"
+   ],
+   "summary": "The derivative of a composition multiplies the outer derivative by the inner derivative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_calculus_the_definite_integral_as_a_limit",
+   "title": "The definite integral as a limit",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_riemann_sums"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "definite integral",
+    "limit of sums"
+   ],
+   "summary": "The integral is defined as a limit of Riemann sums, which makes accumulation precise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_calculus_the_derivative_as_a_limit",
+   "title": "The derivative as a limit",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_average_and_instantaneous_rate_of_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "derivative",
+    "difference quotient",
+    "tangent line"
+   ],
+   "summary": "The derivative is the limit of a difference quotient, which gives the slope of the tangent line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_calculus_the_extreme_value_theorem",
+   "title": "The extreme value theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_mean_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closed interval",
+    "extreme value theorem"
+   ],
+   "summary": "A continuous function on a closed interval attains a maximum and a minimum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_calculus_the_first_derivative_test",
+   "title": "The first derivative test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_increasing_and_decreasing_intervals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "first derivative test",
+    "local extremum"
+   ],
+   "summary": "A sign change of the derivative identifies a local maximum or minimum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_calculus_the_fundamental_theorem_of_calculus",
+   "title": "The fundamental theorem of calculus",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Accumulation",
+   "topic": "Adding up change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_the_definite_integral_as_a_limit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accumulation",
+    "antiderivative",
+    "fundamental theorem"
+   ],
+   "summary": "Differentiation and integration are inverse processes, which links area to antiderivatives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_calculus_the_integral_test",
+   "title": "The integral test",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_the_nth_term_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "improper integral",
+    "integral test"
+   ],
+   "summary": "A series and a related improper integral converge or diverge together.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "ap_calculus_the_intermediate_value_theorem",
+   "title": "The intermediate value theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Continuity",
+   "topic": "Where functions hold together",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_types_of_discontinuity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuous interval",
+    "intermediate value theorem"
+   ],
+   "summary": "A continuous function on an interval takes every value between its endpoint values.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_calculus_the_mean_value_theorem",
+   "title": "The mean value theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_l_hopital_s_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate",
+    "mean value theorem"
+   ],
+   "summary": "Somewhere in an interval the instantaneous rate equals the average rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_calculus_the_nth_term_test",
+   "title": "The nth-term test",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_introduction_to_series"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_geometric_series"
+   ],
+   "keywords": [
+    "divergence test",
+    "nth-term test"
+   ],
+   "summary": "If the terms do not approach zero, the series diverges, but the converse does not hold.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "ap_calculus_the_power_rule",
+   "title": "The power rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_derivative_as_a_limit"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_differentiability_and_continuity"
+   ],
+   "keywords": [
+    "derivative",
+    "power rule"
+   ],
+   "summary": "The derivative of x to the n is n times x to the n minus one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_calculus_the_product_rule",
+   "title": "The product rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_constant_sum_and_difference_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "product rule"
+   ],
+   "summary": "The derivative of a product is the first times the derivative of the second plus the second times the derivative of the first.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_calculus_the_quotient_rule",
+   "title": "The quotient rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "The derivative",
+   "topic": "Rates and rules",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_the_product_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "quotient rule"
+   ],
+   "summary": "The derivative of a quotient follows a fixed numerator pattern over the denominator squared.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_calculus_the_ratio_test",
+   "title": "The ratio test",
+   "strand": "Infinite Sequences and Series (BC)",
+   "unit": "Convergence",
+   "topic": "Infinite sums and tests",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_comparison_tests"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_the_alternating_series_test"
+   ],
+   "keywords": [
+    "absolute convergence",
+    "ratio test"
+   ],
+   "summary": "The ratio of successive terms decides absolute convergence, especially for factorials and powers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "ap_calculus_the_second_derivative_test",
+   "title": "The second derivative test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Shape of a graph",
+   "topic": "Extrema and concavity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_calculus_concavity_and_inflection_points"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "concave down",
+    "second derivative test"
+   ],
+   "summary": "The second derivative classifies a stationary point as a maximum or a minimum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_calculus_the_squeeze_theorem",
+   "title": "The squeeze theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Limits",
+   "topic": "Approaching a value",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_limits_at_infinity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bounding function",
+    "squeeze theorem"
+   ],
+   "summary": "If a function is trapped between two others with the same limit, it has that limit too.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_calculus_types_of_discontinuity",
+   "title": "Types of discontinuity",
+   "strand": "Limits and Continuity",
+   "unit": "Continuity",
+   "topic": "Where functions hold together",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_calculus_continuity_at_a_point"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "infinite",
+    "jump",
+    "removable discontinuity"
+   ],
+   "summary": "Removable, jump and infinite discontinuities differ in whether a limit exists.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_calculus_vector_valued_functions",
+   "title": "Vector-valued functions",
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "unit": "Other coordinate systems",
+   "topic": "Curves beyond y equals f of x",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_motion_with_parametric_and_vector_functions"
+   ],
+   "sequence_predecessors": [
+    "ap_calculus_area_and_arc_length_in_polar_coordinates"
+   ],
+   "keywords": [
+    "tangent vector",
+    "vector-valued function"
+   ],
+   "summary": "A vector-valued function traces a curve, and its derivative is a tangent vector.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "ap_calculus_volumes_of_revolution_disk_and_washer",
+   "title": "Volumes of revolution: disk and washer",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_volumes_with_known_cross_sections"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "disk method",
+    "revolution",
+    "washer method"
+   ],
+   "summary": "Rotating a region about an axis gives circular cross sections, with the washer handling a gap.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "ap_calculus_volumes_of_revolution_shell_method",
+   "title": "Volumes of revolution: shell method",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_volumes_of_revolution_disk_and_washer"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cylindrical shell",
+    "shell method"
+   ],
+   "summary": "Cylindrical shells integrate along the axis perpendicular to the one used by disks.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "ap_calculus_volumes_with_known_cross_sections",
+   "title": "Volumes with known cross sections",
+   "strand": "Applications of Integration",
+   "unit": "Using the integral",
+   "topic": "Area, volume and totals",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_area_between_curves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cross section",
+    "volume"
+   ],
+   "summary": "Integrating the area of a cross section gives the volume of a solid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus - Limits, Derivatives, Integrals and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  }
+ ]
+}

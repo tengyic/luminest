@@ -1,0 +1,231 @@
+[
+  {
+    "slug": "math-plot-points-slope-intercept",
+    "archetype": "plot_points",
+    "title": "Plot Points on y = 2x − 1",
+    "course_id": "algebra_one_year",
+    "concept": "Slope-intercept form",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Drag three points onto the grid so that every one of them lies on y = 2x − 1, then press Check.",
+    "learning_objective": "Recognise that the graph of y = mx + c is the set of exactly those points that satisfy the equation.",
+    "reference": "Amplify Desmos linear-functions activity set",
+    "spec": {
+      "title": "Plot Points on y = 2x − 1",
+      "instruction": "The rule is y = 2x − 1. Drag each point onto a grid intersection where the rule is true, then press Check. The line is drawn once your points agree with the rule.",
+      "rule_label": "y = 2x − 1",
+      "m": 2,
+      "c": -1,
+      "x_min": 0,
+      "x_max": 8,
+      "y_min": -6,
+      "y_max": 12,
+      "step": 1,
+      "required_points": 3,
+      "mode": "line"
+    }
+  },
+  {
+    "slug": "math-plot-points-intercept-and-point",
+    "archetype": "plot_points",
+    "title": "Two Points Fix the Line",
+    "course_id": "algebra_one_year",
+    "concept": "Standard form and intercepts",
+    "subjects": ["mathematics"],
+    "difficulty": "intro",
+    "minutes": 5,
+    "prompt": "Place the y-intercept and one other point that both lie on y = −2x + 8, then press Check.",
+    "learning_objective": "Use the y-intercept and a second solution point to pin down a line.",
+    "reference": "Amplify Desmos linear-functions activity set",
+    "spec": {
+      "title": "Two Points Fix the Line",
+      "instruction": "The rule is y = −2x + 8. One of your two points must sit at x = 0 (the y-intercept); the other can be any other point on the line. Then press Check.",
+      "rule_label": "y = −2x + 8",
+      "m": -2,
+      "c": 8,
+      "x_min": 0,
+      "x_max": 8,
+      "y_min": -4,
+      "y_max": 10,
+      "step": 1,
+      "required_points": 2,
+      "mode": "intercept_and_point"
+    }
+  },
+  {
+    "slug": "math-function-machine-guess-rule",
+    "archetype": "function_machine",
+    "title": "Guess the Machine's Rule",
+    "course_id": "algebra_one_year",
+    "concept": "Function notation",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Feed the machine several inputs, watch the outputs, then choose the rule that produced them.",
+    "learning_objective": "Infer a linear rule from an input-output table and read it as y = mx + c.",
+    "reference": "Math Playground function machine",
+    "spec": {
+      "title": "Guess the Machine's Rule",
+      "instruction": "Feed at least two inputs into the machine and watch the outputs appear in the table. Then choose the rule you think the machine is using and press Check.",
+      "m": 2,
+      "c": 3,
+      "inputs": [0, 1, 2, 3, 4],
+      "answer_mode": "choices"
+    }
+  },
+  {
+    "slug": "math-function-machine-slope-intercept",
+    "archetype": "function_machine",
+    "title": "Name the Slope and Intercept",
+    "course_id": "algebra_2",
+    "concept": "Linear and quadratic models",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Feed the machine, work out the slope and the y-intercept, and enter them as m and c.",
+    "learning_objective": "Recover the slope and y-intercept of a linear model from observed input-output pairs.",
+    "reference": "Math Playground function machine",
+    "spec": {
+      "title": "Name the Slope and Intercept",
+      "instruction": "Feed several inputs into the machine and study the table. Then type the slope m and the y-intercept c of the rule y = mx + c, and press Check.",
+      "m": 3,
+      "c": 2,
+      "inputs": [0, 1, 2, 3, 4],
+      "answer_mode": "slope_intercept"
+    }
+  },
+  {
+    "slug": "math-number-line-fractions",
+    "archetype": "number_line",
+    "title": "Fractions on the Number Line",
+    "course_id": "algebra_one_year",
+    "concept": "Fraction equivalence",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Place each fraction at the right spot on the line, then compare two of them.",
+    "learning_objective": "Locate fractions by dividing the unit interval into equal parts, and compare them by position.",
+    "reference": "NRICH number-line tasks",
+    "spec": {
+      "title": "Fractions on the Number Line",
+      "instruction": "The line runs from 0 to 2 and every unit is cut into eighths. Drag the marker to the value named in each task, then press Check.",
+      "min": 0,
+      "max": 2,
+      "subdivisions": 8,
+      "tol_ticks": 0.4,
+      "tasks": [
+        {
+          "id": "place-7-4",
+          "kind": "point",
+          "prompt": "Place 7/4.",
+          "value": 1.75,
+          "why": "7/4 = 1.75, which is fourteen eighth-ticks from 0 — three quarter-ticks past 1."
+        },
+        {
+          "id": "place-5-8",
+          "kind": "point",
+          "prompt": "Place 5/8.",
+          "value": 0.625,
+          "why": "5/8 = 0.625, five eighth-ticks past 0, just to the right of the halfway mark."
+        },
+        {
+          "id": "compare-eighths",
+          "kind": "compare",
+          "prompt": "Place A at 3/4 and B at 5/8, then say which value is larger.",
+          "value": 0.75,
+          "value_b": 0.625,
+          "why": "3/4 = 0.75 and 5/8 = 0.625, so A sits to the right of B and A is the larger value."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "math-number-line-inequality",
+    "archetype": "number_line",
+    "title": "Graphing Inequalities",
+    "course_id": "algebra_one_year",
+    "concept": "Graphing inequalities on the number line",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Place the boundary of each inequality on the line and mark which way the solution runs.",
+    "learning_objective": "Represent an inequality's boundary and direction on a number line, including open and closed endpoints.",
+    "reference": "Math Playground number-line games",
+    "spec": {
+      "title": "Graphing Inequalities",
+      "instruction": "Each task gives an inequality. Drag the boundary marker to the right value, choose the shading direction, then press Check. The line runs from −2 to 6 in halves.",
+      "min": -2,
+      "max": 6,
+      "subdivisions": 2,
+      "tol_ticks": 0.4,
+      "tasks": [
+        {
+          "id": "graph-x-gt-2-5",
+          "kind": "inequality",
+          "prompt": "Graph x > 2.5.",
+          "value": 2.5,
+          "direction": "right",
+          "strict": true,
+          "why": "x > 2.5 excludes 2.5 itself, so the endpoint is an open circle and the shading runs to the right."
+        },
+        {
+          "id": "graph-x-le-minus-1",
+          "kind": "inequality",
+          "prompt": "Graph x ≤ −1.",
+          "value": -1,
+          "direction": "left",
+          "strict": false,
+          "why": "x ≤ −1 includes −1, so the endpoint is a filled circle and the shading runs to the left."
+        },
+        {
+          "id": "place-minus-1-half",
+          "kind": "point",
+          "prompt": "Place −1 1/2.",
+          "value": -1.5,
+          "why": "−1 1/2 = −1.5, exactly one half-tick to the left of −1."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "math-balance-scale-two-step",
+    "archetype": "balance_scale",
+    "title": "Solve 3x + 4 = 19",
+    "course_id": "algebra_one_year",
+    "concept": "Two-step equations",
+    "subjects": ["mathematics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Use the balance to isolate x in 3x + 4 = 19, keeping both pans equal, then press Check.",
+    "learning_objective": "Solve a two-step linear equation by subtracting a constant and dividing by a coefficient on both sides.",
+    "reference": "Math Playground algebra balance scales",
+    "spec": {
+      "title": "Solve 3x + 4 = 19",
+      "instruction": "The scale shows 3x + 4 on the left and 19 on the right. Remove blocks from both pans equally, then divide both pans by the same number, until x stands alone. Keep the scale level and press Check.",
+      "coefficient": 3,
+      "constant_left": 4,
+      "constant_right": 19
+    }
+  },
+  {
+    "slug": "math-balance-scale-equivalent-equations",
+    "archetype": "balance_scale",
+    "title": "Solve 2x + 7 = 15",
+    "course_id": "algebra_one_year",
+    "concept": "Solutions and equivalent equations",
+    "subjects": ["mathematics"],
+    "difficulty": "intro",
+    "minutes": 5,
+    "prompt": "Solve 2x + 7 = 15 by making the same move on both pans, then press Check.",
+    "learning_objective": "Understand that each balanced move produces an equivalent equation with the same solution.",
+    "reference": "Math Playground algebra balance scales",
+    "spec": {
+      "title": "Solve 2x + 7 = 15",
+      "instruction": "The scale shows 2x + 7 on the left and 15 on the right. Every move you make to one pan you must also make to the other, so the scale stays level. Isolate x and press Check.",
+      "coefficient": 2,
+      "constant_left": 7,
+      "constant_right": 15
+    }
+  }
+]

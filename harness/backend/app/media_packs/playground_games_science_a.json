@@ -1,0 +1,470 @@
+[
+  {
+    "slug": "sci-gas-laws-predict-pressure",
+    "archetype": "particle_sandbox",
+    "title": "Gas Laws — Predict the Pressure",
+    "course_id": "physics",
+    "concept": "Ideal gas law: how pressure responds to temperature, volume and amount",
+    "subjects": ["science"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "Set the sliders, watch the pressure, then commit to what happens when you change one thing at a time.",
+    "learning_objective": "Predict the direction and size of the pressure change from P = nRT/V when one variable is doubled or halved.",
+    "reference": "PhET Gas Properties; ExploreLearning Gizmos 'Ideal Gas Law'",
+    "tags": ["gas-laws", "proportionality", "prediction"],
+    "note": "Every prediction is checked against the ideal gas law, not against the animation: the particles show the mechanism, the equation gives the number.",
+    "spec": {
+      "title": "Gas Laws — Predict the Pressure",
+      "instruction": "Drag the sliders to explore, then pick a factor and press Check.",
+      "unit_note": "P = nRT/V with V in litres, T in kelvin, n in moles, R = 8.314 J/mol/K, so P is in kPa.",
+      "t_min": 100, "t_max": 1000, "t_start": 300,
+      "v_min": 5, "v_max": 50, "v_start": 24.5,
+      "n_min": 0.5, "n_max": 3, "n_start": 1.0,
+      "p_max": 400,
+      "seed": 20261014,
+      "tasks": [
+        {
+          "id": "double-t",
+          "question": "Double the temperature at constant volume. What happens to the pressure?",
+          "setup": "Set Temperature to 600 K and leave Volume at 24.5 L.",
+          "options": [0.5, 1, 2, 4],
+          "answer": 2,
+          "hint": "P = nRT/V. You changed a symbol that sits on the top of the fraction.",
+          "why": "At constant n and V, P is directly proportional to T (Gay-Lussac's law), so doubling T doubles P: 101.8 kPa becomes 203.6 kPa."
+        },
+        {
+          "id": "halve-v",
+          "question": "Halve the volume at constant temperature. What happens to the pressure?",
+          "setup": "Set Volume to 12.25 L and leave Temperature at 300 K.",
+          "options": [0.25, 0.5, 1, 2],
+          "answer": 2,
+          "hint": "P is proportional to 1/V (Boyle's law). Squeezing the same molecules into half the space doubles how often they hit the walls.",
+          "why": "Boyle's law: at constant n and T, P is inversely proportional to V, so halving V doubles P."
+        },
+        {
+          "id": "double-n",
+          "question": "Double the amount of gas at constant temperature and volume. What happens to the pressure?",
+          "setup": "Set Particles to 2.0 mol, keeping T = 300 K and V = 24.5 L.",
+          "options": [0.5, 1, 2, 4],
+          "answer": 2,
+          "hint": "Twice as many molecules strike the walls in the same time.",
+          "why": "Avogadro's law: at constant T and V, P is directly proportional to n, so doubling n doubles P."
+        },
+        {
+          "id": "double-both",
+          "question": "Double both the temperature and the volume. What happens to the pressure?",
+          "setup": "Set Temperature to 600 K and Volume to 49.0 L.",
+          "options": [0.5, 1, 2, 4],
+          "answer": 1,
+          "hint": "T doubles, which doubles P. V doubles, which halves P. Do the two effects cancel?",
+          "why": "P = nR(2T)/(2V) = nRT/V, so the two changes cancel exactly and the pressure is unchanged."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-gas-laws-boyle-and-charles",
+    "archetype": "particle_sandbox",
+    "title": "Boyle and Charles — One Change at a Time",
+    "course_id": "chemistry",
+    "concept": "Boyle's law, Charles's law and Gay-Lussac's law as special cases of P = nRT/V",
+    "subjects": ["science"],
+    "difficulty": "intro",
+    "minutes": 6,
+    "prompt": "Watch the pressure as you change temperature and volume, then predict the factor.",
+    "learning_objective": "Read a proportionality off the ideal gas law and state it as a multiplier.",
+    "reference": "PhET Gas Properties; ExploreLearning Gizmos 'Ideal Gas Law'",
+    "tags": ["gas-laws", "boyle", "charles", "proportionality"],
+    "note": "The particle speed is drawn proportional to the square root of the temperature, which is the correct scaling for the rms molecular speed.",
+    "spec": {
+      "title": "Boyle and Charles — One Change at a Time",
+      "instruction": "Set the sliders, then choose what happens to the pressure and press Check.",
+      "unit_note": "P = nRT/V, with P in kPa, V in L, T in K, n in mol and R = 8.314 J/mol/K.",
+      "t_min": 100, "t_max": 1000, "t_start": 300,
+      "v_min": 5, "v_max": 50, "v_start": 24.5,
+      "n_min": 0.5, "n_max": 3, "n_start": 1.0,
+      "p_max": 400,
+      "seed": 771103,
+      "tasks": [
+        {
+          "id": "double-volume",
+          "question": "Double the volume at constant temperature. What happens to the pressure?",
+          "setup": "Set Volume to 49.0 L and leave Temperature at 300 K.",
+          "options": [0.25, 0.5, 1, 2],
+          "answer": 0.5,
+          "hint": "V is in the denominator, so a bigger V gives a smaller P.",
+          "why": "Boyle's law: P falls to half. 101.8 kPa at 24.5 L becomes 50.9 kPa at 49.0 L."
+        },
+        {
+          "id": "halve-temperature",
+          "question": "Halve the temperature at constant volume. What happens to the pressure?",
+          "setup": "Set Temperature to 150 K and leave Volume at 24.5 L.",
+          "options": [0.25, 0.5, 1, 2],
+          "answer": 0.5,
+          "hint": "T is in the numerator, so cooling the gas lowers the pressure.",
+          "why": "P is directly proportional to T at constant n and V, so halving T halves P: 101.8 kPa becomes 50.9 kPa."
+        },
+        {
+          "id": "triple-temperature",
+          "question": "Triple the temperature at constant volume. What happens to the pressure?",
+          "setup": "Set Temperature to 900 K and leave Volume at 24.5 L.",
+          "options": [0.3333333333333333, 1, 3, 9],
+          "answer": 3,
+          "hint": "T is in the numerator. If T goes up by a factor of three, so does P.",
+          "why": "P is directly proportional to T, so tripling T triples P: 101.8 kPa becomes 305.4 kPa."
+        },
+        {
+          "id": "quarter-volume",
+          "question": "Quarter the volume at constant temperature. What happens to the pressure?",
+          "setup": "Set Volume to 6.125 L and leave Temperature at 300 K.",
+          "options": [0.25, 1, 4, 16],
+          "answer": 4,
+          "hint": "Shrinking V by a factor of four multiplies P by four.",
+          "why": "P is inversely proportional to V, so dividing V by four multiplies P by four: 101.8 kPa becomes 407.2 kPa."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-ohms-law-two-resistors",
+    "archetype": "circuit_builder",
+    "title": "Ohm's Law — Two Resistors in Series",
+    "course_id": "physics",
+    "concept": "Series resistance, current and voltage drop (I = V/R)",
+    "subjects": ["science"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Set the supply voltage, read the ammeter, then commit to what Ohm's law predicts.",
+    "learning_objective": "Add series resistances, apply I = V/R, and use V = IR to say which resistor takes the larger potential difference.",
+    "reference": "PhET Circuit Construction Kit; ExploreLearning Gizmos 'Circuits'",
+    "tags": ["circuits", "ohms-law", "series", "voltage-drop"],
+    "note": "The voltage drop across each resistor is hidden until you commit, so 'which resistor drops the most' is a prediction and not a lookup.",
+    "spec": {
+      "title": "Ohm's Law — Two Resistors in Series",
+      "instruction": "Move the supply slider to explore, then answer and press Check.",
+      "note": "Ideal wires, ideal ammeter, and a battery with no internal resistance.",
+      "v_min": 0, "v_max": 12, "v_start": 6,
+      "resistors": [
+        {"id": "r1", "label": "R1", "ohms": 2, "colour": "a"},
+        {"id": "r2", "label": "R2", "ohms": 4, "colour": "b"}
+      ],
+      "tasks": [
+        {
+          "id": "resistance-total",
+          "kind": "resistance",
+          "question": "What is the total resistance of R1 = 2 Ω and R2 = 4 Ω in series?",
+          "voltage": 6,
+          "answer": 6,
+          "tolerance": 0.05,
+          "hint": "In series the resistances simply add: R_total = R1 + R2.",
+          "why": "Series resistances add, so R_total = 2 Ω + 4 Ω = 6 Ω."
+        },
+        {
+          "id": "current-6v",
+          "kind": "current",
+          "question": "With R1 = 2 Ω and R2 = 4 Ω in series, what current flows when the supply is 6.0 V?",
+          "voltage": 6,
+          "answer": 1.0,
+          "tolerance": 0.05,
+          "hint": "Find the total resistance first, then use I = V / R_total.",
+          "why": "R_total = 2 + 4 = 6 Ω, so I = V/R = 6.0 / 6 = 1.00 A."
+        },
+        {
+          "id": "current-12v",
+          "kind": "current",
+          "question": "What current flows when the supply is raised to 12.0 V, with the same two resistors?",
+          "voltage": 12,
+          "answer": 2.0,
+          "tolerance": 0.05,
+          "hint": "The resistance has not changed. Doubling the voltage doubles the current.",
+          "why": "I = 12.0 / 6 = 2.00 A. At constant resistance the current is proportional to the voltage."
+        },
+        {
+          "id": "largest-drop",
+          "kind": "voltage_drop",
+          "question": "The same current passes through both resistors. Which one has the larger potential difference across it?",
+          "voltage": 6,
+          "answer_resistor": "r2",
+          "hint": "V = IR. With I the same in both, the bigger resistance takes the bigger share of the supply.",
+          "why": "At 1.00 A, R1 drops 2.0 V and R2 drops 4.0 V. In series the drops always add back up to the supply voltage, and the largest resistance takes the largest share."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-ohms-law-three-resistors",
+    "archetype": "circuit_builder",
+    "title": "Ohm's Law — Three Resistors in Series",
+    "course_id": "physics",
+    "concept": "Total resistance and current in a three-resistor series circuit",
+    "subjects": ["science"],
+    "difficulty": "stretch",
+    "minutes": 7,
+    "prompt": "Three resistors in one loop: work out the total, then the current, then which resistor takes the most voltage.",
+    "learning_objective": "Combine three series resistances and use them to predict current and voltage distribution.",
+    "reference": "PhET Circuit Construction Kit; ExploreLearning Gizmos 'Circuits'",
+    "tags": ["circuits", "ohms-law", "series", "voltage-drop"],
+    "note": "The voltage drop across each resistor is hidden until you commit.",
+    "spec": {
+      "title": "Ohm's Law — Three Resistors in Series",
+      "instruction": "Set the supply, then answer and press Check.",
+      "note": "Ideal wires and ammeter; the battery has no internal resistance.",
+      "v_min": 0, "v_max": 12, "v_start": 10,
+      "resistors": [
+        {"id": "r1", "label": "R1", "ohms": 4, "colour": "a"},
+        {"id": "r2", "label": "R2", "ohms": 6, "colour": "b"},
+        {"id": "r3", "label": "R3", "ohms": 10, "colour": "d"}
+      ],
+      "tasks": [
+        {
+          "id": "resistance-total-3",
+          "kind": "resistance",
+          "question": "What is the total resistance of 4 Ω, 6 Ω and 10 Ω in series?",
+          "voltage": 10,
+          "answer": 20,
+          "tolerance": 0.05,
+          "hint": "Add all three resistances.",
+          "why": "R_total = 4 + 6 + 10 = 20 Ω."
+        },
+        {
+          "id": "current-10v",
+          "kind": "current",
+          "question": "What current flows from a 10.0 V supply through this 20 Ω series combination?",
+          "voltage": 10,
+          "answer": 0.5,
+          "tolerance": 0.02,
+          "hint": "I = V / R_total.",
+          "why": "I = 10.0 / 20 = 0.50 A."
+        },
+        {
+          "id": "largest-drop-3",
+          "kind": "voltage_drop",
+          "question": "Which of the three resistors has the largest potential difference across it?",
+          "voltage": 10,
+          "answer_resistor": "r3",
+          "hint": "V = IR and I is the same everywhere in a series loop.",
+          "why": "At 0.50 A the drops are 2.0 V, 3.0 V and 5.0 V, which add to 10.0 V. The 10 Ω resistor takes the largest share."
+        },
+        {
+          "id": "current-12v-3",
+          "kind": "current",
+          "question": "What current flows when the supply is raised to 12.0 V?",
+          "voltage": 12,
+          "answer": 0.6,
+          "tolerance": 0.02,
+          "hint": "Same 20 Ω, higher voltage.",
+          "why": "I = 12.0 / 20 = 0.60 A."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-balance-combustion",
+    "archetype": "balance_equation",
+    "title": "Balancing Combustion Equations",
+    "course_id": "chemistry",
+    "concept": "Conservation of atoms and stoichiometric coefficients",
+    "subjects": ["science"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Step the coefficients until every element has the same count on both sides, using the smallest whole numbers.",
+    "learning_objective": "Balance a combustion equation by conserving each element and reduce to the lowest whole-number coefficients.",
+    "reference": "PhET Balancing Chemical Equations; ExploreLearning Gizmos 'Balancing Chemical Equations'",
+    "tags": ["stoichiometry", "combustion", "conservation"],
+    "note": "The atom counts are computed from the formula text, so they are exactly what each formula implies.",
+    "spec": {
+      "title": "Balancing Combustion Equations",
+      "instruction": "Use the − and + buttons to change each coefficient. The counts update live; press Check when every element matches.",
+      "note": "Atoms are conserved: the count of each element must be the same on both sides.",
+      "max_coefficient": 8,
+      "equations": [
+        {
+          "id": "propane",
+          "equation": "C3H8 + O2 -> CO2 + H2O",
+          "why": "1 C3H8 + 5 O2 -> 3 CO2 + 4 H2O. Three carbons need three CO2; eight hydrogens need four H2O; that leaves 10 oxygens to supply, so five O2."
+        },
+        {
+          "id": "iron-oxide",
+          "equation": "Fe2O3 + CO -> Fe + CO2",
+          "why": "1 Fe2O3 + 3 CO -> 2 Fe + 3 CO2. Two irons need two Fe, and the three oxygens carried away by CO require three CO."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-balance-ap-chemistry-set",
+    "archetype": "balance_equation",
+    "title": "Balancing Equations — AP Chemistry Set",
+    "course_id": "ap_chemistry",
+    "concept": "Balancing equations with polyatomic ions and nested groups",
+    "subjects": ["science"],
+    "difficulty": "stretch",
+    "minutes": 8,
+    "prompt": "Balance each equation with the lowest whole-number coefficients, including formulas with parentheses.",
+    "learning_objective": "Balance equations containing nested groups such as Ca(OH)2 and Ca3(PO4)2 by conserving every element.",
+    "reference": "PhET Balancing Chemical Equations; AP Chemistry Unit 4 stoichiometry",
+    "tags": ["stoichiometry", "polyatomic", "conservation"],
+    "note": "A group in brackets, such as OH in Ca(OH)2, is multiplied by the subscript after the bracket.",
+    "spec": {
+      "title": "Balancing Equations — AP Chemistry Set",
+      "instruction": "Step the coefficients until every element matches on both sides, at the lowest whole numbers.",
+      "note": "Count the atoms inside brackets first, then multiply by the subscript after the bracket: Ca(OH)2 has 2 O and 2 H.",
+      "max_coefficient": 10,
+      "equations": [
+        {
+          "id": "calcium-phosphate",
+          "equation": "Ca(OH)2 + H3PO4 -> Ca3(PO4)2 + H2O",
+          "why": "3 Ca(OH)2 + 2 H3PO4 -> 1 Ca3(PO4)2 + 6 H2O. Three calcium need three Ca(OH)2; two phosphate groups need two H3PO4; the 12 hydrogens that leaves make six H2O."
+        },
+        {
+          "id": "aluminium-acid",
+          "equation": "Al + HCl -> AlCl3 + H2",
+          "why": "2 Al + 6 HCl -> 2 AlCl3 + 3 H2. Each AlCl3 takes three chlorines, so two AlCl3 need six HCl, which release three H2."
+        },
+        {
+          "id": "iron-oxide",
+          "equation": "Fe2O3 + CO -> Fe + CO2",
+          "why": "1 Fe2O3 + 3 CO -> 2 Fe + 3 CO2. The three oxygens in Fe2O3 are each removed by one CO, giving three CO2."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-titration-strong-strong",
+    "archetype": "titration_curve",
+    "title": "Titration — Strong Acid with Strong Base",
+    "course_id": "ap_chemistry",
+    "concept": "pH curve for a strong acid / strong base titration and the equivalence point",
+    "subjects": ["science"],
+    "difficulty": "stretch",
+    "minutes": 8,
+    "prompt": "Add titrant and watch the pH curve turn. Read the equivalence point off the plot, then commit.",
+    "learning_objective": "Locate the equivalence point from the steep part of the curve and predict pH from the excess strong acid or base.",
+    "reference": "ExploreLearning Gizmos 'Titration'; AP Chemistry Unit 8 acids and bases",
+    "tags": ["titration", "pH", "equivalence", "acids-bases"],
+    "note": "Strong acid / strong base model: water autoionisation is neglected, so the curve passes exactly through pH 7.00 at the equivalence point instead of rounding the corner.",
+    "spec": {
+      "title": "Titration — Strong Acid with Strong Base",
+      "instruction": "Add titrant with the buttons or drag the playhead. Answer the question, then press Check.",
+      "note": "Model: strong acid + strong base. Water autoionisation is neglected, so pH is exactly 7.00 at the equivalence point.",
+      "acid_name": "HCl",
+      "base_name": "NaOH",
+      "acid_conc": 0.1,
+      "acid_volume": 25.0,
+      "base_conc": 0.1,
+      "v_max": 50,
+      "seed": 25,
+      "tasks": [
+        {
+          "id": "equivalence-volume",
+          "kind": "equivalence_volume",
+          "question": "Add titrant until the curve turns sharply. At what volume of NaOH does the equivalence point occur?",
+          "answer": 25.0,
+          "tolerance": 0.6,
+          "unit": "mL",
+          "hint": "The equivalence point is where the curve is steepest — the middle of the near-vertical jump.",
+          "why": "At equivalence the moles of base added equal the moles of acid: 0.100 M x 25.0 mL = 0.100 M x V, so V = 25.0 mL."
+        },
+        {
+          "id": "ph-half-way",
+          "kind": "ph_at",
+          "question": "Predict the pH after 12.5 mL of NaOH has been added — half of the acid is neutralised.",
+          "volume": 12.5,
+          "answer": 1.48,
+          "tolerance": 0.15,
+          "hint": "You have neutralised half the acid, so half of it is still there as free H+. That is still a fairly acidic solution.",
+          "why": "1.25 mmol of H+ remains in a total volume of 37.5 mL, so [H+] = 0.0333 M and pH = -log10(0.0333) = 1.48. Half-neutralising a strong acid does not give pH 7."
+        },
+        {
+          "id": "ph-equivalence",
+          "kind": "ph_at",
+          "question": "Predict the pH exactly at the equivalence point.",
+          "volume": 25.0,
+          "answer": 7.0,
+          "tolerance": 0.2,
+          "hint": "A strong acid and a strong base neutralise to give a neutral salt solution.",
+          "why": "At equivalence every H+ has been matched by an OH-. Only NaCl and water remain, so the pH is 7.00."
+        },
+        {
+          "id": "ph-past-equivalence",
+          "kind": "ph_at",
+          "question": "Predict the pH after 30.0 mL of NaOH has been added, well past the equivalence point.",
+          "volume": 30.0,
+          "answer": 11.96,
+          "tolerance": 0.2,
+          "hint": "Past equivalence the pH is set by the excess strong base, so work out [OH-] and convert.",
+          "why": "Excess base = 0.100 M x 5.0 mL = 0.50 mmol in 55.0 mL, so [OH-] = 0.00909 M, pOH = 2.04 and pH = 11.96."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-titration-dilute-acid",
+    "archetype": "titration_curve",
+    "title": "Titration — Dilute Acid, Concentrated Base",
+    "course_id": "chemistry",
+    "concept": "Equivalence volume when the acid and base concentrations differ",
+    "subjects": ["science"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "The acid is weaker in concentration than the base. Add titrant, find the jump, and predict the pH at two points.",
+    "learning_objective": "Compute the equivalence volume from moles and predict pH before and after equivalence.",
+    "reference": "ExploreLearning Gizmos 'Titration'",
+    "tags": ["titration", "pH", "equivalence", "stoichiometry"],
+    "note": "Strong acid / strong base model: water autoionisation is neglected, so pH is exactly 7.00 at the equivalence point.",
+    "spec": {
+      "title": "Titration — Dilute Acid, Concentrated Base",
+      "instruction": "Add titrant with the buttons or drag the playhead, then answer and press Check.",
+      "note": "Model: strong acid + strong base. Water autoionisation is neglected, so pH is exactly 7.00 at equivalence.",
+      "acid_name": "HCl",
+      "base_name": "NaOH",
+      "acid_conc": 0.05,
+      "acid_volume": 20.0,
+      "base_conc": 0.1,
+      "v_max": 30,
+      "seed": 10,
+      "tasks": [
+        {
+          "id": "equivalence-volume-dilute",
+          "kind": "equivalence_volume",
+          "question": "At what volume of NaOH does the equivalence point occur?",
+          "answer": 10.0,
+          "tolerance": 0.5,
+          "unit": "mL",
+          "hint": "The base is twice as concentrated as the acid, so you need less of it. Match the moles, not the volumes.",
+          "why": "Moles of acid = 0.050 M x 20.0 mL = 1.00 mmol. That needs 1.00 mmol of base, which is 1.00 / 0.100 = 10.0 mL of NaOH."
+        },
+        {
+          "id": "ph-5ml",
+          "kind": "ph_at",
+          "question": "Predict the pH after 5.0 mL of NaOH has been added.",
+          "volume": 5.0,
+          "answer": 1.7,
+          "tolerance": 0.15,
+          "hint": "You have neutralised only a quarter of the acid. Most of the H+ is still free.",
+          "why": "0.50 mmol of H+ remains in 25.0 mL, so [H+] = 0.020 M and pH = -log10(0.020) = 1.70."
+        },
+        {
+          "id": "ph-15ml",
+          "kind": "ph_at",
+          "question": "Predict the pH after 15.0 mL of NaOH has been added.",
+          "volume": 15.0,
+          "answer": 12.15,
+          "tolerance": 0.2,
+          "hint": "That is 5.0 mL past equivalence, so the pH is set by the excess strong base.",
+          "why": "Excess base = 0.100 M x 5.0 mL = 0.50 mmol in 35.0 mL, so [OH-] = 0.01429 M, pOH = 1.85 and pH = 12.15."
+        },
+        {
+          "id": "ph-20ml",
+          "kind": "ph_at",
+          "question": "Predict the pH after 20.0 mL of NaOH has been added.",
+          "volume": 20.0,
+          "answer": 12.4,
+          "tolerance": 0.2,
+          "hint": "Twice the titrant of the equivalence point, so twice the excess base.",
+          "why": "Excess base = 0.100 M x 10.0 mL = 1.00 mmol in 40.0 mL, so [OH-] = 0.025 M, pOH = 1.60 and pH = 12.40."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,33 @@
+# The build context is harness/, not harness/backend/.
+#
+# It has to be: app/resources.py resolves ``web/`` and ``model/`` by walking two parents up
+# from app/, which is /srv in the image, so those two directories have to be copyable from
+# the context. With a backend/-only context they were unreachable and the image served a
+# 404 at / and /playground - the same failure package.py was hardened against for the
+# desktop bundle, with no gate covering the container.
+#
+# Widening the context means these exclusions are load-bearing: without them the build
+# ships the Swift sources, the UI-test virtualenv and node_modules to the daemon.
+# Nothing here may exclude backend/, web/ or model/.
+native
+ui-tests
+node_modules
+workspaces
+docs
+reference
+.tmp
+outputs
+
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.mypy_cache
+
+backend/.data
+backend/tests
+backend/.env
+backend/build
+backend/dist
+backend/.dockerignore
+
+*.log

@@ -1,0 +1,21 @@
+# Capabilities the application detects and degrades from, plus the packages only one
+# deployment configuration needs. Nothing here is required by the frozen desktop
+# bundle, and ``scripts/package.py`` reports these rather than enforcing them.
+#
+# Install everything with:
+#     pip install -r requirements.txt -r requirements-optional.txt
+#
+# psycopg - PostgreSQL deployments only. ``deploy/compose.yaml`` points
+#   HARNESS_DATABASE_URL at a postgres+psycopg URL, so the container image needs it; the
+#   desktop application is SQLite and never opens a Postgres connection.
+psycopg[binary]>=3.2,<4
+#
+# playwright - the teacher-only headless-browser tool (``browser_snapshot``). The
+#   package is ~40 MB and needs a separate chromium download on top of it, which is why
+#   the desktop bundle ships without it: excluding it is what halved the DMG from 87.8 MB
+#   to 45.6 MB. ``scripts/package.py`` names the exclusion explicitly so the omission is
+#   a recorded decision rather than a side effect of whatever happened to be installed,
+#   and the tool catalogue stops advertising ``browser_snapshot`` when it is absent.
+#   A deployment that wants the tool installs this file and then runs
+#   ``playwright install chromium``.
+playwright==1.62.0

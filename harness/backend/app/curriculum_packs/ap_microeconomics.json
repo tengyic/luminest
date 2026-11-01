@@ -1,0 +1,1772 @@
+{
+ "schema": 1,
+ "name": "ap_microeconomics",
+ "title": "AP Microeconomics",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Microeconomics - Markets, Firms and Market Failure",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "The firm-and-market view: scarcity and marginal analysis, supply and demand with elasticity, production and cost, market structure from perfect competition to oligopoly, factor markets, and market failure.",
+  "id_namespace": {
+   "prefix": "ap_microeconomics_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Basic Economic Concepts": {
+    "Scarcity, choice and marginal analysis": [
+     "Foundations"
+    ]
+   },
+   "Supply and Demand": {
+    "Elasticity": [
+     "Responsiveness of quantity"
+    ],
+    "Welfare, taxes and intervention": [
+     "Surplus and policy"
+    ]
+   },
+   "Production, Cost, and the Perfect Competition Model": {
+    "Production and cost": [
+     "Cost structure"
+    ],
+    "Perfect competition": [
+     "A price-taking market"
+    ]
+   },
+   "Imperfect Competition": {
+    "Monopoly": [
+     "Market power"
+    ],
+    "Strategic interaction": [
+     "Between competition and monopoly"
+    ]
+   },
+   "Factor Markets": {
+    "Labour, capital and income": [
+     "Derived demand"
+    ]
+   },
+   "Market Failure and the Role of Government": {
+    "Externalities and public goods": [
+     "When markets fail"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Basic Economic Concepts",
+    "units": [
+     "Scarcity, choice and marginal analysis"
+    ]
+   },
+   {
+    "strand": "Supply and Demand",
+    "units": [
+     "Elasticity",
+     "Welfare, taxes and intervention"
+    ]
+   },
+   {
+    "strand": "Production, Cost, and the Perfect Competition Model",
+    "units": [
+     "Production and cost",
+     "Perfect competition"
+    ]
+   },
+   {
+    "strand": "Imperfect Competition",
+    "units": [
+     "Monopoly",
+     "Strategic interaction"
+    ]
+   },
+   {
+    "strand": "Factor Markets",
+    "units": [
+     "Labour, capital and income"
+    ]
+   },
+   {
+    "strand": "Market Failure and the Role of Government",
+    "units": [
+     "Externalities and public goods"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_microeconomics_accounting_profit_versus_economic_profit",
+   "title": "Accounting profit versus economic profit",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Production and cost",
+   "topic": "Cost structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_explicit_and_implicit_costs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accounting profit",
+    "economic profit",
+    "normal profit"
+   ],
+   "summary": "Economic profit subtracts implicit cost as well, so a firm can be accounting-profitable and economically breaking even.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_microeconomics_antitrust_policy_and_regulation",
+   "title": "Antitrust policy and regulation",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_microeconomics_asymmetric_information"
+   ],
+   "keywords": [
+    "antitrust",
+    "regulation"
+   ],
+   "summary": "Competition policy targets market power, while regulation can address natural monopoly directly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_microeconomics_asymmetric_information",
+   "title": "Asymmetric information",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_corrective_taxes_and_subsidies"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_common_resources_and_the_tragedy_of_the_common"
+   ],
+   "keywords": [
+    "adverse selection",
+    "asymmetric information",
+    "moral hazard"
+   ],
+   "summary": "When one side knows more, adverse selection and moral hazard can drive good participants out of the market.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_microeconomics_budget_constraints_and_trade_offs",
+   "title": "Budget constraints and trade-offs",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_marginal_utility_per_dollar_and_consumer_choic"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "budget constraint",
+    "relative price"
+   ],
+   "summary": "A budget line shows the affordable combinations, and its slope is the relative price.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_microeconomics_capital_markets_and_the_rental_price_of_capita",
+   "title": "Capital markets and the rental price of capital",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_marginal_revenue_product"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_unions_and_bilateral_bargaining"
+   ],
+   "keywords": [
+    "factor demand",
+    "rental price of capital"
+   ],
+   "summary": "Firms hire capital until its marginal revenue product equals the rental price.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_microeconomics_coase_theorem_and_property_rights",
+   "title": "Coase theorem and property rights",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_marginal_social_cost_and_marginal_social_benef"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Coase theorem",
+    "property rights"
+   ],
+   "summary": "With clear property rights and low bargaining cost, private parties can reach the efficient outcome themselves.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_microeconomics_collusion_and_cartels",
+   "title": "Collusion and cartels",
+   "strand": "Imperfect Competition",
+   "unit": "Strategic interaction",
+   "topic": "Between competition and monopoly",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_game_theory_and_nash_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cartel",
+    "collusion",
+    "prisoner dilemma"
+   ],
+   "summary": "Firms can raise joint profit by acting as a monopolist, but each has an incentive to cheat.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_microeconomics_common_resources_and_the_tragedy_of_the_common",
+   "title": "Common resources and the tragedy of the commons",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_public_goods_and_the_free_rider_problem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common resource",
+    "tragedy of the commons"
+   ],
+   "summary": "Rival but non-excludable resources are overused because no one bears the full cost of their own use.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_microeconomics_comparative_advantage_and_gains_from_trade",
+   "title": "Comparative advantage and gains from trade",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_production_possibilities_curve"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "comparative advantage",
+    "trade"
+   ],
+   "summary": "Specialising where opportunity cost is lowest raises total output, so trade can benefit both sides.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_microeconomics_competitive_labour_market_equilibrium",
+   "title": "Competitive labour market equilibrium",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_marginal_revenue_product"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "competitive labour market",
+    "wage determination"
+   ],
+   "summary": "In a competitive market the wage equals marginal revenue product for every worker hired.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_microeconomics_consumer_and_producer_surplus",
+   "title": "Consumer and producer surplus",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_elasticity_and_total_revenue"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "consumer surplus",
+    "producer surplus"
+   ],
+   "summary": "Surplus measures the gain from trade for buyers and sellers separately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_microeconomics_corrective_taxes_and_subsidies",
+   "title": "Corrective taxes and subsidies",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_marginal_social_cost_and_marginal_social_benef"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_coase_theorem_and_property_rights"
+   ],
+   "keywords": [
+    "Pigouvian subsidy",
+    "corrective tax"
+   ],
+   "summary": "A tax equal to the external cost, or a subsidy equal to the external benefit, realigns private with social incentives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_microeconomics_deadweight_loss_of_taxation",
+   "title": "Deadweight loss of taxation",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_taxes_and_tax_incidence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deadweight loss",
+    "tax wedge"
+   ],
+   "summary": "A tax drives a wedge between price paid and price received, so some mutually beneficial trades do not happen.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_microeconomics_derived_demand_for_labour",
+   "title": "Derived demand for labour",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_collusion_and_cartels"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "derived demand",
+    "factor market"
+   ],
+   "summary": "Demand for a factor exists only because the factor helps produce a good that is itself demanded.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_microeconomics_determinants_of_price_elasticity_of_demand",
+   "title": "Determinants of price elasticity of demand",
+   "strand": "Supply and Demand",
+   "unit": "Elasticity",
+   "topic": "Responsiveness of quantity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_price_elasticity_of_demand"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elasticity determinants",
+    "substitutes"
+   ],
+   "summary": "Substitutes, share of budget, necessity and time horizon decide how responsive demand is.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_microeconomics_elasticity_and_total_revenue",
+   "title": "Elasticity and total revenue",
+   "strand": "Supply and Demand",
+   "unit": "Elasticity",
+   "topic": "Responsiveness of quantity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_price_elasticity_of_demand"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_income_and_cross_price_elasticity"
+   ],
+   "keywords": [
+    "elasticity",
+    "total revenue"
+   ],
+   "summary": "Total revenue rises with price only when demand is inelastic, which is the practical use of the measure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_microeconomics_explicit_and_implicit_costs",
+   "title": "Explicit and implicit costs",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Production and cost",
+   "topic": "Cost structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_international_trade_and_tariffs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "explicit cost",
+    "implicit cost"
+   ],
+   "summary": "Economic cost includes the opportunity cost of resources the owner already supplies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_microeconomics_game_theory_and_nash_equilibrium",
+   "title": "Game theory and Nash equilibrium",
+   "strand": "Imperfect Competition",
+   "unit": "Strategic interaction",
+   "topic": "Between competition and monopoly",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_oligopoly_and_interdependence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Nash equilibrium",
+    "game theory"
+   ],
+   "summary": "A Nash equilibrium is a set of strategies where no player can gain by changing alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_microeconomics_income_and_cross_price_elasticity",
+   "title": "Income and cross-price elasticity",
+   "strand": "Supply and Demand",
+   "unit": "Elasticity",
+   "topic": "Responsiveness of quantity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_price_elasticity_of_demand"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_price_elasticity_of_supply"
+   ],
+   "keywords": [
+    "cross-price elasticity",
+    "income elasticity"
+   ],
+   "summary": "Income elasticity classifies normal and inferior goods, and cross-price elasticity identifies substitutes and complements.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_microeconomics_income_inequality_and_redistribution",
+   "title": "Income inequality and redistribution",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_microeconomics_corrective_taxes_and_subsidies"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_antitrust_policy_and_regulation"
+   ],
+   "keywords": [
+    "Lorenz curve",
+    "income inequality",
+    "redistribution"
+   ],
+   "summary": "Tax-and-transfer policy can change the distribution of income, with efficiency costs of its own.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_microeconomics_international_trade_and_tariffs",
+   "title": "International trade and tariffs",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_deadweight_loss_of_taxation"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_price_ceilings_and_floors"
+   ],
+   "keywords": [
+    "comparative advantage",
+    "tariff",
+    "trade"
+   ],
+   "summary": "Opening trade raises total surplus while a tariff lowers it, though it redistributes toward domestic producers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_microeconomics_least_cost_combination_of_inputs",
+   "title": "Least-cost combination of inputs",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_present_value_and_investment_decisions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "least-cost combination",
+    "marginal product per dollar"
+   ],
+   "summary": "Cost is minimised where the marginal product per dollar is equal across inputs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_microeconomics_long_run_average_total_cost_and_economies_of_s",
+   "title": "Long-run average total cost and economies of scale",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Production and cost",
+   "topic": "Cost structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_short_run_cost_curves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "economies of scale",
+    "long-run average cost"
+   ],
+   "summary": "All inputs vary in the long run, so the planning curve shows economies, constant returns and diseconomies of scale.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_microeconomics_long_run_equilibrium_and_normal_profit",
+   "title": "Long-run equilibrium and normal profit",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_short_run_equilibrium_in_perfect_competition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "entry",
+    "long-run equilibrium",
+    "zero economic profit"
+   ],
+   "summary": "Free entry drives economic profit to zero, leaving firms earning only a normal profit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_microeconomics_marginal_analysis_and_decision_rules",
+   "title": "Marginal analysis and decision rules",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_scarcity_choice_and_opportunity_cost"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_comparative_advantage_and_gains_from_trade"
+   ],
+   "keywords": [
+    "marginal benefit",
+    "marginal cost"
+   ],
+   "summary": "A rational decision compares the marginal benefit of one more unit with its marginal cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_microeconomics_marginal_revenue_product",
+   "title": "Marginal revenue product",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_derived_demand_for_labour"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor demand",
+    "marginal revenue product"
+   ],
+   "summary": "A firm hires until the marginal revenue product of the factor equals its price.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_microeconomics_marginal_social_cost_and_marginal_social_benef",
+   "title": "Marginal social cost and marginal social benefit",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_positive_and_negative_externalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "marginal social benefit",
+    "marginal social cost"
+   ],
+   "summary": "Social cost and benefit add the external effect to the private one, which is where the efficient quantity sits.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_microeconomics_marginal_utility_per_dollar_and_consumer_choic",
+   "title": "Marginal utility per dollar and consumer choice",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_utility_and_marginal_utility"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "consumer equilibrium",
+    "marginal utility per dollar"
+   ],
+   "summary": "A consumer maximises utility by equalising marginal utility per dollar across all goods.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_microeconomics_market_efficiency_and_total_surplus",
+   "title": "Market efficiency and total surplus",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_consumer_and_producer_surplus"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "efficiency",
+    "total surplus"
+   ],
+   "summary": "Total surplus is maximised at competitive equilibrium, which is the efficiency benchmark for every later comparison.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopolistic_competition",
+   "title": "Monopolistic competition",
+   "strand": "Imperfect Competition",
+   "unit": "Strategic interaction",
+   "topic": "Between competition and monopoly",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_natural_monopoly_and_regulation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "monopolistic competition",
+    "product differentiation"
+   ],
+   "summary": "Many firms sell differentiated products, so each faces a downward-sloping demand curve but no barrier to entry.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopolistic_competition_in_the_long_run",
+   "title": "Monopolistic competition in the long run",
+   "strand": "Imperfect Competition",
+   "unit": "Strategic interaction",
+   "topic": "Between competition and monopoly",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopolistic_competition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "excess capacity",
+    "long-run equilibrium"
+   ],
+   "summary": "Entry erodes profit until price equals average total cost, leaving excess capacity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopoly_inefficiency_and_deadweight_loss",
+   "title": "Monopoly inefficiency and deadweight loss",
+   "strand": "Imperfect Competition",
+   "unit": "Monopoly",
+   "topic": "Market power",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopoly_profit_maximisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deadweight loss",
+    "monopoly inefficiency"
+   ],
+   "summary": "Restricting output below the competitive level leaves some mutually beneficial trades unmade.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopoly_profit_maximisation",
+   "title": "Monopoly profit maximisation",
+   "strand": "Imperfect Competition",
+   "unit": "Monopoly",
+   "topic": "Market power",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopoly_sources_of_market_power"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "marginal revenue",
+    "monopoly output"
+   ],
+   "summary": "A monopolist sets output where marginal revenue equals marginal cost and prices off the demand curve.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopoly_sources_of_market_power",
+   "title": "Monopoly: sources of market power",
+   "strand": "Imperfect Competition",
+   "unit": "Monopoly",
+   "topic": "Market power",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_productive_and_allocative_efficiency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "barriers to entry",
+    "monopoly",
+    "price maker"
+   ],
+   "summary": "Barriers to entry such as control of a resource, patents, or scale keep rivals out and create a price maker.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_microeconomics_monopsony",
+   "title": "Monopsony",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_competitive_labour_market_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exploitation",
+    "monopsony"
+   ],
+   "summary": "A single buyer of labour hires less and pays less than a competitive market would.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_microeconomics_natural_monopoly_and_regulation",
+   "title": "Natural monopoly and regulation",
+   "strand": "Imperfect Competition",
+   "unit": "Monopoly",
+   "topic": "Market power",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopoly_inefficiency_and_deadweight_loss"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_price_discrimination"
+   ],
+   "keywords": [
+    "natural monopoly",
+    "regulation"
+   ],
+   "summary": "When scale makes one firm cheapest, regulation targets the price rather than the number of firms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_microeconomics_oligopoly_and_interdependence",
+   "title": "Oligopoly and interdependence",
+   "strand": "Imperfect Competition",
+   "unit": "Strategic interaction",
+   "topic": "Between competition and monopoly",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopolistic_competition_in_the_long_run"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interdependence",
+    "oligopoly"
+   ],
+   "summary": "A few large firms must anticipate each other, so decisions are strategic rather than independent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_microeconomics_perfect_competition_characteristics",
+   "title": "Perfect competition: characteristics",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_long_run_average_total_cost_and_economies_of_s"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "perfect competition",
+    "price taker"
+   ],
+   "summary": "Many small firms, a homogeneous product and free entry make each firm a price taker.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_microeconomics_positive_and_negative_externalities",
+   "title": "Positive and negative externalities",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_least_cost_combination_of_inputs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "externality",
+    "third party"
+   ],
+   "summary": "An externality is a cost or benefit that falls on a third party outside the transaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_microeconomics_present_value_and_investment_decisions",
+   "title": "Present value and investment decisions",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_capital_markets_and_the_rental_price_of_capita"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discount rate",
+    "present value"
+   ],
+   "summary": "A project is worth funding when the present value of its returns exceeds its cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_microeconomics_price_ceilings_and_floors",
+   "title": "Price ceilings and floors",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_market_efficiency_and_total_surplus"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_subsidies"
+   ],
+   "keywords": [
+    "price ceiling",
+    "price floor"
+   ],
+   "summary": "A binding ceiling creates a shortage and a binding floor a surplus, with deadweight loss in both cases.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_microeconomics_price_discrimination",
+   "title": "Price discrimination",
+   "strand": "Imperfect Competition",
+   "unit": "Monopoly",
+   "topic": "Market power",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_monopoly_profit_maximisation"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_monopoly_inefficiency_and_deadweight_loss"
+   ],
+   "keywords": [
+    "consumer surplus",
+    "price discrimination"
+   ],
+   "summary": "Charging different prices to different buyers raises profit when groups can be separated and resale is blocked.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_microeconomics_price_elasticity_of_demand",
+   "title": "Price elasticity of demand",
+   "strand": "Supply and Demand",
+   "unit": "Elasticity",
+   "topic": "Responsiveness of quantity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_budget_constraints_and_trade_offs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elasticity of demand",
+    "responsiveness"
+   ],
+   "summary": "Elasticity measures the percentage change in quantity demanded for a one per cent change in price.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_microeconomics_price_elasticity_of_supply",
+   "title": "Price elasticity of supply",
+   "strand": "Supply and Demand",
+   "unit": "Elasticity",
+   "topic": "Responsiveness of quantity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_price_elasticity_of_demand"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_determinants_of_price_elasticity_of_demand"
+   ],
+   "keywords": [
+    "elasticity of supply"
+   ],
+   "summary": "Supply elasticity depends on how quickly producers can change output, so it is larger in the long run.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_microeconomics_production_possibilities_curve",
+   "title": "Production possibilities curve",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_scarcity_choice_and_opportunity_cost"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "frontier",
+    "production possibilities"
+   ],
+   "summary": "The frontier shows the maximum output combinations and the opportunity cost of moving along it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_microeconomics_productive_and_allocative_efficiency",
+   "title": "Productive and allocative efficiency",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_microeconomics_long_run_equilibrium_and_normal_profit"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_shutdown_and_exit_decisions"
+   ],
+   "keywords": [
+    "allocative efficiency",
+    "productive efficiency"
+   ],
+   "summary": "Perfect competition is both productively and allocatively efficient in long-run equilibrium.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_microeconomics_profit_maximisation_where_marginal_revenue_equ",
+   "title": "Profit maximisation where marginal revenue equals marginal cost",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_perfect_competition_characteristics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "marginal revenue",
+    "profit maximisation"
+   ],
+   "summary": "Every firm maximises profit by producing where marginal revenue equals marginal cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_microeconomics_public_goods_and_the_free_rider_problem",
+   "title": "Public goods and the free-rider problem",
+   "strand": "Market Failure and the Role of Government",
+   "unit": "Externalities and public goods",
+   "topic": "When markets fail",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_corrective_taxes_and_subsidies"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "free rider",
+    "non-rival",
+    "public good"
+   ],
+   "summary": "Non-rival and non-excludable goods are underprovided because each user can free ride.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_microeconomics_scarcity_choice_and_opportunity_cost",
+   "title": "Scarcity, choice and opportunity cost",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "opportunity cost",
+    "scarcity"
+   ],
+   "summary": "Every choice costs the next-best alternative forgone, which is the source of all trade-offs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_microeconomics_short_run_cost_curves",
+   "title": "Short-run cost curves",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Production and cost",
+   "topic": "Cost structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_short_run_production_and_diminishing_returns"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average total cost",
+    "average variable cost",
+    "marginal cost"
+   ],
+   "summary": "Marginal cost crosses average variable and average total cost at their minimum points.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_microeconomics_short_run_equilibrium_in_perfect_competition",
+   "title": "Short-run equilibrium in perfect competition",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_profit_maximisation_where_marginal_revenue_equ"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "price equals marginal cost",
+    "short-run equilibrium"
+   ],
+   "summary": "Price equals marginal revenue for a price taker, so the firm produces where price equals marginal cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_microeconomics_short_run_production_and_diminishing_returns",
+   "title": "Short-run production and diminishing returns",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Production and cost",
+   "topic": "Cost structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_explicit_and_implicit_costs"
+   ],
+   "sequence_predecessors": [
+    "ap_microeconomics_accounting_profit_versus_economic_profit"
+   ],
+   "keywords": [
+    "diminishing returns",
+    "marginal product"
+   ],
+   "summary": "With one input fixed, the marginal product of the variable input eventually falls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_microeconomics_shutdown_and_exit_decisions",
+   "title": "Shutdown and exit decisions",
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "unit": "Perfect competition",
+   "topic": "A price-taking market",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_microeconomics_long_run_equilibrium_and_normal_profit"
+   ],
+   "keywords": [
+    "exit",
+    "shutdown point",
+    "sunk cost"
+   ],
+   "summary": "A firm shuts down in the short run when price falls below average variable cost, and exits when it falls below average total cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_microeconomics_subsidies",
+   "title": "Subsidies",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_deadweight_loss_of_taxation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "government cost",
+    "subsidy"
+   ],
+   "summary": "A subsidy lowers the price buyers pay and raises the price sellers receive, at a cost to the government.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_microeconomics_taxes_and_tax_incidence",
+   "title": "Taxes and tax incidence",
+   "strand": "Supply and Demand",
+   "unit": "Welfare, taxes and intervention",
+   "topic": "Surplus and policy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_microeconomics_market_efficiency_and_total_surplus"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "tax burden",
+    "tax incidence"
+   ],
+   "summary": "The statutory payer is not the economic bearer: incidence follows the relative elasticities.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_microeconomics_unions_and_bilateral_bargaining",
+   "title": "Unions and bilateral bargaining",
+   "strand": "Factor Markets",
+   "unit": "Labour, capital and income",
+   "topic": "Derived demand",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_microeconomics_monopsony"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "collective bargaining",
+    "union"
+   ],
+   "summary": "Collective bargaining raises wages through higher demand or restricted supply, with employment effects.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_microeconomics_utility_and_marginal_utility",
+   "title": "Utility and marginal utility",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity, choice and marginal analysis",
+   "topic": "Foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_microeconomics_marginal_analysis_and_decision_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "marginal utility",
+    "utility"
+   ],
+   "summary": "Total utility rises with consumption while marginal utility generally falls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Microeconomics - Markets, Firms and Market Failure",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  }
+ ]
+}

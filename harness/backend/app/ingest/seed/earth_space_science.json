@@ -1,0 +1,139 @@
+{
+ "course": "Earth and Space Science — Systems, Climate and the Cosmos",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "An introductory Earth and space science course: Earth's place in the universe, plate tectonics and Earth's structure, weather and climate, and Earth's resources and human impact.",
+ "expected_weeks": 36,
+ "strands": [
+  {
+   "strand": "Earth in the Universe",
+   "units": [
+    {
+     "unit": "Space systems",
+     "topics": [
+      {
+       "topic": "The solar system and beyond",
+       "concepts": [
+        {"title": "The scale of the universe", "summary": "Astronomical distances are so large that a scaled model almost always misleads unless it is built carefully.", "keywords": ["scale", "light year", "astronomical unit"]},
+        {"title": "Formation of the solar system", "summary": "A collapsing cloud of gas and dust flattened into a disc, and the Sun ignited at its centre.", "keywords": ["solar system", "accretion", "nebula"], "prerequisites": ["The scale of the universe"]},
+        {"title": "Terrestrial and gas giant planets", "summary": "Distance from the Sun during formation decided whether a planet kept a thick volatile envelope or not.", "keywords": ["terrestrial", "gas giant", "formation"], "prerequisites": ["Formation of the solar system"]},
+        {"title": "The Sun and stellar processes", "summary": "Stars fuse light nuclei into heavier ones, releasing the energy that drives everything around them.", "keywords": ["star", "fusion", "energy"], "prerequisites": ["Formation of the solar system"]},
+        {"title": "The life cycle of stars", "summary": "A star's mass decides its whole history, including whether it ends as a white dwarf, neutron star or black hole.", "keywords": ["stellar evolution", "supernova", "mass"], "prerequisites": ["The Sun and stellar processes"]},
+        {"title": "Galaxies and the expanding universe", "summary": "Distant galaxies recede faster, which is the observation that the universe is expanding.", "keywords": ["galaxy", "redshift", "expansion"], "prerequisites": ["The life cycle of stars"]},
+        {"title": "Orbital motion and seasons", "summary": "Seasons come from the tilt of Earth's axis, not from its changing distance from the Sun.", "keywords": ["season", "axial tilt", "orbit"], "prerequisites": ["The scale of the universe"]},
+        {"title": "Moon phases, eclipses and tides", "summary": "Phases, eclipses and tides are all consequences of relative position and gravity, not of the Moon changing shape.", "keywords": ["phase", "eclipse", "tide"], "prerequisites": ["Orbital motion and seasons"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Solid Earth",
+   "units": [
+    {
+     "unit": "Earth's structure and plate tectonics",
+     "prerequisites": ["Earth in the Universe"],
+     "topics": [
+      {
+       "topic": "Inside the Earth",
+       "concepts": [
+        {"title": "Layers of the Earth", "summary": "Crust, mantle, outer core and inner core are distinguished by composition and by mechanical behaviour.", "keywords": ["crust", "mantle", "core"]},
+        {"title": "Evidence from seismic waves", "summary": "Seismic waves bend and stop at boundaries, which is how the interior was mapped without ever seeing it.", "keywords": ["seismic wave", "refraction", "shadow zone"], "prerequisites": ["Layers of the Earth"]},
+        {"title": "The rock cycle", "summary": "Igneous, sedimentary and metamorphic rocks are three states of the same material under different conditions.", "keywords": ["rock cycle", "igneous", "metamorphic"], "prerequisites": ["Layers of the Earth"]},
+        {"title": "Minerals and their identification", "summary": "Hardness, cleavage, lustre and streak identify a mineral more reliably than colour.", "keywords": ["mineral", "hardness", "cleavage"], "prerequisites": ["The rock cycle"]},
+        {"title": "Relative and absolute dating", "summary": "Superposition gives order while radiometric decay gives age, and together they give a timeline.", "keywords": ["dating", "superposition", "radiometric"], "prerequisites": ["The rock cycle"]},
+        {"title": "The fossil record and geological time", "summary": "The geological timescale was assembled from fossil succession before any radiometric date existed.", "keywords": ["fossil", "timescale", "succession"], "prerequisites": ["Relative and absolute dating"]}
+       ]
+      },
+      {
+       "topic": "Plate tectonics",
+       "concepts": [
+        {"title": "Continental drift and the evidence for it", "summary": "Matching coastlines, fossils and rock sequences were explained only once the continents were allowed to move.", "keywords": ["continental drift", "Wegener", "evidence"]},
+        {"title": "Seafloor spreading", "summary": "Magnetic stripes recorded symmetrically either side of a ridge are direct evidence that new crust forms there.", "keywords": ["seafloor spreading", "magnetic stripe", "ridge"], "prerequisites": ["Continental drift and the evidence for it"]},
+        {"title": "Plate boundaries and their hazards", "summary": "Divergent, convergent and transform boundaries each produce a characteristic set of hazards.", "keywords": ["plate boundary", "convergent", "transform"], "prerequisites": ["Seafloor spreading"]},
+        {"title": "Earthquakes and their measurement", "summary": "Magnitude measures energy released while intensity measures the effect at a place, so they differ for one event.", "keywords": ["earthquake", "magnitude", "intensity"], "prerequisites": ["Plate boundaries and their hazards"]},
+        {"title": "Volcanoes and magma", "summary": "Magma viscosity, set by silica content, decides whether an eruption is gentle or explosive.", "keywords": ["volcano", "magma", "viscosity"], "prerequisites": ["Plate boundaries and their hazards"]},
+        {"title": "Mountain building and deformation", "summary": "Folding and faulting are the visible result of crustal stress exceeding what rock can bear.", "keywords": ["folding", "faulting", "orogeny"], "prerequisites": ["Plate boundaries and their hazards"]}
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Surface processes",
+     "prerequisites": ["Earth's structure and plate tectonics"],
+     "topics": [
+      {
+       "topic": "Weathering, erosion and landforms",
+       "concepts": [
+        {"title": "Weathering and erosion", "summary": "Weathering breaks rock in place while erosion transports the pieces, and they are different processes.", "keywords": ["weathering", "erosion", "transport"]},
+        {"title": "The water cycle", "summary": "Water moves between ocean, atmosphere and land, and the cycle is powered by the Sun.", "keywords": ["water cycle", "evaporation", "precipitation"], "prerequisites": ["Weathering and erosion"]},
+        {"title": "River processes and landforms", "summary": "A river erodes, transports and deposits along its course, building different landforms at each stage.", "keywords": ["river", "deposition", "meander"], "prerequisites": ["The water cycle"]},
+        {"title": "Groundwater and aquifers", "summary": "Water stored in permeable rock moves slowly, and withdrawing it faster than recharge lowers the water table.", "keywords": ["aquifer", "water table", "permeability"], "prerequisites": ["The water cycle"]},
+        {"title": "Glaciers and glacial landforms", "summary": "Ice erodes differently from water, leaving characteristic U-shaped valleys and deposited moraine.", "keywords": ["glacier", "moraine", "U-shaped valley"], "prerequisites": ["Weathering and erosion"]},
+        {"title": "Soil formation and conservation", "summary": "Soil forms over long periods from parent rock and organic matter, and erodes far faster than it forms.", "keywords": ["soil", "horizon", "erosion"], "prerequisites": ["Weathering and erosion"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Atmosphere and Climate",
+   "units": [
+    {
+     "unit": "Weather and climate systems",
+     "prerequisites": ["Surface processes"],
+     "topics": [
+      {
+       "topic": "Atmosphere and weather",
+       "concepts": [
+        {"title": "Structure and composition of the atmosphere", "summary": "Temperature changes direction at layer boundaries, and each layer has a different role.", "keywords": ["atmosphere", "troposphere", "stratosphere"]},
+        {"title": "Energy balance and the greenhouse effect", "summary": "Incoming solar radiation must be balanced by outgoing radiation, and greenhouse gases shift where that balance sits.", "keywords": ["energy balance", "greenhouse", "radiation"], "prerequisites": ["Structure and composition of the atmosphere"]},
+        {"title": "Air pressure, wind and global circulation", "summary": "Uneven heating creates pressure differences, and rotation deflects the resulting flow.", "keywords": ["pressure", "wind", "Coriolis"], "prerequisites": ["Energy balance and the greenhouse effect"]},
+        {"title": "Clouds, humidity and precipitation", "summary": "Air cools as it rises, water vapour condenses onto nuclei, and droplets grow until they fall.", "keywords": ["humidity", "condensation", "precipitation"], "prerequisites": ["Air pressure, wind and global circulation"]},
+        {"title": "Air masses and fronts", "summary": "Weather changes sharply at a front because two air masses with different properties meet.", "keywords": ["air mass", "front", "weather change"], "prerequisites": ["Clouds, humidity and precipitation"]},
+        {"title": "Weather prediction and forecasting", "summary": "Forecasts come from numerical models, and their skill decays with lead time in a way that can be estimated.", "keywords": ["forecast", "model", "uncertainty"], "prerequisites": ["Air masses and fronts"]}
+       ]
+      },
+      {
+       "topic": "Climate and change",
+       "concepts": [
+        {"title": "Climate versus weather", "summary": "Weather is the state of the atmosphere now; climate is the statistics of that state over decades.", "keywords": ["climate", "weather", "timescale"]},
+        {"title": "Natural climate drivers", "summary": "Orbital cycles, volcanic activity and solar variation all changed climate before human influence.", "keywords": ["orbital cycle", "volcanic", "solar"], "prerequisites": ["Climate versus weather"]},
+        {"title": "Evidence for recent climate change", "summary": "Temperature records, ice cores, sea level and phenology are independent lines that agree.", "keywords": ["ice core", "temperature record", "sea level"], "prerequisites": ["Natural climate drivers"]},
+        {"title": "Feedback loops in the climate system", "summary": "Positive feedbacks amplify a change and negative feedbacks damp it, and ice albedo is a strong positive one.", "keywords": ["feedback", "albedo", "amplification"], "prerequisites": ["Evidence for recent climate change"]},
+        {"title": "Impacts and adaptation", "summary": "Impacts differ by region and by capacity to adapt, so the same warming is not the same experience.", "keywords": ["impact", "adaptation", "vulnerability"], "prerequisites": ["Feedback loops in the climate system"]},
+        {"title": "Mitigation and energy transition", "summary": "Mitigation reduces the cause rather than managing the effect, and it requires replacing the energy source.", "keywords": ["mitigation", "energy transition", "emissions"], "prerequisites": ["Impacts and adaptation"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Resources and Human Impact",
+   "units": [
+    {
+     "unit": "Resources and sustainability",
+     "prerequisites": ["Weather and climate systems"],
+     "topics": [
+      {
+       "topic": "Resources",
+       "concepts": [
+        {"title": "Renewable and non-renewable resources", "summary": "The distinction is about the rate of replenishment relative to the rate of use.", "keywords": ["renewable", "non-renewable", "replenishment"]},
+        {"title": "Energy resources and their trade-offs", "summary": "Every generation source has a different mix of cost, reliability, land use and emissions.", "keywords": ["energy resource", "reliability", "trade-off"], "prerequisites": ["Renewable and non-renewable resources"]},
+        {"title": "Mineral and water resource distribution", "summary": "Resources are unevenly distributed, which makes supply a geopolitical as well as a geological question.", "keywords": ["distribution", "supply", "geopolitics"], "prerequisites": ["Renewable and non-renewable resources"]},
+        {"title": "Sustainable use and carrying capacity", "summary": "Use is sustainable only while it stays within the rate at which the system can renew itself.", "keywords": ["sustainability", "carrying capacity", "renewal"], "prerequisites": ["Mineral and water resource distribution"]},
+        {"title": "Waste, recycling and circular economy", "summary": "Designing for reuse changes the material flow at the design stage rather than after disposal.", "keywords": ["waste", "recycling", "circular"], "prerequisites": ["Sustainable use and carrying capacity"]},
+        {"title": "Natural hazards and risk reduction", "summary": "Risk combines hazard, exposure and vulnerability, so reducing any one of the three reduces risk.", "keywords": ["hazard", "exposure", "vulnerability"], "prerequisites": ["Sustainable use and carrying capacity"]}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

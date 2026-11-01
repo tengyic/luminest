@@ -1,0 +1,216 @@
+{
+ "course": "Chemistry — Structure, Reactions and Energy",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "An introductory chemistry course: atomic structure and periodicity, bonding and structure, quantitative chemistry, reactions and energetics, equilibrium, and organic and analytical chemistry.",
+ "expected_weeks": 36,
+ "strands": [
+  {
+   "strand": "Foundations of Chemistry",
+   "units": [
+    {
+     "unit": "Matter, measurement and the mole",
+     "topics": [
+      {
+       "topic": "Describing matter",
+       "concepts": [
+        {"title": "States of matter and particle models", "summary": "The same particles arranged with different spacing and freedom of motion account for solids, liquids and gases.", "keywords": ["states of matter", "particle model", "spacing"]},
+        {"title": "Elements, compounds and mixtures", "summary": "The distinction is chemical: a compound's components are bonded, a mixture's are not.", "keywords": ["element", "compound", "mixture"], "prerequisites": ["States of matter and particle models"]},
+        {"title": "Physical and chemical changes", "summary": "A chemical change makes new substances while a physical change does not, even when appearance changes greatly.", "keywords": ["physical change", "chemical change", "reaction"], "prerequisites": ["Elements, compounds and mixtures"]},
+        {"title": "Separation techniques", "summary": "Filtration, distillation and chromatography each exploit a different physical property difference.", "keywords": ["filtration", "distillation", "chromatography"], "prerequisites": ["Elements, compounds and mixtures"]},
+        {"title": "Pure substances and purity testing", "summary": "A sharp melting point indicates purity while a range indicates contamination.", "keywords": ["purity", "melting point", "impurity"], "prerequisites": ["Separation techniques"]}
+       ]
+      },
+      {
+       "topic": "Quantitative chemistry",
+       "concepts": [
+        {"title": "Atomic mass and relative masses", "summary": "Relative atomic mass is an average over natural isotopes weighted by abundance.", "keywords": ["relative atomic mass", "isotope", "weighted average"]},
+        {"title": "The mole and Avogadro's number", "summary": "A mole is a fixed count of particles, which lets chemists weigh out countable numbers of atoms.", "keywords": ["mole", "Avogadro", "count"], "prerequisites": ["Atomic mass and relative masses"]},
+        {"title": "Molar mass and mass-mole conversions", "summary": "Molar mass links the mass measured on a balance to the number of moles in the sample.", "keywords": ["molar mass", "conversion", "moles"], "prerequisites": ["The mole and Avogadro's number"]},
+        {"title": "Concentration and molarity", "summary": "Concentration is amount of solute per volume of solution, and diluting changes volume not amount.", "keywords": ["concentration", "molarity", "dilution"], "prerequisites": ["Molar mass and mass-mole conversions"]},
+        {"title": "Empirical and molecular formulae", "summary": "Percentage composition gives the simplest ratio, and molar mass decides the multiple.", "keywords": ["empirical formula", "molecular formula", "ratio"], "prerequisites": ["Molar mass and mass-mole conversions"]},
+        {"title": "Percentage yield and atom economy", "summary": "Yield measures what you actually got; atom economy measures how much of the reactants ended up in the product.", "keywords": ["yield", "atom economy", "efficiency"], "prerequisites": ["Molar mass and mass-mole conversions"]},
+        {"title": "Gas volumes and the ideal gas law", "summary": "At a given temperature and pressure equal volumes of gas contain equal numbers of particles.", "keywords": ["gas volume", "molar volume", "ideal gas"], "prerequisites": ["The mole and Avogadro's number"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Atomic Structure and Periodicity",
+   "units": [
+    {
+     "unit": "Atomic structure",
+     "prerequisites": ["Matter, measurement and the mole"],
+     "topics": [
+      {
+       "topic": "Inside the atom",
+       "concepts": [
+        {"title": "Subatomic particles", "summary": "Protons, neutrons and electrons differ in charge and mass, and only protons define the element.", "keywords": ["proton", "neutron", "electron"]},
+        {"title": "Atomic number, mass number and isotopes", "summary": "Atomic number counts protons and fixes identity; mass number counts protons plus neutrons.", "keywords": ["atomic number", "mass number", "isotope"], "prerequisites": ["Subatomic particles"]},
+        {"title": "Electron shells and energy levels", "summary": "Electrons occupy quantised shells, and chemical behaviour is governed by the outermost ones.", "keywords": ["shell", "energy level", "outer electron"], "prerequisites": ["Subatomic particles"]},
+        {"title": "Electron configuration", "summary": "Filling order follows increasing energy, which is why the periodic table has the shape it does.", "keywords": ["configuration", "orbital", "filling order"], "prerequisites": ["Electron shells and energy levels"]},
+        {"title": "Emission spectra and evidence for levels", "summary": "Discrete spectral lines are direct evidence that electron energies are quantised.", "keywords": ["emission spectrum", "quantised", "line"], "prerequisites": ["Electron shells and energy levels"]}
+       ]
+      },
+      {
+       "topic": "The periodic table",
+       "concepts": [
+        {"title": "Groups, periods and the table's structure", "summary": "Columns share outer-electron count and rows share shell count, which is why the table predicts behaviour.", "keywords": ["group", "period", "periodic table"]},
+        {"title": "Metals, non-metals and metalloids", "summary": "The dividing line between metals and non-metals explains the kinds of bonding each tends to form.", "keywords": ["metal", "non-metal", "metalloid"], "prerequisites": ["Groups, periods and the table's structure"]},
+        {"title": "Trends in atomic radius", "summary": "Radius falls across a period as nuclear charge grows and rises down a group as shells are added.", "keywords": ["atomic radius", "trend", "nuclear charge"], "prerequisites": ["Groups, periods and the table's structure"]},
+        {"title": "Ionisation energy and electron affinity", "summary": "Ionisation energy measures how tightly an electron is held, so it rises across a period and falls down a group.", "keywords": ["ionisation energy", "electron affinity", "trend"], "prerequisites": ["Trends in atomic radius"]},
+        {"title": "Group trends and reactivity", "summary": "Alkali metals become more reactive down the group while halogens become less, and both follow from outer-shell shielding.", "keywords": ["reactivity", "alkali", "halogen"], "prerequisites": ["Ionisation energy and electron affinity"]}
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Bonding and structure",
+     "prerequisites": ["Atomic structure"],
+     "topics": [
+      {
+       "topic": "Chemical bonds",
+       "concepts": [
+        {"title": "Ionic bonding", "summary": "Electron transfer between a metal and a non-metal produces oppositely charged ions held in a lattice.", "keywords": ["ionic", "lattice", "transfer"]},
+        {"title": "Covalent bonding", "summary": "Shared electron pairs hold non-metal atoms together, and the bond is directional.", "keywords": ["covalent", "shared pair", "molecule"], "prerequisites": ["Ionic bonding"]},
+        {"title": "Metallic bonding", "summary": "A sea of delocalised electrons explains why metals conduct and deform rather than shatter.", "keywords": ["metallic", "delocalised", "conduct"], "prerequisites": ["Ionic bonding"]},
+        {"title": "Dot-and-cross diagrams and Lewis structures", "summary": "Drawing outer electrons makes it visible whether an atom has achieved a stable count.", "keywords": ["Lewis structure", "dot and cross", "octet"], "prerequisites": ["Covalent bonding"]},
+        {"title": "Bond polarity and electronegativity", "summary": "Unequal sharing creates a dipole, which is what makes many molecules reactive at specific sites.", "keywords": ["polarity", "electronegativity", "dipole"], "prerequisites": ["Covalent bonding"]},
+        {"title": "Intermolecular forces", "summary": "London forces, dipole-dipole attractions and hydrogen bonding are much weaker than bonds but decide boiling points.", "keywords": ["intermolecular", "hydrogen bond", "van der Waals"], "prerequisites": ["Bond polarity and electronegativity"]}
+       ]
+      },
+      {
+       "topic": "Structure, shape and properties",
+       "concepts": [
+        {"title": "Giant covalent and simple molecular structures", "summary": "The same strong bonds give very different properties depending on whether they extend through the whole solid.", "keywords": ["giant covalent", "simple molecular", "network"]},
+        {"title": "Shapes of molecules and VSEPR", "summary": "Electron pairs repel and arrange as far apart as possible, which predicts the shape and the bond angles.", "keywords": ["VSEPR", "shape", "bond angle"], "prerequisites": ["Covalent bonding"]},
+        {"title": "Structure and physical properties", "summary": "Melting point, conductivity and solubility all follow from which particles are present and how they are held.", "keywords": ["properties", "structure", "melting point"], "prerequisites": ["Giant covalent and simple molecular structures"]},
+        {"title": "Allotropes of carbon", "summary": "Diamond, graphite and graphene are all pure carbon yet differ completely because of how the atoms are arranged.", "keywords": ["allotrope", "diamond", "graphite"], "prerequisites": ["Structure and physical properties"]},
+        {"title": "Nanoparticles and surface area", "summary": "Nanoparticles have a very large surface area to volume ratio, which changes their behaviour compared with bulk material.", "keywords": ["nanoparticle", "surface area", "scale"], "prerequisites": ["Structure and physical properties"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Chemical Reactions",
+   "units": [
+    {
+     "unit": "Reaction types and equations",
+     "prerequisites": ["Bonding and structure"],
+     "topics": [
+      {
+       "topic": "Writing and balancing reactions",
+       "concepts": [
+        {"title": "Word and symbol equations", "summary": "A balanced symbol equation is a statement of conservation of atoms and charge.", "keywords": ["equation", "symbol", "balancing"]},
+        {"title": "Balancing chemical equations", "summary": "Coefficients must be adjusted so every element's count matches on both sides.", "keywords": ["balancing", "coefficient", "conservation"], "prerequisites": ["Word and symbol equations"]},
+        {"title": "State symbols and reaction conditions", "summary": "State symbols and conditions carry real information that changes whether a reaction happens.", "keywords": ["state symbol", "conditions", "aqueous"], "prerequisites": ["Word and symbol equations"]},
+        {"title": "Ionic equations and spectator ions", "summary": "Removing ions that do not change reveals the actual reaction taking place.", "keywords": ["ionic equation", "spectator ion", "net reaction"], "prerequisites": ["Balancing chemical equations"]}
+       ]
+      },
+      {
+       "topic": "Reaction classes",
+       "concepts": [
+        {"title": "Acids, bases and neutralisation", "summary": "An acid donates protons and a base accepts them, and neutralisation produces a salt and water.", "keywords": ["acid", "base", "neutralisation"]},
+        {"title": "pH and the hydrogen ion scale", "summary": "pH is a logarithmic measure of hydrogen ion concentration, so one unit is a tenfold change.", "keywords": ["pH", "logarithmic", "hydrogen ion"], "prerequisites": ["Acids, bases and neutralisation"]},
+        {"title": "Strong and weak acids", "summary": "Strength refers to how completely an acid dissociates, which is different from concentration.", "keywords": ["strong acid", "weak acid", "dissociation"], "prerequisites": ["pH and the hydrogen ion scale"]},
+        {"title": "Titration and volumetric analysis", "summary": "A titration finds an unknown concentration by finding the exact volume that neutralises a known one.", "keywords": ["titration", "volumetric", "endpoint"], "prerequisites": ["Strong and weak acids", "Concentration and molarity"]},
+        {"title": "Redox and oxidation states", "summary": "Redox reactions move electrons, and tracking oxidation states shows which species gained them.", "keywords": ["redox", "oxidation state", "electron transfer"], "prerequisites": ["Ionic equations and spectator ions"]},
+        {"title": "Precipitation and solubility rules", "summary": "Mixing two solutions produces a solid when the ion combination is insoluble.", "keywords": ["precipitation", "solubility", "insoluble"], "prerequisites": ["Ionic equations and spectator ions"]},
+        {"title": "Reaction rates and collision theory", "summary": "Particles must collide with enough energy and the right orientation, which explains every rate factor.", "keywords": ["rate", "collision theory", "activation energy"], "prerequisites": ["Balancing chemical equations"]},
+        {"title": "Catalysts and activation energy", "summary": "A catalyst provides a lower-energy route without being consumed, so it does not change the equilibrium position.", "keywords": ["catalyst", "activation energy", "pathway"], "prerequisites": ["Reaction rates and collision theory"]}
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Energetics and equilibrium",
+     "prerequisites": ["Reaction types and equations"],
+     "topics": [
+      {
+       "topic": "Energy in reactions",
+       "concepts": [
+        {"title": "Exothermic and endothermic reactions", "summary": "The sign of the enthalpy change says whether the system released or absorbed energy overall.", "keywords": ["exothermic", "endothermic", "enthalpy"]},
+        {"title": "Bond energies and enthalpy change", "summary": "Breaking bonds costs energy and forming them releases it, and the net of the two sets the sign.", "keywords": ["bond energy", "enthalpy", "net energy"], "prerequisites": ["Exothermic and endothermic reactions"]},
+        {"title": "Energy level diagrams", "summary": "A reaction profile shows reactant and product energies and the activation hump between them.", "keywords": ["energy profile", "activation", "diagram"], "prerequisites": ["Bond energies and enthalpy change"]},
+        {"title": "Calorimetry and measuring enthalpy change", "summary": "A measured temperature rise plus a known heat capacity gives the energy released per mole.", "keywords": ["calorimetry", "temperature rise", "specific heat"], "prerequisites": ["Exothermic and endothermic reactions"]}
+       ]
+      },
+      {
+       "topic": "Equilibrium",
+       "concepts": [
+        {"title": "Reversible reactions and dynamic equilibrium", "summary": "At equilibrium both directions continue at equal rates, so concentrations stop changing but nothing stops.", "keywords": ["reversible", "dynamic equilibrium", "rate"]},
+        {"title": "Le Chatelier's principle", "summary": "A system at equilibrium shifts to oppose the change imposed on it, which predicts the direction of shift.", "keywords": ["Le Chatelier", "shift", "opposition"], "prerequisites": ["Reversible reactions and dynamic equilibrium"]},
+        {"title": "The equilibrium constant", "summary": "The equilibrium constant summarises the position of equilibrium at a given temperature.", "keywords": ["equilibrium constant", "position", "temperature"], "prerequisites": ["Le Chatelier's principle"]},
+        {"title": "Factors affecting equilibrium position", "summary": "Concentration, pressure and temperature shift the position, while a catalyst only changes how fast it is reached.", "keywords": ["concentration", "pressure", "catalyst"], "prerequisites": ["Le Chatelier's principle"]},
+        {"title": "Industrial equilibrium and yield optimisation", "summary": "The Haber process trades yield against rate, which is why real conditions are a compromise.", "keywords": ["Haber", "compromise", "yield"], "prerequisites": ["Factors affecting equilibrium position"]}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Organic and Analytical Chemistry",
+   "units": [
+    {
+     "unit": "Organic chemistry",
+     "prerequisites": ["Bonding and structure"],
+     "topics": [
+      {
+       "topic": "Hydrocarbons",
+       "concepts": [
+        {"title": "Carbon's bonding and catenation", "summary": "Carbon forms four strong bonds and bonds to itself, which is why there are millions of organic compounds.", "keywords": ["carbon", "catenation", "tetravalent"]},
+        {"title": "Alkanes and saturated hydrocarbons", "summary": "Alkanes contain only single carbon-carbon bonds and are relatively unreactive.", "keywords": ["alkane", "saturated", "single bond"], "prerequisites": ["Carbon's bonding and catenation"]},
+        {"title": "Alkenes and unsaturation", "summary": "A carbon-carbon double bond makes alkenes reactive and lets them add atoms across the bond.", "keywords": ["alkene", "double bond", "unsaturated"], "prerequisites": ["Alkanes and saturated hydrocarbons"]},
+        {"title": "Homologous series and functional groups", "summary": "A functional group behaves consistently across a series, which is what makes organic chemistry predictable.", "keywords": ["homologous series", "functional group", "predictable"], "prerequisites": ["Alkenes and unsaturation"]},
+        {"title": "Naming organic compounds", "summary": "Systematic names encode chain length, functional group and position, so a name is a structure.", "keywords": ["IUPAC", "nomenclature", "prefix"], "prerequisites": ["Homologous series and functional groups"]},
+        {"title": "Isomerism", "summary": "The same molecular formula can give different structures, and different structures give different properties.", "keywords": ["isomer", "structural", "formula"], "prerequisites": ["Naming organic compounds"]},
+        {"title": "Alcohols and carboxylic acids", "summary": "The hydroxyl and carboxyl groups give these compounds their distinctive solubility, acidity and reactivity.", "keywords": ["alcohol", "carboxylic acid", "hydroxyl"], "prerequisites": ["Homologous series and functional groups"]},
+        {"title": "Polymers and polymerisation", "summary": "Addition and condensation routes build long chains from small monomers with different by-products.", "keywords": ["polymer", "monomer", "addition"], "prerequisites": ["Alkenes and unsaturation"]}
+       ]
+      },
+      {
+       "topic": "Fuels and the environment",
+       "concepts": [
+        {"title": "Crude oil and fractional distillation", "summary": "Hydrocarbons separate by boiling point because chain length changes the strength of intermolecular forces.", "keywords": ["crude oil", "fractional distillation", "boiling point"], "prerequisites": ["Alkanes and saturated hydrocarbons"]},
+        {"title": "Combustion of fuels", "summary": "Complete combustion gives carbon dioxide and water, while incomplete combustion gives carbon monoxide and soot.", "keywords": ["combustion", "complete", "carbon monoxide"], "prerequisites": ["Crude oil and fractional distillation"]},
+        {"title": "Cracking and feedstock supply", "summary": "Cracking converts long, abundant chains into shorter, more useful ones including alkenes.", "keywords": ["cracking", "feedstock", "short chain"], "prerequisites": ["Crude oil and fractional distillation"]},
+        {"title": "Greenhouse gases and climate effects", "summary": "Gases that absorb infrared radiation change the planet's energy balance, which changes climate.", "keywords": ["greenhouse", "infrared", "climate"], "prerequisites": ["Combustion of fuels"]}
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Analysis and the atmosphere",
+     "prerequisites": ["Organic chemistry"],
+     "topics": [
+      {
+       "topic": "Analytical techniques",
+       "concepts": [
+        {"title": "Flame tests and cation identification", "summary": "Different metal ions emit characteristic colours, giving a quick identification test.", "keywords": ["flame test", "cation", "colour"]},
+        {"title": "Testing for anions and gases", "summary": "Characteristic precipitates and gas reactions identify common anions and gases.", "keywords": ["anion test", "precipitate", "gas test"], "prerequisites": ["Flame tests and cation identification"]},
+        {"title": "Paper and thin-layer chromatography", "summary": "Components travel at different rates according to how they partition, so they separate into spots.", "keywords": ["chromatography", "Rf value", "separation"], "prerequisites": ["Testing for anions and gases"]},
+        {"title": "Instrumental analysis", "summary": "Spectroscopy and spectrometry identify and quantify substances from how they interact with radiation.", "keywords": ["spectroscopy", "spectrometry", "instrumental"], "prerequisites": ["Paper and thin-layer chromatography"]}
+       ]
+      },
+      {
+       "topic": "Atmosphere and sustainability",
+       "concepts": [
+        {"title": "Composition and evolution of the atmosphere", "summary": "The early atmosphere was largely carbon dioxide and water vapour, and photosynthesis changed that.", "keywords": ["atmosphere", "composition", "photosynthesis"]},
+        {"title": "Air pollution and its chemistry", "summary": "Sulfur dioxide and nitrogen oxides form acid rain, and particulates affect health.", "keywords": ["air pollution", "acid rain", "particulate"], "prerequisites": ["Composition and evolution of the atmosphere"]},
+        {"title": "Water treatment and purity", "summary": "Filtration, sedimentation and chlorination remove different classes of contaminant in sequence.", "keywords": ["water treatment", "chlorination", "filtration"], "prerequisites": ["Composition and evolution of the atmosphere"]},
+        {"title": "Life cycle assessment and recycling", "summary": "Comparing products across their whole life cycle is more informative than comparing them at the point of use.", "keywords": ["life cycle", "recycling", "assessment"], "prerequisites": ["Composition and evolution of the atmosphere"]}
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

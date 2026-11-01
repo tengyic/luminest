@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Hardened-runtime entitlements for a Developer ID (direct download) build.
+
+	     Notarization requires the Hardened Runtime. The bundled Python runtime loads its
+	     own extension modules from inside the bundle, and those are signed with the same
+	     Developer ID but are not part of the main executable's team-validated set, so
+	     library validation must be relaxed or the frozen server will not start after
+	     notarization. This is the standard, documented requirement for a bundled
+	     interpreter; it does not grant any new capability to the app itself.
+
+	     Deliberately NOT included: com.apple.security.get-task-allow (debug builds only)
+	     and any App Sandbox key, which belongs in LuminfestLearningHarness.entitlements. -->
+
+	<key>com.apple.security.cs.disable-library-validation</key>
+	<true/>
+
+	<!-- Some bundled extension modules allocate executable memory at import time. -->
+	<key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+	<true/>
+
+	<!-- Microphone access for voice dictation and duplex voice chat. Harmless in a
+	     non-sandboxed (Developer ID) build; required if this entitlement set is ever
+	     combined with the App Sandbox. -->
+	<key>com.apple.security.device.audio-input</key>
+	<true/>
+</dict>
+</plist>

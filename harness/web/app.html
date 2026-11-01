@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luminfest — the app, in a browser</title>
+<style>
+  :root {
+    --bg: #0d1014;
+    --panel: #161b22;
+    --line: #2a313b;
+    --text: #e6edf3;
+    --muted: #8b98a8;
+    --accent: #f0b429;
+    --bad: #e5534b;
+    --good: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; background: var(--bg); color: var(--text);
+    font: 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; }
+  body { display: flex; flex-direction: column; }
+
+  header {
+    display: flex; align-items: center; gap: 12px; padding: 8px 12px;
+    border-bottom: 1px solid var(--line); background: var(--panel); flex: none;
+  }
+  header .brand { font-weight: 600; letter-spacing: .01em; }
+  header .brand span { color: var(--muted); font-weight: 400; }
+  .spacer { flex: 1; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px;
+    border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); }
+  .dot.good { background: var(--good); }
+  .dot.bad { background: var(--bad); }
+
+  main { flex: 1; display: flex; min-height: 0; }
+
+  #stage {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    min-height: 0; overflow: hidden; background: #05070a;
+  }
+  canvas {
+    max-width: 100%; max-height: 100%; image-rendering: -webkit-optimize-contrast;
+    cursor: default; outline: none;
+  }
+  canvas.live { cursor: crosshair; }
+
+  #gate {
+    max-width: 380px; width: 100%; padding: 28px; border: 1px solid var(--line);
+    border-radius: 12px; background: var(--panel);
+  }
+  #gate h1 { margin: 0 0 4px; font-size: 16px; }
+  #gate p { margin: 0 0 18px; color: var(--muted); }
+  #gate label { display: block; margin: 12px 0 4px; color: var(--muted); font-size: 12px; }
+  #gate input {
+    width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line);
+    background: #0b0e13; color: var(--text); font: inherit;
+  }
+  #gate button {
+    margin-top: 18px; width: 100%; padding: 9px 12px; border-radius: 8px; border: 0;
+    background: var(--accent); color: #1a1206; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  #gate button:disabled { opacity: .55; cursor: default; }
+  #gate .error { margin-top: 12px; color: var(--bad); min-height: 1.4em; }
+  #gate .hint { margin-top: 16px; color: var(--muted); font-size: 12px; }
+
+  aside {
+    width: 300px; flex: none; border-left: 1px solid var(--line); background: var(--panel);
+    padding: 14px; overflow: auto; display: none;
+  }
+  aside.open { display: block; }
+  aside h2 { font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted); margin: 18px 0 6px; }
+  aside h2:first-child { margin-top: 0; }
+  aside p, aside li { color: var(--muted); }
+  aside ul { margin: 0; padding-left: 18px; }
+  aside .warn { color: var(--bad); }
+  .kv { display: grid; grid-template-columns: 96px 1fr; gap: 2px 10px; }
+  .kv div:nth-child(odd) { color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Luminfest <span>— the app, in a browser</span></div>
+  <div class="spacer"></div>
+  <span class="chip"><span class="dot" id="dot"></span><span id="state">signed out</span></span>
+  <span class="chip" id="fps">— fps</span>
+  <button id="details" class="chip" style="cursor:pointer;background:none;font:inherit">details</button>
+</header>
+
+<main>
+  <div id="stage">
+    <form id="gate" autocomplete="on">
+      <h1>Present the app in this tab</h1>
+      <p>This shows the app running on the host machine — the same window, the same lesson,
+         the same backend. Nothing is rebuilt.</p>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required autocomplete="username">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password">
+      <button id="signin" type="submit">Connect</button>
+      <div class="error" id="gate-error"></div>
+      <div class="hint">Teacher accounts only: this streams the host's screen.</div>
+    </form>
+    <canvas id="screen" width="1280" height="800" hidden></canvas>
+  </div>
+
+  <aside id="panel">
+    <h2>Stream</h2>
+    <div class="kv" id="kv"></div>
+    <h2>Permissions</h2>
+    <ul id="perms"><li>checking…</li></ul>
+    <h2>What this is</h2>
+    <p id="notes"></p>
+  </aside>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const API = '/api/v1';
+  // A ceiling, not a promise: one frame costs about 200 ms on the host (capture plus
+  // re-encode), so the loop is latency-bound and this only stops it from hammering.
+  const MAX_FPS = 10;
+  const canvas = document.getElementById('screen');
+  const ctx = canvas.getContext('2d', { alpha: false });
+  const gate = document.getElementById('gate');
+  const gateError = document.getElementById('gate-error');
+  const stateChip = document.getElementById('state');
+  const dot = document.getElementById('dot');
+  const fpsChip = document.getElementById('fps');
+  const panel = document.getElementById('panel');
+  const kv = document.getElementById('kv');
+  const perms = document.getElementById('perms');
+  const notes = document.getElementById('notes');
+
+  let token = sessionStorage.getItem('luminfest.token') || '';
+  let region = null;
+  let running = false;
+  let inFlight = false;
+  let frames = 0;
+  let lastTick = performance.now();
+  let typeBuffer = '';
+  let typeTimer = 0;
+
+  const setState = (text, cls) => {
+    stateChip.textContent = text;
+    dot.className = 'dot' + (cls ? ' ' + cls : '');
+  };
+
+  const authHeaders = () => ({ 'Authorization': 'Bearer ' + token });
+
+  async function api(path, options = {}) {
+    const response = await fetch(API + path, {
+      ...options,
+      headers: { 'Content-Type': 'application/json', ...authHeaders(), ...(options.headers || {}) },
+    });
+    if (!response.ok) {
+      let detail = response.status + '';
+      try { const body = await response.json(); detail = body.detail || detail; } catch (_) {}
+      const error = new Error(typeof detail === 'string' ? detail : JSON.stringify(detail));
+      error.status = response.status;
+      throw error;
+    }
+    return response;
+  }
+
+  // ------------------------------------------------------------------ signing in
+
+  gate.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    gateError.textContent = '';
+    const button = document.getElementById('signin');
+    button.disabled = true;
+    try {
+      const response = await fetch(API + '/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value,
+        }),
+      });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(body.detail || 'Sign-in failed');
+      token = body.token;
+      sessionStorage.setItem('luminfest.token', token);
+      if (body.user && body.user.role !== 'teacher') {
+        throw new Error('This account is a learner account. Streaming the host window is a '
+          + 'teacher action — sign in with the operator account.');
+      }
+      await start();
+    } catch (error) {
+      gateError.textContent = error.message;
+      setState('signed out', 'bad');
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  // ------------------------------------------------------------------ status
+
+  async function refreshStatus() {
+    const response = await api('/stream/status');
+    const status = await response.json();
+    region = status.window || null;
+    const rows = [
+      ['switch', status.enabled ? 'on' : 'off'],
+      ['window', region ? `${region.width}×${region.height} at ${region.x},${region.y}` : 'not reported'],
+      ['capture', status.capture || 'unknown'],
+      ['input', status.input || 'unknown'],
+    ];
+    kv.innerHTML = rows.map(([k, v]) => `<div>${k}</div><div>${v}</div>`).join('');
+    const problems = status.permissions || [];
+    const items = [];
+    // The console comes first, because it is the commonest reason a stream stops and the
+    // only one that is nobody's permission: a sleeping display fails a region capture with
+    // exactly the error a missing grant produces.
+    if (status.console === 'asleep') {
+      items.push('<li class="warn">The display is asleep. A region capture needs the console '
+        + 'awake; the app keeps running behind it and the stream resumes on its own.</li>');
+    } else if (status.console === 'locked') {
+      items.push('<li class="warn">The screen is locked. Unlock the Mac and the stream '
+        + 'resumes on its own.</li>');
+    }
+    if (problems.length) {
+      items.push(...problems.map((text) => `<li class="warn">${text}</li>`));
+    } else if (status.console === 'awake' || !status.console) {
+      // Input has been asked and answered; capture has not been exercised yet. Saying "both
+      // granted" here would be a claim this poll cannot support, and the first frame is a
+      // second away, so the honest answer is to say that.
+      items.push(status.capture === 'unknown'
+        ? '<li>Input is permitted. Capture has not been exercised yet — the first frame '
+          + 'will tell.</li>'
+        : '<li>Both permissions are granted.</li>');
+    }
+    perms.innerHTML = items.join('');
+    notes.textContent = [status.reason, ...(status.guarantees || [])]
+      .filter(Boolean).join(' ');
+    return status;
+  }
+
+  // ------------------------------------------------------------------ frames
+
+  async function pump() {
+    if (!running) return;
+    const started = performance.now();
+    if (!inFlight) {
+      inFlight = true;
+      try {
+        const response = await api('/stream/frame');
+        const bitmap = await createImageBitmap(await response.blob());
+        if (canvas.width !== bitmap.width || canvas.height !== bitmap.height) {
+          canvas.width = bitmap.width;
+          canvas.height = bitmap.height;
+        }
+        ctx.drawImage(bitmap, 0, 0);
+        bitmap.close();
+        frames += 1;
+        setState('live', 'good');
+      } catch (error) {
+        setState(error.status === 503 ? 'paused' : 'error', 'bad');
+        if (error.status === 503) {
+          running = false;
+          refreshStatus().catch(() => {});
+          return;
+        }
+      } finally {
+        inFlight = false;
+      }
+    }
+    const now = performance.now();
+    if (now - lastTick >= 1000) {
+      fpsChip.textContent = Math.round(frames * 1000 / (now - lastTick)) + ' fps';
+      frames = 0; lastTick = now;
+    }
+    // Wait only what is left of the frame budget. Adding a fixed delay on top of a capture
+    // that already took 200 ms is how a 4.9 fps capture became a 3 fps page: the throttle
+    // was being spent twice.
+    setTimeout(pump, Math.max(0, Math.round(1000 / MAX_FPS) - (performance.now() - started)));
+  }
+
+  // ------------------------------------------------------------------ input
+
+  // Window-local coordinates. The bitmap is the window at backing scale (2x on a Retina
+  // display) and the canvas is then scaled by CSS, so the two ratios cancel: a click maps
+  // straight from the rendered box onto the window's points.
+  function toRegion(event) {
+    if (!region) return null;
+    const box = canvas.getBoundingClientRect();
+    const x = Math.round((event.clientX - box.left) * (region.width / box.width));
+    const y = Math.round((event.clientY - box.top) * (region.height / box.height));
+    if (x < 0 || y < 0 || x > region.width || y > region.height) return null;
+    return { x, y };
+  }
+
+  function send(event) {
+    api('/stream/input', { method: 'POST', body: JSON.stringify(event) })
+      .then((response) => response.json())
+      .then((body) => { if (!body.ok) setState(body.reason.slice(0, 60), 'bad'); })
+      .catch(() => setState('input refused', 'bad'));
+  }
+
+  canvas.addEventListener('pointerdown', (event) => {
+    if (!running) return;
+    const point = toRegion(event);
+    if (point) send({ kind: 'click', x: point.x, y: point.y });
+    canvas.focus();
+  });
+
+  // Typing goes through System Events' ``keystroke``, which is one process per call. A
+  // character-at-a-time loop would spend the whole event budget on a sentence, so printable
+  // input is collected for a moment and sent as one string; control keys go straight out.
+  const SPECIAL = {
+    Enter: 36, Backspace: 51, Tab: 48, Escape: 53,
+    ArrowLeft: 123, ArrowRight: 124, ArrowDown: 125, ArrowUp: 126,
+  };
+
+  function flushTyping() {
+    clearTimeout(typeTimer);
+    typeTimer = 0;
+    if (!typeBuffer) return;
+    send({ kind: 'type', text: typeBuffer });
+    typeBuffer = '';
+  }
+
+  window.addEventListener('keydown', (event) => {
+    if (!running || document.activeElement === document.getElementById('email')
+        || document.activeElement === document.getElementById('password')) return;
+    if (SPECIAL[event.key] !== undefined) {
+      flushTyping();
+      send({ kind: 'key', code: SPECIAL[event.key] });
+      event.preventDefault();
+      return;
+    }
+    if (event.key.length === 1 && !event.metaKey && !event.ctrlKey) {
+      typeBuffer += event.key;
+      clearTimeout(typeTimer);
+      typeTimer = setTimeout(flushTyping, 60);
+      event.preventDefault();
+    }
+  });
+
+  canvas.addEventListener('wheel', (event) => {
+    if (!running) return;
+    send({ kind: 'scroll', dy: event.deltaY > 0 ? 1 : -1 });
+    event.preventDefault();
+  }, { passive: false });
+
+  // ------------------------------------------------------------------ lifecycle
+
+  document.getElementById('details').addEventListener('click', () => {
+    panel.classList.toggle('open');
+  });
+
+  // One loop decides the whole page. It used to give up when the switch was off: the
+  // status poll only started *after* the stream was already running, so a tab opened
+  // before the switch was turned on sat on "switched off" for as long as it stayed open —
+  // turning the switch on looked like it did nothing until the page was reloaded by hand.
+  // The poll is now what starts *and* stops the pump, in both directions.
+  let poll = null;
+
+  async function tick() {
+    let status = null;
+    try {
+      status = await refreshStatus();
+    } catch (_) {
+      // Keep whatever the page already says; the next tick tries again.
+    }
+    if (!status) {
+      setState('no server', 'bad');
+    } else if (!status.enabled) {
+      running = false;
+      setState('switched off', 'bad');
+    } else if (!status.window) {
+      running = false;
+      setState('waiting for the app', 'bad');
+    } else if (!running) {
+      running = true;
+      lastTick = performance.now();
+      pump();
+    }
+    clearTimeout(poll);
+    // Three seconds while something is missing, because a person who just flipped the
+    // switch is watching this page and expects it to move. Fifteen once frames are
+    // flowing: the frame loop is the thing keeping the page alive then, and this poll only
+    // exists to notice the switch being turned off.
+    poll = setTimeout(tick, running ? 15000 : 3000);
+  }
+
+  async function start() {
+    gate.hidden = true;
+    canvas.hidden = false;
+    canvas.classList.add('live');
+    canvas.tabIndex = 0;
+    canvas.focus();
+    await tick();
+  }
+
+  if (token) {
+    start().catch(() => {
+      sessionStorage.removeItem('luminfest.token');
+      token = '';
+      setState('signed out', 'bad');
+    });
+  }
+})();
+</script>
+</body>
+</html>

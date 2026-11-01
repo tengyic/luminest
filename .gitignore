@@ -1,0 +1,37 @@
+# Lumen harness — repository root ignore rules.
+#
+# `harness/.gitignore` already covers the deep cases (test residue, .venv, .build,
+# backend/.data) and is deliberately unanchored so it matches at every depth. This file
+# only adds the workspace-level trees and the two reference artefacts that must never be
+# committed.
+
+# Generated trees: marketing renders, packaged builds, screenshots. 10G and rebuildable.
+/outputs/
+
+# Scratch space. `harness/.gitignore` covers the same names inside harness/; these cover
+# the workspace root.
+.tmp/
+.pytest_cache/
+
+# Python environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Swift build products
+.build/
+DerivedData/
+
+# OS and tool noise
+.DS_Store
+*.genie
+.workbuddy/
+
+# Reference artefacts that stay on disk but out of git:
+#  - the EDNeT shard is 163M, over every host's per-file limit, and is data rather than
+#    source;
+#  - `ai-learning-software` is a full clone with its own history, so committing it would
+#    record a gitlink that clones back as an empty directory.
+reference/prior-models/ednet_real/*.parquet
+reference/prior-app/ai-learning-software/

@@ -1,0 +1,1392 @@
+{
+ "schema": 1,
+ "name": "earth_space_science",
+ "title": "earth_space_science",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "topic",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Earth and Space Science — Systems, Climate and the Cosmos",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "An introductory Earth and space science course: Earth's place in the universe, plate tectonics and Earth's structure, weather and climate, and Earth's resources and human impact."
+ },
+ "taxonomy": {
+  "strands": {
+   "Earth in the Universe": {
+    "Space systems": [
+     "The solar system and beyond"
+    ]
+   },
+   "Solid Earth": {
+    "Earth's structure and plate tectonics": [
+     "Inside the Earth",
+     "Plate tectonics"
+    ],
+    "Surface processes": [
+     "Weathering, erosion and landforms"
+    ]
+   },
+   "Atmosphere and Climate": {
+    "Weather and climate systems": [
+     "Atmosphere and weather",
+     "Climate and change"
+    ]
+   },
+   "Resources and Human Impact": {
+    "Resources and sustainability": [
+     "Resources"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Earth in the Universe",
+    "units": [
+     "Space systems"
+    ]
+   },
+   {
+    "strand": "Solid Earth",
+    "units": [
+     "Earth's structure and plate tectonics",
+     "Surface processes"
+    ]
+   },
+   {
+    "strand": "Atmosphere and Climate",
+    "units": [
+     "Weather and climate systems"
+    ]
+   },
+   {
+    "strand": "Resources and Human Impact",
+    "units": [
+     "Resources and sustainability"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "air_masses_and_fronts",
+   "title": "Air masses and fronts",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "clouds_humidity_and_precipitation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "air mass",
+    "front",
+    "weather change"
+   ],
+   "summary": "Weather changes sharply at a front because two air masses with different properties meet.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "air_pressure_wind_and_global_circulation",
+   "title": "Air pressure, wind and global circulation",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "energy_balance_and_the_greenhouse_effect"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Coriolis",
+    "pressure",
+    "wind"
+   ],
+   "summary": "Uneven heating creates pressure differences, and rotation deflects the resulting flow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "climate_versus_weather",
+   "title": "Climate versus weather",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "weather_prediction_and_forecasting"
+   ],
+   "keywords": [
+    "climate",
+    "timescale",
+    "weather"
+   ],
+   "summary": "Weather is the state of the atmosphere now; climate is the statistics of that state over decades.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "clouds_humidity_and_precipitation",
+   "title": "Clouds, humidity and precipitation",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "air_pressure_wind_and_global_circulation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "condensation",
+    "humidity",
+    "precipitation"
+   ],
+   "summary": "Air cools as it rises, water vapour condenses onto nuclei, and droplets grow until they fall.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "continental_drift_and_the_evidence_for_it",
+   "title": "Continental drift and the evidence for it",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "the_fossil_record_and_geological_time"
+   ],
+   "keywords": [
+    "Wegener",
+    "continental drift",
+    "evidence"
+   ],
+   "summary": "Matching coastlines, fossils and rock sequences were explained only once the continents were allowed to move.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "earthquakes_and_their_measurement",
+   "title": "Earthquakes and their measurement",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "plate_boundaries_and_their_hazards"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "earthquake",
+    "intensity",
+    "magnitude"
+   ],
+   "summary": "Magnitude measures energy released while intensity measures the effect at a place, so they differ for one event.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "energy_balance_and_the_greenhouse_effect",
+   "title": "Energy balance and the greenhouse effect",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "structure_and_composition_of_the_atmosphere"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy balance",
+    "greenhouse",
+    "radiation"
+   ],
+   "summary": "Incoming solar radiation must be balanced by outgoing radiation, and greenhouse gases shift where that balance sits.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "energy_resources_and_their_trade_offs",
+   "title": "Energy resources and their trade-offs",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "renewable_and_non_renewable_resources"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy resource",
+    "reliability",
+    "trade-off"
+   ],
+   "summary": "Every generation source has a different mix of cost, reliability, land use and emissions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "evidence_for_recent_climate_change",
+   "title": "Evidence for recent climate change",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "natural_climate_drivers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ice core",
+    "sea level",
+    "temperature record"
+   ],
+   "summary": "Temperature records, ice cores, sea level and phenology are independent lines that agree.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "evidence_from_seismic_waves",
+   "title": "Evidence from seismic waves",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "layers_of_the_earth"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "refraction",
+    "seismic wave",
+    "shadow zone"
+   ],
+   "summary": "Seismic waves bend and stop at boundaries, which is how the interior was mapped without ever seeing it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "feedback_loops_in_the_climate_system",
+   "title": "Feedback loops in the climate system",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "evidence_for_recent_climate_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "albedo",
+    "amplification",
+    "feedback"
+   ],
+   "summary": "Positive feedbacks amplify a change and negative feedbacks damp it, and ice albedo is a strong positive one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "formation_of_the_solar_system",
+   "title": "Formation of the solar system",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_scale_of_the_universe"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accretion",
+    "nebula",
+    "solar system"
+   ],
+   "summary": "A collapsing cloud of gas and dust flattened into a disc, and the Sun ignited at its centre.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "galaxies_and_the_expanding_universe",
+   "title": "Galaxies and the expanding universe",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_life_cycle_of_stars"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "expansion",
+    "galaxy",
+    "redshift"
+   ],
+   "summary": "Distant galaxies recede faster, which is the observation that the universe is expanding.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "glaciers_and_glacial_landforms",
+   "title": "Glaciers and glacial landforms",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "weathering_and_erosion",
+    "groundwater_and_aquifers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "U-shaped valley",
+    "glacier",
+    "moraine"
+   ],
+   "summary": "Ice erodes differently from water, leaving characteristic U-shaped valleys and deposited moraine.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "groundwater_and_aquifers",
+   "title": "Groundwater and aquifers",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "the_water_cycle",
+    "river_processes_and_landforms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aquifer",
+    "permeability",
+    "water table"
+   ],
+   "summary": "Water stored in permeable rock moves slowly, and withdrawing it faster than recharge lowers the water table.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "impacts_and_adaptation",
+   "title": "Impacts and adaptation",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "feedback_loops_in_the_climate_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adaptation",
+    "impact",
+    "vulnerability"
+   ],
+   "summary": "Impacts differ by region and by capacity to adapt, so the same warming is not the same experience.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "layers_of_the_earth",
+   "title": "Layers of the Earth",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "core",
+    "crust",
+    "mantle"
+   ],
+   "summary": "Crust, mantle, outer core and inner core are distinguished by composition and by mechanical behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "mineral_and_water_resource_distribution",
+   "title": "Mineral and water resource distribution",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "renewable_and_non_renewable_resources",
+    "energy_resources_and_their_trade_offs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribution",
+    "geopolitics",
+    "supply"
+   ],
+   "summary": "Resources are unevenly distributed, which makes supply a geopolitical as well as a geological question.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "minerals_and_their_identification",
+   "title": "Minerals and their identification",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_rock_cycle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cleavage",
+    "hardness",
+    "mineral"
+   ],
+   "summary": "Hardness, cleavage, lustre and streak identify a mineral more reliably than colour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "mitigation_and_energy_transition",
+   "title": "Mitigation and energy transition",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "impacts_and_adaptation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "emissions",
+    "energy transition",
+    "mitigation"
+   ],
+   "summary": "Mitigation reduces the cause rather than managing the effect, and it requires replacing the energy source.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "moon_phases_eclipses_and_tides",
+   "title": "Moon phases, eclipses and tides",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "orbital_motion_and_seasons"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "eclipse",
+    "phase",
+    "tide"
+   ],
+   "summary": "Phases, eclipses and tides are all consequences of relative position and gravity, not of the Moon changing shape.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "mountain_building_and_deformation",
+   "title": "Mountain building and deformation",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "plate_boundaries_and_their_hazards",
+    "volcanoes_and_magma"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "faulting",
+    "folding",
+    "orogeny"
+   ],
+   "summary": "Folding and faulting are the visible result of crustal stress exceeding what rock can bear.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "natural_climate_drivers",
+   "title": "Natural climate drivers",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Climate and change",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "climate_versus_weather"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "orbital cycle",
+    "solar",
+    "volcanic"
+   ],
+   "summary": "Orbital cycles, volcanic activity and solar variation all changed climate before human influence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "natural_hazards_and_risk_reduction",
+   "title": "Natural hazards and risk reduction",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "sustainable_use_and_carrying_capacity",
+    "waste_recycling_and_circular_economy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exposure",
+    "hazard",
+    "vulnerability"
+   ],
+   "summary": "Risk combines hazard, exposure and vulnerability, so reducing any one of the three reduces risk.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "orbital_motion_and_seasons",
+   "title": "Orbital motion and seasons",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_scale_of_the_universe",
+    "galaxies_and_the_expanding_universe"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "axial tilt",
+    "orbit",
+    "season"
+   ],
+   "summary": "Seasons come from the tilt of Earth's axis, not from its changing distance from the Sun.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "plate_boundaries_and_their_hazards",
+   "title": "Plate boundaries and their hazards",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "seafloor_spreading"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convergent",
+    "plate boundary",
+    "transform"
+   ],
+   "summary": "Divergent, convergent and transform boundaries each produce a characteristic set of hazards.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "relative_and_absolute_dating",
+   "title": "Relative and absolute dating",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "the_rock_cycle",
+    "minerals_and_their_identification"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dating",
+    "radiometric",
+    "superposition"
+   ],
+   "summary": "Superposition gives order while radiometric decay gives age, and together they give a timeline.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "renewable_and_non_renewable_resources",
+   "title": "Renewable and non-renewable resources",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "mitigation_and_energy_transition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "non-renewable",
+    "renewable",
+    "replenishment"
+   ],
+   "summary": "The distinction is about the rate of replenishment relative to the rate of use.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "river_processes_and_landforms",
+   "title": "River processes and landforms",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_water_cycle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deposition",
+    "meander",
+    "river"
+   ],
+   "summary": "A river erodes, transports and deposits along its course, building different landforms at each stage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "seafloor_spreading",
+   "title": "Seafloor spreading",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "continental_drift_and_the_evidence_for_it"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "magnetic stripe",
+    "ridge",
+    "seafloor spreading"
+   ],
+   "summary": "Magnetic stripes recorded symmetrically either side of a ridge are direct evidence that new crust forms there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "soil_formation_and_conservation",
+   "title": "Soil formation and conservation",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "weathering_and_erosion",
+    "glaciers_and_glacial_landforms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "erosion",
+    "horizon",
+    "soil"
+   ],
+   "summary": "Soil forms over long periods from parent rock and organic matter, and erodes far faster than it forms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "structure_and_composition_of_the_atmosphere",
+   "title": "Structure and composition of the atmosphere",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "soil_formation_and_conservation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atmosphere",
+    "stratosphere",
+    "troposphere"
+   ],
+   "summary": "Temperature changes direction at layer boundaries, and each layer has a different role.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "sustainable_use_and_carrying_capacity",
+   "title": "Sustainable use and carrying capacity",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "mineral_and_water_resource_distribution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carrying capacity",
+    "renewal",
+    "sustainability"
+   ],
+   "summary": "Use is sustainable only while it stays within the rate at which the system can renew itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "terrestrial_and_gas_giant_planets",
+   "title": "Terrestrial and gas giant planets",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "formation_of_the_solar_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "formation",
+    "gas giant",
+    "terrestrial"
+   ],
+   "summary": "Distance from the Sun during formation decided whether a planet kept a thick volatile envelope or not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "the_fossil_record_and_geological_time",
+   "title": "The fossil record and geological time",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "relative_and_absolute_dating"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fossil",
+    "succession",
+    "timescale"
+   ],
+   "summary": "The geological timescale was assembled from fossil succession before any radiometric date existed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "the_life_cycle_of_stars",
+   "title": "The life cycle of stars",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_sun_and_stellar_processes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mass",
+    "stellar evolution",
+    "supernova"
+   ],
+   "summary": "A star's mass decides its whole history, including whether it ends as a white dwarf, neutron star or black hole.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "the_rock_cycle",
+   "title": "The rock cycle",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Inside the Earth",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "layers_of_the_earth",
+    "evidence_from_seismic_waves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "igneous",
+    "metamorphic",
+    "rock cycle"
+   ],
+   "summary": "Igneous, sedimentary and metamorphic rocks are three states of the same material under different conditions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "the_scale_of_the_universe",
+   "title": "The scale of the universe",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "astronomical unit",
+    "light year",
+    "scale"
+   ],
+   "summary": "Astronomical distances are so large that a scaled model almost always misleads unless it is built carefully.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "the_sun_and_stellar_processes",
+   "title": "The Sun and stellar processes",
+   "strand": "Earth in the Universe",
+   "unit": "Space systems",
+   "topic": "The solar system and beyond",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "formation_of_the_solar_system",
+    "terrestrial_and_gas_giant_planets"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy",
+    "fusion",
+    "star"
+   ],
+   "summary": "Stars fuse light nuclei into heavier ones, releasing the energy that drives everything around them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "the_water_cycle",
+   "title": "The water cycle",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "weathering_and_erosion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evaporation",
+    "precipitation",
+    "water cycle"
+   ],
+   "summary": "Water moves between ocean, atmosphere and land, and the cycle is powered by the Sun.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "volcanoes_and_magma",
+   "title": "Volcanoes and magma",
+   "strand": "Solid Earth",
+   "unit": "Earth's structure and plate tectonics",
+   "topic": "Plate tectonics",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "plate_boundaries_and_their_hazards",
+    "earthquakes_and_their_measurement"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "magma",
+    "viscosity",
+    "volcano"
+   ],
+   "summary": "Magma viscosity, set by silica content, decides whether an eruption is gentle or explosive.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "waste_recycling_and_circular_economy",
+   "title": "Waste, recycling and circular economy",
+   "strand": "Resources and Human Impact",
+   "unit": "Resources and sustainability",
+   "topic": "Resources",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "sustainable_use_and_carrying_capacity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "circular",
+    "recycling",
+    "waste"
+   ],
+   "summary": "Designing for reuse changes the material flow at the design stage rather than after disposal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "weather_prediction_and_forecasting",
+   "title": "Weather prediction and forecasting",
+   "strand": "Atmosphere and Climate",
+   "unit": "Weather and climate systems",
+   "topic": "Atmosphere and weather",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "air_masses_and_fronts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "forecast",
+    "model",
+    "uncertainty"
+   ],
+   "summary": "Forecasts come from numerical models, and their skill decays with lead time in a way that can be estimated.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "weathering_and_erosion",
+   "title": "Weathering and erosion",
+   "strand": "Solid Earth",
+   "unit": "Surface processes",
+   "topic": "Weathering, erosion and landforms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "mountain_building_and_deformation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "erosion",
+    "transport",
+    "weathering"
+   ],
+   "summary": "Weathering breaks rock in place while erosion transports the pieces, and they are different processes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Earth and Space Science — Systems, Climate and the Cosmos",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+# secrets
+backend/.env
+.env
+
+# dev-only: lets scripts/*.mjs resolve playwright from the managed node workspace
+node_modules
+
+# Scratch and test residue.
+#
+# These patterns are unanchored on purpose, so they match at every depth. A test run
+# here creates a throwaway data directory per worker - .pt*, .pytest-*, .tmp - and each
+# one holds a full copy of the SQLite database, the media cache and the authored course
+# records. They are not small: one afternoon of full-suite runs left 3.2G in .tmp at the
+# harness root and another 2.5G of .pt* directories under backend/. Without these lines a
+# `git add -A` on a fresh repository would commit several gigabytes of other runs'
+# databases in the first commit, and every clone after that would pay for it.
+.tmp/
+.pt*/
+.pytest-*/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Harness runtime state: the database, downloaded media with its licence metadata, the
+# simulation cache, sessions. Rebuildable from the shipped packs; not source.
+backend/.data/
+
+# Python environments
+.venv/
+venv/
+env/
+
+# Swift build products
+native/.build/
+*.xcuserstate
+DerivedData/
+# macOS app bundles are build products: packaging output, and test residue such as
+# ui-tests/misplaced-interop-build.app. Never source.
+*.app/
+
+# OS files
+.DS_Store
+
+# Agent scratch and caches, none of it source: lead-verification dumps and debug
+# scripts, real-browser QA captures, and the SwiftPM cache. All three accumulate per
+# run and are referenced by no code path, so they must not reach the first commit.
+.lead-verify/
+.real-browser/
+.swiftpm-cache/
+
+# Per-run SQLite databases written by the native UI test harness. Same category as the
+# .pt* residue above: one full database (plus its -wal and -shm) per run.
+ui-tests/test-state/

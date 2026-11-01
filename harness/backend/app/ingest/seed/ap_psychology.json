@@ -1,0 +1,1761 @@
+{
+ "course": "AP Psychology - Behaviour, Evidence and Explanation",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "The AP Psychology framework: the vocabulary of evidence, biological bases of behaviour, cognition, development and learning, social psychology and personality, and mental and physical health.",
+ "expected_weeks": 30,
+ "strands": [
+  {
+   "strand": "Foundations",
+   "units": [
+    {
+     "unit": "History and approaches",
+     "topics": [
+      {
+       "topic": "Schools of thought",
+       "concepts": [
+        {
+         "title": "Structuralism and introspection",
+         "summary": "Wundt and Titchener tried to break conscious experience into its elements, training observers to report what a stimulus felt like rather than what it was.",
+         "keywords": [
+          "structuralism",
+          "introspection",
+          "Wundt",
+          "Titchener"
+         ]
+        },
+        {
+         "title": "Functionalism",
+         "summary": "James asked what consciousness is for rather than what it is made of, so mental processes were explained by their adaptive value.",
+         "keywords": [
+          "functionalism",
+          "William James",
+          "adaptation"
+         ],
+         "prerequisites": [
+          "Structuralism and introspection"
+         ]
+        },
+        {
+         "title": "Psychoanalytic perspective",
+         "summary": "Freud located behaviour in unconscious conflict and early experience, which is why the same situation can produce anxiety the person cannot explain.",
+         "keywords": [
+          "psychoanalytic",
+          "unconscious",
+          "Freud"
+         ]
+        },
+        {
+         "title": "Behaviourist perspective",
+         "summary": "Behaviourism studies only what can be observed, and explains it by the consequences that followed it rather than by inner states.",
+         "keywords": [
+          "behaviourism",
+          "observable behaviour",
+          "Watson",
+          "Skinner"
+         ]
+        },
+        {
+         "title": "Humanistic perspective",
+         "summary": "Rogers and Maslow argued that people are driven toward growth and self-direction, so a person is not reducible to drives or reinforcement.",
+         "keywords": [
+          "humanistic",
+          "self-actualisation",
+          "Rogers",
+          "Maslow"
+         ]
+        },
+        {
+         "title": "Cognitive perspective",
+         "summary": "The cognitive perspective explains behaviour through the mental processes between stimulus and response: attention, encoding, retrieval and decision.",
+         "keywords": [
+          "cognitive",
+          "information processing"
+         ]
+        },
+        {
+         "title": "Biological perspective",
+         "summary": "The biological perspective explains behaviour through genes, brain structures, neurotransmitters and hormones.",
+         "keywords": [
+          "biological",
+          "neuroscience",
+          "genes"
+         ]
+        },
+        {
+         "title": "Evolutionary perspective",
+         "summary": "The evolutionary perspective asks which adaptive problem a trait solved, so a behaviour is explained by the survival or reproductive advantage it once carried.",
+         "keywords": [
+          "evolutionary",
+          "natural selection",
+          "adaptation"
+         ]
+        },
+        {
+         "title": "Sociocultural perspective",
+         "summary": "The sociocultural perspective explains behaviour through culture, norms and social situation, so the same act can mean different things in different groups.",
+         "keywords": [
+          "sociocultural",
+          "culture",
+          "norms"
+         ]
+        },
+        {
+         "title": "Biopsychosocial approach",
+         "summary": "A complete explanation combines biological, psychological and social levels rather than choosing one, because each level answers a different question about the same behaviour.",
+         "keywords": [
+          "biopsychosocial",
+          "levels of analysis"
+         ],
+         "prerequisites": [
+          "Biological perspective",
+          "Cognitive perspective",
+          "Sociocultural perspective"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Research methods",
+     "prerequisites": [
+      "History and approaches"
+     ],
+     "topics": [
+      {
+       "topic": "Designing a study",
+       "concepts": [
+        {
+         "title": "Hypothesis and operational definition",
+         "summary": "A hypothesis is a testable prediction, and an operational definition states exactly how a variable will be measured so another researcher could repeat it.",
+         "keywords": [
+          "hypothesis",
+          "operational definition",
+          "measurement"
+         ]
+        },
+        {
+         "title": "Independent and dependent variables",
+         "summary": "The independent variable is what the researcher manipulates; the dependent variable is what is measured as the outcome.",
+         "keywords": [
+          "independent variable",
+          "dependent variable"
+         ],
+         "prerequisites": [
+          "Hypothesis and operational definition"
+         ]
+        },
+        {
+         "title": "Confounding variables",
+         "summary": "A confound is an unintended difference between conditions that could produce the effect instead of the manipulated variable.",
+         "keywords": [
+          "confound",
+          "internal validity"
+         ],
+         "prerequisites": [
+          "Independent and dependent variables"
+         ]
+        },
+        {
+         "title": "Random assignment and random sampling",
+         "summary": "Random sampling decides who is in the study; random assignment decides which condition each participant enters. Only assignment supports a causal claim.",
+         "keywords": [
+          "random sampling",
+          "random assignment",
+          "generalisation"
+         ],
+         "prerequisites": [
+          "Confounding variables"
+         ]
+        },
+        {
+         "title": "Experimental and correlational designs",
+         "summary": "An experiment manipulates a variable and can establish cause; a correlational study measures two variables as they occur and cannot.",
+         "keywords": [
+          "experiment",
+          "correlational design",
+          "causation"
+         ],
+         "prerequisites": [
+          "Random assignment and random sampling"
+         ]
+        },
+        {
+         "title": "Correlation coefficient",
+         "summary": "A correlation coefficient runs from -1 to +1 and reports the strength and direction of a relationship; its size says nothing about causation.",
+         "keywords": [
+          "correlation",
+          "scatterplot",
+          "coefficient"
+         ],
+         "prerequisites": [
+          "Experimental and correlational designs"
+         ]
+        },
+        {
+         "title": "Naturalistic observation and case study",
+         "summary": "Naturalistic observation watches behaviour where it happens, and a case study examines one person in depth; both describe richly but neither controls variables.",
+         "keywords": [
+          "naturalistic observation",
+          "case study",
+          "description"
+         ]
+        },
+        {
+         "title": "Survey and self-report bias",
+         "summary": "Surveys depend on what people say about themselves, so wording, social desirability and inaccurate self-knowledge all distort the data.",
+         "keywords": [
+          "survey",
+          "self-report",
+          "social desirability"
+         ]
+        },
+        {
+         "title": "Longitudinal and cross-sectional designs",
+         "summary": "A longitudinal design follows one group over time and a cross-sectional design compares age groups at one moment; cohort differences are the price of the faster design.",
+         "keywords": [
+          "longitudinal",
+          "cross-sectional",
+          "cohort"
+         ]
+        },
+        {
+         "title": "Reliability and validity",
+         "summary": "Reliability is consistency of measurement and validity is whether the measure actually captures the construct, so a test can be reliable without being valid.",
+         "keywords": [
+          "reliability",
+          "validity",
+          "construct"
+         ]
+        },
+        {
+         "title": "Replication and publication bias",
+         "summary": "A finding counts when independent researchers reproduce it; studies that fail to replicate tend to go unpublished, which inflates the published literature.",
+         "keywords": [
+          "replication",
+          "publication bias",
+          "file drawer"
+         ],
+         "prerequisites": [
+          "Reliability and validity"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Statistics and ethics",
+     "prerequisites": [
+      "Research methods"
+     ],
+     "topics": [
+      {
+       "topic": "Reading the evidence",
+       "concepts": [
+        {
+         "title": "Measures of central tendency",
+         "summary": "Mean, median and mode summarise a distribution differently, and the mean is the one an outlier drags away from the centre.",
+         "keywords": [
+          "mean",
+          "median",
+          "mode",
+          "outlier"
+         ]
+        },
+        {
+         "title": "Variation and standard deviation",
+         "summary": "Two groups can share a mean and differ completely in spread, which is why standard deviation is reported beside the average.",
+         "keywords": [
+          "standard deviation",
+          "range",
+          "variability"
+         ],
+         "prerequisites": [
+          "Measures of central tendency"
+         ]
+        },
+        {
+         "title": "Normal distribution and percentile rank",
+         "summary": "In a normal distribution most scores cluster near the mean and fall away symmetrically, so a percentile describes position rather than percentage correct.",
+         "keywords": [
+          "normal curve",
+          "percentile",
+          "distribution"
+         ],
+         "prerequisites": [
+          "Variation and standard deviation"
+         ]
+        },
+        {
+         "title": "Inferential statistics and significance",
+         "summary": "A significance test estimates how often a difference this large would appear by chance alone; a small p-value is evidence against chance, not proof of importance.",
+         "keywords": [
+          "inferential statistics",
+          "p-value",
+          "significance"
+         ],
+         "prerequisites": [
+          "Normal distribution and percentile rank"
+         ]
+        },
+        {
+         "title": "Effect size",
+         "summary": "Effect size reports how large a difference is in standardised units, which is why a statistically significant result can still be trivial.",
+         "keywords": [
+          "effect size",
+          "practical significance"
+         ],
+         "prerequisites": [
+          "Inferential statistics and significance"
+         ]
+        },
+        {
+         "title": "Informed consent and debriefing",
+         "summary": "Participants must agree to take part knowing the risks, and must be told the true purpose afterwards, especially when deception was used.",
+         "keywords": [
+          "informed consent",
+          "debriefing",
+          "deception"
+         ]
+        },
+        {
+         "title": "Confidentiality and protection from harm",
+         "summary": "Data must be kept private and participants must leave the study no worse than they arrived, which is the standard an ethics board applies.",
+         "keywords": [
+          "confidentiality",
+          "protection from harm",
+          "IRB"
+         ],
+         "prerequisites": [
+          "Informed consent and debriefing"
+         ]
+        },
+        {
+         "title": "Placebo and double-blind procedure",
+         "summary": "A placebo control separates the effect of expecting improvement from the effect of the treatment, and blinding keeps the experimenter from communicating that expectation.",
+         "keywords": [
+          "placebo",
+          "double-blind",
+          "expectancy"
+         ],
+         "prerequisites": [
+          "Experimental and correlational designs"
+         ]
+        },
+        {
+         "title": "Experimenter and demand characteristics",
+         "summary": "Cues in a study tell participants what is expected of them, so behaviour can reflect the hypothesis rather than the manipulation.",
+         "keywords": [
+          "demand characteristics",
+          "experimenter bias"
+         ],
+         "prerequisites": [
+          "Placebo and double-blind procedure"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Biological Bases of Behavior",
+   "units": [
+    {
+     "unit": "Heredity and environment",
+     "topics": [
+      {
+       "topic": "Nature and nurture",
+       "concepts": [
+        {
+         "title": "Behaviour genetics and twin studies",
+         "summary": "Comparing identical and fraternal twins separates the contribution of shared genes from shared environment, because both kinds of twin share a home but only one kind shares all its genes.",
+         "keywords": [
+          "twin study",
+          "behaviour genetics",
+          "identical twins"
+         ]
+        },
+        {
+         "title": "Heritability",
+         "summary": "Heritability estimates how much of the variation in a group is explained by genetic differences; it is a property of a population, not a fixed share of one person.",
+         "keywords": [
+          "heritability",
+          "population",
+          "variation"
+         ],
+         "prerequisites": [
+          "Behaviour genetics and twin studies"
+         ]
+        },
+        {
+         "title": "Gene-environment interaction",
+         "summary": "Genes set a range of possible outcomes and environment decides where inside that range a person lands, so the same genotype can develop differently.",
+         "keywords": [
+          "gene-environment interaction",
+          "range of reaction"
+         ],
+         "prerequisites": [
+          "Heritability"
+         ]
+        },
+        {
+         "title": "Epigenetics",
+         "summary": "Experience can switch genes on or off without changing the DNA sequence, which is how stress or diet in one generation can shape expression in the next.",
+         "keywords": [
+          "epigenetics",
+          "gene expression"
+         ],
+         "prerequisites": [
+          "Gene-environment interaction"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Neural communication",
+     "prerequisites": [
+      "Heredity and environment"
+     ],
+     "topics": [
+      {
+       "topic": "How a neuron signals",
+       "concepts": [
+        {
+         "title": "Neuron structure",
+         "summary": "A neuron receives at dendrites, integrates at the cell body and transmits down the axon to terminals, which is why damage to different parts produces different deficits.",
+         "keywords": [
+          "neuron",
+          "dendrite",
+          "axon",
+          "myelin"
+         ]
+        },
+        {
+         "title": "Action potential",
+         "summary": "A neuron fires all-or-none when excitation passes threshold, so intensity is coded by firing rate rather than by a bigger impulse.",
+         "keywords": [
+          "action potential",
+          "threshold",
+          "all-or-none"
+         ],
+         "prerequisites": [
+          "Neuron structure"
+         ]
+        },
+        {
+         "title": "Neurotransmitters",
+         "summary": "Neurotransmitters cross the synapse and bind to receptors, turning the signal into excitation or inhibition in the next cell.",
+         "keywords": [
+          "neurotransmitter",
+          "synapse",
+          "receptor"
+         ],
+         "prerequisites": [
+          "Action potential"
+         ]
+        },
+        {
+         "title": "Agonists and antagonists",
+         "summary": "An agonist mimics or strengthens a neurotransmitter and an antagonist blocks it, which is how most psychiatric drugs change behaviour.",
+         "keywords": [
+          "agonist",
+          "antagonist",
+          "drug action"
+         ],
+         "prerequisites": [
+          "Neurotransmitters"
+         ]
+        },
+        {
+         "title": "Reuptake and synaptic plasticity",
+         "summary": "Reuptake clears transmitter from the gap, and repeated signalling strengthens or weakens the synapse, which is the cellular basis of learning.",
+         "keywords": [
+          "reuptake",
+          "plasticity",
+          "long-term potentiation"
+         ],
+         "prerequisites": [
+          "Neurotransmitters"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Nervous system and brain",
+     "prerequisites": [
+      "Neural communication"
+     ],
+     "topics": [
+      {
+       "topic": "Systems and structures",
+       "concepts": [
+        {
+         "title": "Central and peripheral nervous system",
+         "summary": "The central nervous system is the brain and spinal cord; the peripheral system carries sensory input in and motor commands out.",
+         "keywords": [
+          "central nervous system",
+          "peripheral nervous system"
+         ]
+        },
+        {
+         "title": "Somatic and autonomic nervous system",
+         "summary": "The somatic division controls voluntary movement and the autonomic division runs involuntary functions, which is why arousal happens without a decision.",
+         "keywords": [
+          "somatic",
+          "autonomic"
+         ],
+         "prerequisites": [
+          "Central and peripheral nervous system"
+         ]
+        },
+        {
+         "title": "Sympathetic and parasympathetic division",
+         "summary": "The sympathetic division mobilises the body for threat and the parasympathetic division restores and conserves, so they pull against each other.",
+         "keywords": [
+          "sympathetic",
+          "parasympathetic",
+          "arousal"
+         ],
+         "prerequisites": [
+          "Somatic and autonomic nervous system"
+         ]
+        },
+        {
+         "title": "Endocrine system and hormones",
+         "summary": "Glands release hormones into the blood, so their effects are slower and longer-lasting than neural signals.",
+         "keywords": [
+          "endocrine",
+          "hormone",
+          "adrenal",
+          "cortisol"
+         ]
+        },
+        {
+         "title": "Brainstem and cerebellum",
+         "summary": "The brainstem sustains automatic survival functions and the cerebellum coordinates movement and balance, which is why damage shows up as clumsiness rather than as lost knowledge.",
+         "keywords": [
+          "brainstem",
+          "medulla",
+          "pons",
+          "cerebellum"
+         ]
+        },
+        {
+         "title": "Limbic system",
+         "summary": "The amygdala tags emotional significance, the hippocampus forms new memories and the hypothalamus regulates drives, so emotion, memory and motivation share one circuit.",
+         "keywords": [
+          "limbic system",
+          "amygdala",
+          "hippocampus",
+          "hypothalamus"
+         ]
+        },
+        {
+         "title": "Cerebral cortex and lobes",
+         "summary": "The occipital lobe processes vision, the temporal lobe hearing and language, the parietal lobe touch and spatial location, and the frontal lobe movement, planning and inhibition.",
+         "keywords": [
+          "cortex",
+          "occipital",
+          "temporal",
+          "parietal",
+          "frontal"
+         ]
+        },
+        {
+         "title": "Hemispheric specialisation and split brain",
+         "summary": "The hemispheres specialise, and when the connecting fibres are cut each half behaves as though it did not know what the other perceived.",
+         "keywords": [
+          "hemisphere",
+          "corpus callosum",
+          "split brain",
+          "lateralisation"
+         ],
+         "prerequisites": [
+          "Cerebral cortex and lobes"
+         ]
+        },
+        {
+         "title": "Neuroplasticity",
+         "summary": "The brain reorganises its connections with experience, which is why recovery after injury and skill learning are possible at all.",
+         "keywords": [
+          "plasticity",
+          "reorganisation"
+         ],
+         "prerequisites": [
+          "Synaptic plasticity"
+         ]
+        },
+        {
+         "title": "Brain imaging techniques",
+         "summary": "EEG records electrical activity quickly, MRI and CT show structure, and PET and fMRI show activity, so each technique answers a different question.",
+         "keywords": [
+          "EEG",
+          "MRI",
+          "fMRI",
+          "PET"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Sleep",
+     "prerequisites": [
+      "Nervous system and brain"
+     ],
+     "topics": [
+      {
+       "topic": "Rhythms and rest",
+       "concepts": [
+        {
+         "title": "Circadian rhythm",
+         "summary": "An internal clock of roughly twenty-four hours regulates alertness and body temperature, and light is what resets it.",
+         "keywords": [
+          "circadian rhythm",
+          "biological clock",
+          "melatonin"
+         ]
+        },
+        {
+         "title": "Sleep stages",
+         "summary": "Sleep cycles through light, deep and REM stages, and the EEG signature changes with each because brain activity differs.",
+         "keywords": [
+          "REM",
+          "slow wave sleep",
+          "EEG"
+         ],
+         "prerequisites": [
+          "Circadian rhythm"
+         ]
+        },
+        {
+         "title": "Sleep disorders",
+         "summary": "Insomnia, narcolepsy and sleep apnoea are distinguished by what fails - falling asleep, staying awake, or breathing - not by how tired the person feels.",
+         "keywords": [
+          "insomnia",
+          "narcolepsy",
+          "sleep apnoea"
+         ],
+         "prerequisites": [
+          "Sleep stages"
+         ]
+        },
+        {
+         "title": "Theories of dreaming",
+         "summary": "Freudian, activation-synthesis and cognitive views disagree about whether dreams express hidden conflict, assemble random activity into a story, or consolidate memory.",
+         "keywords": [
+          "dreaming",
+          "activation-synthesis",
+          "manifest content"
+         ],
+         "prerequisites": [
+          "Sleep stages"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Sensation",
+     "prerequisites": [
+      "Nervous system and brain"
+     ],
+     "topics": [
+      {
+       "topic": "From stimulus to signal",
+       "concepts": [
+        {
+         "title": "Sensation and perception",
+         "summary": "Sensation is the detection of a stimulus and perception is its interpretation, so the same physical input can yield different experience.",
+         "keywords": [
+          "sensation",
+          "perception"
+         ]
+        },
+        {
+         "title": "Transduction and thresholds",
+         "summary": "Transduction converts one form of energy into neural signals, and the absolute and difference thresholds mark the weakest detectable stimulus and the smallest detectable change.",
+         "keywords": [
+          "transduction",
+          "absolute threshold",
+          "difference threshold"
+         ],
+         "prerequisites": [
+          "Sensation and perception"
+         ]
+        },
+        {
+         "title": "Signal detection and sensory adaptation",
+         "summary": "Detection depends on both sensitivity and response bias, and adaptation means a constant stimulus fades from awareness.",
+         "keywords": [
+          "signal detection",
+          "adaptation",
+          "response bias"
+         ],
+         "prerequisites": [
+          "Transduction and thresholds"
+         ]
+        },
+        {
+         "title": "Vision: rods, cones and the retina",
+         "summary": "Rods work in dim light without colour and cones give colour and detail, so night vision is poor in colour and colour vision is poor in the dark.",
+         "keywords": [
+          "rods",
+          "cones",
+          "retina",
+          "photoreceptor"
+         ]
+        },
+        {
+         "title": "Audition: pitch and localisation",
+         "summary": "Place and frequency coding together explain pitch, and timing and loudness differences between the ears explain where a sound comes from.",
+         "keywords": [
+          "audition",
+          "cochlea",
+          "pitch",
+          "localisation"
+         ]
+        },
+        {
+         "title": "Touch, pain and the body senses",
+         "summary": "Nociceptors signal tissue damage, gate control explains why attention changes pain, and the vestibular and kinesthetic senses report balance and limb position.",
+         "keywords": [
+          "pain",
+          "gate control",
+          "vestibular",
+          "kinesthetic"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Cognition",
+   "units": [
+    {
+     "unit": "Perception",
+     "prerequisites": [
+      "Sensation"
+     ],
+     "topics": [
+      {
+       "topic": "Organising the input",
+       "concepts": [
+        {
+         "title": "Bottom-up and top-down processing",
+         "summary": "Bottom-up processing builds a percept from features and top-down processing applies expectation, which is why a blurry word becomes readable in context.",
+         "keywords": [
+          "bottom-up",
+          "top-down",
+          "expectation"
+         ]
+        },
+        {
+         "title": "Perceptual constancy",
+         "summary": "Size, shape and colour stay stable across changing retinal images, so we see a door as rectangular while its image is a trapezoid.",
+         "keywords": [
+          "constancy",
+          "size constancy",
+          "shape constancy"
+         ],
+         "prerequisites": [
+          "Bottom-up and top-down processing"
+         ]
+        },
+        {
+         "title": "Gestalt principles of grouping",
+         "summary": "Proximity, similarity, continuity and closure describe how elements are grouped into wholes, because perception organises rather than records.",
+         "keywords": [
+          "Gestalt",
+          "proximity",
+          "closure",
+          "grouping"
+         ],
+         "prerequisites": [
+          "Perceptual constancy"
+         ]
+        },
+        {
+         "title": "Depth perception and binocular cues",
+         "summary": "Convergence and retinal disparity use two eyes, and relative size, interposition and linear perspective work with one, which is why depth survives closing an eye.",
+         "keywords": [
+          "depth perception",
+          "retinal disparity",
+          "monocular cue"
+         ],
+         "prerequisites": [
+          "Gestalt principles of grouping"
+         ]
+        },
+        {
+         "title": "Selective and divided attention",
+         "summary": "Selective attention filters input by relevance and divided attention splits capacity, which is why two demanding tasks degrade together.",
+         "keywords": [
+          "attention",
+          "cocktail party effect",
+          "multitasking"
+         ]
+        },
+        {
+         "title": "Perceptual set and context",
+         "summary": "Expectation, context and culture bias what is perceived, so the same ambiguous figure resolves differently for different observers.",
+         "keywords": [
+          "perceptual set",
+          "context",
+          "expectation"
+         ],
+         "prerequisites": [
+          "Selective and divided attention"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Memory",
+     "prerequisites": [
+      "Perception"
+     ],
+     "topics": [
+      {
+       "topic": "Encoding, storage, retrieval",
+       "concepts": [
+        {
+         "title": "Three-stage model of memory",
+         "summary": "Sensory memory holds a trace briefly, working memory holds a few items while they are used, and long-term memory stores effectively without limit.",
+         "keywords": [
+          "sensory memory",
+          "working memory",
+          "long-term memory"
+         ]
+        },
+        {
+         "title": "Encoding and levels of processing",
+         "summary": "Deep, meaning-based encoding produces better retention than shallow structural encoding, which is why elaborating beats rereading.",
+         "keywords": [
+          "encoding",
+          "elaboration",
+          "levels of processing"
+         ],
+         "prerequisites": [
+          "Three-stage model of memory"
+         ]
+        },
+        {
+         "title": "Chunking and working-memory capacity",
+         "summary": "Working memory holds about four chunks, and grouping items into larger units raises the amount carried without raising the capacity.",
+         "keywords": [
+          "chunking",
+          "capacity",
+          "working memory"
+         ],
+         "prerequisites": [
+          "Three-stage model of memory"
+         ]
+        },
+        {
+         "title": "Retrieval: recall and recognition",
+         "summary": "Recall reproduces information and recognition identifies it, and recognition is usually easier because the cue is present.",
+         "keywords": [
+          "recall",
+          "recognition",
+          "retrieval cue"
+         ],
+         "prerequisites": [
+          "Encoding and levels of processing"
+         ]
+        },
+        {
+         "title": "Forgetting: decay and interference",
+         "summary": "Traces fade with disuse and similar material interferes, with proactive interference blocking new learning and retroactive interference blocking old.",
+         "keywords": [
+          "forgetting",
+          "interference",
+          "decay"
+         ],
+         "prerequisites": [
+          "Retrieval: recall and recognition"
+         ]
+        },
+        {
+         "title": "Reconstructive memory and the misinformation effect",
+         "summary": "Memory is rebuilt at retrieval, so misleading post-event information can be incorporated as though it had been witnessed.",
+         "keywords": [
+          "reconstruction",
+          "misinformation effect",
+          "eyewitness"
+         ],
+         "prerequisites": [
+          "Retrieval: recall and recognition"
+         ]
+        },
+        {
+         "title": "Spacing, testing and the serial position effect",
+         "summary": "Distributed practice and retrieval practice beat massed rereading, and the primacy and recency effects show that position in a list changes what is remembered.",
+         "keywords": [
+          "spacing effect",
+          "testing effect",
+          "serial position"
+         ],
+         "prerequisites": [
+          "Forgetting: decay and interference"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Thinking and intelligence",
+     "prerequisites": [
+      "Memory"
+     ],
+     "topics": [
+      {
+       "topic": "Reasoning and ability",
+       "concepts": [
+        {
+         "title": "Concepts and prototypes",
+         "summary": "A concept groups similar things and a prototype is the best example of the category, so categorisation is graded rather than all-or-nothing.",
+         "keywords": [
+          "concept",
+          "prototype",
+          "categorisation"
+         ]
+        },
+        {
+         "title": "Algorithms and heuristics",
+         "summary": "An algorithm guarantees a solution by trying every option and a heuristic trades certainty for speed, which is why heuristics produce predictable errors.",
+         "keywords": [
+          "algorithm",
+          "heuristic",
+          "problem solving"
+         ],
+         "prerequisites": [
+          "Concepts and prototypes"
+         ]
+        },
+        {
+         "title": "Availability and representativeness heuristics",
+         "summary": "The availability heuristic judges likelihood by how easily examples come to mind and the representativeness heuristic judges it by resemblance to a stereotype.",
+         "keywords": [
+          "availability heuristic",
+          "representativeness heuristic"
+         ],
+         "prerequisites": [
+          "Algorithms and heuristics"
+         ]
+        },
+        {
+         "title": "Confirmation bias and belief perseverance",
+         "summary": "People seek evidence that fits a existing belief and discount what contradicts it, so a wrong belief can survive disconfirming data.",
+         "keywords": [
+          "confirmation bias",
+          "belief perseverance"
+         ],
+         "prerequisites": [
+          "Availability and representativeness heuristics"
+         ]
+        },
+        {
+         "title": "Framing and loss aversion",
+         "summary": "The same choice framed as a gain or a loss produces different decisions, because losses weigh more than equivalent gains.",
+         "keywords": [
+          "framing",
+          "loss aversion",
+          "prospect theory"
+         ],
+         "prerequisites": [
+          "Confirmation bias and belief perseverance"
+         ]
+        },
+        {
+         "title": "Language structure and development",
+         "summary": "Phonemes, morphemes, syntax and semantics are separate levels, and children acquire them in a predictable order without explicit instruction.",
+         "keywords": [
+          "phoneme",
+          "morpheme",
+          "syntax",
+          "language acquisition"
+         ]
+        },
+        {
+         "title": "Linguistic relativity",
+         "summary": "Language shapes the categories available for thought, so a distinction encoded in words is easier to notice and remember.",
+         "keywords": [
+          "linguistic relativity",
+          "Whorf",
+          "language and thought"
+         ],
+         "prerequisites": [
+          "Language structure and development"
+         ]
+        },
+        {
+         "title": "Intelligence as psychometric g",
+         "summary": "Scores on diverse mental tests correlate, which supports a general factor behind performance while leaving room for specific abilities.",
+         "keywords": [
+          "g factor",
+          "psychometrics",
+          "factor analysis"
+         ]
+        },
+        {
+         "title": "Standardisation, reliability and validity of tests",
+         "summary": "A test is standardised on a norm group, and its scores are only interpretable if it measures consistently and predicts what it claims to predict.",
+         "keywords": [
+          "standardisation",
+          "norms",
+          "test validity"
+         ],
+         "prerequisites": [
+          "Intelligence as psychometric g"
+         ]
+        },
+        {
+         "title": "Stereotype threat and test bias",
+         "summary": "Awareness of a negative stereotype about one group can depress performance, so a group difference is not evidence about ability.",
+         "keywords": [
+          "stereotype threat",
+          "test bias"
+         ],
+         "prerequisites": [
+          "Standardisation, reliability and validity of tests"
+         ]
+        },
+        {
+         "title": "Creativity and divergent thinking",
+         "summary": "Creativity combines expertise, imaginative thinking skills and a venturesome personality, so it is a profile rather than a single score.",
+         "keywords": [
+          "creativity",
+          "divergent thinking",
+          "expertise"
+         ],
+         "prerequisites": [
+          "Intelligence as psychometric g"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Development and Learning",
+   "units": [
+    {
+     "unit": "Development",
+     "topics": [
+      {
+       "topic": "Change across the lifespan",
+       "concepts": [
+        {
+         "title": "Prenatal development and teratogens",
+         "summary": "Development proceeds through germinal, embryonic and fetal stages, and a teratogen is any agent that damages the developing organism during a critical period.",
+         "keywords": [
+          "prenatal",
+          "teratogen",
+          "critical period"
+         ]
+        },
+        {
+         "title": "Piaget stages of cognitive development",
+         "summary": "Children move from sensorimotor action to preoperational symbolism, then concrete operations, then formal operations, with each stage defined by what the child can now do that it could not before.",
+         "keywords": [
+          "Piaget",
+          "sensorimotor",
+          "concrete operations",
+          "formal operations"
+         ]
+        },
+        {
+         "title": "Assimilation and accommodation",
+         "summary": "Assimilation fits new experience into an existing schema and accommodation changes the schema, and the tension between them drives stage change.",
+         "keywords": [
+          "assimilation",
+          "accommodation",
+          "schema"
+         ],
+         "prerequisites": [
+          "Piaget stages of cognitive development"
+         ]
+        },
+        {
+         "title": "Object permanence and conservation",
+         "summary": "Object permanence is knowing a thing continues to exist unseen and conservation is knowing quantity survives a change of appearance; both fail in the young child and mark stage boundaries.",
+         "keywords": [
+          "object permanence",
+          "conservation",
+          "egocentrism"
+         ],
+         "prerequisites": [
+          "Piaget stages of cognitive development"
+         ]
+        },
+        {
+         "title": "Vygotsky and the zone of proximal development",
+         "summary": "Learning is social first, and the zone of proximal development is the gap between what a learner can do alone and with support, which is what scaffolding targets.",
+         "keywords": [
+          "Vygotsky",
+          "zone of proximal development",
+          "scaffolding"
+         ]
+        },
+        {
+         "title": "Attachment and the strange situation",
+         "summary": "Attachment forms in the first year, and Ainsworth classified secure, avoidant and ambivalent patterns by how an infant reacts to separation and reunion.",
+         "keywords": [
+          "attachment",
+          "strange situation",
+          "secure base"
+         ]
+        },
+        {
+         "title": "Parenting styles",
+         "summary": "Authoritative parenting, high in warmth and demand, is associated with the best outcomes, while authoritarian, permissive and neglectful styles are not.",
+         "keywords": [
+          "parenting style",
+          "authoritative",
+          "authoritarian"
+         ],
+         "prerequisites": [
+          "Attachment and the strange situation"
+         ]
+        },
+        {
+         "title": "Erikson psychosocial stages",
+         "summary": "Each stage poses a crisis between two outcomes, and resolution shapes the next stage, which is why identity work dominates adolescence.",
+         "keywords": [
+          "Erikson",
+          "identity",
+          "psychosocial crisis"
+         ]
+        },
+        {
+         "title": "Kohlberg moral development",
+         "summary": "Moral reasoning moves from consequences, to social approval and law, to abstract principle, and the stage is about the reason given rather than the choice made.",
+         "keywords": [
+          "Kohlberg",
+          "preconventional",
+          "postconventional"
+         ]
+        },
+        {
+         "title": "Adolescent brain and identity",
+         "summary": "The limbic system matures before the prefrontal cortex, so sensation seeking peaks before impulse control catches up.",
+         "keywords": [
+          "adolescence",
+          "prefrontal cortex",
+          "identity"
+         ],
+         "prerequisites": [
+          "Erikson psychosocial stages"
+         ]
+        },
+        {
+         "title": "Gender and sexual orientation development",
+         "summary": "Gender identity, expression and orientation develop from interacting biological, cognitive and social influences rather than one cause.",
+         "keywords": [
+          "gender identity",
+          "sexual orientation",
+          "socialisation"
+         ]
+        },
+        {
+         "title": "Ageing and cognitive change",
+         "summary": "Fluid abilities decline earlier than crystallised ones, so vocabulary can hold while processing speed falls.",
+         "keywords": [
+          "ageing",
+          "fluid intelligence",
+          "crystallised intelligence"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Learning",
+     "prerequisites": [
+      "Development"
+     ],
+     "topics": [
+      {
+       "topic": "Conditioning",
+       "concepts": [
+        {
+         "title": "Classical conditioning",
+         "summary": "A neutral stimulus paired repeatedly with an unconditioned stimulus comes to elicit the response alone, which is how a physiological reaction gets attached to a new cue.",
+         "keywords": [
+          "classical conditioning",
+          "Pavlov",
+          "conditioned stimulus"
+         ]
+        },
+        {
+         "title": "Acquisition, extinction and spontaneous recovery",
+         "summary": "Acquisition builds the association, extinction weakens it when the pairing stops, and spontaneous recovery shows the original learning was suppressed rather than erased.",
+         "keywords": [
+          "acquisition",
+          "extinction",
+          "spontaneous recovery"
+         ],
+         "prerequisites": [
+          "Classical conditioning"
+         ]
+        },
+        {
+         "title": "Generalisation and discrimination",
+         "summary": "A response generalises to stimuli similar to the conditioned one and discrimination narrows it to the one that predicts the outcome.",
+         "keywords": [
+          "generalisation",
+          "discrimination"
+         ],
+         "prerequisites": [
+          "Classical conditioning"
+         ]
+        },
+        {
+         "title": "Operant conditioning",
+         "summary": "Behaviour is shaped by its consequences: reinforcement raises the probability of a response and punishment lowers it.",
+         "keywords": [
+          "operant conditioning",
+          "Skinner",
+          "reinforcement",
+          "punishment"
+         ]
+        },
+        {
+         "title": "Positive and negative reinforcement",
+         "summary": "Both reinforcement types increase behaviour; positive adds a consequence and negative removes one, which is why negative reinforcement is not punishment.",
+         "keywords": [
+          "positive reinforcement",
+          "negative reinforcement"
+         ],
+         "prerequisites": [
+          "Operant conditioning"
+         ]
+        },
+        {
+         "title": "Schedules of reinforcement",
+         "summary": "Ratio schedules count responses and interval schedules count time, and variable schedules resist extinction better than fixed ones.",
+         "keywords": [
+          "fixed ratio",
+          "variable interval",
+          "partial reinforcement"
+         ],
+         "prerequisites": [
+          "Operant conditioning"
+         ]
+        },
+        {
+         "title": "Observational learning",
+         "summary": "Bandura showed that behaviour is acquired by watching a model and its consequences, so learning can occur without the learner being reinforced.",
+         "keywords": [
+          "observational learning",
+          "Bandura",
+          "modelling"
+         ]
+        },
+        {
+         "title": "Latent learning and cognitive maps",
+         "summary": "Learning can occur without performance and without reward, appearing only when an incentive makes it useful.",
+         "keywords": [
+          "latent learning",
+          "cognitive map",
+          "Tolman"
+         ],
+         "prerequisites": [
+          "Observational learning"
+         ]
+        },
+        {
+         "title": "Biological constraints on conditioning",
+         "summary": "Some associations form far more easily than others, so preparedness limits what can be conditioned in a species.",
+         "keywords": [
+          "preparedness",
+          "taste aversion",
+          "biological constraint"
+         ],
+         "prerequisites": [
+          "Classical conditioning"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Social Psychology and Personality",
+   "units": [
+    {
+     "unit": "Social cognition",
+     "topics": [
+      {
+       "topic": "Persons in situations",
+       "concepts": [
+        {
+         "title": "Attribution theory and the fundamental attribution error",
+         "summary": "People explain behaviour by disposition or situation, and the fundamental attribution error is over-weighting disposition when judging others.",
+         "keywords": [
+          "attribution",
+          "fundamental attribution error",
+          "dispositional"
+         ]
+        },
+        {
+         "title": "Attitudes and cognitive dissonance",
+         "summary": "An attitude is an evaluation that guides behaviour, and dissonance is the discomfort of holding inconsistent cognitions, usually resolved by changing the attitude.",
+         "keywords": [
+          "attitude",
+          "cognitive dissonance",
+          "Festinger"
+         ]
+        },
+        {
+         "title": "Conformity and normative influence",
+         "summary": "Asch showed that people yield to a unanimous wrong majority, because fitting in and being right are separate pressures.",
+         "keywords": [
+          "conformity",
+          "Asch",
+          "normative influence"
+         ]
+        },
+        {
+         "title": "Obedience to authority",
+         "summary": "Milgram showed that ordinary people follow an authority instruction that harms another person when the situation makes each step small and the authority takes responsibility.",
+         "keywords": [
+          "obedience",
+          "Milgram",
+          "authority"
+         ]
+        },
+        {
+         "title": "Group influence: facilitation, loafing and polarisation",
+         "summary": "Presence of others improves simple performance and impairs complex performance, individual effort drops when it cannot be identified, and discussion pushes a group toward a more extreme position.",
+         "keywords": [
+          "social facilitation",
+          "social loafing",
+          "group polarisation"
+         ]
+        },
+        {
+         "title": "Groupthink and deindividuation",
+         "summary": "Groupthink suppresses dissent in the interest of harmony and deindividuation reduces self-awareness in a crowd, so both loosen restraint.",
+         "keywords": [
+          "groupthink",
+          "deindividuation"
+         ],
+         "prerequisites": [
+          "Group influence: facilitation, loafing and polarisation"
+         ]
+        },
+        {
+         "title": "Prejudice, stereotypes and discrimination",
+         "summary": "A stereotype is a belief about a group, prejudice is an attitude toward it, and discrimination is behaviour; the three can occur separately.",
+         "keywords": [
+          "prejudice",
+          "stereotype",
+          "discrimination",
+          "ingroup"
+         ]
+        },
+        {
+         "title": "Bystander effect and altruism",
+         "summary": "Helping drops as the number of witnesses rises, because responsibility is diffused and each person reads the others as not alarmed.",
+         "keywords": [
+          "bystander effect",
+          "diffusion of responsibility",
+          "altruism"
+         ]
+        },
+        {
+         "title": "Attraction and interpersonal factors",
+         "summary": "Proximity, physical attractiveness, similarity and reciprocity of liking predict attraction better than the idea of opposites attracting.",
+         "keywords": [
+          "proximity",
+          "similarity",
+          "mere exposure"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Personality",
+     "prerequisites": [
+      "Social cognition"
+     ],
+     "topics": [
+      {
+       "topic": "Theories and assessment",
+       "concepts": [
+        {
+         "title": "Psychodynamic structure: id, ego and superego",
+         "summary": "The id seeks immediate gratification, the superego enforces internalised rules, and the ego negotiates between them and reality.",
+         "keywords": [
+          "id",
+          "ego",
+          "superego",
+          "Freud"
+         ]
+        },
+        {
+         "title": "Defence mechanisms",
+         "summary": "The ego reduces anxiety by distorting reality - repression, projection, displacement, rationalisation - which protects the self at the cost of accuracy.",
+         "keywords": [
+          "defence mechanism",
+          "repression",
+          "projection"
+         ],
+         "prerequisites": [
+          "Psychodynamic structure: id, ego and superego"
+         ]
+        },
+        {
+         "title": "Humanistic self-concept",
+         "summary": "Rogers held that growth requires unconditional positive regard, and that a gap between the real and ideal self produces incongruence.",
+         "keywords": [
+          "self-concept",
+          "unconditional positive regard",
+          "congruence"
+         ]
+        },
+        {
+         "title": "Trait theory and the Big Five",
+         "summary": "Trait models describe stable, continuous differences; the Big Five - openness, conscientiousness, extraversion, agreeableness, neuroticism - summarise them with better predictive validity than type labels.",
+         "keywords": [
+          "trait",
+          "Big Five",
+          "OCEAN",
+          "factor analysis"
+         ]
+        },
+        {
+         "title": "Social-cognitive theory and locus of control",
+         "summary": "Behaviour results from the interaction of person, behaviour and environment, and locus of control is the belief that outcomes depend on one's own actions or on outside forces.",
+         "keywords": [
+          "reciprocal determinism",
+          "locus of control",
+          "self-efficacy"
+         ]
+        },
+        {
+         "title": "Projective and objective personality tests",
+         "summary": "Projective tests interpret ambiguous stimuli and objective tests score fixed items; the second is far more reliable, whatever the first claims to reveal.",
+         "keywords": [
+          "projective test",
+          "MMPI",
+          "self-report inventory"
+         ],
+         "prerequisites": [
+          "Trait theory and the Big Five"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Motivation and emotion",
+     "prerequisites": [
+      "Personality"
+     ],
+     "topics": [
+      {
+       "topic": "Why we act and feel",
+       "concepts": [
+        {
+         "title": "Drive-reduction and arousal theory",
+         "summary": "Drive-reduction explains behaviour as restoring balance, and arousal theory explains it as seeking an optimal level of stimulation.",
+         "keywords": [
+          "drive reduction",
+          "homeostasis",
+          "arousal"
+         ]
+        },
+        {
+         "title": "Intrinsic and extrinsic motivation",
+         "summary": "Intrinsic motivation comes from the activity itself and extrinsic from its consequences, and heavy external reward can undercut the first.",
+         "keywords": [
+          "intrinsic motivation",
+          "extrinsic motivation",
+          "overjustification"
+         ]
+        },
+        {
+         "title": "Maslow hierarchy of needs",
+         "summary": "Needs are arranged from physiological to self-actualisation, and lower needs dominate attention until they are met.",
+         "keywords": [
+          "Maslow",
+          "hierarchy of needs",
+          "self-actualisation"
+         ],
+         "prerequisites": [
+          "Drive-reduction and arousal theory"
+         ]
+        },
+        {
+         "title": "Theories of emotion",
+         "summary": "James-Lange says the body reaction comes first, Cannon-Bard says body and feeling occur together, and Schachter-Singer says arousal plus a cognitive label produces the emotion.",
+         "keywords": [
+          "James-Lange",
+          "Cannon-Bard",
+          "two-factor theory",
+          "appraisal"
+         ]
+        },
+        {
+         "title": "Stress and the general adaptation syndrome",
+         "summary": "Selye described alarm, resistance and exhaustion, which is why prolonged stress damages health rather than merely feeling unpleasant.",
+         "keywords": [
+          "stress",
+          "general adaptation syndrome",
+          "cortisol"
+         ],
+         "prerequisites": [
+          "Theories of emotion"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Mental and Physical Health",
+   "units": [
+    {
+     "unit": "Health and positive psychology",
+     "topics": [
+      {
+       "topic": "Stress, coping and well-being",
+       "concepts": [
+        {
+         "title": "Appraisal and coping",
+         "summary": "Lazarus held that stress depends on whether an event is appraised as threatening and whether resources are judged sufficient, so coping follows appraisal.",
+         "keywords": [
+          "appraisal",
+          "coping",
+          "problem-focused",
+          "emotion-focused"
+         ]
+        },
+        {
+         "title": "Health psychology and behaviour",
+         "summary": "Health psychology links behaviour - sleep, exercise, smoking, adherence - to physical outcomes, because most chronic disease has a behavioural component.",
+         "keywords": [
+          "health psychology",
+          "behavioural risk",
+          "adherence"
+         ],
+         "prerequisites": [
+          "Appraisal and coping"
+         ]
+        },
+        {
+         "title": "Positive psychology and well-being",
+         "summary": "Positive psychology studies what makes life go well rather than only what goes wrong, measuring engagement, relationships, meaning and accomplishment alongside pleasant feeling.",
+         "keywords": [
+          "positive psychology",
+          "well-being",
+          "flourishing"
+         ]
+        },
+        {
+         "title": "Resilience and social support",
+         "summary": "Resilience is the capacity to recover after adversity, and social support is one of the strongest predictors of recovery.",
+         "keywords": [
+          "resilience",
+          "social support",
+          "recovery"
+         ],
+         "prerequisites": [
+          "Positive psychology and well-being"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Psychological disorders",
+     "prerequisites": [
+      "Health and positive psychology"
+     ],
+     "topics": [
+      {
+       "topic": "Classification and categories",
+       "concepts": [
+        {
+         "title": "Classifying disorder: the DSM and diagnosis",
+         "summary": "A classification system names clusters of symptoms so clinicians agree on what they are treating; a diagnosis describes a pattern and is not a statement about the person.",
+         "keywords": [
+          "DSM",
+          "diagnosis",
+          "classification"
+         ]
+        },
+        {
+         "title": "Diathesis-stress model",
+         "summary": "Disorder appears when a vulnerability meets a stressor, which is why the same stressor harms one person and not another.",
+         "keywords": [
+          "diathesis-stress",
+          "vulnerability",
+          "stressor"
+         ],
+         "prerequisites": [
+          "Classifying disorder: the DSM and diagnosis"
+         ]
+        },
+        {
+         "title": "Anxiety disorders",
+         "summary": "Generalised anxiety, panic disorder, phobia and social anxiety share excessive fear but differ in what triggers it and how it is avoided.",
+         "keywords": [
+          "anxiety disorder",
+          "panic",
+          "phobia"
+         ]
+        },
+        {
+         "title": "Obsessive-compulsive and related disorders",
+         "summary": "Obsessions are intrusive thoughts and compulsions are repeated acts that reduce the distress, so the compulsion is maintained by relief rather than by pleasure.",
+         "keywords": [
+          "obsession",
+          "compulsion",
+          "OCD"
+         ],
+         "prerequisites": [
+          "Anxiety disorders"
+         ]
+        },
+        {
+         "title": "Depressive and bipolar disorders",
+         "summary": "Major depression is a sustained low mood or loss of interest, and bipolar disorder adds episodes of elevated mood, which is why the two are treated differently.",
+         "keywords": [
+          "major depression",
+          "bipolar",
+          "mania"
+         ]
+        },
+        {
+         "title": "Schizophrenia spectrum",
+         "summary": "Positive symptoms add experience - hallucinations, delusions, disorganised speech - and negative symptoms subtract it, such as flat affect and withdrawal.",
+         "keywords": [
+          "schizophrenia",
+          "positive symptom",
+          "negative symptom",
+          "delusion"
+         ]
+        },
+        {
+         "title": "Dissociative and somatic symptom disorders",
+         "summary": "Dissociative disorders involve disruption of identity or memory and somatic symptom disorders involve bodily complaints without a matching medical explanation.",
+         "keywords": [
+          "dissociative",
+          "somatic symptom"
+         ]
+        },
+        {
+         "title": "Neurodevelopmental and personality disorders",
+         "summary": "Neurodevelopmental disorders appear early and affect development, while personality disorders are enduring patterns of relating that are rigid and cause impairment.",
+         "keywords": [
+          "neurodevelopmental",
+          "personality disorder",
+          "autism spectrum"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Treatment",
+     "prerequisites": [
+      "Psychological disorders"
+     ],
+     "topics": [
+      {
+       "topic": "What helps",
+       "concepts": [
+        {
+         "title": "Psychodynamic and humanistic therapy",
+         "summary": "Psychodynamic therapy works on insight into unconscious patterns and humanistic therapy on self-acceptance and growth, so both aim at understanding rather than at a specific behaviour.",
+         "keywords": [
+          "psychotherapy",
+          "insight",
+          "client-centred"
+         ]
+        },
+        {
+         "title": "Cognitive-behavioural therapy",
+         "summary": "CBT changes the thoughts and behaviours that maintain a problem, and it has the strongest evidence base of the talking therapies for anxiety and depression.",
+         "keywords": [
+          "CBT",
+          "cognitive restructuring",
+          "behavioural activation"
+         ]
+        },
+        {
+         "title": "Behavioural therapy and exposure",
+         "summary": "Exposure works by preventing the avoidance that keeps a fear alive, so the extinction is experienced rather than argued.",
+         "keywords": [
+          "exposure therapy",
+          "systematic desensitisation",
+          "extinction"
+         ],
+         "prerequisites": [
+          "Cognitive-behavioural therapy"
+         ]
+        },
+        {
+         "title": "Biomedical treatments",
+         "summary": "Psychopharmacology changes neurotransmitter signalling - SSRIs for depression, antipsychotics for psychosis, lithium for bipolar - and medication and therapy are often combined.",
+         "keywords": [
+          "SSRI",
+          "antipsychotic",
+          "lithium",
+          "psychopharmacology"
+         ]
+        },
+        {
+         "title": "Evaluating treatment effectiveness",
+         "summary": "Improvement must be compared with no treatment and with placebo, because many conditions improve on their own and expectation alone produces change.",
+         "keywords": [
+          "efficacy",
+          "placebo control",
+          "randomised trial"
+         ],
+         "prerequisites": [
+          "Biomedical treatments"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

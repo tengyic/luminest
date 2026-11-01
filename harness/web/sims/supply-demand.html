@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Supply &amp; Demand — Market Equilibrium</title>
+<!--
+  Seed simulation for the Luminfest workbench.
+
+  data-series convention (workbench hover-to-select relies on it):
+    every plottable curve/group carries data-series="<name>" on its SVG
+    <g> element: data-series="demand" | "supply" | "equilibrium".
+  Hovering any child resolves to the nearest [data-series] ancestor, so the
+  AI-generated sims should tag every curve, point and label group likewise.
+-->
+<style>
+  :root {
+    /* Same tokens as the playground runtime (see backend/app/harness/playground/
+       runtime.py and docs/playground-design.md) so a hand-authored simulation and a
+       generated game are indistinguishable in the product. */
+    --ink: #24312A; --ink-2: #5C6A60; --ink-3: #8D9A90;
+    --bg: #F7F5EF; --surface: #FFFFFF; --surface-2: #F6F4ED;
+    --line: #E5E7DB; --line-strong: #D3D7C7;
+    --demand: #47519C; --supply: #3E7A55; --equilibrium: #B35C2E;
+    --grid: #E5E7DB;
+    --e1: 0 1px 2px rgba(36,49,42,.06), 0 1px 1px rgba(36,49,42,.04);
+    --e2: 0 4px 12px rgba(36,49,42,.07), 0 1px 3px rgba(36,49,42,.05);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color: var(--ink); background: var(--bg); display: flex; flex-direction: column;
+    overflow: hidden; -webkit-font-smoothing: antialiased;
+  }
+  .frame {
+    flex: 1 1 auto; min-height: 0; width: 100%; max-width: 940px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 10px; padding: 16px 20px 14px;
+  }
+  header { flex: 0 0 auto; }
+  .eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 5px;
+  }
+  header h1 { margin: 0; font-size: 19px; font-weight: 650; letter-spacing: -.018em; }
+  header p { margin: 5px 0 0; font-size: 13px; line-height: 1.5; color: var(--ink-2); max-width: 66ch; }
+  .stage {
+    position: relative; flex: 1 1 auto; min-height: 0; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--e2);
+    padding: 12px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .stage svg { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  /* A legend rather than labels pinned to the curve ends: two straight lines that
+     cross always occupy all four corners, so an end-label sits on the line or on the
+     axis. A swatch row above the plot is collision-free by construction. */
+  .legend { display: flex; gap: 16px; padding: 2px 6px 0; flex: 0 0 auto; }
+  .key { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--ink-2); }
+  .key::before { content: ""; width: 14px; height: 3px; border-radius: 2px; background: var(--k); }
+  .readout { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; flex: 0 0 auto; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 13px;
+    font-size: 11.5px; font-weight: 550; color: var(--ink-2); box-shadow: var(--e1);
+  }
+  .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); }
+  .chip[data-tone="demand"]::before { background: var(--demand); }
+  .chip[data-tone="supply"]::before { background: var(--supply); }
+  .chip[data-tone="equilibrium"]::before { background: var(--equilibrium); }
+  .chip b { color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 700; }
+  [data-series] { cursor: grab; }
+  [data-series="demand"] { cursor: ew-resize; }
+  #demand-hit { fill: transparent; stroke: transparent; stroke-width: 26; pointer-events: stroke; }
+  #demand-hit:hover { stroke: rgba(71, 81, 156, 0.22); }
+</style>
+</head>
+<body>
+<div class="frame">
+<header>
+  <div class="eyebrow">Economics &middot; Shift the curve</div>
+  <h1>Supply &amp; Demand — Market Equilibrium</h1>
+  <p>Drag the demand curve left or right to shift it. Hover any curve to inspect it in the workbench.</p>
+</header>
+
+<div class="stage">
+<div class="legend">
+  <span class="key" style="--k: var(--demand)">Demand D</span>
+  <span class="key" style="--k: var(--supply)">Supply S</span>
+  <span class="key" style="--k: var(--equilibrium)">Equilibrium</span>
+</div>
+<svg id="chart" viewBox="0 0 700 420" aria-label="Supply and demand chart">
+  <!-- plot area: x = quantity 0..10, y = price 0..10 (inverted) -->
+  <g id="grid"></g>
+  <g id="axes" data-series="axes" font-size="11" fill="#5C6A60">
+    <line x1="60" y1="360" x2="660" y2="360" stroke="#24312A"/>
+    <line x1="60" y1="30" x2="60" y2="360" stroke="#24312A"/>
+    <text x="660" y="382" text-anchor="end">Quantity Q</text>
+    <text x="60" y="20">Price P</text>
+    <text id="lbl-q" x="0" y="378" text-anchor="middle"></text>
+    <text id="lbl-p" x="52" y="0" text-anchor="end"></text>
+  </g>
+
+  <g data-series="demand" id="demand">
+    <line id="demand-line" x1="60" y1="30" x2="660" y2="360" stroke="#47519C" stroke-width="3"/>
+    <line id="demand-hit" x1="60" y1="30" x2="660" y2="360"/>
+  </g>
+
+  <g data-series="supply" id="supply">
+    <line id="supply-line" x1="60" y1="360" x2="660" y2="30" stroke="#3E7A55" stroke-width="3"/>
+  </g>
+
+  <g data-series="equilibrium" id="equilibrium">
+    <circle id="eq-dot" cx="360" cy="195" r="6" fill="#B35C2E" stroke="#fff" stroke-width="2"/>
+    <line id="eq-dash-p" x1="60" y1="195" x2="360" y2="195" stroke="#B35C2E" stroke-width="1" stroke-dasharray="4 4"/>
+    <line id="eq-dash-q" x1="360" y1="195" x2="360" y2="360" stroke="#B35C2E" stroke-width="1" stroke-dasharray="4 4"/>
+    <text id="eq-label" x="348" y="183" text-anchor="end" font-size="12" fill="#B35C2E" font-weight="600">Equilibrium</text>
+  </g>
+</svg>
+</div>
+
+<div class="readout">
+  <span class="chip" data-tone="equilibrium">Equilibrium price <b id="out-p">—</b></span>
+  <span class="chip" data-tone="equilibrium">Equilibrium quantity <b id="out-q">—</b></span>
+  <span class="chip" data-tone="demand">Demand shift <b id="out-shift">0.0</b></span>
+</div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  // Model: demand Qd = a - b*P + shift ; supply Qs = c + d*P
+  // Linear in P; drawn on axes Q in [0,10], P in [0,10].
+  var a = 10, b = 1, c = 0, d = 1;
+  var shift = 0;
+  var X0 = 60, X1 = 660, Y0 = 360, Y1 = 30;      // plot box in px
+  var QMAX = 10, PMAX = 10;
+
+  var grid = document.getElementById('grid');
+  for (var i = 0; i <= 10; i++) {
+    var gx = X0 + (X1 - X0) * i / 10;
+    var gy = Y0 - (Y0 - Y1) * i / 10;
+    var vl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    vl.setAttribute('x1', gx); vl.setAttribute('x2', gx);
+    vl.setAttribute('y1', Y0); vl.setAttribute('y2', Y1);
+    vl.setAttribute('stroke', '#E5E7DB');
+    grid.appendChild(vl);
+    var hl = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    hl.setAttribute('x1', X0); hl.setAttribute('x2', X1);
+    hl.setAttribute('y1', gy); hl.setAttribute('y2', gy);
+    hl.setAttribute('stroke', '#E5E7DB');
+    grid.appendChild(hl);
+  }
+
+  const qToX = (q) => X0 + (X1 - X0) * q / QMAX;
+  const pToY = (p) => Y0 - (Y0 - Y1) * p / PMAX;
+  const xToQ = (x) => (x - X0) / (X1 - X0) * QMAX;
+
+  // Demand as a curve over P: Qd(P) = a - b*P + shift, clamped to the view.
+  const drawDemand = () => {
+    var p1 = 0, q1 = a + shift;
+    var p2 = PMAX, q2 = a - b * PMAX + shift;
+    var line = document.getElementById('demand-line');
+    var hit = document.getElementById('demand-hit');
+    line.setAttribute('x1', qToX(q1)); line.setAttribute('y1', pToY(p1));
+    line.setAttribute('x2', qToX(q2)); line.setAttribute('y2', pToY(p2));
+    hit.setAttribute('x1', qToX(q1)); hit.setAttribute('y1', pToY(p1));
+    hit.setAttribute('x2', qToX(q2)); hit.setAttribute('y2', pToY(p2));
+  }
+
+  const drawSupply = () => {
+    var p1 = 0, q1 = c;
+    var p2 = PMAX, q2 = c + d * PMAX;
+    var line = document.getElementById('supply-line');
+    line.setAttribute('x1', qToX(q1)); line.setAttribute('y1', pToY(p1));
+    line.setAttribute('x2', qToX(q2)); line.setAttribute('y2', pToY(p2));
+  }
+
+  const drawEquilibrium = () => {
+    // a - b*P + shift = c + d*P  ->  P* = (a + shift - c) / (b + d)
+    var p = (a + shift - c) / (b + d);
+    var q = c + d * p;
+    var cx = qToX(q), cy = pToY(p);
+    var dot = document.getElementById('eq-dot');
+    var dp = document.getElementById('eq-dash-p');
+    var dq = document.getElementById('eq-dash-q');
+    var label = document.getElementById('eq-label');
+    dot.setAttribute('cx', cx); dot.setAttribute('cy', cy);
+    dp.setAttribute('x1', X0); dp.setAttribute('y1', cy);
+    dp.setAttribute('x2', cx); dp.setAttribute('y2', cy);
+    dq.setAttribute('x1', cx); dq.setAttribute('y1', cy);
+    dq.setAttribute('x2', cx); dq.setAttribute('y2', Y0);
+    label.setAttribute('x', cx - 14); label.setAttribute('y', cy - 12);
+    var lblQ = document.getElementById('lbl-q');
+    var lblP = document.getElementById('lbl-p');
+    lblQ.setAttribute('x', cx); lblQ.textContent = q.toFixed(1);
+    lblP.setAttribute('y', cy + 4); lblP.textContent = p.toFixed(1);
+    document.getElementById('out-p').textContent = p.toFixed(2);
+    document.getElementById('out-q').textContent = q.toFixed(2);
+    document.getElementById('out-shift').textContent = shift.toFixed(1);
+    // Announce the readout outward (sandboxed sim -> workbench via the agent
+    // bridge convention): the parent cannot read this DOM, so anything the
+    // workbench should display travels as a postMessage.
+    try {
+      window.parent.postMessage({ type: 'luminfest:readout',
+                                  price: +p.toFixed(2), quantity: +q.toFixed(2),
+                                  shift: +shift.toFixed(1) }, '*');
+    } catch (e) { /* parent unavailable */ }
+  }
+
+  const render = () => { drawDemand(); drawSupply(); drawEquilibrium(); };
+
+  // Drag anywhere on the demand hit-line shifts the whole curve.
+  var svg = document.getElementById('chart');
+  var dragging = false, startQ = 0, startShift = 0;
+
+  svg.addEventListener('pointerdown', (event) => {
+    var target = event.target;
+    var series = target.closest && target.closest('[data-series="demand"]');
+    if (!series) return;
+    dragging = true;
+    var pt = svgPoint(event);
+    startQ = Math.min(QMAX, Math.max(0, xToQ(pt.x)));
+    startShift = shift;
+    // Capture on the grabbed series element (not the svg root), so the
+    // workbench click handler still resolves the target to [data-series].
+    series.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  });
+
+  svg.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    var pt = svgPoint(event);
+    var q = Math.min(QMAX, Math.max(0, xToQ(pt.x)));
+    shift = Math.min(6, Math.max(-8, startShift + (q - startQ)));
+    render();
+  });
+
+  ['pointerup', 'pointercancel'].forEach((type) => {
+    svg.addEventListener(type, () => { dragging = false; });
+  });
+
+  const svgPoint = (event) => {
+    var rect = svg.getBoundingClientRect();
+    return {
+      x: (event.clientX - rect.left) / rect.width * 700,
+      y: (event.clientY - rect.top) / rect.height * 420
+    };
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

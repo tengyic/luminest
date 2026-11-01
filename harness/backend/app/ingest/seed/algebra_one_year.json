@@ -1,0 +1,2140 @@
+{
+ "course": "Algebra I and Integrated Mathematics — one year",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A full-year integrated mathematics course: number and quantity, algebra, functions, geometry and measurement, statistics and probability.",
+ "expected_weeks": 36,
+ "concept_count": 164,
+ "unit_count": 17,
+ "cross_unit_links": 36,
+ "strands": [
+  {
+   "strand": "Number & Quantity",
+   "units": [
+    {
+     "unit": "Number foundations",
+     "prerequisites": [],
+     "topics": [
+      {
+       "topic": "Whole-number structure",
+       "concepts": [
+        {
+         "title": "Place value and base-ten structure",
+         "summary": "Each digit carries a value set by its position, which is what makes regrouping possible.",
+         "keywords": [
+          "place value",
+          "regrouping",
+          "base ten"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Factors, multiples and divisibility",
+         "summary": "Divisibility rules let you test factor structure without dividing, which speeds up later work with fractions and polynomials.",
+         "keywords": [
+          "divisibility",
+          "factor",
+          "multiple"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Prime factorisation",
+         "summary": "Every whole number above one factors uniquely into primes, giving one canonical description of a number.",
+         "keywords": [
+          "prime",
+          "factorisation",
+          "fundamental theorem"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Greatest common factor and least common multiple",
+         "summary": "The GCF is the largest shared divisor and the LCM the smallest shared multiple; both come straight out of prime factorisation.",
+         "keywords": [
+          "gcf",
+          "lcm",
+          "common factor"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Fractions as quantities",
+       "concepts": [
+        {
+         "title": "Fraction equivalence",
+         "summary": "Multiplying numerator and denominator by the same nonzero number renames a quantity without changing it.",
+         "keywords": [
+          "equivalent fractions",
+          "common denominator"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Fraction addition and subtraction",
+         "summary": "Fractions can only be combined once they name the same size of piece, so a common unit comes first.",
+         "keywords": [
+          "common denominator",
+          "unlike denominators",
+          "sum"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Fraction multiplication and division",
+         "summary": "Multiplication scales one fraction by another; division asks how many of one fraction fit inside another.",
+         "keywords": [
+          "multiply fractions",
+          "reciprocal",
+          "divide fractions"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Decimals, fractions and percent equivalence",
+         "summary": "Decimals, fractions and percent are three notations for the same rational quantity, and converting between them is a routine move.",
+         "keywords": [
+          "decimal",
+          "percent",
+          "conversion"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Signed numbers",
+       "concepts": [
+        {
+         "title": "Signed numbers on the number line",
+         "summary": "A negative sign records direction relative to zero, not merely a subtraction waiting to happen.",
+         "keywords": [
+          "negative",
+          "number line",
+          "opposite"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Absolute value as distance",
+         "summary": "Absolute value measures distance from zero and therefore discards direction while keeping size.",
+         "keywords": [
+          "absolute value",
+          "distance",
+          "magnitude"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Integer addition and subtraction",
+         "summary": "Adding a signed number moves along the number line; subtracting a number is the same as adding its opposite.",
+         "keywords": [
+          "integer",
+          "opposite",
+          "subtract negative"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Integer multiplication and division",
+         "summary": "The sign rules for products and quotients follow from repeated addition, and they set up sign handling in algebra.",
+         "keywords": [
+          "sign rules",
+          "product",
+          "quotient"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Ratios, rates and proportional reasoning",
+     "prerequisites": [
+      "Number foundations"
+     ],
+     "topics": [
+      {
+       "topic": "Building and comparing ratios",
+       "concepts": [
+        {
+         "title": "Ratios as comparisons",
+         "summary": "A ratio compares two quantities of the same or different kinds, and the order of the terms carries meaning.",
+         "keywords": [
+          "ratio",
+          "comparison",
+          "part to part"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Unit rates",
+         "summary": "A unit rate divides a comparison down to a single unit of the second quantity, which makes prices and speeds comparable.",
+         "keywords": [
+          "unit rate",
+          "per unit",
+          "rate"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Proportional relationships",
+         "summary": "Two quantities are proportional when their ratio is constant, so scaling one scales the other by the same factor.",
+         "keywords": [
+          "proportion",
+          "constant of proportionality",
+          "scale factor"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Solving proportions",
+         "summary": "Cross multiplication is a shortcut that follows from multiplying both sides of an equality of ratios by the same product.",
+         "keywords": [
+          "cross multiplication",
+          "proportion",
+          "solve"
+         ],
+         "prerequisites": [
+          "Fraction addition and subtraction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Scaling and percent",
+       "concepts": [
+        {
+         "title": "Scale drawings and scale factor",
+         "summary": "A scale drawing preserves shape while changing size, and the scale factor connects drawing lengths to real lengths.",
+         "keywords": [
+          "scale drawing",
+          "scale factor",
+          "similar"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Percent as a rate per hundred",
+         "summary": "Percent is a ratio with an implicit denominator of one hundred, which is why it converts directly to a decimal.",
+         "keywords": [
+          "percent",
+          "per hundred",
+          "decimal"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Percent change",
+         "summary": "Percent change compares the size of a change to the original quantity, so the base must be stated.",
+         "keywords": [
+          "percent change",
+          "increase",
+          "decrease"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Applications: tax, tip, discount and interest",
+         "summary": "Everyday percent problems are one proportional structure wearing different words.",
+         "keywords": [
+          "tax",
+          "tip",
+          "discount",
+          "markup"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Direct variation",
+         "summary": "Direct variation is a proportional relationship written as an equation through the origin.",
+         "keywords": [
+          "direct variation",
+          "constant of variation",
+          "origin"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Dimensional analysis and unit conversion",
+         "summary": "Tracking units as if they were algebraic quantities catches conversion errors before they reach an answer.",
+         "keywords": [
+          "unit conversion",
+          "dimensional analysis",
+          "rate"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Exponents, radicals and irrational numbers",
+     "prerequisites": [
+      "Number foundations",
+      "Ratios, rates and proportional reasoning"
+     ],
+     "topics": [
+      {
+       "topic": "Exponent structure",
+       "concepts": [
+        {
+         "title": "Integer exponents",
+         "summary": "A positive integer exponent counts repeated factors, which is not the same as repeated addition.",
+         "keywords": [
+          "exponent",
+          "repeated factors",
+          "power"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Product and quotient rules for exponents",
+         "summary": "Multiplying like bases adds exponents because it concatenates two runs of identical factors.",
+         "keywords": [
+          "product rule",
+          "quotient rule",
+          "like bases"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Power of a power and power of a product",
+         "summary": "An outer exponent distributes over a product and multiplies against an inner exponent.",
+         "keywords": [
+          "power of a power",
+          "distribute exponent",
+          "parentheses"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Zero and negative exponents",
+         "summary": "The rules extend to zero and negative exponents in exactly the way that keeps the quotient rule consistent.",
+         "keywords": [
+          "zero exponent",
+          "negative exponent",
+          "reciprocal"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Radicals and scientific notation",
+       "concepts": [
+        {
+         "title": "Square roots and perfect squares",
+         "summary": "A square root reverses squaring, and perfect squares let you factor a root exactly.",
+         "keywords": [
+          "square root",
+          "perfect square",
+          "radical"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Simplifying radical expressions",
+         "summary": "A radical simplifies by pulling out the largest perfect-square factor, which is factoring under a root.",
+         "keywords": [
+          "simplify radical",
+          "perfect square factor",
+          "radical"
+         ],
+         "prerequisites": [
+          "Square roots and perfect squares",
+          "Prime factorisation"
+         ]
+        },
+        {
+         "title": "Rational exponents",
+         "summary": "A fractional exponent names a root, which unifies radical notation with exponent rules.",
+         "keywords": [
+          "rational exponent",
+          "fractional exponent",
+          "root"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Estimating and locating irrational numbers",
+         "summary": "Irrational numbers cannot be written as a ratio of integers, so they are placed by approximation rather than exact form.",
+         "keywords": [
+          "irrational",
+          "estimate",
+          "approximate"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Scientific notation",
+         "summary": "Scientific notation writes a number as a mantissa times a power of ten, which makes extreme magnitudes readable and comparable.",
+         "keywords": [
+          "scientific notation",
+          "mantissa",
+          "power of ten"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Algebra",
+   "units": [
+    {
+     "unit": "Algebraic expressions",
+     "prerequisites": [
+      "Number foundations",
+      "Exponents, radicals and irrational numbers"
+     ],
+     "topics": [
+      {
+       "topic": "Expressions and notation",
+       "concepts": [
+        {
+         "title": "Variables and algebraic notation",
+         "summary": "A variable names a quantity that may vary, and juxtaposition is the conventional way to write multiplication.",
+         "keywords": [
+          "variable",
+          "coefficient",
+          "notation"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Translating verbal statements into expressions",
+         "summary": "Moving from words to symbols requires deciding what each quantity is before choosing operations.",
+         "keywords": [
+          "translate",
+          "verbal expression",
+          "word phrase"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Evaluating expressions",
+         "summary": "Substituting a value and computing is the direct test of what an expression means.",
+         "keywords": [
+          "evaluate",
+          "substitute",
+          "value"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Structure of expressions",
+       "concepts": [
+        {
+         "title": "Terms, coefficients and constants",
+         "summary": "An expression is a sum of terms, and each term carries its own sign and coefficient.",
+         "keywords": [
+          "term",
+          "coefficient",
+          "constant"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Combining like terms",
+         "summary": "Only terms with identical variable parts can be merged, because only they describe the same kind of quantity.",
+         "keywords": [
+          "like terms",
+          "combine",
+          "simplify"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "The distributive property",
+         "summary": "Multiplication distributes over addition, which is what lets you remove parentheses correctly.",
+         "keywords": [
+          "distributive",
+          "expand",
+          "parentheses"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Simplifying linear expressions",
+         "summary": "Simplifying means rewriting an expression in an equivalent but shorter form, verified by substitution.",
+         "keywords": [
+          "simplify",
+          "equivalent",
+          "linear expression"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Polynomial structure",
+       "concepts": [
+        {
+         "title": "Expanding products of binomials",
+         "summary": "Every term of one factor multiplies every term of the other, so a two-by-two product produces four terms before simplification.",
+         "keywords": [
+          "expand",
+          "binomial",
+          "foil",
+          "product"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Polynomial vocabulary and degree",
+         "summary": "The degree is the highest exponent present and the leading coefficient governs end behaviour.",
+         "keywords": [
+          "polynomial",
+          "degree",
+          "leading coefficient",
+          "monomial"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Adding and subtracting polynomials",
+         "summary": "Polynomials combine by matching like terms, and subtracting requires distributing the minus sign across every term.",
+         "keywords": [
+          "add polynomials",
+          "subtract polynomials",
+          "like terms"
+         ],
+         "prerequisites": [
+          "Combining like terms"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Linear equations",
+     "prerequisites": [
+      "Algebraic expressions",
+      "Ratios, rates and proportional reasoning"
+     ],
+     "topics": [
+      {
+       "topic": "What a solution means",
+       "concepts": [
+        {
+         "title": "Solutions and equivalent equations",
+         "summary": "An equation asserts equality, and applying the same reversible operation to both sides preserves the solution set.",
+         "keywords": [
+          "equation",
+          "solution",
+          "equivalent equations"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "One-step equations",
+         "summary": "A single inverse operation isolates the variable when only one operation is applied to it.",
+         "keywords": [
+          "one step",
+          "inverse operation",
+          "isolate"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Two-step equations",
+         "summary": "Undo addition before multiplication, because the order of inverse operations reverses the order of the original operations.",
+         "keywords": [
+          "two step",
+          "order of operations",
+          "inverse"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Multi-step and general linear equations",
+       "concepts": [
+        {
+         "title": "Multi-step equations with distribution",
+         "summary": "Removing parentheses first turns a multi-step equation into a familiar linear one.",
+         "keywords": [
+          "multi step",
+          "distribute",
+          "combine"
+         ],
+         "prerequisites": [
+          "The distributive property"
+         ]
+        },
+        {
+         "title": "Equations with variables on both sides",
+         "summary": "Collecting variable terms on one side and constants on the other reduces any linear equation to a two-step form.",
+         "keywords": [
+          "variables both sides",
+          "collect",
+          "linear"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Equations with fractions and decimals",
+         "summary": "Clearing denominators by multiplying every term by the common denominator removes fractions without changing the solution.",
+         "keywords": [
+          "clear denominators",
+          "fraction coefficient",
+          "decimal"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Literal equations and formulas",
+         "summary": "Solving a formula for a different variable uses the same operations, treating the other variables as numbers.",
+         "keywords": [
+          "literal equation",
+          "solve for a variable",
+          "formula"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Absolute value equations",
+         "summary": "An absolute value equation splits into two cases because two numbers sit at the same distance from zero.",
+         "keywords": [
+          "absolute value",
+          "two cases",
+          "extraneous solution"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Equations from context",
+       "concepts": [
+        {
+         "title": "Modelling with linear equations",
+         "summary": "Translating a situation into an equation requires naming the unknown and writing what the situation asserts.",
+         "keywords": [
+          "model",
+          "word problem",
+          "define variable"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Consecutive integer and age problems",
+         "summary": "These problems are linear equations in disguise, and the modelling step is where they are won or lost.",
+         "keywords": [
+          "consecutive integers",
+          "age problem",
+          "model"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Mixture, rate and work problems",
+         "summary": "Rates and mixtures combine as weighted sums, which produce linear equations in one unknown.",
+         "keywords": [
+          "mixture",
+          "rate",
+          "work problem"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Linear inequalities",
+     "prerequisites": [
+      "Linear equations"
+     ],
+     "topics": [
+      {
+       "topic": "Inequality basics",
+       "concepts": [
+        {
+         "title": "Inequality notation and solution sets",
+         "summary": "An inequality describes a range of values rather than a single number, and the solution set is that whole range.",
+         "keywords": [
+          "inequality",
+          "solution set",
+          "range"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Graphing inequalities on the number line",
+         "summary": "An open circle excludes the boundary and a closed circle includes it, which is the visual record of strictness.",
+         "keywords": [
+          "graph inequality",
+          "open circle",
+          "closed circle"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Solving one- and two-step inequalities",
+         "summary": "Inequalities solve with the same inverse operations as equations, with one exception.",
+         "keywords": [
+          "solve inequality",
+          "inverse operation",
+          "boundary"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Reversing the inequality symbol",
+         "summary": "Multiplying or dividing by a negative number reverses order, which is why the symbol flips.",
+         "keywords": [
+          "reverse inequality",
+          "negative divisor",
+          "order"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Compound and absolute value inequalities",
+       "concepts": [
+        {
+         "title": "Compound inequalities",
+         "summary": "An \"and\" compound restricts to an interval while an \"or\" compound allows two separate rays.",
+         "keywords": [
+          "compound inequality",
+          "and",
+          "or",
+          "interval"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Interval notation",
+         "summary": "Interval notation compresses an inequality solution set into a compact pair of endpoints.",
+         "keywords": [
+          "interval notation",
+          "bracket",
+          "parenthesis"
+         ],
+         "prerequisites": [
+          "Graphing inequalities on the number line"
+         ]
+        },
+        {
+         "title": "Absolute value inequalities",
+         "summary": "Distance reasoning turns an absolute value inequality into a compound inequality rather than two separate cases.",
+         "keywords": [
+          "absolute value inequality",
+          "distance",
+          "compound"
+         ],
+         "prerequisites": [
+          "Absolute value functions",
+          "Absolute value equations"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Inequalities in context",
+       "concepts": [
+        {
+         "title": "Modelling constraints with inequalities",
+         "summary": "A constraint states a range the answer may occupy, which is naturally an inequality rather than an equation.",
+         "keywords": [
+          "constraint",
+          "model",
+          "at least",
+          "at most"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Graphing linear inequalities in two variables",
+         "summary": "A two-variable inequality shades a half-plane bounded by the corresponding line.",
+         "keywords": [
+          "half plane",
+          "boundary line",
+          "shading"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Systems of linear equations",
+     "prerequisites": [
+      "Linear equations",
+      "Linear inequalities"
+     ],
+     "topics": [
+      {
+       "topic": "Systems and their solutions",
+       "concepts": [
+        {
+         "title": "Systems as simultaneous constraints",
+         "summary": "A solution to a system must satisfy every equation at once, which is why it is an intersection rather than a root.",
+         "keywords": [
+          "system",
+          "simultaneous",
+          "intersection"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Solving systems by graphing",
+         "summary": "Graphing shows the solution as an intersection, which makes the meaning of no solution and infinite solutions visible.",
+         "keywords": [
+          "graph system",
+          "intersection",
+          "coincident"
+         ],
+         "prerequisites": [
+          "Slope as a constant rate of change"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Algebraic solution methods",
+       "concepts": [
+        {
+         "title": "Solving systems by substitution",
+         "summary": "Substitution replaces one variable with an equivalent expression so that a two-variable problem becomes one-variable.",
+         "keywords": [
+          "substitution",
+          "isolate",
+          "substitute"
+         ],
+         "prerequisites": [
+          "Slope-intercept form"
+         ]
+        },
+        {
+         "title": "Solving systems by elimination",
+         "summary": "Elimination adds or subtracts multiples of equations so one variable cancels, leaving a single-variable equation.",
+         "keywords": [
+          "elimination",
+          "add equations",
+          "cancel variable"
+         ],
+         "prerequisites": [
+          "Combining like terms"
+         ]
+        },
+        {
+         "title": "Special systems: no solution and infinitely many",
+         "summary": "Parallel distinct lines share no point and coincident lines share every point, and the algebra reports both cases.",
+         "keywords": [
+          "no solution",
+          "infinitely many",
+          "parallel",
+          "coincident"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Choosing an efficient solution method",
+         "summary": "Method choice is a judgement about which form the equations are already in, not a rule about correctness.",
+         "keywords": [
+          "method choice",
+          "substitution",
+          "elimination"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Systems in context",
+       "concepts": [
+        {
+         "title": "Systems modelling two constraints",
+         "summary": "Two unknowns with two conditions produce a system, and each equation encodes one condition.",
+         "keywords": [
+          "model",
+          "two unknowns",
+          "constraint"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Systems with three variables",
+         "summary": "Three unknowns need three independent equations, and elimination extends to that case one variable at a time.",
+         "keywords": [
+          "three variables",
+          "elimination",
+          "independent"
+         ],
+         "prerequisites": [
+          "Solving systems by substitution"
+         ]
+        },
+        {
+         "title": "Introduction to linear programming",
+         "summary": "Optimising a linear objective under linear constraints is solved at the vertices of the feasible region.",
+         "keywords": [
+          "linear programming",
+          "objective",
+          "feasible region"
+         ],
+         "prerequisites": [
+          "Systems as simultaneous constraints",
+          "Graphing linear inequalities in two variables"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Quadratic expressions and equations",
+     "prerequisites": [
+      "Algebraic expressions",
+      "Linear equations",
+      "Exponents, radicals and irrational numbers"
+     ],
+     "topics": [
+      {
+       "topic": "Quadratic structure",
+       "concepts": [
+        {
+         "title": "Quadratic expressions and their graphs",
+         "summary": "A quadratic has a nonzero squared term, and its graph is a parabola whose vertex is the turning point.",
+         "keywords": [
+          "quadratic",
+          "parabola",
+          "vertex",
+          "squared term"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Standard, factored and vertex forms",
+         "summary": "The three forms of a quadratic each expose a different feature: intercepts, roots, or the vertex.",
+         "keywords": [
+          "standard form",
+          "factored form",
+          "vertex form",
+          "quadratic"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "The zero-product property",
+         "summary": "A product equals zero only when at least one factor equals zero, which is what turns factoring into a solution method.",
+         "keywords": [
+          "zero product property",
+          "factor",
+          "roots"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Factoring",
+       "concepts": [
+        {
+         "title": "Factoring out a common monomial factor",
+         "summary": "Factoring begins by removing the largest shared factor, which is the distributive property run backwards.",
+         "keywords": [
+          "common factor",
+          "monomial",
+          "factor out"
+         ],
+         "prerequisites": [
+          "The distributive property"
+         ]
+        },
+        {
+         "title": "Factoring trinomials with leading coefficient one",
+         "summary": "For a monic quadratic, two numbers must meet a sum condition and a product condition simultaneously.",
+         "keywords": [
+          "factor trinomial",
+          "monic",
+          "sum and product"
+         ],
+         "prerequisites": [
+          "Expanding products of binomials"
+         ]
+        },
+        {
+         "title": "Factoring trinomials with leading coefficient other than one",
+         "summary": "When the leading coefficient is not one, the factor pair search must also account for the leading term.",
+         "keywords": [
+          "leading coefficient",
+          "factor trinomial",
+          "grouping"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Special products: difference of squares and perfect squares",
+         "summary": "Recognising a special product pattern lets you factor in one step instead of searching for a factor pair.",
+         "keywords": [
+          "difference of squares",
+          "perfect square trinomial",
+          "special product"
+         ],
+         "prerequisites": [
+          "Expanding products of binomials"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solving and applying",
+       "concepts": [
+        {
+         "title": "Solving quadratic equations by factoring",
+         "summary": "Factoring converts a quadratic equation into two linear equations, each of which is easy to solve.",
+         "keywords": [
+          "solve by factoring",
+          "zero product",
+          "roots"
+         ],
+         "prerequisites": [
+          "Factoring trinomials with leading coefficient one",
+          "The zero-product property"
+         ]
+        },
+        {
+         "title": "Solving quadratic equations by completing the square",
+         "summary": "Completing the square rewrites a quadratic as a perfect square plus a constant, which exposes the vertex and the roots.",
+         "keywords": [
+          "completing the square",
+          "perfect square",
+          "vertex"
+         ],
+         "prerequisites": [
+          "Square roots and perfect squares"
+         ]
+        },
+        {
+         "title": "The quadratic formula and the discriminant",
+         "summary": "The quadratic formula solves every quadratic, and the discriminant reports how many real roots exist before you compute them.",
+         "keywords": [
+          "quadratic formula",
+          "discriminant",
+          "real roots"
+         ],
+         "prerequisites": [
+          "Factoring trinomials with leading coefficient one"
+         ]
+        },
+        {
+         "title": "Choosing an efficient method for quadratics",
+         "summary": "Factoring, completing the square and the formula all work, and the choice is a judgement about the numbers involved.",
+         "keywords": [
+          "method choice",
+          "factoring",
+          "formula"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Quadratic models and optimisation",
+         "summary": "A quadratic models any quantity with a constant second difference, and its vertex is the maximum or minimum of that model.",
+         "keywords": [
+          "quadratic model",
+          "maximum",
+          "minimum",
+          "vertex"
+         ],
+         "prerequisites": [
+          "Quadratic expressions and their graphs"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Functions",
+   "units": [
+    {
+     "unit": "Coordinate plane and relations",
+     "prerequisites": [
+      "Number foundations",
+      "Algebraic expressions"
+     ],
+     "topics": [
+      {
+       "topic": "Coordinates and graphing",
+       "concepts": [
+        {
+         "title": "The coordinate plane and ordered pairs",
+         "summary": "An ordered pair records horizontal then vertical position, and the order is part of the meaning.",
+         "keywords": [
+          "coordinate plane",
+          "ordered pair",
+          "x axis"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Plotting points and identifying quadrants",
+         "summary": "Quadrant location is determined by the signs of the coordinates, which makes sign errors visible immediately.",
+         "keywords": [
+          "plot",
+          "quadrant",
+          "sign"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Relations, domain and range",
+       "concepts": [
+        {
+         "title": "Relations and multiple representations",
+         "summary": "The same relation can be shown as a table, a graph, a set of pairs or an equation, and each view hides different things.",
+         "keywords": [
+          "relation",
+          "table",
+          "graph",
+          "representation"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Domain and range",
+         "summary": "Domain collects the permitted inputs and range the resulting outputs, and both can be restricted by context.",
+         "keywords": [
+          "domain",
+          "range",
+          "input",
+          "output"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Discrete and continuous domains",
+         "summary": "A countable set of inputs gives a discrete domain while an unbroken interval gives a continuous one.",
+         "keywords": [
+          "discrete",
+          "continuous",
+          "interval"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Function concepts",
+       "concepts": [
+        {
+         "title": "Functions and the vertical line test",
+         "summary": "A relation is a function when each input has exactly one output, which the vertical line test detects graphically.",
+         "keywords": [
+          "function",
+          "vertical line test",
+          "one output"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Function notation",
+         "summary": "Function notation names the rule and the input together, which makes substitution explicit.",
+         "keywords": [
+          "function notation",
+          "f of x",
+          "rule"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Evaluating functions and reading graphs",
+         "summary": "Evaluating a function and reading a value off its graph are the same act performed in two representations.",
+         "keywords": [
+          "evaluate function",
+          "read graph",
+          "input output"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Independent and dependent variables",
+         "summary": "Naming which quantity drives which is a modelling decision, and it determines which axis carries which variable.",
+         "keywords": [
+          "independent variable",
+          "dependent variable",
+          "model"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Linear functions",
+     "prerequisites": [
+      "Coordinate plane and relations",
+      "Linear equations"
+     ],
+     "topics": [
+      {
+       "topic": "Slope and rate of change",
+       "concepts": [
+        {
+         "title": "Slope as a constant rate of change",
+         "summary": "Slope is the change in output per unit change in input, which is why it carries units.",
+         "keywords": [
+          "slope",
+          "rate of change",
+          "units"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Computing slope from graphs, tables and points",
+         "summary": "The slope formula is a difference quotient, and the point order must be consistent in numerator and denominator.",
+         "keywords": [
+          "slope formula",
+          "rise over run",
+          "two points"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Forms of a linear equation",
+       "concepts": [
+        {
+         "title": "Slope-intercept form",
+         "summary": "Writing a line as y equals mx plus b exposes the rate and the starting value directly.",
+         "keywords": [
+          "slope intercept form",
+          "y intercept",
+          "rate"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Point-slope form",
+         "summary": "Point-slope form builds a line from one known point and the rate, which suits data with a natural starting observation.",
+         "keywords": [
+          "point slope form",
+          "point",
+          "slope"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Standard form and intercepts",
+         "summary": "Standard form makes the x and y intercepts easy to read, which is useful for constraints written as equations.",
+         "keywords": [
+          "standard form",
+          "intercepts",
+          "coefficients"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Parallel and perpendicular lines",
+         "summary": "Parallel lines share a slope while perpendicular slopes multiply to negative one, both of which follow from the geometry.",
+         "keywords": [
+          "parallel",
+          "perpendicular",
+          "negative reciprocal"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Linear models",
+       "concepts": [
+        {
+         "title": "Writing equations of lines from context",
+         "summary": "Turning a described situation into a line requires identifying the rate and one known point.",
+         "keywords": [
+          "model",
+          "write equation",
+          "context"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Interpreting slope and intercept in context",
+         "summary": "In a model the slope and intercept carry units and meaning, and misreading either produces a plausible but wrong claim.",
+         "keywords": [
+          "interpret slope",
+          "interpret intercept",
+          "units"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Arithmetic sequences as linear functions",
+         "summary": "An arithmetic sequence is a linear function restricted to whole-number inputs, with the common difference as slope.",
+         "keywords": [
+          "arithmetic sequence",
+          "common difference",
+          "linear"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Linear data",
+       "concepts": [
+        {
+         "title": "Scatter plots and lines of best fit",
+         "summary": "A line of best fit summarises a linear trend, and how close the points sit to it decides how much the summary is worth.",
+         "keywords": [
+          "scatter plot",
+          "best fit",
+          "trend"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Correlation and causation",
+         "summary": "Two quantities moving together is evidence of association only, and association alone does not establish a cause.",
+         "keywords": [
+          "correlation",
+          "causation",
+          "association"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Transformations and absolute value functions",
+     "prerequisites": [
+      "Linear functions"
+     ],
+     "topics": [
+      {
+       "topic": "Function families and transformations",
+       "concepts": [
+        {
+         "title": "Parent functions and their graphs",
+         "summary": "A parent function is the simplest member of a family, and every other member is a transformation of it.",
+         "keywords": [
+          "parent function",
+          "family",
+          "graph"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Translations of graphs",
+         "summary": "Adding inside the input shifts the graph horizontally in the opposite direction to the sign.",
+         "keywords": [
+          "translation",
+          "shift",
+          "horizontal"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Reflections of graphs",
+         "summary": "A negative outside the function reflects vertically while a negative inside reflects horizontally.",
+         "keywords": [
+          "reflection",
+          "axis",
+          "negative"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Stretches and compressions",
+         "summary": "A factor outside the function stretches or compresses vertically, and its reciprocal does the same horizontally.",
+         "keywords": [
+          "stretch",
+          "compression",
+          "scale factor"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Absolute value and piecewise functions",
+       "concepts": [
+        {
+         "title": "Absolute value functions",
+         "summary": "The absolute value function is two linear pieces joined at a vertex, which explains its V-shaped graph.",
+         "keywords": [
+          "absolute value function",
+          "vertex",
+          "piecewise"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Piecewise-defined functions",
+         "summary": "A piecewise rule applies different formulas on different parts of the domain, and each piece needs its own interval.",
+         "keywords": [
+          "piecewise",
+          "domain",
+          "interval"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Step functions and modelling",
+         "summary": "A step function is constant on intervals, which fits any quantity that changes in discrete jumps.",
+         "keywords": [
+          "step function",
+          "floor",
+          "discrete model"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Comparing linear and absolute value models",
+         "summary": "Choosing between a linear and an absolute value model is a claim about the shape of the underlying relationship.",
+         "keywords": [
+          "compare models",
+          "linear",
+          "absolute value"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Exponential functions",
+     "prerequisites": [
+      "Linear functions",
+      "Exponents, radicals and irrational numbers"
+     ],
+     "topics": [
+      {
+       "topic": "Exponential structure",
+       "concepts": [
+        {
+         "title": "Exponential growth and decay",
+         "summary": "Repeated multiplication by a constant factor produces growth or decay, which is qualitatively different from repeated addition.",
+         "keywords": [
+          "exponential growth",
+          "decay",
+          "factor"
+         ],
+         "prerequisites": [
+          "Percent change"
+         ]
+        },
+        {
+         "title": "Exponential functions and their graphs",
+         "summary": "An exponential function has a constant ratio between successive outputs, which produces its characteristic curve.",
+         "keywords": [
+          "exponential function",
+          "ratio",
+          "asymptote"
+         ],
+         "prerequisites": [
+          "Function notation",
+          "Domain and range"
+         ]
+        },
+        {
+         "title": "Geometric sequences",
+         "summary": "A geometric sequence is an exponential function restricted to whole-number inputs, with the common ratio as base.",
+         "keywords": [
+          "geometric sequence",
+          "common ratio",
+          "exponential"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Comparing linear and exponential growth",
+         "summary": "Linear growth adds a constant while exponential growth multiplies by one, and the ordering of the two eventually reverses.",
+         "keywords": [
+          "compare growth",
+          "linear",
+          "exponential"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Exponential models and inverses",
+       "concepts": [
+        {
+         "title": "Compound interest",
+         "summary": "Compound interest is exponential growth where the base is one plus the periodic rate.",
+         "keywords": [
+          "compound interest",
+          "principal",
+          "rate"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Exponential modelling in context",
+         "summary": "Population, depreciation and radioactive decay all share the same multiplicative structure.",
+         "keywords": [
+          "model",
+          "population",
+          "depreciation",
+          "half life"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Transforming exponential functions",
+         "summary": "Shifts and stretches move an exponential curve without changing the fact that it is exponential.",
+         "keywords": [
+          "transform",
+          "shift",
+          "stretch"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Logarithms as inverses of exponentials",
+         "summary": "A logarithm answers what exponent produces a given value, which makes it the inverse of an exponential.",
+         "keywords": [
+          "logarithm",
+          "inverse",
+          "exponent"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Solving simple exponential equations",
+         "summary": "When both sides share a base, matching exponents solves the equation; otherwise estimation or logarithms are required.",
+         "keywords": [
+          "exponential equation",
+          "common base",
+          "solve"
+         ],
+         "prerequisites": [
+          "Exponential functions and their graphs"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Geometry & Measurement",
+   "units": [
+    {
+     "unit": "Geometric foundations",
+     "prerequisites": [
+      "Coordinate plane and relations",
+      "Ratios, rates and proportional reasoning"
+     ],
+     "topics": [
+      {
+       "topic": "Lines, angles and triangles",
+       "concepts": [
+        {
+         "title": "Points, lines, rays and planes",
+         "summary": "These undefined terms are the vocabulary every later geometric statement is built from.",
+         "keywords": [
+          "point",
+          "line",
+          "ray",
+          "plane"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Angle relationships",
+         "summary": "Complementary, supplementary and vertical angles are fixed arithmetic relationships, not estimates.",
+         "keywords": [
+          "complementary",
+          "supplementary",
+          "vertical angles"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Parallel lines and transversals",
+         "summary": "A transversal across parallel lines creates equal and supplementary angle pairs that let you transfer information.",
+         "keywords": [
+          "parallel lines",
+          "transversal",
+          "corresponding angles"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Triangle angle sum and exterior angles",
+         "summary": "The interior angles of a triangle sum to a straight angle, and an exterior angle equals the sum of the two remote interior angles.",
+         "keywords": [
+          "triangle angle sum",
+          "exterior angle",
+          "remote interior"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Similarity and coordinate geometry",
+       "concepts": [
+        {
+         "title": "Similar figures and scale factor",
+         "summary": "Similar figures share angles and have proportional sides, which is what makes indirect measurement possible.",
+         "keywords": [
+          "similar",
+          "scale factor",
+          "proportion"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Congruence and rigid motions",
+         "summary": "Congruent figures are related by translations, rotations and reflections, none of which change size or shape.",
+         "keywords": [
+          "congruent",
+          "rigid motion",
+          "transformation"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "The Pythagorean theorem",
+         "summary": "In a right triangle the squares on the legs sum to the square on the hypotenuse, which converts between distances.",
+         "keywords": [
+          "pythagorean theorem",
+          "hypotenuse",
+          "right triangle"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "The distance formula",
+         "summary": "The distance formula is the Pythagorean theorem applied to a difference in coordinates.",
+         "keywords": [
+          "distance formula",
+          "coordinate",
+          "distance"
+         ],
+         "prerequisites": [
+          "The Pythagorean theorem"
+         ]
+        },
+        {
+         "title": "The midpoint formula",
+         "summary": "The midpoint formula averages coordinates, which places a point exactly halfway between two others.",
+         "keywords": [
+          "midpoint formula",
+          "average",
+          "coordinate"
+         ],
+         "prerequisites": [
+          "The distance formula"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Measurement and geometric modelling",
+     "prerequisites": [
+      "Geometric foundations",
+      "Algebraic expressions"
+     ],
+     "topics": [
+      {
+       "topic": "Perimeter, area and volume",
+       "concepts": [
+        {
+         "title": "Perimeter and area of polygons",
+         "summary": "Perimeter measures a boundary while area measures a region, and confusing the two changes the units of the answer.",
+         "keywords": [
+          "perimeter",
+          "area",
+          "polygon",
+          "units"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Circumference and area of circles",
+         "summary": "Circle measurements are proportional to the radius and to its square respectively, which is why pi appears in both.",
+         "keywords": [
+          "circumference",
+          "area of circle",
+          "pi",
+          "radius"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Surface area of prisms and cylinders",
+         "summary": "Surface area sums the areas of every face, and a net makes the individual faces countable.",
+         "keywords": [
+          "surface area",
+          "net",
+          "prism",
+          "cylinder"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Volume of prisms, cylinders and spheres",
+         "summary": "Volume multiplies a base area by a height, with the sphere formula as the notable exception.",
+         "keywords": [
+          "volume",
+          "prism",
+          "cylinder",
+          "sphere"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Measurement reasoning",
+       "concepts": [
+        {
+         "title": "Density and measurement unit conversion",
+         "summary": "Density is a rate of mass per volume, so converting units converts the density too.",
+         "keywords": [
+          "density",
+          "mass",
+          "volume",
+          "conversion"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Composite figures and decomposition",
+         "summary": "Decomposing an unfamiliar region into familiar pieces is the standard route to its area.",
+         "keywords": [
+          "composite figure",
+          "decompose",
+          "area"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Geometric modelling with algebraic expressions",
+         "summary": "Expressing an area or volume with a variable turns a geometry question into an algebra question.",
+         "keywords": [
+          "model",
+          "expression",
+          "area",
+          "volume"
+         ],
+         "prerequisites": [
+          "Perimeter and area of polygons"
+         ]
+        },
+        {
+         "title": "Precision, accuracy and significant figures",
+         "summary": "Precision describes the fineness of a measurement while accuracy describes its closeness to the true value, and they are independent.",
+         "keywords": [
+          "precision",
+          "accuracy",
+          "significant figures"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Statistics & Probability",
+   "units": [
+    {
+     "unit": "Descriptive statistics",
+     "prerequisites": [
+      "Ratios, rates and proportional reasoning",
+      "Linear functions"
+     ],
+     "topics": [
+      {
+       "topic": "Organising data",
+       "concepts": [
+        {
+         "title": "Data types and variables",
+         "summary": "Whether a variable is categorical or quantitative decides which summaries and displays are meaningful.",
+         "keywords": [
+          "categorical",
+          "quantitative",
+          "variable"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Frequency tables and dot plots",
+         "summary": "Counting how often each value occurs is the first step in every summary statistic.",
+         "keywords": [
+          "frequency table",
+          "dot plot",
+          "count"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Histograms and binning",
+         "summary": "A histogram groups quantitative data into bins, and the bin width changes the shape you see.",
+         "keywords": [
+          "histogram",
+          "bin",
+          "distribution shape"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Centre and spread",
+       "concepts": [
+        {
+         "title": "Measures of centre: mean, median and mode",
+         "summary": "The mean uses every value, the median uses position and the mode records the most common value, and each is affected differently by skew.",
+         "keywords": [
+          "mean",
+          "median",
+          "mode",
+          "centre"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Measures of spread: range and interquartile range",
+         "summary": "Range uses only the extremes while the interquartile range describes the middle half, which makes it resistant to outliers.",
+         "keywords": [
+          "range",
+          "interquartile range",
+          "spread",
+          "quartile"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Standard deviation",
+         "summary": "Standard deviation averages squared deviations from the mean, so it describes typical distance from centre.",
+         "keywords": [
+          "standard deviation",
+          "deviation",
+          "variance"
+         ],
+         "prerequisites": [
+          "Measures of centre: mean, median and mode"
+         ]
+        },
+        {
+         "title": "Box plots and five-number summaries",
+         "summary": "A box plot displays the five-number summary, which shows centre, spread and skew in one picture.",
+         "keywords": [
+          "box plot",
+          "five number summary",
+          "quartile",
+          "median"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Outliers and their effect on summaries",
+         "summary": "An outlier moves the mean much more than the median, so the choice of summary is a judgement about the data.",
+         "keywords": [
+          "outlier",
+          "effect",
+          "mean",
+          "median"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Comparing distributions",
+         "summary": "Comparing two distributions requires centre, spread and shape together, because any one alone is misleading.",
+         "keywords": [
+          "compare distributions",
+          "centre",
+          "spread",
+          "shape"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Bivariate data and inference",
+     "prerequisites": [
+      "Descriptive statistics",
+      "Linear functions"
+     ],
+     "topics": [
+      {
+       "topic": "Relationships between two variables",
+       "concepts": [
+        {
+         "title": "Scatter plots and association",
+         "summary": "A scatter plot shows whether two quantitative variables are associated, and in which direction and form.",
+         "keywords": [
+          "scatter plot",
+          "association",
+          "direction",
+          "form"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "The correlation coefficient",
+         "summary": "The correlation coefficient measures the strength and direction of a linear association only, and it is not a percentage.",
+         "keywords": [
+          "correlation coefficient",
+          "strength",
+          "linear"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Lines of best fit and residuals",
+         "summary": "A residual is the vertical gap between an observation and the fitted line, and its pattern diagnoses whether the line fits.",
+         "keywords": [
+          "best fit line",
+          "residual",
+          "fit"
+         ],
+         "prerequisites": [
+          "Scatter plots and lines of best fit"
+         ]
+        },
+        {
+         "title": "Interpreting slope and intercept in data context",
+         "summary": "In a fitted model the slope is a predicted change per unit and the intercept a predicted baseline, both with units.",
+         "keywords": [
+          "interpret slope",
+          "intercept",
+          "units",
+          "prediction"
+         ],
+         "prerequisites": [
+          "Slope as a constant rate of change",
+          "Interpreting slope and intercept in context"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Categorical data and sampling",
+       "concepts": [
+        {
+         "title": "Two-way frequency tables",
+         "summary": "A two-way table cross-classifies two categorical variables, which makes joint and marginal counts visible.",
+         "keywords": [
+          "two way table",
+          "frequency",
+          "joint",
+          "marginal"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Conditional relative frequency",
+         "summary": "Conditioning on a row or column converts counts into rates that can be compared across groups.",
+         "keywords": [
+          "conditional relative frequency",
+          "row",
+          "column"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Sampling methods",
+         "summary": "Simple random, systematic, stratified and cluster sampling each have different practical costs and assumptions.",
+         "keywords": [
+          "sampling method",
+          "random",
+          "stratified",
+          "cluster"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Sampling bias and variability",
+         "summary": "A biased sample systematically misses part of the population, while variability is the unavoidable spread between samples.",
+         "keywords": [
+          "bias",
+          "variability",
+          "sample",
+          "population"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Making and critiquing data-based claims",
+         "summary": "A defensible claim names the population, the sample, the method and the uncertainty, and stops short of causation without a suitable design.",
+         "keywords": [
+          "claim",
+          "critique",
+          "population",
+          "inference"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Probability",
+     "prerequisites": [
+      "Descriptive statistics",
+      "Ratios, rates and proportional reasoning"
+     ],
+     "topics": [
+      {
+       "topic": "Foundations of probability",
+       "concepts": [
+        {
+         "title": "Sample spaces and outcomes",
+         "summary": "A sample space lists every possible outcome, and the list must be exhaustive and mutually exclusive.",
+         "keywords": [
+          "sample space",
+          "outcome",
+          "exhaustive"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Theoretical probability",
+         "summary": "Theoretical probability divides favourable equally likely outcomes by all equally likely outcomes.",
+         "keywords": [
+          "theoretical probability",
+          "favourable",
+          "equally likely"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Experimental probability and the law of large numbers",
+         "summary": "Experimental probability converges towards theoretical probability as the number of trials grows, which is why small samples mislead.",
+         "keywords": [
+          "experimental probability",
+          "law of large numbers",
+          "trials"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Compound events and the addition rule",
+         "summary": "The probability of either event requires subtracting the overlap, otherwise the intersection is counted twice.",
+         "keywords": [
+          "compound event",
+          "addition rule",
+          "union",
+          "overlap"
+         ],
+         "prerequisites": [
+          "Sample spaces and outcomes"
+         ]
+        },
+        {
+         "title": "Independent events and the multiplication rule",
+         "summary": "Independent events multiply because one event does not change the other probability.",
+         "keywords": [
+          "independent",
+          "multiplication rule",
+          "and"
+         ],
+         "prerequisites": []
+        }
+       ]
+      },
+      {
+       "topic": "Conditional probability and counting",
+       "concepts": [
+        {
+         "title": "Conditional probability",
+         "summary": "Conditional probability restricts the sample space to the known condition, which changes the denominator.",
+         "keywords": [
+          "conditional probability",
+          "given",
+          "restrict"
+         ],
+         "prerequisites": [
+          "Conditional relative frequency"
+         ]
+        },
+        {
+         "title": "Permutations and combinations",
+         "summary": "Permutations count arrangements where order matters and combinations count selections where it does not.",
+         "keywords": [
+          "permutation",
+          "combination",
+          "order",
+          "selection"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Probability distributions",
+         "summary": "A probability distribution lists every value of a random variable with its probability, and the probabilities sum to one.",
+         "keywords": [
+          "distribution",
+          "random variable",
+          "sum to one"
+         ],
+         "prerequisites": []
+        },
+        {
+         "title": "Expected value",
+         "summary": "Expected value is a probability-weighted average outcome, which is what makes it a long-run prediction rather than a guarantee.",
+         "keywords": [
+          "expected value",
+          "weighted average",
+          "long run"
+         ],
+         "prerequisites": [
+          "Probability distributions"
+         ]
+        },
+        {
+         "title": "Simulation and probability models",
+         "summary": "A simulation estimates a probability by generating many trials, which is useful when a theoretical model is hard to write down.",
+         "keywords": [
+          "simulation",
+          "model",
+          "trials",
+          "estimate"
+         ],
+         "prerequisites": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

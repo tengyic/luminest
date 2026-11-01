@@ -1,0 +1,16 @@
+{
+  "tests_run": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed": true,
+  "wall_seconds": 1.0190917910076678,
+  "test_source_sha256": "99d35616fc19ea50dcea63d450402d87df2ffbb838458118627d3eefaca8c284",
+  "artifact_sha256": "194bfbc36193fc0fea3000a4aa182e5a95161e0af84da4b55f6a44aaa877623a",
+  "command": [
+    "/Users/tengyi/.workbuddy-ai/binaries/python/envs/default/bin/python",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/model/test_model.py"
+  ],
+  "scope": "Causality, timestamp ties, train-only vocab, disjoint students, real-data reconstruction, JSON parity, domain gates, monotonic bias, cold starts, consent rejection",
+  "fixtures": "Invariant fixtures only; zero synthetic training rows"
+}

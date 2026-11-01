@@ -1,0 +1,535 @@
+[
+  {
+    "slug": "sci-wave-interference",
+    "archetype": "wave_lab",
+    "title": "Wave Interference — Superposition",
+    "course_id": "physics",
+    "concept": "Superposition and the phase condition for interference",
+    "subjects": ["science", "physics"],
+    "difficulty": "core",
+    "minutes": 8,
+    "prompt": "Two waves share one axis. Predict how they combine, then set a phase to cancel them.",
+    "learning_objective": "Predict whether two waves interfere constructively, destructively or partially, and set a phase difference of 180 degrees to cancel a wave.",
+    "reference": "PhET Wave Interference; ExploreLearning Gizmos Wave Superposition",
+    "spec": {
+      "title": "Wave Interference — Superposition",
+      "instruction": "Predict how the two waves combine, then set a phase to cancel them. The sum is computed point by point.",
+      "x_label": "Distance (m)",
+      "y_label": "Displacement",
+      "x_max": 20,
+      "y_max": 4.5,
+      "challenges": [
+        {
+          "id": "in-step",
+          "kind": "classify",
+          "text": "Wave A and wave B are identical and both have phase 0. Predict how they combine.",
+          "a1": 1, "l1": 4, "p1": 0, "a2": 1, "l2": 4, "p2": 0,
+          "why": "Equal waves with a phase difference of 0 degrees are in step: every crest lines up with a crest, so the displacements add and the peak doubles."
+        },
+        {
+          "id": "half-cycle",
+          "kind": "classify",
+          "text": "Wave B is now 180 degrees out of step with wave A. Predict how they combine.",
+          "a1": 1, "l1": 4, "p1": 0, "a2": 1, "l2": 4, "p2": 180,
+          "why": "A phase difference of 180 degrees is half a cycle: a crest of one meets a trough of the other, so the displacements cancel everywhere."
+        },
+        {
+          "id": "quarter-cycle",
+          "kind": "classify",
+          "text": "Wave B is 90 degrees out of step. Predict how they combine.",
+          "a1": 1.5, "l1": 4, "p1": 0, "a2": 1.5, "l2": 4, "p2": 90,
+          "why": "90 degrees is neither in step nor out of step, so the waves partly reinforce and partly cancel. The resultant amplitude is sqrt(A1^2 + A2^2) here, not A1 + A2."
+        },
+        {
+          "id": "beats",
+          "kind": "classify",
+          "text": "The two waves now have different wavelengths (4 m and 6 m) and the same phase. Predict how they combine.",
+          "a1": 1, "l1": 4, "p1": 0, "a2": 1, "l2": 6, "p2": 0,
+          "why": "With different wavelengths the phase difference grows along the axis, so the waves drift in and out of step and produce beats: reinforcement at some distances, cancellation at others."
+        },
+        {
+          "id": "cancel-equal",
+          "kind": "set_phase",
+          "text": "Two equal waves, wave A fixed at phase 0. Set the phase of wave B so the two waves cancel.",
+          "a1": 1, "l1": 4, "p1": 0, "a2": 1, "l2": 4, "p2": 0,
+          "p2_start": 90, "target": "destructive",
+          "why": "Cancellation needs the waves half a cycle apart, so the phase difference must be 180 degrees (or an odd multiple of it)."
+        },
+        {
+          "id": "add-equal",
+          "kind": "set_phase",
+          "text": "Now set the phase of wave B so the two waves reinforce as strongly as possible.",
+          "a1": 1, "l1": 4, "p1": 0, "a2": 1, "l2": 4, "p2": 0,
+          "p2_start": 270, "target": "constructive",
+          "why": "Maximum reinforcement needs the waves in step, so the phase difference must be a whole number of cycles (0 degrees)."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-wave-cancellation",
+    "archetype": "wave_lab",
+    "title": "Wave Cancellation — Beats and Phasing",
+    "course_id": "physics",
+    "concept": "Interference conditions with unequal amplitudes and wavelengths",
+    "subjects": ["science", "physics"],
+    "difficulty": "stretch",
+    "minutes": 8,
+    "prompt": "Play with amplitude, wavelength and phase, then predict or set the interference condition.",
+    "learning_objective": "Apply the phase condition for interference, including the residual amplitude left when amplitudes are unequal.",
+    "reference": "PhET Wave Interference; standard superposition treatment",
+    "spec": {
+      "title": "Wave Cancellation — Beats and Phasing",
+      "instruction": "Explore the sliders, then answer each task. Remember: in step means a phase difference of 0 degrees, out of step means 180 degrees.",
+      "x_label": "Distance (m)",
+      "y_label": "Displacement",
+      "x_max": 20,
+      "y_max": 4.5,
+      "challenges": [
+        {
+          "id": "free",
+          "kind": "sandbox",
+          "text": "Free play. Move any slider and watch the red sum change.",
+          "a1": 1, "l1": 5, "p1": 0, "a2": 1, "l2": 5, "p2": 0
+        },
+        {
+          "id": "cancel-strong",
+          "kind": "set_phase",
+          "text": "Both waves have amplitude 2 and wavelength 6 m, and wave A has phase 0. Set wave B's phase so the waves cancel.",
+          "a1": 2, "l1": 6, "p1": 0, "a2": 2, "l2": 6, "p2": 0,
+          "p2_start": 45, "target": "destructive",
+          "why": "The wavelengths match and the amplitudes match, so a phase difference of 180 degrees gives complete cancellation."
+        },
+        {
+          "id": "unequal-cancel",
+          "kind": "classify",
+          "text": "Wave A has amplitude 1, wave B has amplitude 2, the wavelengths match, and the phases differ by 180 degrees. Predict how they combine.",
+          "a1": 1, "l1": 5, "p1": 0, "a2": 2, "l2": 5, "p2": 180,
+          "why": "A phase difference of 180 degrees is destructive interference whatever the amplitudes; because the amplitudes differ, the cancellation is only partial, leaving a residual amplitude of |2 - 1| = 1."
+        },
+        {
+          "id": "unequal-quarter",
+          "kind": "classify",
+          "text": "Same amplitudes (1 and 2), same wavelength, but now the phases differ by 90 degrees. Predict how they combine.",
+          "a1": 1, "l1": 5, "p1": 0, "a2": 2, "l2": 5, "p2": 90,
+          "why": "90 degrees is a partial case: the resultant amplitude is sqrt(1^2 + 2^2) = sqrt(5) = 2.24, between |2 - 1| = 1 and 1 + 2 = 3."
+        },
+        {
+          "id": "shifted-add",
+          "kind": "set_phase",
+          "text": "Both waves have amplitude 1.5, wavelength 3 m, and wave A has phase 30 degrees. Set wave B's phase so the waves reinforce as strongly as possible.",
+          "a1": 1.5, "l1": 3, "p1": 30, "a2": 1.5, "l2": 3, "p2": 30,
+          "p2_start": 200, "target": "constructive",
+          "why": "Reinforcement needs the waves in step, so wave B must share wave A's phase: 30 degrees, or any phase that differs from it by a whole number of cycles."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-projectile-range",
+    "archetype": "projectile",
+    "title": "Projectile Motion — Predicting the Range",
+    "course_id": "physics",
+    "concept": "Projectile range R = v^2 sin(2 theta) / g",
+    "subjects": ["science", "physics"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "Explore the launch, then predict the range before you see the arc.",
+    "learning_objective": "Compute a projectile's range from its launch speed and angle using R = v^2 sin(2 theta)/g, and identify complementary angles with equal range.",
+    "reference": "PhET Projectile Motion; standard kinematics",
+    "spec": {
+      "title": "Projectile Motion — Predicting the Range",
+      "instruction": "Play with the launch angle and speed, then answer each task. Take g = 9.81 m/s^2.",
+      "x_label": "Horizontal distance (m)",
+      "y_label": "Height (m)",
+      "x_max": 110,
+      "y_max": 50,
+      "g": 9.81,
+      "angle_min": 5,
+      "angle_max": 85,
+      "speed_min": 5,
+      "speed_max": 30,
+      "challenges": [
+        {
+          "id": "free",
+          "kind": "sandbox",
+          "text": "Free play. Set the angle and speed, then watch the arc with its apex, range and time of flight.",
+          "angle": 45, "speed": 20
+        },
+        {
+          "id": "predict-30",
+          "kind": "predict_range",
+          "text": "A ball is launched at 30 degrees with a speed of 24 m/s. Predict its range, in metres, before checking.",
+          "angle": 30, "speed": 24, "tol": 0.06,
+          "why": "sin(2 x 30) = sin 60 = 0.866, so R = 24^2 x 0.866 / 9.81 = 50.9 m."
+        },
+        {
+          "id": "same-as-25",
+          "kind": "same_range",
+          "text": "A ball is launched at 25 degrees with a speed of 22 m/s. Which of these other angles gives the same range at the same speed?",
+          "angle": 25, "speed": 22, "options": [40, 50, 65, 75],
+          "why": "25 + 65 = 90, and sin(2 theta) = sin(180 - 2 theta), so complementary angles give the same range."
+        },
+        {
+          "id": "predict-60",
+          "kind": "predict_range",
+          "text": "Now a ball is launched at 60 degrees with a speed of 18 m/s. Predict its range, in metres.",
+          "angle": 60, "speed": 18, "tol": 0.06,
+          "why": "sin(2 x 60) = sin 120 = 0.866, so R = 18^2 x 0.866 / 9.81 = 28.6 m. Note this is lower than 45 degrees at the same speed."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-projectile-angles",
+    "archetype": "projectile",
+    "title": "Projectile Motion — Complementary Angles",
+    "course_id": "physics",
+    "concept": "Complementary launch angles and the maximum range at 45 degrees",
+    "subjects": ["science", "physics"],
+    "difficulty": "stretch",
+    "minutes": 7,
+    "prompt": "Predict the range and find the angle that matches it.",
+    "learning_objective": "Relate launch angle to range and explain why 45 degrees gives the greatest range for a given speed.",
+    "reference": "PhET Projectile Motion; standard kinematics",
+    "spec": {
+      "title": "Projectile Motion — Complementary Angles",
+      "instruction": "Explore the arc, then predict ranges and match angles. Take g = 9.81 m/s^2.",
+      "x_label": "Horizontal distance (m)",
+      "y_label": "Height (m)",
+      "x_max": 110,
+      "y_max": 50,
+      "g": 9.81,
+      "angle_min": 5,
+      "angle_max": 85,
+      "speed_min": 5,
+      "speed_max": 30,
+      "challenges": [
+        {
+          "id": "free",
+          "kind": "sandbox",
+          "text": "Free play. Try 30 degrees and 60 degrees at the same speed and compare the ranges.",
+          "angle": 40, "speed": 25
+        },
+        {
+          "id": "predict-45",
+          "kind": "predict_range",
+          "text": "A ball is launched at 45 degrees with a speed of 30 m/s. Predict its range, in metres.",
+          "angle": 45, "speed": 30, "tol": 0.05,
+          "why": "At 45 degrees sin(2 theta) = 1, its largest value, so R = v^2/g = 900/9.81 = 91.7 m. That is the maximum range for this speed."
+        },
+        {
+          "id": "same-as-35",
+          "kind": "same_range",
+          "text": "A ball is launched at 35 degrees with a speed of 26 m/s. Which of these other angles gives the same range at the same speed?",
+          "angle": 35, "speed": 26, "options": [45, 55, 60, 70],
+          "why": "35 + 55 = 90. Complementary angles have the same sin(2 theta), so they give equal ranges; the 55 degree launch is slower to rise but travels further horizontally."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-punnett-monohybrid",
+    "archetype": "punnett",
+    "title": "Monohybrid Cross — Dominant and Recessive",
+    "course_id": "biology",
+    "concept": "Monohybrid inheritance and the 3:1 phenotype ratio",
+    "subjects": ["science", "biology"],
+    "difficulty": "intro",
+    "minutes": 7,
+    "prompt": "Cross two parents and read the offspring genotypes and phenotype ratio.",
+    "learning_objective": "Derive the phenotype ratio of a monohybrid cross from the Punnett square, and find the probability of a given genotype.",
+    "reference": "ExploreLearning Gizmos Mouse Genetics; standard Mendelian genetics",
+    "spec": {
+      "title": "Monohybrid Cross — Dominant and Recessive",
+      "instruction": "The square and the ratio are built from the two parents. Predict before you check.",
+      "traits": [
+        {
+          "gene": "Flower colour",
+          "mode": "dominant",
+          "dominant_letter": "P",
+          "recessive_letter": "p",
+          "dominant_label": "Purple flowers",
+          "recessive_label": "White flowers"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "het-x-het",
+          "kind": "ratio",
+          "text": "Cross two heterozygous purple plants, Pp x Pp. Predict the phenotype ratio of the offspring.",
+          "parent1": "Pp", "parent2": "Pp",
+          "options": ["3:1", "1:1", "1:2:1", "9:3:3:1"],
+          "why": "Each parent makes P and p gametes, so the square is 3 purple (PP, Pp, Pp) to 1 white (pp)."
+        },
+        {
+          "id": "prob-white",
+          "kind": "probability",
+          "text": "From the cross Pp x Pp, what is the probability that an offspring is homozygous recessive (pp) and so has white flowers?",
+          "parent1": "Pp", "parent2": "Pp",
+          "ask": "pp",
+          "options": ["1/4", "1/2", "3/4", "1/16"],
+          "why": "Exactly one of the four equally likely squares is pp, so the probability is 1/4."
+        },
+        {
+          "id": "het-x-rec",
+          "kind": "ratio",
+          "text": "Now cross a heterozygous plant with a white-flowered plant, Pp x pp. Predict the phenotype ratio.",
+          "parent1": "Pp", "parent2": "pp",
+          "options": ["3:1", "1:1", "1:2:1", "2:1"],
+          "why": "Pp makes P and p gametes while pp makes only p, so half the offspring are purple (Pp) and half white (pp): 1:1."
+        },
+        {
+          "id": "build-31",
+          "kind": "build",
+          "text": "Choose two parent genotypes whose cross gives a 3:1 ratio of purple to white flowers.",
+          "target": "3:1",
+          "why": "Two heterozygotes, Pp x Pp, give 3 purple to 1 white. Crossing a heterozygote with a homozygous dominant (PP x Pp) gives all purple, and Pp x pp gives 1:1."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-punnett-dihybrid",
+    "archetype": "punnett",
+    "title": "Dihybrid Cross — Independent Assortment",
+    "course_id": "ap_biology",
+    "concept": "Dihybrid crosses and the 9:3:3:1 ratio",
+    "subjects": ["science", "biology"],
+    "difficulty": "stretch",
+    "minutes": 9,
+    "prompt": "Cross two parents for two traits and read the four-phenotype ratio.",
+    "learning_objective": "Derive the phenotype ratio of a dihybrid cross, and the probability of a specific two-trait genotype.",
+    "reference": "ExploreLearning Gizmos Chicken Genetics; standard Mendelian genetics",
+    "spec": {
+      "title": "Dihybrid Cross — Independent Assortment",
+      "instruction": "Two traits: seed shape (R/r) and seed colour (Y/y). The square is built from the parents you set.",
+      "traits": [
+        {
+          "gene": "Seed shape",
+          "mode": "dominant",
+          "dominant_letter": "R",
+          "recessive_letter": "r",
+          "dominant_label": "Round",
+          "recessive_label": "Wrinkled"
+        },
+        {
+          "gene": "Seed colour",
+          "mode": "dominant",
+          "dominant_letter": "Y",
+          "recessive_letter": "y",
+          "dominant_label": "Yellow",
+          "recessive_label": "Green"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "dihybrid-x-dihybrid",
+          "kind": "ratio",
+          "text": "Cross two plants heterozygous for both traits, RrYy x RrYy. Predict the phenotype ratio.",
+          "parent1": "RrYy", "parent2": "RrYy",
+          "options": ["9:3:3:1", "1:1:1:1", "3:1", "1:2:1"],
+          "why": "Each parent makes four gamete types (RY, Ry, rY, ry), so the 4 x 4 square gives 9 round-yellow : 3 round-green : 3 wrinkled-yellow : 1 wrinkled-green."
+        },
+        {
+          "id": "prob-double-rec",
+          "kind": "probability",
+          "text": "From RrYy x RrYy, what is the probability that an offspring is rryy (wrinkled and green)?",
+          "parent1": "RrYy", "parent2": "RrYy",
+          "ask": "rryy",
+          "options": ["1/16", "1/4", "1/8", "3/16"],
+          "why": "Only one of the sixteen squares is rryy, so the probability is 1/16. Each recessive trait on its own is 1/4, and 1/4 x 1/4 = 1/16."
+        },
+        {
+          "id": "testcross",
+          "kind": "ratio",
+          "text": "Now cross a double heterozygote with a double recessive, RrYy x rryy. Predict the phenotype ratio.",
+          "parent1": "RrYy", "parent2": "rryy",
+          "options": ["9:3:3:1", "1:1:1:1", "3:1", "1:2:1"],
+          "why": "This is a test cross: the rryy parent contributes only recessive alleles, so the four gametes of RrYy show up directly as four equally likely phenotypes, 1:1:1:1."
+        },
+        {
+          "id": "build-testcross",
+          "kind": "build",
+          "text": "Choose two parents whose cross gives a 1:1:1:1 ratio across the four phenotypes.",
+          "target": "1:1:1:1",
+          "why": "A double heterozygote crossed with a double recessive (RrYy x rryy) gives 1:1:1:1. Crossing two double heterozygotes gives 9:3:3:1 instead."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-punnett-incomplete",
+    "archetype": "punnett",
+    "title": "Incomplete Dominance — Blending",
+    "course_id": "biology",
+    "concept": "Incomplete dominance and the 1:2:1 phenotype ratio",
+    "subjects": ["science", "biology"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Cross two pink-flowered plants and read the ratio of the three phenotypes.",
+    "learning_objective": "Explain why incomplete dominance gives a 1:2:1 phenotype ratio rather than 3:1.",
+    "reference": "ExploreLearning Gizmos; standard non-Mendelian inheritance",
+    "spec": {
+      "title": "Incomplete Dominance — Blending",
+      "instruction": "Red (RR) crossed with white (WW) gives pink (RW). Work out the ratio from the square.",
+      "traits": [
+        {
+          "gene": "Flower colour",
+          "mode": "incomplete",
+          "dominant_letter": "R",
+          "recessive_letter": "W",
+          "dominant_label": "Red flowers",
+          "recessive_label": "White flowers",
+          "hetero_label": "Pink flowers"
+        }
+      ],
+      "challenges": [
+        {
+          "id": "pink-x-pink",
+          "kind": "ratio",
+          "text": "Cross two pink-flowered plants, RW x RW. Predict the phenotype ratio of the offspring.",
+          "parent1": "RW", "parent2": "RW",
+          "options": ["1:2:1", "3:1", "1:1", "9:3:3:1"],
+          "why": "The heterozygote has its own phenotype, so the ratio of red : pink : white follows the genotypes 1:2:1, not the 3:1 of complete dominance."
+        },
+        {
+          "id": "prob-pink",
+          "kind": "probability",
+          "text": "From RW x RW, what is the probability that an offspring is heterozygous (RW) and so pink?",
+          "parent1": "RW", "parent2": "RW",
+          "ask": "RW",
+          "options": ["1/2", "1/4", "3/4", "1/16"],
+          "why": "Two of the four squares are RW, so the probability is 2/4 = 1/2. The heterozygote is the most common outcome."
+        },
+        {
+          "id": "build-121",
+          "kind": "build",
+          "text": "Choose two parent genotypes whose cross gives a 1:2:1 ratio of red to pink to white flowers.",
+          "target": "1:2:1",
+          "why": "Two pink plants, RW x RW, give 1 red : 2 pink : 1 white. Red x white gives all pink, and pink x white gives 1 pink : 1 white."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-orbit-escape",
+    "archetype": "orbit_gravity",
+    "title": "Gravity and Orbits — The Escape Speed",
+    "course_id": "earth_space_science",
+    "concept": "Orbital energy and the escape speed sqrt(2GM/r)",
+    "subjects": ["science", "physics", "earth_science"],
+    "difficulty": "core",
+    "minutes": 8,
+    "prompt": "Launch a satellite and predict whether it orbits, crashes or escapes.",
+    "learning_objective": "Classify a satellite's fate from its launch speed relative to the escape speed, and find the speed for a circular orbit.",
+    "reference": "PhET Gravity and Orbits; standard orbital mechanics",
+    "spec": {
+      "title": "Gravity and Orbits — The Escape Speed",
+      "instruction": "Predict the fate of the satellite, then check by running the orbit. The escape speed is sqrt(2GM/r).",
+      "orbit_radius": 7000000,
+      "body_radius": 6371000,
+      "view_radius": 21000000,
+      "mass_min": 1,
+      "mass_max": 20,
+      "speed_min": 2,
+      "speed_max": 16,
+      "challenges": [
+        {
+          "id": "free",
+          "kind": "sandbox",
+          "text": "Free play. Set the central mass and the launch speed, then watch the orbit.",
+          "mass": 5.972, "speed": 7.55
+        },
+        {
+          "id": "escape-fast",
+          "kind": "classify",
+          "text": "Central mass 5.97 x 10^24 kg (Earth). The satellite is launched at 12.0 km/s. Predict its fate.",
+          "mass": 5.972, "speed": 12,
+          "why": "The escape speed at this radius is 10.67 km/s. At 12.0 km/s the total energy is positive, so the satellite is unbound and escapes."
+        },
+        {
+          "id": "crash-slow",
+          "kind": "classify",
+          "text": "Same central mass, but the satellite is launched at only 7.0 km/s. Predict its fate.",
+          "mass": 5.972, "speed": 7.0,
+          "why": "The circular speed is 7.55 km/s. At 7.0 km/s the launch point is the apoapsis and the periapsis falls below the surface, so the orbit hits the body."
+        },
+        {
+          "id": "stable",
+          "kind": "classify",
+          "text": "Same central mass, launched at 9.5 km/s. Predict its fate.",
+          "mass": 5.972, "speed": 9.5,
+          "why": "9.5 km/s is above the circular speed of 7.55 km/s but below the escape speed of 10.67 km/s, so the orbit is a bound ellipse that stays clear of the body."
+        },
+        {
+          "id": "find-circular",
+          "kind": "set_speed",
+          "text": "Central mass 5.97 x 10^24 kg. Find the launch speed that gives a circular orbit (within 3%).",
+          "mass": 5.972, "speed": 9.0, "target": "circular", "tol": 0.03,
+          "why": "A circular orbit needs the speed sqrt(GM/r) = 7.55 km/s, where gravity supplies exactly the required centripetal acceleration."
+        },
+        {
+          "id": "find-escape-heavy",
+          "kind": "set_speed",
+          "text": "Now the central mass is 12 x 10^24 kg. Find a launch speed that escapes.",
+          "mass": 12, "speed": 10.0, "target": "escape",
+          "why": "With a heavier body the escape speed rises to sqrt(2GM/r) = 15.1 km/s, so you need a much higher launch speed than for Earth."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "sci-orbit-velocity",
+    "archetype": "orbit_gravity",
+    "title": "Orbits and Mass — How Speed Sets the Path",
+    "course_id": "physics",
+    "concept": "Circular speed and escape speed scale with the central mass",
+    "subjects": ["science", "physics"],
+    "difficulty": "stretch",
+    "minutes": 8,
+    "prompt": "Change the central mass and predict how the orbit changes.",
+    "learning_objective": "Predict how the circular and escape speeds depend on the central mass, and classify orbits across masses.",
+    "reference": "PhET Gravity and Orbits; standard orbital mechanics",
+    "spec": {
+      "title": "Orbits and Mass — How Speed Sets the Path",
+      "instruction": "The escape speed grows with the square root of the central mass. Predict each fate, then check.",
+      "orbit_radius": 7000000,
+      "body_radius": 6371000,
+      "view_radius": 21000000,
+      "mass_min": 1,
+      "mass_max": 20,
+      "speed_min": 2,
+      "speed_max": 16,
+      "challenges": [
+        {
+          "id": "free",
+          "kind": "sandbox",
+          "text": "Free play. Halve the mass and see what happens to the escape speed.",
+          "mass": 5.972, "speed": 8
+        },
+        {
+          "id": "light-fast",
+          "kind": "classify",
+          "text": "Central mass 2 x 10^24 kg. The satellite is launched at 5.0 km/s. Predict its fate.",
+          "mass": 2, "speed": 5,
+          "why": "For this lighter body the circular speed is 4.37 km/s and the escape speed is 6.18 km/s. At 5.0 km/s the orbit is bound and clear of the body."
+        },
+        {
+          "id": "light-escape",
+          "kind": "classify",
+          "text": "Same light body (2 x 10^24 kg), but launched at 7.0 km/s. Predict its fate.",
+          "mass": 2, "speed": 7,
+          "why": "The escape speed is only 6.18 km/s here, so 7.0 km/s is above it and the satellite escapes."
+        },
+        {
+          "id": "heavy-crash",
+          "kind": "classify",
+          "text": "Now a heavy body, 10 x 10^24 kg, launched at 6.0 km/s. Predict its fate.",
+          "mass": 10, "speed": 6,
+          "why": "The circular speed is 9.76 km/s, so 6.0 km/s is far too slow: the satellite is bound but its periapsis falls inside the body and it crashes."
+        }
+      ]
+    }
+  }
+]

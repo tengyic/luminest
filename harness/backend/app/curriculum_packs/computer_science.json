@@ -1,0 +1,1812 @@
+{
+ "schema": 1,
+ "name": "computer_science",
+ "title": "computer_science",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "topic",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Computer Science — Programming, Data and Systems",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "An introductory computer science course: computational thinking, programming fundamentals, data structures, algorithms, systems and networks, and the ethics of computing."
+ },
+ "taxonomy": {
+  "strands": {
+   "Computational Thinking": {
+    "Foundations of computing": [
+     "What computation is"
+    ]
+   },
+   "Programming": {
+    "Programming fundamentals": [
+     "Building blocks of a program",
+     "Working with data",
+     "Program quality"
+    ]
+   },
+   "Data Structures and Algorithms": {
+    "Core structures and analysis": [
+     "Data structures",
+     "Algorithms"
+    ]
+   },
+   "Systems, Networks and Society": {
+    "How computers work": [
+     "Hardware and architecture",
+     "Networks and security",
+     "Computing and society"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Computational Thinking",
+    "units": [
+     "Foundations of computing"
+    ]
+   },
+   {
+    "strand": "Programming",
+    "units": [
+     "Programming fundamentals"
+    ]
+   },
+   {
+    "strand": "Data Structures and Algorithms",
+    "units": [
+     "Core structures and analysis"
+    ]
+   },
+   {
+    "strand": "Systems, Networks and Society",
+    "units": [
+     "How computers work"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "abstract_data_types",
+   "title": "Abstract data types",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "abstract data type",
+    "interface",
+    "operations"
+   ],
+   "summary": "An abstract data type is defined by its operations, not by how those operations are implemented.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "algorithm_efficiency_and_big_o",
+   "title": "Algorithm efficiency and Big-O",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "graphs_and_their_representations"
+   ],
+   "keywords": [
+    "Big-O",
+    "complexity",
+    "growth"
+   ],
+   "summary": "Big-O describes how running time grows with input size, ignoring constants and hardware.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "algorithmic_bias_and_fairness",
+   "title": "Algorithmic bias and fairness",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Computing and society",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "data_privacy_and_consent"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bias",
+    "fairness",
+    "training data"
+   ],
+   "summary": "A model trained on biased data reproduces that bias, and it can do so while appearing objective.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "algorithms_and_algorithmic_thinking",
+   "title": "Algorithms and algorithmic thinking",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "algorithm",
+    "sequence",
+    "unambiguous"
+   ],
+   "summary": "An algorithm is a finite, unambiguous sequence of steps, and writing one down is a separate skill from running it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "automation_work_and_responsibility",
+   "title": "Automation, work and responsibility",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Computing and society",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algorithmic_bias_and_fairness",
+    "environmental_and_social_cost_of_computing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accountability",
+    "automation",
+    "responsibility"
+   ],
+   "summary": "Automating a decision does not move responsibility for it away from the people who deployed it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "binary_representation",
+   "title": "Binary representation",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "pattern_recognition_and_generalisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binary",
+    "bit",
+    "encoding"
+   ],
+   "summary": "Computers store everything as bits, so numbers, text, images and sound are all encodings.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "boolean_logic_and_truth_tables",
+   "title": "Boolean logic and truth tables",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "binary_representation",
+    "representing_text_images_and_sound"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Boolean",
+    "logic gate",
+    "truth table"
+   ],
+   "summary": "AND, OR and NOT combine conditions, and a truth table enumerates every case.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "common_attack_classes",
+   "title": "Common attack classes",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "encryption_and_authentication"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "injection",
+    "malware",
+    "phishing"
+   ],
+   "summary": "Malware, phishing, injection and denial of service each exploit a different assumption.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "comparison_sorting_algorithms",
+   "title": "Comparison sorting algorithms",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "algorithm_efficiency_and_big_o",
+    "linear_and_binary_search"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "merge sort",
+    "quick sort",
+    "sorting"
+   ],
+   "summary": "Bubble, insertion, merge and quick sort differ in average and worst-case behaviour, not just speed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "compilers_and_interpreters",
+   "title": "Compilers and interpreters",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Hardware and architecture",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_stored_program_concept",
+    "operating_systems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compiler",
+    "interpreter",
+    "translation"
+   ],
+   "summary": "A compiler translates the whole program before running it; an interpreter translates as it goes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "data_privacy_and_consent",
+   "title": "Data, privacy and consent",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Computing and society",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "defensive_practice"
+   ],
+   "keywords": [
+    "consent",
+    "minimisation",
+    "privacy"
+   ],
+   "summary": "Personal data has value, and consent, minimisation and retention limits are the mechanisms that constrain its use.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "debugging_and_tracing",
+   "title": "Debugging and tracing",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Program quality",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "records_and_structured_data"
+   ],
+   "keywords": [
+    "debugging",
+    "hypothesis",
+    "trace"
+   ],
+   "summary": "Debugging is hypothesis testing: form a guess about the cause and design a check that would falsify it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "decomposition_and_abstraction",
+   "title": "Decomposition and abstraction",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algorithms_and_algorithmic_thinking"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "abstraction",
+    "decomposition",
+    "problem solving"
+   ],
+   "summary": "Breaking a problem into smaller pieces and hiding detail are the two moves most problem solving depends on.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "defensive_practice",
+   "title": "Defensive practice",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "common_attack_classes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "least privilege",
+    "patching",
+    "validation"
+   ],
+   "summary": "Input validation, least privilege and patching remove whole classes of vulnerability rather than individual bugs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "dictionaries_and_key_value_data",
+   "title": "Dictionaries and key-value data",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "lists_and_arrays",
+    "iterating_over_collections"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dictionary",
+    "key value",
+    "lookup"
+   ],
+   "summary": "A dictionary maps a key to a value, giving fast lookup by meaning rather than by position.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "divide_and_conquer",
+   "title": "Divide and conquer",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "recursion",
+    "algorithm_efficiency_and_big_o",
+    "shortest_paths"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combine",
+    "divide and conquer",
+    "recurrence"
+   ],
+   "summary": "Splitting a problem, solving the parts and combining the results is a pattern with a predictable cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "encryption_and_authentication",
+   "title": "Encryption and authentication",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "protocols_and_layering",
+    "packets_and_routing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "authentication",
+    "certificate",
+    "encryption"
+   ],
+   "summary": "Encryption protects confidentiality while authentication establishes who is on the other end, and they solve different problems.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "environmental_and_social_cost_of_computing",
+   "title": "Environmental and social cost of computing",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Computing and society",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "data_privacy_and_consent",
+    "intellectual_property_and_licensing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "e-waste",
+    "energy",
+    "sustainability"
+   ],
+   "summary": "Computation consumes energy and materials, and the cost is distributed unevenly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "errors_exceptions_and_validation",
+   "title": "Errors, exceptions and validation",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Program quality",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "debugging_and_tracing",
+    "testing_and_test_cases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "runtime error",
+    "syntax error",
+    "validation"
+   ],
+   "summary": "Distinguishing a syntax error, a runtime error and a logic error tells you where to look.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "functions_and_parameters",
+   "title": "Functions and parameters",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "iteration_and_loops",
+    "nested_loops_and_pattern_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "function",
+    "parameter",
+    "return"
+   ],
+   "summary": "A function names a reusable block, takes inputs and returns a result, which is how programs stay readable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "graph_traversal",
+   "title": "Graph traversal",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "graphs_and_their_representations",
+    "comparison_sorting_algorithms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "breadth-first",
+    "depth-first",
+    "traversal"
+   ],
+   "summary": "Depth-first and breadth-first traversal visit the same nodes in different orders for different purposes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "graphs_and_their_representations",
+   "title": "Graphs and their representations",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "trees_and_binary_search_trees",
+    "hash_tables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adjacency",
+    "edge",
+    "graph"
+   ],
+   "summary": "Adjacency lists and matrices represent the same graph with different cost profiles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "hash_tables",
+   "title": "Hash tables",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "dictionaries_and_key_value_data",
+    "trees_and_binary_search_trees"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "collision",
+    "constant time",
+    "hash table"
+   ],
+   "summary": "Hashing turns a key into an index, giving near-constant lookup at the cost of collisions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "input_output_and_casting",
+   "title": "Input, output and casting",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "variables_types_and_assignment",
+    "operators_and_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "casting",
+    "input",
+    "output"
+   ],
+   "summary": "Reading input as text and converting it to the type you need is where most beginner bugs live.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "intellectual_property_and_licensing",
+   "title": "Intellectual property and licensing",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Computing and society",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "data_privacy_and_consent",
+    "algorithmic_bias_and_fairness"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "attribution",
+    "copyright",
+    "licence"
+   ],
+   "summary": "Copyright, patents and open licences grant different rights, and using work without checking is a real risk.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "iterating_over_collections",
+   "title": "Iterating over collections",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "lists_and_arrays"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "collection",
+    "iteration",
+    "traversal"
+   ],
+   "summary": "Traversing a collection with a loop is the pattern behind searching, counting and transforming.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "iteration_and_loops",
+   "title": "Iteration and loops",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "selection_and_conditional_logic"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "for while",
+    "iteration",
+    "loop"
+   ],
+   "summary": "A loop repeats work, and the three parts that matter are initialisation, condition and update.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "linear_and_binary_search",
+   "title": "Linear and binary search",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algorithm_efficiency_and_big_o"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binary search",
+    "logarithmic",
+    "sorted"
+   ],
+   "summary": "Binary search is far faster but demands sorted input, which is the trade it makes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "linked_lists",
+   "title": "Linked lists",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "abstract_data_types",
+    "queues"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "linked list",
+    "node",
+    "pointer"
+   ],
+   "summary": "Nodes pointing to nodes allow cheap insertion and removal but lose random access.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "lists_and_arrays",
+   "title": "Lists and arrays",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "strings_and_string_processing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "array",
+    "index",
+    "list"
+   ],
+   "summary": "An indexed collection stores many values under one name and allows traversal and modification.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "logic_circuits",
+   "title": "Logic circuits",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "boolean_logic_and_truth_tables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "circuit",
+    "hardware",
+    "logic gate"
+   ],
+   "summary": "Logic gates implement Boolean expressions in hardware, and any circuit can be described by a truth table.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "memory_and_storage_hierarchy",
+   "title": "Memory and storage hierarchy",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Hardware and architecture",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_fetch_decode_execute_cycle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "RAM",
+    "cache",
+    "hierarchy"
+   ],
+   "summary": "Registers, cache, RAM and disk trade speed against capacity and cost at every level.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "nested_loops_and_pattern_problems",
+   "title": "Nested loops and pattern problems",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "iteration_and_loops"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complexity",
+    "nested loop",
+    "pattern"
+   ],
+   "summary": "A loop inside a loop scales multiplicatively, which is both its power and its cost.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "networks_and_topologies",
+   "title": "Networks and topologies",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "compilers_and_interpreters"
+   ],
+   "keywords": [
+    "mesh",
+    "star",
+    "topology"
+   ],
+   "summary": "Star, mesh and bus topologies differ in resilience and cost, and the choice follows from the requirement.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "number_bases_and_conversion",
+   "title": "Number bases and conversion",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "binary_representation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binary",
+    "conversion",
+    "hexadecimal"
+   ],
+   "summary": "Binary, denary and hexadecimal are the same values written differently, and conversion is repeated division or grouping.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "operating_systems",
+   "title": "Operating systems",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Hardware and architecture",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "memory_and_storage_hierarchy",
+    "the_stored_program_concept"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "operating system",
+    "process",
+    "resource"
+   ],
+   "summary": "An operating system manages memory, processes, files and devices so programs need not each do it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "operators_and_expressions",
+   "title": "Operators and expressions",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "variables_types_and_assignment"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "expression",
+    "operator",
+    "precedence"
+   ],
+   "summary": "Arithmetic, comparison and logical operators combine values, and precedence decides the order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "optimisation_and_greedy_methods",
+   "title": "Optimisation and greedy methods",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algorithm_efficiency_and_big_o",
+    "divide_and_conquer"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "counterexample",
+    "greedy",
+    "optimisation"
+   ],
+   "summary": "A greedy choice is fast and sometimes optimal, and knowing when it fails is the real skill.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "packets_and_routing",
+   "title": "Packets and routing",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "protocols_and_layering"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "packet",
+    "reassembly",
+    "routing"
+   ],
+   "summary": "Data is split into packets that may take different routes and are reassembled at the destination.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "pattern_recognition_and_generalisation",
+   "title": "Pattern recognition and generalisation",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "decomposition_and_abstraction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "generalisation",
+    "pattern",
+    "structure"
+   ],
+   "summary": "Spotting that two problems share a structure lets one solution serve both.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "protocols_and_layering",
+   "title": "Protocols and layering",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Networks and security",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "networks_and_topologies"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "TCP/IP",
+    "layer",
+    "protocol"
+   ],
+   "summary": "Splitting communication into layers lets each layer be replaced without rewriting the others.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "queues",
+   "title": "Queues",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "abstract_data_types",
+    "stacks"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "FIFO",
+    "enqueue",
+    "queue"
+   ],
+   "summary": "A queue is first in first out, which is what fair scheduling and breadth-first traversal need.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "readability_and_naming",
+   "title": "Readability and naming",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Program quality",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "functions_and_parameters",
+    "errors_exceptions_and_validation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "naming",
+    "readability",
+    "style"
+   ],
+   "summary": "Code is read far more often than it is written, so naming and structure are functional requirements.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "reading_and_writing_files",
+   "title": "Reading and writing files",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "dictionaries_and_key_value_data",
+    "sorting_and_searching_in_practice"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "file",
+    "persistence",
+    "read write"
+   ],
+   "summary": "Programs outlive their own run only if they persist data, and files are the simplest persistence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "records_and_structured_data",
+   "title": "Records and structured data",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "dictionaries_and_key_value_data",
+    "reading_and_writing_files"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "field",
+    "record",
+    "struct"
+   ],
+   "summary": "Grouping related fields into one record makes code express the domain rather than the storage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "recursion",
+   "title": "Recursion",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Program quality",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "functions_and_parameters",
+    "readability_and_naming"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "base case",
+    "call stack",
+    "recursion"
+   ],
+   "summary": "A function that calls itself needs a base case, and without one it never terminates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "representing_text_images_and_sound",
+   "title": "Representing text, images and sound",
+   "strand": "Computational Thinking",
+   "unit": "Foundations of computing",
+   "topic": "What computation is",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "binary_representation",
+    "number_bases_and_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ASCII",
+    "pixel",
+    "sampling"
+   ],
+   "summary": "Each medium has a standard encoding, and every encoding trades quality against size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "scope_and_lifetime",
+   "title": "Scope and lifetime",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "functions_and_parameters"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "lifetime",
+    "local",
+    "scope"
+   ],
+   "summary": "Where a name is visible and how long its value survives are decided by where it was declared.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "selection_and_conditional_logic",
+   "title": "Selection and conditional logic",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "operators_and_expressions",
+    "input_output_and_casting"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "branch",
+    "condition",
+    "if"
+   ],
+   "summary": "A condition chooses which block runs, and nesting conditions expresses compound decisions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "shortest_paths",
+   "title": "Shortest paths",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Algorithms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "graph_traversal"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Dijkstra",
+    "shortest path",
+    "weight"
+   ],
+   "summary": "Dijkstra's algorithm grows a known-distance set outward, which is only correct for non-negative weights.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "sorting_and_searching_in_practice",
+   "title": "Sorting and searching in practice",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "iterating_over_collections",
+    "dictionaries_and_key_value_data"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "built-in",
+    "search",
+    "sort"
+   ],
+   "summary": "Using a built-in sort or search correctly is a different skill from implementing one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "stacks",
+   "title": "Stacks",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "abstract_data_types"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "LIFO",
+    "push pop",
+    "stack"
+   ],
+   "summary": "A stack is last in first out, which is exactly what nested structure such as brackets and call frames needs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "strings_and_string_processing",
+   "title": "Strings and string processing",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Working with data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "scope_and_lifetime"
+   ],
+   "keywords": [
+    "index",
+    "slice",
+    "string"
+   ],
+   "summary": "Text is a sequence of characters, so indexing, slicing and joining are the core operations.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "testing_and_test_cases",
+   "title": "Testing and test cases",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Program quality",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "debugging_and_tracing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary",
+    "invalid case",
+    "testing"
+   ],
+   "summary": "Normal, boundary and invalid cases each catch a different class of defect.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "the_fetch_decode_execute_cycle",
+   "title": "The fetch-decode-execute cycle",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Hardware and architecture",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "CPU",
+    "fetch decode execute",
+    "instruction"
+   ],
+   "summary": "A processor repeatedly fetches an instruction, decodes it and executes it, which is all a CPU does.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "the_stored_program_concept",
+   "title": "The stored program concept",
+   "strand": "Systems, Networks and Society",
+   "unit": "How computers work",
+   "topic": "Hardware and architecture",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_fetch_decode_execute_cycle",
+    "memory_and_storage_hierarchy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "memory",
+    "stored program",
+    "von Neumann"
+   ],
+   "summary": "Instructions and data live in the same memory, which is what makes a general-purpose computer possible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "trees_and_binary_search_trees",
+   "title": "Trees and binary search trees",
+   "strand": "Data Structures and Algorithms",
+   "unit": "Core structures and analysis",
+   "topic": "Data structures",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "linked_lists"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binary search tree",
+    "hierarchy",
+    "tree"
+   ],
+   "summary": "A tree encodes hierarchy, and the search-tree ordering rule turns lookup into a sequence of comparisons.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "variables_types_and_assignment",
+   "title": "Variables, types and assignment",
+   "strand": "Programming",
+   "unit": "Programming fundamentals",
+   "topic": "Building blocks of a program",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "logic_circuits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "assignment",
+    "type",
+    "variable"
+   ],
+   "summary": "A variable is a named location holding a value of some type, and assignment replaces what was there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Computer Science — Programming, Data and Systems",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  }
+ ]
+}

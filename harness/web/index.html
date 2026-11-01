@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luminfest Workbench</title>
+<link rel="stylesheet" href="/web/styles.css">
+</head>
+<body>
+<div id="app" class="app" data-status="idle">
+
+  <!-- ----------------------------------------------------- sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand">Luminfest <span>workbench</span></div>
+      <button id="new-session-btn" class="btn btn-ghost btn-small" title="Start a new chat session">+ New</button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="panel-label">Simulations</div>
+      <ul id="sim-list" class="sim-list"></ul>
+    </div>
+
+    <div class="sidebar-section grow">
+      <div class="panel-label">Sessions</div>
+      <ul id="session-list" class="session-list"></ul>
+    </div>
+
+    <div class="sidebar-foot">
+      <div class="role-toggle" id="role-toggle" role="radiogroup" aria-label="Role">
+        <button class="role-btn" data-role="student" aria-selected="true">Student</button>
+        <button class="role-btn" data-role="teacher" aria-selected="false">Teacher</button>
+      </div>
+      <div id="auth-row" class="auth-row hidden">
+        <input id="token-input" type="password" placeholder="Paste access token" autocomplete="off">
+        <button id="token-save" class="btn btn-small">Save</button>
+      </div>
+      <div class="conn-row">
+        <span id="conn-dot" class="conn-dot"></span>
+        <span id="conn-text">checking API…</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ----------------------------------------------------- main -->
+  <main class="main">
+    <div class="main-topbar">
+      <button id="sidebar-toggle" class="btn btn-ghost btn-small" title="Toggle sidebar">☰</button>
+      <div id="sim-title" class="sim-title">No simulation loaded</div>
+      <span id="status-pill" class="status-pill" data-status="idle">idle</span>
+      <button id="sim-refresh" class="btn btn-ghost btn-small" title="Reload simulation">⟳ Reload sim</button>
+    </div>
+
+    <div class="canvas-wrap" id="canvas-wrap">
+      <div class="canvas-head">
+        <span class="panel-label">Simulation canvas</span>
+        <span class="canvas-hint">Hover to inspect · click to select · then explain or request a change</span>
+      </div>
+      <div class="canvas-stage" id="canvas-stage">
+        <iframe id="sim-frame" class="sim-frame" sandbox="allow-scripts"
+                title="Simulation preview"></iframe>
+        <div id="sim-overlay" class="sim-overlay">
+          <div id="hover-box" class="hover-box hidden"></div>
+          <div id="select-box" class="select-box hidden"></div>
+          <div id="select-popover" class="select-popover hidden">
+            <div id="popover-label" class="popover-label"></div>
+            <button id="btn-explain" class="btn btn-primary btn-small">Explain this</button>
+            <button id="btn-request" class="btn btn-small">Request change…</button>
+          </div>
+        </div>
+        <div id="canvas-empty" class="canvas-empty">
+          <div>
+            <p><strong>No simulation selected.</strong></p>
+            <p>Pick one in the sidebar, or ask your teacher to publish one.</p>
+          </div>
+        </div>
+        <div id="canvas-note" class="canvas-note hidden"></div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------- teacher: course studio -->
+    <div id="course-studio" class="course-studio hidden">
+      <div class="studio-head">
+        <span class="panel-label">Course studio — a specialised course from your own source</span>
+        <span class="studio-note">PDF, DOCX, TXT, MD or an https link. Nothing is shared with other
+        accounts; the course belongs to you.</span>
+      </div>
+      <div class="studio-row">
+        <input type="file" id="studio-file" class="studio-file"
+               accept=".pdf,.docx,.txt,.md,.markdown,.html,.htm">
+        <input type="text" id="studio-title" class="studio-field" maxlength="200"
+               placeholder="Course title (optional)">
+        <input type="text" id="studio-subject" class="studio-field" maxlength="80"
+               placeholder="Subject (optional)">
+      </div>
+      <div class="studio-row">
+        <input type="url" id="studio-url" class="studio-field studio-url" maxlength="2000"
+               placeholder="…or paste an https link to a page (the file above is then ignored)">
+      </div>
+      <div class="studio-row">
+        <button id="studio-preview" class="btn btn-small">Preview the plan</button>
+        <button id="studio-save" class="btn btn-primary btn-small hidden">Save &amp; make it active</button>
+        <span id="studio-status" class="studio-status"></span>
+      </div>
+      <div id="studio-plan" class="studio-plan hidden"></div>
+    </div>
+
+    <!-- --------------------------------------------- teacher: TA studio -->
+    <div id="ta-studio" class="ta-studio hidden">
+      <div class="studio-head">
+        <span class="panel-label">Teaching assistant — works on its own, reports back here</span>
+        <span class="studio-note">The TA searches the web, fetches licence-cleared images and builds
+          decks and diagrams on its own turn. Every asset it produces arrives in this feed with its
+          credit line; nothing it makes is written to the student's board.</span>
+      </div>
+      <div class="studio-row">
+        <select id="ta-concept" class="studio-field ta-concept"></select>
+        <input type="text" id="ta-message" class="studio-field" maxlength="500"
+               placeholder="Ask the TA: build a deck, find images, search the web…">
+        <button id="ta-send" class="btn btn-primary btn-small">Send to TA</button>
+        <span id="ta-status" class="studio-status"></span>
+      </div>
+      <div id="ta-jobs" class="ta-jobs"></div>
+      <div id="ta-results" class="ta-results"></div>
+    </div>
+
+    <div class="transcript-wrap">
+      <div class="transcript-head">
+        <span class="panel-label">Transcript</span>
+        <button id="cancel-btn" class="btn btn-danger btn-small hidden">■ Cancel</button>
+      </div>
+      <div id="transcript" class="transcript" aria-live="polite"></div>
+    </div>
+
+    <!-- ------------------------------------------------- composer -->
+    <div class="composer">
+      <div id="boundary-note" class="boundary-note">
+        Students file change requests; creating or rewriting a simulation belongs to your teacher.
+      </div>
+
+      <div id="student-composer" class="student-composer">
+        <div class="category-row" id="category-row">
+          <button class="cat-btn" data-category="bug"><b>Bug</b><span>something is broken</span></button>
+          <button class="cat-btn" data-category="wrong_info"><b>Wrong info</b><span>content is incorrect</span></button>
+          <button class="cat-btn" data-category="ugly"><b>Ugly</b><span>looks bad</span></button>
+          <button class="cat-btn" data-category="ux"><b>Hard to use</b><span>usability</span></button>
+        </div>
+        <div class="input-row">
+          <textarea id="student-note" rows="1" placeholder="Describe the problem… (select something on the canvas to attach it)"></textarea>
+          <button id="student-send" class="btn btn-primary">Send request</button>
+        </div>
+        <div id="student-hint" class="student-hint"></div>
+      </div>
+
+      <div id="teacher-composer" class="teacher-composer hidden">
+        <div class="input-row">
+          <textarea id="teacher-input" rows="1" placeholder="Ask anything — explain, restructure, or rebuild the simulation…"></textarea>
+          <button id="teacher-send" class="btn btn-primary">Send</button>
+        </div>
+        <div class="teacher-hint">Teacher mode: free-form requests, including creating new simulations.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ----------------------------------------------------- details -->
+  <aside class="details" id="details">
+    <div class="panel-label">Details</div>
+
+    <div class="details-block">
+      <div class="details-row"><span>Agent status</span><b id="detail-status">idle</b></div>
+      <div class="details-row"><span>Sim</span><b id="detail-sim">—</b></div>
+      <div class="details-row"><span>Sim version</span><b id="detail-version">—</b></div>
+      <div class="details-row"><span>Role</span><b id="detail-role">student</b></div>
+    </div>
+
+    <div class="details-block">
+      <div class="panel-label">Selection</div>
+      <div id="selection-info" class="selection-info">Nothing selected. Hover the canvas.</div>
+    </div>
+
+    <div class="details-block">
+      <div class="panel-label">Change requests</div>
+      <div id="requests-info" class="selection-info">—</div>
+    </div>
+
+    <div class="details-block">
+      <div class="panel-label">Tools</div>
+      <div id="tools-info" class="selection-info">No tools seen yet this turn.</div>
+    </div>
+
+    <div class="details-block grow">
+      <div class="dev-row">
+        <button id="dev-toggle" class="dev-chip" title="Developer options">dev</button>
+      </div>
+      <div id="dev-panel" class="dev-panel hidden">
+        <label class="dev-option">
+          <input type="checkbox" id="dev-mode"> Developer mode (show model reasoning)
+        </label>
+        <label class="dev-option">
+          <input type="checkbox" id="dev-raw"> Log raw SSE events to console
+        </label>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/web/cards.js"></script>
+<script src="/web/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2295 @@
+{
+ "schema": 1,
+ "name": "chemistry",
+ "title": "chemistry",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "topic",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Chemistry — Structure, Reactions and Energy",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "An introductory chemistry course: atomic structure and periodicity, bonding and structure, quantitative chemistry, reactions and energetics, equilibrium, and organic and analytical chemistry."
+ },
+ "taxonomy": {
+  "strands": {
+   "Foundations of Chemistry": {
+    "Matter, measurement and the mole": [
+     "Describing matter",
+     "Quantitative chemistry"
+    ]
+   },
+   "Atomic Structure and Periodicity": {
+    "Atomic structure": [
+     "Inside the atom",
+     "The periodic table"
+    ],
+    "Bonding and structure": [
+     "Chemical bonds",
+     "Structure, shape and properties"
+    ]
+   },
+   "Chemical Reactions": {
+    "Reaction types and equations": [
+     "Writing and balancing reactions",
+     "Reaction classes"
+    ],
+    "Energetics and equilibrium": [
+     "Energy in reactions",
+     "Equilibrium"
+    ]
+   },
+   "Organic and Analytical Chemistry": {
+    "Organic chemistry": [
+     "Hydrocarbons",
+     "Fuels and the environment"
+    ],
+    "Analysis and the atmosphere": [
+     "Analytical techniques",
+     "Atmosphere and sustainability"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Foundations of Chemistry",
+    "units": [
+     "Matter, measurement and the mole"
+    ]
+   },
+   {
+    "strand": "Atomic Structure and Periodicity",
+    "units": [
+     "Atomic structure",
+     "Bonding and structure"
+    ]
+   },
+   {
+    "strand": "Chemical Reactions",
+    "units": [
+     "Reaction types and equations",
+     "Energetics and equilibrium"
+    ]
+   },
+   {
+    "strand": "Organic and Analytical Chemistry",
+    "units": [
+     "Organic chemistry",
+     "Analysis and the atmosphere"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "acids_bases_and_neutralisation",
+   "title": "Acids, bases and neutralisation",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ionic_equations_and_spectator_ions"
+   ],
+   "keywords": [
+    "acid",
+    "base",
+    "neutralisation"
+   ],
+   "summary": "An acid donates protons and a base accepts them, and neutralisation produces a salt and water.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "air_pollution_and_its_chemistry",
+   "title": "Air pollution and its chemistry",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Atmosphere and sustainability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "composition_and_evolution_of_the_atmosphere"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acid rain",
+    "air pollution",
+    "particulate"
+   ],
+   "summary": "Sulfur dioxide and nitrogen oxides form acid rain, and particulates affect health.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "alcohols_and_carboxylic_acids",
+   "title": "Alcohols and carboxylic acids",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "homologous_series_and_functional_groups",
+    "isomerism"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alcohol",
+    "carboxylic acid",
+    "hydroxyl"
+   ],
+   "summary": "The hydroxyl and carboxyl groups give these compounds their distinctive solubility, acidity and reactivity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "alkanes_and_saturated_hydrocarbons",
+   "title": "Alkanes and saturated hydrocarbons",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "carbon_s_bonding_and_catenation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkane",
+    "saturated",
+    "single bond"
+   ],
+   "summary": "Alkanes contain only single carbon-carbon bonds and are relatively unreactive.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "alkenes_and_unsaturation",
+   "title": "Alkenes and unsaturation",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "alkanes_and_saturated_hydrocarbons"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkene",
+    "double bond",
+    "unsaturated"
+   ],
+   "summary": "A carbon-carbon double bond makes alkenes reactive and lets them add atoms across the bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "allotropes_of_carbon",
+   "title": "Allotropes of carbon",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Structure, shape and properties",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "structure_and_physical_properties"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "allotrope",
+    "diamond",
+    "graphite"
+   ],
+   "summary": "Diamond, graphite and graphene are all pure carbon yet differ completely because of how the atoms are arranged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "atomic_mass_and_relative_masses",
+   "title": "Atomic mass and relative masses",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "pure_substances_and_purity_testing"
+   ],
+   "keywords": [
+    "isotope",
+    "relative atomic mass",
+    "weighted average"
+   ],
+   "summary": "Relative atomic mass is an average over natural isotopes weighted by abundance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "atomic_number_mass_number_and_isotopes",
+   "title": "Atomic number, mass number and isotopes",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "Inside the atom",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "subatomic_particles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atomic number",
+    "isotope",
+    "mass number"
+   ],
+   "summary": "Atomic number counts protons and fixes identity; mass number counts protons plus neutrons.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "balancing_chemical_equations",
+   "title": "Balancing chemical equations",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Writing and balancing reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "word_and_symbol_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balancing",
+    "coefficient",
+    "conservation"
+   ],
+   "summary": "Coefficients must be adjusted so every element's count matches on both sides.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "bond_energies_and_enthalpy_change",
+   "title": "Bond energies and enthalpy change",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Energy in reactions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "exothermic_and_endothermic_reactions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bond energy",
+    "enthalpy",
+    "net energy"
+   ],
+   "summary": "Breaking bonds costs energy and forming them releases it, and the net of the two sets the sign.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "bond_polarity_and_electronegativity",
+   "title": "Bond polarity and electronegativity",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "covalent_bonding",
+    "dot_and_cross_diagrams_and_lewis_structures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dipole",
+    "electronegativity",
+    "polarity"
+   ],
+   "summary": "Unequal sharing creates a dipole, which is what makes many molecules reactive at specific sites.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "calorimetry_and_measuring_enthalpy_change",
+   "title": "Calorimetry and measuring enthalpy change",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Energy in reactions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "exothermic_and_endothermic_reactions",
+    "energy_level_diagrams"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "calorimetry",
+    "specific heat",
+    "temperature rise"
+   ],
+   "summary": "A measured temperature rise plus a known heat capacity gives the energy released per mole.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "carbon_s_bonding_and_catenation",
+   "title": "Carbon's bonding and catenation",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "nanoparticles_and_surface_area"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbon",
+    "catenation",
+    "tetravalent"
+   ],
+   "summary": "Carbon forms four strong bonds and bonds to itself, which is why there are millions of organic compounds.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "catalysts_and_activation_energy",
+   "title": "Catalysts and activation energy",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "reaction_rates_and_collision_theory"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activation energy",
+    "catalyst",
+    "pathway"
+   ],
+   "summary": "A catalyst provides a lower-energy route without being consumed, so it does not change the equilibrium position.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "combustion_of_fuels",
+   "title": "Combustion of fuels",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Fuels and the environment",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "crude_oil_and_fractional_distillation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbon monoxide",
+    "combustion",
+    "complete"
+   ],
+   "summary": "Complete combustion gives carbon dioxide and water, while incomplete combustion gives carbon monoxide and soot.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "composition_and_evolution_of_the_atmosphere",
+   "title": "Composition and evolution of the atmosphere",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Atmosphere and sustainability",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "instrumental_analysis"
+   ],
+   "keywords": [
+    "atmosphere",
+    "composition",
+    "photosynthesis"
+   ],
+   "summary": "The early atmosphere was largely carbon dioxide and water vapour, and photosynthesis changed that.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "concentration_and_molarity",
+   "title": "Concentration and molarity",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "molar_mass_and_mass_mole_conversions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "concentration",
+    "dilution",
+    "molarity"
+   ],
+   "summary": "Concentration is amount of solute per volume of solution, and diluting changes volume not amount.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "covalent_bonding",
+   "title": "Covalent bonding",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ionic_bonding"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "covalent",
+    "molecule",
+    "shared pair"
+   ],
+   "summary": "Shared electron pairs hold non-metal atoms together, and the bond is directional.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "cracking_and_feedstock_supply",
+   "title": "Cracking and feedstock supply",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Fuels and the environment",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "crude_oil_and_fractional_distillation",
+    "combustion_of_fuels"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cracking",
+    "feedstock",
+    "short chain"
+   ],
+   "summary": "Cracking converts long, abundant chains into shorter, more useful ones including alkenes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "crude_oil_and_fractional_distillation",
+   "title": "Crude oil and fractional distillation",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Fuels and the environment",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "alkanes_and_saturated_hydrocarbons"
+   ],
+   "sequence_predecessors": [
+    "polymers_and_polymerisation"
+   ],
+   "keywords": [
+    "boiling point",
+    "crude oil",
+    "fractional distillation"
+   ],
+   "summary": "Hydrocarbons separate by boiling point because chain length changes the strength of intermolecular forces.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "dot_and_cross_diagrams_and_lewis_structures",
+   "title": "Dot-and-cross diagrams and Lewis structures",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "covalent_bonding",
+    "metallic_bonding"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Lewis structure",
+    "dot and cross",
+    "octet"
+   ],
+   "summary": "Drawing outer electrons makes it visible whether an atom has achieved a stable count.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "electron_configuration",
+   "title": "Electron configuration",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "Inside the atom",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "electron_shells_and_energy_levels"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "configuration",
+    "filling order",
+    "orbital"
+   ],
+   "summary": "Filling order follows increasing energy, which is why the periodic table has the shape it does.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "electron_shells_and_energy_levels",
+   "title": "Electron shells and energy levels",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "Inside the atom",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "subatomic_particles",
+    "atomic_number_mass_number_and_isotopes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy level",
+    "outer electron",
+    "shell"
+   ],
+   "summary": "Electrons occupy quantised shells, and chemical behaviour is governed by the outermost ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "elements_compounds_and_mixtures",
+   "title": "Elements, compounds and mixtures",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Describing matter",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "states_of_matter_and_particle_models"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compound",
+    "element",
+    "mixture"
+   ],
+   "summary": "The distinction is chemical: a compound's components are bonded, a mixture's are not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "emission_spectra_and_evidence_for_levels",
+   "title": "Emission spectra and evidence for levels",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "Inside the atom",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "electron_shells_and_energy_levels",
+    "electron_configuration"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "emission spectrum",
+    "line",
+    "quantised"
+   ],
+   "summary": "Discrete spectral lines are direct evidence that electron energies are quantised.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "empirical_and_molecular_formulae",
+   "title": "Empirical and molecular formulae",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "molar_mass_and_mass_mole_conversions",
+    "concentration_and_molarity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "empirical formula",
+    "molecular formula",
+    "ratio"
+   ],
+   "summary": "Percentage composition gives the simplest ratio, and molar mass decides the multiple.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "energy_level_diagrams",
+   "title": "Energy level diagrams",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Energy in reactions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "bond_energies_and_enthalpy_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activation",
+    "diagram",
+    "energy profile"
+   ],
+   "summary": "A reaction profile shows reactant and product energies and the activation hump between them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "exothermic_and_endothermic_reactions",
+   "title": "Exothermic and endothermic reactions",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Energy in reactions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "catalysts_and_activation_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endothermic",
+    "enthalpy",
+    "exothermic"
+   ],
+   "summary": "The sign of the enthalpy change says whether the system released or absorbed energy overall.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "factors_affecting_equilibrium_position",
+   "title": "Factors affecting equilibrium position",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "le_chatelier_s_principle",
+    "the_equilibrium_constant"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "catalyst",
+    "concentration",
+    "pressure"
+   ],
+   "summary": "Concentration, pressure and temperature shift the position, while a catalyst only changes how fast it is reached.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "flame_tests_and_cation_identification",
+   "title": "Flame tests and cation identification",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Analytical techniques",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "greenhouse_gases_and_climate_effects"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cation",
+    "colour",
+    "flame test"
+   ],
+   "summary": "Different metal ions emit characteristic colours, giving a quick identification test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "gas_volumes_and_the_ideal_gas_law",
+   "title": "Gas volumes and the ideal gas law",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "the_mole_and_avogadro_s_number",
+    "percentage_yield_and_atom_economy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "gas volume",
+    "ideal gas",
+    "molar volume"
+   ],
+   "summary": "At a given temperature and pressure equal volumes of gas contain equal numbers of particles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "giant_covalent_and_simple_molecular_structures",
+   "title": "Giant covalent and simple molecular structures",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Structure, shape and properties",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "intermolecular_forces"
+   ],
+   "keywords": [
+    "giant covalent",
+    "network",
+    "simple molecular"
+   ],
+   "summary": "The same strong bonds give very different properties depending on whether they extend through the whole solid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "greenhouse_gases_and_climate_effects",
+   "title": "Greenhouse gases and climate effects",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Fuels and the environment",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "combustion_of_fuels",
+    "cracking_and_feedstock_supply"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "climate",
+    "greenhouse",
+    "infrared"
+   ],
+   "summary": "Gases that absorb infrared radiation change the planet's energy balance, which changes climate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "group_trends_and_reactivity",
+   "title": "Group trends and reactivity",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "The periodic table",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ionisation_energy_and_electron_affinity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkali",
+    "halogen",
+    "reactivity"
+   ],
+   "summary": "Alkali metals become more reactive down the group while halogens become less, and both follow from outer-shell shielding.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "groups_periods_and_the_table_s_structure",
+   "title": "Groups, periods and the table's structure",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "The periodic table",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "emission_spectra_and_evidence_for_levels"
+   ],
+   "keywords": [
+    "group",
+    "period",
+    "periodic table"
+   ],
+   "summary": "Columns share outer-electron count and rows share shell count, which is why the table predicts behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "homologous_series_and_functional_groups",
+   "title": "Homologous series and functional groups",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "alkenes_and_unsaturation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "functional group",
+    "homologous series",
+    "predictable"
+   ],
+   "summary": "A functional group behaves consistently across a series, which is what makes organic chemistry predictable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "industrial_equilibrium_and_yield_optimisation",
+   "title": "Industrial equilibrium and yield optimisation",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Equilibrium",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "factors_affecting_equilibrium_position"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Haber",
+    "compromise",
+    "yield"
+   ],
+   "summary": "The Haber process trades yield against rate, which is why real conditions are a compromise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "instrumental_analysis",
+   "title": "Instrumental analysis",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Analytical techniques",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "paper_and_thin_layer_chromatography"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "instrumental",
+    "spectrometry",
+    "spectroscopy"
+   ],
+   "summary": "Spectroscopy and spectrometry identify and quantify substances from how they interact with radiation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "intermolecular_forces",
+   "title": "Intermolecular forces",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "bond_polarity_and_electronegativity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hydrogen bond",
+    "intermolecular",
+    "van der Waals"
+   ],
+   "summary": "London forces, dipole-dipole attractions and hydrogen bonding are much weaker than bonds but decide boiling points.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ionic_bonding",
+   "title": "Ionic bonding",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "group_trends_and_reactivity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ionic",
+    "lattice",
+    "transfer"
+   ],
+   "summary": "Electron transfer between a metal and a non-metal produces oppositely charged ions held in a lattice.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ionic_equations_and_spectator_ions",
+   "title": "Ionic equations and spectator ions",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Writing and balancing reactions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "balancing_chemical_equations",
+    "state_symbols_and_reaction_conditions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ionic equation",
+    "net reaction",
+    "spectator ion"
+   ],
+   "summary": "Removing ions that do not change reveals the actual reaction taking place.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ionisation_energy_and_electron_affinity",
+   "title": "Ionisation energy and electron affinity",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "The periodic table",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "trends_in_atomic_radius"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron affinity",
+    "ionisation energy",
+    "trend"
+   ],
+   "summary": "Ionisation energy measures how tightly an electron is held, so it rises across a period and falls down a group.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "isomerism",
+   "title": "Isomerism",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "naming_organic_compounds"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "formula",
+    "isomer",
+    "structural"
+   ],
+   "summary": "The same molecular formula can give different structures, and different structures give different properties.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "le_chatelier_s_principle",
+   "title": "Le Chatelier's principle",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "reversible_reactions_and_dynamic_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Le Chatelier",
+    "opposition",
+    "shift"
+   ],
+   "summary": "A system at equilibrium shifts to oppose the change imposed on it, which predicts the direction of shift.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "life_cycle_assessment_and_recycling",
+   "title": "Life cycle assessment and recycling",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Atmosphere and sustainability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "composition_and_evolution_of_the_atmosphere",
+    "water_treatment_and_purity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "assessment",
+    "life cycle",
+    "recycling"
+   ],
+   "summary": "Comparing products across their whole life cycle is more informative than comparing them at the point of use.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "metallic_bonding",
+   "title": "Metallic bonding",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Chemical bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ionic_bonding",
+    "covalent_bonding"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conduct",
+    "delocalised",
+    "metallic"
+   ],
+   "summary": "A sea of delocalised electrons explains why metals conduct and deform rather than shatter.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "metals_non_metals_and_metalloids",
+   "title": "Metals, non-metals and metalloids",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "The periodic table",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "groups_periods_and_the_table_s_structure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "metal",
+    "metalloid",
+    "non-metal"
+   ],
+   "summary": "The dividing line between metals and non-metals explains the kinds of bonding each tends to form.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "molar_mass_and_mass_mole_conversions",
+   "title": "Molar mass and mass-mole conversions",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_mole_and_avogadro_s_number"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conversion",
+    "molar mass",
+    "moles"
+   ],
+   "summary": "Molar mass links the mass measured on a balance to the number of moles in the sample.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "naming_organic_compounds",
+   "title": "Naming organic compounds",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "homologous_series_and_functional_groups"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "IUPAC",
+    "nomenclature",
+    "prefix"
+   ],
+   "summary": "Systematic names encode chain length, functional group and position, so a name is a structure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "nanoparticles_and_surface_area",
+   "title": "Nanoparticles and surface area",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Structure, shape and properties",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "structure_and_physical_properties",
+    "allotropes_of_carbon"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "nanoparticle",
+    "scale",
+    "surface area"
+   ],
+   "summary": "Nanoparticles have a very large surface area to volume ratio, which changes their behaviour compared with bulk material.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "paper_and_thin_layer_chromatography",
+   "title": "Paper and thin-layer chromatography",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Analytical techniques",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "testing_for_anions_and_gases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Rf value",
+    "chromatography",
+    "separation"
+   ],
+   "summary": "Components travel at different rates according to how they partition, so they separate into spots.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "percentage_yield_and_atom_economy",
+   "title": "Percentage yield and atom economy",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "molar_mass_and_mass_mole_conversions",
+    "empirical_and_molecular_formulae"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atom economy",
+    "efficiency",
+    "yield"
+   ],
+   "summary": "Yield measures what you actually got; atom economy measures how much of the reactants ended up in the product.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ph_and_the_hydrogen_ion_scale",
+   "title": "pH and the hydrogen ion scale",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "acids_bases_and_neutralisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hydrogen ion",
+    "logarithmic",
+    "pH"
+   ],
+   "summary": "pH is a logarithmic measure of hydrogen ion concentration, so one unit is a tenfold change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "physical_and_chemical_changes",
+   "title": "Physical and chemical changes",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Describing matter",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "elements_compounds_and_mixtures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chemical change",
+    "physical change",
+    "reaction"
+   ],
+   "summary": "A chemical change makes new substances while a physical change does not, even when appearance changes greatly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "polymers_and_polymerisation",
+   "title": "Polymers and polymerisation",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Organic chemistry",
+   "topic": "Hydrocarbons",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "alkenes_and_unsaturation",
+    "alcohols_and_carboxylic_acids"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "addition",
+    "monomer",
+    "polymer"
+   ],
+   "summary": "Addition and condensation routes build long chains from small monomers with different by-products.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "precipitation_and_solubility_rules",
+   "title": "Precipitation and solubility rules",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ionic_equations_and_spectator_ions",
+    "redox_and_oxidation_states"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "insoluble",
+    "precipitation",
+    "solubility"
+   ],
+   "summary": "Mixing two solutions produces a solid when the ion combination is insoluble.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "pure_substances_and_purity_testing",
+   "title": "Pure substances and purity testing",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Describing matter",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "separation_techniques"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "impurity",
+    "melting point",
+    "purity"
+   ],
+   "summary": "A sharp melting point indicates purity while a range indicates contamination.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "reaction_rates_and_collision_theory",
+   "title": "Reaction rates and collision theory",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "balancing_chemical_equations",
+    "precipitation_and_solubility_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activation energy",
+    "collision theory",
+    "rate"
+   ],
+   "summary": "Particles must collide with enough energy and the right orientation, which explains every rate factor.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "redox_and_oxidation_states",
+   "title": "Redox and oxidation states",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ionic_equations_and_spectator_ions",
+    "titration_and_volumetric_analysis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron transfer",
+    "oxidation state",
+    "redox"
+   ],
+   "summary": "Redox reactions move electrons, and tracking oxidation states shows which species gained them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "reversible_reactions_and_dynamic_equilibrium",
+   "title": "Reversible reactions and dynamic equilibrium",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "calorimetry_and_measuring_enthalpy_change"
+   ],
+   "keywords": [
+    "dynamic equilibrium",
+    "rate",
+    "reversible"
+   ],
+   "summary": "At equilibrium both directions continue at equal rates, so concentrations stop changing but nothing stops.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "separation_techniques",
+   "title": "Separation techniques",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Describing matter",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "elements_compounds_and_mixtures",
+    "physical_and_chemical_changes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chromatography",
+    "distillation",
+    "filtration"
+   ],
+   "summary": "Filtration, distillation and chromatography each exploit a different physical property difference.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "shapes_of_molecules_and_vsepr",
+   "title": "Shapes of molecules and VSEPR",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Structure, shape and properties",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "covalent_bonding",
+    "giant_covalent_and_simple_molecular_structures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "VSEPR",
+    "bond angle",
+    "shape"
+   ],
+   "summary": "Electron pairs repel and arrange as far apart as possible, which predicts the shape and the bond angles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "state_symbols_and_reaction_conditions",
+   "title": "State symbols and reaction conditions",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Writing and balancing reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "word_and_symbol_equations",
+    "balancing_chemical_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aqueous",
+    "conditions",
+    "state symbol"
+   ],
+   "summary": "State symbols and conditions carry real information that changes whether a reaction happens.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "states_of_matter_and_particle_models",
+   "title": "States of matter and particle models",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Describing matter",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "particle model",
+    "spacing",
+    "states of matter"
+   ],
+   "summary": "The same particles arranged with different spacing and freedom of motion account for solids, liquids and gases.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "strong_and_weak_acids",
+   "title": "Strong and weak acids",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ph_and_the_hydrogen_ion_scale"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dissociation",
+    "strong acid",
+    "weak acid"
+   ],
+   "summary": "Strength refers to how completely an acid dissociates, which is different from concentration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "structure_and_physical_properties",
+   "title": "Structure and physical properties",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Bonding and structure",
+   "topic": "Structure, shape and properties",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "giant_covalent_and_simple_molecular_structures",
+    "shapes_of_molecules_and_vsepr"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "melting point",
+    "properties",
+    "structure"
+   ],
+   "summary": "Melting point, conductivity and solubility all follow from which particles are present and how they are held.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "subatomic_particles",
+   "title": "Subatomic particles",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "Inside the atom",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "gas_volumes_and_the_ideal_gas_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron",
+    "neutron",
+    "proton"
+   ],
+   "summary": "Protons, neutrons and electrons differ in charge and mass, and only protons define the element.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "testing_for_anions_and_gases",
+   "title": "Testing for anions and gases",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Analytical techniques",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "flame_tests_and_cation_identification"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "anion test",
+    "gas test",
+    "precipitate"
+   ],
+   "summary": "Characteristic precipitates and gas reactions identify common anions and gases.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "the_equilibrium_constant",
+   "title": "The equilibrium constant",
+   "strand": "Chemical Reactions",
+   "unit": "Energetics and equilibrium",
+   "topic": "Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "le_chatelier_s_principle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium constant",
+    "position",
+    "temperature"
+   ],
+   "summary": "The equilibrium constant summarises the position of equilibrium at a given temperature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "the_mole_and_avogadro_s_number",
+   "title": "The mole and Avogadro's number",
+   "strand": "Foundations of Chemistry",
+   "unit": "Matter, measurement and the mole",
+   "topic": "Quantitative chemistry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "atomic_mass_and_relative_masses"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Avogadro",
+    "count",
+    "mole"
+   ],
+   "summary": "A mole is a fixed count of particles, which lets chemists weigh out countable numbers of atoms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "titration_and_volumetric_analysis",
+   "title": "Titration and volumetric analysis",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Reaction classes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "concentration_and_molarity",
+    "strong_and_weak_acids"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endpoint",
+    "titration",
+    "volumetric"
+   ],
+   "summary": "A titration finds an unknown concentration by finding the exact volume that neutralises a known one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "trends_in_atomic_radius",
+   "title": "Trends in atomic radius",
+   "strand": "Atomic Structure and Periodicity",
+   "unit": "Atomic structure",
+   "topic": "The periodic table",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "groups_periods_and_the_table_s_structure",
+    "metals_non_metals_and_metalloids"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atomic radius",
+    "nuclear charge",
+    "trend"
+   ],
+   "summary": "Radius falls across a period as nuclear charge grows and rises down a group as shells are added.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "water_treatment_and_purity",
+   "title": "Water treatment and purity",
+   "strand": "Organic and Analytical Chemistry",
+   "unit": "Analysis and the atmosphere",
+   "topic": "Atmosphere and sustainability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "composition_and_evolution_of_the_atmosphere",
+    "air_pollution_and_its_chemistry"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chlorination",
+    "filtration",
+    "water treatment"
+   ],
+   "summary": "Filtration, sedimentation and chlorination remove different classes of contaminant in sequence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "word_and_symbol_equations",
+   "title": "Word and symbol equations",
+   "strand": "Chemical Reactions",
+   "unit": "Reaction types and equations",
+   "topic": "Writing and balancing reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "nanoparticles_and_surface_area"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balancing",
+    "equation",
+    "symbol"
+   ],
+   "summary": "A balanced symbol equation is a statement of conservation of atoms and charge.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Chemistry — Structure, Reactions and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  }
+ ]
+}

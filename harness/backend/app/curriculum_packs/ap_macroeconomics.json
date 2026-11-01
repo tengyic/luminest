@@ -1,0 +1,1618 @@
+{
+ "schema": 1,
+ "name": "ap_macroeconomics",
+ "title": "AP Macroeconomics",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "The whole-economy view: scarcity and market fundamentals, national income and price determination, the financial sector, stabilisation policy and its long-run consequences, and the open economy.",
+  "id_namespace": {
+   "prefix": "ap_macroeconomics_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Basic Economic Concepts": {
+    "Scarcity and choice": [
+     "Foundations of economic reasoning"
+    ],
+    "Demand, supply and equilibrium": [
+     "The market model"
+    ]
+   },
+   "Economic Indicators and the Business Cycle": {
+    "Measuring output": [
+     "Output and growth"
+    ],
+    "Inflation, unemployment and the cycle": [
+     "Prices and jobs"
+    ]
+   },
+   "National Income and Price Determination": {
+    "The aggregate demand-aggregate supply model": [
+     "AD, SRAS and LRAS"
+    ],
+    "Fiscal policy": [
+     "Taxing and spending"
+    ]
+   },
+   "The Financial Sector": {
+    "Money, banking and interest": [
+     "Money and the money market"
+    ],
+    "Central banking and monetary policy": [
+     "Policy tools and transmission"
+    ]
+   },
+   "Long-Run Consequences of Stabilization Policies": {
+    "Expectations and the long run": [
+     "Long-run neutrality and the debt"
+    ]
+   },
+   "Open Economy: International Trade and Finance": {
+    "Trade and the balance of payments": [
+     "Accounts and barriers"
+    ],
+    "Exchange rates and policy": [
+     "Currencies and regimes"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Basic Economic Concepts",
+    "units": [
+     "Scarcity and choice",
+     "Demand, supply and equilibrium"
+    ]
+   },
+   {
+    "strand": "Economic Indicators and the Business Cycle",
+    "units": [
+     "Measuring output",
+     "Inflation, unemployment and the cycle"
+    ]
+   },
+   {
+    "strand": "National Income and Price Determination",
+    "units": [
+     "The aggregate demand-aggregate supply model",
+     "Fiscal policy"
+    ]
+   },
+   {
+    "strand": "The Financial Sector",
+    "units": [
+     "Money, banking and interest",
+     "Central banking and monetary policy"
+    ]
+   },
+   {
+    "strand": "Long-Run Consequences of Stabilization Policies",
+    "units": [
+     "Expectations and the long run"
+    ]
+   },
+   {
+    "strand": "Open Economy: International Trade and Finance",
+    "units": [
+     "Trade and the balance of payments",
+     "Exchange rates and policy"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_macroeconomics_aggregate_demand",
+   "title": "Aggregate demand",
+   "strand": "National Income and Price Determination",
+   "unit": "The aggregate demand-aggregate supply model",
+   "topic": "AD, SRAS and LRAS",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_business_cycle_phases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aggregate demand",
+    "real wealth effect"
+   ],
+   "summary": "AD slopes downward because a lower price level raises real wealth, lowers interest rates and raises net exports.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_macroeconomics_appreciation_depreciation_and_net_exports",
+   "title": "Appreciation, depreciation and net exports",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Exchange rates and policy",
+   "topic": "Currencies and regimes",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_determinants_of_exchange_rates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "appreciation",
+    "depreciation",
+    "net exports"
+   ],
+   "summary": "A weaker currency makes exports cheaper abroad, which raises net exports and shifts aggregate demand.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_macroeconomics_automatic_stabilizers",
+   "title": "Automatic stabilizers",
+   "strand": "National Income and Price Determination",
+   "unit": "Fiscal policy",
+   "topic": "Taxing and spending",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_fiscal_policy_spending_and_taxation"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_the_spending_multiplier"
+   ],
+   "keywords": [
+    "automatic stabilizers",
+    "built-in stability"
+   ],
+   "summary": "Taxes and transfers that vary with income dampen the cycle without any new legislation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_macroeconomics_balance_of_payments_accounts",
+   "title": "Balance of payments accounts",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Trade and the balance of payments",
+   "topic": "Accounts and barriers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_policies_to_promote_growth"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balance of payments",
+    "current account",
+    "financial account"
+   ],
+   "summary": "The current account and the financial account offset each other, so a trade deficit is matched by net capital inflow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_macroeconomics_banking_and_money_creation",
+   "title": "Banking and money creation",
+   "strand": "The Financial Sector",
+   "unit": "Money, banking and interest",
+   "topic": "Money and the money market",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_functions_and_measures_of_money"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bank",
+    "deposits",
+    "reserves"
+   ],
+   "summary": "Banks create deposits by lending out reserves, so the money supply exceeds the monetary base.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_macroeconomics_business_cycle_phases",
+   "title": "Business cycle phases",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Inflation, unemployment and the cycle",
+   "topic": "Prices and jobs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_unemployment_measurement_and_types"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_costs_of_inflation"
+   ],
+   "keywords": [
+    "business cycle",
+    "expansion",
+    "recession"
+   ],
+   "summary": "Expansion, peak, contraction and trough describe the recurring but irregular pattern of output and employment.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_macroeconomics_central_banks_and_monetary_policy_tools",
+   "title": "Central banks and monetary policy tools",
+   "strand": "The Financial Sector",
+   "unit": "Central banking and monetary policy",
+   "topic": "Policy tools and transmission",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_the_loanable_funds_market"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "central bank",
+    "monetary policy",
+    "open market operations"
+   ],
+   "summary": "Open-market operations, reserve requirements and the administered rate change reserves and short-term interest rates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_macroeconomics_comparative_advantage_and_gains_from_trade",
+   "title": "Comparative advantage and gains from trade",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity and choice",
+   "topic": "Foundations of economic reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_production_possibilities_curve"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "comparative advantage",
+    "specialisation",
+    "trade"
+   ],
+   "summary": "Specialising where the opportunity cost is lowest raises total output, which is why voluntary trade can benefit both sides.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_macroeconomics_consumer_and_producer_surplus",
+   "title": "Consumer and producer surplus",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_market_equilibrium_and_disequilibrium"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_determinants_of_demand_and_supply"
+   ],
+   "keywords": [
+    "consumer surplus",
+    "producer surplus"
+   ],
+   "summary": "Surplus measures the gain from trade: what buyers would have paid above price, and what sellers would have accepted below it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_macroeconomics_costs_of_inflation",
+   "title": "Costs of inflation",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Inflation, unemployment and the cycle",
+   "topic": "Prices and jobs",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_inflation_and_the_consumer_price_index"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inflation",
+    "purchasing power",
+    "redistribution"
+   ],
+   "summary": "Expected inflation is manageable, but unanticipated inflation redistributes wealth between borrowers and lenders.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_macroeconomics_crowding_out",
+   "title": "Crowding out",
+   "strand": "National Income and Price Determination",
+   "unit": "Fiscal policy",
+   "topic": "Taxing and spending",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_fiscal_policy_spending_and_taxation"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_automatic_stabilizers"
+   ],
+   "keywords": [
+    "crowding out",
+    "interest rate"
+   ],
+   "summary": "Deficit spending can raise interest rates and displace private investment, reducing the net stimulus.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_macroeconomics_deficits_debt_and_sustainability",
+   "title": "Deficits, debt and sustainability",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_fiscal_policy_in_the_long_run"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "debt sustainability",
+    "interest growth gap"
+   ],
+   "summary": "Sustainability depends on the gap between the interest rate and the growth rate, not on the debt level alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_macroeconomics_demand_and_the_law_of_demand",
+   "title": "Demand and the law of demand",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "demand",
+    "law of demand"
+   ],
+   "summary": "Quantity demanded falls as price rises, holding every other influence constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_macroeconomics_determinants_of_demand_and_supply",
+   "title": "Determinants of demand and supply",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_market_equilibrium_and_disequilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "curve shift",
+    "determinants"
+   ],
+   "summary": "Non-price influences shift the curves, and a shift moves equilibrium price and quantity together.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_macroeconomics_determinants_of_exchange_rates",
+   "title": "Determinants of exchange rates",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Exchange rates and policy",
+   "topic": "Currencies and regimes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_exchange_rates_and_the_foreign_exchange_market"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exchange rate",
+    "interest rate differential"
+   ],
+   "summary": "Interest-rate differentials, relative inflation and trade flows move currency demand and supply.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_macroeconomics_economic_growth_and_productivity",
+   "title": "Economic growth and productivity",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Measuring output",
+   "topic": "Output and growth",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_real_versus_nominal_gdp"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_limitations_of_gdp_as_a_measure"
+   ],
+   "keywords": [
+    "growth",
+    "human capital",
+    "productivity"
+   ],
+   "summary": "Long-run living standards rise with productivity, which depends on physical capital, human capital and technology.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_macroeconomics_exchange_rates_and_the_foreign_exchange_market",
+   "title": "Exchange rates and the foreign exchange market",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Exchange rates and policy",
+   "topic": "Currencies and regimes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_trade_barriers_and_their_effects"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exchange rate",
+    "foreign exchange market"
+   ],
+   "summary": "The exchange rate is the price of one currency in another, set by the supply of and demand for currencies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_macroeconomics_expectations_and_credibility",
+   "title": "Expectations and credibility",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_macroeconomics_the_long_run_phillips_curve"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "credibility",
+    "expectations"
+   ],
+   "summary": "Once expectations adjust, only surprise inflation moves output, so central-bank credibility has real value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_macroeconomics_fiscal_policy_in_the_long_run",
+   "title": "Fiscal policy in the long run",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_monetary_policy_in_the_long_run"
+   ],
+   "keywords": [
+    "debt",
+    "deficit",
+    "long run"
+   ],
+   "summary": "Persistent deficits can crowd out capital formation and shift the burden toward future taxpayers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_macroeconomics_fiscal_policy_spending_and_taxation",
+   "title": "Fiscal policy: spending and taxation",
+   "strand": "National Income and Price Determination",
+   "unit": "Fiscal policy",
+   "topic": "Taxing and spending",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_macroeconomic_equilibrium_and_output_gaps"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fiscal policy",
+    "government spending",
+    "taxation"
+   ],
+   "summary": "Government shifts aggregate demand directly through spending and indirectly through taxes and transfers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_macroeconomics_functions_and_measures_of_money",
+   "title": "Functions and measures of money",
+   "strand": "The Financial Sector",
+   "unit": "Money, banking and interest",
+   "topic": "Money and the money market",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_supply_side_fiscal_policy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "M1",
+    "M2",
+    "liquidity",
+    "money"
+   ],
+   "summary": "Money is a medium of exchange, a unit of account and a store of value, and M1 and M2 measure it by liquidity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_macroeconomics_gross_domestic_product",
+   "title": "Gross domestic product",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Measuring output",
+   "topic": "Output and growth",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_price_ceilings_and_price_floors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "GDP",
+    "final goods",
+    "output"
+   ],
+   "summary": "GDP is the market value of final goods and services produced inside a country during a period.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_macroeconomics_inflation_and_the_consumer_price_index",
+   "title": "Inflation and the consumer price index",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Inflation, unemployment and the cycle",
+   "topic": "Prices and jobs",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_labour_force_participation"
+   ],
+   "keywords": [
+    "CPI",
+    "inflation",
+    "price index"
+   ],
+   "summary": "A price index tracks the cost of a fixed basket, and its percentage change is the inflation rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_macroeconomics_interest_rates_and_investment",
+   "title": "Interest rates and investment",
+   "strand": "The Financial Sector",
+   "unit": "Central banking and monetary policy",
+   "topic": "Policy tools and transmission",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_transmission_of_monetary_policy"
+   ],
+   "keywords": [
+    "interest rate",
+    "investment"
+   ],
+   "summary": "Lower real interest rates raise the present value of future returns, so investment spending rises.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_macroeconomics_labour_force_participation",
+   "title": "Labour force participation",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Inflation, unemployment and the cycle",
+   "topic": "Prices and jobs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_unemployment_measurement_and_types"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "labour force",
+    "participation"
+   ],
+   "summary": "Participation measures the share of the working-age population working or seeking work, and it moves with the cycle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_macroeconomics_limitations_of_gdp_as_a_measure",
+   "title": "Limitations of GDP as a measure",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Measuring output",
+   "topic": "Output and growth",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_real_versus_nominal_gdp"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "limitations of GDP",
+    "welfare"
+   ],
+   "summary": "GDP omits unpaid work, inequality, environmental cost and leisure, so it measures production rather than welfare.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_macroeconomics_long_run_aggregate_supply",
+   "title": "Long-run aggregate supply",
+   "strand": "National Income and Price Determination",
+   "unit": "The aggregate demand-aggregate supply model",
+   "topic": "AD, SRAS and LRAS",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_short_run_aggregate_supply"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "long-run aggregate supply",
+    "potential output"
+   ],
+   "summary": "LRAS is vertical at potential output, set by productive capacity rather than the price level.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_macroeconomics_macroeconomic_equilibrium_and_output_gaps",
+   "title": "Macroeconomic equilibrium and output gaps",
+   "strand": "National Income and Price Determination",
+   "unit": "The aggregate demand-aggregate supply model",
+   "topic": "AD, SRAS and LRAS",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_aggregate_demand",
+    "ap_macroeconomics_short_run_aggregate_supply",
+    "ap_macroeconomics_long_run_aggregate_supply"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium",
+    "output gap"
+   ],
+   "summary": "Where AD meets SRAS gives short-run output, and the distance from LRAS signals inflationary or recessionary pressure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_macroeconomics_marginal_analysis_and_decision_rules",
+   "title": "Marginal analysis and decision rules",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity and choice",
+   "topic": "Foundations of economic reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_scarcity_and_opportunity_cost"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_comparative_advantage_and_gains_from_trade"
+   ],
+   "keywords": [
+    "marginal benefit",
+    "marginal cost"
+   ],
+   "summary": "A rational decision compares the marginal benefit of one more unit with its marginal cost, not the totals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_macroeconomics_market_efficiency_and_deadweight_loss",
+   "title": "Market efficiency and deadweight loss",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_consumer_and_producer_surplus"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deadweight loss",
+    "efficiency"
+   ],
+   "summary": "Total surplus is maximised at equilibrium, so any move away from it destroys some surplus as deadweight loss.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_macroeconomics_market_equilibrium_and_disequilibrium",
+   "title": "Market equilibrium and disequilibrium",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_demand_and_the_law_of_demand",
+    "ap_macroeconomics_supply_and_the_law_of_supply"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium",
+    "shortage",
+    "surplus"
+   ],
+   "summary": "Price settles where quantity demanded equals quantity supplied; a mismatch shows up as a surplus or a shortage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_macroeconomics_monetary_policy_in_the_long_run",
+   "title": "Monetary policy in the long run",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_macroeconomics_the_long_run_phillips_curve"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_expectations_and_credibility"
+   ],
+   "keywords": [
+    "neutrality of money",
+    "price level"
+   ],
+   "summary": "Money is neutral in the long run: it affects the price level rather than real output.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_macroeconomics_money_demand_and_the_money_market",
+   "title": "Money demand and the money market",
+   "strand": "The Financial Sector",
+   "unit": "Money, banking and interest",
+   "topic": "Money and the money market",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_functions_and_measures_of_money"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_the_money_multiplier"
+   ],
+   "keywords": [
+    "interest rate",
+    "money demand"
+   ],
+   "summary": "Money demand depends on income and interest rates, and equilibrium sets the short-term interest rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_macroeconomics_open_economy_policy_linkages",
+   "title": "Open-economy policy linkages",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Exchange rates and policy",
+   "topic": "Currencies and regimes",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_appreciation_depreciation_and_net_exports"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fixed exchange rate",
+    "floating exchange rate"
+   ],
+   "summary": "With mobile capital, monetary and fiscal policy work differently under fixed and floating exchange-rate regimes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_macroeconomics_policies_to_promote_growth",
+   "title": "Policies to promote growth",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_deficits_debt_and_sustainability"
+   ],
+   "keywords": [
+    "growth policy",
+    "human capital"
+   ],
+   "summary": "Policies that raise saving, investment, human capital and technology raise long-run potential output.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_macroeconomics_price_ceilings_and_price_floors",
+   "title": "Price ceilings and price floors",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_market_efficiency_and_deadweight_loss"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "price ceiling",
+    "price floor"
+   ],
+   "summary": "A binding ceiling creates a shortage and a binding floor creates a surplus, because neither changes the underlying curves.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_macroeconomics_production_possibilities_curve",
+   "title": "Production possibilities curve",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity and choice",
+   "topic": "Foundations of economic reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_scarcity_and_opportunity_cost"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "efficiency",
+    "frontier",
+    "production possibilities"
+   ],
+   "summary": "The frontier shows the maximum output combinations and the opportunity cost of moving along it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_macroeconomics_real_versus_nominal_gdp",
+   "title": "Real versus nominal GDP",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Measuring output",
+   "topic": "Output and growth",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_gross_domestic_product"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "deflator",
+    "nominal GDP",
+    "real GDP"
+   ],
+   "summary": "Deflating nominal GDP by a price index separates a change in output from a change in prices.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_macroeconomics_scarcity_and_opportunity_cost",
+   "title": "Scarcity and opportunity cost",
+   "strand": "Basic Economic Concepts",
+   "unit": "Scarcity and choice",
+   "topic": "Foundations of economic reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "opportunity cost",
+    "scarcity",
+    "trade-off"
+   ],
+   "summary": "Every choice costs the next-best alternative forgone, so scarcity is about trade-offs rather than a temporary shortage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_macroeconomics_shifts_in_aggregate_demand",
+   "title": "Shifts in aggregate demand",
+   "strand": "National Income and Price Determination",
+   "unit": "The aggregate demand-aggregate supply model",
+   "topic": "AD, SRAS and LRAS",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_aggregate_demand"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aggregate demand shift",
+    "spending shock"
+   ],
+   "summary": "Spending shocks shift AD, and how much output changes depends on the slope of short-run aggregate supply.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_macroeconomics_short_run_aggregate_supply",
+   "title": "Short-run aggregate supply",
+   "strand": "National Income and Price Determination",
+   "unit": "The aggregate demand-aggregate supply model",
+   "topic": "AD, SRAS and LRAS",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_shifts_in_aggregate_demand"
+   ],
+   "keywords": [
+    "short-run aggregate supply",
+    "sticky prices"
+   ],
+   "summary": "SRAS slopes upward because some input prices and wages are sticky in the short run.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_macroeconomics_supply_and_the_law_of_supply",
+   "title": "Supply and the law of supply",
+   "strand": "Basic Economic Concepts",
+   "unit": "Demand, supply and equilibrium",
+   "topic": "The market model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_macroeconomics_demand_and_the_law_of_demand"
+   ],
+   "keywords": [
+    "law of supply",
+    "supply"
+   ],
+   "summary": "Quantity supplied rises as price rises because a higher price makes production more profitable at the margin.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_macroeconomics_supply_side_fiscal_policy",
+   "title": "Supply-side fiscal policy",
+   "strand": "National Income and Price Determination",
+   "unit": "Fiscal policy",
+   "topic": "Taxing and spending",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_fiscal_policy_spending_and_taxation"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_crowding_out"
+   ],
+   "keywords": [
+    "incentives",
+    "supply-side"
+   ],
+   "summary": "Policies aimed at incentives can raise potential output rather than merely shifting demand.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_macroeconomics_the_loanable_funds_market",
+   "title": "The loanable funds market",
+   "strand": "The Financial Sector",
+   "unit": "Money, banking and interest",
+   "topic": "Money and the money market",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_money_demand_and_the_money_market"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "loanable funds",
+    "real interest rate"
+   ],
+   "summary": "The real interest rate balances saving with investment demand, linking the financial and goods markets.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_macroeconomics_the_long_run_phillips_curve",
+   "title": "The long-run Phillips curve",
+   "strand": "Long-Run Consequences of Stabilization Policies",
+   "unit": "Expectations and the long run",
+   "topic": "Long-run neutrality and the debt",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_macroeconomics_the_short_run_phillips_curve"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "long-run Phillips curve",
+    "natural rate"
+   ],
+   "summary": "In the long run the trade-off disappears: unemployment returns to its natural rate whatever the inflation rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_macroeconomics_the_money_multiplier",
+   "title": "The money multiplier",
+   "strand": "The Financial Sector",
+   "unit": "Money, banking and interest",
+   "topic": "Money and the money market",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_banking_and_money_creation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "money multiplier",
+    "reserve ratio"
+   ],
+   "summary": "Maximum deposit expansion is the reciprocal of the reserve ratio, and it shrinks with leakage into cash.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_macroeconomics_the_short_run_phillips_curve",
+   "title": "The short-run Phillips curve",
+   "strand": "The Financial Sector",
+   "unit": "Central banking and monetary policy",
+   "topic": "Policy tools and transmission",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_macroeconomics_transmission_of_monetary_policy"
+   ],
+   "sequence_predecessors": [
+    "ap_macroeconomics_interest_rates_and_investment"
+   ],
+   "keywords": [
+    "Phillips curve",
+    "inflation",
+    "unemployment"
+   ],
+   "summary": "The short-run trade-off between inflation and unemployment arises from sticky prices and surprise inflation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_macroeconomics_the_spending_multiplier",
+   "title": "The spending multiplier",
+   "strand": "National Income and Price Determination",
+   "unit": "Fiscal policy",
+   "topic": "Taxing and spending",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_macroeconomics_fiscal_policy_spending_and_taxation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "marginal propensity to consume",
+    "spending multiplier"
+   ],
+   "summary": "An initial spending change produces a larger total change because each round of income is partly re-spent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_macroeconomics_trade_barriers_and_their_effects",
+   "title": "Trade barriers and their effects",
+   "strand": "Open Economy: International Trade and Finance",
+   "unit": "Trade and the balance of payments",
+   "topic": "Accounts and barriers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "ap_macroeconomics_balance_of_payments_accounts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "quota",
+    "tariff",
+    "trade barrier"
+   ],
+   "summary": "Tariffs and quotas raise domestic prices, reduce imports and destroy some surplus as deadweight loss.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_macroeconomics_transmission_of_monetary_policy",
+   "title": "Transmission of monetary policy",
+   "strand": "The Financial Sector",
+   "unit": "Central banking and monetary policy",
+   "topic": "Policy tools and transmission",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_macroeconomics_central_banks_and_monetary_policy_tools"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "investment",
+    "transmission mechanism"
+   ],
+   "summary": "A rate change works through investment, consumption and net exports, and it arrives with a lag.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_macroeconomics_unemployment_measurement_and_types",
+   "title": "Unemployment: measurement and types",
+   "strand": "Economic Indicators and the Business Cycle",
+   "unit": "Inflation, unemployment and the cycle",
+   "topic": "Prices and jobs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_macroeconomics_economic_growth_and_productivity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cyclical",
+    "frictional",
+    "structural",
+    "unemployment"
+   ],
+   "summary": "Frictional, structural and cyclical unemployment are distinguished by their cause, and only some respond to demand policy.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Macroeconomics - Scarcity, Stabilisation and the Open Economy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  }
+ ]
+}

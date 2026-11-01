@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "generated": "2026-10-11",
+  "note": "Curated math games and interactive activities, teacher-searchable via find_game. Every URL was HTTP-verified live (200) on 2026-10-11 before being packed. Every source is LINK_ONLY (see app/ingest/policy.py GAME_SOURCES): the harness names and deep-links the activity and never copies or embeds its content. Specific Desmos activity ids are intentionally NOT packed (they rot); the verified search landing is packed instead. Prodigy and Brilliant are deliberately absent (account walls). Widening a source to embed_only requires a rights audit, not an edit here.",
+  "sources": [
+    {"key": "mathigon", "site_title": "Mathigon", "policy_name": "Mathigon", "url": "https://mathigon.org"},
+    {"key": "desmos", "site_title": "Desmos Classroom", "policy_name": "Desmos Classroom", "url": "https://teacher.desmos.com"},
+    {"key": "nrich", "site_title": "NRICH (University of Cambridge)", "policy_name": "NRICH (University of Cambridge)", "url": "https://nrich.maths.org"},
+    {"key": "transum", "site_title": "Transum Mathematics", "policy_name": "Transum Mathematics", "url": "https://www.transum.org"},
+    {"key": "mathsisfun", "site_title": "MathsIsFun", "policy_name": "MathsIsFun", "url": "https://www.mathsisfun.com"}
+  ],
+  "games": [
+    {"slug": "mathigon-polypad", "title": "Polypad — virtual manipulatives", "url": "https://mathigon.org/polypad", "site_title": "Mathigon", "policy_name": "Mathigon", "licence": "Site content © Mathigon Ltd; free for non-commercial educational use", "topics": ["fractions", "geometry", "pattern", "algebra", "arithmetic", "manipulatives"], "keywords": ["tiles", "tangram", "polygons", "number chart"]},
+    {"slug": "desmos-search-marbleslides", "title": "Desmos Classroom: Marbleslides collection", "url": "https://teacher.desmos.com/search?q=marbleslides", "site_title": "Desmos Classroom", "policy_name": "Desmos Classroom", "licence": "Desmos Terms of Service; activity links shared freely for classroom use", "topics": ["linear functions", "slope", "graphing", "equations"], "keywords": ["marbleslides", "lines", "transformations"]},
+    {"slug": "desmos-search-polygraph", "title": "Desmos Classroom: Polygraph collection", "url": "https://teacher.desmos.com/search?q=polygraph", "site_title": "Desmos Classroom", "policy_name": "Desmos Classroom", "licence": "Desmos Terms of Service; activity links shared freely for classroom use", "topics": ["linear functions", "vocabulary", "slope", "geometry"], "keywords": ["polygraph", "guessing game", "graph talk"]},
+    {"slug": "nrich-home", "title": "NRICH problems & investigations", "url": "https://nrich.maths.org/", "site_title": "NRICH (University of Cambridge)", "policy_name": "NRICH (University of Cambridge)", "licence": "© University of Cambridge NRICH project; educational use", "topics": ["problem solving", "reasoning", "number", "logic"], "keywords": ["enrichment", "challenge", "investigation"]},
+    {"slug": "transum-starters", "title": "Transum Maths Starters & Puzzles", "url": "https://www.transum.org/Maths/Starters/", "site_title": "Transum Mathematics", "policy_name": "Transum Mathematics", "licence": "© Transum Mathematics; free classroom use", "topics": ["arithmetic", "puzzles", "starters", "mental math"], "keywords": ["warm up", "starter", "drill", "puzzle"]},
+    {"slug": "mathsisfun-games", "title": "MathsIsFun games & interactives", "url": "https://www.mathsisfun.com/games/index.html", "site_title": "MathsIsFun", "policy_name": "MathsIsFun", "licence": "© MathsIsFun.com; personal and educational use", "topics": ["arithmetic", "logic", "strategy", "number sense"], "keywords": ["games", "interactive", "practice"]}
+  ]
+}

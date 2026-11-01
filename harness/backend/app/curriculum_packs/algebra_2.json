@@ -1,0 +1,2458 @@
+{
+ "schema": 1,
+ "name": "algebra_2",
+ "title": "Algebra 2",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A full-year Algebra 2 course: polynomial and rational functions, complex numbers, exponents, radicals and logarithms, transformations, trigonometry, conic sections, sequences and series, probability and matrices.",
+  "id_namespace": {
+   "prefix": "algebra_2_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Polynomials": {
+    "Polynomial arithmetic and factoring": [
+     "Working with polynomials"
+    ],
+    "Polynomial factorisation and division": [
+     "Finding factors and zeros"
+    ],
+    "Polynomial graphs": [
+     "Shape and zeros"
+    ]
+   },
+   "Complex Numbers": {
+    "Extending the number system": [
+     "Imaginary and complex numbers"
+    ]
+   },
+   "Exponentials and Logarithms": {
+    "Rational exponents and radicals": [
+     "Roots as powers"
+    ],
+    "Exponential and logarithmic functions": [
+     "Growth, decay and logs"
+    ]
+   },
+   "Functions": {
+    "Transformations and inverses": [
+     "Changing a graph"
+    ],
+    "Rational functions": [
+     "Quotients of polynomials"
+    ]
+   },
+   "Equations and Modelling": {
+    "Solving and modelling": [
+     "Choosing and using models"
+    ]
+   },
+   "Trigonometry": {
+    "Angles and the unit circle": [
+     "Circular functions"
+    ]
+   },
+   "Conic Sections, Series and Probability": {
+    "Conic sections": [
+     "Curves from cones"
+    ],
+    "Sequences, series and counting": [
+     "Discrete patterns"
+    ],
+    "Matrices": [
+     "Linear algebra foundations"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Polynomials",
+    "units": [
+     "Polynomial arithmetic and factoring",
+     "Polynomial factorisation and division",
+     "Polynomial graphs"
+    ]
+   },
+   {
+    "strand": "Complex Numbers",
+    "units": [
+     "Extending the number system"
+    ]
+   },
+   {
+    "strand": "Exponentials and Logarithms",
+    "units": [
+     "Rational exponents and radicals",
+     "Exponential and logarithmic functions"
+    ]
+   },
+   {
+    "strand": "Functions",
+    "units": [
+     "Transformations and inverses",
+     "Rational functions"
+    ]
+   },
+   {
+    "strand": "Equations and Modelling",
+    "units": [
+     "Solving and modelling"
+    ]
+   },
+   {
+    "strand": "Trigonometry",
+    "units": [
+     "Angles and the unit circle"
+    ]
+   },
+   {
+    "strand": "Conic Sections, Series and Probability",
+    "units": [
+     "Conic sections",
+     "Sequences, series and counting",
+     "Matrices"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "algebra_2_absolute_value_equations_and_inequalities",
+   "title": "Absolute value equations and inequalities",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_solving_systems_with_nonlinear_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value",
+    "case split"
+   ],
+   "summary": "Absolute value splits into two cases, and inequalities require checking the direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "algebra_2_adding_and_subtracting_polynomials",
+   "title": "Adding and subtracting polynomials",
+   "strand": "Polynomials",
+   "unit": "Polynomial arithmetic and factoring",
+   "topic": "Working with polynomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_polynomials_and_their_degree"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "like terms",
+    "polynomial addition"
+   ],
+   "summary": "Like terms combine by their power, so addition and subtraction act on coefficients of the same degree.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "algebra_2_adding_and_subtracting_rational_expressions",
+   "title": "Adding and subtracting rational expressions",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_multiplying_and_dividing_rational_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common denominator",
+    "rational addition"
+   ],
+   "summary": "A common denominator is required, exactly as with numerical fractions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "algebra_2_angles_and_radian_measure",
+   "title": "Angles and radian measure",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_choosing_a_model_and_checking_fit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "angle",
+    "arc length",
+    "radian"
+   ],
+   "summary": "Radians measure an angle by arc length, which makes calculus and periodicity natural.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "algebra_2_arithmetic_sequences_and_series",
+   "title": "Arithmetic sequences and series",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_identifying_conic_sections"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arithmetic sequence",
+    "common difference",
+    "series sum"
+   ],
+   "summary": "An arithmetic sequence adds a constant difference and its series sum has a closed form.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "algebra_2_asymptotes_and_holes",
+   "title": "Asymptotes and holes",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_solving_rational_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hole",
+    "horizontal asymptote",
+    "vertical asymptote"
+   ],
+   "summary": "Vertical asymptotes come from non-cancelled factors and holes from cancelled ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "algebra_2_change_of_base",
+   "title": "Change of base",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_properties_of_logarithms"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_graphing_logarithmic_functions"
+   ],
+   "keywords": [
+    "change of base",
+    "logarithm"
+   ],
+   "summary": "Change of base rewrites a logarithm in any base, which makes any log computable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "algebra_2_choosing_a_model_and_checking_fit",
+   "title": "Choosing a model and checking fit",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_exponential_and_logarithmic_models"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "model fit",
+    "residual"
+   ],
+   "summary": "Residuals and context decide which model is defensible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "algebra_2_circles",
+   "title": "Circles",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Conic sections",
+   "topic": "Curves from cones",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_parabolas"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "circle",
+    "completing the square",
+    "radius"
+   ],
+   "summary": "A circle is the set of points a fixed distance from a centre.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "algebra_2_complex_conjugates",
+   "title": "Complex conjugates",
+   "strand": "Complex Numbers",
+   "unit": "Extending the number system",
+   "topic": "Imaginary and complex numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_complex_numbers_and_their_arithmetic"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complex conjugate",
+    "modulus"
+   ],
+   "summary": "Multiplying by the conjugate removes the imaginary part, which is how a quotient is simplified.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "algebra_2_complex_numbers_and_their_arithmetic",
+   "title": "Complex numbers and their arithmetic",
+   "strand": "Complex Numbers",
+   "unit": "Extending the number system",
+   "topic": "Imaginary and complex numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_the_imaginary_unit_i"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complex number",
+    "imaginary part",
+    "real part"
+   ],
+   "summary": "Complex numbers add componentwise and multiply by distributing, treating i squared as minus one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "algebra_2_composite_functions",
+   "title": "Composite functions",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_inverse_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "composite function",
+    "composition"
+   ],
+   "summary": "A composite applies one function to the output of another, and order matters.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "algebra_2_compound_interest",
+   "title": "Compound interest",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_the_number_e_and_continuous_growth"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compound interest",
+    "effective rate"
+   ],
+   "summary": "Compound interest applies the growth factor repeatedly, and more frequent compounding raises the effective rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "algebra_2_determinants",
+   "title": "Determinants",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Matrices",
+   "topic": "Linear algebra foundations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_matrix_multiplication"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "determinant",
+    "invertible",
+    "singular"
+   ],
+   "summary": "A determinant is a number that reports whether a matrix is invertible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "algebra_2_ellipses",
+   "title": "Ellipses",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Conic sections",
+   "topic": "Curves from cones",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_circles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ellipse",
+    "foci",
+    "major axis"
+   ],
+   "summary": "An ellipse is the set of points whose distances to two foci sum to a constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "algebra_2_end_behaviour_of_polynomials",
+   "title": "End behaviour of polynomials",
+   "strand": "Polynomials",
+   "unit": "Polynomial graphs",
+   "topic": "Shape and zeros",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_factoring_higher_degree_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "end behaviour",
+    "leading term"
+   ],
+   "summary": "The leading term decides what the graph does as the input grows large in either direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "algebra_2_even_and_odd_functions",
+   "title": "Even and odd functions",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_function_transformations"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_stretching_and_compressing_graphs"
+   ],
+   "keywords": [
+    "even function",
+    "odd function"
+   ],
+   "summary": "Even functions are symmetric about the y-axis and odd functions about the origin.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "algebra_2_exponential_and_logarithmic_models",
+   "title": "Exponential and logarithmic models",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_linear_and_quadratic_models"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decay",
+    "exponential model"
+   ],
+   "summary": "A constant ratio suggests exponential growth or decay.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "algebra_2_exponential_growth_and_decay",
+   "title": "Exponential growth and decay",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_graphing_square_and_cube_root_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decay",
+    "exponential growth",
+    "growth factor"
+   ],
+   "summary": "A quantity changes by a constant factor per period, which is multiplicative rather than additive.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "algebra_2_factoring_by_grouping",
+   "title": "Factoring by grouping",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_factoring_common_factors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common binomial",
+    "factoring by grouping"
+   ],
+   "summary": "Grouping pairs of terms with a shared factor turns a four-term polynomial into a product.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "algebra_2_factoring_common_factors",
+   "title": "Factoring common factors",
+   "strand": "Polynomials",
+   "unit": "Polynomial arithmetic and factoring",
+   "topic": "Working with polynomials",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "algebra_2_multiplying_polynomials"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_special_polynomial_products"
+   ],
+   "keywords": [
+    "factoring",
+    "greatest common factor"
+   ],
+   "summary": "Removing the greatest common factor is the first step of every factorisation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "algebra_2_factoring_higher_degree_polynomials",
+   "title": "Factoring higher-degree polynomials",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_synthetic_division"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "higher-degree polynomial",
+    "rational root theorem"
+   ],
+   "summary": "Combining the factor theorem, division and pattern recognition factors polynomials of any degree.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "algebra_2_factoring_quadratics",
+   "title": "Factoring quadratics",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_factoring_by_grouping"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor pair",
+    "quadratic",
+    "sum and product"
+   ],
+   "summary": "A quadratic factors into two linear factors whose constants satisfy the sum and product conditions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "algebra_2_factoring_sum_and_difference_of_cubes",
+   "title": "Factoring sum and difference of cubes",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_2_factoring_quadratics"
+   ],
+   "keywords": [
+    "difference of cubes",
+    "sum of cubes"
+   ],
+   "summary": "Sum and difference of cubes factor into a binomial and a quadratic using standard patterns.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "algebra_2_function_transformations",
+   "title": "Function transformations",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_change_of_base"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parent function",
+    "transformation"
+   ],
+   "summary": "Shifts, stretches and reflections move a parent graph without changing its shape family.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "algebra_2_geometric_sequences_and_series",
+   "title": "Geometric sequences and series",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "algebra_2_arithmetic_sequences_and_series"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common ratio",
+    "geometric sequence",
+    "series sum"
+   ],
+   "summary": "A geometric sequence multiplies by a constant ratio, and its finite sum also has a closed form.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "algebra_2_graphing_exponential_functions",
+   "title": "Graphing exponential functions",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_exponential_growth_and_decay"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "asymptote",
+    "exponential graph"
+   ],
+   "summary": "Exponential graphs have a horizontal asymptote and pass through the point zero one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "algebra_2_graphing_logarithmic_functions",
+   "title": "Graphing logarithmic functions",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_introduction_to_logarithms"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_solving_logarithmic_equations"
+   ],
+   "keywords": [
+    "logarithmic graph",
+    "reflection"
+   ],
+   "summary": "A log graph is the reflection of its exponential in the line y equals x.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "algebra_2_graphing_polynomial_functions",
+   "title": "Graphing polynomial functions",
+   "strand": "Polynomials",
+   "unit": "Polynomial graphs",
+   "topic": "Shape and zeros",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_zeros_and_multiplicity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graphing polynomial",
+    "y-intercept"
+   ],
+   "summary": "Zeros, multiplicity, end behaviour and the y-intercept together determine the sketch.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "algebra_2_graphing_rational_functions",
+   "title": "Graphing rational functions",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_asymptotes_and_holes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "asymptote",
+    "rational graph"
+   ],
+   "summary": "Intercepts, asymptotes and holes together determine the shape of a rational graph.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "algebra_2_graphing_square_and_cube_root_functions",
+   "title": "Graphing square and cube root functions",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Rational exponents and radicals",
+   "topic": "Roots as powers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_radical_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "domain restriction",
+    "square root graph"
+   ],
+   "summary": "Root graphs have restricted domains and characteristic shapes that transform like other functions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "algebra_2_graphing_trigonometric_functions",
+   "title": "Graphing trigonometric functions",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_sine_cosine_and_tangent"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplitude",
+    "period",
+    "sinusoid"
+   ],
+   "summary": "Amplitude, period, phase and midline describe a transformed sinusoid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "algebra_2_hyperbolas",
+   "title": "Hyperbolas",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Conic sections",
+   "topic": "Curves from cones",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_ellipses"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "asymptote",
+    "foci",
+    "hyperbola"
+   ],
+   "summary": "A hyperbola is the set of points whose distances to two foci differ by a constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "algebra_2_identifying_conic_sections",
+   "title": "Identifying conic sections",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Conic sections",
+   "topic": "Curves from cones",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_hyperbolas"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conic classification",
+    "discriminant"
+   ],
+   "summary": "The general second-degree equation is classified by its coefficients.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "algebra_2_infinite_geometric_series",
+   "title": "Infinite geometric series",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "algebra_2_summation_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common ratio",
+    "convergence",
+    "infinite series"
+   ],
+   "summary": "An infinite geometric series converges exactly when the common ratio is smaller than one in size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "algebra_2_introduction_to_logarithms",
+   "title": "Introduction to logarithms",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_graphing_exponential_functions"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_compound_interest"
+   ],
+   "keywords": [
+    "base",
+    "inverse",
+    "logarithm"
+   ],
+   "summary": "A logarithm answers the exponent question, and it is the inverse of the exponential.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "algebra_2_inverse_functions",
+   "title": "Inverse functions",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_function_transformations"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_even_and_odd_functions"
+   ],
+   "keywords": [
+    "domain",
+    "inverse function",
+    "one-to-one"
+   ],
+   "summary": "An inverse undoes a function, and it exists only where the function is one-to-one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "algebra_2_inverse_matrices",
+   "title": "Inverse matrices",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Matrices",
+   "topic": "Linear algebra foundations",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "algebra_2_determinants"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "identity matrix",
+    "inverse matrix"
+   ],
+   "summary": "An inverse matrix undoes a linear transformation, and it exists only when the determinant is non-zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "algebra_2_inverse_trigonometric_functions",
+   "title": "Inverse trigonometric functions",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_the_unit_circle"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_solving_trigonometric_equations"
+   ],
+   "keywords": [
+    "inverse sine",
+    "principal value",
+    "range"
+   ],
+   "summary": "Inverse functions recover an angle, restricted to a principal range to stay one-to-one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "algebra_2_linear_and_quadratic_models",
+   "title": "Linear and quadratic models",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_absolute_value_equations_and_inequalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "linear model",
+    "quadratic model"
+   ],
+   "summary": "Constant difference suggests a linear model and constant second difference a quadratic one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "algebra_2_long_division_of_polynomials",
+   "title": "Long division of polynomials",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_the_remainder_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "polynomial long division",
+    "quotient",
+    "remainder"
+   ],
+   "summary": "Polynomial long division mirrors integer long division and produces a quotient and a remainder.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "algebra_2_matrix_multiplication",
+   "title": "Matrix multiplication",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Matrices",
+   "topic": "Linear algebra foundations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_matrix_notation_and_operations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "matrix multiplication",
+    "row column"
+   ],
+   "summary": "Matrix multiplication combines rows of the first with columns of the second, so order matters.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "algebra_2_matrix_notation_and_operations",
+   "title": "Matrix notation and operations",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Matrices",
+   "topic": "Linear algebra foundations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_probability_with_combinatorics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dimension",
+    "matrix",
+    "scalar multiplication"
+   ],
+   "summary": "Matrices are rectangular arrays, and addition and scalar multiplication act entrywise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "algebra_2_multiplying_and_dividing_rational_expressions",
+   "title": "Multiplying and dividing rational expressions",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_rational_expressions_and_simplification"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rational multiplication",
+    "reciprocal"
+   ],
+   "summary": "Multiplication and division work like fractions, with factoring first.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "algebra_2_multiplying_polynomials",
+   "title": "Multiplying polynomials",
+   "strand": "Polynomials",
+   "unit": "Polynomial arithmetic and factoring",
+   "topic": "Working with polynomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_adding_and_subtracting_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribution",
+    "polynomial multiplication"
+   ],
+   "summary": "Every term of one polynomial multiplies every term of the other, which is the distributive property applied repeatedly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "algebra_2_parabolas",
+   "title": "Parabolas",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Conic sections",
+   "topic": "Curves from cones",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_inverse_trigonometric_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "directrix",
+    "focus",
+    "parabola"
+   ],
+   "summary": "A parabola is the set of points equidistant from a focus and a directrix.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "algebra_2_permutations_and_combinations",
+   "title": "Permutations and combinations",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_the_counting_principle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combination",
+    "factorial",
+    "permutation"
+   ],
+   "summary": "Permutations count ordered arrangements and combinations count unordered selections.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "algebra_2_polynomials_and_their_degree",
+   "title": "Polynomials and their degree",
+   "strand": "Polynomials",
+   "unit": "Polynomial arithmetic and factoring",
+   "topic": "Working with polynomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "degree",
+    "leading coefficient",
+    "polynomial"
+   ],
+   "summary": "A polynomial is a sum of power terms, and its degree governs its end behaviour and how many roots it can have.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "algebra_2_probability_with_combinatorics",
+   "title": "Probability with combinatorics",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_permutations_and_combinations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "favourable outcomes",
+    "probability"
+   ],
+   "summary": "Counting favourable and total outcomes gives a probability for equally likely events.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "algebra_2_properties_of_logarithms",
+   "title": "Properties of logarithms",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_introduction_to_logarithms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "log properties",
+    "power rule",
+    "product rule"
+   ],
+   "summary": "Products, quotients and powers become sums, differences and multiples of logs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "algebra_2_quadratic_equations_with_complex_solutions",
+   "title": "Quadratic equations with complex solutions",
+   "strand": "Complex Numbers",
+   "unit": "Extending the number system",
+   "topic": "Imaginary and complex numbers",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_complex_conjugates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complex roots",
+    "discriminant"
+   ],
+   "summary": "A negative discriminant gives a conjugate pair of complex roots.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "algebra_2_radical_equations",
+   "title": "Radical equations",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Rational exponents and radicals",
+   "topic": "Roots as powers",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_simplifying_radical_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "extraneous solution",
+    "radical equation"
+   ],
+   "summary": "Squaring both sides can introduce extraneous solutions, so every result must be checked.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "algebra_2_rational_exponents",
+   "title": "Rational exponents",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Rational exponents and radicals",
+   "topic": "Roots as powers",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_the_fundamental_theorem_of_algebra"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "radical",
+    "rational exponent"
+   ],
+   "summary": "A fractional exponent is a root, so radicals and powers are two notations for the same thing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "algebra_2_rational_expressions_and_simplification",
+   "title": "Rational expressions and simplification",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_composite_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rational expression",
+    "simplify"
+   ],
+   "summary": "A rational expression is a quotient of polynomials, simplified by cancelling common factors.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "algebra_2_shifting_and_reflecting_graphs",
+   "title": "Shifting and reflecting graphs",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_function_transformations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inside outside",
+    "reflection",
+    "shift"
+   ],
+   "summary": "Horizontal changes act inside the function and reverse intuition, while vertical changes act outside.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "algebra_2_simplifying_radical_expressions",
+   "title": "Simplifying radical expressions",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Rational exponents and radicals",
+   "topic": "Roots as powers",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_rational_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "radical",
+    "rationalise",
+    "simplify"
+   ],
+   "summary": "Radicals simplify by removing perfect-power factors and rationalising denominators.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "algebra_2_sine_cosine_and_tangent",
+   "title": "Sine, cosine and tangent",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_the_unit_circle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "SOHCAHTOA",
+    "cosine",
+    "sine",
+    "tangent"
+   ],
+   "summary": "The three basic ratios relate the sides of a right triangle and extend to any angle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "algebra_2_solving_exponential_and_logarithmic_equations",
+   "title": "Solving exponential and logarithmic equations",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_graphing_rational_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponential equation",
+    "logarithmic equation"
+   ],
+   "summary": "Choosing the right inverse isolates the unknown in either direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "algebra_2_solving_exponential_equations_with_logarithms",
+   "title": "Solving exponential equations with logarithms",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_properties_of_logarithms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponential equation",
+    "logarithm"
+   ],
+   "summary": "Taking a logarithm of both sides isolates an unknown exponent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "algebra_2_solving_logarithmic_equations",
+   "title": "Solving logarithmic equations",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_properties_of_logarithms"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_solving_exponential_equations_with_logarithms"
+   ],
+   "keywords": [
+    "domain check",
+    "logarithmic equation"
+   ],
+   "summary": "Rewriting in exponential form solves log equations, and every solution must be checked for domain.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "algebra_2_solving_rational_equations",
+   "title": "Solving rational equations",
+   "strand": "Functions",
+   "unit": "Rational functions",
+   "topic": "Quotients of polynomials",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_adding_and_subtracting_rational_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "extraneous solution",
+    "rational equation"
+   ],
+   "summary": "Multiplying by the common denominator can introduce extraneous solutions, so results must be checked.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "algebra_2_solving_systems_with_matrices",
+   "title": "Solving systems with matrices",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Matrices",
+   "topic": "Linear algebra foundations",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "algebra_2_inverse_matrices"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "augmented matrix",
+    "matrix system",
+    "row reduction"
+   ],
+   "summary": "A linear system can be solved by matrix inverse or row reduction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "algebra_2_solving_systems_with_nonlinear_equations",
+   "title": "Solving systems with nonlinear equations",
+   "strand": "Equations and Modelling",
+   "unit": "Solving and modelling",
+   "topic": "Choosing and using models",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_solving_exponential_and_logarithmic_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "nonlinear system",
+    "substitution"
+   ],
+   "summary": "Substitution reduces a nonlinear system to one equation in one variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "algebra_2_solving_trigonometric_equations",
+   "title": "Solving trigonometric equations",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_trigonometric_identities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "periodicity",
+    "trigonometric equation"
+   ],
+   "summary": "Periodicity means a trigonometric equation usually has infinitely many solutions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "algebra_2_special_polynomial_products",
+   "title": "Special polynomial products",
+   "strand": "Polynomials",
+   "unit": "Polynomial arithmetic and factoring",
+   "topic": "Working with polynomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_multiplying_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "difference of squares",
+    "perfect square"
+   ],
+   "summary": "Perfect-square and difference-of-squares patterns let products be written without full distribution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "algebra_2_stretching_and_compressing_graphs",
+   "title": "Stretching and compressing graphs",
+   "strand": "Functions",
+   "unit": "Transformations and inverses",
+   "topic": "Changing a graph",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_shifting_and_reflecting_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compression",
+    "scale factor",
+    "stretch"
+   ],
+   "summary": "A factor greater than one stretches and a factor between zero and one compresses.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "algebra_2_summation_notation",
+   "title": "Summation notation",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_geometric_sequences_and_series"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "sigma notation",
+    "summation index"
+   ],
+   "summary": "Sigma notation compresses a sum and makes index changes explicit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "algebra_2_symmetry_in_polynomial_graphs",
+   "title": "Symmetry in polynomial graphs",
+   "strand": "Polynomials",
+   "unit": "Polynomial graphs",
+   "topic": "Shape and zeros",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_graphing_polynomial_functions"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_the_intermediate_value_theorem"
+   ],
+   "keywords": [
+    "even function",
+    "odd function",
+    "symmetry"
+   ],
+   "summary": "Even and odd symmetry come from the parity of the exponents.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "algebra_2_synthetic_division",
+   "title": "Synthetic division",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "algebra_2_long_division_of_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "linear factor",
+    "synthetic division"
+   ],
+   "summary": "Synthetic division divides by a linear factor quickly using only coefficients.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "algebra_2_the_binomial_theorem",
+   "title": "The binomial theorem",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "algebra_2_summation_notation"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_infinite_geometric_series"
+   ],
+   "keywords": [
+    "Pascal's triangle",
+    "binomial theorem",
+    "coefficient"
+   ],
+   "summary": "Binomial coefficients from Pascal's triangle expand a power of a binomial.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "algebra_2_the_counting_principle",
+   "title": "The counting principle",
+   "strand": "Conic Sections, Series and Probability",
+   "unit": "Sequences, series and counting",
+   "topic": "Discrete patterns",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_2_the_binomial_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "counting principle",
+    "multiplication rule"
+   ],
+   "summary": "Independent choices multiply, which is the basis of all counting.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "algebra_2_the_factor_theorem",
+   "title": "The factor theorem",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_factoring_quadratics"
+   ],
+   "sequence_predecessors": [
+    "algebra_2_factoring_sum_and_difference_of_cubes"
+   ],
+   "keywords": [
+    "factor theorem",
+    "zero of a polynomial"
+   ],
+   "summary": "A polynomial has a factor x minus c exactly when its value at c is zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "algebra_2_the_fundamental_theorem_of_algebra",
+   "title": "The fundamental theorem of algebra",
+   "strand": "Complex Numbers",
+   "unit": "Extending the number system",
+   "topic": "Imaginary and complex numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_quadratic_equations_with_complex_solutions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fundamental theorem of algebra",
+    "roots"
+   ],
+   "summary": "A degree-n polynomial has exactly n complex roots counted with multiplicity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "algebra_2_the_imaginary_unit_i",
+   "title": "The imaginary unit i",
+   "strand": "Complex Numbers",
+   "unit": "Extending the number system",
+   "topic": "Imaginary and complex numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_symmetry_in_polynomial_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "i",
+    "imaginary unit",
+    "square root"
+   ],
+   "summary": "The imaginary unit squares to minus one, which gives negative numbers square roots.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "algebra_2_the_intermediate_value_theorem",
+   "title": "The intermediate value theorem",
+   "strand": "Polynomials",
+   "unit": "Polynomial graphs",
+   "topic": "Shape and zeros",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_graphing_polynomial_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intermediate value theorem",
+    "sign change"
+   ],
+   "summary": "A continuous polynomial takes every value between its endpoint values, which locates real roots.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "algebra_2_the_number_e_and_continuous_growth",
+   "title": "The number e and continuous growth",
+   "strand": "Exponentials and Logarithms",
+   "unit": "Exponential and logarithmic functions",
+   "topic": "Growth, decay and logs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_graphing_exponential_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuous compounding",
+    "e"
+   ],
+   "summary": "Continuous compounding leads to the base e, which describes growth as a rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "algebra_2_the_remainder_theorem",
+   "title": "The remainder theorem",
+   "strand": "Polynomials",
+   "unit": "Polynomial factorisation and division",
+   "topic": "Finding factors and zeros",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "algebra_2_the_factor_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "remainder theorem",
+    "synthetic substitution"
+   ],
+   "summary": "The remainder on dividing by x minus c equals the polynomial's value at c.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "algebra_2_the_unit_circle",
+   "title": "The unit circle",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_angles_and_radian_measure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cosine",
+    "sine",
+    "unit circle"
+   ],
+   "summary": "The unit circle gives sine and cosine as coordinates and extends them beyond right triangles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "algebra_2_trigonometric_identities",
+   "title": "Trigonometric identities",
+   "strand": "Trigonometry",
+   "unit": "Angles and the unit circle",
+   "topic": "Circular functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_2_graphing_trigonometric_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Pythagorean identity",
+    "double angle",
+    "identity"
+   ],
+   "summary": "Pythagorean, sum and double-angle identities rewrite expressions and prove equalities.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "algebra_2_zeros_and_multiplicity",
+   "title": "Zeros and multiplicity",
+   "strand": "Polynomials",
+   "unit": "Polynomial graphs",
+   "topic": "Shape and zeros",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_2_end_behaviour_of_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "multiplicity",
+    "turning point",
+    "zero"
+   ],
+   "summary": "A repeated root makes the graph touch or flatten at the axis instead of crossing it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  }
+ ]
+}

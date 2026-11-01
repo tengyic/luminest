@@ -1,0 +1,16 @@
+# Development, test and packaging environment. A superset of the runtime requirements,
+# so ``pip install -r requirements-dev.txt`` is all a contributor or a build needs.
+#
+# pytest and pyinstaller live here rather than in requirements.txt because nothing at
+# runtime imports either: keeping them in the runtime file made the packaging lockstep
+# demand a test framework and a freezer in the build environment, which is a false
+# failure waiting to happen.
+#
+# pyinstaller is declared because it *is* the build. Its absence from any environment on
+# this machine is precisely why the shipped artifact fell a day behind the source tree:
+# the packaging script could not be run, so nobody noticed that the file the
+# distribution guide told testers to download was the previous build with an empty
+# knowledge graph.
+-r requirements.txt
+pytest==9.1.1
+pyinstaller>=6.11,<7

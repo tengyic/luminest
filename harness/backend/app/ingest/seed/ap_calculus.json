@@ -1,0 +1,1068 @@
+{
+ "course": "AP Calculus - Limits, Derivatives, Integrals and Series",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "The AP Calculus AB and BC course framework: limits and continuity, differentiation and its applications, integration and accumulation, differential equations, applications of integration, and (BC) parametric, polar, vector and series topics.",
+ "expected_weeks": 36,
+ "strands": [
+  {
+   "strand": "Limits and Continuity",
+   "units": [
+    {
+     "unit": "Limits",
+     "topics": [
+      {
+       "topic": "Approaching a value",
+       "concepts": [
+        {
+         "title": "Estimating limits from graphs and tables",
+         "summary": "A limit describes the value a function approaches, which need not equal its value at the point.",
+         "keywords": [
+          "limit",
+          "approach",
+          "graph"
+         ]
+        },
+        {
+         "title": "Defining limits and limit notation",
+         "summary": "The formal definition makes \"approaches\" precise and distinguishes one-sided from two-sided limits.",
+         "keywords": [
+          "limit definition",
+          "one-sided limit",
+          "notation"
+         ],
+         "prerequisites": [
+          "Estimating limits from graphs and tables"
+         ]
+        },
+        {
+         "title": "Limit properties and algebraic techniques",
+         "summary": "Limits combine by sum, product and quotient, and factoring or rationalising resolves indeterminate forms.",
+         "keywords": [
+          "limit laws",
+          "indeterminate form",
+          "factoring"
+         ],
+         "prerequisites": [
+          "Defining limits and limit notation"
+         ]
+        },
+        {
+         "title": "Limits at infinity",
+         "summary": "Limits at infinity describe end behaviour, including horizontal asymptotes.",
+         "keywords": [
+          "limits at infinity",
+          "end behaviour",
+          "horizontal asymptote"
+         ],
+         "prerequisites": [
+          "Limit properties and algebraic techniques"
+         ]
+        },
+        {
+         "title": "The squeeze theorem",
+         "summary": "If a function is trapped between two others with the same limit, it has that limit too.",
+         "keywords": [
+          "squeeze theorem",
+          "bounding function"
+         ],
+         "prerequisites": [
+          "Limits at infinity"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Continuity",
+     "prerequisites": [
+      "Limits"
+     ],
+     "topics": [
+      {
+       "topic": "Where functions hold together",
+       "concepts": [
+        {
+         "title": "Continuity at a point",
+         "summary": "A function is continuous when its limit exists, its value exists, and the two agree.",
+         "keywords": [
+          "continuity",
+          "limit equals value"
+         ]
+        },
+        {
+         "title": "Types of discontinuity",
+         "summary": "Removable, jump and infinite discontinuities differ in whether a limit exists.",
+         "keywords": [
+          "removable discontinuity",
+          "jump",
+          "infinite"
+         ],
+         "prerequisites": [
+          "Continuity at a point"
+         ]
+        },
+        {
+         "title": "The intermediate value theorem",
+         "summary": "A continuous function on an interval takes every value between its endpoint values.",
+         "keywords": [
+          "intermediate value theorem",
+          "continuous interval"
+         ],
+         "prerequisites": [
+          "Types of discontinuity"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "units": [
+    {
+     "unit": "The derivative",
+     "prerequisites": [
+      "Continuity"
+     ],
+     "topics": [
+      {
+       "topic": "Rates and rules",
+       "concepts": [
+        {
+         "title": "Average and instantaneous rate of change",
+         "summary": "The average rate is a secant slope and the instantaneous rate is the limit of secant slopes.",
+         "keywords": [
+          "average rate",
+          "instantaneous rate",
+          "secant"
+         ]
+        },
+        {
+         "title": "The derivative as a limit",
+         "summary": "The derivative is the limit of a difference quotient, which gives the slope of the tangent line.",
+         "keywords": [
+          "derivative",
+          "difference quotient",
+          "tangent line"
+         ],
+         "prerequisites": [
+          "Average and instantaneous rate of change"
+         ]
+        },
+        {
+         "title": "Differentiability and continuity",
+         "summary": "Differentiable implies continuous, but continuity does not imply differentiability.",
+         "keywords": [
+          "differentiability",
+          "continuity",
+          "corner"
+         ],
+         "prerequisites": [
+          "The derivative as a limit"
+         ]
+        },
+        {
+         "title": "The power rule",
+         "summary": "The derivative of x to the n is n times x to the n minus one.",
+         "keywords": [
+          "power rule",
+          "derivative"
+         ],
+         "prerequisites": [
+          "The derivative as a limit"
+         ]
+        },
+        {
+         "title": "Constant, sum and difference rules",
+         "summary": "Derivatives distribute over sums and differences, and a constant differentiates to zero.",
+         "keywords": [
+          "sum rule",
+          "constant rule"
+         ],
+         "prerequisites": [
+          "The power rule"
+         ]
+        },
+        {
+         "title": "The product rule",
+         "summary": "The derivative of a product is the first times the derivative of the second plus the second times the derivative of the first.",
+         "keywords": [
+          "product rule"
+         ],
+         "prerequisites": [
+          "Constant, sum and difference rules"
+         ]
+        },
+        {
+         "title": "The quotient rule",
+         "summary": "The derivative of a quotient follows a fixed numerator pattern over the denominator squared.",
+         "keywords": [
+          "quotient rule"
+         ],
+         "prerequisites": [
+          "The product rule"
+         ]
+        },
+        {
+         "title": "Derivatives of trigonometric functions",
+         "summary": "Sine and cosine differentiate into each other with a sign change, and the rest follow.",
+         "keywords": [
+          "trig derivative",
+          "sine",
+          "cosine"
+         ],
+         "prerequisites": [
+          "Constant, sum and difference rules"
+         ]
+        },
+        {
+         "title": "Higher-order derivatives",
+         "summary": "Repeated differentiation gives acceleration from velocity, and concavity from slope.",
+         "keywords": [
+          "second derivative",
+          "higher order"
+         ],
+         "prerequisites": [
+          "The derivative as a limit"
+         ]
+        },
+        {
+         "title": "Tangent line approximation",
+         "summary": "The tangent line gives a local linear approximation of a function.",
+         "keywords": [
+          "linearisation",
+          "tangent line approximation"
+         ],
+         "prerequisites": [
+          "The derivative as a limit"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "units": [
+    {
+     "unit": "Chain and implicit rules",
+     "prerequisites": [
+      "The derivative"
+     ],
+     "topics": [
+      {
+       "topic": "Composition and implicit relations",
+       "concepts": [
+        {
+         "title": "The chain rule",
+         "summary": "The derivative of a composition multiplies the outer derivative by the inner derivative.",
+         "keywords": [
+          "chain rule",
+          "composite"
+         ]
+        },
+        {
+         "title": "Implicit differentiation",
+         "summary": "Differentiating both sides of a relation and treating y as a function of x gives dy by dx.",
+         "keywords": [
+          "implicit differentiation",
+          "dy/dx"
+         ],
+         "prerequisites": [
+          "The chain rule"
+         ]
+        },
+        {
+         "title": "Derivatives of inverse functions",
+         "summary": "The derivative of an inverse is the reciprocal of the original derivative at the corresponding point.",
+         "keywords": [
+          "inverse function derivative",
+          "reciprocal"
+         ],
+         "prerequisites": [
+          "Implicit differentiation"
+         ]
+        },
+        {
+         "title": "Derivatives of exponential functions",
+         "summary": "The exponential function is its own derivative, and a base change brings down a factor.",
+         "keywords": [
+          "exponential derivative",
+          "e^x"
+         ],
+         "prerequisites": [
+          "The chain rule"
+         ]
+        },
+        {
+         "title": "Derivatives of logarithmic functions",
+         "summary": "The natural logarithm differentiates to one over x, and the chain rule extends it.",
+         "keywords": [
+          "logarithmic derivative",
+          "ln x"
+         ],
+         "prerequisites": [
+          "Derivatives of exponential functions"
+         ]
+        },
+        {
+         "title": "Derivatives of inverse trigonometric functions",
+         "summary": "Inverse trigonometric derivatives follow standard forms used in integration.",
+         "keywords": [
+          "inverse trig derivative",
+          "arcsin"
+         ],
+         "prerequisites": [
+          "Derivatives of inverse functions"
+         ]
+        },
+        {
+         "title": "Logarithmic differentiation",
+         "summary": "Taking a logarithm first turns products and powers into sums, which simplifies the derivative.",
+         "keywords": [
+          "logarithmic differentiation"
+         ],
+         "prerequisites": [
+          "Derivatives of logarithmic functions"
+         ]
+        },
+        {
+         "title": "Selecting differentiation procedures",
+         "summary": "Recognising the structure of an expression decides which rule applies.",
+         "keywords": [
+          "procedure selection",
+          "rule choice"
+         ],
+         "prerequisites": [
+          "Logarithmic differentiation"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Contextual Applications of Differentiation",
+   "units": [
+    {
+     "unit": "Derivatives in context",
+     "prerequisites": [
+      "Chain and implicit rules"
+     ],
+     "topics": [
+      {
+       "topic": "Rates in the world",
+       "concepts": [
+        {
+         "title": "Interpreting derivatives in context",
+         "summary": "A derivative is a rate with units, and its sign reports direction of change.",
+         "keywords": [
+          "derivative meaning",
+          "units",
+          "rate"
+         ]
+        },
+        {
+         "title": "Straight-line motion",
+         "summary": "Position, velocity and acceleration are related by successive derivatives.",
+         "keywords": [
+          "position",
+          "velocity",
+          "acceleration"
+         ],
+         "prerequisites": [
+          "Interpreting derivatives in context"
+         ]
+        },
+        {
+         "title": "Related rates",
+         "summary": "When two quantities are linked, differentiating the relation in time connects their rates.",
+         "keywords": [
+          "related rates",
+          "implicit differentiation"
+         ],
+         "prerequisites": [
+          "Straight-line motion"
+         ]
+        },
+        {
+         "title": "Local linearity and approximation",
+         "summary": "Near a point a differentiable function behaves like its tangent line.",
+         "keywords": [
+          "local linearity",
+          "approximation"
+         ],
+         "prerequisites": [
+          "Interpreting derivatives in context"
+         ]
+        },
+        {
+         "title": "L'Hôpital's rule",
+         "summary": "Indeterminate limits of quotients can be evaluated by differentiating numerator and denominator.",
+         "keywords": [
+          "L'Hôpital",
+          "indeterminate form"
+         ],
+         "prerequisites": [
+          "Interpreting derivatives in context"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Analytical Applications of Differentiation",
+   "units": [
+    {
+     "unit": "Shape of a graph",
+     "prerequisites": [
+      "Derivatives in context"
+     ],
+     "topics": [
+      {
+       "topic": "Extrema and concavity",
+       "concepts": [
+        {
+         "title": "The mean value theorem",
+         "summary": "Somewhere in an interval the instantaneous rate equals the average rate.",
+         "keywords": [
+          "mean value theorem",
+          "average rate"
+         ]
+        },
+        {
+         "title": "The extreme value theorem",
+         "summary": "A continuous function on a closed interval attains a maximum and a minimum.",
+         "keywords": [
+          "extreme value theorem",
+          "closed interval"
+         ],
+         "prerequisites": [
+          "The mean value theorem"
+         ]
+        },
+        {
+         "title": "Critical points",
+         "summary": "Critical points are where the derivative is zero or undefined, and they candidate the extrema.",
+         "keywords": [
+          "critical point",
+          "stationary point"
+         ],
+         "prerequisites": [
+          "The extreme value theorem"
+         ]
+        },
+        {
+         "title": "Increasing and decreasing intervals",
+         "summary": "The sign of the derivative reports where a function rises or falls.",
+         "keywords": [
+          "increasing",
+          "decreasing",
+          "sign of derivative"
+         ],
+         "prerequisites": [
+          "Critical points"
+         ]
+        },
+        {
+         "title": "The first derivative test",
+         "summary": "A sign change of the derivative identifies a local maximum or minimum.",
+         "keywords": [
+          "first derivative test",
+          "local extremum"
+         ],
+         "prerequisites": [
+          "Increasing and decreasing intervals"
+         ]
+        },
+        {
+         "title": "Concavity and inflection points",
+         "summary": "The sign of the second derivative reports concavity and where it changes.",
+         "keywords": [
+          "concavity",
+          "inflection point",
+          "second derivative"
+         ],
+         "prerequisites": [
+          "The first derivative test"
+         ]
+        },
+        {
+         "title": "The second derivative test",
+         "summary": "The second derivative classifies a stationary point as a maximum or a minimum.",
+         "keywords": [
+          "second derivative test",
+          "concave down"
+         ],
+         "prerequisites": [
+          "Concavity and inflection points"
+         ]
+        },
+        {
+         "title": "Optimisation problems",
+         "summary": "A constraint reduces a quantity to one variable, and the derivative locates its optimum.",
+         "keywords": [
+          "optimisation",
+          "constraint"
+         ],
+         "prerequisites": [
+          "The second derivative test"
+         ]
+        },
+        {
+         "title": "Connecting graphs of f, f prime and f double prime",
+         "summary": "The signs and zeros of the first two derivatives describe the shape of the function.",
+         "keywords": [
+          "graph relationships",
+          "derivative graphs"
+         ],
+         "prerequisites": [
+          "Concavity and inflection points"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Integration and Accumulation of Change",
+   "units": [
+    {
+     "unit": "Accumulation",
+     "prerequisites": [
+      "Shape of a graph"
+     ],
+     "topics": [
+      {
+       "topic": "Adding up change",
+       "concepts": [
+        {
+         "title": "Riemann sums",
+         "summary": "A definite integral is the limit of sums of rectangular areas.",
+         "keywords": [
+          "Riemann sum",
+          "area approximation"
+         ]
+        },
+        {
+         "title": "The definite integral as a limit",
+         "summary": "The integral is defined as a limit of Riemann sums, which makes accumulation precise.",
+         "keywords": [
+          "definite integral",
+          "limit of sums"
+         ],
+         "prerequisites": [
+          "Riemann sums"
+         ]
+        },
+        {
+         "title": "The fundamental theorem of calculus",
+         "summary": "Differentiation and integration are inverse processes, which links area to antiderivatives.",
+         "keywords": [
+          "fundamental theorem",
+          "antiderivative",
+          "accumulation"
+         ],
+         "prerequisites": [
+          "The definite integral as a limit"
+         ]
+        },
+        {
+         "title": "Antiderivatives and indefinite integrals",
+         "summary": "An antiderivative reverses differentiation, up to an additive constant.",
+         "keywords": [
+          "antiderivative",
+          "indefinite integral",
+          "constant of integration"
+         ],
+         "prerequisites": [
+          "The fundamental theorem of calculus"
+         ]
+        },
+        {
+         "title": "Properties of definite integrals",
+         "summary": "Integrals split, reverse sign and combine linearly, which simplifies evaluation.",
+         "keywords": [
+          "integral properties",
+          "additivity"
+         ],
+         "prerequisites": [
+          "The fundamental theorem of calculus"
+         ]
+        },
+        {
+         "title": "Accumulation functions",
+         "summary": "An accumulation function's derivative is the integrand, which lets integrals be differentiated.",
+         "keywords": [
+          "accumulation function",
+          "derivative of integral"
+         ],
+         "prerequisites": [
+          "The fundamental theorem of calculus"
+         ]
+        },
+        {
+         "title": "Integration by substitution",
+         "summary": "Substitution reverses the chain rule and simplifies many integrals.",
+         "keywords": [
+          "substitution",
+          "u-substitution"
+         ],
+         "prerequisites": [
+          "Antiderivatives and indefinite integrals"
+         ]
+        },
+        {
+         "title": "Integration by parts",
+         "summary": "Integration by parts reverses the product rule.",
+         "keywords": [
+          "integration by parts",
+          "product rule"
+         ],
+         "prerequisites": [
+          "Integration by substitution"
+         ]
+        },
+        {
+         "title": "Partial fractions",
+         "summary": "A rational integrand can be split into simpler fractions that integrate directly.",
+         "keywords": [
+          "partial fractions",
+          "rational integrand"
+         ],
+         "prerequisites": [
+          "Integration by parts"
+         ]
+        },
+        {
+         "title": "Improper integrals",
+         "summary": "An integral over an infinite interval or with a singularity is defined by a limit and may diverge.",
+         "keywords": [
+          "improper integral",
+          "convergence",
+          "diverge"
+         ],
+         "prerequisites": [
+          "Partial fractions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differential Equations",
+   "units": [
+    {
+     "unit": "Modelling change",
+     "prerequisites": [
+      "Accumulation"
+     ],
+     "topics": [
+      {
+       "topic": "Equations involving a derivative",
+       "concepts": [
+        {
+         "title": "Modelling with differential equations",
+         "summary": "A differential equation states how a quantity changes in terms of the quantity itself.",
+         "keywords": [
+          "differential equation",
+          "model"
+         ]
+        },
+        {
+         "title": "Slope fields",
+         "summary": "A slope field draws the derivative at each point, which reveals solution curves.",
+         "keywords": [
+          "slope field",
+          "direction field"
+         ],
+         "prerequisites": [
+          "Modelling with differential equations"
+         ]
+        },
+        {
+         "title": "Separation of variables",
+         "summary": "Separating the variables allows each side to be integrated independently.",
+         "keywords": [
+          "separation of variables",
+          "general solution"
+         ],
+         "prerequisites": [
+          "Slope fields"
+         ]
+        },
+        {
+         "title": "Exponential models",
+         "summary": "A rate proportional to the amount gives exponential growth or decay.",
+         "keywords": [
+          "exponential growth",
+          "decay",
+          "proportional rate"
+         ],
+         "prerequisites": [
+          "Separation of variables"
+         ]
+        },
+        {
+         "title": "Logistic models",
+         "summary": "A rate limited by a carrying capacity gives logistic growth.",
+         "keywords": [
+          "logistic growth",
+          "carrying capacity"
+         ],
+         "prerequisites": [
+          "Exponential models"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Applications of Integration",
+   "units": [
+    {
+     "unit": "Using the integral",
+     "prerequisites": [
+      "Modelling change"
+     ],
+     "topics": [
+      {
+       "topic": "Area, volume and totals",
+       "concepts": [
+        {
+         "title": "Average value of a function",
+         "summary": "The average value is the integral over the interval divided by the interval length.",
+         "keywords": [
+          "average value",
+          "mean value"
+         ]
+        },
+        {
+         "title": "Area between curves",
+         "summary": "Area between curves is the integral of the upper minus the lower function.",
+         "keywords": [
+          "area between curves",
+          "upper lower"
+         ],
+         "prerequisites": [
+          "Average value of a function"
+         ]
+        },
+        {
+         "title": "Volumes with known cross sections",
+         "summary": "Integrating the area of a cross section gives the volume of a solid.",
+         "keywords": [
+          "cross section",
+          "volume"
+         ],
+         "prerequisites": [
+          "Area between curves"
+         ]
+        },
+        {
+         "title": "Volumes of revolution: disk and washer",
+         "summary": "Rotating a region about an axis gives circular cross sections, with the washer handling a gap.",
+         "keywords": [
+          "disk method",
+          "washer method",
+          "revolution"
+         ],
+         "prerequisites": [
+          "Volumes with known cross sections"
+         ]
+        },
+        {
+         "title": "Volumes of revolution: shell method",
+         "summary": "Cylindrical shells integrate along the axis perpendicular to the one used by disks.",
+         "keywords": [
+          "shell method",
+          "cylindrical shell"
+         ],
+         "prerequisites": [
+          "Volumes of revolution: disk and washer"
+         ]
+        },
+        {
+         "title": "Arc length",
+         "summary": "Arc length integrates the length element derived from the Pythagorean theorem.",
+         "keywords": [
+          "arc length",
+          "length element"
+         ],
+         "prerequisites": [
+          "Volumes of revolution: shell method"
+         ]
+        },
+        {
+         "title": "Accumulated change in context",
+         "summary": "The integral of a rate gives the total change in the underlying quantity.",
+         "keywords": [
+          "accumulated change",
+          "net change"
+         ],
+         "prerequisites": [
+          "Average value of a function"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Parametric, Polar and Vector Functions (BC)",
+   "units": [
+    {
+     "unit": "Other coordinate systems",
+     "prerequisites": [
+      "Using the integral"
+     ],
+     "topics": [
+      {
+       "topic": "Curves beyond y equals f of x",
+       "concepts": [
+        {
+         "title": "Parametric equations and derivatives",
+         "summary": "Parametric curves describe x and y separately, and dy by dx is the ratio of their derivatives.",
+         "keywords": [
+          "parametric",
+          "dy/dx",
+          "parameter"
+         ]
+        },
+        {
+         "title": "Motion with parametric and vector functions",
+         "summary": "Velocity and acceleration become vector quantities with direction and magnitude.",
+         "keywords": [
+          "vector function",
+          "velocity vector",
+          "speed"
+         ],
+         "prerequisites": [
+          "Parametric equations and derivatives"
+         ]
+        },
+        {
+         "title": "Polar coordinates",
+         "summary": "Polar coordinates locate a point by distance and angle, and they convert to and from Cartesian.",
+         "keywords": [
+          "polar coordinates",
+          "conversion"
+         ],
+         "prerequisites": [
+          "Motion with parametric and vector functions"
+         ]
+        },
+        {
+         "title": "Area and arc length in polar coordinates",
+         "summary": "Polar area uses sectors rather than rectangles, which changes the integrand.",
+         "keywords": [
+          "polar area",
+          "polar arc length"
+         ],
+         "prerequisites": [
+          "Polar coordinates"
+         ]
+        },
+        {
+         "title": "Vector-valued functions",
+         "summary": "A vector-valued function traces a curve, and its derivative is a tangent vector.",
+         "keywords": [
+          "vector-valued function",
+          "tangent vector"
+         ],
+         "prerequisites": [
+          "Motion with parametric and vector functions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Infinite Sequences and Series (BC)",
+   "units": [
+    {
+     "unit": "Convergence",
+     "prerequisites": [
+      "Other coordinate systems"
+     ],
+     "topics": [
+      {
+       "topic": "Infinite sums and tests",
+       "concepts": [
+        {
+         "title": "Convergence of sequences",
+         "summary": "A sequence converges when its terms approach a single finite limit.",
+         "keywords": [
+          "sequence",
+          "convergence",
+          "limit"
+         ]
+        },
+        {
+         "title": "Introduction to series",
+         "summary": "A series is the sum of a sequence, and its partial sums decide convergence.",
+         "keywords": [
+          "series",
+          "partial sum"
+         ],
+         "prerequisites": [
+          "Convergence of sequences"
+         ]
+        },
+        {
+         "title": "Geometric series",
+         "summary": "A geometric series converges exactly when the common ratio is smaller than one in size.",
+         "keywords": [
+          "geometric series",
+          "common ratio"
+         ],
+         "prerequisites": [
+          "Introduction to series"
+         ]
+        },
+        {
+         "title": "The nth-term test",
+         "summary": "If the terms do not approach zero, the series diverges, but the converse does not hold.",
+         "keywords": [
+          "nth-term test",
+          "divergence test"
+         ],
+         "prerequisites": [
+          "Introduction to series"
+         ]
+        },
+        {
+         "title": "The integral test",
+         "summary": "A series and a related improper integral converge or diverge together.",
+         "keywords": [
+          "integral test",
+          "improper integral"
+         ],
+         "prerequisites": [
+          "The nth-term test"
+         ]
+        },
+        {
+         "title": "Comparison tests",
+         "summary": "Bounding a series by a known one decides convergence term by term.",
+         "keywords": [
+          "comparison test",
+          "limit comparison"
+         ],
+         "prerequisites": [
+          "The integral test"
+         ]
+        },
+        {
+         "title": "The alternating series test",
+         "summary": "Alternating terms that decrease to zero converge, with a bounded error.",
+         "keywords": [
+          "alternating series",
+          "error bound"
+         ],
+         "prerequisites": [
+          "Comparison tests"
+         ]
+        },
+        {
+         "title": "The ratio test",
+         "summary": "The ratio of successive terms decides absolute convergence, especially for factorials and powers.",
+         "keywords": [
+          "ratio test",
+          "absolute convergence"
+         ],
+         "prerequisites": [
+          "Comparison tests"
+         ]
+        },
+        {
+         "title": "Absolute and conditional convergence",
+         "summary": "A series can converge while the series of absolute values diverges.",
+         "keywords": [
+          "absolute convergence",
+          "conditional convergence"
+         ],
+         "prerequisites": [
+          "The alternating series test"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Representing functions as series",
+     "prerequisites": [
+      "Convergence"
+     ],
+     "topics": [
+      {
+       "topic": "Power and Taylor series",
+       "concepts": [
+        {
+         "title": "Taylor and Maclaurin series",
+         "summary": "A smooth function can be represented by a power series built from its derivatives at a point.",
+         "keywords": [
+          "Taylor series",
+          "Maclaurin series",
+          "expansion"
+         ]
+        },
+        {
+         "title": "Power series and radius of convergence",
+         "summary": "A power series converges on an interval whose radius is found from the ratio test.",
+         "keywords": [
+          "power series",
+          "radius of convergence",
+          "interval"
+         ],
+         "prerequisites": [
+          "Taylor and Maclaurin series"
+         ]
+        },
+        {
+         "title": "Approximating functions with polynomials",
+         "summary": "A Taylor polynomial approximates a function with a controllable error bound.",
+         "keywords": [
+          "Taylor polynomial",
+          "error bound",
+          "approximation"
+         ],
+         "prerequisites": [
+          "Power series and radius of convergence"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

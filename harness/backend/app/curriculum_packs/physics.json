@@ -1,0 +1,3670 @@
+{
+ "schema": 1,
+ "name": "physics",
+ "title": "Physics",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "topic",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "An introductory algebra-based physics course: measurement and modelling, mechanics, waves and optics, electricity and magnetism, thermodynamics, and modern physics."
+ },
+ "taxonomy": {
+  "strands": {
+   "Measurement and Modelling": {
+    "Physical quantities and reasoning": [
+     "Quantities, units and uncertainty"
+    ],
+    "Vectors and kinematics in one dimension": [
+     "Scalars, vectors and motion language",
+     "Constant-acceleration motion"
+    ]
+   },
+   "Mechanics": {
+    "Forces and Newton's laws": [
+     "Force and equilibrium",
+     "Common forces"
+    ],
+    "Energy, momentum and rotation": [
+     "Work and energy",
+     "Momentum and collisions",
+     "Circular and rotational motion"
+    ],
+    "Gravitation and oscillations": [
+     "Universal gravitation",
+     "Simple harmonic motion"
+    ]
+   },
+   "Waves and Optics": {
+    "Wave behaviour": [
+     "Describing waves",
+     "Superposition and interference"
+    ],
+    "Sound and geometric optics": [
+     "Sound",
+     "Light and reflection"
+    ]
+   },
+   "Electricity and Magnetism": {
+    "Electric charge and fields": [
+     "Electrostatics"
+    ],
+    "Circuits": [
+     "Direct current circuits"
+    ],
+    "Magnetism and induction": [
+     "Magnetic fields and forces",
+     "Electromagnetic induction"
+    ]
+   },
+   "Thermal Physics": {
+    "Heat, temperature and gases": [
+     "Thermal energy",
+     "Gas laws and thermodynamics"
+    ]
+   },
+   "Modern Physics": {
+    "Quantum and nuclear physics": [
+     "Quantum foundations",
+     "Nuclear physics"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Measurement and Modelling",
+    "units": [
+     "Physical quantities and reasoning",
+     "Vectors and kinematics in one dimension"
+    ]
+   },
+   {
+    "strand": "Mechanics",
+    "units": [
+     "Forces and Newton's laws",
+     "Energy, momentum and rotation",
+     "Gravitation and oscillations"
+    ]
+   },
+   {
+    "strand": "Waves and Optics",
+    "units": [
+     "Wave behaviour",
+     "Sound and geometric optics"
+    ]
+   },
+   {
+    "strand": "Electricity and Magnetism",
+    "units": [
+     "Electric charge and fields",
+     "Circuits",
+     "Magnetism and induction"
+    ]
+   },
+   {
+    "strand": "Thermal Physics",
+    "units": [
+     "Heat, temperature and gases"
+    ]
+   },
+   {
+    "strand": "Modern Physics",
+    "units": [
+     "Quantum and nuclear physics"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "acceleration",
+   "title": "Acceleration",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Scalars, vectors and motion language",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "speed_and_velocity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acceleration",
+    "rate of change"
+   ],
+   "summary": "Acceleration is the rate of change of velocity, so an object turns even at constant speed when its direction changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "amplitude_and_energy_in_waves",
+   "title": "Amplitude and energy in waves",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Describing waves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "wavelength_frequency_and_wave_speed"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplitude",
+    "energy",
+    "intensity"
+   ],
+   "summary": "A wave's energy depends on the square of its amplitude, so doubling amplitude quadruples the energy carried.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "angular_momentum",
+   "title": "Angular momentum",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "moment_of_inertia_and_rotational_dynamics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "angular momentum",
+    "conservation",
+    "spin"
+   ],
+   "summary": "In the absence of external torque angular momentum is conserved, so a spinning body speeds up as it pulls its mass inward.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "angular_quantities",
+   "title": "Angular quantities",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "uniform_circular_motion",
+    "centripetal_acceleration_and_force"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "angular velocity",
+    "radian",
+    "rotation"
+   ],
+   "summary": "Angular position, velocity and acceleration mirror their linear counterparts with angle in place of distance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "atomic_energy_levels_and_spectra",
+   "title": "Atomic energy levels and spectra",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Quantum foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_photon_model_of_light",
+    "wave_particle_duality"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy level",
+    "line spectrum",
+    "quantised"
+   ],
+   "summary": "Atoms absorb and emit only specific photon energies, which is why line spectra are a fingerprint.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 113
+   }
+  },
+  {
+   "id": "atomic_structure_and_the_nucleus",
+   "title": "Atomic structure and the nucleus",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "the_bohr_model_and_its_limits"
+   ],
+   "keywords": [
+    "neutron",
+    "nucleus",
+    "proton"
+   ],
+   "summary": "Protons and neutrons make up a nucleus whose size is set by the strong force, not by electron orbits.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "beats",
+   "title": "Beats",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Sound",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "constructive_and_destructive_interference",
+    "resonance_in_pipes_and_strings"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "beats",
+    "difference frequency"
+   ],
+   "summary": "Two close frequencies produce a slow loudness pulse at the difference frequency.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "centre_of_mass",
+   "title": "Centre of mass",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Momentum and collisions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "conservation_of_momentum",
+    "elastic_and_inelastic_collisions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "centre of mass",
+    "system motion"
+   ],
+   "summary": "A system moves as though all its mass sat at the centre of mass and all external forces acted there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "centripetal_acceleration_and_force",
+   "title": "Centripetal acceleration and force",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "newton_s_second_law",
+    "uniform_circular_motion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "centripetal acceleration",
+    "net force"
+   ],
+   "summary": "The net force in circular motion points toward the centre, and something real must supply it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "conservation_of_mechanical_energy",
+   "title": "Conservation of mechanical energy",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "kinetic_energy",
+    "gravitational_potential_energy",
+    "elastic_potential_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conservation",
+    "mechanical energy"
+   ],
+   "summary": "When only conservative forces act, the total of kinetic and potential energy stays fixed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "conservation_of_momentum",
+   "title": "Conservation of momentum",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Momentum and collisions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "impulse_and_momentum_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conservation",
+    "external force",
+    "system"
+   ],
+   "summary": "In the absence of external forces the total momentum of a system does not change, even during a collision.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "constructive_and_destructive_interference",
+   "title": "Constructive and destructive interference",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Superposition and interference",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_principle_of_superposition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interference",
+    "path difference",
+    "phase"
+   ],
+   "summary": "Path difference in whole wavelengths reinforces and half wavelengths cancels.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "coulomb_s_law",
+   "title": "Coulomb's law",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "electric_charge_and_conservation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Coulomb",
+    "force",
+    "inverse square"
+   ],
+   "summary": "The force between two point charges follows an inverse-square law and is attractive or repulsive by sign.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "damping_and_resonance",
+   "title": "Damping and resonance",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "energy_in_simple_harmonic_motion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "damping",
+    "driving frequency",
+    "resonance"
+   ],
+   "summary": "Damping removes energy and lowers the amplitude, while driving at the natural frequency makes it grow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "diffraction_and_the_double_slit",
+   "title": "Diffraction and the double slit",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Superposition and interference",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "constructive_and_destructive_interference",
+    "standing_waves_and_nodes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "diffraction",
+    "double slit",
+    "fringe"
+   ],
+   "summary": "Waves spread around obstacles, and two slits produce a pattern of bright and dark fringes from path difference.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "diffraction_gratings",
+   "title": "Diffraction gratings",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Superposition and interference",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "diffraction_and_the_double_slit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "grating",
+    "order",
+    "resolution"
+   ],
+   "summary": "Many slits sharpen the maxima, which is what makes a grating a precision wavelength-measuring device.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "dimensional_analysis",
+   "title": "Dimensional analysis",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "physical_quantities_and_si_units"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "consistency",
+    "dimension",
+    "unit check"
+   ],
+   "summary": "Checking that both sides of an equation carry the same dimensions catches most algebra errors before any numbers are substituted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "dispersion_and_colour",
+   "title": "Dispersion and colour",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "refraction_and_snell_s_law",
+    "lenses_and_image_formation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "colour",
+    "dispersion",
+    "prism"
+   ],
+   "summary": "A refractive index that varies with wavelength separates white light into its components.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "efficiency",
+   "title": "Efficiency",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "power"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "efficiency",
+    "losses",
+    "useful output"
+   ],
+   "summary": "Efficiency is useful output over total input and is always below one for a real machine.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "elastic_and_inelastic_collisions",
+   "title": "Elastic and inelastic collisions",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Momentum and collisions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "conservation_of_momentum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elastic",
+    "inelastic",
+    "kinetic energy"
+   ],
+   "summary": "Momentum is conserved in both kinds of collision, but kinetic energy only in the elastic ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "elastic_potential_energy",
+   "title": "Elastic potential energy",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "work_done_by_a_force",
+    "gravitational_potential_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "elastic energy",
+    "extension",
+    "spring"
+   ],
+   "summary": "A stretched spring stores energy proportional to the square of its extension.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "electric_charge_and_conservation",
+   "title": "Electric charge and conservation",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "inclined_planes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "charge",
+    "conservation",
+    "quantised"
+   ],
+   "summary": "Charge comes in two kinds, is quantised in units of the electron charge, and is conserved in every interaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "electric_current_and_charge_flow",
+   "title": "Electric current and charge flow",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "energy_stored_in_a_capacitor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "charge flow",
+    "conventional",
+    "current"
+   ],
+   "summary": "Current is the rate of charge flow, and conventional current runs opposite to electron drift.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "electric_field_and_field_lines",
+   "title": "Electric field and field lines",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "coulomb_s_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electric field",
+    "field line",
+    "test charge"
+   ],
+   "summary": "An electric field gives the force per unit positive charge, and field lines never cross.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "electric_potential_and_potential_difference",
+   "title": "Electric potential and potential difference",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "electric_field_and_field_lines"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy per charge",
+    "potential",
+    "voltage"
+   ],
+   "summary": "Potential is energy per unit charge, and only differences in it are physically meaningful.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "electrical_power_and_energy_transfer",
+   "title": "Electrical power and energy transfer",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "series_and_parallel_circuits",
+    "kirchhoff_s_circuit_laws"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dissipation",
+    "power",
+    "transmission"
+   ],
+   "summary": "Power dissipated in a component is current times voltage, which is why high-voltage transmission wastes less.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "electromagnetic_waves",
+   "title": "Electromagnetic waves",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Electromagnetic induction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "faraday_s_law_of_induction",
+    "transformers_and_power_transmission"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electromagnetic wave",
+    "radiation",
+    "speed of light"
+   ],
+   "summary": "An accelerating charge radiates self-sustaining electric and magnetic fields that travel at the speed of light.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "electromotive_force_and_internal_resistance",
+   "title": "Electromotive force and internal resistance",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "kirchhoff_s_circuit_laws",
+    "electrical_power_and_energy_transfer"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "emf",
+    "internal resistance",
+    "terminal voltage"
+   ],
+   "summary": "A real source has internal resistance, so the terminal voltage falls as the current drawn rises.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "energy_in_simple_harmonic_motion",
+   "title": "Energy in simple harmonic motion",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "conservation_of_mechanical_energy",
+    "simple_harmonic_motion",
+    "the_simple_pendulum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplitude",
+    "energy",
+    "exchange"
+   ],
+   "summary": "Energy trades continuously between kinetic and potential while the total stays fixed in an ideal oscillator.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "energy_stored_in_a_capacitor",
+   "title": "Energy stored in a capacitor",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "uniform_fields_and_capacitors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "capacitor",
+    "stored energy",
+    "voltage"
+   ],
+   "summary": "A capacitor stores energy proportional to the square of the voltage across it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "escape_velocity",
+   "title": "Escape velocity",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Universal gravitation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "gravitational_potential_energy_in_a_field"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy",
+    "escape velocity",
+    "well"
+   ],
+   "summary": "Escape velocity is the speed at which an object's kinetic energy just pays for climbing out of a gravity well.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "faraday_s_law_of_induction",
+   "title": "Faraday's law of induction",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Electromagnetic induction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "magnetic_flux"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Faraday",
+    "induced emf",
+    "rate of change"
+   ],
+   "summary": "A changing flux induces an emf, and the faster the change the larger the emf.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "fission_fusion_and_energy_release",
+   "title": "Fission, fusion and energy release",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "mass_energy_equivalence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binding energy",
+    "fission",
+    "fusion"
+   ],
+   "summary": "Both fission and fusion release energy because the products are more tightly bound than the reactants.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 120
+   }
+  },
+  {
+   "id": "force_on_a_current_carrying_conductor",
+   "title": "Force on a current-carrying conductor",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Magnetic fields and forces",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "force_on_a_moving_charge"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conductor",
+    "motor effect",
+    "torque"
+   ],
+   "summary": "A current in a field feels a force, which is how an electric motor produces torque.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "force_on_a_moving_charge",
+   "title": "Force on a moving charge",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Magnetic fields and forces",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "magnetic_fields_and_poles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Lorentz force",
+    "charge",
+    "perpendicular"
+   ],
+   "summary": "A charge moving in a magnetic field feels a force perpendicular to both its velocity and the field.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "forces_as_interactions",
+   "title": "Forces as interactions",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "relative_motion_in_one_dimension"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "agent",
+    "force",
+    "interaction"
+   ],
+   "summary": "A force is one object acting on another; every force has an agent and a recipient.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "free_body_diagrams",
+   "title": "Free-body diagrams",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "forces_as_interactions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "forces",
+    "free-body diagram"
+   ],
+   "summary": "Drawing every force on a single object, with no forces belonging to other objects, is the step most errors skip.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "free_fall",
+   "title": "Free fall",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Constant-acceleration motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "kinematic_equations_for_constant_acceleration"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "free fall",
+    "g",
+    "gravity"
+   ],
+   "summary": "Near the surface of the Earth all objects fall with the same downward acceleration when air resistance is negligible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "friction",
+   "title": "Friction",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Common forces",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "normal_force"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "friction",
+    "kinetic",
+    "static"
+   ],
+   "summary": "Static friction matches the applied force up to a maximum; kinetic friction opposes sliding at a roughly fixed value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "graphing_and_linearising_relationships",
+   "title": "Graphing and linearising relationships",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "dimensional_analysis",
+    "measurement_uncertainty_and_error"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graph",
+    "linearisation",
+    "slope"
+   ],
+   "summary": "Plotting the right combination of variables turns a power law into a straight line whose slope carries the constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "gravitational_field_and_field_strength",
+   "title": "Gravitational field and field strength",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Universal gravitation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "newton_s_law_of_universal_gravitation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "field",
+    "field strength",
+    "g"
+   ],
+   "summary": "A field describes the force per unit mass a test object would feel at a point in space.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "gravitational_potential_energy",
+   "title": "Gravitational potential energy",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "work_done_by_a_force",
+    "kinetic_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conservative",
+    "height",
+    "potential energy"
+   ],
+   "summary": "Near the Earth's surface gravitational potential energy depends only on height change, not on the path taken.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "gravitational_potential_energy_in_a_field",
+   "title": "Gravitational potential energy in a field",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Universal gravitation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "orbital_motion_and_kepler_s_laws"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "escape",
+    "infinity",
+    "potential"
+   ],
+   "summary": "Far from a planet the simple mgh formula fails and potential energy must be measured from infinity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "half_life_and_decay_rates",
+   "title": "Half-life and decay rates",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "radioactive_decay"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activity",
+    "exponential",
+    "half-life"
+   ],
+   "summary": "Half-life is the time for half of any sample to decay, so activity falls exponentially.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "heat_engines_and_efficiency",
+   "title": "Heat engines and efficiency",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "the_second_law_and_entropy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Carnot",
+    "efficiency",
+    "heat engine"
+   ],
+   "summary": "No engine converting heat to work can exceed the Carnot limit set by the two reservoir temperatures.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "heat_transfer_by_conduction_convection_and_radiation",
+   "title": "Heat transfer by conduction, convection and radiation",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Thermal energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "internal_energy_and_thermal_equilibrium",
+    "latent_heat_and_changes_of_state"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conduction",
+    "convection",
+    "radiation"
+   ],
+   "summary": "The three mechanisms differ in whether they need a medium and in whether they carry matter.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "impulse_and_momentum_change",
+   "title": "Impulse and momentum change",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Momentum and collisions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "linear_momentum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cushioning",
+    "force time",
+    "impulse"
+   ],
+   "summary": "A given change in momentum can come from a large force briefly or a small force for longer, which is what safety features exploit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "inclined_planes",
+   "title": "Inclined planes",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Common forces",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "newton_s_second_law",
+    "friction",
+    "spring_force_and_hooke_s_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "components",
+    "incline",
+    "resolution"
+   ],
+   "summary": "Resolving weight into components along and perpendicular to a slope turns a two-dimensional problem into two one-dimensional ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "intensity_loudness_and_the_decibel_scale",
+   "title": "Intensity, loudness and the decibel scale",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Sound",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "amplitude_and_energy_in_waves",
+    "speed_of_sound_and_the_doppler_effect"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decibel",
+    "intensity",
+    "logarithmic"
+   ],
+   "summary": "The decibel scale is logarithmic because human loudness perception is roughly logarithmic too.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "internal_energy_and_thermal_equilibrium",
+   "title": "Internal energy and thermal equilibrium",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Thermal energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "temperature_and_the_kinetic_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium",
+    "heat flow",
+    "internal energy"
+   ],
+   "summary": "Heat flows spontaneously from hotter to colder until temperatures equalise and net flow stops.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "isotopes_and_nuclear_stability",
+   "title": "Isotopes and nuclear stability",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "atomic_structure_and_the_nucleus"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "isotope",
+    "neutron ratio",
+    "stability"
+   ],
+   "summary": "Isotopes of an element differ only in neutron number, and the neutron-to-proton ratio decides stability.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "kinematic_equations_for_constant_acceleration",
+   "title": "Kinematic equations for constant acceleration",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Constant-acceleration motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "motion_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constant acceleration",
+    "kinematic equations"
+   ],
+   "summary": "The four kinematic equations are the same relationship rearranged, each omitting a different variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "kinetic_energy",
+   "title": "Kinetic energy",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "work_done_by_a_force"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "kinetic energy",
+    "speed squared"
+   ],
+   "summary": "Kinetic energy grows with the square of speed, which is why stopping distance grows so quickly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "kinetic_theory_of_gases",
+   "title": "Kinetic theory of gases",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "temperature_and_the_kinetic_model",
+    "the_ideal_gas_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "collision",
+    "kinetic theory",
+    "pressure"
+   ],
+   "summary": "Gas pressure comes from countless particle collisions, which explains the gas laws from mechanics.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "kirchhoff_s_circuit_laws",
+   "title": "Kirchhoff's circuit laws",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "series_and_parallel_circuits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Kirchhoff",
+    "junction",
+    "loop"
+   ],
+   "summary": "Charge conservation at a junction and energy conservation around a loop give two rules that solve any network.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "latent_heat_and_changes_of_state",
+   "title": "Latent heat and changes of state",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Thermal energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "specific_heat_capacity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "latent heat",
+    "phase change",
+    "plateau"
+   ],
+   "summary": "During a phase change energy goes into breaking bonds, so temperature stays constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "lenses_and_image_formation",
+   "title": "Lenses and image formation",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "refraction_and_snell_s_law",
+    "total_internal_reflection"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "focal length",
+    "image",
+    "lens"
+   ],
+   "summary": "A thin lens forms a real or virtual image whose position follows from the object distance and focal length.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "lenz_s_law",
+   "title": "Lenz's law",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Electromagnetic induction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "faraday_s_law_of_induction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Lenz",
+    "conservation",
+    "opposition"
+   ],
+   "summary": "An induced current opposes the change that produced it, which is energy conservation in disguise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "linear_momentum",
+   "title": "Linear momentum",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Momentum and collisions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "efficiency"
+   ],
+   "keywords": [
+    "mass",
+    "momentum",
+    "vector"
+   ],
+   "summary": "Momentum is mass times velocity, and it is a vector because velocity is.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "magnetic_field_of_a_current",
+   "title": "Magnetic field of a current",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Magnetic fields and forces",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "magnetic_fields_and_poles",
+    "force_on_a_current_carrying_conductor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Ampere",
+    "field around wire",
+    "solenoid"
+   ],
+   "summary": "A current produces a circular magnetic field around it, unifying electricity and magnetism.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "magnetic_fields_and_poles",
+   "title": "Magnetic fields and poles",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Magnetic fields and forces",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "potential_dividers_and_sensing_circuits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "field line",
+    "magnetic field",
+    "pole"
+   ],
+   "summary": "Magnetic field lines run from north to south outside a magnet and form closed loops.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "magnetic_flux",
+   "title": "Magnetic flux",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Electromagnetic induction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "magnetic_field_of_a_current"
+   ],
+   "keywords": [
+    "angle",
+    "area",
+    "flux"
+   ],
+   "summary": "Flux measures how much field passes through a surface, so angle and area both matter.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "mass_and_weight",
+   "title": "Mass and weight",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "newton_s_second_law",
+    "newton_s_third_law_and_interaction_pairs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "gravitational force",
+    "mass",
+    "weight"
+   ],
+   "summary": "Mass measures inertia; weight is the gravitational force on that mass and changes with location.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "mass_energy_equivalence",
+   "title": "Mass-energy equivalence",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "isotopes_and_nuclear_stability",
+    "half_life_and_decay_rates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binding energy",
+    "defect",
+    "mass-energy"
+   ],
+   "summary": "Mass and energy are interconvertible, and the mass defect of a nucleus appears as binding energy.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "measurement_uncertainty_and_error",
+   "title": "Measurement uncertainty and error",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "significant_figures_and_precision"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "random error",
+    "systematic error",
+    "uncertainty"
+   ],
+   "summary": "Random and systematic errors behave differently, and only one of them improves by averaging.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "moment_of_inertia_and_rotational_dynamics",
+   "title": "Moment of inertia and rotational dynamics",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "torque_and_rotational_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "moment of inertia",
+    "rotational inertia"
+   ],
+   "summary": "How mass is distributed about the axis matters as much as how much mass there is.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "motion_graphs",
+   "title": "Motion graphs",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Constant-acceleration motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "acceleration"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "area",
+    "motion graph",
+    "slope"
+   ],
+   "summary": "The slope of a position-time graph is velocity and the slope of a velocity-time graph is acceleration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "newton_s_first_law_and_inertia",
+   "title": "Newton's first law and inertia",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "free_body_diagrams"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Newton first law",
+    "inertia",
+    "net force"
+   ],
+   "summary": "An object's velocity changes only when the net force is nonzero, which is why motion needs no cause but change does.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "newton_s_law_of_universal_gravitation",
+   "title": "Newton's law of universal gravitation",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Universal gravitation",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "angular_momentum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "gravitation",
+    "inverse square",
+    "mass"
+   ],
+   "summary": "Every mass attracts every other mass with a force proportional to both masses and falling off as the square of the distance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "newton_s_second_law",
+   "title": "Newton's second law",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "newton_s_first_law_and_inertia"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Newton second law",
+    "acceleration",
+    "mass"
+   ],
+   "summary": "Net force equals mass times acceleration, so the same force accelerates a larger mass less.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "newton_s_third_law_and_interaction_pairs",
+   "title": "Newton's third law and interaction pairs",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Force and equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "newton_s_second_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Newton third law",
+    "interaction pair"
+   ],
+   "summary": "Forces come in equal and opposite pairs acting on two different objects, which is why they never cancel on one body.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "normal_force",
+   "title": "Normal force",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Common forces",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "free_body_diagrams"
+   ],
+   "sequence_predecessors": [
+    "mass_and_weight"
+   ],
+   "keywords": [
+    "contact force",
+    "normal force"
+   ],
+   "summary": "The normal force is a contact push perpendicular to a surface and adjusts to whatever the situation requires.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "orbital_motion_and_kepler_s_laws",
+   "title": "Orbital motion and Kepler's laws",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Universal gravitation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "centripetal_acceleration_and_force",
+    "gravitational_field_and_field_strength"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Kepler",
+    "orbit",
+    "satellite"
+   ],
+   "summary": "An orbit is continuous free fall, and Kepler's laws follow from the inverse-square force.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "order_of_magnitude_estimation",
+   "title": "Order-of-magnitude estimation",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "dimensional_analysis",
+    "graphing_and_linearising_relationships"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Fermi",
+    "estimation",
+    "scale"
+   ],
+   "summary": "A rough estimate that is right to a factor of ten is often enough to reject a wrong answer.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "period_and_frequency_of_a_spring_mass_system",
+   "title": "Period and frequency of a spring-mass system",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "simple_harmonic_motion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "frequency",
+    "period",
+    "spring mass"
+   ],
+   "summary": "A stiffer spring oscillates faster and a heavier mass oscillates slower, and neither changes the amplitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "physical_quantities_and_si_units",
+   "title": "Physical quantities and SI units",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "SI units",
+    "dimension",
+    "measurement"
+   ],
+   "summary": "Every physical quantity is a number together with a unit, and the unit is what makes the number meaningful.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "position_displacement_and_distance",
+   "title": "Position, displacement and distance",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Scalars, vectors and motion language",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "scalars_and_vectors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "displacement",
+    "distance",
+    "position"
+   ],
+   "summary": "Displacement is a vector change in position; distance is the scalar path length and they differ whenever the path bends.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "potential_dividers_and_sensing_circuits",
+   "title": "Potential dividers and sensing circuits",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "series_and_parallel_circuits",
+    "electromotive_force_and_internal_resistance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "potential divider",
+    "proportion",
+    "sensor"
+   ],
+   "summary": "Two resistors in series split a supply voltage in proportion to their resistance, which is the basis of many sensors.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "power",
+   "title": "Power",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "work_done_by_a_force",
+    "work_done_by_non_conservative_forces"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "power",
+    "rate",
+    "watt"
+   ],
+   "summary": "Power is the rate of energy transfer, so the same work done faster requires more power.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "radioactive_decay",
+   "title": "Radioactive decay",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Nuclear physics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "isotopes_and_nuclear_stability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alpha",
+    "beta",
+    "radioactive"
+   ],
+   "summary": "Alpha, beta and gamma decay each change the nucleus differently and have different penetrating power.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "reflection_and_plane_mirrors",
+   "title": "Reflection and plane mirrors",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_electromagnetic_spectrum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mirror",
+    "normal",
+    "reflection"
+   ],
+   "summary": "The angle of reflection equals the angle of incidence, measured from the normal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "refraction_and_snell_s_law",
+   "title": "Refraction and Snell's law",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_electromagnetic_spectrum",
+    "reflection_and_plane_mirrors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Snell",
+    "refraction",
+    "refractive index"
+   ],
+   "summary": "Light bends when its speed changes between media, and the bending follows the ratio of the speeds.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "relative_motion_in_one_dimension",
+   "title": "Relative motion in one dimension",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Constant-acceleration motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "kinematic_equations_for_constant_acceleration",
+    "free_fall"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "reference frame",
+    "relative velocity"
+   ],
+   "summary": "Velocities add as vectors, so a description of motion depends on the frame it is measured in.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "resistance_and_ohm_s_law",
+   "title": "Resistance and Ohm's law",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "electric_current_and_charge_flow"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Ohm",
+    "resistance",
+    "voltage"
+   ],
+   "summary": "For an ohmic conductor current is proportional to voltage, and the constant of proportionality is the resistance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "resistivity_and_temperature",
+   "title": "Resistivity and temperature",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "resistance_and_ohm_s_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "material",
+    "resistivity",
+    "temperature"
+   ],
+   "summary": "Resistance depends on material, length and cross-section, and for metals it rises with temperature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "resonance_in_pipes_and_strings",
+   "title": "Resonance in pipes and strings",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Sound",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "standing_waves_and_nodes",
+    "intensity_loudness_and_the_decibel_scale"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary",
+    "harmonic",
+    "resonance"
+   ],
+   "summary": "Boundary conditions fix which standing waves fit, which is why instruments have characteristic harmonic series.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "restoring_force_and_oscillation",
+   "title": "Restoring force and oscillation",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "spring_force_and_hooke_s_law"
+   ],
+   "sequence_predecessors": [
+    "escape_velocity"
+   ],
+   "keywords": [
+    "equilibrium",
+    "oscillation",
+    "restoring force"
+   ],
+   "summary": "An oscillation needs a restoring force that always points back toward equilibrium.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "scalars_and_vectors",
+   "title": "Scalars and vectors",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Scalars, vectors and motion language",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "order_of_magnitude_estimation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "magnitude",
+    "scalar",
+    "vector"
+   ],
+   "summary": "A scalar has magnitude only; a vector has magnitude and direction, and direction is what makes it a different kind of object.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "series_and_parallel_circuits",
+   "title": "Series and parallel circuits",
+   "strand": "Electricity and Magnetism",
+   "unit": "Circuits",
+   "topic": "Direct current circuits",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "resistance_and_ohm_s_law",
+    "resistivity_and_temperature"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "current voltage",
+    "parallel",
+    "series"
+   ],
+   "summary": "Series elements share the current and parallel elements share the voltage, which is why household wiring is parallel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "significant_figures_and_precision",
+   "title": "Significant figures and precision",
+   "strand": "Measurement and Modelling",
+   "unit": "Physical quantities and reasoning",
+   "topic": "Quantities, units and uncertainty",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "physical_quantities_and_si_units",
+    "dimensional_analysis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "precision",
+    "rounding",
+    "significant figures"
+   ],
+   "summary": "A measurement's written precision should reflect the instrument, not the display of the calculator.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "simple_harmonic_motion",
+   "title": "Simple harmonic motion",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "restoring_force_and_oscillation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "period",
+    "simple harmonic",
+    "sinusoidal"
+   ],
+   "summary": "When the restoring force is proportional to displacement the motion is sinusoidal and its period is independent of amplitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "sound_as_a_pressure_wave",
+   "title": "Sound as a pressure wave",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Sound",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "diffraction_gratings"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "medium",
+    "pressure",
+    "sound"
+   ],
+   "summary": "Sound is a longitudinal compression wave that needs a medium, which is why it cannot cross a vacuum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "specific_heat_capacity",
+   "title": "Specific heat capacity",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Thermal energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "internal_energy_and_thermal_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "energy",
+    "specific heat",
+    "temperature rise"
+   ],
+   "summary": "The energy needed to raise a temperature depends on the material's specific heat capacity as well as the mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "speed_and_velocity",
+   "title": "Speed and velocity",
+   "strand": "Measurement and Modelling",
+   "unit": "Vectors and kinematics in one dimension",
+   "topic": "Scalars, vectors and motion language",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "position_displacement_and_distance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rate",
+    "speed",
+    "velocity"
+   ],
+   "summary": "Velocity is the rate of change of displacement, so its sign carries direction while speed does not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "speed_of_sound_and_the_doppler_effect",
+   "title": "Speed of sound and the Doppler effect",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Sound",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "sound_as_a_pressure_wave"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Doppler",
+    "frequency shift",
+    "motion"
+   ],
+   "summary": "Relative motion between source and observer changes the observed frequency even though the source is unchanged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "spring_force_and_hooke_s_law",
+   "title": "Spring force and Hooke's law",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Common forces",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "normal_force",
+    "tension_in_strings_and_ropes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Hooke's law",
+    "restoring force",
+    "spring"
+   ],
+   "summary": "A spring's restoring force is proportional to its extension, so it pulls harder the further it is stretched.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "standing_waves_and_nodes",
+   "title": "Standing waves and nodes",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Superposition and interference",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "constructive_and_destructive_interference"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antinode",
+    "node",
+    "standing wave"
+   ],
+   "summary": "Two counter-propagating waves form fixed nodes and antinodes, and the allowed patterns are quantised by the boundary.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "temperature_and_the_kinetic_model",
+   "title": "Temperature and the kinetic model",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Thermal energy",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "angular_momentum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average energy",
+    "kinetic model",
+    "temperature"
+   ],
+   "summary": "Temperature measures the average random kinetic energy of particles, not the total energy stored.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "tension_in_strings_and_ropes",
+   "title": "Tension in strings and ropes",
+   "strand": "Mechanics",
+   "unit": "Forces and Newton's laws",
+   "topic": "Common forces",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "newton_s_third_law_and_interaction_pairs",
+    "friction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "pulley",
+    "string",
+    "tension"
+   ],
+   "summary": "In an ideal massless string the tension is the same everywhere, which is what makes pulley problems tractable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "the_bohr_model_and_its_limits",
+   "title": "The Bohr model and its limits",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Quantum foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "atomic_energy_levels_and_spectra"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "Bohr",
+    "hydrogen",
+    "orbit"
+   ],
+   "summary": "Quantised orbits predict hydrogen's spectrum but fail for anything with more than one electron.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "the_electromagnetic_spectrum",
+   "title": "The electromagnetic spectrum",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "beats"
+   ],
+   "keywords": [
+    "electromagnetic",
+    "spectrum",
+    "visible"
+   ],
+   "summary": "Visible light is one narrow band of a continuous spectrum that all travels at the same speed in vacuum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "the_first_law_of_thermodynamics",
+   "title": "The first law of thermodynamics",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "internal_energy_and_thermal_equilibrium",
+    "kinetic_theory_of_gases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "first law",
+    "internal energy",
+    "work"
+   ],
+   "summary": "Energy added as heat either raises internal energy or does work, and never disappears.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
+   }
+  },
+  {
+   "id": "the_ideal_gas_law",
+   "title": "The ideal gas law",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "heat_transfer_by_conduction_convection_and_radiation"
+   ],
+   "keywords": [
+    "equation of state",
+    "ideal gas",
+    "pressure"
+   ],
+   "summary": "Pressure, volume and temperature of a dilute gas are linked by a single equation of state.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "the_photoelectric_effect",
+   "title": "The photoelectric effect",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Quantum foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_photon_model_of_light"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "photoelectric",
+    "threshold",
+    "work function"
+   ],
+   "summary": "Electrons are emitted only above a threshold frequency, which wave theory cannot explain.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "the_photon_model_of_light",
+   "title": "The photon model of light",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Quantum foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_electromagnetic_spectrum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "photoelectric",
+    "photon",
+    "quantum"
+   ],
+   "summary": "Light arrives in discrete packets whose energy depends only on frequency, which explains the photoelectric effect.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "the_principle_of_superposition",
+   "title": "The principle of superposition",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Superposition and interference",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "wavefronts_and_rays"
+   ],
+   "keywords": [
+    "addition",
+    "overlap",
+    "superposition"
+   ],
+   "summary": "Where waves overlap their displacements add, which is the whole basis of interference.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "the_second_law_and_entropy",
+   "title": "The second law and entropy",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "thermodynamic_processes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "entropy",
+    "irreversibility",
+    "second law"
+   ],
+   "summary": "Entropy of an isolated system never decreases, which is what gives time a direction in thermodynamics.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "the_simple_pendulum",
+   "title": "The simple pendulum",
+   "strand": "Mechanics",
+   "unit": "Gravitation and oscillations",
+   "topic": "Simple harmonic motion",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "simple_harmonic_motion",
+    "period_and_frequency_of_a_spring_mass_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "length",
+    "pendulum",
+    "small angle"
+   ],
+   "summary": "For small swings a pendulum's period depends only on its length and the local gravitational field.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "thermodynamic_processes",
+   "title": "Thermodynamic processes",
+   "strand": "Thermal Physics",
+   "unit": "Heat, temperature and gases",
+   "topic": "Gas laws and thermodynamics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "the_first_law_of_thermodynamics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adiabatic",
+    "isothermal",
+    "process"
+   ],
+   "summary": "Isothermal, adiabatic, isobaric and isochoric processes each hold one variable fixed and give different work.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "torque_and_rotational_equilibrium",
+   "title": "Torque and rotational equilibrium",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "angular_quantities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium",
+    "lever arm",
+    "torque"
+   ],
+   "summary": "Torque depends on both the force and how far from the pivot it acts, which is why a long lever helps.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "total_internal_reflection",
+   "title": "Total internal reflection",
+   "strand": "Waves and Optics",
+   "unit": "Sound and geometric optics",
+   "topic": "Light and reflection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "refraction_and_snell_s_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "critical angle",
+    "fibre",
+    "total internal reflection"
+   ],
+   "summary": "Beyond the critical angle light cannot escape a dense medium, which is how optical fibres guide signals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "transformers_and_power_transmission",
+   "title": "Transformers and power transmission",
+   "strand": "Electricity and Magnetism",
+   "unit": "Magnetism and induction",
+   "topic": "Electromagnetic induction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "faraday_s_law_of_induction",
+    "lenz_s_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "transformer",
+    "transmission",
+    "turns ratio"
+   ],
+   "summary": "A changing flux links two coils so voltage steps up or down while power is roughly preserved.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "transverse_and_longitudinal_waves",
+   "title": "Transverse and longitudinal waves",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Describing waves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "longitudinal",
+    "medium",
+    "transverse"
+   ],
+   "summary": "The distinction is whether the medium moves perpendicular to the wave's travel or along it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "uniform_circular_motion",
+   "title": "Uniform circular motion",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Circular and rotational motion",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "acceleration"
+   ],
+   "sequence_predecessors": [
+    "centre_of_mass"
+   ],
+   "keywords": [
+    "centripetal",
+    "circular motion",
+    "direction"
+   ],
+   "summary": "Constant speed in a circle still means acceleration, because the direction of velocity keeps changing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "uniform_fields_and_capacitors",
+   "title": "Uniform fields and capacitors",
+   "strand": "Electricity and Magnetism",
+   "unit": "Electric charge and fields",
+   "topic": "Electrostatics",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "electric_potential_and_potential_difference"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "capacitance",
+    "capacitor",
+    "parallel plate"
+   ],
+   "summary": "Two parallel plates give a uniform field, and a capacitor stores charge proportional to the applied voltage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "wave_particle_duality",
+   "title": "Wave-particle duality",
+   "strand": "Modern Physics",
+   "unit": "Quantum and nuclear physics",
+   "topic": "Quantum foundations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "the_photoelectric_effect"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "de Broglie",
+    "diffraction",
+    "duality"
+   ],
+   "summary": "Electrons diffract and light carries momentum, so neither model alone describes nature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "wavefronts_and_rays",
+   "title": "Wavefronts and rays",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Describing waves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "wavelength_frequency_and_wave_speed",
+    "amplitude_and_energy_in_waves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ray",
+    "representation",
+    "wavefront"
+   ],
+   "summary": "Wavefronts and rays are two views of the same wave, useful for interference and for geometric optics respectively.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "wavelength_frequency_and_wave_speed",
+   "title": "Wavelength, frequency and wave speed",
+   "strand": "Waves and Optics",
+   "unit": "Wave behaviour",
+   "topic": "Describing waves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "transverse_and_longitudinal_waves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "frequency",
+    "wave speed",
+    "wavelength"
+   ],
+   "summary": "Wave speed is frequency times wavelength, and changing medium changes speed and wavelength but not frequency.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "work_done_by_a_force",
+   "title": "Work done by a force",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "inclined_planes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "displacement",
+    "dot product",
+    "work"
+   ],
+   "summary": "Work is force times displacement along the force, so a force perpendicular to motion does no work.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "work_done_by_non_conservative_forces",
+   "title": "Work done by non-conservative forces",
+   "strand": "Mechanics",
+   "unit": "Energy, momentum and rotation",
+   "topic": "Work and energy",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "conservation_of_mechanical_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dissipation",
+    "friction",
+    "non-conservative"
+   ],
+   "summary": "Friction and drag convert mechanical energy into internal energy, so mechanical energy is not conserved when they act.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  }
+ ]
+}

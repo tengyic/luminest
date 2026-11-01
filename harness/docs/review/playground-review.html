@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Playground design review — before / after</title>
+<style>
+  :root {
+    --bg:#F7F5EF; --surface:#FFFFFF; --line:#E5E7DB; --line-strong:#D3D7C7;
+    --ink:#24312A; --ink-2:#5C6A60; --ink-3:#8D9A90; --accent:#3E7A55;
+    --e2:0 4px 12px rgba(36,49,42,.07), 0 1px 3px rgba(36,49,42,.05);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink); padding:32px 28px 64px;
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  header { max-width:1500px; margin:0 auto 26px; }
+  .eyebrow {
+    font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:8px;
+  }
+  h1 { margin:0 0 8px; font-size:26px; font-weight:650; letter-spacing:-.022em; }
+  .lede { margin:0; color:var(--ink-2); font-size:14px; line-height:1.6; max-width:74ch; }
+  .count { margin-top:14px; font-size:12.5px; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .row { max-width:1500px; margin:0 auto 34px; }
+  .row h2 {
+    font-size:13px; font-weight:650; margin:0 0 10px; letter-spacing:-.01em;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--ink-2);
+  }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  figure { margin:0; }
+  figcaption {
+    font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:6px;
+  }
+  img {
+    width:100%; display:block; border-radius:12px; border:1px solid var(--line);
+    box-shadow:var(--e2); background:var(--surface);
+  }
+  .missing {
+    border:1px dashed var(--line-strong); border-radius:12px; padding:40px 16px;
+    text-align:center; color:var(--ink-3); font-size:12px; background:var(--surface);
+  }
+  @media (max-width:1000px) { .pair { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Simulator playground</div>
+  <h1>Design review — before and after</h1>
+  <p class="lede">The same forty-five games, rendered from the same catalogue through the
+  same pipeline. Only the shared design system and the per-archetype layout changed;
+  no mechanic, no schema, no telemetry.</p>
+  <div class="count">45 games captured</div>
+</header>
+
+    <section class="row">
+      <h2>cs-linear-search-sequence</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/cs-linear-search-sequence.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/cs-linear-search-sequence.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>cs-star-network-diagram</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/cs-star-network-diagram.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/cs-star-network-diagram.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>cs-step-algorithm-bubble-state</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/cs-step-algorithm-bubble-state.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/cs-step-algorithm-bubble-state.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>cs-step-algorithm-insertion-comparisons</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/cs-step-algorithm-insertion-comparisons.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/cs-step-algorithm-insertion-comparisons.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-comparative-advantage</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-comparative-advantage.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-comparative-advantage.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-determinants-sort</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-determinants-sort.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-determinants-sort.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-elasticity-midpoint</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-elasticity-midpoint.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-elasticity-midpoint.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-elasticity-point</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-elasticity-point.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-elasticity-point.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-ppf-growth-capital</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-ppf-growth-capital.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-ppf-growth-capital.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>econ-ppf-opportunity-cost</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/econ-ppf-opportunity-cost.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/econ-ppf-opportunity-cost.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-area-model-factoring</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-area-model-factoring.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-area-model-factoring.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-area-model-multiplication</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-area-model-multiplication.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-area-model-multiplication.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-balance-scale-equivalent-equations</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-balance-scale-equivalent-equations.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-balance-scale-equivalent-equations.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-balance-scale-two-step</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-balance-scale-two-step.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-balance-scale-two-step.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-function-machine-guess-rule</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-function-machine-guess-rule.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-function-machine-guess-rule.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-function-machine-slope-intercept</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-function-machine-slope-intercept.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-function-machine-slope-intercept.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-number-line-fractions</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-number-line-fractions.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-number-line-fractions.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-number-line-inequality</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-number-line-inequality.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-number-line-inequality.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-pattern-sequence-growing-tiles</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-pattern-sequence-growing-tiles.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-pattern-sequence-growing-tiles.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-pattern-sequence-nth-term</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-pattern-sequence-nth-term.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-pattern-sequence-nth-term.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-plot-points-intercept-and-point</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-plot-points-intercept-and-point.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-plot-points-intercept-and-point.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-plot-points-slope-intercept</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-plot-points-slope-intercept.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-plot-points-slope-intercept.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-probability-lab-biased-coin</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-probability-lab-biased-coin.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-probability-lab-biased-coin.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>math-probability-lab-fair-die</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/math-probability-lab-fair-die.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/math-probability-lab-fair-die.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-animal-cell-diagram</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-animal-cell-diagram.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-animal-cell-diagram.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-balance-ap-chemistry-set</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-balance-ap-chemistry-set.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-balance-ap-chemistry-set.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-balance-combustion</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-balance-combustion.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-balance-combustion.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-enzyme-terms</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-enzyme-terms.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-enzyme-terms.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-gas-laws-boyle-and-charles</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-gas-laws-boyle-and-charles.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-gas-laws-boyle-and-charles.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-gas-laws-predict-pressure</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-gas-laws-predict-pressure.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-gas-laws-predict-pressure.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-mitosis-sequence</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-mitosis-sequence.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-mitosis-sequence.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-ohms-law-three-resistors</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-ohms-law-three-resistors.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-ohms-law-three-resistors.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-ohms-law-two-resistors</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-ohms-law-two-resistors.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-ohms-law-two-resistors.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-orbit-escape</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-orbit-escape.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-orbit-escape.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-orbit-velocity</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-orbit-velocity.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-orbit-velocity.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-projectile-angles</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-projectile-angles.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-projectile-angles.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-projectile-range</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-projectile-range.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-projectile-range.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-punnett-dihybrid</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-punnett-dihybrid.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-punnett-dihybrid.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-punnett-incomplete</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-punnett-incomplete.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-punnett-incomplete.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-punnett-monohybrid</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-punnett-monohybrid.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-punnett-monohybrid.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-quantity-si-units</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-quantity-si-units.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-quantity-si-units.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-titration-dilute-acid</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-titration-dilute-acid.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-titration-dilute-acid.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-titration-strong-strong</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-titration-strong-strong.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-titration-strong-strong.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-wave-cancellation</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-wave-cancellation.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-wave-cancellation.png" alt="after"></figure>
+      </div>
+    </section>
+    <section class="row">
+      <h2>sci-wave-interference</h2>
+      <div class="pair">
+        <figure><figcaption>before</figcaption><img src="before/sci-wave-interference.png" alt="before"></figure>
+        <figure><figcaption>after</figcaption>
+          <img src="after/sci-wave-interference.png" alt="after"></figure>
+      </div>
+    </section>
+</body>
+</html>

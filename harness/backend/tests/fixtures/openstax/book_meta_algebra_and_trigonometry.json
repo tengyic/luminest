@@ -1,0 +1,604 @@
+{
+    "id": 38,
+    "meta": {
+        "slug": "algebra-and-trigonometry",
+        "seo_title": "Free Algebra and Trigonometry Book for Download",
+        "search_description": "Study algebra online free by downloading OpenStax's Algebra and Trigonometry book and using our accompanying online resources including an algebra study guide.",
+        "type": "books.Book",
+        "detail_url": "https://openstax.org/apps/cms/api/v2/pages/38/",
+        "html_url": "https://openstax.org/details/books/algebra-and-trigonometry",
+        "show_in_menus": false,
+        "first_published_at": "2016-03-09T09:53:01.890636-06:00",
+        "alias_of": null,
+        "parent": {
+            "id": 30,
+            "meta": {
+                "type": "books.BookIndex",
+                "detail_url": "https://openstax.org/apps/cms/api/v2/pages/30/",
+                "html_url": "https://openstax.org/subjects/"
+            },
+            "title": "Books"
+        },
+        "locale": "en"
+    },
+    "title": "Algebra and Trigonometry",
+    "created": "2016-03-09T09:53:01.497000-06:00",
+    "updated": "2022-03-23T16:58:00-05:00",
+    "book_state": "retired",
+    "cnx_id": "13ac107a-f15f-49d2-97e8-60ab2e3b519c",
+    "book_uuid": "13ac107a-f15f-49d2-97e8-60ab2e3b519c",
+    "polish_site_link": null,
+    "salesforce_abbreviation": "Algebra and Trigonometry",
+    "salesforce_name": "Algebra and Trigonometry",
+    "salesforce_book_id": null,
+    "book_subjects": [
+        {
+            "id": 214,
+            "meta": {
+                "type": "books.BookSubjects"
+            },
+            "subject_name": "Math",
+            "subject_page_content": "Simple to use, simple to adopt. Our math textbooks are designed to meet the standard scope and sequence requirements of their respective courses – and are 100% free online. Complete with free resources for educators (like LMS course shells, lecture slides, instructor answer keys, and more), all OpenStax textbooks are fully customizable. Explore our texts below and adopt any and all parts useful to your course.",
+            "subject_search_description": "Math"
+        }
+    ],
+    "book_categories": [],
+    "k12book_subjects": [],
+    "is_ap": false,
+    "remediation_status": "",
+    "description": "<p data-block-key=\"b0flc\"><i>Algebra and Trigonometry</i> provides a comprehensive exploration of algebraic principles and meets scope and sequence requirements for a typical introductory algebra and trigonometry course. The modular approach and the richness of content ensure that the book meets the needs of a variety of courses. <i>Algebra and Trigonometry</i> offers a wealth of examples with detailed, conceptual explanations, building a strong foundation in the material before asking students to apply what they’ve learned.</p>",
+    "content_warning_text": null,
+    "require_login_message_text": null,
+    "cover_url": "https://assets.openstax.org/oscms-prodcms/media/documents/algebra_trigonometry.svg",
+    "cover_alt": null,
+    "title_image_url": "https://assets.openstax.org/oscms-prodcms/media/documents/Head_AlgebraandTrig_1.svg",
+    "title_image_alt": null,
+    "cover_color": "red",
+    "book_cover_text_color": "yellow",
+    "reverse_gradient": false,
+    "book_student_resources": [
+        {
+            "id": 1113,
+            "meta": {
+                "type": "books.BookStudentResources"
+            },
+            "resource_heading": "Student Getting Started Guide",
+            "resource_description": "<p data-block-key=\"ku2u8\">Congratulations! You've got a free textbook. Download this guide to learn how to use it.<br/></p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon_2.png",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/student_getting_started_guide.pdf",
+            "link_document_title": "OpenStax Student Getting Started Guide 2020",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "updated": null,
+            "remediation_status": "",
+            "print_link": null,
+            "display_on_k12": true,
+            "resource_category": "getting started guide",
+            "hidden": false
+        },
+        {
+            "id": 1114,
+            "meta": {
+                "type": "books.BookStudentResources"
+            },
+            "resource_heading": "Reading and Notetaking Guide",
+            "resource_description": "<p data-block-key=\"8gs86\">Adapted from OpenStax <i>College Success</i>, this guide discusses effective reading approaches, study tips, and notetaking strategies for students.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon_2.png",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax.Effective.Reading.and.Notetaking.Guide_E7WFZSP.pdf",
+            "link_document_title": "Reading and Notetaking Guide",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "updated": null,
+            "remediation_status": "",
+            "print_link": null,
+            "display_on_k12": true,
+            "resource_category": "study skills guide",
+            "hidden": false
+        },
+        {
+            "id": 1115,
+            "meta": {
+                "type": "books.BookStudentResources"
+            },
+            "resource_heading": "Student Time Management Guide",
+            "resource_description": "<p data-block-key=\"eztlp\">Adapted from OpenStax <i>College Success</i>, this guide includes information about estimating time on tasks, avoiding procrastination, and using strategies to stick to your priorities.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon_2.png",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax.Managing.Time.and.Priorities.Guide.pdf",
+            "link_document_title": "Student Time Management Guide",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "updated": null,
+            "remediation_status": "",
+            "print_link": null,
+            "display_on_k12": true,
+            "resource_category": "study skills guide",
+            "hidden": false
+        },
+        {
+            "id": 1116,
+            "meta": {
+                "type": "books.BookStudentResources"
+            },
+            "resource_heading": "Corequisite Skillsheets",
+            "resource_description": "<p data-block-key=\"ssx7l\">These downloadable versions of the individual Corequisite sections allow students and instructors to use them flexibly and collaboratively. Each file is numbered according to its corresponding textbook section.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon_2.png",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax_Algebra_Trig_Corequisite_Skillsheets_g7JzkKO.zip",
+            "link_document_title": "Algebra and Trigonometry CoReq Skillsheet",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "updated": null,
+            "remediation_status": "",
+            "print_link": null,
+            "display_on_k12": true,
+            "resource_category": "practice resources",
+            "hidden": false
+        }
+    ],
+    "book_faculty_resources": [
+        {
+            "id": 3213,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "PowerPoint Slides",
+            "resource_description": "<p data-block-key=\"c9ta8\">Let us make lectures a little easier for you. We’ve got PowerPoint slides with all the images from the book, organized by chapter.<br/></p>",
+            "resource_unlocked": false,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/AlgebraTrig_PowerPoints_FLIXCUh_iHJTIQJ.zip",
+            "link_document_title": "Algebra and Trigonometry PPT",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "instructional slides",
+            "hidden": false
+        },
+        {
+            "id": 3214,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Instructor Getting Started Guide",
+            "resource_description": "<p data-block-key=\"yoxee\">Download our helpful guide to all things OpenStax.<br/></p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax.Instructor.Getting.Started.Guide.pdf",
+            "link_document_title": "OpenStax Instructor Getting Started Guide 2023",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "getting started guide",
+            "hidden": false
+        },
+        {
+            "id": 3215,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Instructor Solutions Manual",
+            "resource_description": "<p data-block-key=\"v5k04\">The instructor solutions manual contains the instructor-facing answers to the problems and exercises within the textbook. Since many instructors use these questions in graded assignments, we ask that you not post these questions and the answers on any publicly available websites.<br/></p>",
+            "resource_unlocked": false,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/AlgebraTrig-ISM_SdigLC5.zip",
+            "link_document_title": "Algebra and Trigonometry ISM",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "answer guide",
+            "hidden": false
+        },
+        {
+            "id": 3216,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Canvas Course Cartridge",
+            "resource_description": "<p data-block-key=\"9curp\">The California Community Colleges’ Online Education Initiative created a course cartridge for this title to integrate your OpenStax books and resources into the Canvas learning management system. Download this course file and read the attached help article to import this resource into Canvas.</p><p data-block-key=\"28os0\"><a href=\"https://help.openstax.org/s/article/Importing-Canvas-Cartridges\">Instructions for importing the Canvas Cartridge</a></p>",
+            "resource_unlocked": false,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/Canvas_Algebra_and_Trigonometry.zip",
+            "link_document_title": "Canvas_Algebra and Trigonometry",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": true,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "cartridge",
+            "hidden": false
+        },
+        {
+            "id": 3218,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Errata Release Notes",
+            "resource_description": "<p data-block-key=\"uqko0\">Throughout the year, subject matter experts comb through all queries from our readers. These release notes cover the errata updates in our most recent summer PDF release.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/Algebra_and_Trigonometry_Release_Notes_2017.pdf",
+            "link_document_title": "Algebra and Trigonometry Errata Release Notes",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "edition updates",
+            "hidden": false
+        },
+        {
+            "id": 3219,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Blackboard Course Package",
+            "resource_description": "<p data-block-key=\"eyg89\">San Jacinto College created a course package for this title to integrate your OpenStax books into the Blackboard learning management system. Download this file and work with your campus Blackboard administrator to add to your course.</p><p data-block-key=\"910lm\"><a href=\"https://help.openstax.org/s/article/Downloading-the-Blackboard-Ultra-Course-Package\">Instructions for using the package with Blackboard Ultra</a></p><p data-block-key=\"4r5qs\"><a href=\"https://help.openstax.org/s/article/Downloading-the-Blackboard-Learn-Course-Package\">Instructions for using the package with Blackboard Learn</a></p>",
+            "resource_unlocked": false,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/ExportFile_OpenStax_Algebra_and_Trigonometry_1e.zip",
+            "link_document_title": "Blackboard Course Cartridge - Algebra and Trigonometry",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": true,
+            "k12": false,
+            "display_on_k12": false,
+            "print_link": null,
+            "resource_category": "cartridge",
+            "hidden": false
+        },
+        {
+            "id": 3220,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Diversity and Representation Development Guidelines",
+            "resource_description": "<p data-block-key=\"fvo6u\">These guidelines support OpenStax efforts to ensure diverse representation in the development and improvement of our materials. These guidelines can be used to develop and improve all open educational resources.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax_Diversity_Equity_Inclusion_Development_Guidelines_2022_fkJcepg.pdf",
+            "link_document_title": "OpenStax Representation and Diversity Development Guidelines",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "dei guide",
+            "hidden": false
+        },
+        {
+            "id": 3221,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "Corequisite Skillsheets",
+            "resource_description": "<p data-block-key=\"i5bkm\">These downloadable versions of the individual Corequisite sections allow students and instructors to use them flexibly and collaboratively. Each file is numbered according to its corresponding textbook section.</p>",
+            "resource_unlocked": true,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax_Algebra_Trig_Corequisite_Skillsheets_8s1ZM3w.zip",
+            "link_document_title": "Algebra and Trigonometry CoReq Skillsheet",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": false,
+            "k12": false,
+            "display_on_k12": true,
+            "print_link": null,
+            "resource_category": "practice resources",
+            "hidden": false
+        },
+        {
+            "id": 3222,
+            "meta": {
+                "type": "books.BookFacultyResources"
+            },
+            "resource_heading": "D2L Course Cartridge",
+            "resource_description": "<p data-block-key=\"hri6m\">Minnesota State University, Mankato created a course cartridge for this title to integrate your OpenStax book into the D2L learning management system. Download this file and read the attached help article to import this resource into D2L. Please note that to use the book&#x27;s highlighting and note-taking feature in D2L, you and your students will need to be logged into your individual OpenStax accounts on openstax.org.</p><p data-block-key=\"eebq3\"></p><p data-block-key=\"hmqxo\"><a href=\"https://help.openstax.org/s/article/How-to-import-the-D2L-Course-Cartridge\">Instructions for importing the D2L Cartridge</a></p>",
+            "resource_unlocked": false,
+            "resource_icon": "https://assets.openstax.org/oscms-prodcms/media/original_images/resource_icon.jpg",
+            "link_external": "",
+            "link_page": null,
+            "link_document_url": "https://assets.openstax.org/oscms-prodcms/media/documents/D2LExport_Algebra_and_Trigonometry.zip",
+            "link_document_title": "Algebra and Trigonometry D2L Course Cartridge",
+            "link_text": "Download",
+            "coming_soon_text": null,
+            "video_reference_number": null,
+            "remediation_status": "",
+            "updated": null,
+            "featured": true,
+            "k12": false,
+            "display_on_k12": false,
+            "print_link": null,
+            "resource_category": "cartridge",
+            "hidden": false
+        }
+    ],
+    "publish_date": "2015-02-13",
+    "authors": [
+        {
+            "type": "author",
+            "value": {
+                "name": "Jay Abramson",
+                "university": "Arizona State University",
+                "country": "",
+                "senior_author": true,
+                "display_at_top": true
+            },
+            "id": "fda520dc-b9da-49f8-aa28-c5371cfe5267"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Valeree Falduto",
+                "university": "Palm Beach State College",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "dbcc5721-22fa-458d-99bb-a637c613c246"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Rachael Gross",
+                "university": "Towson University",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "3c754820-8b8a-41c3-aa1e-44b27f9cab1a"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "David Lippman",
+                "university": "Pierce College",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "42c97bd5-de88-4b55-ac7a-40bb7a4d0109"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Melonie Rasmussen",
+                "university": "Pierce College",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "b258c9cb-dbbf-4da6-b81d-a8b99ac87088"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Christina Fernandez",
+                "university": "",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": false
+            },
+            "id": "0be92000-9717-4b8c-b3f2-3806612b6612"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Harold Whipple",
+                "university": "Formerly of Columbia College",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": false
+            },
+            "id": "e85b3215-b35d-4a9f-8289-edbc0da0510d"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Jean-Marie Magnier",
+                "university": "Springfield Technical Community College",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "52d1a0cc-e5a5-4555-bca2-ccee48aff8ba"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Rick Norwood",
+                "university": "East Tennessee State University",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "aed2f1ae-d73a-4dd3-8675-3d771e5ee2aa"
+        },
+        {
+            "type": "author",
+            "value": {
+                "name": "Nicholas Belloit",
+                "university": "Florida State College at Jacksonville",
+                "country": "",
+                "senior_author": false,
+                "display_at_top": true
+            },
+            "id": "af61212a-a017-4b11-9685-74c1eb99b034"
+        }
+    ],
+    "print_isbn_13": "978-1-938168-37-6",
+    "print_softcover_isbn_13": "978-1-50669-800-7",
+    "digital_isbn_13": "978-1-947172-10-4",
+    "assignable_isbn_13": null,
+    "license_text": "",
+    "license_name": "Creative Commons Attribution License",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "pdf_url": "https://assets.openstax.org/oscms-prodcms/media/documents/AlgebraAndTrigonometry-OP_1tE6R5r.pdf",
+    "high_resolution_pdf_url": "https://assets.openstax.org/oscms-prodcms/media/documents/AlgebraAndTrigonometry-OP_1tE6R5r.pdf",
+    "free_stuff_instructor": [
+        {
+            "type": "content",
+            "value": {
+                "id": 1,
+                "heading": "<b>Academic freedom.</b> No catch.",
+                "content": "<p>Access free resources integrated with your book. <a href=\"https://accounts.openstax.org/signup\">Sign up</a> for an account to access locked content.</p>",
+                "content_logged_in": null,
+                "button_text": null,
+                "button_url": null
+            },
+            "id": "8e7099a1-c0d6-432a-9849-2151ad1addc9"
+        }
+    ],
+    "free_stuff_student": [
+        {
+            "type": "content",
+            "value": {
+                "id": 2,
+                "heading": "<b>Academic success.</b> You've got this.",
+                "content": "<p>And we've got resources that will help you ace your course.</p> <a",
+                "content_logged_in": null,
+                "button_text": null,
+                "button_url": null
+            },
+            "id": "cb4c016c-76ca-431b-9677-53c47d9f655d"
+        }
+    ],
+    "community_resource_heading": "OER Commons Hub Resources",
+    "community_resource_logo_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OERC_logo.jpg",
+    "community_resource_url": "https://www.oercommons.org/groups/openstax-algebra-and-trigonometry/1045/?__hub_id=27",
+    "community_resource_cta": "Visit the Hub",
+    "community_resource_blurb": "Members of the OpenStax community can join the Hub to share resources they've created to use with our algebra and trigonometry book, like the recorded lectures and lecture notes below. Find more resources and submit your own.",
+    "community_resource_feature_link_url": "https://assets.openstax.org/oscms-prodcms/media/documents/OpenStax_Algebra__Trigonometry_Recorded_Lectures_and_Notes_for_Precalculus.pdf",
+    "community_resource_feature_text": "Algebra and Trigonometry recorded lectures and notes",
+    "webinar_content": [
+        {
+            "type": "content",
+            "value": {
+                "id": 3,
+                "heading": "Find a webinar",
+                "content": "Learn more by attending one of our free webinars featuring OpenStax authors, staff, and partners.",
+                "content_logged_in": "",
+                "button_text": null,
+                "button_url": "https://openstax.org/webinars"
+            },
+            "id": "c1fafb0e-0162-4159-8d56-5d95517430f3"
+        },
+        {
+            "type": "link",
+            "value": "http://openstax.org/webinars",
+            "id": "72967730-33b0-4830-98b4-0e8c17eda871"
+        }
+    ],
+    "promote_snippet": [],
+    "webview_link": "https://cnx.org/contents/13ac107a-f15f-49d2-97e8-60ab2e3b519c",
+    "webview_rex_link": "https://openstax.org/books/algebra-and-trigonometry/pages/1-introduction-to-prerequisites",
+    "rex_callout_title": "Recommended",
+    "rex_callout_blurb": "<b>New</b> Highlight and add notes — it’s 100% free!",
+    "bookshare_link": "",
+    "amazon_coming_soon": false,
+    "amazon_link": "https://buyprint.openstax.org/algebra-and-trigonometry?utm_source=openstax&utm_medium=website&utm_campaign=book-page",
+    "audiobook_link": "",
+    "bookstore_coming_soon": false,
+    "bookstore_content": [
+        {
+            "type": "content",
+            "value": {
+                "id": 9,
+                "heading": "Individual",
+                "content": "<p>Order a personal copy</p>",
+                "content_logged_in": "",
+                "button_text": "Order a personal copy",
+                "button_url": null
+            },
+            "id": "6e3b62cb-81c5-460b-86e9-36dbb29f69d6"
+        },
+        {
+            "type": "content",
+            "value": {
+                "id": 10,
+                "heading": "Bookstore",
+                "content": "<p>Place a bulk order</p>",
+                "content_logged_in": "",
+                "button_text": "Place a bulk order",
+                "button_url": "https://buyprint.openstax.org/bookstore-suppliers"
+            },
+            "id": "88514590-d904-487d-9cc4-16471c695205"
+        }
+    ],
+    "assignable_book": false,
+    "partner_list_label": "Technology Partners",
+    "partner_page_link_text": "See more!",
+    "customization_form_heading": "Customization Form",
+    "customization_form_subheading": "Please select the modules (up to 10), that you want to customize with Google Docs.",
+    "customization_form_disclaimer": "<p data-block-key=\"zkdax\"><b>Disclaimer</b></p><p data-block-key=\"vcmjf\">The following features and functionality are not available to teachers and students using Google Docs customized content:</p><ul><li data-block-key=\"9qnbx\"><b>Errata updates</b>. OpenStax webview is updated at least twice yearly. Customized Google Docs will not receive these content updates.</li><li data-block-key=\"kwlwp\"><b>Access to study tools</b>. OpenStax webview has in-book search, highlighting, study guides, and more available for free. This functionality will not be available in Google Docs versions.</li><li data-block-key=\"xhzfe\"><b>Formatting.</b> Print books and webview have a specific design and structure format developed for those platforms. These functionalities are not available in the Google Docs versions.</li></ul>",
+    "customization_form_next_steps": "<p data-block-key=\"ad6km\"><b>Next Steps</b></p><ol><li data-block-key=\"8eh5b\">Within two business days, you will receive an email for each module that you have requested access to customize.</li><li data-block-key=\"ljhz9\">The link provided in the email will be your own copy of the Google Doc that OpenStax generated for you.</li><li data-block-key=\"h97dr\">Once you have accessessed the document you can make the changes you desire and share with your students. We recommend using the \"Publish to the Web\" functionality under the file menu for sharing with students.</li></ol>",
+    "videos": [],
+    "translations": [],
+    "promote_image": null,
+    "last_updated_pdf": null,
+    "featured_resources_header": "Resources for taking your course online",
+    "support_statement": "With philanthropic support, this book is used in <span id='adoption_number'></span> classrooms, saving students <span id='savings'></span> dollars this school year. <a href='/impact'>Learn more about our impact</a> and how you can help.",
+    "adoptions": 806,
+    "savings": 34930101
+}

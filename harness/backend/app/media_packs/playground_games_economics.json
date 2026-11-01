@@ -1,0 +1,278 @@
+[
+  {
+    "slug": "econ-ppf-opportunity-cost",
+    "archetype": "ppf_frontier",
+    "title": "Production Possibilities — the Cost of Moving Along",
+    "course_id": "ap_microeconomics",
+    "concept": "Scarcity, choice and opportunity cost",
+    "subjects": ["economics"],
+    "difficulty": "core",
+    "minutes": 7,
+    "prompt": "Move the point of production along the frontier, and read the opportunity cost as you go.",
+    "learning_objective": "Show that moving along a bowed-out PPF raises the opportunity cost of the good you are increasing, and read that cost off the vertical axis.",
+    "reference": "Production Possibilities, reviewecon.com games & activities",
+    "spec": {
+      "title": "Production Possibilities — the Cost of Moving Along",
+      "instruction": "The frontier shows the most the economy can make of two goods. Drag the production point along it, then check whether you reached the required output and read off the opportunity cost.",
+      "x_label": "Butter (tonnes)",
+      "y_label": "Guns (thousands)",
+      "x_max": 10,
+      "y_max": 10,
+      "x_intercept": 10,
+      "y_intercept": 10,
+      "bow": 2,
+      "tasks": [
+        {
+          "id": "to-6-butter",
+          "text": "The economy currently makes only guns. Move the point of production to 6 tonnes of butter.",
+          "kind": "move_along",
+          "from_x": 0,
+          "target_x": 6,
+          "ask_cost": true,
+          "cost_tolerance": 0.2,
+          "tolerance": 0.4,
+          "why": "The frontier is the constraint: to make 6 tonnes of butter you give up 2 thousand guns. That trade-off is the opportunity cost, and it is the height you lose on the vertical axis."
+        },
+        {
+          "id": "to-8-butter",
+          "text": "From 6 tonnes of butter, push production further to 8 tonnes.",
+          "kind": "move_along",
+          "from_x": 6,
+          "target_x": 8,
+          "ask_cost": true,
+          "cost_tolerance": 0.2,
+          "tolerance": 0.4,
+          "why": "Those last 2 tonnes of butter cost another 2 thousand guns - about 1 gun per tonne, against a third of a gun per tonne over the first 6. The frontier bows out precisely because opportunity cost rises as you specialise."
+        },
+        {
+          "id": "to-10-butter",
+          "text": "Now move production all the way to 10 tonnes of butter.",
+          "kind": "move_along",
+          "from_x": 8,
+          "target_x": 10,
+          "ask_cost": true,
+          "cost_tolerance": 0.3,
+          "tolerance": 0.4,
+          "why": "The final 2 tonnes cost 6 thousand guns. At the very end of the frontier the resources are badly suited to butter, so the opportunity cost is at its steepest."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "econ-ppf-growth-capital",
+    "archetype": "ppf_frontier",
+    "title": "Production Possibilities — Growth Shifts the Frontier",
+    "course_id": "ap_macroeconomics",
+    "concept": "Economic growth and the production possibilities frontier",
+    "subjects": ["economics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Read the shock, then drag the frontier outward.",
+    "learning_objective": "Distinguish a movement along the PPF (a choice) from a shift of the whole PPF (growth), and show that growth lets the economy produce more of both goods.",
+    "reference": "Production Possibilities, reviewecon.com games & activities",
+    "spec": {
+      "title": "Production Possibilities — Growth Shifts the Frontier",
+      "instruction": "Consumption goods are for today; capital goods build tomorrow's capacity. Move the point along the frontier, then answer the growth shock by dragging the frontier itself outward.",
+      "x_label": "Consumption goods",
+      "y_label": "Capital goods",
+      "x_max": 12,
+      "y_max": 12,
+      "x_intercept": 10,
+      "y_intercept": 10,
+      "bow": 2,
+      "tasks": [
+        {
+          "id": "choose-consumption",
+          "text": "The economy commits to 6 units of consumption goods. Move the point of production there and work out what it costs.",
+          "kind": "move_along",
+          "from_x": 0,
+          "target_x": 6,
+          "ask_cost": true,
+          "cost_tolerance": 0.2,
+          "tolerance": 0.4,
+          "why": "Choosing 6 units of consumption goods means giving up 2 units of capital goods - and capital goods are what would have raised future capacity."
+        },
+        {
+          "id": "growth-shock",
+          "text": "Investment and new technology raise productivity across the whole economy. Drag the frontier outward until capacity is about 130% of its original level.",
+          "kind": "grow",
+          "grow_axis": "both",
+          "target_scale": 1.3,
+          "tolerance": 0.06,
+          "why": "Growth shifts the entire frontier outward, so the economy can produce more of both goods. That is a shift of the curve, not a movement along it."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "econ-determinants-sort",
+    "archetype": "sort_columns",
+    "title": "Determinants of Supply and Demand — Sort the Shock",
+    "course_id": "ap_microeconomics",
+    "concept": "Determinants of supply and demand",
+    "subjects": ["economics"],
+    "difficulty": "core",
+    "minutes": 8,
+    "prompt": "Sort all fourteen non-price determinants into the right column - a wrong drop bounces straight back.",
+    "learning_objective": "Classify each non-price determinant by whether it changes what buyers want at every price (demand) or what sellers offer at every price (supply).",
+    "reference": "Determinants of Supply and Demand, reviewecon.com games & activities",
+    "spec": {
+      "title": "Determinants of Supply and Demand — Sort the Shock",
+      "instruction": "Drag each tile into the column it belongs in. A wrong drop bounces straight back to the tray, so ask first whether the shock changes buyer behaviour or seller behaviour at every price.",
+      "tray_label": "Non-price determinants",
+      "seed": 11,
+      "reveal_note": "Demand shifters move the whole demand curve; supply shifters move the whole supply curve.",
+      "columns": [
+        {
+          "id": "demand",
+          "label": "Demand — buyers",
+          "hint": "changes what buyers want at each price"
+        },
+        {
+          "id": "supply",
+          "label": "Supply — sellers",
+          "hint": "changes what sellers offer at each price"
+        }
+      ],
+      "tiles": [
+        {"id": "d-tastes", "text": "Consumer tastes change", "column": "demand"},
+        {"id": "d-substitute", "text": "Price of a substitute", "column": "demand"},
+        {"id": "d-complement", "text": "Price of a complement", "column": "demand"},
+        {"id": "d-income-normal", "text": "Income rises (normal)", "column": "demand"},
+        {"id": "d-income-inferior", "text": "Income rises (inferior)", "column": "demand"},
+        {"id": "d-expect", "text": "Buyers expect higher prices", "column": "demand"},
+        {"id": "d-buyers", "text": "More or fewer buyers", "column": "demand"},
+        {"id": "s-inputs", "text": "Input prices change", "column": "supply"},
+        {"id": "s-tech", "text": "Better technology", "column": "supply"},
+        {"id": "s-tax", "text": "A new tax on the good", "column": "supply"},
+        {"id": "s-subsidy", "text": "A new subsidy", "column": "supply"},
+        {"id": "s-sellers", "text": "More or fewer sellers", "column": "supply"},
+        {"id": "s-expect", "text": "Sellers expect higher prices", "column": "supply"},
+        {"id": "s-other", "text": "Price of other goods", "column": "supply"}
+      ]
+    }
+  },
+  {
+    "slug": "econ-comparative-advantage",
+    "archetype": "calc_choice",
+    "title": "Comparative Advantage — Who Should Specialise?",
+    "course_id": "ap_microeconomics",
+    "concept": "Comparative advantage and gains from trade",
+    "subjects": ["economics"],
+    "difficulty": "stretch",
+    "minutes": 8,
+    "prompt": "Work out the opportunity costs from the intercepts, then decide who should specialise.",
+    "learning_objective": "Compute opportunity cost from two linear frontiers and identify comparative advantage as the lower opportunity cost, not the larger output.",
+    "reference": "Comparative Advantage, reviewecon.com games & activities",
+    "spec": {
+      "title": "Comparative Advantage — Who Should Specialise?",
+      "instruction": "Each island can produce up to the intercept of either good. Work out the opportunity cost asked for, type it in, then choose who has the comparative advantage.",
+      "x_good": "Coffee",
+      "y_good": "Tea",
+      "x_max": 40,
+      "y_max": 40,
+      "parties": [
+        {"id": "alpha", "name": "Alpha", "colour": "a", "x_intercept": 30, "y_intercept": 30},
+        {"id": "beta", "name": "Beta", "colour": "b", "x_intercept": 20, "y_intercept": 40}
+      ],
+      "questions": [
+        {
+          "id": "alpha-oc-coffee",
+          "text": "Alpha can make up to 30 coffee or up to 30 tea. What is Alpha's opportunity cost of 1 unit of coffee, in units of tea?",
+          "party": "alpha",
+          "per_good": "x",
+          "answer": 1.0,
+          "tolerance": 0.02,
+          "choice_prompt": "Who has the comparative advantage in coffee?",
+          "choices": ["Alpha", "Beta"],
+          "choice_answer": "Alpha",
+          "why": "Alpha gives up 1 tea per coffee; Beta gives up 2 tea per coffee (40 tea forgone for 20 coffee). Alpha gives up less, so Alpha has the comparative advantage in coffee and should specialise there."
+        },
+        {
+          "id": "beta-oc-coffee",
+          "text": "Beta can make up to 20 coffee or up to 40 tea. What is Beta's opportunity cost of 1 unit of coffee, in units of tea?",
+          "party": "beta",
+          "per_good": "x",
+          "answer": 2.0,
+          "tolerance": 0.02,
+          "choice_prompt": "Who has the comparative advantage in tea?",
+          "choices": ["Alpha", "Beta"],
+          "choice_answer": "Beta",
+          "why": "Beta's opportunity cost of 1 tea is 0.5 coffee; Alpha's is 1 coffee. Beta gives up less coffee per tea, so Beta has the comparative advantage in tea. Each island should specialise where its opportunity cost is lowest, then trade."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "econ-elasticity-point",
+    "archetype": "elasticity_probe",
+    "title": "Elasticity — the Point Method",
+    "course_id": "ap_microeconomics",
+    "concept": "Price elasticity of demand",
+    "subjects": ["economics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Compute the coefficient by the point method, classify it, and read the sign.",
+    "learning_objective": "Apply e = (ΔQ/ΔP) × (P/Q) at a point on a demand curve and interpret the magnitude and sign.",
+    "reference": "Elasticity Coefficients, reviewecon.com games & activities",
+    "spec": {
+      "title": "Elasticity — the Point Method",
+      "instruction": "Two points on the demand curve are given. Work out the price elasticity of demand at point A using the point method, then classify the demand and read what the sign means.",
+      "coefficient_prompt": "Using the point method, e = (ΔQ/ΔP) × (P1/Q1), what is the coefficient at point A?",
+      "x_label": "Quantity",
+      "y_label": "Price",
+      "x_max": 6,
+      "y_max": 12,
+      "method": "point",
+      "tolerance": 0.05,
+      "points": [
+        {"id": "a", "label": "Point A", "price": 10, "quantity": 2},
+        {"id": "b", "label": "Point B", "price": 8, "quantity": 4}
+      ],
+      "sign_prompt": "What does the negative sign of the coefficient tell you?",
+      "sign_choices": [
+        "Price and quantity move in opposite directions - the law of demand.",
+        "The good is a luxury good.",
+        "Demand is perfectly inelastic."
+      ],
+      "sign_answer": "Price and quantity move in opposite directions - the law of demand.",
+      "why": "ΔQ/ΔP = 2/(-2) = -1 and P/Q = 10/2 = 5, so e = -5. Because |e| = 5 > 1 demand is elastic: a 1% price rise cuts quantity demanded by about 5%."
+    }
+  },
+  {
+    "slug": "econ-elasticity-midpoint",
+    "archetype": "elasticity_probe",
+    "title": "Elasticity — the Mid-point Method",
+    "course_id": "ap_microeconomics",
+    "concept": "Price elasticity of demand",
+    "subjects": ["economics"],
+    "difficulty": "core",
+    "minutes": 6,
+    "prompt": "Compute the coefficient by the mid-point method, classify it, and read the sign.",
+    "learning_objective": "Apply e = (ΔQ/ΔP) × ((P1+P2)/(Q1+Q2)) between two points and interpret the result, including why it differs from the point method.",
+    "reference": "Elasticity Coefficients, reviewecon.com games & activities",
+    "spec": {
+      "title": "Elasticity — the Mid-point Method",
+      "instruction": "Two points on the demand curve are given. Work out the price elasticity of demand using the mid-point method, then classify the demand and read what the sign means.",
+      "coefficient_prompt": "Using the mid-point method, e = (ΔQ/ΔP) × ((P1+P2)/(Q1+Q2)), what is the coefficient between the two points?",
+      "x_label": "Quantity",
+      "y_label": "Price",
+      "x_max": 12,
+      "y_max": 6,
+      "method": "midpoint",
+      "tolerance": 0.05,
+      "points": [
+        {"id": "a", "label": "Point A", "price": 2, "quantity": 10},
+        {"id": "b", "label": "Point B", "price": 4, "quantity": 6}
+      ],
+      "sign_prompt": "What does the negative sign of the coefficient tell you?",
+      "sign_choices": [
+        "Price and quantity move in opposite directions - the law of demand.",
+        "The good is an inferior good.",
+        "The demand curve slopes upward."
+      ],
+      "sign_answer": "Price and quantity move in opposite directions - the law of demand.",
+      "why": "ΔQ/ΔP = -4/2 = -2 and the mid-point average term is (2+4)/(10+6) = 0.375, so e = -0.75. Because |e| = 0.75 < 1 demand is inelastic: quantity is relatively unresponsive to price. The mid-point method gives the same answer whichever point you start from, which is why it is preferred between two points."
+    }
+  }
+]

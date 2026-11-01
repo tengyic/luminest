@@ -1,0 +1,380 @@
+{
+  "biology": [
+    {
+      "concept_id": "active_transport",
+      "provider": "youtube",
+      "video_id": "p_yiVLGW3dQ",
+      "title": "Electrochemical gradients and secondary active transport | biology | Khan Academy (IN accent)",
+      "channel": "Khan Academy India - English",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "alleles_genotype_and_phenotype",
+      "provider": "youtube",
+      "video_id": "lYAHx7NiF3g",
+      "title": "Genotype vs Phenotype | Understanding Alleles",
+      "channel": "2 Minute Classroom",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "anaerobic_respiration",
+      "provider": "youtube",
+      "video_id": "cDC29iBxb3w",
+      "title": "Anaerobic Respiration",
+      "channel": "Bozeman Science",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "antibiotic_resistance_as_observed_evolution",
+      "provider": "youtube",
+      "video_id": "2lNL7_rSEME",
+      "title": "ANTIBIOTIC RESISTANCE | How natural selection occurs today and results in evolution",
+      "channel": "Miss Angler",
+      "why": "curated by the TA: 5 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "atp_as_the_energy_currency",
+      "provider": "youtube",
+      "video_id": "00jbG_cfGuQ",
+      "title": "ATP & Respiration: Crash Course Biology #7",
+      "channel": "CrashCourse",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    }
+  ],
+  "chemistry": [
+    {
+      "concept_id": "acids_bases_and_neutralisation",
+      "provider": "youtube",
+      "video_id": "ivRczDkilAI",
+      "title": "Acids and Bases for Kids | Learn the difference between an acid and a base",
+      "channel": "Learn Bright",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "air_pollution_and_its_chemistry",
+      "provider": "youtube",
+      "video_id": "e8RFtRi-Q2Q",
+      "title": "Revealing the Culprit Unmasking Air Pollution with Chemistry and Environmental Preservation",
+      "channel": "Atomic Chemistry",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "alcohols_and_carboxylic_acids",
+      "provider": "youtube",
+      "video_id": "3YeXGpDdgZw",
+      "title": "Carboxylic Acids, Typical Acids and Esters | Organic Chemistry | Chemistry | FuseSchool",
+      "channel": "FuseSchool - Global Education",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "alkanes_and_saturated_hydrocarbons",
+      "provider": "youtube",
+      "video_id": "NlhANtNRVL8",
+      "title": "Preparation of alkanes from alkyl halides | Hydrocarbons | Grade 11 | Chemistry | Khan Academy",
+      "channel": "Khan Academy India - English",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "alkenes_and_unsaturation",
+      "provider": "youtube",
+      "video_id": "iEKA0jUstPs",
+      "title": "Hydrohalogenation | Alkenes and Alkynes | Organic chemistry | Khan Academy",
+      "channel": "Khan Academy Organic Chemistry",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    }
+  ],
+  "computer_science": [
+    {
+      "concept_id": "algorithm_efficiency_and_big_o",
+      "provider": "youtube",
+      "video_id": "QnRx6V8YQy0",
+      "title": "Time Complexity and Big O Notation - Data Structures and Algorithms",
+      "channel": "Caleb Curry",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "algorithmic_bias_and_fairness",
+      "provider": "youtube",
+      "video_id": "wmyVODy_WD8",
+      "title": "MIT 6.S191: AI Bias and Fairness",
+      "channel": "Alexander Amini",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "algorithms_and_algorithmic_thinking",
+      "provider": "youtube",
+      "video_id": "qbnTZCj0ugI",
+      "title": "Computational Thinking: What Is It? How Is It Used?",
+      "channel": "College & Career Ready Labs │ Paxton Patterson",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "automation_work_and_responsibility",
+      "provider": "youtube",
+      "video_id": "GQrJBhLgCQI",
+      "title": "Sit Back and Let AI Do The Work (Automation Guide)",
+      "channel": "Matt Wolfe",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    }
+  ],
+  "integrated_math_1": [
+    {
+      "concept_id": "linear_functions",
+      "provider": "three_blue_one_brown",
+      "video_id": "kYB8IZa5AuE",
+      "title": "Linear transformations and matrices",
+      "channel": "3Blue1Brown",
+      "why": "Shows a linear map as the thing that moves the whole plane, which is the picture a slope-only treatment of linear functions never supplies."
+    },
+    {
+      "concept_id": "linear_functions",
+      "provider": "three_blue_one_brown",
+      "video_id": "kjBOesZCoqc",
+      "title": "Essence of linear algebra preview",
+      "channel": "3Blue1Brown",
+      "why": "A short geometric overview of what \"linear\" means visually - straight lines preserved under transformations - so the course has a picture to anchor slope and rate-of-change language. oEmbed-verified 2026-10-11."
+    },
+    {
+      "concept_id": "coordinates",
+      "provider": "three_blue_one_brown",
+      "video_id": "fNk_zzaMoSs",
+      "title": "Vectors | Chapter 1, Essence of linear algebra",
+      "channel": "3Blue1Brown",
+      "why": "Presents coordinates as data for arrows with direction and magnitude, which is the geometric picture behind slope as a directed rate. oEmbed-verified 2026-10-11."
+    },
+    {
+      "concept_id": "systems",
+      "provider": "three_blue_one_brown",
+      "video_id": "k7RM-ot2NWY",
+      "title": "Linear combinations, span, and basis vectors",
+      "channel": "3Blue1Brown",
+      "why": "Linear combination is exactly the operation elimination performs on two equations; this video gives that operation a visual meaning before the algebra. oEmbed-verified 2026-10-11."
+    },
+    {
+      "concept_id": "fractions",
+      "provider": "youtube",
+      "video_id": "-YpEkExjq2E",
+      "title": "Generating equivalent fractions | Fractions | 3rd grade | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "signed_numbers",
+      "provider": "youtube",
+      "video_id": "fii9QEVJPas",
+      "title": "Values to make absolute value inequality true | Negative numbers | 6th grade | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "ratios",
+      "provider": "youtube",
+      "video_id": "HpdMJaKaXXc",
+      "title": "Introduction to ratios | Ratios, proportions, units, and rates | Pre-Algebra | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "expressions",
+      "provider": "youtube",
+      "video_id": "hDtqpqUqRNk",
+      "title": "Structure of Expressions Relearning",
+      "channel": "Brittney Torzilli",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "equations",
+      "provider": "youtube",
+      "video_id": "7DPWeBszNSM",
+      "title": "How To Solve Linear Equations In Algebra",
+      "channel": "The Organic Chemistry Tutor",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "inequalities",
+      "provider": "youtube",
+      "video_id": "d2cnQ5ahHgE",
+      "title": "Compound inequalities 2 | Linear inequalities | Algebra I | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "exponents",
+      "provider": "youtube",
+      "video_id": "NS4vHqJIPiE",
+      "title": "What is an Exponent? | An Intro to Exponents | Math with Mr. J",
+      "channel": "Math with Mr. J",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "probability",
+      "provider": "youtube",
+      "video_id": "PR-A3UAO7_0",
+      "title": "Compound sample spaces | Statistics and probability | 7th grade | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "descriptive_stats",
+      "provider": "youtube",
+      "video_id": "U0NZu6f5TMI",
+      "title": "Skewness - Right, Left & Symmetric Distribution - Mean, Median, & Mode With Boxplots - Statistics",
+      "channel": "The Organic Chemistry Tutor",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "data_interpretation",
+      "provider": "youtube",
+      "video_id": "z0Ry_3_qhDw",
+      "title": "Introduction to sampling distributions | Sampling distributions | AP Statistics | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "variables_and_algebraic_notation",
+      "provider": "youtube",
+      "video_id": "xLYVo_k0_us",
+      "title": "How to write algebraic expressions with parentheses | Algebra I | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "combining_like_terms",
+      "provider": "youtube",
+      "video_id": "CLWpkv6ccpA",
+      "title": "Combining like terms introduction | Introduction to algebra | Algebra I | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "the_distributive_property",
+      "provider": "youtube",
+      "video_id": "ecbxmp-7hK0",
+      "title": "The Distributive Property | Simplifying Expressions | Math with Mr. J",
+      "channel": "Math with Mr. J",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "one_step_equations",
+      "provider": "youtube",
+      "video_id": "vksy7e3hY8Q",
+      "title": "One-step multiplication equations: fractional coefficients | 6th grade | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "two_step_equations",
+      "provider": "youtube",
+      "video_id": "3CMgWiBnw_U",
+      "title": "Khan Support: Two-step Equation Word Problems",
+      "channel": "Joshua Fischbach",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "solving_proportions",
+      "provider": "youtube",
+      "video_id": "xxcrqr9y-M0",
+      "title": "Solving Proportions Math Reveal Adv Grade 9 Module 1 Lesson 6",
+      "channel": "Zayed Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "percent_change",
+      "provider": "youtube",
+      "video_id": "dvE2KvPtaqQ",
+      "title": "Percentage Change",
+      "channel": "tecmath",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "direct_variation",
+      "provider": "youtube",
+      "video_id": "7dE-hEhJ_JY",
+      "title": "Direct Variation",
+      "channel": "ThinkwellVids",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "point_slope_form",
+      "provider": "youtube",
+      "video_id": "HUR2uIziexc",
+      "title": "Intro to point-slope form | Grade 11 | Math | NCERT | Khan Academy (IN accent)",
+      "channel": "Khan Academy India - English",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "standard_form_and_intercepts",
+      "provider": "youtube",
+      "video_id": "MXV65i9g1Xg",
+      "title": "Basic Linear Functions - Math Antics",
+      "channel": "mathantics",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "solving_systems_by_substitution",
+      "provider": "youtube",
+      "video_id": "JWfn2E1XPkc",
+      "title": "Grade 10/9 - Solving Systems by Substitution",
+      "channel": "Mr Zapp Loves Math",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "solving_systems_by_elimination",
+      "provider": "youtube",
+      "video_id": "u5dPUHjagSI",
+      "title": "Systems with elimination practice | Algebra II | Khan Academy",
+      "channel": "Khan Academy",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "parallel_and_perpendicular_lines",
+      "provider": "youtube",
+      "video_id": "0oe-GqFrYFU",
+      "title": "Graphing Parallel and Perpendicular Lines",
+      "channel": "Professor Dave Explains",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    },
+    {
+      "concept_id": "the_pythagorean_theorem",
+      "provider": "youtube",
+      "video_id": "IXYhbupmBe4",
+      "title": "Singapore O-Level Additional Maths (4049) · Geometry · Similarity & the Pythagorean Theorem",
+      "channel": "Mind Made",
+      "why": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    }
+  ],
+  "physics": [
+    {
+      "concept_id": "acceleration",
+      "provider": "youtube",
+      "video_id": "zFmboDnc_UM",
+      "title": "PotU 1.3 - Using Vectors and Scalar to Describe Motion",
+      "channel": "James Johnson",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "angular_quantities",
+      "provider": "youtube",
+      "video_id": "2J2ZnI74Aok",
+      "title": "Angular Quantities Example",
+      "channel": "Andrey K",
+      "why": "curated by the TA: 2 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "atomic_energy_levels_and_spectra",
+      "provider": "youtube",
+      "video_id": "b2bho0UWPCA",
+      "title": "Level 3 NCEA Physics Modern Physics: Atomic Spectra",
+      "channel": "Doctor Harves",
+      "why": "curated by the TA: 5 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar"
+    },
+    {
+      "concept_id": "atomic_structure_and_the_nucleus",
+      "provider": "youtube",
+      "video_id": "h6LPAwAmnCQ",
+      "title": "Basic Atomic Structure: A Look Inside the Atom",
+      "channel": "Tyler DeWitt",
+      "why": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source preferred"
+    }
+  ]
+}

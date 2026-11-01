@@ -1,0 +1,764 @@
+[
+ {
+  "id": "retrieval_practice",
+  "title": "Test-enhanced learning: Taking memory tests improves long-term retention",
+  "authors": [
+   "Henry L. Roediger III",
+   "Jeffrey D. Karpicke"
+  ],
+  "year": 2006,
+  "url": "https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x",
+  "doi": "10.1111/j.1467-9280.2006.01693.x",
+  "claim_kind": "empirical_research",
+  "finding": "In two experiments, students studied prose passages and either restudied or completed one or three immediate free-recall tests without feedback. Restudy produced better recall on a final test after 5 minutes, but prior testing produced better retention after 2 days or 1 week. Immediate fluency and confidence therefore need not track delayed retention.",
+  "product_policy": "Include low-stakes retrieval opportunities and later reviews. Distinguish practice performance from delayed retention. Offering corrective feedback is a separate design choice, not an intervention directly established by this paper's no-feedback comparison. Do not advertise a numerical learning gain for this app from this study.",
+  "scope": "Controlled experiments with students, prose materials, free recall, and final tests at specified delays.",
+  "limitations": [
+   "Does not directly establish algebra problem-solving transfer, an optimal scheduler, a universal target error rate, or desktop-app efficacy.",
+   "The original abstract was verified; full-paper PDF retrieval failed certificate/access checks. No sample-size or effect-size claim is made from unavailable full text."
+  ],
+  "evidence_strength": {
+   "level": "strong_within_studied_task",
+   "type": "controlled_primary_experiments",
+   "app_directness": "indirect; app-specific outcomes untested"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original abstract on the journal society and author institution pages",
+   "read_urls": [
+    "https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2006.01693.x/",
+    "https://profiles.wustl.edu/en/publications/test-enhanced-learning-taking-memory-tests-improves-long-term-ret/"
+   ],
+   "locator": "Abstract; Psychological Science 17(3), 249-255"
+  }
+ },
+ {
+  "id": "distributed_practice",
+  "title": "Distributed practice in verbal recall tasks: A review and quantitative synthesis",
+  "authors": [
+   "Nicholas J. Cepeda",
+   "Harold Pashler",
+   "Edward Vul",
+   "John T. Wixted",
+   "Doug Rohrer"
+  ],
+  "year": 2006,
+  "url": "https://www.yorku.ca/ncepeda/publications/CPVWR2006.html",
+  "doi": "10.1037/0033-2909.132.3.354",
+  "claim_kind": "research_synthesis",
+  "finding": "The original meta-analysis identified 839 assessments from 317 experiments in 184 articles. Interstudy interval and retention interval jointly affected final recall: the spacing associated with maximal retention increased as the intended retention interval increased. Longer spacing is not an unconditional 'more is always better' rule.",
+  "product_policy": "Distribute practice over time, specify the retention horizon, and test scheduling choices against later recall and transfer. Do not present one universal interval schedule or a fixed struggle percentage as established by this review.",
+  "scope": "Quantitative synthesis specifically of verbal recall tasks; spacing, lag, and temporal moderators.",
+  "limitations": [
+   "Task and timing heterogeneity constrain direct extrapolation to mathematical reasoning or every learner population.",
+   "The study does not validate HLR, BKT, a 70% correctness threshold, or this product's efficacy."
+  ],
+  "evidence_strength": {
+   "level": "strong_for_verbal_recall_spacing",
+   "type": "original_meta_analysis",
+   "app_directness": "indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "author-hosted original article PDF and author abstract; selected article pages extracted in memory",
+   "read_urls": [
+    "https://www.yorku.ca/ncepeda/publications/CPVWR2006.html",
+    "https://www.yorku.ca/ncepeda/publications/CPVWR2006.pdf",
+    "https://pubmed.ncbi.nlm.nih.gov/16719566/"
+   ],
+   "locator": "Psychological Bulletin 132(3), 354-380; abstract and introductory scope"
+  }
+ },
+ {
+  "id": "hlr_prediction",
+  "title": "A Trainable Spaced Repetition Model for Language Learning",
+  "authors": [
+   "Burr Settles",
+   "Brendan Meeder"
+  ],
+  "year": 2016,
+  "url": "https://aclanthology.org/P16-1174/",
+  "doi": "10.18653/v1/P16-1174",
+  "claim_kind": "predictive_model_research",
+  "finding": "Half-life regression models recall as p = 2^(-elapsed_time/half_life), with trainable half-life features. Evaluation used 12.9 million Duolingo instances, the first 90% for training and remaining 10% for testing. HLR achieved recall-rate MAE 0.128 and at least 45% lower MAE than the Leitner baseline. Leitner nevertheless had the highest AUC among the compared algorithms. Prediction error reduction is not a learning-gain percentage.",
+  "product_policy": "Treat HLR as a candidate forgetting model. Fit and calibrate it on authorized, domain-appropriate histories; compare it with simple spacing baselines using chronological held-out data. Keep next-response prediction, ranking, delayed retention, and transfer as different evaluation targets. Use conservative cold-start behavior rather than invented personalized half-lives.",
+  "scope": "Second-language word/lexeme recall in Duolingo; historical prediction and production student-model use.",
+  "limitations": [
+   "Language-learning parameters are not automatically valid for algebra knowledge components.",
+   "Sparse lexeme features overfit and frustrated some users; removing them addressed cold-start and experience problems.",
+   "Predictive fit does not establish a causal improvement in delayed transfer or durable conceptual mastery."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_predictive_model_choice",
+   "type": "original_large_scale_model_evaluation",
+   "app_directness": "indirect; must retrain and validate for the app's domain"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original ACL paper text extracted in memory; publication metadata verified",
+   "read_urls": [
+    "https://aclanthology.org/P16-1174/",
+    "https://aclanthology.org/P16-1174.pdf"
+   ],
+   "locator": "Sections 3.3, 4.1, 4.4 and Table 2; pages 1848-1858"
+  }
+ },
+ {
+  "id": "hlr_engagement_not_learning",
+  "title": "A Trainable Spaced Repetition Model for Language Learning — production experiments",
+  "authors": [
+   "Burr Settles",
+   "Brendan Meeder"
+  ],
+  "year": 2016,
+  "url": "https://aclanthology.org/P16-1174/",
+  "claim_kind": "empirical_research",
+  "finding": "The first randomized production experiment compared HLR with Leitner for six weeks in just under one million students: Table 4 reports +0.3% any-activity daily retention, +0.3% lesson retention, and -7.3% practice retention. The second compared HLR without lexeme features against full HLR for two weeks in 3.3 million students: +12.0% any-activity daily retention, +1.7% lesson retention, and +9.5% practice retention. Here 'retention' means returning the next day, not retaining learned knowledge.",
+  "product_policy": "Never cite the 12% result as a memory, mastery, or transfer improvement, or as a comparison against Leitner. Engagement is a secondary product outcome, not a substitute for independent delayed assessments.",
+  "scope": "Randomized Duolingo production comparisons and next-day return behavior.",
+  "limitations": [
+   "No independent delayed-transfer learning outcome is reported for these production comparisons.",
+   "Platform, interface, sample, duration, and treatment comparisons differ from the proposed desktop app.",
+   "The authors' attribution of later overall user growth is not itself an isolated randomized outcome."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_specific_engagement_comparisons",
+   "type": "randomized_production_experiments",
+   "app_directness": "no direct evidence of app learning efficacy"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original full paper",
+   "read_urls": [
+    "https://aclanthology.org/P16-1174.pdf"
+   ],
+   "locator": "Sections 4.3-4.4 and Table 4"
+  }
+ },
+ {
+  "id": "active_learning",
+  "title": "Active learning increases student performance in science, engineering, and mathematics",
+  "authors": [
+   "Scott Freeman",
+   "Sarah L. Eddy",
+   "Miles McDonough",
+   "Michelle K. Smith",
+   "Nnadozie Okoroafor",
+   "Hannah Jordt",
+   "Mary Pat Wenderoth"
+  ],
+  "year": 2014,
+  "url": "https://www.pnas.org/doi/10.1073/pnas.1319030111",
+  "doi": "10.1073/pnas.1319030111",
+  "claim_kind": "research_synthesis",
+  "finding": "Across 225 studies of undergraduate STEM classrooms, active learning was associated with a mean examination/concept-inventory improvement of 0.47 standard deviations in 158 studies. In 67 failure-rate studies, traditional lecturing had a failure odds ratio of 1.95, approximately a risk ratio of 1.5. These are different quantities. Reported average failure rates were 33.8% under lecture and 21.8% under active learning.",
+  "product_policy": "Prefer meaningful solving, explaining, retrieval, and feedback over passive consumption alone. Do not equate clicking with active learning or promise the meta-analysis effect size for a self-study desktop app. Assess the actual intervention rather than its label.",
+  "scope": "In-class undergraduate STEM instructional designs, examinations, concept inventories, and course failure; not a study of desktop software or solitary AI tutoring.",
+  "limitations": [
+   "Active-learning formats and intensity varied widely; the review could not estimate an optimal intensity/type from available data.",
+   "Many studies were quasi-experimental; the failure-rate evidence lacked randomized designs.",
+   "Volunteer instructors and context may affect generalization; it is not known that universal implementation would preserve the same effect size.",
+   "The approximate 6% examination-score description is not a universal app gain."
+  ],
+  "evidence_strength": {
+   "level": "strong_for_classroom_association_with_scope_limits",
+   "type": "original_meta_analysis",
+   "app_directness": "indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "publisher page exposed mostly navigation; original published article read from university-hosted PDF, including an author-upload cover page",
+   "read_urls": [
+    "https://www.pnas.org/doi/10.1073/pnas.1319030111",
+    "https://oscqr.suny.edu/wp-content/uploads/2024/02/FreemanEddyetal.2014.Activelearningincreasesstudentperformanceinscienceengineeringandmathematics.pdf"
+   ],
+   "locator": "PNAS 111(23), 8410-8415; abstract, Table 1, Results and Discussion"
+  }
+ },
+ {
+  "id": "learning_styles_meshing",
+  "title": "Learning Styles: Concepts and Evidence",
+  "authors": [
+   "Harold Pashler",
+   "Mark McDaniel",
+   "Doug Rohrer",
+   "Robert Bjork"
+  ],
+  "year": 2008,
+  "url": "https://journals.sagepub.com/doi/abs/10.1111/j.1539-6053.2009.01038.x",
+  "doi": "10.1111/j.1539-6053.2009.01038.x",
+  "year_note": "Nominal journal issue is 2008, volume 9(3), 105-119. The accessible author PDF bears 2009 copyright and the publisher/search metadata also reports 2009 online publication; retain this distinction rather than treating the DOI's year as the issue year.",
+  "claim_kind": "critical_research_review",
+  "finding": "The review found virtually no evidence for the interaction pattern needed to validate instructional 'meshing' with diagnosed learning styles, and no adequate evidence base to justify routine learning-style assessments. A credible test requires grouping by assessed style, random assignment to instructional methods, the same outcome assessment, and a style-by-method interaction in which the best method differs by style.",
+  "product_policy": "Do not classify users as visual/auditory/kinesthetic learners and claim that matching their presumed style improves learning. Offer modalities for accessibility and user preference, and adapt to demonstrated knowledge, goals, and performance. Test any claimed learning advantage separately.",
+  "scope": "Evidence review of learning-style-based instructional matching, not all personalization or all accessibility accommodations.",
+  "limitations": [
+   "Lack of adequate meshing validation is not proof that all individual differences or every possible personalization are ineffective.",
+   "The authors explicitly caution that many possible versions had not been tested with sound methods.",
+   "The review is historical; it is not an exhaustive review of all later literature."
+  ],
+  "evidence_strength": {
+   "level": "strong_basis_for_rejecting_unsupported_meshing_claims",
+   "type": "original_critical_review",
+   "app_directness": "direct constraint on marketing rationale; not product efficacy evidence"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "author-lab-hosted original PDF; abstract and relevant methods/conclusions extracted",
+   "read_urls": [
+    "https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/07/Pashler_McDaniel_Rohrer_Bjork_2009_PSPI.pdf",
+    "https://journals.sagepub.com/doi/abs/10.1111/j.1539-6053.2009.01038.x"
+   ],
+   "locator": "Summary, experimental criteria, and conclusions"
+  }
+ },
+ {
+  "id": "bayesian_knowledge_tracing",
+  "title": "Knowledge tracing: Modeling the acquisition of procedural knowledge",
+  "authors": [
+   "Albert T. Corbett",
+   "John R. Anderson"
+  ],
+  "year": 1994,
+  "url": "https://link.springer.com/article/10.1007/BF01099821",
+  "doi": "10.1007/BF01099821",
+  "year_note": "Requested and Springer-indexed citation is 1994. APA lists 1994-1995. The original scanned article says 1995, received 1 December 1994 and final form 13 March 1995; it is commonly cited as 1995. This record preserves the discrepancy explicitly.",
+  "claim_kind": "predictive_model_research",
+  "finding": "The ACT Programming Tutor estimated the probability that each production rule was learned and individualized practice from those estimates. Original BKT uses learned/unlearned states, an initial-learning probability, learning-transition probability, guess probability, and slip probability. It explicitly assumes no learned-to-unlearned transition. Successive empirical refinements included rule difficulty and individual differences; the article reports useful prediction of test performance.",
+  "product_policy": "Use BKT as an interpretable candidate model for carefully defined knowledge components, not as a direct measurement of the mind. Expose estimates as uncertain. Validate skill tags, parameters, and out-of-tutor predictions. For long-term use, do not silently assume no forgetting: evaluate a forgetting extension or separate retention model. Distinguish latent learned-state probability from next-answer correctness.",
+  "scope": "Procedural programming knowledge in ACT tutoring, including Lisp and related programming modules; a sequence of modeling studies, not a universal adaptive-app trial.",
+  "limitations": [
+   "Two-state representation, component independence, single-action attribution, parameter identifiability, and no-forgetting assumptions constrain interpretation.",
+   "An answer may be correct by guessing or incorrect through a slip; neither establishes mastery or nonmastery deterministically.",
+   "A high mastery probability or a tutor's chosen criterion is not a universal optimal training accuracy and does not guarantee delayed transfer.",
+   "OCR introduces potential transcription errors; no new numeric effect-size claim is made from the scan."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_model_foundation",
+   "type": "original_tutor_model_and_empirical_refinements",
+   "app_directness": "indirect; algebra and app validation required"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "publisher access blocked; original scanned article from research-institute host OCR-read in memory on selected pages",
+   "read_urls": [
+    "https://perso.liris.cnrs.fr/pierre-antoine.champin/2014/m2iade-ia2/slides/_static/893CorbettAnderson1995.pdf",
+    "https://psycnet.apa.org/record/1996-29060-001"
+   ],
+   "locator": "Printed pages 253-254, 257-260 and 276; original abstract, assumptions, and conclusion"
+  }
+ },
+ {
+  "id": "performance_factors_analysis",
+  "title": "Performance Factors Analysis – A New Alternative to Knowledge Tracing",
+  "authors": [
+   "Philip I. Pavlik Jr.",
+   "Hao Cen",
+   "Kenneth R. Koedinger"
+  ],
+  "year": 2009,
+  "url": "https://files.eric.ed.gov/fulltext/ED506305.pdf",
+  "claim_kind": "predictive_model_research",
+  "finding": "PFA models next-performance probability through logistic regression with knowledge-component difficulty and separate coefficients for prior successes and failures. It supports combining multiple components. Comparisons used fractions, algebra, geometry, and physics tutor datasets. PFA was somewhat superior to the particular KT implementations on reported fit statistics and reacted less aggressively to a single failure; full LFA was marginally better on several comparisons with subject effects.",
+  "product_policy": "Compare PFA and BKT against simple baselines on authorized, correctly tagged data. Use only prior observations when constructing success/failure counts. Report chronological held-out log loss, Brier score, calibration, and discrimination, including new-user and new-item tests. Do not infer that better predictive fit causes better learning or that PFA is always superior.",
+  "scope": "Original educational data-mining/model comparison using four specific tutor datasets with supplied knowledge-component labels.",
+  "limitations": [
+   "Results depend on dataset labels, parameter constraints, KT fitting procedures, and treatment of multi-component responses.",
+   "The reported KT comparison is not an app-specific randomized outcome experiment; fit statistics are not durable mastery or transfer effects.",
+   "The basic success/failure-count model does not itself model elapsed-time forgetting or fully distinguish response order.",
+   "A chronological validation protocol is a product requirement proposed here, not a claim that the paper used that exact protocol."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_candidate_model_selection",
+   "type": "original_multi_dataset_model_comparison",
+   "app_directness": "domain-relevant but still indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "all eight pages of original proceedings paper extracted in memory",
+   "read_urls": [
+    "https://files.eric.ed.gov/fulltext/ED506305.pdf"
+   ],
+   "publication_metadata_search_url": "https://dl.acm.org/doi/10.5555/1659450.1659529",
+   "locator": "Equation 3, Tables 2-3, model-comparison methods and conclusion"
+  }
+ },
+ {
+  "id": "no_universal_correctness_or_struggle_target",
+  "title": "The Eighty Five Percent Rule for optimal learning — boundary on generalization",
+  "authors": [
+   "Robert C. Wilson",
+   "Amitai Shenhav",
+   "Mark Straccia",
+   "Jonathan D. Cohen"
+  ],
+  "year": 2019,
+  "url": "https://collaborate.princeton.edu/en/publications/the-eighty-five-percent-rule-for-optimal-learning/",
+  "doi": "10.1038/s41467-019-12552-4",
+  "claim_kind": "research_boundary_and_product_hypothesis",
+  "finding": "This paper derives an approximately 15.87% optimal training error rate for a class of stochastic-gradient-descent learning algorithms in binary classification and demonstrates it with artificial and biologically plausible neural networks. It does not validate 70% correctness, an 85% target for every human curriculum, or any fixed percentage of 'productive struggle.' None of the reviewed sources establishes the proposed product's universal target.",
+  "product_policy": "Any target correctness, challenge band, hint rate, or struggle percentage must be explicitly labeled a configurable hypothesis, not a research-backed universal. Keep observed correctness, predicted correctness, BKT latent mastery, frustration, and effort separate. Permit user overrides and stopping. Compare candidate settings using independent delayed retention and transfer outcomes, with adverse-experience monitoring.",
+  "scope": "Theoretical/simulation results under specified binary-classification learning assumptions; product thresholds remain unvalidated hypotheses.",
+  "limitations": [
+   "A mathematically optimal algorithmic error rate is not an established universal optimal human practice rate.",
+   "The cited abstract does not report a trial of algebra learners or this app.",
+   "The absence of validation in this evidence set is not proof that no useful context-specific threshold could be discovered."
+  ],
+  "evidence_strength": {
+   "level": "strong_for_limiting_the_claim; none_for_a_universal_product_threshold",
+   "type": "primary_theoretical_work_plus_explicit_scope_assessment",
+   "app_directness": "hypothesis only"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original abstract and metadata on an author institution page",
+   "read_urls": [
+    "https://collaborate.princeton.edu/en/publications/the-eighty-five-percent-rule-for-optimal-learning/"
+   ],
+   "locator": "Abstract; Nature Communications 10, article 4646"
+  }
+ },
+ {
+  "id": "attention_activity_proxy",
+  "title": "Interpolated memory tests reduce mind wandering and improve learning of online lectures",
+  "authors": [
+   "Karl K. Szpunar",
+   "Novall Y. Khan",
+   "Daniel L. Schacter"
+  ],
+  "year": 2013,
+  "url": "https://www.pnas.org/doi/10.1073/pnas.1221764110",
+  "doi": "10.1073/pnas.1221764110",
+  "claim_kind": "empirical_research_and_measurement_boundary",
+  "finding": "Two experiments with 80 students learning a 21-minute statistics video associated interpolated memory tests with reduced reported mind wandering, more note taking, and improved learning of the lecture's final segment. Mind wandering was assessed through retrospective ratings and, in experiment 2, randomly placed thought probes. The original published paper spells the second author's surname Khan; an institutional listing uses Kahn.",
+  "product_policy": "Label window focus, mouse/keyboard events, elapsed time, video playback, and inactivity as activity proxies, not cognitive attention measurements. Reading, thinking, accessibility tools, interruptions, and background activity can break any assumed mapping. Optional self-report probes can supplement assessment but do not make continuous attention observable. Do not issue attention diagnoses or punitive scores.",
+  "scope": "Small controlled experiments on a short online lecture, self-reported mind wandering, notes, and immediate learning outcomes.",
+  "limitations": [
+   "The study did not validate desktop clickstream attention inference, a continuous attention score, or camera-based attention surveillance.",
+   "Thought probes and retrospective self-reports have measurement limits and are not cognitive ground truth.",
+   "Immediate lecture performance does not establish delayed transfer or general app efficacy."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_specific_intervention; no_validation_of_clickstream_attention",
+   "type": "controlled_primary_experiments",
+   "app_directness": "indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original paper from author institution repository, selected pages read in memory",
+   "read_urls": [
+    "https://dash.harvard.edu/server/api/core/bitstreams/f3608457-a87d-4171-8f75-b068482e8233/content",
+    "https://psychology.fas.harvard.edu/publications/interpolated-memory-tests-reduce-mind-wandering-and-improve-learning-online"
+   ],
+   "locator": "Original printed pages 6313-6315; experimental design, thought probes, and Results"
+  }
+ },
+ {
+  "id": "creativity_not_clickstream_score",
+  "title": "Social psychology of creativity: A consensual assessment technique",
+  "authors": [
+   "Teresa M. Amabile"
+  ],
+  "year": 1982,
+  "url": "https://psycnet.apa.org/record/1983-20083-001",
+  "doi": "10.1037/0022-3514.43.5.997",
+  "claim_kind": "measurement_research_and_product_boundary",
+  "finding": "The paper describes a consensual creativity assessment method and reports eight studies with elementary-school and undergraduate populations in artistic and verbal domains. The method concerns assessment of creative work, not counting clicks, typing speed, or session frequency.",
+  "product_policy": "Do not display a validated creativity trait/score inferred from clickstreams. No such metric is established for this product. If creativity is evaluated, use actual domain-relevant artifacts, independent qualified raters, stated criteria and rater-reliability checks; describe the score as task-specific. Automated suggestions are formative and require separate validation.",
+  "scope": "Creative products and consensual assessment in the studied artistic/verbal tasks.",
+  "limitations": [
+   "Only the original abstract and citation were accessible; detailed psychometrics are not claimed.",
+   "This source does not prove that every possible future telemetry model is invalid; it provides no validation of this app's proposed clickstream metric.",
+   "Scores on particular tasks are not universal creativity measurements."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_assessment_approach; none_for_clickstream_metric",
+   "type": "primary_measurement_studies",
+   "app_directness": "indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "publisher's original abstract and citation",
+   "read_urls": [
+    "https://psycnet.apa.org/record/1983-20083-001"
+   ],
+   "locator": "Journal of Personality and Social Psychology 43(5), 997-1013; abstract"
+  }
+ },
+ {
+  "id": "collaboration_not_clickstream_score",
+  "title": "When Smart Groups Fail",
+  "authors": [
+   "Brigid Barron"
+  ],
+  "year": 2003,
+  "url": "https://www.tandfonline.com/doi/abs/10.1207/S15327809JLS1203_1",
+  "doi": "10.1207/S15327809JLS1203_1",
+  "year_note": "Journal issue is 2003; publisher page reports later online publication on 17 November 2009.",
+  "claim_kind": "empirical_research_and_measurement_boundary",
+  "finding": "Quantitative and qualitative analysis of conversations in twelve sixth-grade triads linked problem-solving outcomes to proposal characteristics, partner responsiveness, and uptake of correct ideas. Generating correct ideas and members' prior achievement alone did not account for between-group outcomes; interaction quality mattered.",
+  "product_policy": "Do not label message counts, clicks, shared-screen duration, or solo activity as a valid collaboration skill metric. There is no validated clickstream collaboration score for this app. Use consented collaborative tasks, actual exchanges and joint artifacts, task-specific rubrics, qualified review, and independent individual transfer assessments. Avoid recording other participants without their consent.",
+  "scope": "Small observational study of sixth-grade group problem solving and subsequent independent work.",
+  "limitations": [
+   "Correlational, context-specific study; not a general causal estimate or an adult-app validation.",
+   "Publisher abstract was accessible, not the full article.",
+   "Does not establish that a clickstream model measures interaction quality or stable collaboration ability."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_contextual_interaction_insight; none_for_clickstream_metric",
+   "type": "primary_observational_study",
+   "app_directness": "indirect"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "publisher's original abstract and issue metadata",
+   "read_urls": [
+    "https://www.tandfonline.com/doi/abs/10.1207/S15327809JLS1203_1"
+   ],
+   "issue_metadata_search_url": "https://www.tandfonline.com/toc/hlns20/12/3",
+   "locator": "Journal of the Learning Sciences 12(3), 307-359; abstract"
+  }
+ },
+ {
+  "id": "ai_detection_uncertainty",
+  "title": "Testing of detection tools for AI-generated text",
+  "authors": [
+   "Debora Weber-Wulff",
+   "Alla Anohina-Naumeca",
+   "Sonja Bjelobaba",
+   "Tomáš Foltýnek",
+   "Jean Guerrero-Dib",
+   "Olumide Popoola",
+   "Petr Šigut",
+   "Lorna Waddington"
+  ],
+  "year": 2023,
+  "url": "https://arxiv.org/abs/2306.15666",
+  "doi": "10.1007/s40979-023-00146-z",
+  "claim_kind": "empirical_research_and_product_safety_boundary",
+  "finding": "The original study evaluated 12 publicly available AI-text detection tools and two commercial systems. It concluded that the evaluated tools were neither accurate nor reliable for distinguishing the tested human and generated documents; transformations such as obfuscation worsened performance. These findings concern the tested 2023 tools, not every future system.",
+  "product_policy": "Treat anti-AI indicators as uncertain review cues, never proof of AI use or cheating. Timing, paste events, fast responses, inactivity, or writing-style changes cannot by themselves establish authorship or AI use. Do not auto-accuse, punish, or deny learning access. Account for expertise, prepared work, network latency, assistive technology, and human variability. Prefer disclosed tool-use rules, optional process explanations, and independently assessed transfer. Provide human review and appeal where stakes exist.",
+  "scope": "Specific 2023 AI-generated text detectors and document transformations; timing-only indicators were not studied.",
+  "limitations": [
+   "The timing restriction is a conservative product evidentiary rule, not an empirical timing effect reported by this study.",
+   "No detector benchmark for this desktop app was performed.",
+   "False-positive and false-negative risks remain context- and base-rate-dependent; present-day detector accuracy cannot be inferred from historical results."
+  ],
+  "evidence_strength": {
+   "level": "moderate_for_tested_detector_limitations; none_for_timing_as_proof",
+   "type": "primary_detector_evaluation",
+   "app_directness": "indirect; supports nonpunitive uncertainty policy"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "authors' original preprint abstract, author list and journal reference",
+   "read_urls": [
+    "https://arxiv.org/abs/2306.15666"
+   ],
+   "journal_publication_url": "https://link.springer.com/article/10.1007/s40979-023-00146-z",
+   "locator": "Original abstract; International Journal for Educational Integrity 19, article 26"
+  }
+ },
+ {
+  "id": "openstax_elementary_algebra_current_rights",
+  "title": "Elementary Algebra 2e — current original attribution and licensing notice",
+  "authors": [
+   "Lynn Marecek",
+   "MaryAnne Anthony-Smith",
+   "Andrea Honeycutt Mathis",
+   "OpenStax / Rice University"
+  ],
+  "year": 2020,
+  "url": "https://openstax.org/books/elementary-algebra-2e/pages/index",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "The current original book page states Creative Commons Attribution-NonCommercial-ShareAlike 4.0, not an assumed historical CC BY default. The attribution notice requires noncommercial reuse, attribution, and same-license derivatives, and says commercial use requires permission. It additionally states that the book may not be trained on or ingested into LLMs or generative-AI offerings without prior written OpenStax permission. The book detail page lists original publication on 22 April 2020 and web update on 29 June 2026.",
+  "product_policy": "Link only to original OpenStax learning pages in the current product. Do not scrape, bundle, redistribute, copy exercises or images into the app, use them for model training, or ingest them into RAG/prompts/generative-AI offerings without documented rights clearance covering the actual use. Treat OpenStax's AI notice as a provider permission requirement, not as a universal interpretation of Creative Commons law. A paid product must not assume an NC resource is commercially reusable because it is publicly accessible.",
+  "scope": "The currently served Elementary Algebra 2e web version and its first-party rights notices, checked on 10 October 2026.",
+  "limitations": [
+   "Older licensed versions and third-party components may have different rights; verify the exact artifact and provenance rather than asserting all historical editions were relicensed retroactively.",
+   "Names, logos and trademarks are excluded from the book's Creative Commons grant; attribution is not permission to imply endorsement.",
+   "Legal interaction between a Creative Commons grant and supplemental notices requires rights/legal review; this record adopts a conservative product policy, not a court determination.",
+   "This check is time-sensitive, not a perpetual license guarantee."
+  ],
+  "evidence_strength": {
+   "level": "high_for_observed_current_notice",
+   "type": "original_resource_and_first_party_policy",
+   "app_directness": "direct content-use constraint; no learning efficacy evidence"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "live original HTML fetched and parsed in memory after WebFetch failed to expose the notice; detail page also read",
+   "read_urls": [
+    "https://openstax.org/books/elementary-algebra-2e/pages/index",
+    "https://openstax.org/details/books/elementary-algebra-2e"
+   ],
+   "locator": "Citation/Attribution panel and book/footer license links",
+   "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+   "web_version_last_updated": "2026-06-29"
+  }
+ },
+ {
+  "id": "openstax_college_algebra_current_rights",
+  "title": "College Algebra 2e — current original preface and licensing notice",
+  "authors": [
+   "OpenStax / Rice University"
+  ],
+  "year": null,
+  "url": "https://openstax.org/books/college-algebra-2e/pages/preface",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "The current original preface explicitly identifies College Algebra 2e as CC BY-NC-SA 4.0. It permits noncommercial distribution/remixing with attribution and same-license derivatives. Art captions may identify other rights holders/licenses; the notice directs commercial entities to seek reuse permission. Its attribution panel also includes the prior-written-permission notice for LLM training or ingestion into generative-AI offerings.",
+  "product_policy": "Use original-page links only. Do not ingest, scrape, republish or commercially adapt current College Algebra content, exercises or illustrations unless rights are documented for that exact use. Check every third-party component independently. Do not use logos or imply OpenStax endorsement.",
+  "scope": "Current College Algebra 2e preface and attribution/footer notices as served on 10 October 2026.",
+  "limitations": [
+   "The publication year and full author list were not independently verified from this page, so year is null and the policy publisher is identified rather than inventing metadata.",
+   "This is a current-version observation, not a claim about every historical edition or the enforceability of every supplemental term.",
+   "Reverify licenses before any reuse or release."
+  ],
+  "evidence_strength": {
+   "level": "high_for_observed_current_notice",
+   "type": "original_live_resource_policy",
+   "app_directness": "direct licensing boundary"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original live HTML parsed in memory; generic WebFetch did not expose the content",
+   "read_urls": [
+    "https://openstax.org/books/college-algebra-2e/pages/preface"
+   ],
+   "locator": "About OpenStax Resources / Customization, Art Attribution, Citation/Attribution panel, footer",
+   "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+  }
+ },
+ {
+  "id": "openstax_license_transition",
+  "title": "An update on OpenStax licensing",
+  "authors": [
+   "OpenStax"
+  ],
+  "year": null,
+  "url": "https://openstax.org/blog/openstax-licensing",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "OpenStax's official update says its library has transitioned from a mix of CC BY and CC BY-NC-SA to CC BY-NC-SA for newly released and updated versions, with limited exceptions. It explicitly says no action is needed by those who previously created derivatives of CC BY content.",
+  "product_policy": "Maintain version-specific provenance before any permitted reuse: original source, edition/version, retrieval date, license and attribution, third-party exceptions, and written permissions. Do not treat an old CC BY label as permission for newer content, or claim that older granted rights were automatically revoked. Current product behavior remains link only pending clearance.",
+  "scope": "OpenStax's current licensing-transition explanation; resource-specific notices still control the operational rights check.",
+  "limitations": [
+   "The article's exact publication date was not exposed, so year is null.",
+   "The announcement is first-party policy guidance, not legal adjudication or a complete history of every artifact's license.",
+   "Any assertion of older CC BY rights requires evidence for the precise older material, not a general recollection."
+  ],
+  "evidence_strength": {
+   "level": "high_for_provider_statement",
+   "type": "first_party_licensing_announcement",
+   "app_directness": "direct provenance requirement"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "official announcement text; OpenStax license page resolved to this announcement",
+   "read_urls": [
+    "https://openstax.org/license",
+    "https://openstax.org/blog/openstax-licensing"
+   ],
+   "locator": "What's changing; What is NOT changing"
+  }
+ },
+ {
+  "id": "khan_academy_link_only",
+  "title": "Khan Academy official content-use and prohibited-conduct guidance",
+  "authors": [
+   "Khan Academy"
+  ],
+  "year": null,
+  "url": "https://support.khanacademy.org/hc/en-us/articles/202262954-Can-I-use-Khan-Academy-s-videos-name-materials-links-in-my-project",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "Khan Academy's official reuse page welcomes linking subject to its conditions, but says incorporation into paid offerings is not noncommercial and the main platform is not available for licensing. It links CC BY-NC-SA 4.0 while its attribution paragraph also references 3.0 US, so a blanket single-version license should not be inferred. Official prohibited-conduct guidance explicitly prohibits scraping/bots to copy or extract site data and using content/data to train, test or develop AI/ML tools; it also prohibits unpermitted commercial reproduction and replication using its data.",
+  "product_policy": "Provide clearly attributed external links to the original Khan Academy website only, without charging specifically for access to its otherwise-free resources. No scraping, lesson/exercise/video/transcript copying, redistribution, offline mirroring, platform cloning, embedding as a paid content offering, or AI/RAG ingestion absent explicit written permission and verified applicable rights. Identify links as external and unofficial; no endorsement or logo rights are implied. Build original curriculum rather than extracting Khan Academy's.",
+  "scope": "Official first-party content-use FAQ and prohibited-conduct guidance linked to the general Website Terms of Service, checked on 10 October 2026.",
+  "limitations": [
+   "The main Terms of Service endpoints repeatedly returned only an application shell or failed document display. Exact current full-TOS wording, section numbering and effective date were not fully verified; this record relies on accessible official guidance and does not claim complete TOS access.",
+   "Clever-specific and Kids terms were not substituted for the general site terms.",
+   "The reuse FAQ's 4.0/3.0 links and guidance must be resolved for any future licensed reuse; public availability is not blanket authorization.",
+   "Relative 'updated' labels were exposed, not a reliable exact policy publication date, so year is null."
+  ],
+  "evidence_strength": {
+   "level": "high_for_accessible_official_guidance; partial_for_full_TOS",
+   "type": "first_party_current_resource_policies",
+   "app_directness": "direct rights and access boundary"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "two official Help Center pages read in full; general TOS document inaccessible",
+   "read_urls": [
+    "https://support.khanacademy.org/hc/en-us/articles/202262954-Can-I-use-Khan-Academy-s-videos-name-materials-links-in-my-project",
+    "https://support.khanacademy.org/hc/en-us/articles/42929097425037-What-s-allowed-and-not-allowed-under-Khan-Academy-s-Terms-of-Service"
+   ],
+   "general_tos_url": "https://www.khanacademy.org/about/tos",
+   "locator": "Reuse FAQ opening, Important considerations and Non-commercial; prohibited-conduct guidance sections 1 and 4"
+  }
+ },
+ {
+  "id": "consent_no_silent_tracking",
+  "title": "Apple App Review Guidelines — user activity recording and data collection",
+  "authors": [
+   "Apple"
+  ],
+  "year": null,
+  "url": "https://developer.apple.com/app-store/review/guidelines/",
+  "claim_kind": "platform_policy_and_product_safety_requirement",
+  "finding": "Guideline 2.5.14 requires explicit consent and a clear visual and/or audible indication when recording or logging user activity, including camera, microphone, screen recordings or other inputs. Section 5.1.1 addresses data-use disclosure, consent/withdrawal, minimization, retention/deletion, and respect for permission choices; it says users must not be manipulated or forced into unnecessary data access and alternatives should be provided where possible.",
+  "product_policy": "No silent monitoring, global keylogging, covert screenshots, forced uploads, or mandatory camera/microphone collection. Keep optional activity analytics and research enrollment opt-in, separately consented and revocable. Explain essential answer/history storage and offer a nonadaptive or local mode where feasible. Use visible indicators, minimum in-app events, short documented retention, deletion/export controls, per-user isolation and least privilege. Avoid capturing other apps or other people's information. Never force continued practice or consent to unnecessary data to unlock core learning.",
+  "scope": "Current Apple distribution policy; this product's broader safety commitments are adopted independently of whether a particular distribution channel imposes the same rules.",
+  "limitations": [
+   "Platform review rules are not universal law or proof that this app complies.",
+   "Consent, child-user requirements, school contexts, provider retention, security and jurisdictional obligations need separate implementation/review.",
+   "No code or runtime behavior was audited in this research-only task; these are requirements, not verified implementation claims."
+  ],
+  "evidence_strength": {
+   "level": "high_for_observed_platform_requirements",
+   "type": "first_party_platform_policy",
+   "app_directness": "direct safety requirements; implementation unverified"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "original live guideline HTML extracted in memory after generic WebFetch failed",
+   "read_urls": [
+    "https://developer.apple.com/app-store/review/guidelines/"
+   ],
+   "locator": "2.5.14 and 5.1.1(i)-(iv)"
+  }
+ },
+ {
+  "id": "voice_identity_cloning_rights",
+  "title": "ElevenLabs official voice-cloning restrictions and Professional Voice Clone ownership verification",
+  "authors": [
+   "ElevenLabs"
+  ],
+  "year": null,
+  "url": "https://help.elevenlabs.io/hc/en-us/articles/36842751624209-Can-I-create-a-Professional-Voice-Clone-of-someone-else-s-voice",
+  "claim_kind": "provider_policy_and_product_safety_requirement",
+  "finding": "The provider states that a Professional Voice Clone must be of the account holder's own verified voice: another person's voice cannot be cloned in that account even with consent. A voice owner can create and verify their clone and share it privately through the provider's permitted process. Its restrictions guidance also emphasizes intellectual-property rights and prohibited harmful use.",
+  "product_policy": "Disable voice/likeness/teacher-persona cloning by default. Require specific informed permission from the represented person, documented rights in input recordings/content, permitted provider workflows, allowed purposes, retention and withdrawal/deletion arrangements, and clear synthetic labeling. Consent alone is not sufficient when provider rules forbid the workflow. Do not clone public lecture recordings or imitate identifiable people from publicly accessible material. Prefer licensed stock voices or nonidentifying synthetic personas. Never imply a real person's endorsement or impersonate an institution.",
+  "scope": "ElevenLabs Professional Voice Clone policy and rights guidance, used as an example of provider-specific restrictions; broader product identity safeguards are normative commitments.",
+  "limitations": [
+   "Not a universal statement of law for all voice/likeness cloning or all providers.",
+   "Voice consent does not grant copyright in recordings, trademark rights, or unlimited downstream use.",
+   "Do not promise deletion or withdrawal behavior that an external provider cannot support; verify before enabling the feature.",
+   "This task did not implement or inspect cloning functionality."
+  ],
+  "evidence_strength": {
+   "level": "high_for_specific_provider_rule",
+   "type": "first_party_provider_policy",
+   "app_directness": "direct design constraint if used; not learning evidence"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "official provider policy articles read",
+   "read_urls": [
+    "https://help.elevenlabs.io/hc/en-us/articles/36842751624209-Can-I-create-a-Professional-Voice-Clone-of-someone-else-s-voice",
+    "https://help.elevenlabs.io/hc/en-us/articles/13313778519057-Are-there-any-restrictions-on-what-voices-I-can-upload-for-voice-cloning"
+   ],
+   "locator": "Own-voice-only answer and sharing procedure; rights restrictions"
+  }
+ },
+ {
+  "id": "randomized_within_user_learning_benchmark",
+  "title": "Proposed preregistered randomized within-user delayed-retention and transfer benchmark",
+  "authors": [],
+  "year": 2026,
+  "url": "https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2006.01693.x/",
+  "claim_kind": "proposed_product_experiment_not_a_published_finding",
+  "finding": "No learning-outcome experiment was run in this research-only task. The cited retrieval and spacing evidence motivates measuring delayed outcomes but does not itself validate this protocol or establish product efficacy. The following is a proposed acceptance benchmark, not a reported result.",
+  "product_policy": "Preregister a randomized within-user comparison on matched, nonoverlapping skill/item-family blocks. Each consenting learner receives both adaptive and fixed evidence-informed practice with a matched time budget. Do not repeatedly switch the same learned skill between treatments and assume learning washes out. Independently assess delayed unassisted retention and novel transfer. Require app-specific human outcome evidence before efficacy marketing.",
+  "scope": "A consented target-population algebra pilot followed by a sufficiently powered confirmatory study; generalization limited to sampled learners, curriculum and tested app version.",
+  "limitations": [
+   "Knowledge transfer between related blocks, time/order effects, external study, motivation, nonadherence and missing delayed tests can bias a within-user estimate.",
+   "Learning is not reversible, so conventional washout on the same items is invalid; nonoverlapping matched blocks and counterbalanced order reduce but do not eliminate carryover.",
+   "An underpowered or single-user trial is exploratory and cannot justify population efficacy claims.",
+   "Any bundled treatment difference estimates the bundle, not the isolated effect of each algorithm or threshold."
+  ],
+  "evidence_strength": {
+   "level": "none_yet_for_product_efficacy",
+   "type": "proposed_preregistered_protocol",
+   "app_directness": "intended direct test; not conducted"
+  },
+  "benchmark_plan": {
+   "status": "proposed_not_run",
+   "population_and_consent": "Recruit the intended learner population with voluntary research consent, accessibility accommodations, stated allowed outside aids, and a decline/withdrawal path without losing core learning access. Obtain any required child/guardian and institutional approvals before enrollment. Report recruitment, eligibility, baseline proficiency and app/content versions.",
+   "unit_and_randomization": "Within each learner, use several expert-matched pairs of nonoverlapping knowledge-component/item-family blocks balanced on pretest proficiency and estimated difficulty. Randomly assign one member of each pair to adaptive practice and the other to a fixed evidence-informed schedule; counterbalance order and content-to-condition assignments across learners. Treat tightly linked prerequisites as a cluster to reduce cross-condition leakage. Store the allocation seed and probabilities.",
+   "arms": {
+    "adaptive": "A frozen, versioned scheduling/difficulty policy using only prior in-condition practice history, with bounded challenge settings and user-requested hints/stopping.",
+    "control": "A prespecified fixed spacing/difficulty policy with the same interface, instruction quality, feedback/hint availability, curriculum coverage opportunity and assigned practice-time budget. Use an evidence-informed comparator, not an intentionally weak or unsafe condition."
+   },
+   "threshold_experiment": "Keep any 70% correctness setting or fixed struggle/challenge percentage explicitly hypothetical. To isolate a threshold effect, compare prespecified safe target bands while holding other policy components constant; use separate randomized matched blocks or a planned factorial design with sufficient power. Define whether the target means predicted or observed first-attempt correctness and measure calibration. No band is declared universally optimal beforehand.",
+   "outcome_schedule": "Before randomization obtain a brief independent pretest. Assess unassisted retention and novel transfer after a prespecified delay such as 7 days, with a second assessment such as 28 days. These are protocol choices, not universally optimal delays. Define timing anchors relative to the intervention end; keep the assigned practice window and test timing comparable, log actual exposure and last practice, and state whether additional post-window practice is allowed.",
+   "primary_outcome": "Blinded score on independently authored or licensed, unseen transfer tasks at the primary delayed assessment. Tasks must require applying the trained concepts in new surface forms/contexts rather than repeating training answers. Freeze the rubric and content before the trial; ensure graders do not see allocation or telemetry. Estimate the adaptive-minus-control within-user difference with uncertainty.",
+   "secondary_outcomes": [
+    "Delayed unassisted retention on independent parallel items",
+    "Longer-delay transfer and retention",
+    "Immediate assessment and task-specific misconceptions",
+    "Assigned and actual practice time, hint use and completion",
+    "Optional frustration/workload reports and adverse experiences",
+    "Engagement as a distinct secondary behavioral measure, not mastery"
+   ],
+   "test_integrity_and_carryover": "Hold assessment items/rubrics out of scheduler training, prompts, feedback and model updates. Keep AI and hints unavailable in the assessment UI under disclosed, consented conditions without covert surveillance. Use explanations and unfamiliar transfer rather than claiming timing proves independence. Use parallel forms at successive tests because an earlier test is itself retrieval practice; apply that exposure consistently to both conditions and acknowledge it. Log outside study voluntarily and prespecify sensitivity analyses.",
+   "analysis": "Preregister the primary estimand, smallest educationally meaningful effect, outcome hierarchy, exclusion rules, missing-data handling and stopping rule. Use a paired/mixed-effects or randomization-based analysis respecting learner and randomized skill-block clustering, baseline scores and counterbalanced order. Report raw paired differences, effect sizes and 95% confidence intervals; adjust multiplicity for confirmatory secondary claims. Analyze by assigned condition first, disclose adherence, and perform prespecified missingness/carryover sensitivity analyses. Never count repeated answers as independent participants.",
+   "sample_size": "Use pilot variance, within-user correlation, cluster structure, intended meaningful effect and delayed-test attrition to justify confirmatory sample size. Do not invent a fixed participant count or assume literature effect sizes equal the app's effect.",
+   "acceptance": "Before data collection define meaningful benefit and acceptable harm bounds with domain experts. An efficacy claim requires a prespecified delayed-transfer result supporting the meaningful benefit threshold with its confidence interval, no unacceptable adverse-experience tradeoff, and robustness checks; preferably replicate. Otherwise report null, negative or inconclusive results honestly, with no efficacy claim. A nonsignificant result is not proof of equivalence.",
+   "software_vs_learning": "Unit/integration/security tests, model prediction benchmarks, successful packaging, visual polish and end-to-end workflow success are engineering acceptance only. They cannot establish human learning gains, cognitive attention, creativity, collaboration or AI-use detection accuracy. Record learning-outcome study status separately."
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "protocol authored for this evidence file; supporting primary findings reviewed, not a registered/completed experiment",
+   "supporting_urls": [
+    "https://www.psychologicalscience.org/journals/psychological-science/j.1467-9280.2006.01693.x/",
+    "https://www.yorku.ca/ncepeda/publications/CPVWR2006.html",
+    "https://aclanthology.org/P16-1174/"
+   ],
+   "locator": "Supporting evidence only; no external protocol registration exists in this task"
+  }
+ },
+ {
+  "id": "honest_acceptance_not_perfection_guarantee",
+  "title": "Research and product acceptance must be bounded, transparent and non-guaranteed",
+  "authors": [],
+  "year": 2026,
+  "url": null,
+  "claim_kind": "user_requested_acceptance_rule_not_empirical_research",
+  "finding": "The instruction to continue until 'perfect' cannot establish that perfection, universal success or zero residual risk is achievable. This file records evidence and a proposed human-outcome benchmark; it does not certify the existing application's implementation, safety, learning efficacy or complete legal compliance.",
+  "product_policy": "Use explicit, falsifiable acceptance criteria and report each as verified, failed, blocked or not tested. State source-access gaps, uncertainty and residual risks. Do not guarantee impossible perfection, zero bugs, universal mastery or efficacy because software tests pass. Do not change implementation, collect learner data, enroll participants, or initiate scraping under this research-only request. Only the requested evidence.json is an authored workspace deliverable.",
+  "scope": "This research-only task and truthful future engineering/research acceptance reporting.",
+  "limitations": [
+   "This is a normative acceptance requirement supplied by the user, not a published scientific finding.",
+   "No code audit, product test run, live learner experiment, legal opinion or runtime telemetry verification was performed here.",
+   "Some original abstracts were available without full text, and the general Khan Academy TOS document could not be fully read; the relevant records disclose those limits."
+  ],
+  "evidence_strength": {
+   "level": "not_applicable_policy_requirement",
+   "type": "user_instruction_and_honesty_boundary",
+   "app_directness": "direct acceptance constraint; efficacy remains untested"
+  },
+  "source_verification": {
+   "checked_on": "2026-10-10",
+   "access": "user instruction in this session",
+   "read_urls": [],
+   "locator": "Research-only request and explicit non-perfection requirement"
+  }
+ },
+ {
+  "id": "openstax_algebra_trig_1e_cc_by",
+  "title": "Algebra and Trigonometry (1e) — CC BY 4.0 as reported by OpenStax's own book API",
+  "authors": [
+   "Jay Abramson",
+   "OpenStax / Rice University"
+  ],
+  "year": 2015,
+  "url": "https://openstax.org/details/books/algebra-and-trigonometry",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "OpenStax's CMS book API (apps/cms/api/v2/pages/38/) reports the first edition of Algebra and Trigonometry with license_name 'Creative Commons Attribution License', license_version 4.0, license_url https://creativecommons.org/licenses/by/4.0/ — BY only, no NC, no ND. This contrasts with every current 2e edition checked the same day (Algebra 1, College Algebra 2e, Algebra and Trigonometry 2e, Elementary Algebra 2e, Intermediate Algebra 2e, Prealgebra 2e), all of which report CC BY-NC-SA 4.0. The 1e is book_state 'retired' from the storefront but its webview pages are still served with server-rendered prose and citation_* metadata. The licensing-transition evidence (openstax_license_transition) confirms the move is from a CC BY mix to NC for new versions, not a revocation of the CC BY grant on the 1e.",
+  "product_policy": "Text storage is cleared for THIS edition only. The fetcher (app/ingest/sources/openstax.py) re-classifies the licence from the publisher's API at every fetch and refuses to store text unless the live classification still matches this audited CC BY entry; 2e editions and unaudited slugs stay link-only. Stored sections are quoted deterministically into rendered lessons and never sent to a model, per OpenStax's own prohibition on ingesting its content into LLMs or generative-AI offerings: the quote lives in a callout block the prose-rewriting pass never reads, and agent-loop tool results are redacted by app.harness.generate.redact_textbook_quotes (verbatim text replaced with a withholding notice, citation kept).",
+  "scope": "OpenStax CMS API record for book id 38 (book_uuid 13ac107a-f15f-49d2-97e8-60ab2e3b519c) and the publisher-served webview pages under /books/algebra-and-trigonometry/pages/, as served on 11 October 2026.",
+  "limitations": [
+   "The 1e is retired from OpenStax's storefront; if the webview pages are withdrawn, fetches fail closed to status 'unavailable' rather than serving a cached text as current.",
+   "Third-party components inside sections (photos, embedded resources) carry their own rights; the CC BY grant is OpenStax's for its own content. Quotes are prose only."
+  ]
+ }
+]

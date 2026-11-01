@@ -1,0 +1,30 @@
+# What the application needs at runtime in every configuration it ships in.
+#
+# ``scripts/package.py`` compares this file against the build environment before it
+# freezes anything, and stops the build when a declared distribution is missing. The
+# reason is that PyInstaller collects what is *installed*, not what is declared: a
+# freeze run from an environment without a dependency produces a bundle whose feature
+# fails on a tester's machine with no build-time signal at all. That is exactly how a
+# shipped build came to carry a document-upload path whose multipart parser was never
+# frozen, and a text-to-speech tool that could only ever refuse.
+#
+# Requirements that only one deployment configuration needs, or that back a capability
+# the desktop bundle deliberately does not carry, live in ``requirements-optional.txt``.
+# Tests need ``requirements-dev.txt``.
+fastapi==0.143.0
+uvicorn[standard]==0.54.0
+SQLAlchemy==2.1.4
+argon2-cffi==25.1.0
+httpx==0.28.1
+pydantic==2.14.0
+numpy==2.5.3
+Pillow==12.3.0
+python-pptx==1.0.2
+# Live web search. The package was renamed from duckduckgo-search to ddgs; the
+# 8.1.1 duckduckgo-search line is a rename stub whose backend returns nothing,
+# so pinning it made web_search succeed and report zero results. app/harness/
+# ddg_provider.py still accepts the legacy module name for environments that
+# have not migrated.
+ddgs==9.16.0
+python-multipart==0.0.22
+pypdf>=6,<7

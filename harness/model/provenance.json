@@ -1,0 +1,91 @@
+{
+  "actual_training": true,
+  "artifact_sha256": "194bfbc36193fc0fea3000a4aa182e5a95161e0af84da4b55f6a44aaa877623a",
+  "attribution": "EdNet: A Large-Scale Hierarchical Dataset in Education; Choi et al.; Santa/TOEIC interactions",
+  "consent_verification_boundary": null,
+  "created_at_utc": "2026-10-10T10:33:09.329445+00:00",
+  "data_path": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/reference/prior-models/ednet_real/kt1_shard0.parquet",
+  "data_sha256": "7908e8d37925de5321877a7a62bfe082aa7cda38b415923e2b28e350fe61fdd9",
+  "dependencies": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "scikit_learn": "1.9.1",
+    "scipy": "1.18.1"
+  },
+  "disjoint_students": true,
+  "domain": "ednet_english_toeic",
+  "evaluation_protocol": "online one-step predictions; earlier held-out student outcomes may update history; no held-out fit",
+  "feature_policy": "strictly_prior_timestamps; tied timestamps featurized as a group before updates; earliest N retained",
+  "item_count": 5518,
+  "kc_count": 180,
+  "learned_difficulty": "regularized KC and item intercepts; no manual difficulty feature",
+  "license": "CC BY-NC 4.0",
+  "limitations": [
+    "EdNet English/TOEIC is not evidence for mathematics",
+    "No commercial rights or readiness certification",
+    "NC source and derivative research artifact must remain separate",
+    "First-encounter student subsample is not population representative",
+    "No external or prospective validation",
+    "Observed histories and item effects are predictive associations, not causal treatment effects",
+    "Cold-start unknown KC and item effects are zero, not learned domain-specific difficulty"
+  ],
+  "max_rows_per_student": 80,
+  "max_users": 1500,
+  "min_rows_per_student": 20,
+  "questions_path": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/reference/prior-models/ednet_real/questions.csv",
+  "questions_sha256": "137d2936b746c98e1586ef134bf9f9bc4b5a878c96b88e630b2241fe9f15d3cd",
+  "raw_data_included": false,
+  "research_only": true,
+  "schema_version": 1,
+  "seed": 42,
+  "selected_rows": 33392,
+  "selected_rows_sha256": "aef334e9d298096f79c1b2aa57dd671bd3b16dca58d299a6aaccbe698723e563",
+  "source_info": {
+    "selected_users_policy": "first_encountered_then_seeded_disjoint_split",
+    "source_rows_scanned": 8662979,
+    "source_students_selected_before_min_length_filter": 1500,
+    "timestamp_input_unit": "milliseconds",
+    "unmatched_answer_rows_dropped": 13
+  },
+  "split": {
+    "test": {
+      "rows": 3016,
+      "student_ids_sha256": "da4c0ee294cd5ea34dd85e4dc310d55a7baae0549e4fefbf83db6540e89250e8",
+      "students": 62
+    },
+    "train": {
+      "rows": 27048,
+      "student_ids_sha256": "197203a6b7f600d24aa84797636cb9a3141fae67c226059af0c5bc3d5224c88f",
+      "students": 501
+    },
+    "validation": {
+      "rows": 3328,
+      "student_ids_sha256": "05bc8f4a35d31d0accbaeb86828ac4bcbfd57157c45be710d6503bdfe490ca1e",
+      "students": 62
+    }
+  },
+  "synthetic_training_rows": 0,
+  "training_command": [
+    "/Users/tengyi/.workbuddy-ai/binaries/python/envs/default/bin/python",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/model/train.py",
+    "--data",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/reference/prior-models/ednet_real/kt1_shard0.parquet",
+    "--out",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/model",
+    "--max-users",
+    "1500",
+    "--max-per-user",
+    "80",
+    "--seed",
+    "42",
+    "--questions",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/reference/prior-models/ednet_real/questions.csv"
+  ],
+  "training_source_sha256": {
+    "features.py": "d40de8ba528293e30d7e8b30eeb7bb9cce2c3d9df378d9ce3b3b6e553349ceb6",
+    "train.py": "e087bdaa33073dfabf79221013351da02f31d3f44d39bd90bd645e3d0338d0a3",
+    "trained_pfa.py": "0887ece0af5a9472d61d4186dc95384f634d374a2be7e6c724a099750cb27739"
+  },
+  "vocabulary_policy": "KC and item biases fit training students only; shared coefficients and zero unknown biases"
+}

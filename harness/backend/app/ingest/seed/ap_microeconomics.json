@@ -1,0 +1,758 @@
+{
+ "course": "AP Microeconomics - Markets, Firms and Market Failure",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "The firm-and-market view: scarcity and marginal analysis, supply and demand with elasticity, production and cost, market structure from perfect competition to oligopoly, factor markets, and market failure.",
+ "expected_weeks": 30,
+ "strands": [
+  {
+   "strand": "Basic Economic Concepts",
+   "units": [
+    {
+     "unit": "Scarcity, choice and marginal analysis",
+     "topics": [
+      {
+       "topic": "Foundations",
+       "concepts": [
+        {
+         "title": "Scarcity, choice and opportunity cost",
+         "summary": "Every choice costs the next-best alternative forgone, which is the source of all trade-offs.",
+         "keywords": [
+          "scarcity",
+          "opportunity cost"
+         ]
+        },
+        {
+         "title": "Production possibilities curve",
+         "summary": "The frontier shows the maximum output combinations and the opportunity cost of moving along it.",
+         "keywords": [
+          "production possibilities",
+          "frontier"
+         ],
+         "prerequisites": [
+          "Scarcity, choice and opportunity cost"
+         ]
+        },
+        {
+         "title": "Comparative advantage and gains from trade",
+         "summary": "Specialising where opportunity cost is lowest raises total output, so trade can benefit both sides.",
+         "keywords": [
+          "comparative advantage",
+          "trade"
+         ],
+         "prerequisites": [
+          "Production possibilities curve"
+         ]
+        },
+        {
+         "title": "Marginal analysis and decision rules",
+         "summary": "A rational decision compares the marginal benefit of one more unit with its marginal cost.",
+         "keywords": [
+          "marginal benefit",
+          "marginal cost"
+         ],
+         "prerequisites": [
+          "Scarcity, choice and opportunity cost"
+         ]
+        },
+        {
+         "title": "Utility and marginal utility",
+         "summary": "Total utility rises with consumption while marginal utility generally falls.",
+         "keywords": [
+          "utility",
+          "marginal utility"
+         ],
+         "prerequisites": [
+          "Marginal analysis and decision rules"
+         ]
+        },
+        {
+         "title": "Marginal utility per dollar and consumer choice",
+         "summary": "A consumer maximises utility by equalising marginal utility per dollar across all goods.",
+         "keywords": [
+          "marginal utility per dollar",
+          "consumer equilibrium"
+         ],
+         "prerequisites": [
+          "Utility and marginal utility"
+         ]
+        },
+        {
+         "title": "Budget constraints and trade-offs",
+         "summary": "A budget line shows the affordable combinations, and its slope is the relative price.",
+         "keywords": [
+          "budget constraint",
+          "relative price"
+         ],
+         "prerequisites": [
+          "Marginal utility per dollar and consumer choice"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Supply and Demand",
+   "units": [
+    {
+     "unit": "Elasticity",
+     "prerequisites": [
+      "Scarcity, choice and marginal analysis"
+     ],
+     "topics": [
+      {
+       "topic": "Responsiveness of quantity",
+       "concepts": [
+        {
+         "title": "Price elasticity of demand",
+         "summary": "Elasticity measures the percentage change in quantity demanded for a one per cent change in price.",
+         "keywords": [
+          "elasticity of demand",
+          "responsiveness"
+         ]
+        },
+        {
+         "title": "Determinants of price elasticity of demand",
+         "summary": "Substitutes, share of budget, necessity and time horizon decide how responsive demand is.",
+         "keywords": [
+          "substitutes",
+          "elasticity determinants"
+         ],
+         "prerequisites": [
+          "Price elasticity of demand"
+         ]
+        },
+        {
+         "title": "Price elasticity of supply",
+         "summary": "Supply elasticity depends on how quickly producers can change output, so it is larger in the long run.",
+         "keywords": [
+          "elasticity of supply"
+         ],
+         "prerequisites": [
+          "Price elasticity of demand"
+         ]
+        },
+        {
+         "title": "Income and cross-price elasticity",
+         "summary": "Income elasticity classifies normal and inferior goods, and cross-price elasticity identifies substitutes and complements.",
+         "keywords": [
+          "income elasticity",
+          "cross-price elasticity"
+         ],
+         "prerequisites": [
+          "Price elasticity of demand"
+         ]
+        },
+        {
+         "title": "Elasticity and total revenue",
+         "summary": "Total revenue rises with price only when demand is inelastic, which is the practical use of the measure.",
+         "keywords": [
+          "total revenue",
+          "elasticity"
+         ],
+         "prerequisites": [
+          "Price elasticity of demand"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Welfare, taxes and intervention",
+     "prerequisites": [
+      "Elasticity"
+     ],
+     "topics": [
+      {
+       "topic": "Surplus and policy",
+       "concepts": [
+        {
+         "title": "Consumer and producer surplus",
+         "summary": "Surplus measures the gain from trade for buyers and sellers separately.",
+         "keywords": [
+          "consumer surplus",
+          "producer surplus"
+         ]
+        },
+        {
+         "title": "Market efficiency and total surplus",
+         "summary": "Total surplus is maximised at competitive equilibrium, which is the efficiency benchmark for every later comparison.",
+         "keywords": [
+          "efficiency",
+          "total surplus"
+         ],
+         "prerequisites": [
+          "Consumer and producer surplus"
+         ]
+        },
+        {
+         "title": "Taxes and tax incidence",
+         "summary": "The statutory payer is not the economic bearer: incidence follows the relative elasticities.",
+         "keywords": [
+          "tax incidence",
+          "tax burden"
+         ],
+         "prerequisites": [
+          "Market efficiency and total surplus"
+         ]
+        },
+        {
+         "title": "Deadweight loss of taxation",
+         "summary": "A tax drives a wedge between price paid and price received, so some mutually beneficial trades do not happen.",
+         "keywords": [
+          "deadweight loss",
+          "tax wedge"
+         ],
+         "prerequisites": [
+          "Taxes and tax incidence"
+         ]
+        },
+        {
+         "title": "Subsidies",
+         "summary": "A subsidy lowers the price buyers pay and raises the price sellers receive, at a cost to the government.",
+         "keywords": [
+          "subsidy",
+          "government cost"
+         ],
+         "prerequisites": [
+          "Deadweight loss of taxation"
+         ]
+        },
+        {
+         "title": "Price ceilings and floors",
+         "summary": "A binding ceiling creates a shortage and a binding floor a surplus, with deadweight loss in both cases.",
+         "keywords": [
+          "price ceiling",
+          "price floor"
+         ],
+         "prerequisites": [
+          "Market efficiency and total surplus"
+         ]
+        },
+        {
+         "title": "International trade and tariffs",
+         "summary": "Opening trade raises total surplus while a tariff lowers it, though it redistributes toward domestic producers.",
+         "keywords": [
+          "tariff",
+          "trade",
+          "comparative advantage"
+         ],
+         "prerequisites": [
+          "Deadweight loss of taxation"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Production, Cost, and the Perfect Competition Model",
+   "units": [
+    {
+     "unit": "Production and cost",
+     "prerequisites": [
+      "Welfare, taxes and intervention"
+     ],
+     "topics": [
+      {
+       "topic": "Cost structure",
+       "concepts": [
+        {
+         "title": "Explicit and implicit costs",
+         "summary": "Economic cost includes the opportunity cost of resources the owner already supplies.",
+         "keywords": [
+          "explicit cost",
+          "implicit cost"
+         ]
+        },
+        {
+         "title": "Accounting profit versus economic profit",
+         "summary": "Economic profit subtracts implicit cost as well, so a firm can be accounting-profitable and economically breaking even.",
+         "keywords": [
+          "accounting profit",
+          "economic profit",
+          "normal profit"
+         ],
+         "prerequisites": [
+          "Explicit and implicit costs"
+         ]
+        },
+        {
+         "title": "Short-run production and diminishing returns",
+         "summary": "With one input fixed, the marginal product of the variable input eventually falls.",
+         "keywords": [
+          "diminishing returns",
+          "marginal product"
+         ],
+         "prerequisites": [
+          "Explicit and implicit costs"
+         ]
+        },
+        {
+         "title": "Short-run cost curves",
+         "summary": "Marginal cost crosses average variable and average total cost at their minimum points.",
+         "keywords": [
+          "marginal cost",
+          "average total cost",
+          "average variable cost"
+         ],
+         "prerequisites": [
+          "Short-run production and diminishing returns"
+         ]
+        },
+        {
+         "title": "Long-run average total cost and economies of scale",
+         "summary": "All inputs vary in the long run, so the planning curve shows economies, constant returns and diseconomies of scale.",
+         "keywords": [
+          "long-run average cost",
+          "economies of scale"
+         ],
+         "prerequisites": [
+          "Short-run cost curves"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Perfect competition",
+     "prerequisites": [
+      "Production and cost"
+     ],
+     "topics": [
+      {
+       "topic": "A price-taking market",
+       "concepts": [
+        {
+         "title": "Perfect competition: characteristics",
+         "summary": "Many small firms, a homogeneous product and free entry make each firm a price taker.",
+         "keywords": [
+          "perfect competition",
+          "price taker"
+         ]
+        },
+        {
+         "title": "Profit maximisation where marginal revenue equals marginal cost",
+         "summary": "Every firm maximises profit by producing where marginal revenue equals marginal cost.",
+         "keywords": [
+          "profit maximisation",
+          "marginal revenue"
+         ],
+         "prerequisites": [
+          "Perfect competition: characteristics"
+         ]
+        },
+        {
+         "title": "Short-run equilibrium in perfect competition",
+         "summary": "Price equals marginal revenue for a price taker, so the firm produces where price equals marginal cost.",
+         "keywords": [
+          "short-run equilibrium",
+          "price equals marginal cost"
+         ],
+         "prerequisites": [
+          "Profit maximisation where marginal revenue equals marginal cost"
+         ]
+        },
+        {
+         "title": "Long-run equilibrium and normal profit",
+         "summary": "Free entry drives economic profit to zero, leaving firms earning only a normal profit.",
+         "keywords": [
+          "long-run equilibrium",
+          "zero economic profit",
+          "entry"
+         ],
+         "prerequisites": [
+          "Short-run equilibrium in perfect competition"
+         ]
+        },
+        {
+         "title": "Shutdown and exit decisions",
+         "summary": "A firm shuts down in the short run when price falls below average variable cost, and exits when it falls below average total cost.",
+         "keywords": [
+          "shutdown point",
+          "exit",
+          "sunk cost"
+         ]
+        },
+        {
+         "title": "Productive and allocative efficiency",
+         "summary": "Perfect competition is both productively and allocatively efficient in long-run equilibrium.",
+         "keywords": [
+          "productive efficiency",
+          "allocative efficiency"
+         ],
+         "prerequisites": [
+          "Long-run equilibrium and normal profit"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Imperfect Competition",
+   "units": [
+    {
+     "unit": "Monopoly",
+     "prerequisites": [
+      "Perfect competition"
+     ],
+     "topics": [
+      {
+       "topic": "Market power",
+       "concepts": [
+        {
+         "title": "Monopoly: sources of market power",
+         "summary": "Barriers to entry such as control of a resource, patents, or scale keep rivals out and create a price maker.",
+         "keywords": [
+          "monopoly",
+          "barriers to entry",
+          "price maker"
+         ]
+        },
+        {
+         "title": "Monopoly profit maximisation",
+         "summary": "A monopolist sets output where marginal revenue equals marginal cost and prices off the demand curve.",
+         "keywords": [
+          "monopoly output",
+          "marginal revenue"
+         ],
+         "prerequisites": [
+          "Monopoly: sources of market power"
+         ]
+        },
+        {
+         "title": "Monopoly inefficiency and deadweight loss",
+         "summary": "Restricting output below the competitive level leaves some mutually beneficial trades unmade.",
+         "keywords": [
+          "deadweight loss",
+          "monopoly inefficiency"
+         ],
+         "prerequisites": [
+          "Monopoly profit maximisation"
+         ]
+        },
+        {
+         "title": "Price discrimination",
+         "summary": "Charging different prices to different buyers raises profit when groups can be separated and resale is blocked.",
+         "keywords": [
+          "price discrimination",
+          "consumer surplus"
+         ],
+         "prerequisites": [
+          "Monopoly profit maximisation"
+         ]
+        },
+        {
+         "title": "Natural monopoly and regulation",
+         "summary": "When scale makes one firm cheapest, regulation targets the price rather than the number of firms.",
+         "keywords": [
+          "natural monopoly",
+          "regulation"
+         ],
+         "prerequisites": [
+          "Monopoly inefficiency and deadweight loss"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Strategic interaction",
+     "prerequisites": [
+      "Monopoly"
+     ],
+     "topics": [
+      {
+       "topic": "Between competition and monopoly",
+       "concepts": [
+        {
+         "title": "Monopolistic competition",
+         "summary": "Many firms sell differentiated products, so each faces a downward-sloping demand curve but no barrier to entry.",
+         "keywords": [
+          "monopolistic competition",
+          "product differentiation"
+         ]
+        },
+        {
+         "title": "Monopolistic competition in the long run",
+         "summary": "Entry erodes profit until price equals average total cost, leaving excess capacity.",
+         "keywords": [
+          "long-run equilibrium",
+          "excess capacity"
+         ],
+         "prerequisites": [
+          "Monopolistic competition"
+         ]
+        },
+        {
+         "title": "Oligopoly and interdependence",
+         "summary": "A few large firms must anticipate each other, so decisions are strategic rather than independent.",
+         "keywords": [
+          "oligopoly",
+          "interdependence"
+         ],
+         "prerequisites": [
+          "Monopolistic competition in the long run"
+         ]
+        },
+        {
+         "title": "Game theory and Nash equilibrium",
+         "summary": "A Nash equilibrium is a set of strategies where no player can gain by changing alone.",
+         "keywords": [
+          "game theory",
+          "Nash equilibrium"
+         ],
+         "prerequisites": [
+          "Oligopoly and interdependence"
+         ]
+        },
+        {
+         "title": "Collusion and cartels",
+         "summary": "Firms can raise joint profit by acting as a monopolist, but each has an incentive to cheat.",
+         "keywords": [
+          "collusion",
+          "cartel",
+          "prisoner dilemma"
+         ],
+         "prerequisites": [
+          "Game theory and Nash equilibrium"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Factor Markets",
+   "units": [
+    {
+     "unit": "Labour, capital and income",
+     "prerequisites": [
+      "Strategic interaction"
+     ],
+     "topics": [
+      {
+       "topic": "Derived demand",
+       "concepts": [
+        {
+         "title": "Derived demand for labour",
+         "summary": "Demand for a factor exists only because the factor helps produce a good that is itself demanded.",
+         "keywords": [
+          "derived demand",
+          "factor market"
+         ]
+        },
+        {
+         "title": "Marginal revenue product",
+         "summary": "A firm hires until the marginal revenue product of the factor equals its price.",
+         "keywords": [
+          "marginal revenue product",
+          "factor demand"
+         ],
+         "prerequisites": [
+          "Derived demand for labour"
+         ]
+        },
+        {
+         "title": "Competitive labour market equilibrium",
+         "summary": "In a competitive market the wage equals marginal revenue product for every worker hired.",
+         "keywords": [
+          "wage determination",
+          "competitive labour market"
+         ],
+         "prerequisites": [
+          "Marginal revenue product"
+         ]
+        },
+        {
+         "title": "Monopsony",
+         "summary": "A single buyer of labour hires less and pays less than a competitive market would.",
+         "keywords": [
+          "monopsony",
+          "exploitation"
+         ],
+         "prerequisites": [
+          "Competitive labour market equilibrium"
+         ]
+        },
+        {
+         "title": "Unions and bilateral bargaining",
+         "summary": "Collective bargaining raises wages through higher demand or restricted supply, with employment effects.",
+         "keywords": [
+          "union",
+          "collective bargaining"
+         ],
+         "prerequisites": [
+          "Monopsony"
+         ]
+        },
+        {
+         "title": "Capital markets and the rental price of capital",
+         "summary": "Firms hire capital until its marginal revenue product equals the rental price.",
+         "keywords": [
+          "rental price of capital",
+          "factor demand"
+         ],
+         "prerequisites": [
+          "Marginal revenue product"
+         ]
+        },
+        {
+         "title": "Present value and investment decisions",
+         "summary": "A project is worth funding when the present value of its returns exceeds its cost.",
+         "keywords": [
+          "present value",
+          "discount rate"
+         ],
+         "prerequisites": [
+          "Capital markets and the rental price of capital"
+         ]
+        },
+        {
+         "title": "Least-cost combination of inputs",
+         "summary": "Cost is minimised where the marginal product per dollar is equal across inputs.",
+         "keywords": [
+          "least-cost combination",
+          "marginal product per dollar"
+         ],
+         "prerequisites": [
+          "Present value and investment decisions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Market Failure and the Role of Government",
+   "units": [
+    {
+     "unit": "Externalities and public goods",
+     "prerequisites": [
+      "Labour, capital and income"
+     ],
+     "topics": [
+      {
+       "topic": "When markets fail",
+       "concepts": [
+        {
+         "title": "Positive and negative externalities",
+         "summary": "An externality is a cost or benefit that falls on a third party outside the transaction.",
+         "keywords": [
+          "externality",
+          "third party"
+         ]
+        },
+        {
+         "title": "Marginal social cost and marginal social benefit",
+         "summary": "Social cost and benefit add the external effect to the private one, which is where the efficient quantity sits.",
+         "keywords": [
+          "marginal social cost",
+          "marginal social benefit"
+         ],
+         "prerequisites": [
+          "Positive and negative externalities"
+         ]
+        },
+        {
+         "title": "Coase theorem and property rights",
+         "summary": "With clear property rights and low bargaining cost, private parties can reach the efficient outcome themselves.",
+         "keywords": [
+          "Coase theorem",
+          "property rights"
+         ],
+         "prerequisites": [
+          "Marginal social cost and marginal social benefit"
+         ]
+        },
+        {
+         "title": "Corrective taxes and subsidies",
+         "summary": "A tax equal to the external cost, or a subsidy equal to the external benefit, realigns private with social incentives.",
+         "keywords": [
+          "corrective tax",
+          "Pigouvian subsidy"
+         ],
+         "prerequisites": [
+          "Marginal social cost and marginal social benefit"
+         ]
+        },
+        {
+         "title": "Public goods and the free-rider problem",
+         "summary": "Non-rival and non-excludable goods are underprovided because each user can free ride.",
+         "keywords": [
+          "public good",
+          "free rider",
+          "non-rival"
+         ],
+         "prerequisites": [
+          "Corrective taxes and subsidies"
+         ]
+        },
+        {
+         "title": "Common resources and the tragedy of the commons",
+         "summary": "Rival but non-excludable resources are overused because no one bears the full cost of their own use.",
+         "keywords": [
+          "common resource",
+          "tragedy of the commons"
+         ],
+         "prerequisites": [
+          "Public goods and the free-rider problem"
+         ]
+        },
+        {
+         "title": "Asymmetric information",
+         "summary": "When one side knows more, adverse selection and moral hazard can drive good participants out of the market.",
+         "keywords": [
+          "asymmetric information",
+          "adverse selection",
+          "moral hazard"
+         ],
+         "prerequisites": [
+          "Corrective taxes and subsidies"
+         ]
+        },
+        {
+         "title": "Antitrust policy and regulation",
+         "summary": "Competition policy targets market power, while regulation can address natural monopoly directly.",
+         "keywords": [
+          "antitrust",
+          "regulation"
+         ]
+        },
+        {
+         "title": "Income inequality and redistribution",
+         "summary": "Tax-and-transfer policy can change the distribution of income, with efficiency costs of its own.",
+         "keywords": [
+          "income inequality",
+          "redistribution",
+          "Lorenz curve"
+         ],
+         "prerequisites": [
+          "Corrective taxes and subsidies"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

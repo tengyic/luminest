@@ -1,0 +1,1084 @@
+{
+ "course": "Algebra 2 - Functions, Logarithms, Trigonometry and Series",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A full-year Algebra 2 course: polynomial and rational functions, complex numbers, exponents, radicals and logarithms, transformations, trigonometry, conic sections, sequences and series, probability and matrices.",
+ "expected_weeks": 36,
+ "strands": [
+  {
+   "strand": "Polynomials",
+   "units": [
+    {
+     "unit": "Polynomial arithmetic and factoring",
+     "topics": [
+      {
+       "topic": "Working with polynomials",
+       "concepts": [
+        {
+         "title": "Polynomials and their degree",
+         "summary": "A polynomial is a sum of power terms, and its degree governs its end behaviour and how many roots it can have.",
+         "keywords": [
+          "polynomial",
+          "degree",
+          "leading coefficient"
+         ]
+        },
+        {
+         "title": "Adding and subtracting polynomials",
+         "summary": "Like terms combine by their power, so addition and subtraction act on coefficients of the same degree.",
+         "keywords": [
+          "like terms",
+          "polynomial addition"
+         ],
+         "prerequisites": [
+          "Polynomials and their degree"
+         ]
+        },
+        {
+         "title": "Multiplying polynomials",
+         "summary": "Every term of one polynomial multiplies every term of the other, which is the distributive property applied repeatedly.",
+         "keywords": [
+          "polynomial multiplication",
+          "distribution"
+         ],
+         "prerequisites": [
+          "Adding and subtracting polynomials"
+         ]
+        },
+        {
+         "title": "Special polynomial products",
+         "summary": "Perfect-square and difference-of-squares patterns let products be written without full distribution.",
+         "keywords": [
+          "perfect square",
+          "difference of squares"
+         ],
+         "prerequisites": [
+          "Multiplying polynomials"
+         ]
+        },
+        {
+         "title": "Factoring common factors",
+         "summary": "Removing the greatest common factor is the first step of every factorisation.",
+         "keywords": [
+          "greatest common factor",
+          "factoring"
+         ],
+         "prerequisites": [
+          "Multiplying polynomials"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Polynomial factorisation and division",
+     "prerequisites": [
+      "Polynomial arithmetic and factoring"
+     ],
+     "topics": [
+      {
+       "topic": "Finding factors and zeros",
+       "concepts": [
+        {
+         "title": "Factoring by grouping",
+         "summary": "Grouping pairs of terms with a shared factor turns a four-term polynomial into a product.",
+         "keywords": [
+          "factoring by grouping",
+          "common binomial"
+         ]
+        },
+        {
+         "title": "Factoring quadratics",
+         "summary": "A quadratic factors into two linear factors whose constants satisfy the sum and product conditions.",
+         "keywords": [
+          "quadratic",
+          "factor pair",
+          "sum and product"
+         ],
+         "prerequisites": [
+          "Factoring by grouping"
+         ]
+        },
+        {
+         "title": "Factoring sum and difference of cubes",
+         "summary": "Sum and difference of cubes factor into a binomial and a quadratic using standard patterns.",
+         "keywords": [
+          "sum of cubes",
+          "difference of cubes"
+         ]
+        },
+        {
+         "title": "The factor theorem",
+         "summary": "A polynomial has a factor x minus c exactly when its value at c is zero.",
+         "keywords": [
+          "factor theorem",
+          "zero of a polynomial"
+         ],
+         "prerequisites": [
+          "Factoring quadratics"
+         ]
+        },
+        {
+         "title": "The remainder theorem",
+         "summary": "The remainder on dividing by x minus c equals the polynomial's value at c.",
+         "keywords": [
+          "remainder theorem",
+          "synthetic substitution"
+         ],
+         "prerequisites": [
+          "The factor theorem"
+         ]
+        },
+        {
+         "title": "Long division of polynomials",
+         "summary": "Polynomial long division mirrors integer long division and produces a quotient and a remainder.",
+         "keywords": [
+          "polynomial long division",
+          "quotient",
+          "remainder"
+         ],
+         "prerequisites": [
+          "The remainder theorem"
+         ]
+        },
+        {
+         "title": "Synthetic division",
+         "summary": "Synthetic division divides by a linear factor quickly using only coefficients.",
+         "keywords": [
+          "synthetic division",
+          "linear factor"
+         ],
+         "prerequisites": [
+          "Long division of polynomials"
+         ]
+        },
+        {
+         "title": "Factoring higher-degree polynomials",
+         "summary": "Combining the factor theorem, division and pattern recognition factors polynomials of any degree.",
+         "keywords": [
+          "higher-degree polynomial",
+          "rational root theorem"
+         ],
+         "prerequisites": [
+          "Synthetic division"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Polynomial graphs",
+     "prerequisites": [
+      "Polynomial factorisation and division"
+     ],
+     "topics": [
+      {
+       "topic": "Shape and zeros",
+       "concepts": [
+        {
+         "title": "End behaviour of polynomials",
+         "summary": "The leading term decides what the graph does as the input grows large in either direction.",
+         "keywords": [
+          "end behaviour",
+          "leading term"
+         ]
+        },
+        {
+         "title": "Zeros and multiplicity",
+         "summary": "A repeated root makes the graph touch or flatten at the axis instead of crossing it.",
+         "keywords": [
+          "multiplicity",
+          "zero",
+          "turning point"
+         ],
+         "prerequisites": [
+          "End behaviour of polynomials"
+         ]
+        },
+        {
+         "title": "Graphing polynomial functions",
+         "summary": "Zeros, multiplicity, end behaviour and the y-intercept together determine the sketch.",
+         "keywords": [
+          "graphing polynomial",
+          "y-intercept"
+         ],
+         "prerequisites": [
+          "Zeros and multiplicity"
+         ]
+        },
+        {
+         "title": "The intermediate value theorem",
+         "summary": "A continuous polynomial takes every value between its endpoint values, which locates real roots.",
+         "keywords": [
+          "intermediate value theorem",
+          "sign change"
+         ],
+         "prerequisites": [
+          "Graphing polynomial functions"
+         ]
+        },
+        {
+         "title": "Symmetry in polynomial graphs",
+         "summary": "Even and odd symmetry come from the parity of the exponents.",
+         "keywords": [
+          "even function",
+          "odd function",
+          "symmetry"
+         ],
+         "prerequisites": [
+          "Graphing polynomial functions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Complex Numbers",
+   "units": [
+    {
+     "unit": "Extending the number system",
+     "prerequisites": [
+      "Polynomial graphs"
+     ],
+     "topics": [
+      {
+       "topic": "Imaginary and complex numbers",
+       "concepts": [
+        {
+         "title": "The imaginary unit i",
+         "summary": "The imaginary unit squares to minus one, which gives negative numbers square roots.",
+         "keywords": [
+          "imaginary unit",
+          "i",
+          "square root"
+         ]
+        },
+        {
+         "title": "Complex numbers and their arithmetic",
+         "summary": "Complex numbers add componentwise and multiply by distributing, treating i squared as minus one.",
+         "keywords": [
+          "complex number",
+          "real part",
+          "imaginary part"
+         ],
+         "prerequisites": [
+          "The imaginary unit i"
+         ]
+        },
+        {
+         "title": "Complex conjugates",
+         "summary": "Multiplying by the conjugate removes the imaginary part, which is how a quotient is simplified.",
+         "keywords": [
+          "complex conjugate",
+          "modulus"
+         ],
+         "prerequisites": [
+          "Complex numbers and their arithmetic"
+         ]
+        },
+        {
+         "title": "Quadratic equations with complex solutions",
+         "summary": "A negative discriminant gives a conjugate pair of complex roots.",
+         "keywords": [
+          "discriminant",
+          "complex roots"
+         ],
+         "prerequisites": [
+          "Complex conjugates"
+         ]
+        },
+        {
+         "title": "The fundamental theorem of algebra",
+         "summary": "A degree-n polynomial has exactly n complex roots counted with multiplicity.",
+         "keywords": [
+          "fundamental theorem of algebra",
+          "roots"
+         ],
+         "prerequisites": [
+          "Quadratic equations with complex solutions"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Exponentials and Logarithms",
+   "units": [
+    {
+     "unit": "Rational exponents and radicals",
+     "prerequisites": [
+      "Extending the number system"
+     ],
+     "topics": [
+      {
+       "topic": "Roots as powers",
+       "concepts": [
+        {
+         "title": "Rational exponents",
+         "summary": "A fractional exponent is a root, so radicals and powers are two notations for the same thing.",
+         "keywords": [
+          "rational exponent",
+          "radical"
+         ]
+        },
+        {
+         "title": "Simplifying radical expressions",
+         "summary": "Radicals simplify by removing perfect-power factors and rationalising denominators.",
+         "keywords": [
+          "radical",
+          "rationalise",
+          "simplify"
+         ],
+         "prerequisites": [
+          "Rational exponents"
+         ]
+        },
+        {
+         "title": "Radical equations",
+         "summary": "Squaring both sides can introduce extraneous solutions, so every result must be checked.",
+         "keywords": [
+          "radical equation",
+          "extraneous solution"
+         ],
+         "prerequisites": [
+          "Simplifying radical expressions"
+         ]
+        },
+        {
+         "title": "Graphing square and cube root functions",
+         "summary": "Root graphs have restricted domains and characteristic shapes that transform like other functions.",
+         "keywords": [
+          "square root graph",
+          "domain restriction"
+         ],
+         "prerequisites": [
+          "Radical equations"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Exponential and logarithmic functions",
+     "prerequisites": [
+      "Rational exponents and radicals"
+     ],
+     "topics": [
+      {
+       "topic": "Growth, decay and logs",
+       "concepts": [
+        {
+         "title": "Exponential growth and decay",
+         "summary": "A quantity changes by a constant factor per period, which is multiplicative rather than additive.",
+         "keywords": [
+          "exponential growth",
+          "decay",
+          "growth factor"
+         ]
+        },
+        {
+         "title": "Graphing exponential functions",
+         "summary": "Exponential graphs have a horizontal asymptote and pass through the point zero one.",
+         "keywords": [
+          "exponential graph",
+          "asymptote"
+         ],
+         "prerequisites": [
+          "Exponential growth and decay"
+         ]
+        },
+        {
+         "title": "The number e and continuous growth",
+         "summary": "Continuous compounding leads to the base e, which describes growth as a rate.",
+         "keywords": [
+          "e",
+          "continuous compounding"
+         ],
+         "prerequisites": [
+          "Graphing exponential functions"
+         ]
+        },
+        {
+         "title": "Compound interest",
+         "summary": "Compound interest applies the growth factor repeatedly, and more frequent compounding raises the effective rate.",
+         "keywords": [
+          "compound interest",
+          "effective rate"
+         ],
+         "prerequisites": [
+          "The number e and continuous growth"
+         ]
+        },
+        {
+         "title": "Introduction to logarithms",
+         "summary": "A logarithm answers the exponent question, and it is the inverse of the exponential.",
+         "keywords": [
+          "logarithm",
+          "inverse",
+          "base"
+         ],
+         "prerequisites": [
+          "Graphing exponential functions"
+         ]
+        },
+        {
+         "title": "Properties of logarithms",
+         "summary": "Products, quotients and powers become sums, differences and multiples of logs.",
+         "keywords": [
+          "log properties",
+          "product rule",
+          "power rule"
+         ],
+         "prerequisites": [
+          "Introduction to logarithms"
+         ]
+        },
+        {
+         "title": "Solving exponential equations with logarithms",
+         "summary": "Taking a logarithm of both sides isolates an unknown exponent.",
+         "keywords": [
+          "exponential equation",
+          "logarithm"
+         ],
+         "prerequisites": [
+          "Properties of logarithms"
+         ]
+        },
+        {
+         "title": "Solving logarithmic equations",
+         "summary": "Rewriting in exponential form solves log equations, and every solution must be checked for domain.",
+         "keywords": [
+          "logarithmic equation",
+          "domain check"
+         ],
+         "prerequisites": [
+          "Properties of logarithms"
+         ]
+        },
+        {
+         "title": "Graphing logarithmic functions",
+         "summary": "A log graph is the reflection of its exponential in the line y equals x.",
+         "keywords": [
+          "logarithmic graph",
+          "reflection"
+         ],
+         "prerequisites": [
+          "Introduction to logarithms"
+         ]
+        },
+        {
+         "title": "Change of base",
+         "summary": "Change of base rewrites a logarithm in any base, which makes any log computable.",
+         "keywords": [
+          "change of base",
+          "logarithm"
+         ],
+         "prerequisites": [
+          "Properties of logarithms"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Functions",
+   "units": [
+    {
+     "unit": "Transformations and inverses",
+     "prerequisites": [
+      "Exponential and logarithmic functions"
+     ],
+     "topics": [
+      {
+       "topic": "Changing a graph",
+       "concepts": [
+        {
+         "title": "Function transformations",
+         "summary": "Shifts, stretches and reflections move a parent graph without changing its shape family.",
+         "keywords": [
+          "transformation",
+          "parent function"
+         ]
+        },
+        {
+         "title": "Shifting and reflecting graphs",
+         "summary": "Horizontal changes act inside the function and reverse intuition, while vertical changes act outside.",
+         "keywords": [
+          "shift",
+          "reflection",
+          "inside outside"
+         ],
+         "prerequisites": [
+          "Function transformations"
+         ]
+        },
+        {
+         "title": "Stretching and compressing graphs",
+         "summary": "A factor greater than one stretches and a factor between zero and one compresses.",
+         "keywords": [
+          "stretch",
+          "compression",
+          "scale factor"
+         ],
+         "prerequisites": [
+          "Shifting and reflecting graphs"
+         ]
+        },
+        {
+         "title": "Even and odd functions",
+         "summary": "Even functions are symmetric about the y-axis and odd functions about the origin.",
+         "keywords": [
+          "even function",
+          "odd function"
+         ],
+         "prerequisites": [
+          "Function transformations"
+         ]
+        },
+        {
+         "title": "Inverse functions",
+         "summary": "An inverse undoes a function, and it exists only where the function is one-to-one.",
+         "keywords": [
+          "inverse function",
+          "one-to-one",
+          "domain"
+         ],
+         "prerequisites": [
+          "Function transformations"
+         ]
+        },
+        {
+         "title": "Composite functions",
+         "summary": "A composite applies one function to the output of another, and order matters.",
+         "keywords": [
+          "composite function",
+          "composition"
+         ],
+         "prerequisites": [
+          "Inverse functions"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Rational functions",
+     "prerequisites": [
+      "Transformations and inverses"
+     ],
+     "topics": [
+      {
+       "topic": "Quotients of polynomials",
+       "concepts": [
+        {
+         "title": "Rational expressions and simplification",
+         "summary": "A rational expression is a quotient of polynomials, simplified by cancelling common factors.",
+         "keywords": [
+          "rational expression",
+          "simplify"
+         ]
+        },
+        {
+         "title": "Multiplying and dividing rational expressions",
+         "summary": "Multiplication and division work like fractions, with factoring first.",
+         "keywords": [
+          "rational multiplication",
+          "reciprocal"
+         ],
+         "prerequisites": [
+          "Rational expressions and simplification"
+         ]
+        },
+        {
+         "title": "Adding and subtracting rational expressions",
+         "summary": "A common denominator is required, exactly as with numerical fractions.",
+         "keywords": [
+          "common denominator",
+          "rational addition"
+         ],
+         "prerequisites": [
+          "Multiplying and dividing rational expressions"
+         ]
+        },
+        {
+         "title": "Solving rational equations",
+         "summary": "Multiplying by the common denominator can introduce extraneous solutions, so results must be checked.",
+         "keywords": [
+          "rational equation",
+          "extraneous solution"
+         ],
+         "prerequisites": [
+          "Adding and subtracting rational expressions"
+         ]
+        },
+        {
+         "title": "Asymptotes and holes",
+         "summary": "Vertical asymptotes come from non-cancelled factors and holes from cancelled ones.",
+         "keywords": [
+          "vertical asymptote",
+          "hole",
+          "horizontal asymptote"
+         ],
+         "prerequisites": [
+          "Solving rational equations"
+         ]
+        },
+        {
+         "title": "Graphing rational functions",
+         "summary": "Intercepts, asymptotes and holes together determine the shape of a rational graph.",
+         "keywords": [
+          "rational graph",
+          "asymptote"
+         ],
+         "prerequisites": [
+          "Asymptotes and holes"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Equations and Modelling",
+   "units": [
+    {
+     "unit": "Solving and modelling",
+     "prerequisites": [
+      "Rational functions"
+     ],
+     "topics": [
+      {
+       "topic": "Choosing and using models",
+       "concepts": [
+        {
+         "title": "Solving exponential and logarithmic equations",
+         "summary": "Choosing the right inverse isolates the unknown in either direction.",
+         "keywords": [
+          "exponential equation",
+          "logarithmic equation"
+         ]
+        },
+        {
+         "title": "Solving systems with nonlinear equations",
+         "summary": "Substitution reduces a nonlinear system to one equation in one variable.",
+         "keywords": [
+          "nonlinear system",
+          "substitution"
+         ],
+         "prerequisites": [
+          "Solving exponential and logarithmic equations"
+         ]
+        },
+        {
+         "title": "Absolute value equations and inequalities",
+         "summary": "Absolute value splits into two cases, and inequalities require checking the direction.",
+         "keywords": [
+          "absolute value",
+          "case split"
+         ],
+         "prerequisites": [
+          "Solving systems with nonlinear equations"
+         ]
+        },
+        {
+         "title": "Linear and quadratic models",
+         "summary": "Constant difference suggests a linear model and constant second difference a quadratic one.",
+         "keywords": [
+          "linear model",
+          "quadratic model"
+         ],
+         "prerequisites": [
+          "Absolute value equations and inequalities"
+         ]
+        },
+        {
+         "title": "Exponential and logarithmic models",
+         "summary": "A constant ratio suggests exponential growth or decay.",
+         "keywords": [
+          "exponential model",
+          "decay"
+         ],
+         "prerequisites": [
+          "Linear and quadratic models"
+         ]
+        },
+        {
+         "title": "Choosing a model and checking fit",
+         "summary": "Residuals and context decide which model is defensible.",
+         "keywords": [
+          "residual",
+          "model fit"
+         ],
+         "prerequisites": [
+          "Exponential and logarithmic models"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Trigonometry",
+   "units": [
+    {
+     "unit": "Angles and the unit circle",
+     "prerequisites": [
+      "Solving and modelling"
+     ],
+     "topics": [
+      {
+       "topic": "Circular functions",
+       "concepts": [
+        {
+         "title": "Angles and radian measure",
+         "summary": "Radians measure an angle by arc length, which makes calculus and periodicity natural.",
+         "keywords": [
+          "radian",
+          "arc length",
+          "angle"
+         ]
+        },
+        {
+         "title": "The unit circle",
+         "summary": "The unit circle gives sine and cosine as coordinates and extends them beyond right triangles.",
+         "keywords": [
+          "unit circle",
+          "sine",
+          "cosine"
+         ],
+         "prerequisites": [
+          "Angles and radian measure"
+         ]
+        },
+        {
+         "title": "Sine, cosine and tangent",
+         "summary": "The three basic ratios relate the sides of a right triangle and extend to any angle.",
+         "keywords": [
+          "sine",
+          "cosine",
+          "tangent",
+          "SOHCAHTOA"
+         ],
+         "prerequisites": [
+          "The unit circle"
+         ]
+        },
+        {
+         "title": "Graphing trigonometric functions",
+         "summary": "Amplitude, period, phase and midline describe a transformed sinusoid.",
+         "keywords": [
+          "amplitude",
+          "period",
+          "sinusoid"
+         ],
+         "prerequisites": [
+          "Sine, cosine and tangent"
+         ]
+        },
+        {
+         "title": "Trigonometric identities",
+         "summary": "Pythagorean, sum and double-angle identities rewrite expressions and prove equalities.",
+         "keywords": [
+          "identity",
+          "Pythagorean identity",
+          "double angle"
+         ],
+         "prerequisites": [
+          "Graphing trigonometric functions"
+         ]
+        },
+        {
+         "title": "Solving trigonometric equations",
+         "summary": "Periodicity means a trigonometric equation usually has infinitely many solutions.",
+         "keywords": [
+          "trigonometric equation",
+          "periodicity"
+         ],
+         "prerequisites": [
+          "Trigonometric identities"
+         ]
+        },
+        {
+         "title": "Inverse trigonometric functions",
+         "summary": "Inverse functions recover an angle, restricted to a principal range to stay one-to-one.",
+         "keywords": [
+          "inverse sine",
+          "principal value",
+          "range"
+         ],
+         "prerequisites": [
+          "The unit circle"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Conic Sections, Series and Probability",
+   "units": [
+    {
+     "unit": "Conic sections",
+     "prerequisites": [
+      "Angles and the unit circle"
+     ],
+     "topics": [
+      {
+       "topic": "Curves from cones",
+       "concepts": [
+        {
+         "title": "Parabolas",
+         "summary": "A parabola is the set of points equidistant from a focus and a directrix.",
+         "keywords": [
+          "parabola",
+          "focus",
+          "directrix"
+         ]
+        },
+        {
+         "title": "Circles",
+         "summary": "A circle is the set of points a fixed distance from a centre.",
+         "keywords": [
+          "circle",
+          "radius",
+          "completing the square"
+         ],
+         "prerequisites": [
+          "Parabolas"
+         ]
+        },
+        {
+         "title": "Ellipses",
+         "summary": "An ellipse is the set of points whose distances to two foci sum to a constant.",
+         "keywords": [
+          "ellipse",
+          "foci",
+          "major axis"
+         ],
+         "prerequisites": [
+          "Circles"
+         ]
+        },
+        {
+         "title": "Hyperbolas",
+         "summary": "A hyperbola is the set of points whose distances to two foci differ by a constant.",
+         "keywords": [
+          "hyperbola",
+          "foci",
+          "asymptote"
+         ],
+         "prerequisites": [
+          "Ellipses"
+         ]
+        },
+        {
+         "title": "Identifying conic sections",
+         "summary": "The general second-degree equation is classified by its coefficients.",
+         "keywords": [
+          "conic classification",
+          "discriminant"
+         ],
+         "prerequisites": [
+          "Hyperbolas"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Sequences, series and counting",
+     "prerequisites": [
+      "Conic sections"
+     ],
+     "topics": [
+      {
+       "topic": "Discrete patterns",
+       "concepts": [
+        {
+         "title": "Arithmetic sequences and series",
+         "summary": "An arithmetic sequence adds a constant difference and its series sum has a closed form.",
+         "keywords": [
+          "arithmetic sequence",
+          "common difference",
+          "series sum"
+         ]
+        },
+        {
+         "title": "Geometric sequences and series",
+         "summary": "A geometric sequence multiplies by a constant ratio, and its finite sum also has a closed form.",
+         "keywords": [
+          "geometric sequence",
+          "common ratio",
+          "series sum"
+         ],
+         "prerequisites": [
+          "Arithmetic sequences and series"
+         ]
+        },
+        {
+         "title": "Summation notation",
+         "summary": "Sigma notation compresses a sum and makes index changes explicit.",
+         "keywords": [
+          "sigma notation",
+          "summation index"
+         ],
+         "prerequisites": [
+          "Geometric sequences and series"
+         ]
+        },
+        {
+         "title": "Infinite geometric series",
+         "summary": "An infinite geometric series converges exactly when the common ratio is smaller than one in size.",
+         "keywords": [
+          "infinite series",
+          "convergence",
+          "common ratio"
+         ],
+         "prerequisites": [
+          "Summation notation"
+         ]
+        },
+        {
+         "title": "The binomial theorem",
+         "summary": "Binomial coefficients from Pascal's triangle expand a power of a binomial.",
+         "keywords": [
+          "binomial theorem",
+          "Pascal's triangle",
+          "coefficient"
+         ],
+         "prerequisites": [
+          "Summation notation"
+         ]
+        },
+        {
+         "title": "The counting principle",
+         "summary": "Independent choices multiply, which is the basis of all counting.",
+         "keywords": [
+          "counting principle",
+          "multiplication rule"
+         ],
+         "prerequisites": [
+          "The binomial theorem"
+         ]
+        },
+        {
+         "title": "Permutations and combinations",
+         "summary": "Permutations count ordered arrangements and combinations count unordered selections.",
+         "keywords": [
+          "permutation",
+          "combination",
+          "factorial"
+         ],
+         "prerequisites": [
+          "The counting principle"
+         ]
+        },
+        {
+         "title": "Probability with combinatorics",
+         "summary": "Counting favourable and total outcomes gives a probability for equally likely events.",
+         "keywords": [
+          "probability",
+          "favourable outcomes"
+         ],
+         "prerequisites": [
+          "Permutations and combinations"
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "unit": "Matrices",
+     "prerequisites": [
+      "Sequences, series and counting"
+     ],
+     "topics": [
+      {
+       "topic": "Linear algebra foundations",
+       "concepts": [
+        {
+         "title": "Matrix notation and operations",
+         "summary": "Matrices are rectangular arrays, and addition and scalar multiplication act entrywise.",
+         "keywords": [
+          "matrix",
+          "dimension",
+          "scalar multiplication"
+         ]
+        },
+        {
+         "title": "Matrix multiplication",
+         "summary": "Matrix multiplication combines rows of the first with columns of the second, so order matters.",
+         "keywords": [
+          "matrix multiplication",
+          "row column"
+         ],
+         "prerequisites": [
+          "Matrix notation and operations"
+         ]
+        },
+        {
+         "title": "Determinants",
+         "summary": "A determinant is a number that reports whether a matrix is invertible.",
+         "keywords": [
+          "determinant",
+          "invertible",
+          "singular"
+         ],
+         "prerequisites": [
+          "Matrix multiplication"
+         ]
+        },
+        {
+         "title": "Inverse matrices",
+         "summary": "An inverse matrix undoes a linear transformation, and it exists only when the determinant is non-zero.",
+         "keywords": [
+          "inverse matrix",
+          "identity matrix"
+         ],
+         "prerequisites": [
+          "Determinants"
+         ]
+        },
+        {
+         "title": "Solving systems with matrices",
+         "summary": "A linear system can be solved by matrix inverse or row reduction.",
+         "keywords": [
+          "matrix system",
+          "row reduction",
+          "augmented matrix"
+         ],
+         "prerequisites": [
+          "Inverse matrices"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
