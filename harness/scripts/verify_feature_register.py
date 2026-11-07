@@ -126,10 +126,10 @@ def render(data: dict[str, Any]) -> str:
     lines: list[str] = [
         '# Feature verification register',
         '',
-        f"**Program:** {data.get('program', '')}  ",
-        f"**Product:** {data.get('product', '')}  ",
-        f"**Version:** {data.get('version', '')}  ",
-        f"**Updated:** {data.get('updated', '')}",
+        f"- **Program:** {data.get('program', '')}",
+        f"- **Product:** {data.get('product', '')}",
+        f"- **Version:** {data.get('version', '')}",
+        f"- **Updated:** {data.get('updated', '')}",
         '',
         '> Generated from `docs/feature_verification_register.json` by '
         '`scripts/verify_feature_register.py`. Edit the JSON, then rerun the script; do not '
@@ -201,7 +201,7 @@ def render(data: dict[str, Any]) -> str:
         '4. Run it with `--check` in CI if the register must not drift.',
         '',
     ]
-    return '\n'.join(lines)
+    return '\n'.join(lines).rstrip() + '\n'
 
 
 def main(argv: list[str]) -> int:
@@ -218,7 +218,7 @@ def main(argv: list[str]) -> int:
         print(f'register: OK — {len(data.get("areas") or [])} areas, {features} features')
         if check_only:
             return 0
-        OUTPUT.write_text(render(data) + '\n', encoding='utf-8')
+        OUTPUT.write_text(render(data), encoding='utf-8')
         print(f'register: wrote {OUTPUT.relative_to(ROOT)}')
         return 0
     except RegisterError as exc:
