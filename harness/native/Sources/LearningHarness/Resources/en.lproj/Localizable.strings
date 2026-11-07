@@ -67,7 +67,7 @@
 "state.empty.detail" = "Once you add something it will appear here. Nothing is missing — this list is genuinely empty.";
 
 "state.offline.title" = "Working offline";
-"state.offline.detail" = "The local learning server is not answering. Anything you already loaded stays readable; new work will resume when it reconnects.";
+"state.offline.detail" = "The learning server is not answering. Anything you already loaded stays readable; new work will resume when it reconnects.";
 
 "state.error.title" = "Something went wrong";
 "state.error.detail" = "The request reached the server but was refused. Details below.";

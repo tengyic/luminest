@@ -161,6 +161,41 @@ struct RootView: View {
     }
 }
 
+/// One store failure, presented according to what is actually known about it.
+///
+/// Takes the pieces rather than an `Error` because `AppStore.error` is already a String by
+/// the time a screen sees it: the HTTP code survives only in `errorStatus`, and
+/// `connected` is the last evidence of whether the server answered at all. `FailureCause`
+/// can no longer infer "unreachable" from a String, so the split has to be made here —
+/// otherwise a dead socket would be titled "something went wrong" while the real cause is
+/// the network.
+///
+/// Both branches clear `errorStatus` together with the message: a leftover code would be
+/// paired with the next, unrelated failure for a frame.
+private struct FailurePresentation: View {
+    let message: String
+    let status: Int?
+    let connected: Bool
+    let retry: () -> Void
+    let dismiss: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            if connected {
+                InlineFailureBar(message: message, status: status, retry: retry, dismiss: dismiss)
+            } else {
+                // The banner has no dismiss of its own, so the close button is supplied
+                // here rather than leaving an offline notice with no way off screen.
+                OfflineBanner(retry: retry)
+                Button(L10n.t("action.close"), action: dismiss)
+                    .buttonStyle(.borderless)
+                    .font(Typography.caption)
+                    .foregroundStyle(Palette.secondary)
+            }
+        }
+    }
+}
+
 struct OnboardingView: View {
     @EnvironmentObject var store: AppStore
     @State private var registering = true
@@ -329,10 +364,16 @@ struct OnboardingView: View {
                     }
 
                     if let error = store.error {
-                        InlineFailureBar(message: error,
-                                         status: store.errorStatus,
-                                         retry: { store.retry() },
-                                         dismiss: { store.error = nil })
+                        // `connected` is the only honest split left: `store.error` is a
+                        // String, so by the time a bar renders it a dead socket and a
+                        // refused request both look like "an error". Retry re-sends this
+                        // form rather than calling `store.retry()`, which has no
+                        // `retryAction` during onboarding and would be a dead button.
+                        FailurePresentation(message: error,
+                                            status: store.errorStatus,
+                                            connected: store.connected,
+                                            retry: { retryAuthentication() },
+                                            dismiss: { store.error = nil; store.errorStatus = nil })
                     } else if let next = unmet.first {
                         // One requirement at a time, in the order the fields are laid out. A
                         // list of five at once reads as a wall of complaint before anything has
@@ -394,6 +435,20 @@ struct OnboardingView: View {
 
     func field<V: View>(_ label: String, @ViewBuilder content: @escaping () -> V) -> some View {
         FormFieldContainer(label: label, content: content)
+    }
+
+    /// Re-send exactly what is in the form.
+    ///
+    /// The failure bar's Retry has to do this itself: `store.retry()` replays
+    /// `retryAction`, which `authenticate` never sets, so during onboarding it would be a
+    /// button that clears the message and sends nothing — the dead-button pattern this
+    /// screen has already been burned by once (see `unmet`).
+    private func retryAuthentication() {
+        store.run {
+            await store.authenticate(register: registering, name: name, email: email,
+                                     password: password, server: server,
+                                     ageConfirmed: ageConfirmed, acceptedTerms: acceptedTerms)
+        }
     }
 }
 
@@ -481,13 +536,16 @@ struct AppShell: View {
                                 .offset(x: -70, y: -70)
                         }
                         if let error = store.error {
-                            // Cause-aware, not one red sentence for everything: `errorStatus`
-                            // is what lets a 422 read as "the server refused this request"
-                            // instead of "cannot connect".
-                            InlineFailureBar(message: error,
-                                             status: store.errorStatus,
-                                             retry: { store.retry() },
-                                             dismiss: { store.error = nil })
+                            // One cause-aware presentation for the whole shell, split on
+                            // `connected`: a refusal keeps its status code and the compact
+                            // bar; an unreachable server gets the offline banner, because
+                            // `FailureCause` cannot recover "unreachable" from a String and
+                            // would otherwise label a dead socket "unexpected".
+                            FailurePresentation(message: error,
+                                                status: store.errorStatus,
+                                                connected: store.connected,
+                                                retry: { store.retry() },
+                                                dismiss: { store.error = nil; store.errorStatus = nil })
                         }
                         if let notice = store.notice {
                             HStack { Image(systemName: "checkmark.circle"); Text(notice); Spacer(); Button { store.notice = nil } label: { Image(systemName: "xmark") }.buttonStyle(.plain) }.font(.system(size: 12)).padding(13).background(Palette.sage, in: RoundedRectangle(cornerRadius: 12))

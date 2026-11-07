@@ -159,8 +159,13 @@ final class Localization: ObservableObject {
     }
 
     /// Format variant for strings with positional arguments.
-    func tf(_ key: String, _ args: [CVarArg]) -> String {
-        String(format: t(key), arguments: args)
+    ///
+    /// `table:` mirrors ``t(_:table:)`` because the two are used together the moment a
+    /// surface ships its own `.strings` file: a sentence with a version number in it is
+    /// exactly the kind of string that moves to a surface table. Without the parameter,
+    /// `tf` would silently read the default table and the format would miss.
+    func tf(_ key: String, table: String? = nil, _ args: [CVarArg]) -> String {
+        String(format: t(key, table: table), arguments: args)
     }
 }
 
@@ -173,8 +178,8 @@ enum L10n {
         return AppResources.bundle.localizedString(forKey: key, value: key, table: table)
     }
 
-    static func tf(_ key: String, _ args: CVarArg...) -> String {
-        let template = t(key)
+    static func tf(_ key: String, table: String? = nil, _ args: CVarArg...) -> String {
+        let template = t(key, table: table)
         return String(format: template, arguments: args)
     }
 }

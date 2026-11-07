@@ -69,7 +69,7 @@
 "state.empty.detail" = "添加之后就会出现在这里。不是加载失败——这份列表确实是空的。";
 
 "state.offline.title" = "离线状态";
-"state.offline.detail" = "本地学习服务没有响应。已经加载过的内容仍然可读；新任务会在连接恢复后继续。";
+"state.offline.detail" = "学习服务没有响应。已经加载过的内容仍然可读；新任务会在连接恢复后继续。";
 
 "state.error.title" = "出了点问题";
 "state.error.detail" = "请求已经到达服务端，但被拒绝了。详情见下。";
