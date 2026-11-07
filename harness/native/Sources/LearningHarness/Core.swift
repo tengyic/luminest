@@ -142,6 +142,10 @@ enum SecureSession {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        // Telling the server which language the learner is reading is what makes generated
+        // questions, tutor turns and decks come back in that language rather than English.
+        request.setValue(Self.acceptLanguage(preference: UserDefaults.standard.string(forKey: "luminfest.language")),
+                         forHTTPHeaderField: "Accept-Language")
         if let token { request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization") }
         if let body { request.httpBody = try JSONSerialization.data(withJSONObject: body); request.setValue("application/json", forHTTPHeaderField: "Content-Type") }
         let (data, response) = try await session.data(for: request)
@@ -153,6 +157,26 @@ enum SecureSession {
         }
         return data
     }
+    /// The `Accept-Language` this app sends.
+    ///
+    /// Read from the stored preference rather than from `Localization.shared`: request
+    /// paths run off the main actor, and a background `Task` must not crash on an isolated
+    /// access or quietly fall back to English. `nil` means "follow the system", which is
+    /// the same promise the language picker makes.
+    nonisolated static func acceptLanguage(preference: String?,
+                                           system: [String] = Locale.preferredLanguages) -> String {
+        switch preference {
+        case AppLanguage.simplifiedChinese.rawValue:
+            // The q-values are not decoration: without them a server that honours
+            // preference order can pick `en` from the tail of the list.
+            return "zh-Hans,zh;q=0.9,en;q=0.5"
+        case AppLanguage.english.rawValue:
+            return "en"
+        default:
+            return system.first ?? "en"
+        }
+    }
+
     func json(_ path: String, method: String = "GET", body: [String: Any]? = nil, query: [URLQueryItem] = []) async throws -> JSON {
         let d = try await data(path, method: method, body: body, query: query)
         return d.isEmpty ? .null : try JSONDecoder().decode(JSON.self, from: d)
@@ -199,6 +223,8 @@ enum SecureSession {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+            request.setValue(Self.acceptLanguage(preference: UserDefaults.standard.string(forKey: "luminfest.language")),
+                             forHTTPHeaderField: "Accept-Language")
             if let token { request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization") }
             request.httpBody = try? JSONSerialization.data(withJSONObject: body)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

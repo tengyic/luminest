@@ -17,6 +17,8 @@ import re
 import time
 from typing import Any, Mapping, Sequence
 
+from .. import content_locale
+
 import httpx
 
 MAX_REPLY_CHARS = 40000
@@ -96,7 +98,7 @@ def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
                           trust_env=False) as client:
             if settings.provider == 'ollama':
                 response = client.post(settings.provider_url.rstrip('/') + '/api/chat', json={
-                    'model': settings.provider_model, 'messages': list(messages), 'stream': False,
+                    'model': settings.provider_model, 'messages': content_locale.apply(messages), 'stream': False,
                     'options': {'num_predict': max_tokens, 'temperature': temperature}}, headers=headers)
                 response.raise_for_status()
                 if len(response.content) > ceiling * 4:
@@ -107,7 +109,7 @@ def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
                 finish_reason = str(body.get('done_reason') or '')
                 meter_usage(usage_out, started=started, body=body)
             else:
-                payload = {'model': settings.provider_model, 'messages': list(messages),
+                payload = {'model': settings.provider_model, 'messages': content_locale.apply(messages),
                            'max_tokens': max_tokens, 'temperature': temperature}
                 if reasoning == 'off':
                     payload['reasoning_effort'] = 'none'
@@ -201,7 +203,7 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
         with httpx.Client(timeout=settings.provider_timeout, follow_redirects=False,
                           trust_env=False) as client:
             response = client.post(settings.provider_url.rstrip('/') + '/chat/completions', json={
-                'model': settings.provider_model, 'messages': list(messages),
+                'model': settings.provider_model, 'messages': content_locale.apply(messages),
                 'tools': wire_tools, 'tool_choice': tool_choice,
                 'max_tokens': max_tokens, 'temperature': temperature}, headers=headers)
             response.raise_for_status()

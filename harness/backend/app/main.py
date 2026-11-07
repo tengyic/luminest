@@ -24,6 +24,8 @@ from sqlalchemy import Integer, delete, func, inspect, select, text
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from . import content_locale
+
 from . import (accounts, courses, curriculum_route, experiments, figures, harness, learning,
                learning_science, lecture, planner, procedure_service, schemas, simulation_map,
                teacher_clone, tutor)
@@ -742,6 +744,13 @@ def create_app(settings=None):
 
     @app.middleware('http')
     async def boundaries(request, call_next):
+        # The interface can be English or Simplified Chinese, and everything the server
+        # *generates* has to follow the same choice: questions, tutor turns, decks,
+        # slides. The header is read here because this is the only place that sees every
+        # request. It stays set for the rest of the request's context, which is what a
+        # background task started by the route inherits.
+        content_locale.set_locale(
+            content_locale.from_header(request.headers.get('accept-language')))
         if settings.environment == 'production' and request.url.scheme != 'https' and request.url.path not in {API+'/health', '/health'}:
             return JSONResponse({'detail': 'HTTPS is required'}, status_code=400)
         if request.method in {'POST', 'PATCH', 'DELETE'}:

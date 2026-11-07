@@ -25,6 +25,35 @@ import SwiftUI
 /// needs ``com.apple.security.device.audio-input`` in its entitlements: the sandbox file had
 /// it and the direct-download file did not, so a notarised build asked for a microphone it had
 /// no entitlement to open and TCC refused it.
+/// The spoken language the app should use right now.
+///
+/// The device voice path was hardcoded to `en-US`: recogniser *and* synthesiser. A learner
+/// reading the app in Chinese would speak Chinese and be transcribed as English, and the
+/// tutor's answer would be read aloud by an English voice — the audio equivalent of
+/// showing a Chinese screen with English dates. Both now follow the interface language.
+@MainActor
+enum SpeechLocale {
+    static var identifier: String {
+        switch Localization.shared.language {
+        case .simplifiedChinese: return "zh-CN"
+        case .english: return "en-US"
+        case .system: return Locale.preferredLanguages.first ?? "en-US"
+        }
+    }
+
+    static var locale: Locale { Locale(identifier: identifier) }
+
+    /// Nil when no voice for this language is installed. Nil is the correct answer: it
+    /// leaves the system default in place, which at least makes a sound. Substituting an
+    /// English voice for Chinese text produces fluent nonsense.
+    static var voice: AVSpeechSynthesisVoice? {
+        AVSpeechSynthesisVoice(language: identifier)
+            ?? AVSpeechSynthesisVoice.speechVoices().first {
+                $0.language.hasPrefix(String(identifier.prefix(2)))
+            }
+    }
+}
+
 @MainActor final class VoiceIO: NSObject, ObservableObject {
     @Published var transcript = ""
     @Published var listening = false
@@ -40,7 +69,7 @@ import SwiftUI
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
     private let synthesizer = AVSpeechSynthesizer()
-    private lazy var recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))
+    private lazy var recognizer = SFSpeechRecognizer(locale: SpeechLocale.locale)
     private var detector = VoiceActivityDetector()
     /// When the current utterance's audio began, and when speech was last heard in it.
     private var utteranceStartedAt = Date()
@@ -333,6 +362,7 @@ import SwiftUI
         guard !clean.isEmpty else { return }
         synthesizer.stopSpeaking(at: .immediate)
         let utterance = AVSpeechUtterance(string: String(clean.prefix(1200)))
+        if let voice = SpeechLocale.voice { utterance.voice = voice }
         utterance.rate = 0.5
         utterance.pitchMultiplier = 1.0
         synthesizer.delegate = self
