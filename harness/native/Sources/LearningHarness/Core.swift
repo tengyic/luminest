@@ -265,9 +265,13 @@ enum SecureSession {
 enum Page: String, CaseIterable, Identifiable {
     case today, studio, map, review, teacher, projects, insights, settings
     var id: String { rawValue }
-    var title: String {
-        switch self { case .today: return "Today"; case .studio: return "Learning studio"; case .map: return "Knowledge map"; case .review: return "Daily review"; case .teacher: return "Teacher"; case .projects: return "Projects"; case .insights: return "Insights"; case .settings: return "Settings" }
-    }
+    /// Localized through `L10n` rather than a switch over English literals.
+    ///
+    /// The sidebar, the window title and the `Learning` menu all render this one
+    /// property, so a single lookup keeps three surfaces in step when the language
+    /// changes — a switch here would leave the menu in English after a switch to Chinese.
+    /// Keys are `nav.<case>`; see Localizable.strings.
+    var title: String { L10n.t("nav.\(rawValue)") }
     var icon: String {
         switch self { case .today: return "sun.max"; case .studio: return "book.closed"; case .map: return "point.3.connected.trianglepath.dotted"; case .review: return "arrow.trianglehead.clockwise"; case .teacher: return "bubble.left.and.text.bubble.right"; case .projects: return "square.stack.3d.up"; case .insights: return "chart.xyaxis.line"; case .settings: return "slider.horizontal.3" }
     }
@@ -412,6 +416,16 @@ enum Page: String, CaseIterable, Identifiable {
     /// Raw transcripts and quoted evidence never enter the chat request or UserDefaults.
     @Published var teacherStyleProfile: [String: [String]] = [:]
     @Published var error: String?
+    /// The HTTP status behind ``error``, when there was one.
+    ///
+    /// `error` is a `String`, so by the time a view renders it the code is gone and a 422
+    /// — the server *refusing a request it parsed*, on a connection that worked — is
+    /// indistinguishable from a dropped socket. That is not a cosmetic difference: it is
+    /// the difference between "the app and the server disagree about the request format,
+    /// check the versions" and "cannot reach the backend, restart it", and the second
+    /// message sends the reader to a fix that cannot work. Kept separate rather than
+    /// embedded in the string so the presentation layer classifies instead of parsing.
+    @Published var errorStatus: Int?
     @Published var questionError: String?
     @Published var notice: String?
     @Published var connected = false
@@ -602,8 +616,10 @@ enum Page: String, CaseIterable, Identifiable {
         if failure is CancellationError || (failure as? URLError)?.code == .cancelled { return }
         if let e = failure as? AppFailure {
             connected = true
+            errorStatus = e.status
             if e.status == 401 && authenticated { logout(); error = "Your session expired. Please sign in again."; return }
-        } else if failure is URLError { connected = false }
+        } else if failure is URLError { connected = false; errorStatus = nil }
+        else { errorStatus = nil }
         error = failure.localizedDescription
     }
     func load(_ path: String, apply: @escaping (JSON) -> Void) async {
@@ -614,7 +630,7 @@ enum Page: String, CaseIterable, Identifiable {
     func refresh() async {
         guard authenticated else { return }
         let version = epoch
-        busy = true; error = nil
+        busy = true; error = nil; errorStatus = nil
         retryAction = { [weak self] in await self?.refresh() }
         await load("/dashboard") { self.dashboard = $0; if !$0["user"].isNull { self.user = $0["user"] } }
         await load("/curriculum") { self.curriculum = $0; if self.selectedConcept.isEmpty { self.selectedConcept = $0["concepts"].array.first?["id"].string ?? "" } }

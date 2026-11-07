@@ -22,7 +22,7 @@ Run from ``harness/``::
     ui-tests/.venv/bin/python scripts/probe_class.py
     ui-tests/.venv/bin/python scripts/probe_class.py --concept algebra_2_permutations_and_combinations
     ui-tests/.venv/bin/python scripts/probe_class.py --message "why is it divided by r!?"
-    ui-tests/.venv/bin/python scripts/probe_class.py --backend-exe ../outputs/Luminfest.app/Contents/Resources/backend/LuminfestBackend/LuminfestBackend
+    ui-tests/.venv/bin/python scripts/probe_class.py --backend-exe ../outputs/Luminest.app/Contents/Resources/backend/LuminfestBackend/LuminfestBackend
 """
 
 from __future__ import annotations

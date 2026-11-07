@@ -55,6 +55,177 @@ final class BackendLauncherTests: XCTestCase {
                                  "shutdown must not stall the main actor")
     }
 
+    // MARK: - Which server may be adopted
+    //
+    // The reported bug: on a second machine the window said the backend could not be
+    // reached while the server was answering 422. 422 is FastAPI refusing the *shape* of
+    // a request, i.e. the app and the server were different builds. The launcher caused
+    // it by adopting whatever server answered /api/v1/health - a previous install's
+    // backend answers `ready: true` and the same `service` string, so nothing in the old
+    // check could tell them apart. These cases pin the rule that fixes it, with no
+    // process spawned and no port bound.
+
+    private func report(_ json: String) throws -> HealthReport {
+        try XCTUnwrap(HealthReport(payload: Data(json.utf8)), "payload should parse: \(json)")
+    }
+
+    func testAdoptsAServerReportingTheExpectedSchema() throws {
+        let health = try report(#"{"ready":true,"service":"luminfest-learning-harness","schema_version":11}"#)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11), .adopt(11))
+    }
+
+    /// The bug itself: the same service string, a different schema. Adopting this is what
+    /// produced 422 on every request afterwards.
+    func testRefusesAServerReportingAnOlderSchema() throws {
+        let health = try report(#"{"ready":true,"service":"luminfest-learning-harness","schema_version":10}"#)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11),
+                       .schemaMismatch(server: 10, expected: 11))
+    }
+
+    /// A newer server is just as unusable from this build: the disagreement is symmetric.
+    func testRefusesAServerReportingANewerSchema() throws {
+        let health = try report(#"{"ready":true,"service":"luminfest-learning-harness","schema_version":12}"#)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11),
+                       .schemaMismatch(server: 12, expected: 11))
+    }
+
+    /// Builds that predate the field are still this project's server. Refusing them would
+    /// break installs this check exists to protect - but the verdict must say it is a
+    /// guess, so diagnostics can print "unknown" instead of inventing a version.
+    func testAdoptsAServerThatPublishesNoVersionAndReportsItUnknown() throws {
+        let health = try report(#"{"ready":true,"service":"luminfest-learning-harness"}"#)
+        XCTAssertEqual(health.schemaVersion, .absent)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11), .adopt(nil))
+        XCTAssertNil(BackendLauncher.verdict(for: health, expected: 11).adoptedVersion)
+    }
+
+    /// A version we cannot read is not a version we wave through: treating `"11"` as
+    /// "absent" would silently adopt the very server this check is meant to refuse.
+    func testRefusesAVersionItCannotRead() throws {
+        let health = try report(#"{"ready":true,"service":"luminfest-learning-harness","schema_version":"11"}"#)
+        XCTAssertEqual(health.schemaVersion, .unreadable)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11),
+                       .schemaMismatch(server: nil, expected: 11))
+    }
+
+    func testDoesNotAdoptAServerThatSaysItIsNotReady() throws {
+        let health = try report(#"{"ready":false,"service":"luminfest-learning-harness","schema_version":11}"#)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11), .notReady)
+    }
+
+    /// The service name is the only thing standing between the app and a stranger's
+    /// server on 8765 - a proxy, a dev server, another app. It must keep that job now
+    /// that the schema check sits behind it.
+    func testDoesNotAdoptAForeignServiceEvenOnTheRightPort() throws {
+        let health = try report(#"{"ready":true,"service":"some-other-service","schema_version":11}"#)
+        XCTAssertEqual(BackendLauncher.verdict(for: health, expected: 11),
+                       .foreignService("some-other-service"))
+    }
+
+    /// A 200 whose body is not a health payload is the absence of an answer, not a
+    /// refusal: the scan must keep looking rather than stop on it.
+    func testABodyThatIsNotAHealthPayloadIsNotAReport() {
+        XCTAssertNil(HealthReport(payload: Data("not json".utf8)))
+        XCTAssertNil(HealthReport(payload: Data(#"{"ok":true}"#.utf8)),
+                     "a report needs ready and service; without them it is a stranger")
+    }
+
+    /// The failure has to send the reader to the real fix. "Cannot reach the server" is
+    /// what made this a support thread: nothing is unreachable.
+    func testMismatchMessageNamesBothVersionsAndTheFix() {
+        let message = BackendLauncher.incompatibleSchemaMessage(
+            origin: "http://127.0.0.1:8765", server: 10, expected: 11)
+        XCTAssertTrue(message.contains("http://127.0.0.1:8765"))
+        XCTAssertTrue(message.contains("schema v10"))
+        XCTAssertTrue(message.contains("schema v11"))
+        XCTAssertTrue(message.contains("Quit the other copy"))
+        XCTAssertTrue(message.contains("no second server was started"),
+                      "the reader must know nothing was spawned or migrated behind their back")
+    }
+
+    func testMismatchMessageCoversAValueItCannotRead() {
+        let message = BackendLauncher.incompatibleSchemaMessage(
+            origin: "http://127.0.0.1:8766", server: nil, expected: 11)
+        XCTAssertTrue(message.contains("cannot read"))
+        XCTAssertTrue(message.contains("schema v11"))
+    }
+
+    // MARK: - Reading the server's own reason for a failed start
+    //
+    // Second half of the reported bug: on a machine with a previous install the bundled
+    // backend exits at boot because the data directory is from another version (the
+    // schema guard in app.main), and the old code reported "did not become ready". The
+    // log already said why; nobody read it. These cases are pure string/file work.
+
+    private let schemaGuardTrace = """
+    Traceback (most recent call last):
+      File "app/main.py", line 718, in create_app
+        raise RuntimeError('Schema upgrade required; run scripts/init_db.py explicitly. '
+    RuntimeError: Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.
+    """
+
+    func testSchemaGuardInTheLogBecomesTheFailureReason() throws {
+        let message = try XCTUnwrap(BackendLauncher.startupFailure(
+            logText: schemaGuardTrace, dataDirectory: "/Users/x/Library/Application Support/Luminfest Learning Harness"))
+        XCTAssertTrue(message.contains("Schema upgrade required"), message)
+        XCTAssertTrue(message.contains("different Luminfest version"), message)
+        XCTAssertTrue(message.contains("harness.sqlite3"), message)
+        XCTAssertTrue(message.contains("backend.log"), message)
+        XCTAssertTrue(message.contains("back that database up"), message)
+    }
+
+    /// Any other way a start fails must not be dressed up as a schema problem.
+    func testAnUnrelatedStartFailureIsNotBlamedOnTheSchema() {
+        XCTAssertNil(BackendLauncher.startupFailure(
+            logText: "ModuleNotFoundError: No module named 'uvicorn'", dataDirectory: "/tmp"))
+        XCTAssertNil(BackendLauncher.startupFailure(logText: "", dataDirectory: "/tmp"))
+    }
+
+    /// The log is appended to across launches. Only what this launch wrote may explain
+    /// this launch's failure, otherwise an old "Schema upgrade required" line would keep
+    /// misdiagnosing unrelated starts for the life of the install.
+    func testOnlyTheCurrentLaunchsLogIsRead() throws {
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("lf-log-\(UUID().uuidString).txt")
+        defer { try? FileManager.default.removeItem(at: url) }
+        let earlier = "RuntimeError: Schema upgrade required; old run\n"
+        try (earlier + "starting fine\n").write(to: url, atomically: true, encoding: .utf8)
+        let offset = UInt64(earlier.utf8.count)
+
+        XCTAssertEqual(BackendLauncher.logText(at: url, from: 0).hasPrefix("RuntimeError"), true)
+        XCTAssertEqual(BackendLauncher.logText(at: url, from: offset), "starting fine\n")
+        XCTAssertNil(BackendLauncher.startupFailure(
+            logText: BackendLauncher.logText(at: url, from: offset), dataDirectory: "/tmp"),
+            "a previous launch's schema error must not explain this one")
+    }
+
+    // MARK: - Drift guard
+
+    /// ``expectedSchemaVersion`` is a compile-time constant, so nothing stops it from
+    /// going stale when the backend's ``SCHEMA_VERSION`` moves. This reads the backend
+    /// source beside the package and fails on drift, which is the cheapest place to
+    /// catch it: at `swift test`, not on a user's second machine as a 422.
+    func testExpectedSchemaVersionMatchesTheBackendSource() throws {
+        // .../Tests/LearningHarnessTests/BackendLauncherTests.swift -> .../harness
+        let harness = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()   // LearningHarnessTests
+            .deletingLastPathComponent()   // Tests
+            .deletingLastPathComponent()   // native
+            .deletingLastPathComponent()   // harness
+        let db = harness.appendingPathComponent("backend/app/db.py")
+        guard let text = try? String(contentsOf: db, encoding: .utf8) else {
+            throw XCTSkip("backend sources are not beside this package: \(db.path)")
+        }
+        let declared = text.split(whereSeparator: \.isNewline)
+            .first { $0.hasPrefix("SCHEMA_VERSION") }
+            .flatMap { line -> Int? in
+                let value = line.split(separator: "=").last.map(String.init) ?? ""
+                return Int(value.trimmingCharacters(in: .whitespaces))
+            }
+        XCTAssertEqual(declared, BackendLauncher.expectedSchemaVersion,
+                       "BackendLauncher.expectedSchemaVersion must be bumped with \(db.path)")
+    }
+
     // MARK: - Acceptance test 2.5: real process-level regression
 
     /// Spawn exactly ONE child process. ``trap '' TERM`` installs SIG_IGN, which POSIX

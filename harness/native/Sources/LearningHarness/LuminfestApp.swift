@@ -35,17 +35,45 @@ enum CapturePresentation {
 @main struct LuminfestApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var store = AppStore()
+    /// The same two keys `SettingsPage` writes. Read at the scene, not in each view, because
+    /// appearance and text size are window-wide environments: setting them per screen would
+    /// let one card disagree with another about how large the text is.
+    @AppStorage("luminfest.appearance") private var appearanceRaw = AppearancePreference.system.rawValue
+    @AppStorage("luminfest.textScale") private var textScaleRaw = TextScale.system.rawValue
+
+    /// Unknown raw values — an older build's key, or a hand-edited defaults file — fall
+    /// back to following the system rather than to a blank window.
+    private var appearance: AppearancePreference { AppearancePreference(rawValue: appearanceRaw) ?? .system }
+    private var textScale: TextScale { TextScale(rawValue: textScaleRaw) ?? .system }
+
     var body: some Scene {
         WindowGroup("Luminfest") {
-            RootView().environmentObject(store).preferredColorScheme(.light)
-                .onAppear {
-                    delegate.store = store
-                    NativeQA.shared.runIfRequested()
-                    // The browser view at `/app` presents this window, so it needs to know
-                    // where the window is. Reporting is silent when the instance has
-                    // streaming switched off.
-                    WindowFrameReporter.shared.start(store: store)
+            // The text size modifier is applied only when one has been chosen. `dynamicTypeSize`
+            // is not optional, so passing the resolved value unconditionally would make
+            // "Match System" mean `.large` and silently discard a macOS text size the learner
+            // set for every app. `.large` is the macOS default, but "the default" is not the
+            // same promise as "whatever the system currently says".
+            Group {
+                if let size = textScale.dynamicTypeSize {
+                    RootView().dynamicTypeSize(size)
+                } else {
+                    RootView()
                 }
+            }
+            .environmentObject(store)
+            // Both are injected once here so the whole tree moves together on a language
+            // change: the bundle lookup in `L10n` handles the words, this object handles
+            // invalidation, and the locale fixes dates and numbers at the same moment.
+            .environmentObject(Localization.shared)
+            .preferredColorScheme(appearance.colorScheme)
+            .onAppear {
+                delegate.store = store
+                NativeQA.shared.runIfRequested()
+                // The browser view at `/app` presents this window, so it needs to know
+                // where the window is. Reporting is silent when the instance has
+                // streaming switched off.
+                WindowFrameReporter.shared.start(store: store)
+            }
         }
         .defaultSize(width: 1320, height: 860)
         .windowStyle(.hiddenTitleBar)
@@ -65,6 +93,10 @@ enum CapturePresentation {
 
 struct RootView: View {
     @EnvironmentObject var store: AppStore
+    /// Observed, not just injected: reading `language` in this body is what makes a switch
+    /// recompute the whole tree. `L10n.t` is a static bundle lookup, so a view that read it
+    /// once would otherwise keep its old words until something unrelated invalidated it.
+    @EnvironmentObject var localization: Localization
     var body: some View {
         Group {
             if store.restoring { VStack(spacing: 20) { Image(systemName: "sun.max.fill").font(.system(size: 38)).foregroundStyle(Palette.forest); ProgressView("Opening your learning space…") }.frame(maxWidth: .infinity, maxHeight: .infinity) }
@@ -72,12 +104,15 @@ struct RootView: View {
                 // First run is a branch, not a sheet. See `AppStore.inCourseSetup` for why: a sheet
                 // raised in the same update cycle as this swap is intermittently dropped, which
                 // silently enrolled new learners in the default course.
-                if store.inCourseSetup { CourseSetupView().preferredColorScheme(.light) }
+                if store.inCourseSetup { CourseSetupView() }
                 else { AppShell() }
             }
             else { OnboardingView() }
         }
         .foregroundStyle(Palette.ink).font(.system(size: 13))
+        // The locale travels with the words. It governs dates, numbers and measurements —
+        // a Chinese screen with `Oct 23` in it is only half switched.
+        .environment(\.locale, localization.language.locale)
         .background(Palette.background).frame(minWidth: SidebarLayout.minimumWindowWidth, minHeight: 700)
         // The practice surface is an overlay inside the one window rather than a sheet. A sheet is a
         // presentation attached to a host view, and SwiftUI intermittently drops a presentation that
@@ -94,7 +129,6 @@ struct RootView: View {
                     Color.black.opacity(0.26).ignoresSafeArea()
                     QuestionView()
                         .environmentObject(store)
-                        .preferredColorScheme(.light)
                         .background(Palette.background, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
                         .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
                         .overlay(RoundedRectangle(cornerRadius: 22, style: .continuous).strokeBorder(Color.white.opacity(0.65), lineWidth: 1))
@@ -721,7 +755,7 @@ private struct SidebarSettingsButton: View {
 
     var body: some View {
         Button(action: action) {
-            Label("Settings", systemImage: "slider.horizontal.3")
+            Label(Page.settings.title, systemImage: "slider.horizontal.3")
                 .font(.system(size: 12))
                 .foregroundStyle(isSelected ? Palette.accentSky.deep : (isHovered ? Palette.ink : Palette.secondary))
                 .padding(12)

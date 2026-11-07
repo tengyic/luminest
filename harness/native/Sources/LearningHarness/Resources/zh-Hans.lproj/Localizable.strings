@@ -1,0 +1,123 @@
+/* Luminest 界面文案 — 简体中文。
+   键名与 en.lproj/Localizable.strings 必须一一对应；由 LocalizationTests 校验，
+   任一侧缺失都会让构建失败。术语约定：
+   Learner=学习者  Session=学习时段  Deck=卡组  Board=画板  Simulation=模拟
+   Playground=演练场  Insights=洞察  Server=本地服务 */
+
+"app.name" = "Luminest";
+
+/* MARK: - 语言 */
+
+"language.title" = "语言";
+"language.subtitle" = "立即作用于整个应用，无需重启。";
+"language.system" = "跟随系统";
+"language.systemDetail" = "跟随「系统设置」中的语言";
+"language.english" = "English";
+"language.zhHans" = "简体中文";
+
+/* MARK: - 外观与辅助功能设置 */
+
+"settings.section.appearance" = "外观";
+"settings.section.accessibility" = "辅助功能";
+
+"settings.appearance.title" = "主题";
+"settings.appearance.system" = "跟随系统";
+"settings.appearance.light" = "浅色";
+"settings.appearance.dark" = "深色";
+"settings.appearance.detail" = "深色模式沿用同一套莫兰迪配色，只降低亮度而不做反相，因此对比度得以保持。";
+
+"settings.contrast.title" = "增强对比度";
+"settings.contrast.increase" = "增强对比度";
+"settings.contrast.detail" = "加深文字与描边，并去掉低对比度的底色。这是 macOS 的「增强对比度」设置，应用只读取它，不另存一份。";
+"settings.contrast.followSystem" = "跟随系统";
+"settings.contrast.state.on" = "已开启";
+"settings.contrast.state.off" = "未开启";
+
+"settings.motion.title" = "减弱动态效果";
+"settings.motion.reduce" = "减弱动态效果";
+"settings.motion.detail" = "停止装饰性动画、视差与弹簧过渡。这是 macOS 的「减弱动态效果」设置，应用只读取它，不另存一份。";
+"settings.motion.state.on" = "已开启";
+"settings.motion.state.off" = "未开启";
+
+"settings.text.title" = "文字大小";
+"settings.text.detail" = "按比例放大文字以及依赖文字尺寸的间距；布局会重排，而不是被裁切。";
+"settings.text.system" = "跟随系统";
+"settings.text.large" = "大";
+"settings.text.xLarge" = "较大";
+"settings.text.xxLarge" = "最大";
+
+/* MARK: - 导航 */
+
+/* 键名为 nav.<Page 用例>。新增前先看 Core.swift 的 Page 枚举：
+   用不到的键是死重量，缺失的键会直接把键名渲染到侧边栏上。 */
+
+"nav.today" = "今日";
+"nav.studio" = "学习工坊";
+"nav.map" = "知识地图";
+"nav.review" = "每日复习";
+"nav.teacher" = "老师";
+"nav.projects" = "项目";
+"nav.insights" = "洞察";
+"nav.settings" = "设置";
+
+/* MARK: - 通用状态 */
+
+"state.loading" = "正在加载";
+"state.loading.detail" = "正在从本地服务获取最新内容。";
+
+"state.empty.title" = "这里还没有内容";
+"state.empty.detail" = "添加之后就会出现在这里。不是加载失败——这份列表确实是空的。";
+
+"state.offline.title" = "离线状态";
+"state.offline.detail" = "本地学习服务没有响应。已经加载过的内容仍然可读；新任务会在连接恢复后继续。";
+
+"state.error.title" = "出了点问题";
+"state.error.detail" = "请求已经到达服务端，但被拒绝了。详情见下。";
+
+"state.backendStarting.title" = "正在启动本地服务";
+"state.backendStarting.detail" = "更新后的首次启动可能需要最多一分钟，因为 macOS 要加载整个应用包。";
+
+"state.backendUnavailable.title" = "本地服务不可用";
+"state.backendUnavailable.detail" = "应用无法连接本地服务。重试之前，请先打开日志查看原因。";
+
+"state.validation.title" = "服务端拒绝了这个请求";
+"state.validation.detail" = "这是校验失败，不是网络失败：应用与服务端对请求格式的理解不一致，服务端很可能是旧版本。请打开诊断信息查看它报告的版本。";
+
+/* MARK: - 操作 */
+
+"action.retry" = "重试";
+"action.refresh" = "刷新";
+"action.cancel" = "取消";
+"action.done" = "完成";
+"action.save" = "保存";
+"action.delete" = "删除";
+"action.close" = "关闭";
+"action.openLog" = "打开服务日志";
+"action.copyDiagnostics" = "复制诊断信息";
+"action.openSystemSettings" = "打开系统设置";
+
+/* MARK: - 错误：按原因描述，而不是只给状态码 */
+
+"error.network" = "无法连接本地服务。";
+"error.timeout" = "服务端响应超时。";
+"error.unauthorized" = "登录状态已过期，请重新登录。";
+"error.validation" = "服务端无法解析该请求（HTTP 422）。通常意味着应用与服务端版本不一致。";
+"error.server" = "服务端报告了内部错误。";
+"error.unknown" = "发生了未预期的错误。";
+
+/* MARK: - 诊断 */
+
+"diagnostics.title" = "诊断信息";
+"diagnostics.endpoint" = "服务地址";
+"diagnostics.serverVersion" = "服务端数据结构版本";
+"diagnostics.appVersion" = "应用版本";
+"diagnostics.lastError" = "最近一次错误";
+
+/* MARK: - 旁白（VoiceOver） */
+
+"a11y.loading" = "正在加载内容";
+"a11y.offline" = "离线";
+"a11y.error" = "错误";
+"a11y.progress" = "阅读进度";
+"a11y.sidebar" = "主导航";
+"a11y.languagePicker" = "界面语言";

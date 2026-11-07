@@ -16,7 +16,7 @@ Nothing here is written to the operator's real database: the state directory is 
 Run from ``harness/``::
 
     ui-tests/.venv/bin/python scripts/probe_end_to_end.py \
-        --backend-exe ../outputs/Luminfest.app/Contents/Resources/backend/LuminfestBackend/LuminfestBackend
+        --backend-exe ../outputs/Luminest.app/Contents/Resources/backend/LuminfestBackend/LuminfestBackend
 
 Add ``--skip-chat`` to skip the one model-backed turn (the slowest step, and the only one
 that needs a reachable provider).

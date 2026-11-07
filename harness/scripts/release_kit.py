@@ -46,11 +46,16 @@ OUTPUTS = HARNESS.parent / "outputs"
 WORK = OUTPUTS / ".packaging"
 RESULT = WORK / "package-result.json"
 
-APP_NAME = "Luminfest"
+#: The user-visible brand, and the second copy of the constant in ``package.py``. It has to
+#: match, because this script renames the artifacts and bakes the ``.app`` name into the
+#: generated ``install.sh``: with the DMG holding ``Luminest.app``, an installer looking for
+#: ``Luminfest.app`` fails on its first line. The Homebrew cask token below is NOT this name
+#: and is deliberately frozen - see ``cask_text()``.
+APP_NAME = "Luminest"
 
 #: Installed verbatim. POSIX sh, no bashisms: a tester's shell is not our business.
 INSTALL_SH = r'''#!/bin/sh
-# Luminfest installer.
+# Luminest installer.
 #
 # Use it when macOS says the app "is damaged and can't be opened", or when you would
 # rather not drag anything into /Applications by hand. This build is ad-hoc signed and
@@ -59,11 +64,11 @@ INSTALL_SH = r'''#!/bin/sh
 # working one.
 #
 #   sh install.sh                             # uses the .dmg sitting beside this script
-#   sh install.sh path/to/Luminfest-arm64.dmg
+#   sh install.sh path/to/Luminest-arm64.dmg
 #   INSTALL_DIR=~/Applications sh install.sh  # install somewhere else
 set -eu
 
-APP="Luminfest"
+APP="Luminest"
 DEST_DIR="${INSTALL_DIR:-/Applications}"
 HERE=$(cd "$(dirname "$0")" && pwd)
 SRC="${1:-}"
@@ -75,7 +80,7 @@ if [ -z "$SRC" ]; then
 fi
 
 if [ -z "$SRC" ] || [ ! -e "$SRC" ]; then
-  echo "install.sh: give me the Luminfest .dmg, or put it in the same folder as this script." >&2
+  echo "install.sh: give me the Luminest .dmg, or put it in the same folder as this script." >&2
   exit 1
 fi
 
@@ -138,7 +143,7 @@ echo ""
 echo "The first launch starts a local backend and can take up to a minute."
 '''
 
-INSTALL_TXT = """Luminfest {version} — installing it
+INSTALL_TXT = """Luminest {version} — installing it
 =======================================
 
 This build is signed ad-hoc, not notarized by Apple. That is a statement about a
@@ -155,16 +160,16 @@ Put this folder somewhere convenient, then:
 
     sh install.sh
 
-It mounts the DMG, copies Luminfest.app into /Applications, removes the quarantine
+It mounts the DMG, copies Luminest.app into /Applications, removes the quarantine
 flag, and tells you what to do next. It is a short shell script — read it first if you
 would rather not run something you have not read.
 
 2. Drag it in, then clear the flag once
 ---------------------------------------
-Open the DMG, drag Luminfest.app to Applications, then run:
+Open the DMG, drag Luminest.app to Applications, then run:
 
-    xattr -dr com.apple.quarantine /Applications/Luminfest.app
-    open /Applications/Luminfest.app
+    xattr -dr com.apple.quarantine /Applications/Luminest.app
+    open /Applications/Luminest.app
 
 You only need this once per install. macOS 15 removed most of the old
 right-click-then-Open workaround, so the command above is the reliable route.
@@ -195,7 +200,7 @@ minute; later starts take about twenty seconds. If the window says the service i
 ready, wait — it usually is.
 """
 
-RELEASE_NOTES = """# Luminfest {version}
+RELEASE_NOTES = """# Luminest {version}
 
 Built {date} · {size_app} · macOS 14+ · Apple Silicon
 
@@ -322,19 +327,23 @@ def verify_installer(dmg: Path, workdir: Path) -> dict:
 
 
 def cask_text(version: str, base_url: str, digest: str) -> str:
+    # The cask *token* stays "luminfest" on purpose. It is a public identifier: everyone
+    # who already wrote `brew install --cask luminfest` would break if it moved, and a
+    # cask cannot be renamed silently. The `name`/`app`/url fields below are the display
+    # and artifact layer, so they do follow the brand. Do not "tidy" the token away.
     return f'''cask "luminfest" do
   version "{version}"
   sha256 "{digest}"
 
-  url "{base_url.rstrip('/')}/Luminfest-{version}-arm64.dmg"
-  name "Luminfest"
+  url "{base_url.rstrip('/')}/Luminest-{version}-arm64.dmg"
+  name "Luminest"
   desc "Adaptive study harness with a local, offline-first tutor"
   homepage "{base_url.rstrip('/')}"
 
   depends_on macos: ">= :sonoma"
   depends_on arch: :arm64
 
-  app "Luminfest.app"
+  app "Luminest.app"
 
   caveats <<~EOS
     This build is ad-hoc signed and not notarized by Apple. Install it with
@@ -356,7 +365,7 @@ def write(path: Path, text: str, executable: bool = False) -> Path:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Assemble a publishable Luminfest release directory")
+    parser = argparse.ArgumentParser(description="Assemble a publishable Luminest release directory")
     parser.add_argument("--version", required=True, help="the version already packaged")
     parser.add_argument("--base-url", default=None,
                         help="public URL the artifacts will be served from; enables the Homebrew cask")

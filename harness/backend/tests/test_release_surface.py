@@ -154,7 +154,7 @@ def test_install_script_refuses_a_path_it_did_not_install(tmp_path):
 
 def test_cask_points_at_the_versioned_dmg(tmp_path):
     text = release_kit.cask_text('1.1.16', 'https://example.test/v1.1.16', 'a' * 64)
-    assert 'url "https://example.test/v1.1.16/Luminfest-1.1.16-arm64.dmg"' in text
+    assert 'url "https://example.test/v1.1.16/Luminest-1.1.16-arm64.dmg"' in text
     assert "depends_on arch: :arm64" in text
     # The caveat must name the flag, because without it the app is quarantined and blocked.
     assert '--no-quarantine' in text
@@ -168,12 +168,12 @@ def test_release_directory_explains_itself(tmp_path):
 
     release_kit.main(['--version', '1.1.16', '--result', str(record_path), '--out', str(out)])
 
-    for name in ('Luminfest-1.1.16-arm64.dmg', 'Luminfest-1.1.16-arm64.zip',
+    for name in ('Luminest-1.1.16-arm64.dmg', 'Luminest-1.1.16-arm64.zip',
                  'install.sh', 'INSTALL.txt', 'SHA256SUMS.txt', 'RELEASE.md', 'release.json'):
         assert (out / name).is_file(), name
 
     sums = (out / 'SHA256SUMS.txt').read_text(encoding='utf-8')
-    assert 'install.sh' in sums and 'Luminfest-1.1.16-arm64.dmg' in sums
+    assert 'install.sh' in sums and 'Luminest-1.1.16-arm64.dmg' in sums
 
     # Without a public URL there is no cask: a formula pointing at a host that does not
     # exist is worse than no formula, because it looks installable.

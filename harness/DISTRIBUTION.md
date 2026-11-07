@@ -1,4 +1,4 @@
-# Luminfest — macOS 分发与签名指南
+# Luminest — macOS 分发与签名指南
 
 状态(2026-10-25):打包管线完整;当前产物为 **ad-hoc 签名**。要产出 Gatekeeper 直接放行的
 公开分发包,缺的是**两件事,不是一件**:运营者的 **Apple Developer 账号凭据**(签名 + 公证),
@@ -23,6 +23,7 @@
 | 法律文本草稿 | `backend/legal/` 以 `--add-data` 进 bundle(`LEGAL_DATA_DIR`) | ✅ 冻结冒烟断言 `/legal` 非空;发布门禁仍拦未填占位符 |
 | 依赖一致性 | 冻结前比对构建环境与 `requirements.txt`(`dependency_gate()`) | ✅ 缺包直接失败,不产出功能缺失的包 |
 | 功能路由 | `routes_*` 模块由 `app/feature_routers.py` **单点声明**,打包时转成 `--hidden-import`,并在冻结模块表中断言其落地 | ✅ 冻结冒烟断言 `/deck`、`/flashcards`、`/my-courses`、`/images/library`、`/playground` 均非 404 |
+| 语言声明 | `Info.plist` 的 `CFBundleLocalizations`(`en`、`zh-Hans`)+ 资源包内 `en.lproj` / `zh-Hans.lproj` | ✅ 缺任一语言即**构建失败**,见下文「语言与本地化」 |
 
 ## 一条命令产出可分发版本
 
@@ -44,8 +45,8 @@ python3 harness/scripts/package.py --version 1.1.9 \
   --notarize --notary-profile LUMINFEST_NOTARY
 
 # 3) 验证:
-codesign --verify --deep --strict --verbose=2 "outputs/Luminfest.app"
-spctl assess --type execute --verbose=2 "outputs/Luminfest.app"   # 期望 accepted, source=Notarized Developer ID
+codesign --verify --deep --strict --verbose=2 "outputs/Luminest.app"
+spctl assess --type execute --verbose=2 "outputs/Luminest.app"   # 期望 accepted, source=Notarized Developer ID
 ```
 
 注意:`--notarize` 和 `--sandbox` 都**要求** `--sign-identity`(脚本强制;ad-hoc 公证/沙盒
@@ -129,8 +130,8 @@ python3 scripts/release_kit.py --version 1.1.16 --verify --base-url https://exam
 
 | 文件 | 作用 |
 |---|---|
-| `Luminfest-<version>-arm64.dmg` | 版本化命名,与 zip 同源 |
-| `Luminfest-<version>-arm64.zip` | 网盘/微信传输用,比 DMG 更耐中转 |
+| `Luminest-<version>-arm64.dmg` | 版本化命名,与 zip 同源 |
+| `Luminest-<version>-arm64.zip` | 网盘/微信传输用,比 DMG 更耐中转 |
 | `install.sh` | 挂载、拷贝、清 quarantine、校验签名 |
 | `INSTALL.txt` | 三条路径的人话说明,含失败时怎么办 |
 | `SHA256SUMS.txt` | DMG / zip / install.sh 三个摘要 |
@@ -170,13 +171,13 @@ ad-hoc 签名意味着**签名不绑定任何身份**。所以"这个包是不�
 
 适用:小范围熟人测试。产物是 ad-hoc 签名的 zip/DMG,测试者首次打开需手动过一次 Gatekeeper。
 
-**发给测试者的东西**:`outputs/Luminfest-arm64.zip`(比 DMG 更适合网盘/微信传输;DMG 与 zip
+**发给测试者的东西**:`outputs/Luminest-arm64.zip`(比 DMG 更适合网盘/微信传输;DMG 与 zip
 由同一条命令同时写出,只有其中一个新鲜就说明构建中途失败,**不要发**)。要求:Apple
 Silicon Mac、macOS 14+。**不需要发任何源码**——bundle 内不含可读项目源码(见下节),后端是
 PyInstaller 字节码冻结、UI 是编译后的二进制。
 
 > ⚠️ **发之前先核对本次构建记录,不要凭文件名和记忆。** 这里出过一次事故:本文档长期写着
-> "约 44MB",而磁盘上那个 `Luminfest-arm64.zip` 是**上一次**构建——87.8MB、知识图谱为空、
+> "约 44MB",而磁盘上那个 `Luminest-arm64.zip` 是**上一次**构建——87.8MB、知识图谱为空、
 > pack 数据全无,修复后的包就安静地放在它旁边。文件名不随版本变化,所以唯一可靠的判据是
 > 构建记录本身:
 
@@ -210,9 +211,9 @@ PY
 **测试者首次打开步骤**(随包附一段话即可):
 
 ```bash
-# 解压后,把 Luminfest.app 拖进「应用程序」,然后:
-xattr -cr /Applications/Luminfest.app
-open /Applications/Luminfest.app
+# 解压后,把 Luminest.app 拖进「应用程序」,然后:
+xattr -cr /Applications/Luminest.app
+open /Applications/Luminest.app
 ```
 
 说明:未公证的 app 首次启动会被 Gatekeeper 拦("无法验证开发者"),上面第一条命令移除
@@ -442,11 +443,44 @@ bundle 布局。`backend/tests/test_resource_paths.py` 把两种布局都钉住,
 真要改,等这一轮结束再改,然后重新打包 —— 不要用 `--skip-backend-build` 绕过,
 那等于把旧字节贴上新的版本号。
 
-## 已刻意保留的内部标识(改名 Luminfest 时审过)
+## 语言与本地化(English / 简体中文)
+
+App 自带中英切换,语言在设置页里选,不跟随系统——因为同一个人的系统语言和学习语言经常不是
+一个。这一节记的是**打包层**必须配合的三件事,任何一件缺失都不报错,只是静默少一半功能。
+
+**1. `Info.plist` 必须声明语言。** `app_info_plist()` 写入三个键:
+
+| 键 | 值 | 作用 |
+|---|---|---|
+| `CFBundleDevelopmentRegion` | `en` | 开发语言(SwiftPM 的 `defaultLocalization` 也是 `en`) |
+| `CFBundleLocalizations` | `["en", "zh-Hans"]` | **系统设置 → 语言与地区**据此把 app 列进两种语言;缺了它,app 在代码里双语、在系统眼里单语,按 App 覆盖语言只给一种选项 |
+| `CFBundleAllowMixedLocalizations` | `true` | 允许逐语言混排,而不是整包回落到开发语言 |
+
+**2. 翻译跟着 SwiftPM 资源包走,所以必须断言它真的进去了。** `en.lproj` 与 `zh-Hans.lproj`
+在 `Sources/LearningHarness/Resources/` 下,由 `.process("Resources")` 收进
+`<包名>_LearningHarness.bundle`,再随资源包进入 `Contents/Resources/`。文件夹在源码树里
+**不等于**它在 bundle 里——构建产物若是加翻译之前生成的,拷进去的 bundle 一个 `.lproj` 都没有。
+因此 `assemble_app()` 在拷贝资源包之后立即断言两个文件夹都存在,缺哪个就用
+`RuntimeError` 点名哪个,构建当场失败。理由和资源包本身一样:这个仓库已经发出过一个
+签名完好、资源包却缺失、直到首次使用才崩的 app,少一门语言也该在构建时失败,而不是在用户
+第一次打开时才发现。
+
+**3. `Info.plist` 本身也在检查范围内。** `verify_portability()` 读到 `Contents/Info.plist`
+时会断言 `CFBundleLocalizations` 里两种语言都在。`.lproj` 进了 bundle、plist 却在写的时候
+漏掉这个键,是同一类故障的上移一层:文件都在,系统就是不知道。
+
+**测试者数据目录不跟着改名。** 用户数据(课程、设置、TCC 授权、`tutor.env`)在
+`~/Library/Application Support/Luminfest Learning Harness`,名字里仍是旧拼写 `Luminfest`。
+这是刻意的:改目录名等于让每一个既有用户的学习记录、偏好和已授予的权限全部凭空消失,而且
+重新签名救不回来。**显示层改名,身份层不改**——`CFBundleIdentifier`
+(`com.luminfest.learningharness`)同理,理由相同。
+
+## 已刻意保留的内部标识(改名 Luminest 时审过)
 
 - `LuminfestBackend` — 打包内层目录/可执行名(bundle 内部路径,改名需同步 PyInstaller spec,无用户可见影响)
 - `LuminfestLearningHarness*.entitlements` — 构建输入文件名
+- `Luminfest.icns` — bundle 内的图标文件名(与 `CFBundleIconFile` 成对改名才会有收益,但改它要动 `make_icon()`,换不来任何用户可见差异)
 - `com.luminfest.learning-harness.session` — Keychain service(改了会孤儿化已存 session)
 - Application Support 数据目录 `Luminfest Learning Harness` — 改名会孤儿化既有 learner 数据
 - Python 包名/模块名 — 代码内部
-- 用户可见面(窗口标题、邮件文案、UA、bundle id `com.luminfest.learningharness`、App 名/DMG 名)已全部改为 Luminfest。
+- 用户可见面(`CFBundleName`/`CFBundleDisplayName`、`.app` 名、DMG 卷名、归档文件名)已全部改为 Luminest;bundle id 仍是 `com.luminfest.learningharness`,理由见上节。

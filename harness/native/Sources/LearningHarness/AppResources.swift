@@ -32,6 +32,19 @@ enum AppResources {
         }
         // A bundle parked beside Contents, and the test bundle's own Resources.
         candidates.append(Bundle.main.bundleURL.appendingPathComponent(bundleName + ".bundle"))
+        // A `swift test` tree. Two things are true here and both used to break the probe:
+        // `Bundle.main` is the `xctest` *tool* directory (`…/Developer/usr/bin`), not the
+        // `.xctest` bundle, so every candidate derived from it points outside the build
+        // tree; and SwiftPM copies the resource bundle *next to* the `.xctest`, not into
+        // its `Contents/Resources`. The code under test is linked into the .xctest, so
+        // `Bundle(for:)` is the only handle on the directory that actually holds it.
+        // Without this the resolver fell through to `Bundle.main`, whose `localizations`
+        // reports `["en"]` for a plain directory - so the suite saw an English-only tree
+        // and reported missing tables rather than a missing bundle.
+        let testBundle = Bundle(for: BundleFinder.self).bundleURL
+        candidates.append(testBundle.appendingPathComponent(bundleName + ".bundle"))
+        candidates.append(testBundle.deletingLastPathComponent()
+            .appendingPathComponent(bundleName + ".bundle"))
         if let sibling = Bundle(for: BundleFinder.self).resourceURL {
             candidates.append(sibling.appendingPathComponent(bundleName + ".bundle"))
         }

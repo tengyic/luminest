@@ -27,8 +27,20 @@ HARNESS = ROOT / "harness"
 OUTPUTS = ROOT / "outputs"
 WORK = OUTPUTS / ".packaging"
 BACKEND = WORK / "dist" / "LuminfestBackend"
-APP_NAME = "Luminfest"
+#: The user-visible brand. Drives the ``.app`` name, ``CFBundleName``/``CFBundleDisplayName``,
+#: the DMG volume name and the archive stem. The *identity* is deliberately NOT renamed with
+#: it: ``CFBundleIdentifier``, the entitlements filenames, the ``LuminfestBackend`` artifact
+#: and the Application Support directory all keep the old spelling, because changing any of
+#: them orphans existing users' lessons, settings and TCC grants - a re-sign cannot undo that.
+APP_NAME = "Luminest"
 APP = OUTPUTS / f"{APP_NAME}.app"
+#: The languages the app ships, in development-language-first order. Read by three places so
+#: one edit can never half-apply: the Info.plist below, the staging assertion that both
+#: ``.lproj`` folders really landed in the resource bundle, and the plist smoke check. A
+#: bilingual app whose plist omits ``CFBundleLocalizations`` is monolingual to macOS: System
+#: Settings > Language & Region lists it under one language and the per-app override is
+#: offered for one language only.
+LOCALIZATIONS = ("en", "zh-Hans")
 NATIVE = HARNESS / "native"
 PRIVACY_MANIFEST = NATIVE / "Resources" / "PrivacyInfo.xcprivacy"
 ENTITLEMENTS_SANDBOX = NATIVE / "LuminfestLearningHarness.entitlements"
@@ -455,6 +467,21 @@ def verify_portability(directory):
                 binaries.append(path)
             if path.suffix in {".sqlite3", ".sqlite", ".db", ".csv", ".npz", ".pkl", ".pickle"}:
                 raise RuntimeError(f"Unexpected user/training data in distribution: {path}")
+    declared_localizations = None
+    # Only .app bundles carry an Info.plist; this function also runs over the frozen backend
+    # directory, where the key has no meaning. When the plist IS there, the localizations
+    # are part of what "portable" means for this build: the .lproj folders can be inside the
+    # resource bundle while the plist that tells macOS they exist was written without them,
+    # and the only symptom is a language that cannot be chosen per app in System Settings.
+    plist_path = directory / "Contents" / "Info.plist"
+    if plist_path.is_file():
+        plist = plistlib.loads(plist_path.read_bytes())
+        declared_localizations = list(plist.get("CFBundleLocalizations") or [])
+        absent = [name for name in LOCALIZATIONS if name not in declared_localizations]
+        if absent:
+            raise RuntimeError(
+                f"Info.plist does not declare {', '.join(absent)} in CFBundleLocalizations: "
+                f"{plist_path} declares {declared_localizations or 'nothing'}")
     for path in binaries:
         architectures = subprocess.check_output(["/usr/bin/lipo", "-archs", str(path)], text=True).split()
         if "arm64" not in architectures:
@@ -486,7 +513,8 @@ def verify_portability(directory):
                 in_rpath = False
     return {"mach_o_count": len(binaries), "external_symlinks": 0,
             "non_system_absolute_dylib_dependencies": 0, "arm64_verified": True,
-            "binary_minimum_macos_versions": sorted(set(minimum_versions))}
+            "binary_minimum_macos_versions": sorted(set(minimum_versions)),
+            "bundle_localizations": declared_localizations}
 
 
 def feature_router_modules():
@@ -1015,6 +1043,14 @@ def app_info_plist(version):
         "CFBundlePackageType": "APPL", "CFBundleInfoDictionaryVersion": "6.0",
         "CFBundleShortVersionString": version, "CFBundleVersion": version,
         "CFBundleIconFile": "Luminfest.icns", "LSMinimumSystemVersion": "14.0",
+        # The three keys that make the bundle localizable to macOS rather than only to its
+        # own code. ``CFBundleLocalizations`` is what System Settings reads to list the app
+        # under both languages; without it the in-app switch works and the OS still reports
+        # an English-only app. Values come from LOCALIZATIONS so the plist and the staging
+        # assertion cannot disagree.
+        "CFBundleDevelopmentRegion": "en",
+        "CFBundleLocalizations": list(LOCALIZATIONS),
+        "CFBundleAllowMixedLocalizations": True,
         "LSUIElement": False, "NSHighResolutionCapable": True,
         "NSMicrophoneUsageDescription": "Record your microphone only when you explicitly start a presentation recording.",
         "NSSpeechRecognitionUsageDescription": "Transcribe your speech on this Mac only when you start a spoken session with the tutor. Audio is processed on-device.",
@@ -1084,6 +1120,21 @@ def assemble_app(executable, version, sign_identity=None, sandbox=False, notariz
         # part of the app, not an optional extra: see resource_bundle().
         resources_bundle = resource_bundle(executable)
         run(["/usr/bin/ditto", resources_bundle, resources / resources_bundle.name])
+        # The translations ride *inside* that bundle, so a bundle that was copied but was
+        # built before the ``.lproj`` folders existed carries zero translations and the app
+        # silently falls back to its development language. This repository has already
+        # shipped a signed app whose resource bundle was absent and died on first use, so
+        # the rule here is the same: a missing translation must fail the build, not the
+        # user's first launch - and "the folder is in the source tree" is not evidence that
+        # SwiftPM processed it into the bundle.
+        staged_bundle = resources / resources_bundle.name
+        absent = [name for name in LOCALIZATIONS if not (staged_bundle / f"{name}.lproj").is_dir()]
+        if absent:
+            raise RuntimeError(
+                "Staged resource bundle is missing translations: "
+                + ", ".join(f"{name}.lproj" for name in absent)
+                + f" in {staged_bundle}. Rebuild the native target so SwiftPM processes "
+                "Sources/LearningHarness/Resources into the bundle.")
         run(["/usr/bin/ditto", BACKEND, resources / "backend" / "LuminfestBackend"])
         # The manifest must sit at Contents/Resources/PrivacyInfo.xcprivacy, which is the
         # only location App Store review looks in.
@@ -1217,7 +1268,7 @@ def make_archives(template_legal=False):
     # most recipients ever see, and it survives being copied, forwarded in a chat, or
     # renamed - unlike the marker inside the bundle. Naming it like a release is how a
     # documented alpha override ended up being handed out as though it were shippable.
-    stem = "Luminfest-arm64" + ("-ALPHA-TEMPLATE-LEGAL" if template_legal else "")
+    stem = f"{APP_NAME}-arm64" + ("-ALPHA-TEMPLATE-LEGAL" if template_legal else "")
     dmg = OUTPUTS / f"{stem}.dmg"
     archive = OUTPUTS / f"{stem}.zip"
     # A staging directory that is *retired*, never deleted. ``tempfile.TemporaryDirectory``
@@ -1320,7 +1371,7 @@ def verify_dmg(dmg):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Build a portable macOS 14+ arm64 Luminfest app, DMG and zip")
+    parser = argparse.ArgumentParser(description=f"Build a portable macOS 14+ arm64 {APP_NAME} app, DMG and zip")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--backend-only", action="store_true", help="Freeze and smoke-test only; never build or copy native code")
     modes.add_argument("--skip-backend-build", action="store_true", help="Reuse the previously frozen backend if sources are unchanged")

@@ -107,6 +107,23 @@ struct InsightsView: View {
 }
 struct SettingsPage: View {
     @EnvironmentObject var store: AppStore
+    /// Injected once at the scene root. Declared here because the picker itself has to
+    /// repaint on a language change: `L10n.t` is a static lookup, so a view that never
+    /// observes the store would keep its old labels until something else invalidated it.
+    @EnvironmentObject var localization: Localization
+    /// Theme and text size live in the same two defaults keys the scene root reads, so a
+    /// choice made here is what the next window is built with — there is no second copy of
+    /// the preference to drift out of sync.
+    @AppStorage("luminfest.appearance") private var appearanceRaw = AppearancePreference.system.rawValue
+    @AppStorage("luminfest.textScale") private var textScaleRaw = TextScale.system.rawValue
+    /// Increase Contrast is a system preference, not an app preference. It is read from
+    /// AppKit rather than mirrored into `@AppStorage` on purpose: a per-app copy would let
+    /// the row claim a state that `Palette` is not actually drawing with.
+    @State private var increasesContrast = NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    /// Used to re-read Increase Contrast when the learner comes back from System Settings;
+    /// unlike Reduce Motion there is no environment value that updates it for us.
+    @Environment(\.scenePhase) private var scenePhase
     @State private var goal = ""
     @State private var minutes = 20
     @State private var consent = false
@@ -151,8 +168,169 @@ struct SettingsPage: View {
         }
     }
 
+    // MARK: - Display preference sections
+    //
+    // Language, theme and text size are the display preferences this app can actually
+    // honour. Contrast and Reduce Motion deliberately stay read-only status rows: both are
+    // macOS-owned get-only environment values that `Palette` and `Typography` already
+    // resolve against, so a per-app switch could only change a stored bool that no
+    // renderer reads — a lie the learner can catch by toggling it and seeing nothing move.
+
+    private var languageBinding: Binding<AppLanguage> {
+        Binding(get: { localization.language }, set: { localization.set($0) })
+    }
+
+    /// Both bindings resolve the raw string rather than storing the enum: `@AppStorage`
+    /// can only persist a plist scalar, and a corrupt or older value falls back to
+    /// "follow the system" instead of an empty selection.
+    private var appearanceBinding: Binding<AppearancePreference> {
+        Binding(get: { AppearancePreference(rawValue: appearanceRaw) ?? .system },
+                set: { appearanceRaw = $0.rawValue })
+    }
+
+    private var textScaleBinding: Binding<TextScale> {
+        Binding(get: { TextScale(rawValue: textScaleRaw) ?? .system },
+                set: { textScaleRaw = $0.rawValue })
+    }
+
+    private var languageCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 16) {
+                SectionHeading(title: L10n.t("language.title"))
+                Picker(L10n.t("language.title"), selection: languageBinding) {
+                    ForEach(AppLanguage.allCases) { language in
+                        // Each option is written in its own language, so the picker stays
+                        // readable to exactly the person who cannot read the current one.
+                        Text(language == .system ? L10n.t("language.system") : language.endonym)
+                            .tag(language)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+                .accessibilityLabel(L10n.t("a11y.languagePicker"))
+                .accessibilityIdentifier("settings.language")
+                // Only "follow the system" needs an explanation; picking English or
+                // Chinese is self-describing, and a line saying so would be noise.
+                if localization.language == .system {
+                    Text(L10n.t("language.systemDetail"))
+                        .font(Typography.footnote)
+                        .foregroundStyle(Palette.secondary)
+                }
+                Text(L10n.t("language.subtitle"))
+                    .font(Typography.caption)
+                    .foregroundStyle(Palette.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+
+    private var appearanceCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 18) {
+                SectionHeading(title: L10n.t("settings.section.appearance"))
+                VStack(alignment: .leading, spacing: 9) {
+                    Text(L10n.t("settings.appearance.title")).font(Typography.bodyEmphasis)
+                    Picker(L10n.t("settings.appearance.title"), selection: appearanceBinding) {
+                        ForEach(AppearancePreference.allCases) { option in
+                            Text(L10n.t(option.labelKey)).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
+                    .accessibilityIdentifier("settings.appearance")
+                    Text(L10n.t("settings.appearance.detail"))
+                        .font(Typography.caption)
+                        .foregroundStyle(Palette.secondary)
+                        .lineSpacing(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Divider()
+                VStack(alignment: .leading, spacing: 9) {
+                    Text(L10n.t("settings.text.title")).font(Typography.bodyEmphasis)
+                    Picker(L10n.t("settings.text.title"), selection: textScaleBinding) {
+                        ForEach(TextScale.allCases) { option in
+                            Text(L10n.t(option.labelKey)).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .labelsHidden()
+                    .accessibilityIdentifier("settings.textScale")
+                    Text(L10n.t("settings.text.detail"))
+                        .font(Typography.caption)
+                        .foregroundStyle(Palette.secondary)
+                        .lineSpacing(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+    }
+
+    private var accessibilityCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 18) {
+                SectionHeading(title: L10n.t("settings.section.accessibility"))
+                accessibilityRow(titleKey: "settings.contrast.title",
+                                 detailKey: "settings.contrast.detail",
+                                 stateOnKey: "settings.contrast.state.on",
+                                 stateOffKey: "settings.contrast.state.off",
+                                 isOn: increasesContrast,
+                                 pane: "Seeing_Display",
+                                 identifier: "settings.contrast")
+                Divider()
+                accessibilityRow(titleKey: "settings.motion.title",
+                                 detailKey: "settings.motion.detail",
+                                 stateOnKey: "settings.motion.state.on",
+                                 stateOffKey: "settings.motion.state.off",
+                                 isOn: reduceMotion,
+                                 pane: "Seeing_Motion",
+                                 identifier: "settings.motion")
+            }
+        }
+    }
+
+    /// One macOS-owned accessibility setting: what it does, whether it is on right now,
+    /// and the button that opens the pane where it can be changed. The button exists
+    /// because knowing a setting is off is useless without the place to turn it on.
+    private func accessibilityRow(titleKey: String, detailKey: String,
+                                  stateOnKey: String, stateOffKey: String,
+                                  isOn: Bool, pane: String, identifier: String) -> some View {
+        HStack(alignment: .top, spacing: 18) {
+            VStack(alignment: .leading, spacing: 7) {
+                Text(L10n.t(titleKey)).font(Typography.bodyEmphasis)
+                Text(L10n.t(detailKey))
+                    .font(Typography.footnote)
+                    .foregroundStyle(Palette.secondary)
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 16)
+            VStack(alignment: .trailing, spacing: 10) {
+                Tag(text: L10n.t(isOn ? stateOnKey : stateOffKey),
+                    color: isOn ? Palette.sage : Palette.muted)
+                    .accessibilityIdentifier(identifier + ".state")
+                Button(L10n.t("action.openSystemSettings")) { openAccessibilityPane(pane) }
+                    .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                    .accessibilityIdentifier(identifier + ".open")
+            }
+        }
+    }
+
+    /// The `x-apple.systempreferences:` scheme is the only supported way to land on a
+    /// specific Accessibility pane; opening the pane URL is also why this is a button and
+    /// not a toggle — the setting belongs to macOS, and only macOS may change it.
+    private func openAccessibilityPane(_ pane: String) {
+        guard let url = URL(string: "x-apple.systempreferences:com.apple.preference.universalaccess?" + pane) else { return }
+        NSWorkspace.shared.open(url)
+    }
+
     var body: some View {
         VStack(spacing: 21) {
+            // Display preferences come first: they apply to every other card on this page,
+            // so reading them after the account and server blocks would mean changing them
+            // and scrolling back up to judge the result.
+            languageCard
+            appearanceCard
+            accessibilityCard
             HStack(alignment: .top, spacing: 20) {
                 Card {
                     VStack(alignment: .leading, spacing: 20) {
@@ -281,6 +459,14 @@ struct SettingsPage: View {
             }
             Button("Start a curriculum practice exam") { store.run { await store.startQuestion(mode: "exam") } }.buttonStyle(LuminfestButtonStyle(primary: false)).accessibilityIdentifier("exam.start")
         }.onAppear { sync() }.onChange(of: store.user) { _, _ in sync() }
+            // Re-read on return from System Settings. There is no environment value for
+            // Increase Contrast, so without this the row would keep saying "Off" after the
+            // learner followed its own button and turned it on.
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    increasesContrast = NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
+                }
+            }
             .confirmationDialog("Sign out of Luminfest?", isPresented: $logoutPrompt, titleVisibility: .visible) { Button("Sign out") { store.run { await store.signOut() } }; Button("Cancel", role: .cancel) {} }
             .confirmationDialog("Change the backend and sign out?", isPresented: $endpointPrompt, titleVisibility: .visible) { Button("Change server") { do { try store.changeEndpoint(server) } catch { store.error = error.localizedDescription } }; Button("Cancel", role: .cancel) {} }
             .sheet(isPresented: $deletePrompt) {
@@ -290,7 +476,7 @@ struct SettingsPage: View {
                     TextField("Type DELETE MY ACCOUNT", text: $deletePhrase).textFieldStyle(.roundedBorder)
                     HStack { Button("Cancel") { deletePrompt = false }.buttonStyle(LuminfestButtonStyle(primary: false)); Spacer(); Button("Delete permanently", role: .destructive) { store.run { await store.deleteAccount(); if !store.authenticated { deletePrompt = false } } }.buttonStyle(LuminfestButtonStyle()).disabled(deletePhrase != "DELETE MY ACCOUNT") }
                     if let error = store.error { Text(error).font(.system(size: 11)).foregroundStyle(.red) }
-                }.padding(30).frame(width: 520).background(Palette.background).preferredColorScheme(.light)
+                }.padding(30).frame(width: 520).background(Palette.background)
             }
     }
     func sync() { goal = store.user["goal"].string; minutes = max(5, min(210, store.user["daily_minutes"].int)); consent = store.user["telemetry_consent"].bool; server = store.endpoint }

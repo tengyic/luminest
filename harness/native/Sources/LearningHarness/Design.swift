@@ -22,52 +22,59 @@ enum Palette {
     // Morandi warm base tones (inspired by 2019.makemepulse.com & Apple/Google aesthetics)
     // 2026-10-11 brightness pass: base surfaces lifted, text anchors darkened, and every
     // soft fill raised one full step in chroma so cards read as colour, not fog.
-    static let background = Color(hex: 0xFBFAF6)
-    static let surface = Color(hex: 0xFFFFFF)
-    static let surfaceSubtle = Color(hex: 0xF5F3EC)
-    static let ink = Color(hex: 0x24312A)
-    static let secondary = Color(hex: 0x5C6A60)
-    static let tertiary = Color(hex: 0x8D9A90)
+    static let background = adaptiveColor(0xFBFAF6, 0x101410, hcLight: 0xFDFCF8, hcDark: 0x000000)
+    static let surface = adaptiveColor(0xFFFFFF, 0x1A1F1A, hcLight: 0xFFFFFF, hcDark: 0x0B0E0B)
+    static let surfaceSubtle = adaptiveColor(0xF5F3EC, 0x232923)
+    static let ink = adaptiveColor(0x24312A, 0xF3F5EF, hcLight: 0x0E1712, hcDark: 0xFFFFFF)
+    static let secondary = adaptiveColor(0x5C6A60, 0xAFB9AF, hcLight: 0x36423A, hcDark: 0xE6EBE3)
+    // Tertiary was 0x8D9A90, which measures 2.93:1 on white and 2.81:1 on the page
+    // background — below the 4.5:1 that WCAG 2.2 AA requires for text, and this token is
+    // used as text at 8-10 pt in 64 places (credits, notices, timestamps), never as
+    // decoration. Darkened to 5.51:1 / 5.27:1 / 4.96:1 (white / background / surfaceSubtle).
+    // The cost is honest: tertiary now sits only ~0.2 below secondary in luminance, so the
+    // two "quiet" tiers read as one. Recovering three tiers means darkening secondary too,
+    // which is a visual decision rather than an accessibility one.
+    static let tertiary = adaptiveColor(0x5F6C63, 0x8A948B, hcLight: 0x4A564E, hcDark: 0xB6BEB5)
 
     // Morandi earthy botanical palette
-    static let sage = Color(hex: 0xC4E6C9)
-    static let forest = Color(hex: 0x3E7A55)
-    static let deepForest = Color(hex: 0x2C5C3E)
-    static let softForest = Color(hex: 0x58936B)
-    static let eucalyptus = Color(hex: 0xA9D8B0)
+    static let sage = adaptiveColor(0xC4E6C9, 0x2E3F32)
+    static let forest = adaptiveColor(0x3E7A55, 0x74C08D)
+    static let deepForest = adaptiveColor(0x2C5C3E, 0x9BD8AE)
+    static let softForest = adaptiveColor(0x58936B, 0x86C79A)
+    static let eucalyptus = adaptiveColor(0xA9D8B0, 0x35503B)
 
     // Morandi ethereal accents
-    static let lavender = Color(hex: 0xD8CFF2)
-    static let lavenderDeep = Color(hex: 0x655CA8)
-    static let peach = Color(hex: 0xFFDFC4)
-    static let peachDeep = Color(hex: 0xC46A3E)
-    static let terracotta = Color(hex: 0xD96F4F)
-    static let sky = Color(hex: 0xBFDDF5)
-    static let slate = Color(hex: 0x3E6172)
-    static let oat = Color(hex: 0xF6EFDD)
+    static let lavender = adaptiveColor(0xD8CFF2, 0x322E44)
+    static let lavenderDeep = adaptiveColor(0x655CA8, 0xB2A8E6)
+    static let peach = adaptiveColor(0xFFDFC4, 0x44332A)
+    static let peachDeep = adaptiveColor(0xC46A3E, 0xE8966B)
+    static let terracotta = adaptiveColor(0xD96F4F, 0xE88567)
+    static let sky = adaptiveColor(0xBFDDF5, 0x24323C)
+    static let slate = adaptiveColor(0x3E6172, 0x8BB3C7)
+    static let oat = adaptiveColor(0xF6EFDD, 0x3A362B)
 
     // Extended Morandi hues — dusty, low-chroma companions to the green core so the
     // interface is not monochrome. Each is a soft surface tint plus a deep ink tone.
     // Brightness pass: soft tints up ~1 chroma step, deeps kept dark enough for AA text.
-    static let mossSoft = Color(hex: 0xD9E4B8)
-    static let mossDeep = Color(hex: 0x5A702E)
-    static let tealSoft = Color(hex: 0xBCE3DC)
-    static let tealDeep = Color(hex: 0x2F6E68)
-    static let indigoSoft = Color(hex: 0xCCD2F0)
-    static let indigoDeep = Color(hex: 0x47519C)
-    static let plumSoft = Color(hex: 0xE0C7EA)
-    static let plumDeep = Color(hex: 0x7A3E8C)
-    static let roseSoft = Color(hex: 0xF5C9D4)
-    static let roseDeep = Color(hex: 0xA64E68)
-    static let ochreSoft = Color(hex: 0xF7DFA8)
-    static let ochreDeep = Color(hex: 0x8F6A1F)
-    static let claySoft = Color(hex: 0xFBD0B4)
-    static let clayDeep = Color(hex: 0xB35C2E)
+    static let mossSoft = adaptiveColor(0xD9E4B8, 0x333A24)
+    static let mossDeep = adaptiveColor(0x5A702E, 0xAFC178)
+    static let tealSoft = adaptiveColor(0xBCE3DC, 0x223B38)
+    static let tealDeep = adaptiveColor(0x2F6E68, 0x6FC3BA)
+    static let indigoSoft = adaptiveColor(0xCCD2F0, 0x2A2E45)
+    static let indigoDeep = adaptiveColor(0x47519C, 0x9AA3E0)
+    static let plumSoft = adaptiveColor(0xE0C7EA, 0x3A2B40)
+    static let plumDeep = adaptiveColor(0x7A3E8C, 0xC79AD6)
+    static let roseSoft = adaptiveColor(0xF5C9D4, 0x432A31)
+    static let roseDeep = adaptiveColor(0xA64E68, 0xE393AA)
+    static let ochreSoft = adaptiveColor(0xF7DFA8, 0x3D3524)
+    static let ochreDeep = adaptiveColor(0x8F6A1F, 0xD8B264)
+    static let claySoft = adaptiveColor(0xFBD0B4, 0x432F24)
+    static let clayDeep = adaptiveColor(0xB35C2E, 0xE09A6C)
 
     // Structure & Dividers
-    static let line = Color(hex: 0xDFE2D6)
-    static let muted = Color(hex: 0xECEDDF)
-    static let borderHighlight = Color.white.opacity(0.85)
+    static let line = adaptiveColor(0xDFE2D6, 0x39423A, hcLight: 0xB4BBA8, hcDark: 0x7A877C)
+    static let muted = adaptiveColor(0xECEDDF, 0x2B322C)
+    static let borderHighlight = adaptiveBorderHighlight()
 
     // Semantic gradients
     static let heroGradient = LinearGradient(
@@ -154,7 +161,7 @@ private struct LuminfestButtonBody: View {
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ))
-                        : AnyShapeStyle(Color.white.opacity(isHovered ? 0.95 : 0.82))
+                        : AnyShapeStyle(Palette.surface.opacity(isHovered ? 0.95 : 0.82))
                     )
             }
             .overlay(
@@ -186,7 +193,7 @@ private struct LuminfestButtonBody: View {
 }
 
 struct Card<Content: View>: View {
-    var color: Color = .white
+    var color: Color = Palette.surface
     var padding: CGFloat = 24
     var interactive: Bool = true
     @ViewBuilder var content: Content
@@ -205,8 +212,8 @@ struct Card<Content: View>: View {
                     .strokeBorder(
                         LinearGradient(
                             colors: [
-                                Color.white.opacity(isHovered ? 0.95 : 0.8),
-                                isHovered ? Palette.forest.opacity(0.22) : Color.white.opacity(0.3)
+                                Palette.borderHighlight.opacity(isHovered ? 1.0 : 0.9),
+                                isHovered ? Palette.forest.opacity(0.22) : Palette.borderHighlight.opacity(0.45)
                             ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -272,7 +279,7 @@ struct Tag: View {
             .padding(.horizontal, 11)
             .padding(.vertical, 5)
             .background(color.opacity(isHovered ? 0.95 : 0.85), in: Capsule())
-            .overlay(Capsule().strokeBorder(Color.white.opacity(0.6), lineWidth: 0.8))
+            .overlay(Capsule().strokeBorder(Palette.borderHighlight.opacity(0.7), lineWidth: 0.8))
             .shadow(color: color.opacity(isHovered ? 0.3 : 0.08), radius: isHovered ? 4 : 1, x: 0, y: 1)
             .scaleEffect(isHovered ? 1.03 : 1.0)
             .onHover { hovering in
@@ -287,6 +294,7 @@ struct EmptyState: View {
     let icon: String
     let title: String
     let message: String
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var floating = false
 
     var body: some View {
@@ -306,22 +314,25 @@ struct EmptyState: View {
                             .font(.system(size: 30, weight: .light))
                             .foregroundStyle(Palette.forest)
                             .frame(width: 65, height: 65)
-                            .background(Color.white.opacity(0.9), in: RoundedRectangle(cornerRadius: 21, style: .continuous))
+                            .background(Palette.surface.opacity(0.9), in: RoundedRectangle(cornerRadius: 21, style: .continuous))
                             .shadow(color: Palette.ink.opacity(0.05), radius: 8, x: 0, y: 3)
                     }
                 }
             }
             .offset(y: floating ? -3 : 2)
             .onAppear {
-                withAnimation(.easeInOut(duration: 2.8).repeatForever(autoreverses: true)) {
+                // Decorative breathing only. Under Reduce Motion the artwork holds still:
+                // nothing here carries information, so freezing it loses nothing.
+                guard !reduceMotion else { return }
+                withAnimation(LuminfestMotion.ambient(reduceMotion: reduceMotion)) {
                     floating = true
                 }
             }
 
             Text(title)
-                .font(.system(size: 17, weight: .semibold, design: .rounded))
+                .font(Typography.title)
             Text(message)
-                .font(.system(size: 13))
+                .font(Typography.callout)
                 .foregroundStyle(Palette.secondary)
                 .multilineTextAlignment(.center)
                 .lineSpacing(3)
@@ -400,7 +411,7 @@ struct ArtImage: View {
                 .clipShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.75), lineWidth: 1)
+                        .strokeBorder(Palette.borderHighlight.opacity(0.85), lineWidth: 1)
                 )
                 .shadow(color: Palette.ink.opacity(0.06), radius: 7, x: 0, y: 2)
         }
@@ -854,7 +865,7 @@ struct MarginNote<Content: View>: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white.opacity(0.92), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(Palette.surface.opacity(0.92), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .strokeBorder(Palette.line, lineWidth: 1)

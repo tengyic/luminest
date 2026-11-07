@@ -1,0 +1,121 @@
+/* Luminest interface strings — English (development language).
+   Every key here must exist in zh-Hans.lproj/Localizable.strings; a unit test
+   (LocalizationTests) fails the build when the two tables drift. */
+
+"app.name" = "Luminest";
+
+/* MARK: - Language */
+
+"language.title" = "Language";
+"language.subtitle" = "Applies to the whole app immediately. No restart needed.";
+"language.system" = "Match System";
+"language.systemDetail" = "Follow the language set in System Settings";
+"language.english" = "English";
+"language.zhHans" = "Simplified Chinese";
+
+/* MARK: - Appearance & accessibility settings */
+
+"settings.section.appearance" = "Appearance";
+"settings.section.accessibility" = "Accessibility";
+
+"settings.appearance.title" = "Theme";
+"settings.appearance.system" = "Match System";
+"settings.appearance.light" = "Light";
+"settings.appearance.dark" = "Dark";
+"settings.appearance.detail" = "Dark mode uses the same Morandi palette at a lower luminance, so contrast is preserved rather than inverted.";
+
+"settings.contrast.title" = "Increase contrast";
+"settings.contrast.increase" = "Increase contrast";
+"settings.contrast.detail" = "Deepens text and borders and removes low-contrast fills. This is the macOS Increase Contrast setting; the app reads it rather than keeping a copy.";
+"settings.contrast.followSystem" = "Follow System";
+"settings.contrast.state.on" = "On";
+"settings.contrast.state.off" = "Off";
+
+"settings.motion.title" = "Reduce motion";
+"settings.motion.reduce" = "Reduce motion";
+"settings.motion.detail" = "Stops decorative animation, parallax and spring transitions. This is the macOS Reduce Motion setting; the app reads it rather than keeping a copy.";
+"settings.motion.state.on" = "On";
+"settings.motion.state.off" = "Off";
+
+"settings.text.title" = "Text size";
+"settings.text.detail" = "Scales text and the spacing that depends on it. Layouts reflow instead of clipping.";
+"settings.text.system" = "Match System";
+"settings.text.large" = "Large";
+"settings.text.xLarge" = "Larger";
+"settings.text.xxLarge" = "Largest";
+
+/* MARK: - Navigation */
+
+/* Keys are `nav.<Page case>`. Grep the `Page` enum in Core.swift before adding one:
+   an unused key here is dead weight, and a missing one renders as the raw key. */
+
+"nav.today" = "Today";
+"nav.studio" = "Learning studio";
+"nav.map" = "Knowledge map";
+"nav.review" = "Daily review";
+"nav.teacher" = "Teacher";
+"nav.projects" = "Projects";
+"nav.insights" = "Insights";
+"nav.settings" = "Settings";
+
+/* MARK: - Shared states */
+
+"state.loading" = "Loading";
+"state.loading.detail" = "Fetching the latest from your local server.";
+
+"state.empty.title" = "Nothing here yet";
+"state.empty.detail" = "Once you add something it will appear here. Nothing is missing — this list is genuinely empty.";
+
+"state.offline.title" = "Working offline";
+"state.offline.detail" = "The local learning server is not answering. Anything you already loaded stays readable; new work will resume when it reconnects.";
+
+"state.error.title" = "Something went wrong";
+"state.error.detail" = "The request reached the server but was refused. Details below.";
+
+"state.backendStarting.title" = "Starting the local server";
+"state.backendStarting.detail" = "The first launch after an update can take up to a minute while macOS loads the bundle.";
+
+"state.backendUnavailable.title" = "Local server unavailable";
+"state.backendUnavailable.detail" = "The app could not reach its local server. Open the log to see the reason before retrying.";
+
+"state.validation.title" = "The server rejected this request";
+"state.validation.detail" = "This is a validation failure, not a network failure: the app and the server disagree about the request format. The server is probably an older build. Open diagnostics for the version it reports.";
+
+/* MARK: - Actions */
+
+"action.retry" = "Try Again";
+"action.refresh" = "Refresh";
+"action.cancel" = "Cancel";
+"action.done" = "Done";
+"action.save" = "Save";
+"action.delete" = "Delete";
+"action.close" = "Close";
+"action.openLog" = "Open Server Log";
+"action.copyDiagnostics" = "Copy Diagnostics";
+"action.openSystemSettings" = "Open System Settings";
+
+/* MARK: - Errors, by cause rather than by status code */
+
+"error.network" = "No connection to the local server.";
+"error.timeout" = "The server took too long to answer.";
+"error.unauthorized" = "Your session expired. Sign in again.";
+"error.validation" = "The server could not read the request (HTTP 422). This usually means the app and server builds differ.";
+"error.server" = "The server reported an internal error.";
+"error.unknown" = "An unexpected error occurred.";
+
+/* MARK: - Diagnostics */
+
+"diagnostics.title" = "Diagnostics";
+"diagnostics.endpoint" = "Endpoint";
+"diagnostics.serverVersion" = "Server schema";
+"diagnostics.appVersion" = "App version";
+"diagnostics.lastError" = "Last error";
+
+/* MARK: - VoiceOver */
+
+"a11y.loading" = "Loading content";
+"a11y.offline" = "Offline";
+"a11y.error" = "Error";
+"a11y.progress" = "Reading progress";
+"a11y.sidebar" = "Main navigation";
+"a11y.languagePicker" = "Interface language";

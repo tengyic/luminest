@@ -2,6 +2,68 @@ import Foundation
 import AppKit
 import Darwin
 
+/// What a reachable server says about itself at ``GET /api/v1/health``.
+///
+/// The payload is parsed in full rather than reduced to a boolean because the boolean
+/// used to be the whole story, and the whole story was wrong: a *previous* Luminfest
+/// backend - one still running from an earlier install, or from a build someone copied
+/// over this one - answers `ready` and the same `service` string, so it was adopted and
+/// every later request went to a server with a different request schema. FastAPI then
+/// answered 422 (a body that does not match a pydantic model) and the window said the
+/// backend could not be reached, which is a different problem with a different fix.
+///
+/// ``schemaVersion`` is three-valued on purpose. ``absent`` is not the same fact as
+/// ``unreadable``: a server that never published the field is old but self-consistent,
+/// while a present value this build cannot parse means it is not the build it claims.
+struct HealthReport: Equatable {
+    /// The version a server publishes in its health payload.
+    enum SchemaVersion: Equatable {
+        case declared(Int)
+        case absent
+        /// Published, but not an integer - so not something to compare against.
+        case unreadable
+    }
+
+    let ready: Bool
+    let service: String
+    let schemaVersion: SchemaVersion
+
+    /// `nil` when the bytes are not a health payload at all. A body that is not JSON, or
+    /// that has no `ready`/`service`, is not a verdict about the server - it is the
+    /// absence of one, and the caller keeps looking.
+    init?(payload: Data) {
+        guard let object = (try? JSONSerialization.jsonObject(with: payload)) as? [String: Any],
+              let ready = object["ready"] as? Bool,
+              let service = object["service"] as? String else { return nil }
+        self.ready = ready
+        self.service = service
+        if let raw = object["schema_version"] {
+            self.schemaVersion = (raw as? Int).map { .declared($0) } ?? .unreadable
+        } else {
+            self.schemaVersion = .absent
+        }
+    }
+}
+
+/// The decision to make about one ``HealthReport``. Pure, so the adoption policy is
+/// testable without a process, a socket or a running server.
+enum HealthVerdict: Equatable {
+    /// Take this server. The associated value is the schema version it declared, `nil`
+    /// when it declared none - the diagnostics panel shows "unknown" rather than a guess.
+    case adopt(Int?)
+    /// It is Luminfest, but from a build whose requests this one would get 422 from.
+    case schemaMismatch(server: Int?, expected: Int)
+    /// It says it is not ready; the caller keeps scanning and may still spawn its own.
+    case notReady
+    /// Something else is on the port. Not ours to reason about.
+    case foreignService(String)
+
+    var adoptedVersion: Int? {
+        if case .adopt(let version) = self { return version }
+        return nil
+    }
+}
+
 @MainActor final class BackendLauncher {
     static let shared = BackendLauncher()
     private var process: Process?
@@ -11,8 +73,31 @@ import Darwin
     /// Where the bundled server is actually listening. Usually the default, but a
     /// collision moves it - see ``choosePort`` - and the store rebinds to this.
     private(set) var origin = BackendLauncher.defaultOrigin
+    /// The schema version the server actually serving ``origin`` declared, or `nil` when
+    /// it declared none. Exposed so diagnostics can show which server this window is
+    /// talking to; ``ready`` alone cannot distinguish a matched server from a lucky one.
+    private(set) var adoptedSchemaVersion: Int?
     static let defaultOrigin = "http://127.0.0.1:8765"
     private static let defaultPort: UInt16 = 8765
+
+    /// The service string every build of this backend has published, and the one check
+    /// that keeps a stranger's server on the port from being adopted.
+    nonisolated static let serviceIdentifier = "luminfest-learning-harness"
+
+    /// The database schema this client's request bodies were written against.
+    ///
+    /// Compile-time, and deliberately so. The frozen backend inside the .app is built
+    /// from this same tree and `scripts/package.py` refuses to ship when the frozen
+    /// backend's own `SCHEMA_VERSION` disagrees with the sources - so a release carries
+    /// one matched pair. The expectation therefore belongs to *this build*, not to
+    /// whatever happens to be running on the machine: reading it from the server would
+    /// make the check compare the server with itself, which is exactly the bug.
+    ///
+    /// The tradeoff is drift in the source tree: someone bumps ``db.SCHEMA_VERSION``
+    /// without touching this constant. ``BackendLauncherTests`` parses
+    /// ``backend/app/db.py`` and fails when the two disagree, so drift is a red test
+    /// rather than a shipped mismatch.
+    nonisolated static let expectedSchemaVersion = 11
 
     /// True when nothing is listening on 127.0.0.1:``port``.
     ///
@@ -100,18 +185,72 @@ import Darwin
         return result
     }
 
-    private func health(at origin: String) async -> Bool {
-        guard let url = URL(string: origin + "/api/v1/health") else { return false }
+    /// The health payload from ``origin``, or `nil` when nothing usable answered.
+    ///
+    /// A non-200 is reported as nothing. A 503 from this backend means "the database
+    /// query failed", which is a server that exists but is not adoptable; the caller
+    /// treats both the same way and keeps looking, as it always has.
+    private func healthReport(at origin: String) async -> HealthReport? {
+        guard let url = URL(string: origin + "/api/v1/health") else { return nil }
         var request = URLRequest(url: url); request.timeoutInterval = 1
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard (response as? HTTPURLResponse)?.statusCode == 200,
-                  let object = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return false }
-            return object["ready"] as? Bool == true && object["service"] as? String == "luminfest-learning-harness"
-        } catch { return false }
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
+            return HealthReport(payload: data)
+        } catch { return nil }
     }
 
-    private func health() async -> Bool { await health(at: origin) }
+    /// Whether ``report`` describes a server this build may talk to.
+    ///
+    /// The version check is the whole point. Adoption is otherwise decided by facts a
+    /// stale backend also tells the truth about - it *is* ready, and it *is* named
+    /// Luminfest - so without this a previous install's server is adopted, the new
+    /// client sends bodies its models do not know, and FastAPI answers 422 while the
+    /// window blames the network. A mismatch is a refusal to adopt, not a downgrade.
+    ///
+    /// A server that publishes no version is adopted: every build that predates the
+    /// field is still this project's server, and refusing them would break installs the
+    /// check is meant to protect. The verdict says the version is unknown so the
+    /// diagnostics panel can admit it does not know.
+    nonisolated static func verdict(for report: HealthReport,
+                                   expected: Int = BackendLauncher.expectedSchemaVersion) -> HealthVerdict {
+        guard report.ready else { return .notReady }
+        guard report.service == serviceIdentifier else { return .foreignService(report.service) }
+        switch report.schemaVersion {
+        case .absent:
+            return .adopt(nil)
+        case .declared(let version) where version == expected:
+            return .adopt(version)
+        case .declared(let version):
+            return .schemaMismatch(server: version, expected: expected)
+        case .unreadable:
+            // Published but not an integer: it is not the version this build was built
+            // against, and a value we cannot read is not a value we may wave through.
+            return .schemaMismatch(server: nil, expected: expected)
+        }
+    }
+
+    /// The sentence the window shows instead of "cannot reach the server".
+    ///
+    /// It has to name the two versions and send the reader to the actual fix - quit the
+    /// other copy - because the failure looks like a network fault and is not one.
+    nonisolated static func incompatibleSchemaMessage(origin: String,
+                                                      server: Int?,
+                                                      expected: Int) -> String {
+        let found = server.map { "schema v\($0)" } ?? "a schema version this build cannot read"
+        return "A different Luminfest server is already running at \(origin). It reports \(found), "
+            + "and this build expects schema v\(expected). Quit the other copy of Luminfest "
+            + "(or restart the Mac) and open this build again. Nothing was changed, and no "
+            + "second server was started on the same database."
+    }
+
+    /// What the port scan concluded.
+    private enum ServerDiscovery {
+        case none
+        case adopted(origin: String, schemaVersion: Int?)
+        /// Luminfest servers answered, but none of them speaks this build's schema.
+        case incompatible(origin: String, verdict: HealthVerdict)
+    }
 
     /// An already-running bundled server, wherever it landed.
     ///
@@ -121,12 +260,29 @@ import Darwin
     /// app talking to whichever one it happened to spawn. Adopting the live one keeps a
     /// single server per machine, which is the only arrangement the SQLite database and
     /// the learner's session tolerate.
-    private func runningOrigin() async -> String? {
+    ///
+    /// A server that answers with a *different* schema is not adopted, and is also not
+    /// a reason to spawn: it is already holding this install's database, so starting a
+    /// second server beside it is the very arrangement described above. The scan keeps
+    /// going in case a compatible one is also up, and only when none is does the caller
+    /// get ``ServerDiscovery/incompatible`` and stop with an explanation.
+    private func runningOrigin() async -> ServerDiscovery {
+        var incompatible: (origin: String, verdict: HealthVerdict)?
         for port in Self.defaultPort...(Self.defaultPort + 20) {
             let candidate = "http://127.0.0.1:\(port)"
-            if await health(at: candidate) { return candidate }
+            guard let report = await healthReport(at: candidate) else { continue }
+            let verdict = Self.verdict(for: report)
+            switch verdict {
+            case .adopt(let version):
+                return .adopted(origin: candidate, schemaVersion: version)
+            case .schemaMismatch:
+                if incompatible == nil { incompatible = (candidate, verdict) }
+            case .notReady, .foreignService:
+                continue
+            }
         }
-        return nil
+        if let incompatible { return .incompatible(origin: incompatible.origin, verdict: incompatible.verdict) }
+        return .none
     }
 
     /// Whether an endpoint is this app's own local server rather than one the operator chose.
@@ -165,11 +321,24 @@ import Darwin
         guard let resources = Bundle.main.resourceURL else { return }
         let executable = resources.appendingPathComponent("backend/LuminfestBackend/LuminfestBackend")
         guard FileManager.default.isExecutableFile(atPath: executable.path) else { return }
-        if let running = await runningOrigin() {
+        switch await runningOrigin() {
+        case .adopted(let origin, let schemaVersion):
             // Ours, already up - possibly on a fallback port from an earlier launch.
-            origin = running
+            self.origin = origin
+            adoptedSchemaVersion = schemaVersion
             ready = true
             return
+        case .incompatible(let origin, let verdict):
+            // Deliberately no spawn: that server already holds this install's database,
+            // and a second one beside it is the arrangement the launcher exists to
+            // prevent. Say which versions disagree instead of reporting a server that
+            // "did not become ready" or a network that is fine.
+            if case .schemaMismatch(let server, let expected) = verdict {
+                failure = Self.incompatibleSchemaMessage(origin: origin, server: server, expected: expected)
+            }
+            return
+        case .none:
+            break
         }
         let port = choosePort()
         if port != Self.defaultPort { origin = "http://127.0.0.1:\(port)" }
@@ -182,6 +351,10 @@ import Darwin
             if !FileManager.default.fileExists(atPath: log.path) { FileManager.default.createFile(atPath: log.path, contents: nil) }
             try FileManager.default.setAttributes([.posixPermissions: 0o600], ofItemAtPath: log.path)
             logHandle = try FileHandle(forWritingTo: log); try logHandle?.seekToEnd()
+            // Where this launch's own output begins. The log is appended to across launches,
+            // so a "Schema upgrade required" from an earlier run must not be allowed to
+            // explain a failure that has nothing to do with it.
+            let logStart = UInt64((try? FileManager.default.attributesOfItem(atPath: log.path)[.size] as? NSNumber)?.intValue ?? 0)
             let child = Process(); child.executableURL = executable
             child.arguments = ["--port", String(port)]
             child.currentDirectoryURL = support
@@ -248,20 +421,79 @@ import Darwin
             // therefore failed the one case it most needs to survive - the bundle handed to
             // someone else, whose first launch is by definition cold - and reported a server
             // that "did not become ready" when it was in fact about to be. The wait is a
-            // ceiling, not a delay: a warm launch still returns as soon as `health()` answers.
+            // ceiling, not a delay: a warm launch still returns as soon as `healthReport` answers.
             let deadline = ProcessInfo.processInfo.systemUptime + 120
             while ProcessInfo.processInfo.systemUptime < deadline {
-                if await health() { ready = true; return }
+                if let report = await healthReport(at: origin) {
+                    switch Self.verdict(for: report) {
+                    case .adopt(let schemaVersion):
+                        adoptedSchemaVersion = schemaVersion
+                        ready = true
+                        return
+                    case .schemaMismatch(let server, let expected):
+                        // The bundle's own backend disagreeing with the client is a build
+                        // error, not a slow start: say so at once instead of waiting out
+                        // the 120 s ceiling and blaming the log.
+                        failure = Self.incompatibleSchemaMessage(origin: origin, server: server, expected: expected)
+                        stopOwnedProcess()
+                        return
+                    case .notReady, .foreignService:
+                        break   // still starting, or a stranger briefly held the port
+                    }
+                }
                 if !child.isRunning { break }
                 try await Task.sleep(nanoseconds: 200_000_000)
             }
-            failure = "The bundled learning server did not become ready. Check the local server log in Application Support/Luminfest Learning Harness. No progress is being fabricated."
+            // The generic sentence is the last resort, not the first answer. A backend that
+            // exits at boot writes the real reason to this log (the schema guard in
+            // app.main says why in one line) and nobody ever read it - so the app blamed a
+            // slow start for a database it refused to touch. Read what this launch wrote.
+            let diagnosis = Self.startupFailure(
+                logText: Self.logText(at: log, from: logStart),
+                dataDirectory: support.path)
+            failure = diagnosis
+                ?? "The bundled learning server did not become ready. Check the local server log in Application Support/Luminfest Learning Harness. No progress is being fabricated."
             stopOwnedProcess()
         } catch {
             failure = "The bundled server could not start: " + error.localizedDescription
             stopOwnedProcess()
         }
     }
+    /// The text this launch appended to ``url``, capped so a long log cannot stall the
+    /// main actor. ``offset`` is the file size captured before the child started - without
+    /// it, a "Schema upgrade required" left by an earlier run would be read back and
+    /// blamed for an unrelated failure today.
+    nonisolated static func logText(at url: URL, from offset: UInt64, limit: Int = 64_000) -> String {
+        guard let handle = try? FileHandle(forReadingFrom: url) else { return "" }
+        defer { try? handle.close() }
+        let end = (try? handle.seekToEnd()) ?? 0
+        guard end > offset else { return "" }
+        let length = min(UInt64(limit), end - offset)
+        guard (try? handle.seek(toOffset: end - length)) != nil,
+              let data = try? handle.read(upToCount: Int(length)) else { return "" }
+        return String(decoding: data, as: UTF8.self)
+    }
+
+    /// Turn a failed start into the reason the server itself gave, when it gave one.
+    ///
+    /// The one case worth recognising is the schema guard (``app.main``): the bundled
+    /// backend refuses to boot on a data directory written by another version and says so
+    /// in one line. Seeing that sentence beats "did not become ready", which sends the
+    /// reader looking for a network problem that does not exist - the same misdiagnosis as
+    /// the 422 this file was changed to stop causing.
+    ///
+    /// Nothing is migrated, moved or deleted here: the message names the database and the
+    /// log and leaves the decision to the person whose data it is.
+    nonisolated static func startupFailure(logText: String, dataDirectory: String) -> String? {
+        guard logText.contains("Schema upgrade required") else { return nil }
+        let database = dataDirectory + "/harness.sqlite3"
+        return "The bundled learning server refused to start. Its log says: \"Schema upgrade required; "
+            + "run scripts/init_db.py explicitly. Startup never migrates existing tables.\" That means "
+            + "\(database) was written by a different Luminfest version. Nothing was changed. "
+            + "Read \(dataDirectory)/backend.log for the full trace, and back that database up "
+            + "before moving or migrating it."
+    }
+
     /// Bounded grace between SIGTERM and any escalation. This runs on the main
     /// actor, both during app termination and on the start-failure path, so
     /// shutdown must never be able to hang the UI.
@@ -319,6 +551,7 @@ import Darwin
             Self.shutdown(owned: owned, ownsProcess: process === owned)
         }
         process = nil; ready = false
+        adoptedSchemaVersion = nil
         try? logHandle?.close(); logHandle = nil
     }
 }
