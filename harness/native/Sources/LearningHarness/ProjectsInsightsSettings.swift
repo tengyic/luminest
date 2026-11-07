@@ -472,12 +472,13 @@ struct SettingsPage: View {
             .sheet(isPresented: $deletePrompt) {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Permanently delete your account?").font(.system(size: 22, weight: .semibold))
-                    // This sentence used to end at "cannot be undone", which was true of the
-                    // login and false about the data: the app keeps recovery snapshots on
-                    // this Mac, so a copy can survive the deletion. Saying so is the whole
-                    // point of aligning the policy with the implementation — an
-                    // under-claim here is still a false statement to the person deleting.
-                    Text("This removes your account and its learning records from the backend immediately. The app keeps recovery snapshots on this Mac, so a copy of that data can remain for up to 30 days — though an old snapshot cannot sign back in. Export your data first if you want a copy; the account itself cannot be recovered.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
+                    // Third revision, and the first two were wrong for the same reason: an
+                    // absolute sentence about irreversibility. "Cannot sign in or reach any
+                    // route again" is true while the erasure record survives and false if
+                    // both of its copies are removed or the whole data folder is replaced
+                    // from a backup — measured, not theorised. Each clause below is one a
+                    // reader could check, and the limit is stated rather than implied.
+                    Text("This removes your account and its learning records from the backend immediately, and signs it out everywhere on this Mac. The deletion is recorded outside the database, so restoring an old snapshot does not let the account sign back in. Recovery snapshots of the data can stay on this Mac until you remove them — the newest snapshot of each kind is kept indefinitely. If everything the app keeps in its data folder is removed or replaced from a backup, the app can no longer tell that the account was deleted. Export your data first if you want a copy.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
                     TextField("Type DELETE MY ACCOUNT", text: $deletePhrase).textFieldStyle(.roundedBorder)
                     HStack { Button("Cancel") { deletePrompt = false }.buttonStyle(LuminfestButtonStyle(primary: false)); Spacer(); Button("Delete permanently", role: .destructive) { store.run { await store.deleteAccount(); if !store.authenticated { deletePrompt = false } } }.buttonStyle(LuminfestButtonStyle()).disabled(deletePhrase != "DELETE MY ACCOUNT") }
                     if let error = store.error { Text(error).font(.system(size: 11)).foregroundStyle(.red) }
