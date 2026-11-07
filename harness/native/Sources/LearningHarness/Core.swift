@@ -148,26 +148,34 @@ enum SecureSession {
         guard let response = response as? HTTPURLResponse else { throw AppFailure(message: "The server returned an invalid response.", status: nil) }
         guard (200..<300).contains(response.statusCode) else {
             let j = (try? JSONDecoder().decode(JSON.self, from: data)) ?? .null
-            // A failed validation comes back with ``detail`` as a *list* of {loc, msg}
-            // objects. Reading only the string form collapsed every one of them to
-            // "Request failed (HTTP 422)", which tells the learner nothing about which field
-            // the server refused - so join the messages and name the field.
-            let problems = j["detail"].array.compactMap { item -> String? in
-                let message = item.text("msg", fallback: "")
-                guard !message.isEmpty else { return nil }
-                let field = item["loc"].array.map(\.string).last(where: { !$0.isEmpty }) ?? ""
-                return field.isEmpty ? message : "\(field): \(message)"
-            }
-            let detail = problems.isEmpty
-                ? j.text("detail", fallback: j["detail"].text("message", fallback: j.text("error", fallback: j.text("message", fallback: "Request failed (HTTP \(response.statusCode))."))))
-                : problems.joined(separator: "; ")
-            throw AppFailure(message: detail, status: response.statusCode)
+            throw AppFailure(message: Self.failureDetail(j, status: response.statusCode),
+                             status: response.statusCode)
         }
         return data
     }
     func json(_ path: String, method: String = "GET", body: [String: Any]? = nil, query: [URLQueryItem] = []) async throws -> JSON {
         let d = try await data(path, method: method, body: body, query: query)
         return d.isEmpty ? .null : try JSONDecoder().decode(JSON.self, from: d)
+    }
+
+    /// The server's own explanation for a non-2xx, or a sentence naming the status.
+    ///
+    /// A failed validation arrives as ``detail`` = a *list* of `{loc, msg}` objects. Reading
+    /// only the string form collapsed every one of them to "Request failed (HTTP 422)",
+    /// which is indistinguishable from "the server is down" and sends the reader looking for
+    /// a network fault that does not exist. The per-field join is shared by the JSON and the
+    /// SSE path on purpose: `/agent/stream` is the endpoint the tutor chat uses, so leaving
+    /// the stream on the old code meant the one screen a learner actually stares at kept the
+    /// useless message.
+    private static func failureDetail(_ body: JSON, status: Int) -> String {
+        let problems = body["detail"].array.compactMap { item -> String? in
+            let message = item.text("msg", fallback: "")
+            guard !message.isEmpty else { return nil }
+            let field = item["loc"].array.map(\.string).last(where: { !$0.isEmpty }) ?? ""
+            return field.isEmpty ? message : "\(field): \(message)"
+        }
+        if !problems.isEmpty { return problems.joined(separator: "; ") }
+        return body.text("detail", fallback: body["detail"].text("message", fallback: body.text("error", fallback: body.text("message", fallback: "Request failed (HTTP \(status))."))))
     }
 
     /// POST a body and read the reply as a Server-Sent Events stream.
@@ -204,8 +212,8 @@ enum SecureSession {
                         var buffer = Data()
                         for try await byte in bytes { buffer.append(byte) }
                         let j = (try? JSONDecoder().decode(JSON.self, from: buffer)) ?? .null
-                        let detail = j.text("detail", fallback: j["detail"].text("message", fallback: j.text("error", fallback: j.text("message", fallback: "Request failed (HTTP \(http.statusCode))."))))
-                        throw AppFailure(message: detail, status: http.statusCode)
+                        throw AppFailure(message: Self.failureDetail(j, status: http.statusCode),
+                                         status: http.statusCode)
                     }
                     var name = "message"
                     var dataLines: [String] = []
