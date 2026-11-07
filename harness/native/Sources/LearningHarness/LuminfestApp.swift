@@ -84,6 +84,10 @@ enum CapturePresentation {
                     Button(page.title) { store.navigate(page) }.keyboardShortcut(KeyEquivalent(Character(String(index + 1))), modifiers: .command)
                 }
                 Divider()
+                // Replayable on purpose: a walkthrough that runs once, at the moment the
+                // learner is least able to absorb it, helps exactly once.
+                Button(L10n.t("tour.replay")) { GuidedTour.postReplay() }
+                Divider()
                 Button("Start diagnostic") { store.run { await store.startQuestion(mode: "diagnostic") } }.disabled(!store.authenticated).keyboardShortcut("d", modifiers: [.command, .shift])
                 Button("Refresh") { store.run { await store.loadPage() } }.disabled(!store.authenticated).keyboardShortcut("r", modifiers: .command)
             }
@@ -105,7 +109,7 @@ struct RootView: View {
                 // raised in the same update cycle as this swap is intermittently dropped, which
                 // silently enrolled new learners in the default course.
                 if store.inCourseSetup { CourseSetupView() }
-                else { AppShell() }
+                else { TourHost { AppShell() } }
             }
             else { OnboardingView() }
         }
@@ -597,6 +601,7 @@ struct AppShell: View {
                 .buttonStyle(.plain)
                 .accessibilityLabel(page.title)
                 .accessibilityIdentifier(SidebarLayout.compactIdentifier(for: page))
+                .tourAnchor("nav." + page.rawValue)
                 .help(page.title)
                 .padding(.bottom, 4)
             }
@@ -806,6 +811,7 @@ private struct SidebarItemButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("nav." + page.rawValue)
+        .tourAnchor("nav." + page.rawValue)
         .onHover { hovering in
             withAnimation(.spring(response: 0.25, dampingFraction: 0.75)) {
                 isHovered = hovering
@@ -835,6 +841,7 @@ private struct SidebarSettingsButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityIdentifier("nav.settings")
+        .tourAnchor("nav.settings")
         .onHover { hovering in
             withAnimation(.spring(response: 0.25, dampingFraction: 0.75)) {
                 isHovered = hovering

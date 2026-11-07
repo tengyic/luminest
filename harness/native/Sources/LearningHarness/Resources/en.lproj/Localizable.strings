@@ -133,3 +133,23 @@
    language on purpose: the reader is told to search the log for it, and a translated
    quote would not be found there. */
 "backend.schema.upgradeRequired" = "The bundled learning server refused to start. Its log says: \"Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.\" That means %1$@ was written by a different Luminest version. Nothing was changed. Read %2$@ for the full trace, and back that database up before moving or migrating it.";
+
+/* MARK: - First-run walkthrough */
+
+"tour.replay" = "Show the Guided Tour";
+"tour.counter" = "%1$d of %2$d";
+"tour.next" = "Next";
+"tour.done" = "Start learning";
+"tour.skip" = "Skip";
+
+"tour.today.title" = "Start with Today";
+"tour.today.body" = "Today puts the next thing to do in one place. Read the goal, then start the next step — everything else here is optional until that is done.";
+
+"tour.studio.title" = "The Studio is where you think";
+"tour.studio.body" = "Work through an idea with the tutor: ask a question, read, sketch on the board, or turn the lesson into a deck you can present.";
+
+"tour.review.title" = "Review beats re-reading";
+"tour.review.body" = "Daily review brings back only what you are about to forget. Ten minutes here is worth more than re-reading a page you already know.";
+
+"tour.settings.title" = "Make it yours";
+"tour.settings.body" = "Language, theme and text size live in Settings. The interface can be English or 简体中文, and both apply immediately — no relaunch.";

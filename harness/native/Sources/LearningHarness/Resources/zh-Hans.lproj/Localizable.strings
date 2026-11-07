@@ -131,3 +131,23 @@
 /* 引号里那句是服务端日志原文，所有语言都保留英文：用户要拿它去日志里搜索，
    翻译过的引文在那里搜不到。 */
 "backend.schema.upgradeRequired" = "打包的学习服务拒绝启动。它的日志原文是：\"Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.\" 这说明 %1$@ 是由另一个 Luminest 版本写入的。没有改动任何数据。完整追踪见 %2$@；在移动或迁移该数据库之前请先备份。";
+
+/* MARK: - 首次使用引导 */
+
+"tour.replay" = "重新播放新手引导";
+"tour.counter" = "第 %1$d 步，共 %2$d 步";
+"tour.next" = "下一步";
+"tour.done" = "开始学习";
+"tour.skip" = "跳过";
+
+"tour.today.title" = "从「今日」开始";
+"tour.today.body" = "「今日」把下一步该做的事集中在一处。先看目标，再开始下一步——在那之前，其它内容都是可选的。";
+
+"tour.studio.title" = "「学习工坊」是想清楚的地方";
+"tour.studio.body" = "和导师一起推进一个想法：提问、阅读、在画板上画，或把这一课变成一套可以讲给别人听的卡片。";
+
+"tour.review.title" = "复习胜过重读";
+"tour.review.body" = "「每日复习」只把你即将忘记的内容带回来。在这里花十分钟，比重读一遍已经会的页面更有用。";
+
+"tour.settings.title" = "调成适合你的样子";
+"tour.settings.body" = "语言、主题和文字大小都在「设置」里。界面可以在 English 与简体中文之间切换，切换后立即生效，不需要重启。";
