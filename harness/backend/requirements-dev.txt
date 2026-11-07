@@ -13,4 +13,21 @@
 # knowledge graph.
 -r requirements.txt
 pytest==9.1.1
+# ``backend/pytest.ini`` sets ``timeout`` and ``timeout_method``. Those are options of
+# the pytest-timeout plugin, not of pytest itself: without the plugin a clean venv prints
+# "PytestConfigWarning: Unknown config option: timeout" and silently runs the whole
+# suite with NO per-test ceiling. That is the exact hang the comment in pytest.ini was
+# written to prevent. A plugin referenced by configuration must be declared here.
+pytest-timeout==2.4.0
 pyinstaller>=6.11,<7
+# ``tests/test_api.py::test_training_consent_ledger_and_minimized_export`` reaches the
+# owned model trainer through ``app.adaptation._runtime_module()``, which imports
+# ``model/train.py``. That module's analysis imports are test-only from the backend's
+# point of view (nothing in requirements.txt needs them), but they are not optional for
+# the test suite. Versions mirror model/provenance.json so the training ledger test
+# exercises the same numerical stack the shipped model was produced with.
+pandas==3.0.6
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+threadpoolctl==3.7.0

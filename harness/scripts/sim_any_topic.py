@@ -63,7 +63,12 @@ def context(settings):
 
 
 def render(path: Path, shot: Path):
-    """Load in Chromium, drive the first control, report console errors."""
+    """Load in Chromium, drive a control and the primary button, report console errors.
+
+    Both matter: a slider-only probe leaves a "press Stimulate to fire" simulation looking
+    empty, and a button-only probe misses a broken slider. The first button that is not
+    a reset is the primary action in every artefact generated so far.
+    """
     from playwright.sync_api import sync_playwright
     errors = []
     with sync_playwright() as p:
@@ -80,10 +85,19 @@ def render(path: Path, shot: Path):
             el.dispatchEvent(new Event('input', {bubbles: true}));
             el.dispatchEvent(new Event('change', {bubbles: true}));
         }""")
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(300)
+        clicked = page.evaluate("""() => {
+            const btn = Array.from(document.querySelectorAll('button'))
+                .find(b => !/reset|clear/i.test(b.textContent || ''));
+            if (!btn) return null;
+            btn.click();
+            return (btn.textContent || '').trim();
+        }""")
+        page.wait_for_timeout(900)
         page.screenshot(path=str(shot))
         chars = len(page.inner_text('body').strip())
         browser.close()
+    print(f'    clicked: {clicked!r}')
     return errors, chars
 
 

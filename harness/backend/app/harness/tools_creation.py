@@ -327,9 +327,54 @@ def edit_simulation(ctx, artifact_id: str, requirement_category: str,
                           'Validated as a fresh creation before storage.'])
 
 
+def check_simulation(ctx, artifact_id: str) -> Any:
+    """Run a stored simulation in a headless browser and report what a learner would see.
+
+    Validation at creation answers "is this safe and well-formed". This answers the other
+    half -- "does it work" -- which a document cannot tell you about itself. It is a TA
+    tool by design: launching a browser costs a second or two, and the teacher is
+    mid-sentence when an artifact turns out to be broken.
+
+    A build without playwright cannot run the check. That returns ``ok=False`` with a
+    refusal that says *unverified*, not *broken*: claiming a pass would be worse than
+    admitting the check never ran, and a rebuild triggered by a missing browser would be
+    work spent on the wrong problem.
+    """
+    from . import sims_check, sims_store
+    settings = _settings(ctx)
+    if settings is None:
+        return _result('check_simulation', False, error='No settings are bound to this call')
+    entry = sims_store.load(settings, str(artifact_id))
+    if entry is None:
+        return _result('check_simulation', False, error=f'Unknown artifact {artifact_id!r}')
+    html = sims_store.read_version(settings, str(artifact_id)) or ''
+    if not html.strip():
+        return _result('check_simulation', False,
+                       error=f'{artifact_id!r} has no stored version to run')
+    report = sims_check.check(html)
+    problems = list(report['problems'])
+    clean = bool(report['checked']) and not problems
+    if clean:
+        refusal = ''
+    elif not report['checked']:
+        refusal = ('This artifact could not be verified: ' + (report['reason'] or 'no browser '
+                   'is available on this instance.') + ' Unverified is not the same as broken.')
+    else:
+        refusal = (report['reason'] or 'The artifact did not behave when driven.') + ' ' + \
+            ' '.join(problems)
+    return _result('check_simulation', clean,
+                   {'artifact_id': artifact_id, 'version': entry.get('latest_version'),
+                    'checked': report['checked'], 'problems': problems,
+                    'reason': report['reason']},
+                   refused=refusal,
+                   notes=['Drives the first control and the primary button, then reads the '
+                          'page: script errors, a throwing console, a blank frame, or a '
+                          'non-finite value in the visible text.',
+                          'A smoke test, not a proof: it shows the page did not break, not '
+                          'that the model behind it is right.'])
+
+
 # ============================================================ slides
-
-
 def _sections_from_concept(ctx, concept_id: str) -> tuple[list[dict[str, Any]], list[dict], list[str]]:
     """Build slide sections from authored curriculum structure, deterministically."""
     from .toolbox import _lesson_citation, _lesson_for, _node_citation, _node_or_lesson
@@ -822,14 +867,15 @@ def web_search(ctx, query: str, limit: int = 6) -> Any:
         return _result('web_search', False,
                        refused='Web search requires network media, which is disabled for '
                                'this instance (HARNESS_MEDIA_ENABLED). No search was made.')
-    DDGS = ddg_provider.load()
+    DDGS, provider_source = ddg_provider.resolve(settings)
     if DDGS is None:
         return _result('web_search', False,
                        refused='Web search provider not configured: neither the "ddgs" nor '
                                'the legacy "duckduckgo-search" package is installed in this '
-                               'environment. No results were fetched and none are faked.',
-                       notes=['The tool interface is complete; installing ddgs activates it '
-                              'without code changes.'])
+                               'environment, and no headless Chromium provider is enabled. '
+                               'No results were fetched and none are faked.',
+                       notes=['The tool interface is complete; installing ddgs or enabling '
+                              'HARNESS_CHROMIUM_SEARCH activates it without code changes.'])
     try:
         raw = DDGS().text(query, max_results=max(1, min(int(limit), MAX_WEB_RESULTS)))
     except Exception as exc:
@@ -866,7 +912,8 @@ def web_search(ctx, query: str, limit: int = 6) -> Any:
     notes = [f'{len(results)} results; {dropped_snippets} had their snippets withheld '
              'because the domain is not an audited, licence-cleared source.',
              'A search hit is evidence that a page exists, not evidence that its claims '
-             'are true.']
+             'are true.',
+             f'Search provider: {provider_source}.']
     return _result('web_search', bool(results), {'query': query, 'results': results},
                    citations=citations, notes=notes,
                    refused='' if results else 'The search returned no usable results.')

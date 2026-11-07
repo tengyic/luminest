@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import Darwin
 
 @MainActor final class BackendLauncher {
     static let shared = BackendLauncher()
@@ -261,8 +262,62 @@ import AppKit
             stopOwnedProcess()
         }
     }
+    /// Bounded grace between SIGTERM and any escalation. This runs on the main
+    /// actor, both during app termination and on the start-failure path, so
+    /// shutdown must never be able to hang the UI.
+    nonisolated static let terminationGraceSeconds: TimeInterval = 1.2
+
+    /// Pure escalation decision, kept out of the side-effecting code so the contract
+    /// is unit-testable without spawning (or signalling) any process. A SIGKILL is
+    /// legitimate only for a child this launcher actually owns that is still alive
+    /// after the SIGTERM grace. Anything else would mean killing a stranger's process.
+    nonisolated static func shouldForceKillAfterGrace(ownsProcess: Bool,
+                                                      isRunning: Bool) -> Bool {
+        ownsProcess && isRunning
+    }
+
+    /// The real shutdown sequence, factored out of ``stopOwnedProcess()`` so a
+    /// process-level regression test can drive exactly the code the app runs without
+    /// having to expose the private stored property. ``ownsProcess`` must be true only
+    /// for a child this launcher spawned itself: an adopted/external backend is never
+    /// ours to signal. Both call sites are @MainActor and the grace loop blocks the main
+    /// actor synchronously, so nothing can swap ``process`` mid-shutdown; evaluating the
+    /// ownership flag at the call site is therefore equivalent to the old inline check.
+    static func shutdown(owned: Process,
+                         ownsProcess: Bool,
+                         grace: TimeInterval = terminationGraceSeconds) {
+        guard owned.isRunning else { return }
+        // ``terminate()`` is SIGTERM. A backend blocked in a signal handler, or
+        // ignoring SIGTERM, otherwise survives app termination and keeps holding
+        // its port, so the next launch adopts a stale server. Capture the PID at
+        // spawn time and escalate to exactly that PID - never a name or a pattern.
+        let pid = owned.processIdentifier
+        owned.terminate()
+        let deadline = Date().addingTimeInterval(grace)
+        while owned.isRunning && Date() < deadline {
+            RunLoop.current.run(mode: .default, before: Date().addingTimeInterval(0.05))
+        }
+        if shouldForceKillAfterGrace(ownsProcess: ownsProcess,
+                                     isRunning: owned.isRunning) {
+            _ = kill(pid, SIGKILL)  // ESRCH is harmless: the child exited at the deadline
+        }
+    }
+
+    /// Acceptance-only hook. The in-process QA driver spawns a real frozen backend on
+    /// an isolated port and installs it as the launcher's owned child, so a normal
+    /// `NSApp.terminate` drives the exact production path
+    /// `applicationWillTerminate -> stopOwnedProcess() -> shutdown(...)`.
+    /// It is reachable only when `--qa-owned-shutdown` is passed and is never used by
+    /// a normal launch; the launcher still refuses to signal any adopted backend.
+    func qaInstallOwnedProcess(_ child: Process) {
+        process = child
+        ready = true
+    }
+
     func stopOwnedProcess() {
-        if let process, process.isRunning { process.terminate() }
+        if let owned = process, owned.isRunning {
+            Self.shutdown(owned: owned, ownsProcess: process === owned)
+        }
         process = nil; ready = false
         try? logHandle?.close(); logHandle = nil
     }

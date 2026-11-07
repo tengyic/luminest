@@ -159,8 +159,10 @@ CAPABILITIES: tuple[Capability, ...] = (
         provider='YouTube oEmbed keyless probe for embeddability; '
                  'HARNESS_YOUTUBE_API_KEY enables the authoritative Data API check '
                  '(status.embeddable) and teacher search, which costs 100 units per '
-                 'query against a 10,000/day default.',
-        knob='HARNESS_MEDIA_ENABLED=1 (optionally HARNESS_YOUTUBE_API_KEY)',
+                 'query against a 10,000/day default. A headless Chromium now discovers '
+                 'candidates from the provider\'s own results page, so no key is needed.',
+        knob='HARNESS_MEDIA_ENABLED=1 (optionally HARNESS_YOUTUBE_API_KEY); '
+             'HARNESS_VIDEO_AUTO_CURATE=1 fills an empty allowlist on demand',
         fallback='The curated allowlist still renders as plain outbound links; a '
                  'video that cannot be verified is never embedded on an assumption.',
         probe='media_network', meter='capability:video',
@@ -187,14 +189,16 @@ CAPABILITIES: tuple[Capability, ...] = (
         id='web_search', title='Case-study web search', tier=TIER_PLUS,
         provider='DuckDuckGo through the ddgs package (the legacy duckduckgo_search '
                  'name is still honoured); every result passes the ingest licence gate '
-                 'and an unaudited domain returns a link with no copied text. The '
-                 'provider must be installed for live search.',
-        knob='HARNESS_MEDIA_ENABLED=1 plus the ddgs package installed',
+                 'and an unaudited domain returns a link with no copied text. When '
+                 'Playwright + Chromium are installed, a real browser is preferred '
+                 'instead: it renders Bing / YouTube result pages that a bare client '
+                 'cannot, and needs no search API key.',
+        knob='HARNESS_MEDIA_ENABLED=1 plus ddgs or HARNESS_CHROMIUM_SEARCH=1 (default on)',
         fallback='No live search; the local material pack search still works and the '
                  'tutor cites only what it actually read.',
         probe='ddg_package', meter='capability:web_search',
         note='Implemented: the web_search and fetch_page_text tools exist and are '
-             'licence-gated; the probe reports whether a provider is installed.'),
+             'licence-gated; the probe reports whether either provider is ready.'),
     Capability(
         id='browser_snapshot', title='Teacher page snapshots (headless browser)',
         tier=TIER_PLUS,
@@ -347,9 +351,13 @@ def _probe_ddg_package(settings) -> tuple[bool, str]:
         return False, ('Search needs network media, which is off for this instance '
                        '(HARNESS_MEDIA_ENABLED=0).')
     from .harness import ddg_provider
-    if not ddg_provider.installed():
-        return False, ('No DuckDuckGo provider is installed in this environment '
-                       '(neither ddgs nor the legacy duckduckgo_search).')
+    provider, source = ddg_provider.resolve(settings)
+    if provider is None:
+        return False, ('No search provider is available in this environment '
+                       '(neither ddgs nor the legacy duckduckgo_search, and no '
+                       'headless Chromium provider).')
+    if source == 'chromium':
+        return True, 'A headless Chromium search provider is ready (Bing / YouTube).'
     return True, 'A DuckDuckGo search provider is installed.'
 
 

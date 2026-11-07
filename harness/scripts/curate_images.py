@@ -95,9 +95,23 @@ def _shrink(body: bytes, suffix: str) -> tuple[bytes, str, int, int]:
 
 
 def _write_atomically(target: Path, body: bytes) -> None:
+    """Write ``body`` to ``target`` without ever exposing a half-written file.
+
+    The name is the content hash, so a file already sitting at ``target`` is the same fact as
+    one this call would have written. That matters because ``os.replace`` here goes through the
+    host's file-operation broker, which has been seen to move the staging file and *then* report
+    it missing; without this tolerance a single such hiccup ends a pass that has already spent
+    minutes on the network. A genuinely missing result still raises.
+    """
     staged = target.with_suffix(target.suffix + '.tmp')
-    staged.write_bytes(body)
-    os.replace(staged, target)
+    try:
+        staged.write_bytes(body)
+        os.replace(staged, target)
+    except FileNotFoundError:
+        if not target.is_file():
+            raise
+    finally:
+        staged.unlink(missing_ok=True)
 
 
 def _lesson_summary(lesson: dict) -> str:

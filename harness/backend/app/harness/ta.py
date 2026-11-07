@@ -30,11 +30,16 @@ from typing import Any
 # so a tool whose optional package this build does not carry (browser_snapshot needs
 # playwright, which the desktop bundle excludes) is simply not offered rather than being
 # offered and guaranteed to refuse.
+#
+# ``edit_simulation`` is here because ``assets.plan_repair`` answers a broken or off-topic
+# interactive with ``rebuild_simulation``. A TA that can create an artifact but not repair
+# one cannot execute the plan it is handed, so the repair would be planned and never run —
+# the teacher keeps the substitute video forever.
 TA_TOOLS = ('search_concepts', 'read_concept', 'web_search', 'wikipedia_summary',
             'fetch_page_text', 'image_search', 'image_generate', 'find_image',
             'build_figure', 'find_game', 'search_videos', 'browser_snapshot',
-            'generate_slides', 'write_simulation', 'whiteboard_apply',
-            'whiteboard_write', 'whiteboard_place_image')
+            'generate_slides', 'write_simulation', 'edit_simulation', 'check_simulation',
+            'whiteboard_apply', 'whiteboard_write', 'whiteboard_place_image')
 
 MAX_JOBS = 5
 _state_lock = threading.Lock()

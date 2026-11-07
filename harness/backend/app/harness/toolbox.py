@@ -26,7 +26,10 @@ Three rules shape this module.
 
 from __future__ import annotations
 
+import json
+import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
 from ..curriculum import (CONCEPTS, GRAPH_TO_LESSON, KNOWLEDGE_GRAPH, LESSON_TARGETS,
@@ -688,8 +691,77 @@ def find_image(ctx: ToolContext, concept_id: str) -> ToolResult:
                       refused='' if found.get('asset') else str(found.get('outcome') or ''))
 
 
+#: One day. A concept that could not be curated (no network, no browser, no
+#: on-topic candidate) is retried tomorrow, not on every lesson open.
+VIDEO_CURATE_RETRY_SECONDS = 24 * 3600
+
+
+def _curation_attempts_path(settings) -> Path:
+    return Path(settings.data_dir) / 'media' / 'video_curation_attempts.json'
+
+
+def _read_curation_attempts(settings) -> dict[str, float]:
+    try:
+        raw = json.loads(_curation_attempts_path(settings).read_text(encoding='utf-8'))
+        return {str(k): float(v) for k, v in raw.items()} if isinstance(raw, dict) else {}
+    except (OSError, ValueError, TypeError):
+        return {}
+
+
+def _curation_recently_failed(settings, course_id: str, concept_id: str) -> bool:
+    stamp = _read_curation_attempts(settings).get(f'{course_id}:{concept_id}')
+    return bool(stamp) and time.time() - stamp < VIDEO_CURATE_RETRY_SECONDS
+
+
+def _remember_curation(settings, course_id: str, concept_id: str, curated: bool) -> None:
+    """Remember a miss, forget one on success. Written atomically like the allowlist."""
+    table = _read_curation_attempts(settings)
+    key = f'{course_id}:{concept_id}'
+    if curated:
+        table.pop(key, None)
+    else:
+        table[key] = time.time()
+    path = _curation_attempts_path(settings)
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        staging = path.with_suffix('.json.part')
+        staging.write_text(json.dumps(table), encoding='utf-8')
+        staging.replace(path)
+    except OSError:
+        # A read-only data dir must not turn a lesson into a 500. The worst case
+        # is one extra curation attempt per request, which the caller can switch
+        # off with HARNESS_VIDEO_AUTO_CURATE=0.
+        pass
+
+
+def _curate_video_for_lesson(ctx, settings, concept_id: str) -> dict[str, Any]:
+    """Run the teacher's curation job for one lesson, with its own gates intact."""
+    from . import video_search
+
+    node = _node_or_lesson(ctx, concept_id) or {}
+    lesson = _lesson_for(concept_id) or {}
+    title = str(node.get('title') or lesson.get('title') or concept_id)
+    keywords = [str(word) for word in
+                (node.get('keywords') or lesson.get('keywords') or [])]
+    concept = {'id': concept_id, 'title': title, 'keywords': keywords}
+    try:
+        return video_search.curate_for_concept(settings, concept, ctx.course_id, limit=6)
+    except Exception as exc:  # noqa: BLE001 - a failed curation is a note, not a 500
+        return {'curated': False, 'reason': f'{type(exc).__name__}: {exc}'}
+
+
 def find_video(ctx: ToolContext, concept_id: str) -> ToolResult:
-    """Curated video for a concept, verified for embeddability and never downloaded."""
+    """Curated video for a concept, verified for embeddability and never downloaded.
+
+    A concept with no allowlist row used to mean no video at all. The teacher's
+    curation job (:func:`video_search.curate_for_concept`) already existed to
+    close that gap but was only ever run by a separate sweep, so an ordinary
+    lesson stayed empty. Here it runs on demand, once per concept per day, behind
+    the same four gates (title relevance, neighbouring lesson, trusted source and
+    oEmbed embeddability). Writing goes through ``video.curate`` -- the same
+    idempotent allowlist a human edits -- and a failure is reported in ``notes``
+    rather than as a fabricated card.
+    """
     from . import video
     settings = getattr(ctx, 'settings', None)
     if settings is None:
@@ -698,14 +770,36 @@ def find_video(ctx: ToolContext, concept_id: str) -> ToolResult:
         return ToolResult('find_video', False,
                           refused='Video curation is keyed by course; no course is bound.')
     cards = video.resolve(settings, ctx.course_id, concept_id)
+    curation: dict[str, Any] | None = None
+    if (not cards
+            and getattr(settings, 'video_auto_curate', False)
+            and getattr(settings, 'media_enabled', False)
+            and getattr(settings, 'chromium_search_enabled', False)
+            and not _curation_recently_failed(settings, ctx.course_id, concept_id)):
+        curation = _curate_video_for_lesson(ctx, settings, concept_id)
+        _remember_curation(settings, ctx.course_id, concept_id,
+                           bool(curation.get('curated')))
+        if curation.get('curated'):
+            cards = video.resolve(settings, ctx.course_id, concept_id)
     citations = [{'kind': 'video', 'id': card.get('provider'), 'title': card.get('title'),
                   'source': card.get('channel'), 'url': card.get('watch_url'),
                   'licence': card.get('licence'), 'licence_class': card.get('licence_class')}
                  for card in cards]
+    notes = ['Embedded through the provider\'s own player. Embeddability was '
+             'verified per video and fails closed; nothing was downloaded, '
+             'transcribed or re-hosted.']
+    if curation is not None:
+        if curation.get('curated'):
+            best = curation.get('video') or {}
+            notes.append('On-demand curation attached a verified video '
+                         f'({best.get("video_id") or "unknown"}) via '
+                         f'{curation.get("path") or "the search provider"}.')
+        else:
+            notes.append('On-demand curation found no qualifying video: '
+                         f'{curation.get("reason") or "unknown reason"}. '
+                         'No video was invented; retry is suppressed for 24h.')
     return ToolResult('find_video', True, {'videos': cards}, citations=citations,
-                      notes=['Embedded through the provider\'s own player. Embeddability was '
-                             'verified per video and fails closed; nothing was downloaded, '
-                             'transcribed or re-hosted.'])
+                      notes=notes)
 
 
 def find_simulation(ctx: ToolContext, concept_id: str) -> ToolResult:
@@ -1090,6 +1184,15 @@ _register(ToolSpec('edit_simulation',
                    '{artifact_id, version, previous_version, raw_url, diff_summary, gate} '
                    'or refusal'),
           _tools_creation.edit_simulation)
+_register(ToolSpec('check_simulation',
+                   'Run a stored simulation in a headless browser and report whether it '
+                   'behaves: script errors, a throwing console, a blank frame, or a '
+                   'non-finite value in the visible text after being driven. Structural '
+                   'validation at creation cannot catch any of these. Reports unverified '
+                   '(not broken) when the instance has no browser.',
+                   'artifact_id: str', 'sandboxed',
+                   '{artifact_id, version, checked, problems, reason} or refusal'),
+          _tools_creation.check_simulation)
 _register(ToolSpec('generate_slides',
                    'Compose a real slide deck from a spec or from authored curriculum: '
                    'a printable self-contained HTML deck plus a .pptx twin when '

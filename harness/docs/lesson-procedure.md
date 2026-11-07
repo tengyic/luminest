@@ -337,7 +337,7 @@ catch a resolver change that breaks the contract.
 
 ## Tests
 
-`backend/tests/test_lesson_procedure.py` — 82 tests, in two halves:
+`backend/tests/test_lesson_procedure.py` — 83 tests, in two halves:
 
 - **The compiler** (no database): the four rules, the stop conditions, the simulation band,
   determinism, the hash's stability, and the rendered prompt.

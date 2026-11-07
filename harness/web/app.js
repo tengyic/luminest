@@ -14,6 +14,7 @@
     sidebar: $('sidebar'), sidebarToggle: $('sidebar-toggle'),
     simList: $('sim-list'), sessionList: $('session-list'), newSession: $('new-session-btn'),
     roleToggle: $('role-toggle'), authRow: $('auth-row'), tokenInput: $('token-input'), tokenSave: $('token-save'),
+    telemetryRow: $('telemetry-row'), telemetryToggle: $('telemetry-toggle'),
     connDot: $('conn-dot'), connText: $('conn-text'),
     simTitle: $('sim-title'), statusPill: $('status-pill'), simRefresh: $('sim-refresh'),
     canvasStage: $('canvas-stage'), frame: $('sim-frame'), overlay: $('sim-overlay'),
@@ -342,9 +343,14 @@
 
   let bridgeReady = false;
   let bridgeTimer = null;
+  // The document the bridge announced itself for. The injected script runs while
+  // the frame is still parsing, so `luminfest:ready` is delivered *before* the
+  // frame's `load` event — and a naive reset in the load handler turned every
+  // working simulation into "bridge is missing" two seconds later.
+  let bridgeSrc = '';
 
   els.frame.addEventListener('load', () => {
-    bridgeReady = false;
+    if (els.frame.src !== bridgeSrc) bridgeReady = false;
     clearTimeout(bridgeTimer);
     bridgeTimer = setTimeout(() => {
       if (!bridgeReady) {
@@ -361,6 +367,7 @@
     if (!data || typeof data.type !== 'string' || !data.type.startsWith('luminfest:')) return;
     if (data.type === 'luminfest:ready') {
       bridgeReady = true;
+      bridgeSrc = els.frame.src;
       clearTimeout(bridgeTimer);
       return;
     }
@@ -618,6 +625,82 @@
         : 'Teacher tools need a teacher account — the server decides this, not this switch.';
     }
     if (!allowed && state.role === 'teacher') setRole('student');
+  }
+
+  // ------------------------------------------------- interaction telemetry
+  //
+  // The web surface had no click channel at all, so `/api/v1/attention/window`
+  // could only ever see the macOS app. This sends the same `interaction` events
+  // the native client sends, under the same closed grammar (web/telemetry.js),
+  // and only when the account has said yes. `/events` answers 403 without
+  // consent, so arming reads `telemetry_consent` from `/me` - the checkbox is a
+  // request to change that, not the permission itself.
+  const telemetry = window.LuminfestTelemetry || null;
+  let telemetryQueue = null;
+  let telemetryTimer = null;
+
+  function telemetrySend(batch) {
+    api('/api/v1/events', { method: 'POST', body: JSON.stringify({ events: batch }) })
+      .catch((error) => {
+        // 403 means consent was withdrawn (another tab, or the account itself);
+        // retrying a request the server keeps refusing only adds noise.
+        if (error && error.status === 403) armTelemetry(false);
+      });
+  }
+
+  function armTelemetry(on) {
+    if (!telemetry) return;
+    if (on && !telemetryQueue) {
+      telemetryQueue = telemetry.createQueue({ send: telemetrySend, max: 40 });
+      telemetryTimer = setInterval(() => telemetryQueue.flush(), 5000);
+      document.addEventListener('pointerdown', onTelemetryPointer, true);
+      document.addEventListener('keydown', onTelemetryKey, true);
+      window.addEventListener('blur', onTelemetryBlur);
+      window.addEventListener('focus', onTelemetryFocus);
+    } else if (!on && telemetryQueue) {
+      telemetryQueue.flush();
+      clearInterval(telemetryTimer);
+      telemetryTimer = null;
+      telemetryQueue = null;
+      document.removeEventListener('pointerdown', onTelemetryPointer, true);
+      document.removeEventListener('keydown', onTelemetryKey, true);
+      window.removeEventListener('blur', onTelemetryBlur);
+      window.removeEventListener('focus', onTelemetryFocus);
+    }
+  }
+
+  function onTelemetryPointer(event) {
+    if (!telemetryQueue || telemetry.isSensitive(event.target)) return;
+    telemetryQueue.record('click', telemetry.targetFor(event.target));
+  }
+
+  function onTelemetryKey(event) {
+    // No key, no character: the channel records that a key was pressed and
+    // where. Typing into a password or email field is not even that.
+    if (!telemetryQueue || telemetry.isSensitive(event.target)) return;
+    telemetryQueue.record('key', telemetry.targetFor(event.target));
+  }
+
+  function onTelemetryBlur() { if (telemetryQueue) telemetryQueue.record('blur'); }
+  function onTelemetryFocus() { if (telemetryQueue) telemetryQueue.record('focus'); }
+
+  async function loadTelemetryConsent() {
+    if (!els.telemetryRow || !els.telemetryToggle) return;
+    if (!state.token) {
+      els.telemetryRow.classList.add('hidden');
+      armTelemetry(false);
+      return;
+    }
+    try {
+      const me = await api('/api/v1/me');
+      const on = me.telemetry_consent === true;
+      els.telemetryRow.classList.remove('hidden');
+      els.telemetryToggle.checked = on;
+      armTelemetry(on);
+    } catch {
+      els.telemetryRow.classList.add('hidden');
+      armTelemetry(false);
+    }
   }
 
   function setRole(role) {
@@ -984,15 +1067,19 @@
   // Local image bytes ride the authenticated media route; the provider's own
   // URL is the fallback for embed-posture results (searched, never downloaded).
   // A thumbnail that cannot be rendered is dropped rather than shown broken.
-  async function taImageSrc(media) {
-    if (media.sha) {
+  //
+  // Cards and the media list name the same picture differently — a card carries
+  // `url`, a media row carries `thumb_url` — so both are read here. Reading only
+  // `thumb_url` silently rendered every searched image as text.
+  async function taImageSrc(item) {
+    if (item.sha) {
       try {
-        const response = await fetch('/api/v1/media/images/' + media.sha + '/bytes',
+        const response = await fetch('/api/v1/media/images/' + item.sha + '/bytes',
           { headers: authHeaders() });
         if (response.ok) return URL.createObjectURL(await response.blob());
       } catch { /* fall through to the remote URL */ }
     }
-    return media.thumb_url || '';
+    return item.thumb_url || item.url || '';
   }
 
   function taDeckPptxName(meta) {
@@ -1192,7 +1279,29 @@
     toast('Token saved for this tab (sessionStorage)');
     loadSimList();
     loadServerRole();
+    loadTelemetryConsent();
   });
+
+  if (els.telemetryToggle) {
+    els.telemetryToggle.addEventListener('change', async () => {
+      const on = els.telemetryToggle.checked;
+      try {
+        const me = await api('/api/v1/me', {
+          method: 'PATCH', body: JSON.stringify({ telemetry_consent: on }),
+        });
+        const saved = me.telemetry_consent === true;
+        els.telemetryToggle.checked = saved;
+        armTelemetry(saved);
+        toast(saved
+          ? 'Interaction telemetry is on for this account'
+          : 'Interaction telemetry is off; nothing is being sent');
+      } catch (error) {
+        els.telemetryToggle.checked = !on;
+        armTelemetry(!on);
+        toast('Could not change telemetry consent: ' + (error.message || 'unknown error'));
+      }
+    });
+  }
 
   // ------------------------------------------------------------------ start
 
@@ -1216,4 +1325,5 @@
   renderTranscript();
   loadSimList();
   loadServerRole();
+  loadTelemetryConsent();
 })();

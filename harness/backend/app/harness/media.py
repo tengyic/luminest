@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import shutil
 import time
 from dataclasses import asdict, dataclass, field
@@ -1273,6 +1274,23 @@ def find_image(settings, concept_title: str, *, summary: str = '',
     payload = acquire(settings, query, alt_text=alt_text or f'Photograph of {title}',
                       support=summary)
     payload['concept_title'] = title
+    if payload.get('asset') is None and payload.get('outcome') == 'no_cleared_candidate':
+        # One widening, and only after a refusal that means "the search ran and everything it
+        # found was rejected" - never after ``network_disabled``, where a second attempt would
+        # only refuse again, or after a download failure, where the picture exists.
+        head = _head_phrase(title)
+        if head:
+            widened = acquire(settings, head, alt_text=alt_text or f'Photograph of {title}',
+                              support=summary)
+            widened['concept_title'] = title
+            widened['queries'] = [query, head]
+            widened['notes'] = [
+                f'Nothing searchable was found for the whole title, so the search was widened '
+                f'to its subject ({head!r}) - the part a photograph can show, rather than what '
+                f'the lesson says about it.',
+                *(widened.get('notes') or []),
+            ]
+            return widened
     return payload
 
 
@@ -1281,6 +1299,37 @@ def find_image(settings, concept_title: str, *, summary: str = '',
 def _valid_sha(value: Any) -> bool:
     text = str(value or '')
     return len(text) == 64 and all(c in '0123456789abcdef' for c in text)
+
+
+def _head_phrase(title: str) -> str:
+    """The *subject* of a lesson title, without the qualifier that follows "and".
+
+    Curriculum titles are often of the form "Blood vessels and their adaptation": the head is
+    what a photograph can show, and the tail is what the lesson *says* about it. Searching the
+    whole title fails in a way that looks like an empty library — measured on this lesson, 12
+    candidates, 0 accepted, every rejection for the same reason: the relevance gate requires
+    the term the concept turns on, and that term is "adaptation", which no photograph of a
+    blood vessel says about itself. Searching "Blood vessels" returns 40 candidates, 11
+    accepted, and the picture that lands is "Blood vessels structure.jpg".
+
+    Two conditions keep the widening from making things worse:
+
+    * **The head must still be a phrase** (two or more words). "Supply and demand" would reduce
+      to "Supply", and a single generic word is exactly where full-text image search returns
+      its most confident nonsense — the gate would then cheerfully accept a photograph of a
+      supply ship for an economics lesson. A one-word head is left to the full title.
+    * **It only runs when the full title found nothing**, so a title that already works is
+      never rewritten and never costs a second search.
+
+    Returns ``''`` when there is nothing to widen to.
+    """
+    stripped = ' '.join((title or '').split())
+    head = re.split(r'\s+(?:and|&)\s+', stripped, maxsplit=1)[0].strip()
+    if head == stripped or not head:
+        return ''
+    if len(_ordered_tokens(head)) < 2:
+        return ''
+    return head
 
 
 def _concept_query(title: str, summary: str = '') -> str:

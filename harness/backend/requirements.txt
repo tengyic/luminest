@@ -24,7 +24,10 @@ python-pptx==1.0.2
 # 8.1.1 duckduckgo-search line is a rename stub whose backend returns nothing,
 # so pinning it made web_search succeed and report zero results. app/harness/
 # ddg_provider.py still accepts the legacy module name for environments that
-# have not migrated.
+# have not migrated. It also prefers a headless-Chromium provider when
+# playwright is installed (HARNESS_CHROMIUM_SEARCH=1, default on), so a network
+# that refuses DuckDuckGo's HTML endpoint still gets real results; ddgs remains
+# the fallback for the frozen desktop bundle, which excludes playwright.
 ddgs==9.16.0
 python-multipart==0.0.22
 pypdf>=6,<7

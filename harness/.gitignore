@@ -54,3 +54,11 @@ DerivedData/
 # Per-run SQLite databases written by the native UI test harness. Same category as the
 # .pt* residue above: one full database (plus its -wal and -shm) per run.
 ui-tests/test-state/
+
+# Locally created Python environments, per-run acceptance databases and dead copies.
+# These hold runtime state (auth tokens in WALs, generated decks, MP3s), not source.
+.venv*/
+.tmp*/
+/model/tmp*/
+backend/.stash/
+backend/.probe_policy.py

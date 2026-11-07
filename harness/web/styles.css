@@ -80,6 +80,14 @@ body { background: var(--bg-base); color: var(--text-primary); font-size: 14px; 
 .conn-dot.ok { background: var(--ok); }
 .conn-dot.bad { background: var(--danger); }
 
+/* Consent for the click channel. Deliberately quiet: it is an account-level
+   permission, not a mode switch, and it must not look like a feature button. */
+.telemetry-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: var(--text-dim); cursor: pointer;
+}
+.telemetry-row input { margin: 0; width: 12px; height: 12px; accent-color: var(--accent); }
+
 /* ---------------------------------------------------------------- main */
 .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 
@@ -283,13 +291,19 @@ body { background: var(--bg-base); color: var(--text-primary); font-size: 14px; 
 .ta-result-title { font-size: 12px; font-weight: 600; }
 .ta-result-when { font-size: 10px; color: var(--text-dim); margin-left: auto; }
 .ta-summary { margin: 0; font-size: 12px; line-height: 1.45; }
-.ta-cards { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Cards keep their own height: stretching them to the tallest card in the row
+   (an image card) turned the deck card's buttons into tall empty boxes. */
+.ta-cards { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; }
 .ta-card {
   background: var(--bg-base); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 7px 9px; display: grid; gap: 5px; min-width: 150px; max-width: 220px;
+  align-content: start;
 }
 .ta-card-title { font-size: 12px; font-weight: 600; line-height: 1.3; }
-.ta-card-tools { display: flex; gap: 6px; }
+.ta-card-tools { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+/* A deck card is narrow; without nowrap the ".pptx" label breaks into one
+   character per line and the button reads as a glitch. */
+.ta-card-tools > * { white-space: nowrap; flex: none; }
 .ta-card-meta { font-size: 10px; color: var(--text-dim); line-height: 1.35; }
 .ta-card-src { font-size: 10px; }
 .ta-img {

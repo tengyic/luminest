@@ -15,11 +15,20 @@ from app.config import Settings
 from app.harness import speech, voice as voice_backend
 
 
-def settings_for(tmp_path, monkeypatch, *, media_enabled=True):
+def settings_for(tmp_path, monkeypatch, *, media_enabled=True, voice_enabled=True):
+    """Voice output is its own gate.
+
+    It used to be implied by ``HARNESS_MEDIA_ENABLED``, so a test that wanted "nothing
+    is spoken here" switched media off. They are separate switches now, and voice
+    defaults **on** outside production -- which means a test that only cleared media
+    still had a speaking engine and saw ``pending`` where it expected ``unavailable``.
+    State the gate you mean.
+    """
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '1' if media_enabled else '0')
+    monkeypatch.setenv('HARNESS_VOICE_ENABLED', '1' if voice_enabled else '0')
     return Settings.from_env()
 
 
@@ -98,7 +107,7 @@ def test_a_failure_is_never_cached_as_a_clip(tmp_path, monkeypatch):
 
 
 def test_warm_up_is_skipped_when_voice_output_is_off(tmp_path, monkeypatch):
-    settings = settings_for(tmp_path, monkeypatch, media_enabled=False)
+    settings = settings_for(tmp_path, monkeypatch, voice_enabled=False)
     called = []
     monkeypatch.setattr(speech.voice_backend, 'probe', lambda _s: called.append(1) or (True, ''))
     speech.warm(settings)
@@ -180,7 +189,7 @@ def test_the_sequence_renders_every_clip_and_names_the_first(tmp_path, monkeypat
 
 
 def test_a_sequence_with_voice_output_off_says_so_once(tmp_path, monkeypatch):
-    settings = settings_for(tmp_path, monkeypatch, media_enabled=False)
+    settings = settings_for(tmp_path, monkeypatch, voice_enabled=False)
     sequence = speech.request_sequence(settings, LONG_REPLY)
     assert sequence['state'] == speech.UNAVAILABLE
-    assert 'HARNESS_MEDIA_ENABLED' in sequence['reason']
+    assert 'HARNESS_VOICE_ENABLED' in sequence['reason']

@@ -35,3 +35,15 @@ DerivedData/
 #    record a gitlink that clones back as an empty directory.
 reference/prior-models/ednet_real/*.parquet
 reference/prior-app/ai-learning-software/
+
+# Private workspace state and one-off artefacts that must not be published.
+# .workbuddy-ai/ holds agent memory and project notes; the zip is a full source
+# snapshot whose contents have not been audited; tts-samples/ is generated audio.
+/.workbuddy-ai/
+/luminest-source-2026-11-01.zip
+/tts-samples/
+
+# A separate WorkBuddy mini-program scaffold, not part of the Luminfest harness.
+# Its node_modules is generated regardless, so ignore both.
+/luminest-miniprogram/
+node_modules/

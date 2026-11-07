@@ -207,6 +207,20 @@ class Settings:
     #: human, so "off" is the only safe default: an instance that has not been asked for
     #: this must never begin capturing.
     stream_enabled: bool = False
+    #: A real headless Chromium may serve web/video search when the ``ddgs`` package
+    #: is absent or its SERP endpoint refuses the request. ``playwright`` + a downloaded
+    #: Chromium are required; :func:`app.harness.chromium_search.available` decides at
+    #: runtime, so switching this on in a build without the browser still degrades to
+    #: the original honest refusal. Off on a bare ``Settings(...)`` so unit tests never
+    #: reach the network; ``from_env`` turns it on for development/desktop.
+    chromium_search_enabled: bool = False
+    #: A concept with no curated video may be curated on demand by the teacher's
+    #: curation job the first time a lesson asks for it. Every candidate still passes
+    #: the title-relevance, neighbour, trusted-source and oEmbed-embeddability gates
+    #: before it is written to the same allowlist a human curator writes. A failed
+    #: attempt is remembered for 24h so an offline instance does not launch a browser
+    #: on every request. Off on a bare ``Settings(...)`` for the same test reason.
+    video_auto_curate: bool = False
 
     @classmethod
     def from_env(cls):
@@ -351,7 +365,13 @@ class Settings:
                    os.getenv('HARNESS_REALTIME_MODEL', 'gpt-4o-realtime-preview-2024-12-17'),
                    # The one capability that captures the host's screen and can post input
                    # to it, so there is no environment in which it defaults on.
-                   os.getenv('HARNESS_STREAM_ENABLED', '0') == '1')
+                   os.getenv('HARNESS_STREAM_ENABLED', '0') == '1',
+                   # Both default on for a running instance. They are gated again on
+                   # ``media_enabled`` (off in production/desktop) at the call site, so
+                   # an instance that promises no outbound media never launches a
+                   # browser. Set either to 0 to disable explicitly.
+                   os.getenv('HARNESS_CHROMIUM_SEARCH', '1') == '1',
+                   os.getenv('HARNESS_VIDEO_AUTO_CURATE', '1') == '1')
 
 
 def _bounded_int(name: str, default: int, low: int, high: int) -> int:

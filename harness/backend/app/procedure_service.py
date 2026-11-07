@@ -188,7 +188,10 @@ def _deck_image(settings, title: str, lesson_id: str = '') -> tuple[dict[str, An
     if not query:
         return None, 'This concept has no title to search a picture for.'
     try:
-        payload = media.acquire(settings, query, alt_text=f'Illustration for {title}')
+        # ``find_image``, not ``acquire``: it is the concept-facing entry point, so it applies
+        # the same title-widening the curator does and a deck for "Blood vessels and their
+        # adaptation" is not stuck on a query the relevance gate can only reject.
+        payload = media.find_image(settings, query, alt_text=f'Illustration for {title}')
     except Exception as exc:   # noqa: BLE001 - a failed search must not break the deck
         return None, f'The image search failed ({type(exc).__name__}); the deck is complete without it.'
     outcome = str(payload.get('outcome') or '')

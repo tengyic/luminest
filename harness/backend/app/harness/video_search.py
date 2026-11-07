@@ -72,10 +72,10 @@ def _ddg_search(settings, query: str, limit: int) -> tuple[list[dict[str, Any]],
     """Keyless fallback: DDG restricted to youtube.com, ids extracted from links."""
     from . import ddg_provider
 
-    DDGS = ddg_provider.load()
+    DDGS, source = ddg_provider.resolve(settings)
     if DDGS is None:
-        raise RuntimeError('No DuckDuckGo provider is installed (neither ddgs nor '
-                           'duckduckgo_search).')
+        raise RuntimeError('No search provider is installed (neither ddgs nor '
+                           'duckduckgo_search, and no headless Chromium provider).')
     raw = DDGS().text(f'site:youtube.com {query}', max_results=limit * 2)
     hits, seen = [], set()
     for row in raw or []:
@@ -85,7 +85,7 @@ def _ddg_search(settings, query: str, limit: int) -> tuple[list[dict[str, Any]],
         seen.add(video_id)
         hits.append({'video_id': video_id, 'title': str(row.get('title') or ''),
                      'channel': urlparse(str(row.get('href'))).hostname or 'youtube.com',
-                     'source': 'ddg_fallback'})
+                     'source': 'chromium_youtube' if source == 'chromium' else 'ddg_fallback'})
         if len(hits) >= limit:
             break
     return hits, 'ddg_fallback'
@@ -161,7 +161,31 @@ def _page_hits(html: str, limit: int) -> list[dict[str, Any]]:
 
 
 def _youtube_page_search(settings, query: str, limit: int) -> tuple[list[dict[str, Any]], str]:
-    """Keyless discovery from the provider's own results page."""
+    """Keyless discovery from the provider's own results page.
+
+    A real headless Chromium is the first choice: it renders the consent and
+    script layers that a bare HTTP client does not, and its ``ytInitialData``
+    carries the same structured rows this module already parses. The plain-HTTP
+    path below is kept as a fallback for builds that ship without ``playwright``
+    (the desktop bundle excludes it to save ~40 MB). Both feed the same pure
+    :func:`_page_hits` parser, so no candidate skips the duration/relevance
+    filters depending on which path served it.
+    """
+    if getattr(settings, 'chromium_search_enabled', False):
+        try:
+            from . import chromium_search
+            ready, _why = chromium_search.available()
+            if ready:
+                html = chromium_search.youtube_html(query)
+                hits = _page_hits(html, limit)
+                if hits:
+                    for hit in hits:
+                        hit['source'] = 'chromium_youtube'
+                    # ``youtube_page`` is the chain's public path name; the
+                    # per-card ``search_path`` above records the browser.
+                    return hits, 'youtube_page'
+        except Exception:  # noqa: BLE001 - fall through to the plain client
+            pass
     import httpx
     response = httpx.get('https://www.youtube.com/results',
                          params={'search_query': query, 'hl': 'en', 'gl': 'US'},

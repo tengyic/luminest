@@ -18,7 +18,7 @@ enum CapturePresentation {
         DispatchQueue.main.async {
             if let iconURL = Bundle.main.url(forResource: "Luminfest", withExtension: "icns"), let icon = NSImage(contentsOf: iconURL) { NSApp.applicationIconImage = icon }
             NSApp.windows.first?.title = "Luminfest"
-            NSApp.windows.first?.minSize = NSSize(width: 1000, height: 700)
+            NSApp.windows.first?.minSize = NSSize(width: SidebarLayout.minimumWindowWidth, height: 700)
         }
     }
     func applicationWillTerminate(_ notification: Notification) {
@@ -78,7 +78,7 @@ struct RootView: View {
             else { OnboardingView() }
         }
         .foregroundStyle(Palette.ink).font(.system(size: 13))
-        .background(Palette.background).frame(minWidth: 1000, minHeight: 700)
+        .background(Palette.background).frame(minWidth: SidebarLayout.minimumWindowWidth, minHeight: 700)
         // The practice surface is an overlay inside the one window rather than a sheet. A sheet is a
         // presentation attached to a host view, and SwiftUI intermittently drops a presentation that
         // is raised while its host's content is being swapped -- the same failure that used to skip
@@ -388,14 +388,42 @@ private struct FormFieldContainer<V: View>: View {
     }
 }
 
+/// Spec 4.4: the full labelled sidebar is shown at 1,120 points of window width and
+/// above; below it the shell uses a compact icon rail. Kept as pure, testable values so
+/// the breakpoint has an XCTest rather than only a screenshot, and so the window's
+/// minimum width cannot silently make the 900 pt case unreachable.
+enum SidebarLayout {
+    static let expandedBreakpoint: CGFloat = 1120
+    static let expandedWidth: CGFloat = 207
+    static let compactWidth: CGFloat = 68
+    /// The spec asks for a 900 pt window, so the shell must not demand 1,000 pt.
+    static let minimumWindowWidth: CGFloat = 900
+
+    static func isExpanded(width: CGFloat) -> Bool { width >= expandedBreakpoint }
+
+    static func sidebarWidth(for width: CGFloat) -> CGFloat {
+        isExpanded(width: width) ? expandedWidth : compactWidth
+    }
+
+    static func compactIdentifier(for page: Page) -> String {
+        "nav.compact." + page.rawValue
+    }
+}
+
 struct AppShell: View {
     @EnvironmentObject var store: AppStore
     /// The current destination's hue, used for the page eyebrow, title and aura.
     var pageAccent: Accent { Palette.accent(at: Page.allCases.firstIndex(of: store.page) ?? 0) }
     var body: some View {
-        HStack(spacing: 0) {
-            sidebar.frame(width: 207)
-            Rectangle().fill(Palette.line).frame(width: 1)
+        GeometryReader { geometry in
+            let availableWidth = geometry.size.width
+            HStack(spacing: 0) {
+                if SidebarLayout.isExpanded(width: availableWidth) {
+                    sidebar.frame(width: SidebarLayout.expandedWidth)
+                } else {
+                    compactSidebar.frame(width: SidebarLayout.compactWidth)
+                }
+                Rectangle().fill(Palette.line).frame(width: 1)
             VStack(spacing: 0) {
                 header
                 ScrollView {
@@ -435,8 +463,67 @@ struct AppShell: View {
                     }.padding(.horizontal, 32).padding(.top, 27).padding(.bottom, 25)
                 }
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
+
+    /// Below 1,120 pt the labelled sidebar becomes an icon rail. Every icon keeps an
+    /// accessibility label, an accessibility identifier and a tooltip, so the compact
+    /// shell is still usable with a keyboard, VoiceOver or a pointer.
+    private var compactSidebar: some View {
+        VStack(spacing: 0) {
+            Image(systemName: "sun.max.fill")
+                .font(.system(size: 21))
+                .foregroundStyle(Palette.forest)
+                .frame(height: 62)
+                .accessibilityLabel("Luminfest")
+            ForEach(Page.allCases) { page in
+                let accent = Palette.accent(at: Page.allCases.firstIndex(of: page) ?? 0)
+                let selected = store.page == page
+                Button {
+                    store.navigate(page)
+                } label: {
+                    Image(systemName: page.icon)
+                        .font(.system(size: 16))
+                        .foregroundStyle(accent.deep.opacity(selected ? 1 : 0.72))
+                        .frame(width: 40, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(selected ? accent.soft : Color.clear)
+                        )
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(page.title)
+                .accessibilityIdentifier(SidebarLayout.compactIdentifier(for: page))
+                .help(page.title)
+                .padding(.bottom, 4)
+            }
+            // The course/goal action must stay reachable in the compact shell too.
+            Button {
+                store.setupDismissed = false
+                store.showCourseSetup = true
+            } label: {
+                Image(systemName: "book.closed")
+                    .font(.system(size: 16))
+                    .foregroundStyle(Palette.forest)
+                    .frame(width: 40, height: 40)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Palette.sage.opacity(0.5))
+                    )
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Change course or goal")
+            .accessibilityIdentifier("sidebar.setup")
+            .help("Change course or goal")
+            .padding(.bottom, 4)
+            Spacer(minLength: 8)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(hex: 0xF1F2EC))
+    }
+
     var sidebar: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 10) {

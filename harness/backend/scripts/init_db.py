@@ -58,6 +58,19 @@ from sqlalchemy import inspect, text
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.config import Settings
 from app.db import Base, SCHEMA_VERSION, SchemaVersion, make_database
+from app.database_backup import (MAINTENANCE_LOCK_NAME, BackupError,
+                                 create_sqlite_backup, maintenance_lock,
+                                 sqlite_path_from_engine)
+
+# Import every module that declares a model on the shared ``Base``. ``create_all`` only
+# creates tables that have been *registered*, and a model defined outside ``app.db`` is
+# registered by importing its module - not by importing ``Base``. ``CreatedCourse`` lives
+# in ``course_builder`` because it owns that table's lifecycle; without this import a
+# fresh database was created without ``created_courses``, and the first learner who tried
+# to save a course hit "no such table". Tests never saw it: the test app imports
+# ``routes_create``, which imports ``course_builder``, so the table was always registered
+# there. Keep this list in step with any new out-of-``db`` model.
+from app import course_builder  # noqa: F401  - registers ``created_courses``
 
 #: Versions this migration path knows how to bring forward.
 KNOWN_VERSIONS = (None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
@@ -132,13 +145,63 @@ def _add_missing_columns(engine):
                 connection.execute(text(f'ALTER TABLE {table} ADD COLUMN {name} {ddl}'))
 
 
-def initialize(engine):
+def _needs_upgrade(engine, current):
+    """A database can claim v11 while still missing columns a fresh install would have.
+
+    ``create_all`` never adds a column to an existing table, so drift is repaired by the
+    same additive path. A drifted database must be backed up too, even though its version
+    stamp already matches ``SCHEMA_VERSION``.
+    """
+    if current != SCHEMA_VERSION:
+        return True
+    for table, columns in ADDED_COLUMNS.items():
+        present = _columns(engine, table)
+        if present is not None and any(name not in present for name, _ in columns):
+            return True
+    users = _columns(engine, 'users')
+    return users is not None and 'training_consent' not in users
+
+
+def initialize(engine, *, automatic_backup=True, backup_dir=None,
+               backup_creator=create_sqlite_backup):
+    """Create a fresh schema or apply data-preserving migrations.
+
+    Before the first DDL statement on an existing, non-empty SQLite database an online
+    backup is written and verified. If the backup cannot be created, migration stops
+    with an understandable error and the original database is left untouched. PostgreSQL
+    backup stays the deployment operator's responsibility (no file-backed DB to copy).
+    ``backup_creator`` is an injectable hook, so backup failure can be tested without
+    touching a real learner database.
+    """
     inspector = inspect(engine)
+    existing_tables = set(inspector.get_table_names())
+    is_fresh = not existing_tables
+    current = None
     if inspector.has_table('schema_version'):
         with engine.connect() as connection:
-            version = connection.execute(text('SELECT version FROM schema_version WHERE id = 1')).scalar()
-        if version not in KNOWN_VERSIONS and version != SCHEMA_VERSION:
-            raise ValueError(f'Unsupported schema version {version}; refusing to modify tables')
+            current = connection.execute(
+                text('SELECT version FROM schema_version WHERE id = 1')
+            ).scalar()
+        current = int(current) if current is not None else 1
+        if current not in KNOWN_VERSIONS and current != SCHEMA_VERSION:
+            raise ValueError(f'Unsupported schema version {current}; refusing to modify tables')
+    elif not is_fresh:
+        current = 1  # legacy pre-version-table database
+
+    needs_upgrade = True if is_fresh else _needs_upgrade(engine, current)
+
+    if automatic_backup and needs_upgrade and not is_fresh:
+        path = sqlite_path_from_engine(engine)
+        if path is not None and path.is_file() and path.stat().st_size > 0:
+            try:
+                backup_creator(
+                    path, backup_dir=backup_dir, kind='pre-migration',
+                    from_version=current, to_version=SCHEMA_VERSION,
+                )
+            except Exception as exc:
+                raise BackupError(
+                    f'Pre-migration backup failed; database left unchanged ({path}): {exc}'
+                ) from exc
 
     with engine.begin() as connection:
         if inspector.has_table('users') and 'training_consent' not in {c['name'] for c in inspector.get_columns('users')}:
@@ -156,9 +219,11 @@ def initialize(engine):
 
 
 if __name__ == '__main__':
-    engine, _ = make_database(Settings.from_env())
+    settings = Settings.from_env()
+    engine, _ = make_database(settings)
     try:
-        initialize(engine)
+        with maintenance_lock(settings.data_dir / MAINTENANCE_LOCK_NAME):
+            initialize(engine)
         print(f'Schema version {SCHEMA_VERSION} initialized. Existing data was not deleted.')
     finally:
         engine.dispose()

@@ -35,6 +35,10 @@
         <input id="token-input" type="password" placeholder="Paste access token" autocomplete="off">
         <button id="token-save" class="btn btn-small">Save</button>
       </div>
+      <label id="telemetry-row" class="telemetry-row hidden" title="Records that a control was used, never what was typed">
+        <input type="checkbox" id="telemetry-toggle">
+        <span>Share interaction telemetry</span>
+      </label>
       <div class="conn-row">
         <span id="conn-dot" class="conn-dot"></span>
         <span id="conn-text">checking API…</span>
@@ -207,6 +211,7 @@
 
 <div id="toast" class="toast hidden"></div>
 
+<script src="/web/telemetry.js"></script>
 <script src="/web/cards.js"></script>
 <script src="/web/app.js"></script>
 </body>

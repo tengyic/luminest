@@ -56,6 +56,14 @@ EDITED_SIM = GOOD_SIM.replace('let price = 5;', 'let price = 4;')
 class FakeSettings:
     data_dir: Path
     media_enabled: bool = False
+    #: Voice output is a *separate* gate from media (``HARNESS_VOICE_ENABLED``), and in
+    #: production it defaults off so an unattended instance never talks. Here it defaults
+    #: on, because the overwhelming majority of the TTS tests exist to prove what happens
+    #: once the provider is contacted; the one test that pins the refusal states its
+    #: precondition explicitly. Leaving this field off the double entirely is what broke
+    #: fourteen tests when the gate was introduced: they set ``media_enabled`` and then
+    #: asserted on a transport that was never reached.
+    voice_enabled: bool = True
     media_timeout: float = 4.0
     provider: str = 'offline'
     provider_url: str = ''
@@ -82,10 +90,15 @@ def ctx_for(settings, role=None):
 
 
 class FakeProvider:
-    """A provider.chat stand-in that returns a canned reply."""
+    """A provider.chat stand-in that returns a canned reply, or a sequence of them.
 
-    def __init__(self, reply: str):
-        self.reply = reply
+    A list models the retry path: the first reply is consumed, and the last one is
+    returned for every call after that, so a test can say "bad then good" or "bad
+    forever" without counting calls itself.
+    """
+
+    def __init__(self, reply):
+        self.replies = list(reply) if isinstance(reply, list) else [reply]
         self.calls: list[dict] = []
 
     def install(self, monkeypatch):
@@ -95,7 +108,7 @@ class FakeProvider:
 
     def _chat(self, settings, messages, **kwargs):
         self.calls.append({'messages': messages, **kwargs})
-        return self.reply
+        return self.replies.pop(0) if len(self.replies) > 1 else self.replies[0]
 
 
 # ----------------------------------------------------------------- the gate
@@ -389,6 +402,58 @@ def test_write_simulation_refuses_invalid_html(settings, monkeypatch, bad):
     assert not sims_store.list_artifacts(settings)
 
 
+def test_a_truncated_document_is_never_stored(settings, monkeypatch):
+    """A generation cut off mid-file is a broken lesson, not a document.
+
+    Regression: extraction used to accept anything that merely *started* with
+    ``<!doctype``, so a reply that hit the token ceiling was stored and served as half
+    a simulation -- the one failure worse than storing nothing, because it looks fine
+    until a learner opens it.
+    """
+    truncated = GOOD_SIM[:len(GOOD_SIM) // 2]
+    assert truncated.startswith('<!doctype')
+    assert extract_html(truncated) == ''
+
+    FakeProvider(truncated).install(monkeypatch)
+    result = toolbox.invoke(ctx_for(settings, 'teacher'), 'write_simulation',
+                            {'title': 'S', 'description': 'curves'})
+    assert not result.ok
+    assert 'cut off' in result.refused.casefold()
+    assert not sims_store.list_artifacts(settings)
+
+
+def test_a_near_miss_is_retried_with_the_validators_reasons(settings, monkeypatch):
+    """One missing convention costs a retry, not the lesson's artefact.
+
+    Measured 2026-11-01 across five subjects: four validated first time and the fifth
+    (a canvas action-potential scope) failed on a convention rather than on the idea.
+    The second attempt is told exactly what the validator rejected, so the retry is a
+    correction rather than a repetition.
+    """
+    fake = FakeProvider([NO_SERIES_SIM, GOOD_SIM])
+    fake.install(monkeypatch)
+    result = toolbox.invoke(ctx_for(settings, 'teacher'), 'write_simulation',
+                            {'title': 'S', 'description': 'curves'})
+    assert result.ok, result.refused + result.error
+    assert len(fake.calls) == 2
+    retry = fake.calls[1]['messages'][1]['content']
+    assert 'rejected by the structural validator' in retry
+    assert 'data-series' in retry
+    assert sims_store.read_version(settings, result.data['artifact_id']) == GOOD_SIM
+
+
+def test_a_repeated_failure_reports_the_problems_and_stops(settings, monkeypatch):
+    """The retry is bounded, and what comes back names the rule that was broken."""
+    fake = FakeProvider(NO_SERIES_SIM)
+    fake.install(monkeypatch)
+    result = toolbox.invoke(ctx_for(settings, 'teacher'), 'write_simulation',
+                            {'title': 'S'})
+    assert not result.ok
+    assert any('data-series' in problem for problem in result.data['validation_problems'])
+    assert len(fake.calls) == 2, 'the attempt budget is bounded, not a loop'
+    assert not sims_store.list_artifacts(settings)
+
+
 # ------------------------------------------------ privilege-escalation regression
 
 def test_tool_specs_do_not_expose_a_role_argument():
@@ -535,6 +600,9 @@ def _audio_handler(captured=None, content=b'ID3FakeMP3Bytes'):
 
 
 def test_tts_refuses_honestly_when_voice_output_is_off(settings):
+    # Stated, not inherited: the fixture enables voice so the other TTS tests can reach
+    # the provider. This test is the one that pins the gate.
+    settings.voice_enabled = False
     result = toolbox.invoke(ctx_for(settings), 'text_to_speech', {'text': 'Hello.'})
     assert not result.ok
     assert 'switched off' in result.refused.casefold()

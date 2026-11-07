@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Reproducible macOS arm64 desktop packaging; no native build in backend-only mode."""
 import argparse
+import contextlib
 import hashlib
 import json
 import math
@@ -406,6 +407,36 @@ def backend_provenance():
         provenance["backend_bytes"] = binary.stat().st_size
     provenance["provenance_recorded_at"] = time.time()
     return provenance
+
+
+def strip_toolchain_rpaths(path):
+    """Remove absolute non-system rpaths that a local toolchain injected.
+
+    ``swift build`` links against the installed Xcode and records that toolchain's own
+    Swift runtime directory as an ``LC_RPATH`` - for example
+    ``/Applications/Xcode.app/.../usr/lib/swift-6.2/macosx``. The path exists on the build
+    machine, so the app runs there and nowhere else: on any other Mac dyld cannot resolve
+    the Swift runtime and the process dies before the first frame draws.
+
+    macOS 14 ships the Swift runtime in ``/usr/lib/swift``, which is already on the default
+    search path, so the entry is not merely inconvenient - it is wrong. Deleting it is what
+    makes the bundle portable. This has to happen before signing, because
+    ``install_name_tool`` invalidates the existing signature.
+    """
+    commands = subprocess.check_output(["/usr/bin/otool", "-l", str(path)], text=True).splitlines()
+    in_rpath = False
+    removed = []
+    for line in commands:
+        stripped = line.strip()
+        if stripped.startswith("cmd "):
+            in_rpath = stripped == "cmd LC_RPATH"
+        elif in_rpath and stripped.startswith("path "):
+            rpath = stripped[5:].split(" (offset", 1)[0]
+            if rpath.startswith("/") and not rpath.startswith(("/usr/lib/", "/System/Library/")):
+                run(["/usr/bin/install_name_tool", "-delete_rpath", rpath, str(path)])
+                removed.append(rpath)
+            in_rpath = False
+    return removed
 
 
 def verify_portability(directory):
@@ -1030,13 +1061,25 @@ def assemble_app(executable, version, sign_identity=None, sandbox=False, notariz
     entitlements = ENTITLEMENTS_SANDBOX if sandbox else ENTITLEMENTS_DIRECT
     if sign_identity and not entitlements.is_file():
         raise RuntimeError(f"Entitlements file is missing: {entitlements}")
-    with tempfile.TemporaryDirectory(prefix="app-stage-", dir=WORK) as temporary:
+    # Retired, never deleted - the same fix ``make_archives`` already carries, and for the
+    # same reason. ``TemporaryDirectory`` cleans up with an rmtree over a full copy of the
+    # app, a few hundred entries, and a build environment's bulk-delete guard refuses
+    # that. The refusal arrives *after* the bundle has been assembled and signed, so the
+    # run dies with a correct build sitting in a staging directory that never gets moved
+    # into place - which reads exactly like a build failure and is not one.
+    staging_root = WORK / "app-stage"
+    retire(staging_root)
+    staging_root.mkdir(parents=True)
+    with contextlib.nullcontext(staging_root) as temporary:
         staged = Path(temporary) / APP.name
         contents = staged / "Contents"
         resources = contents / "Resources"
         (contents / "MacOS").mkdir(parents=True)
         (resources / "backend").mkdir(parents=True)
         shutil.copy2(executable, contents / "MacOS" / "LearningHarness")
+        # The copy, not the build output: a toolchain rpath is a property of the link, and
+        # editing the shipped binary is the point. See strip_toolchain_rpaths().
+        strip_toolchain_rpaths(contents / "MacOS" / "LearningHarness")
         # Bundle.module aborts the process rather than degrading, so the resource bundle is
         # part of the app, not an optional extra: see resource_bundle().
         resources_bundle = resource_bundle(executable)
@@ -1125,12 +1168,37 @@ def _is_macho(path):
                                   b"\xca\xfe\xba\xbe", b"\xbe\xba\xfe\xca"}
 
 
+def notarize_app(app, profile):
+    """Notarize the .app BEFORE it is archived, and staple the ticket INTO the bundle.
+
+    ``notarytool`` accepts a zip/dmg/pkg, never a bare ``.app``. Gatekeeper validates the
+    ticket on the app that is actually launched: a ticket stapled only to the DMG does
+    nothing for an app extracted from the zip, and an unstapled app is refused when the
+    machine is offline. Stapling the app first means BOTH the DMG and the zip carry a
+    stapled bundle, and the old comment claiming "the zip carries the app's ticket"
+    becomes true instead of wishful.
+    """
+    if not profile:
+        raise RuntimeError("Notarization requires --notary-profile (a notarytool keychain profile)")
+    submission = WORK / f"{app.stem}-notarize.zip"
+    if submission.is_file():
+        submission.unlink()
+    WORK.mkdir(parents=True, exist_ok=True)
+    run(["/usr/bin/ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", str(app), str(submission)])
+    run(["/usr/bin/xcrun", "notarytool", "submit", str(submission), "--keychain-profile", profile,
+         "--wait", "--output-format", "json"])
+    run(["/usr/bin/xcrun", "stapler", "staple", str(app)])
+    run(["/usr/bin/xcrun", "stapler", "validate", str(app)])
+    return {"submitted": str(submission), "stapled_app": str(app), "profile": profile}
+
+
 def notarize(dmg, archive, profile, identity):
     """Submit the disk image and the zip to Apple's notary service and staple the ticket.
 
     Both artifacts are submitted because the DMG is what most users download and the zip
     is what a managed deployment extracts; an unstapled artifact is refused by Gatekeeper
-    when the machine is offline.
+    when the machine is offline. The app inside them was already notarized and stapled by
+    ``notarize_app()`` before ``make_archives()`` ran - see ``main`` for the ordering.
     """
     if not profile:
         raise RuntimeError("Notarization requires --notary-profile (a notarytool keychain profile)")
@@ -1139,8 +1207,8 @@ def notarize(dmg, archive, profile, identity):
              "--wait", "--output-format", "json"])
     run(["/usr/bin/xcrun", "stapler", "staple", dmg])
     run(["/usr/bin/xcrun", "stapler", "validate", dmg])
-    # The zip cannot be stapled; it carries the notarization ticket of the app inside it,
-    # which is why the app must be notarized before it is zipped.
+    # The zip cannot itself be stapled. Its app was stapled by notarize_app() before
+    # make_archives() zipped it, which is why notarization must happen before packaging.
     return {"notarized": [str(dmg), str(archive)], "stapled": str(dmg), "profile": profile}
 
 
@@ -1279,6 +1347,8 @@ def main(argv=None):
         parser.error("--python must point to an existing Python executable")
     if args.notarize and not args.sign_identity:
         parser.error("--notarize requires --sign-identity; Apple refuses an ad-hoc signature")
+    if args.notarize and not args.notary_profile:
+        parser.error("--notarize requires --notary-profile; fail before building, not after shipping files")
     if args.sandbox and not args.sign_identity:
         parser.error("--sandbox requires --sign-identity; an ad-hoc sandbox build cannot be distributed")
     if not OUTPUTS.is_dir():
@@ -1310,13 +1380,18 @@ def main(argv=None):
     checks, bundle_smoke = assemble_app(executable, args.version, sign_identity=args.sign_identity,
                                         sandbox=args.sandbox, notarize=args.notarize,
                                         legal=legal_checks)
+    # The ticket must be stapled into the .app BEFORE it is copied into the DMG and the
+    # zip, otherwise a zip-extracted app has no offline-valid ticket. Ordering here is a
+    # Gatekeeper acceptance property, not a cosmetic detail.
+    app_notary = notarize_app(APP, args.notary_profile) if args.notarize else None
     dmg, archive = make_archives(template_legal=not legal_checks.get("ship_ready"))
     dmg_checks = verify_dmg(dmg)
     notary = notarize(dmg, archive, args.notary_profile, args.sign_identity) if args.notarize else None
     result = {"app": str(APP), "dmg": str(dmg), "archive": str(archive),
         "native_executable_mtime": executable.stat().st_mtime, "portability": checks,
         "backend_smoke": smoke, "bundle_smoke": bundle_smoke, "dmg_checks": dmg_checks,
-        "sign_identity": args.sign_identity, "sandboxed": args.sandbox, "notarization": notary,
+        "sign_identity": args.sign_identity, "sandboxed": args.sandbox,
+        "notarization": notary, "app_notarization": app_notary,
         "legal_gate": legal_checks,
         "version": args.version,
         # The authoritative answer to "which file do I hand out": the artifacts this run

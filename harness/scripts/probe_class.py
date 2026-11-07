@@ -148,7 +148,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--concept', default=DEFAULT_CONCEPT)
     parser.add_argument('--course', default='algebra_2')
-    parser.add_argument('--message', default=DEFAULT_MESSAGE)
+    parser.add_argument('--advance-to', default='',
+                        help='walk the plan until the current block is this kind (for '
+                             'example "simulation"), the way a client advances after a '
+                             'learner finishes each block')
+    parser.add_argument('--message', action='append', default=None,
+                        help='a learner turn; repeat the flag for a multi-turn lesson, and '
+                             'the turns share one server and one conversation')
     parser.add_argument('--no-speak', action='store_true')
     parser.add_argument('--keep', action='store_true', help='leave the server running')
     parser.add_argument('--backend-exe', default='',
@@ -263,15 +269,42 @@ def main() -> int:
 
         status, prepared = call(f'{base}/api/v1/procedure/{args.concept}/start', {}, token)
         print(f"\n[start] POST /procedure/{args.concept}/start -> {status}")
+        run = {}
         if status == 200:
             run = prepared.get('run') or prepared
-            print(f"  run: {run.get('id') or '(unnamed)'} · blocks: {len(run.get('blocks') or [])}")
+            print(f"  run: {run.get('run_id') or '(unnamed)'} · "
+                  f"blocks: {len(run.get('blocks') or [])}")
             for block in run.get('blocks') or []:
                 detail = block.get('image_unavailable') or block.get('image') or ''
                 print(f"    - {block.get('kind') or block.get('activity')}: "
                       f"{str(block.get('title') or '')[:55]} {str(detail)[:40]}")
         else:
             print(f"  {json.dumps(prepared)[:300]}")
+
+        # 2b. Walk the plan the way a client does after a learner finishes a block. Without
+        # this the tutor is pinned to block 1 for the whole conversation: the diagnostic
+        # asks for evidence, the learner answers in prose, and nothing records it, so the
+        # run never advances and every later request is answered with the same question.
+        if args.advance_to and run.get('run_id'):
+            for _ in range(8):
+                current = run.get('current') or {}
+                if str(current.get('kind') or current.get('activity') or '') == args.advance_to:
+                    break
+                order = int(current.get('order') or 0)
+                if not order:
+                    break
+                status, run = call(f"{base}/api/v1/procedure/runs/{run['run_id']}/advance",
+                                   {'order': order, 'outcome': 'done', 'seconds': 90}, token)
+                moved = (run.get('current') or {})
+                print(f"  [advance] block {order} done -> {status} · now "
+                      f"{moved.get('kind') or moved.get('activity') or '(finished)'}")
+                if status != 200:
+                    print(f"    {json.dumps(run)[:300]}")
+                    break
+            current = run.get('current') or {}
+            print(f"  [block] teaching inside: "
+                  f"{current.get('kind') or current.get('activity') or '(none)'} — "
+                  f"{str(current.get('title') or '')[:60]}")
 
         # 2. The TA's asset check, which is what decides whether the class is ready.
         status, sweep = call(f'{base}/api/v1/ta/sweep',
@@ -284,52 +317,55 @@ def main() -> int:
             for entry in sweep.get('plan') or []:
                 print(f"  repair : {entry['substitute']} now, then {entry['fix']}")
 
-        # 3. One teaching turn.
-        print(f'\n[teach] you: {args.message}\n')
-        started = time.time()
-        status, turn = call(base + '/api/v1/agent/chat',
-                            {'message': args.message, 'speak': not args.no_speak,
-                             'context': {'concept_id': args.concept, 'course_id': args.course}},
-                            token)
-        elapsed = time.time() - started
-        print(f'[teach] POST /agent/chat -> {status} in {elapsed:.1f}s')
-        if status != 200:
-            print(json.dumps(turn)[:600])
-            return 1
+        # 3. The lesson: one turn per learner message, in one conversation.
+        messages = args.message or [DEFAULT_MESSAGE]
+        for number, message in enumerate(messages, start=1):
+            print(f'\n[teach {number}/{len(messages)}] you: {message}\n')
+            started = time.time()
+            status, turn = call(base + '/api/v1/agent/chat',
+                                {'message': message, 'speak': not args.no_speak,
+                                 'context': {'concept_id': args.concept,
+                                             'course_id': args.course}},
+                                token)
+            elapsed = time.time() - started
+            print(f'[teach {number}] POST /agent/chat -> {status} in {elapsed:.1f}s')
+            if status != 200:
+                print(json.dumps(turn)[:600])
+                return 1
 
-        tools = [event.get('label') or event.get('name')
-                 for event in turn.get('events') or ()
-                 if event.get('type') in ('tool_call', 'tool_result')]
-        print(f"  answered_by: {turn.get('answered_by')} | finish: {turn.get('finish_reason')}")
-        print(f"  tools      : {tools or 'none'}")
-        speech = turn.get('speech') or {}
-        clips = speech.get('clips') or ([speech] if speech.get('digest') else [])
-        print(f"  speech     : kind={speech.get('kind')} delivery={speech.get('delivery')} "
-              f"clips={len(clips)} first={speech.get('state')}")
-        # A reply is spoken as a series of clips, because one utterance of a paragraph is
-        # a silence the length of the lesson. Poll them in order and report each: this is
-        # the same loop the app runs while it plays.
-        ready = 0
-        for index, clip in enumerate(clips):
-            if not clip.get('digest'):
-                continue
-            status, info = call(f"{base}/api/v1/media/audio/{clip['digest']}/state",
-                                token=token)
-            for _ in range(240):
-                if info.get('state') in ('ready', 'failed'):
-                    break
-                time.sleep(1.0)
+            tools = [event.get('label') or event.get('name')
+                     for event in turn.get('events') or ()
+                     if event.get('type') in ('tool_call', 'tool_result')]
+            print(f"  answered_by: {turn.get('answered_by')} | finish: {turn.get('finish_reason')}")
+            print(f"  tools      : {tools or 'none'}")
+            speech = turn.get('speech') or {}
+            clips = speech.get('clips') or ([speech] if speech.get('digest') else [])
+            print(f"  speech     : kind={speech.get('kind')} delivery={speech.get('delivery')} "
+                  f"clips={len(clips)} first={speech.get('state')}")
+            # A reply is spoken as a series of clips, because one utterance of a paragraph
+            # is a silence the length of the lesson. Poll them in order and report each:
+            # this is the same loop the app runs while it plays.
+            ready = 0
+            for index, clip in enumerate(clips):
+                if not clip.get('digest'):
+                    continue
                 status, info = call(f"{base}/api/v1/media/audio/{clip['digest']}/state",
                                     token=token)
-            if info.get('state') == 'ready':
-                ready += 1
-            print(f"    clip {index + 1}/{len(clips)}: {info.get('state')} · "
-                  f"{info.get('bytes') or 0} bytes"
-                  + (f" · {info.get('reason')}" if info.get('reason') else ''))
-        print(f"  audio      : {ready}/{len(clips)} clip(s) rendered")
-        print('\n--- tutor ---')
-        print(turn.get('message') or '(empty)')
-        print('--- end ---')
+                for _ in range(240):
+                    if info.get('state') in ('ready', 'failed'):
+                        break
+                    time.sleep(1.0)
+                    status, info = call(f"{base}/api/v1/media/audio/{clip['digest']}/state",
+                                        token=token)
+                if info.get('state') == 'ready':
+                    ready += 1
+                print(f"    clip {index + 1}/{len(clips)}: {info.get('state')} · "
+                      f"{info.get('bytes') or 0} bytes"
+                      + (f" · {info.get('reason')}" if info.get('reason') else ''))
+            print(f"  audio      : {ready}/{len(clips)} clip(s) rendered")
+            print('\n--- tutor ---')
+            print(turn.get('message') or '(empty)')
+            print('--- end ---')
         return 0
     finally:
         if not args.keep:

@@ -22,8 +22,30 @@ def hermetic_harness_environment(monkeypatch):
         monkeypatch.delenv(name, raising=False)
 
 
+@pytest.fixture(scope='session')
+def absent_video_seed(tmp_path_factory):
+    """A path that does not exist, computed **once per session**.
+
+    ``tmp_path_factory.mktemp(name)`` deletes any directory already sitting at that name,
+    so calling it from an autouse function-scoped fixture performs a filesystem delete
+    before every single test. Fifty of those trip the environment's bulk-delete guard
+    (``[safe-delete][SAFE_DELETE_BULK_CONFIRM_REQUIRED]``, threshold 50 per turn), which
+    raises ``SystemExit(1)`` from inside fixture setup -- and pytest reports the remaining
+    ~1700 tests as errors. The failure looks like a collapsed test suite, not a delete
+    quota, and it is intermittent because it depends on how many deletes have already
+    happened in the session. The value never changes, so compute it at session scope.
+    """
+    return tmp_path_factory.mktemp('no-seed') / 'absent.json'
+
+
+@pytest.fixture(scope='session')
+def absent_image_seed(tmp_path_factory):
+    """Same hazard, same fix: one directory for the whole session."""
+    return tmp_path_factory.mktemp('no-image-seed')
+
+
 @pytest.fixture(autouse=True)
-def no_shipped_video_curation(monkeypatch, tmp_path_factory):
+def no_shipped_video_curation(monkeypatch, absent_video_seed):
     """Detach the packaged video seed from every test.
 
     ``video.load_allowlist`` falls back to ``media_packs/video_allowlist_seed.json``, which is
@@ -34,12 +56,11 @@ def no_shipped_video_curation(monkeypatch, tmp_path_factory):
     """
     from app.harness import video
 
-    monkeypatch.setattr(video, 'SEED_PACK',
-                        tmp_path_factory.mktemp('no-seed') / 'absent.json')
+    monkeypatch.setattr(video, 'SEED_PACK', absent_video_seed)
 
 
 @pytest.fixture(autouse=True)
-def no_shipped_image_pack(monkeypatch, tmp_path_factory):
+def no_shipped_image_pack(monkeypatch, absent_image_seed):
     """Detach the packaged image seed from every test.
 
     Same hazard as the video seed, with a sharper edge: ``_deck_image`` asks the shipped pack
@@ -51,6 +72,5 @@ def no_shipped_image_pack(monkeypatch, tmp_path_factory):
     """
     from app.harness import media
 
-    absent = tmp_path_factory.mktemp('no-image-seed')
-    monkeypatch.setattr(media, 'SEED_PACK', absent / 'absent.json')
-    monkeypatch.setattr(media, 'SEED_DIR', absent / 'images')
+    monkeypatch.setattr(media, 'SEED_PACK', absent_image_seed / 'absent.json')
+    monkeypatch.setattr(media, 'SEED_DIR', absent_image_seed / 'images')

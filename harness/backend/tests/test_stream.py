@@ -18,6 +18,7 @@ than the machine.
 
 import pytest
 from fastapi.testclient import TestClient
+from types import SimpleNamespace
 
 from app.config import Settings
 from app.harness import screen
@@ -307,12 +308,27 @@ def test_the_event_budget_bounds_a_held_key(monkeypatch, tmp_path):
     monkeypatch.setattr(screen, '_key', lambda code, **k: sent.append(code))
     screen.save_region(settings, {'x': 0, 'y': 0, 'width': 800, 'height': 600})
 
+    # The limiter is a sliding one-second window over time.monotonic(). On a
+    # loaded host this 30-call loop can straddle a second boundary: the oldest
+    # timestamps expire mid-burst and every event slips through, so the test
+    # passes on an idle machine and fails on a busy one. Freeze the clock for
+    # the burst, then advance it explicitly to check the budget comes back.
+    # Only screen's own reference to `time` is replaced, not the global module.
+    clock = [10_000.0]
+    monkeypatch.setattr(screen, 'time',
+                        SimpleNamespace(monotonic=lambda: clock[0]))
+
     results = [screen.send_input(settings, {'kind': 'key', 'code': 36})
                for _ in range(screen.MAX_EVENTS_PER_SECOND + 5)]
 
     assert len(sent) == screen.MAX_EVENTS_PER_SECOND
     assert results[-1]['ok'] is False
     assert 'dropped' in results[-1]['reason']
+
+    clock[0] += 1.1
+    recovered = screen.send_input(settings, {'kind': 'key', 'code': 36})
+    assert recovered['ok'] is True
+    assert len(sent) == screen.MAX_EVENTS_PER_SECOND + 1
 
 
 # --------------------------------------------------------------- throwing the switch

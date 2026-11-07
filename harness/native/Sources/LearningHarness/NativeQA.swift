@@ -1,5 +1,6 @@
 import AppKit
 import ApplicationServices
+import Darwin
 import Foundation
 
 /// In-process QA: every workflow change goes through the application's real accessibility
@@ -75,7 +76,13 @@ final class NativeQA {
 
     /// Invoke once from RootView's onAppear; repeated SwiftUI appearances are harmless.
     func runIfRequested() {
-        guard !started, ProcessInfo.processInfo.arguments.contains("--native-qa") else { return }
+        guard !started else { return }
+        if ProcessInfo.processInfo.arguments.contains("--qa-owned-shutdown") {
+            started = true
+            Task { await runOwnedShutdown() }
+            return
+        }
+        guard ProcessInfo.processInfo.arguments.contains("--native-qa") else { return }
         started = true
         Task { await run() }
     }
@@ -101,7 +108,11 @@ final class NativeQA {
             email = environment["NATIVE_QA_EMAIL"] ?? "native-\(unique)@example.com"
             password = environment["NATIVE_QA_PASSWORD"] ?? "Qa-\(UUID().uuidString)!"
             record("launch", target: "NSApplication", outcome: "observed", details: ["uiTestArgument": ProcessInfo.processInfo.arguments.contains("--ui-test")])
-            try await waitMain("own application window", seconds: 10) { NSApp.windows.contains { $0.contentView != nil && $0.isVisible } }
+            // A cold first launch with a brand-new HOME can take longer than 10 s to
+            // order its window front (observed once at ~10.2 s: the blocked capture
+            // showed a fully rendered OnboardingView). This is a startup race in the
+            // driver, not a product defect, so the window wait is bounded but generous.
+            try await waitMain("own application window", seconds: 30) { NSApp.windows.contains { $0.contentView != nil && $0.isVisible } }
             await focusOwnWindow()
             await pause(0.8)
             try await capture("auth") // Always precedes any action that could block authentication.
@@ -130,6 +141,7 @@ final class NativeQA {
                 try await self.capture("insights")
             }
             await captureRequestedPages()
+            await responsiveWidths()
             status = failures.isEmpty ? "completed" : "blocked"
         } catch {
             fail(error)
@@ -143,6 +155,194 @@ final class NativeQA {
         // Only terminate after final evidence is on disk; no bootstrap-time exit.
         if !ProcessInfo.processInfo.arguments.contains("--qa-keep-open") {
             await pause(0.5)
+            await MainActor.run { NSApp.terminate(nil) }
+        }
+    }
+
+    /// Acceptance 2.5 re-run: a REAL frozen backend binary from the app bundle is spawned
+    /// on an isolated port as the launcher's owned child, then the application is closed
+    /// normally. `applicationWillTerminate -> stopOwnedProcess() -> shutdown(...)` is the
+    /// exact production path. The external driver checks the port and both protected
+    /// user listeners after the app exits.
+    private func runOwnedShutdown() async {
+        var child: Process?
+        do {
+            guard let path = argument("--qa-output"), path.hasPrefix("/") else {
+                throw Blocked(message: "--qa-output requires an absolute directory")
+            }
+            let dir = URL(fileURLWithPath: path, isDirectory: true)
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+            report = dir.appendingPathComponent("owned-shutdown.json")
+            output = dir
+            stage = "owned-shutdown"
+            let mode = ProcessInfo.processInfo.environment["NATIVE_QA_SHUTDOWN_MODE"] ?? "frozen"
+            guard mode == "frozen" || mode == "ignorer" else {
+                throw Blocked(message: "unknown NATIVE_QA_SHUTDOWN_MODE: \(mode)")
+            }
+            // 8893 = real frozen backend (cooperative + wrapper variants).
+            // 8886 = the ORIGINAL 2.5 defect fixture: a genuinely SIGTERM-ignoring owned child.
+            let port = mode == "ignorer" ? 8886 : 8893
+            let dataDir = dir.appendingPathComponent("data", isDirectory: true)
+            try FileManager.default.createDirectory(at: dataDir, withIntermediateDirectories: true)
+            var environment = ProcessInfo.processInfo.environment.filter {
+                !$0.key.hasPrefix("HARNESS_") && !$0.key.hasPrefix("PYTHON")
+            }
+            environment["HARNESS_DATA_DIR"] = dataDir.path
+            environment["HARNESS_DATABASE_URL"] = "sqlite:///\(dataDir.path)/harness.sqlite3"
+            environment["HARNESS_ENV"] = "desktop"
+            environment["HARNESS_AUTO_CREATE"] = "1"
+            environment["HARNESS_ALLOWED_HOSTS"] = "localhost,127.0.0.1"
+            environment["HARNESS_TUTOR_PROVIDER"] = "offline"
+            environment["HARNESS_SECRET"] = UUID().uuidString // generated; never logged
+            environment["PYTHONDONTWRITEBYTECODE"] = "1"
+
+            let launchURL: URL
+            var ownedArguments: [String] = []
+            var controlFile: URL?
+            var notes = ""
+            if mode == "frozen" {
+                guard let resources = Bundle.main.resourceURL else {
+                    throw Blocked(message: "app bundle has no Resources directory")
+                }
+                let executable = resources.appendingPathComponent("backend/LuminfestBackend/LuminfestBackend")
+                guard FileManager.default.isExecutableFile(atPath: executable.path) else {
+                    throw Blocked(message: "real frozen backend binary is missing from the bundle")
+                }
+                let ignoreSigterm = ProcessInfo.processInfo.environment["NATIVE_QA_IGNORE_SIGTERM"] == "1"
+                // A shell wrapper installs SIG_IGN for SIGTERM and then execs the REAL frozen
+                // backend. LIMITATION (measured, see verification.txt): uvicorn reinstalls its
+                // own SIGTERM handler during startup, so this variant does NOT prove force-kill
+                // escalation. The `ignorer` mode is the faithful reproduction of original 2.5.
+                if ignoreSigterm {
+                    let wrapper = dir.appendingPathComponent("sigterm-ignoring-backend.sh")
+                    let script = "#!/bin/sh\ntrap '' TERM\nexec \"\(executable.path)\" \"$@\"\n"
+                    try script.write(to: wrapper, atomically: true, encoding: .utf8)
+                    try FileManager.default.setAttributes([.posixPermissions: 0o700],
+                                                          ofItemAtPath: wrapper.path)
+                    launchURL = wrapper
+                } else {
+                    launchURL = executable
+                }
+                ownedArguments = ["--port", String(port)]
+                notes = "real frozen backend; wrapper=\(ignoreSigterm)"
+            } else {
+                // Faithful reproduction of the original 2.5 failing sub-case: bind the isolated
+                // port, install SIG_IGN, self-signal SIGTERM, and only THEN write a control file.
+                // If SIGTERM were honoured the control file could never exist. This is the exact
+                // condition the patched shutdown() must escalate past with an exact-PID SIGKILL.
+                let scriptURL = dir.appendingPathComponent("sigterm_ignorer.py")
+                let control = dir.appendingPathComponent("sigterm-control.txt")
+                let heartbeat = dir.appendingPathComponent("sigterm-heartbeat.txt")
+                let script = """
+                import os, signal, socket, sys, time
+                port = int(sys.argv[1]); control = sys.argv[2]; heartbeat = sys.argv[3]
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+                s.bind(("127.0.0.1", port)); s.listen(5)
+                signal.signal(signal.SIGTERM, signal.SIG_IGN)
+                signal.signal(signal.SIGINT, signal.SIG_IGN)
+                os.kill(os.getpid(), signal.SIGTERM)
+                with open(control, "w") as f:
+                    f.write("pid=%d port=%d self_sigterm_sent=1 still_alive=1 socket_still_bound=%s\\n" % (os.getpid(), port, str(s.getsockname())))
+                while True:
+                    with open(heartbeat, "w") as f: f.write(str(time.time()))
+                    time.sleep(0.2)
+                """
+                try script.write(to: scriptURL, atomically: true, encoding: .utf8)
+                launchURL = URL(fileURLWithPath: "/usr/bin/python3")
+                ownedArguments = [scriptURL.path, String(port), control.path, heartbeat.path]
+                controlFile = control
+                notes = "genuine SIGTERM-ignoring owned child on the original 2.5 port"
+            }
+
+            let owned = Process()
+            owned.executableURL = launchURL
+            owned.arguments = ownedArguments
+            owned.environment = environment
+            owned.standardInput = FileHandle.nullDevice
+            let logURL = dir.appendingPathComponent("backend.log")
+            FileManager.default.createFile(atPath: logURL.path, contents: nil)
+            let logHandle = try FileHandle(forWritingTo: logURL)
+            owned.standardOutput = logHandle
+            owned.standardError = logHandle
+            try owned.run()
+            child = owned
+            let backendPID = owned.processIdentifier
+            let appPID = getpid()
+            try "\(backendPID)\n".write(to: dir.appendingPathComponent("owned-child-pid.txt"),
+                                        atomically: true, encoding: .utf8)
+            try "\(appPID)\n".write(to: dir.appendingPathComponent("app-pid.txt"),
+                                    atomically: true, encoding: .utf8)
+            record("owned-shutdown", target: "spawned owned child",
+                   outcome: "running", details: [
+                    "appPID": appPID, "backendPID": backendPID, "port": port, "mode": mode,
+                    "launchedURL": launchURL.path, "notes": notes, "dataDir": dataDir.path,
+                   ])
+
+            if mode == "frozen" {
+                // Wait for the actual health contract, not merely for the process to exist.
+                let healthURL = URL(string: "http://127.0.0.1:\(port)/api/v1/health")!
+                let deadline = Date().addingTimeInterval(120)
+                var healthy = false
+                while Date() < deadline && owned.isRunning {
+                    var request = URLRequest(url: healthURL)
+                    request.timeoutInterval = 1
+                    if let (data, response) = try? await URLSession.shared.data(for: request),
+                       (response as? HTTPURLResponse)?.statusCode == 200,
+                       let object = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
+                       object["ready"] as? Bool == true,
+                       object["service"] as? String == "luminfest-learning-harness" {
+                        healthy = true
+                        break
+                    }
+                    try? await Task.sleep(nanoseconds: 300_000_000)
+                }
+                guard healthy else {
+                    throw Blocked(message: "real frozen backend never became healthy on \(port)")
+                }
+                record("owned-shutdown", target: "health", outcome: "ready",
+                       details: ["port": port, "service": "luminfest-learning-harness",
+                                 "pidStillRunning": owned.isRunning])
+            } else {
+                // The control file can only be written AFTER a self-sent SIGTERM was ignored.
+                let control = controlFile!
+                let deadline = Date().addingTimeInterval(30)
+                while Date() < deadline && owned.isRunning &&
+                        !FileManager.default.fileExists(atPath: control.path) {
+                    try? await Task.sleep(nanoseconds: 100_000_000)
+                }
+                guard FileManager.default.fileExists(atPath: control.path) else {
+                    throw Blocked(message: "SIGTERM ignorer never produced its control file")
+                }
+                let controlText = (try? String(contentsOf: control, encoding: .utf8)) ?? ""
+                try? await Task.sleep(nanoseconds: 500_000_000) // let heartbeats prove it kept running
+                guard owned.isRunning else {
+                    throw Blocked(message: "SIGTERM ignorer exited before app termination")
+                }
+                record("owned-shutdown", target: "sigterm-control",
+                       outcome: "SIGTERM ignored; owned child still holds its port",
+                       details: ["control": controlText.trimmingCharacters(in: .whitespacesAndNewlines),
+                                 "port": port, "pidStillRunning": owned.isRunning,
+                                 "escalationExpected": true])
+            }
+
+            await MainActor.run { BackendLauncher.shared.qaInstallOwnedProcess(owned) }
+            record("owned-shutdown", target: "BackendLauncher",
+                   outcome: "installed as owned child; normal termination requested",
+                   details: ["graceSeconds": BackendLauncher.terminationGraceSeconds,
+                             "path": "applicationWillTerminate -> stopOwnedProcess() -> shutdown()"])
+            status = "termination-requested"
+            flush()
+            // Close the app normally. Everything after this point is verified by the
+            // external driver once the process has exited.
+            await MainActor.run { NSApp.terminate(nil) }
+        } catch {
+            fail(error)
+            status = "blocked"
+            if let owned = child, owned.isRunning {
+                kill(owned.processIdentifier, SIGKILL) // exact child PID spawned above only
+            }
+            flush()
             await MainActor.run { NSApp.terminate(nil) }
         }
     }
@@ -162,6 +362,18 @@ final class NativeQA {
         try await type("auth.name", text: accountName)
         try await type("auth.email", text: email)
         try await type("auth.password", text: password, secret: true)
+        // Registration is deliberately gated on the two compliance toggles (13+ and
+        // Terms/Privacy). Record the gate as evidence, then satisfy it through the real
+        // AX checkboxes before pressing. The driver used to skip these and timed out
+        // waiting for an enabled auth.register, which is the product behaving correctly.
+        if let register = find("auth.register"),
+           boolean(register, kAXEnabledAttribute as String) == false {
+            record("compliance-gate", target: "auth.register",
+                   outcome: "disabled until age and terms are accepted",
+                   details: ["authRegisterEnabled": false])
+        }
+        try await setToggle("auth.age", enabled: true)
+        try await setToggle("auth.terms", enabled: true)
         try await press("auth.register")
         await pause(6)
         await focusOwnWindow()
@@ -169,13 +381,15 @@ final class NativeQA {
         record("diagnostic", target: "after-register", outcome: "state captured",
                details: (await MainActor.run { self.applicationState })
                         .merging(["navTodayPresent": self.find("nav.today") != nil,
+                                  "compactNavTodayPresent": self.find("nav.compact.today") != nil,
                                   "authNamePresent": self.find("auth.name") != nil]) { _, new in new })
         try? await capture("after-register")
         // A brand-new account lands on first-run setup rather than the shell. Either surface proves
         // the session is real; the auth form being gone proves the view actually swapped.
         try await wait("signed-in UI", seconds: 30) {
             self.find("auth.name") == nil
-                && (self.find("nav.today") != nil || self.containsText("SETTING UP YOUR LEARNING SPACE"))
+                && (self.find("nav.today") != nil || self.find("nav.compact.today") != nil
+                    || self.containsText("SETTING UP YOUR LEARNING SPACE"))
         }
         record("authentication", target: "auth.register", outcome: "signed-in UI observed", details: ["accountName": accountName, "email": email, "firstRunSetupShown": self.containsText("SETTING UP YOUR LEARNING SPACE"), "backendAccountAndPasswordVerification": "pending launcher; no direct authentication fallback"])
         await pause(0.6)
@@ -306,13 +520,22 @@ final class NativeQA {
         record("heartbeat-wait", target: "own active window", outcome: "elapsed", details: ["appActiveAtEnd": await MainActor.run { NSApp.isActive }, "backendHeartbeatVerification": "pending launcher database inspection"])
     }
 
+    /// The same destination has two identifiers after the 1,120 pt breakpoint fix:
+    /// ``nav.<page>`` in the expanded labelled sidebar and ``nav.compact.<page>`` in
+    /// the compact icon rail. The driver must work at whatever width the real window
+    /// currently has instead of assuming the expanded rail.
+    private func navigationIdentifier(_ page: String) -> String {
+        find("nav." + page) != nil ? "nav." + page : "nav.compact." + page
+    }
+
     private func navigate(_ page: String, marker: String? = nil, text: String? = nil) async throws {
-        try await press("nav." + page)
+        let identifier = navigationIdentifier(page)
+        try await press(identifier)
         try await wait("page \(page)", seconds: 30) {
             (marker.map { self.find($0) != nil } ?? true) && (text.map { self.containsText($0) } ?? true)
         }
         await pause(0.5)
-        record("navigation", target: "nav." + page, outcome: "destination UI observed")
+        record("navigation", target: identifier, outcome: "destination UI observed")
     }
 
     private func exercise(_ name: String, action: () async throws -> Void) async {
@@ -339,15 +562,96 @@ final class NativeQA {
         for page in requested {
             stage = page
             do {
-                try await press("nav." + page)
+                try await press(navigationIdentifier(page))
                 await pause(1.0)
                 try await capture(page)
-                record("optional-page", target: "nav." + page, outcome: "captured")
+                record("optional-page", target: navigationIdentifier(page), outcome: "captured")
             } catch {
                 record("optional-page", target: "nav." + page, outcome: "skipped",
                        details: ["reason": redact(error.localizedDescription)])
             }
         }
+    }
+
+    /// Spec 4.4: sweep the six required window widths against the REAL window and read
+    /// the sidebar state back from the AX tree. Screenshots at 1,120 and 1,119 points
+    /// are captured by the same `capture()` path as the rest of the workflow, so the
+    /// breakpoint is evidenced both structurally (identifiers) and visually (PNG).
+    private func responsiveWidths() async {
+        stage = "responsive"
+        for width: CGFloat in [1400, 1200, 1120, 1119, 1000, 900] {
+            do {
+                let measured = try await resizeOwnWindow(toWidth: width)
+                await pause(0.55) // SwiftUI must settle before the AX tree is read.
+                let expectedExpanded = SidebarLayout.isExpanded(width: width)
+                let expandedControl = find("nav.today")
+                let compactControls = Page.allCases.filter {
+                    find(SidebarLayout.compactIdentifier(for: $0)) != nil
+                }
+                var labelledCompact: [String] = []
+                var enabledControls = 0
+                for page in compactControls {
+                    guard let element = find(SidebarLayout.compactIdentifier(for: page)) else { continue }
+                    let label = string(element, kAXDescriptionAttribute as String)
+                        ?? string(element, kAXTitleAttribute as String)
+                    if let label, !label.isEmpty { labelledCompact.append(page.rawValue) }
+                    if boolean(element, kAXEnabledAttribute as String) == true { enabledControls += 1 }
+                }
+                if let expandedControl,
+                   boolean(expandedControl, kAXEnabledAttribute as String) == true {
+                    enabledControls += 1
+                }
+                let observedExpanded = expandedControl != nil && compactControls.isEmpty
+                let observedCompact = expandedControl == nil
+                    && compactControls.count == Page.allCases.count
+                let matched = expectedExpanded ? observedExpanded : observedCompact
+                try await capture("responsive-\(Int(width))")
+                record("responsive-width", target: "app window",
+                       outcome: matched ? "matched breakpoint" : "MISMATCH",
+                       details: [
+                        "requestedWidthPoints": Double(width),
+                        "measuredContentWidthPoints": measured["contentWidth"] ?? -1,
+                        "windowFrameWidthPoints": measured["frameWidth"] ?? -1,
+                        "minSizeWidthPoints": measured["minSizeWidth"] ?? -1,
+                        "windowResizable": measured["resizable"] ?? false,
+                        "expectedExpanded": expectedExpanded,
+                        "observedExpandedIdentifiers": observedExpanded,
+                        "observedCompactIdentifiers": observedCompact,
+                        "compactIconCount": compactControls.count,
+                        "compactIconsWithAccessibleLabels": labelledCompact.count,
+                        "compactAccessibleLabels": labelledCompact.sorted(),
+                        "enabledNavigationControls": enabledControls,
+                        "screenshotPattern": "*responsive-\(Int(width))-window-0.png",
+                        "visualSubItems": "no overlap / no clipped text pending human inspection of the captured PNG",
+                       ])
+                if !matched {
+                    fail(Blocked(message: "sidebar state at \(Int(width)) pt did not match the 1,120 pt breakpoint"))
+                }
+                if measured["contentWidth"] as? Double != Double(width) {
+                    record("responsive-width-clamp", target: "app window",
+                           outcome: "requested width clamped by the window manager",
+                           details: ["requestedWidthPoints": Double(width),
+                                     "measuredContentWidthPoints": measured["contentWidth"] ?? -1])
+                }
+            } catch {
+                fail(error)
+            }
+        }
+    }
+
+    @MainActor private func resizeOwnWindow(toWidth width: CGFloat) throws -> [String: Any] {
+        guard let window = NSApp.windows.first(where: { $0.isVisible && $0.contentView != nil }) else {
+            throw Blocked(message: "No visible own window to resize for spec 4.4")
+        }
+        window.setContentSize(NSSize(width: width, height: 732))
+        window.contentView?.layoutSubtreeIfNeeded()
+        window.contentView?.displayIfNeeded()
+        return [
+            "contentWidth": Double(window.contentView?.bounds.width ?? 0),
+            "frameWidth": Double(window.frame.width),
+            "minSizeWidth": Double(window.minSize.width),
+            "resizable": window.styleMask.contains(.resizable),
+        ]
     }
 
     /// Poll an accessibility condition until it holds. A background application exposes only its
