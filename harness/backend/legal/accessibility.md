@@ -1,8 +1,8 @@
 # Accessibility Statement
 
-**Version:** 2026-11 · **Effective:** 1 November 2026
+**Version:** 2026-11 · **Effective:** 1 November 2026 · **Revised:** 7 November 2026
 
-We want Luminfest to be usable by as many people as possible, including learners who use a
+We want Luminest to be usable by as many people as possible, including learners who use a
 screen reader, keyboard only, high contrast, larger text, or reduced motion.
 
 ## Our target
@@ -25,16 +25,39 @@ overclaim.
 - **Text alternatives.** Figures and diagrams ship with text descriptions.
 - **Sound is never the only signal.** A correct answer, a streak and a celebration each have a
   visible counterpart; muting the app removes nothing you need.
+- **Light and dark appearance.** The interface ships a dark theme built from the same palette
+  at lower luminance rather than an inversion, plus a higher-contrast variant of both. They
+  follow the macOS setting. The app reads that setting and does not offer a separate switch:
+  an in-app imitation of a system accessibility preference is worse than honouring the real one.
+- **Interface language.** English and Simplified Chinese, switchable in *Settings → Language*
+  and applied immediately, with no relaunch. Dates, numbers and measurements follow the same
+  choice, so a Chinese screen does not keep English dates.
+- **Text scaling.** Text is sized from semantic text styles rather than fixed point sizes, so it
+  grows with the system text size and containers reflow instead of clipping.
+- **Honest failure states.** A server that is not running, one that is slow, an expired session
+  and a request the server refused (HTTP 422) are reported as four different things. A refused
+  request names the field the server objected to; it is never described as a connection problem.
 
 ## Known limitations
 
-- Dark mode and a high-contrast theme are **not yet shipped**; the app currently runs in a
-  light theme. This is the largest outstanding gap, and for a learner with photophobia or low
-  vision it is a real barrier rather than a cosmetic one.
-- The interface is **English only**.
+- **The language switch does not yet cover every screen.** Navigation, settings and the failure
+  states above are bilingual. Several deeper surfaces — the Studio, the board and deck editors,
+  the lesson procedure and the companion — still ship English copy while their translations are
+  being written. They are readable, not translated, and we would rather say so than imply full
+  coverage.
+- **Contrast is measured, not audited.** Body-text pairs were measured against WCAG 2.2
+  relative-luminance ratios in all four appearance variants (light, dark, and each at increased
+  contrast); every pair clears 4.5:1. The weakest is tertiary text at 5.51:1, which was 2.93:1
+  before this revision. Non-text contrast and focus-indicator contrast have not been measured
+  the same way.
+- **Increase Contrast and Reduce Motion follow macOS.** The app honours both settings but does
+  not provide its own overrides, so a per-app preference that differs from the system one is
+  not available.
 - Some chart elements rely on the platform's default accessibility representation and have not
   been individually tuned.
-- We have not yet commissioned an independent accessibility audit.
+- **No independent audit yet.** We have not commissioned a third-party accessibility audit, and
+  the success-criterion-by-criterion review against WCAG 2.2 AA is incomplete. The criteria we
+  have measured are the ones described above; the rest are neither claimed nor certified.
 
 ## Feedback
 

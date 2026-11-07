@@ -83,7 +83,9 @@ struct StateContainer<Value, Loaded: View, Empty: View>: View {
             case .empty:
                 empty()
             case .failed(let error):
-                ErrorStateView(error: error) { retry?() }
+                // Passed through as an optional on purpose: a container built without a
+                // retry gets a pane without a retry button, not a button that does nothing.
+                ErrorStateView(error: error, retry: retry)
             }
         }
     }
@@ -392,6 +394,67 @@ enum FailureCause {
     }
 }
 
+// MARK: - Inline failure bar
+
+/// A one-line failure bar for the top of a page, where a full `.Card` would push the
+/// content the learner came for off the screen.
+///
+/// This exists because `AppStore.error` was rendered as a bare `Text`: every cause arrived
+/// as the same red sentence, so a 422 — the server refusing a request it parsed — looked
+/// exactly like a dead socket. The classification is the same `FailureCause` the full pane
+/// uses, so the two surfaces cannot disagree about what went wrong.
+struct InlineFailureBar: View {
+    let message: String
+    var status: Int? = nil
+    var retry: () -> Void = {}
+    var dismiss: () -> Void = {}
+
+    private var cause: FailureCause {
+        FailureCause(AppFailure(message: message, status: status))
+    }
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            Image(systemName: cause.icon)
+                .font(Typography.footnote)
+                .foregroundStyle(cause.tint)
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(L10n.t(cause.titleKey))
+                    .font(Typography.captionEmphasis)
+                    .accessibilityAddTraits(.isHeader)
+                // On a 422 the server's own sentence carries the offending field name, so
+                // the generic copy would throw away the only actionable part. For a dead
+                // socket the localised sentence is better than the system's English one.
+                Text(cause.surfacesServerSentence ? message : L10n.t(cause.messageKey))
+                    .font(Typography.caption)
+                    .textSelection(.enabled)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .foregroundStyle(Palette.ink)
+
+            Spacer(minLength: 8)
+
+            Button(L10n.t("action.retry"), action: retry)
+                .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+
+            Button(action: dismiss) {
+                Image(systemName: "xmark").font(Typography.captionEmphasis)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(L10n.t("action.close"))
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 11)
+        .background(cause.tint.opacity(0.16), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .strokeBorder(cause.tint.opacity(0.35), lineWidth: 1)
+        )
+    }
+}
+
 // MARK: - Error
 
 /// The failure pane: one cause-aware sentence, then the evidence, then the actions.
@@ -402,17 +465,20 @@ enum FailureCause {
 /// at least keep the code (`status: 422`) and get the right diagnosis.
 struct ErrorStateView: View {
     let error: Error
-    var retry: () -> Void = {}
+    /// nil means "nothing to retry", and the button is then omitted rather than shown
+    /// doing nothing. A dead button teaches people that buttons in error panes are fake,
+    /// which is exactly the lesson this layer exists to unlearn.
+    var retry: (() -> Void)?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showDetails = false
 
-    init(error: Error, retry: @escaping () -> Void = {}) {
+    init(error: Error, retry: (() -> Void)? = nil) {
         self.error = error
         self.retry = retry
     }
 
-    init(message: String, status: Int? = nil, retry: @escaping () -> Void = {}) {
+    init(message: String, status: Int? = nil, retry: (() -> Void)? = nil) {
         self.init(error: AppFailure(message: message, status: status), retry: retry)
     }
 
@@ -525,8 +591,10 @@ struct ErrorStateView: View {
 
     private var actions: some View {
         HStack(spacing: 9) {
-            Button(L10n.t("action.retry"), action: retry)
-                .buttonStyle(LuminfestButtonStyle(primary: true, compact: true))
+            if let retry {
+                Button(L10n.t("action.retry"), action: retry)
+                    .buttonStyle(LuminfestButtonStyle(primary: true, compact: true))
+            }
             Button(L10n.t("action.copyDiagnostics"), action: copyDiagnostics)
                 .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
             if let log = StateDiagnostics.logURL {

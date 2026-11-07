@@ -105,16 +105,6 @@
 "error.server" = "服务端报告了内部错误。";
 "error.unknown" = "发生了未预期的错误。";
 
-/* MARK: - 后端启动失败 */
-
-/* 全部使用位置参数：译文会改变服务地址、两个数据结构版本、日志路径的先后顺序，
-   裸 %d/%@ 只能按出现顺序绑定。版本冲突拆成两条键，因为 nil 表示「服务端声明的版本
-   本构建读不懂」，不是 0 号版本；填 0 会重新制造这次修掉的假版本号。 */
-
-"backend.schema.mismatch" = "已有一个不同的 Luminfest 服务端正在 %1$@ 上运行。它报告的数据结构版本是 v%2$d，而本构建要求 v%3$d。请退出另一个 Luminfest 副本（或重启 Mac），然后重新打开本构建。数据没有任何改动，也没有在同一个数据库上另起第二个服务端。";
-"backend.schema.mismatch.unreadable" = "已有一个不同的 Luminfest 服务端正在 %1$@ 上运行。它报告的数据结构版本本构建无法读取，而本构建要求 v%2$d。请退出另一个 Luminfest 副本（或重启 Mac），然后重新打开本构建。数据没有任何改动，也没有在同一个数据库上另起第二个服务端。";
-"backend.schema.upgradeRequired" = "内置的学习服务未能启动。它的日志写着：「Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.」这意味着 %1$@ 是由另一个 Luminfest 版本写入的。数据没有任何改动。完整日志见 %2$@；在移动或迁移该数据库之前，请先做好备份。";
-
 /* MARK: - 诊断 */
 
 "diagnostics.title" = "诊断信息";

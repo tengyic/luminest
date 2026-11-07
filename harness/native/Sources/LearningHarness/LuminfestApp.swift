@@ -329,7 +329,10 @@ struct OnboardingView: View {
                     }
 
                     if let error = store.error {
-                        Text(error).font(.system(size: 12)).foregroundStyle(.red).textSelection(.enabled)
+                        InlineFailureBar(message: error,
+                                         status: store.errorStatus,
+                                         retry: { store.retry() },
+                                         dismiss: { store.error = nil })
                     } else if let next = unmet.first {
                         // One requirement at a time, in the order the fields are laid out. A
                         // list of five at once reads as a wall of complaint before anything has
@@ -478,7 +481,13 @@ struct AppShell: View {
                                 .offset(x: -70, y: -70)
                         }
                         if let error = store.error {
-                            HStack { Image(systemName: "exclamationmark.circle"); Text(error).font(.system(size: 12)).textSelection(.enabled); Spacer(); Button("Retry") { store.retry() }.buttonStyle(.borderless); Button { store.error = nil } label: { Image(systemName: "xmark") }.buttonStyle(.plain) }.foregroundStyle(Color(hex: 0x965D42)).padding(14).background(Palette.peach, in: RoundedRectangle(cornerRadius: 12))
+                            // Cause-aware, not one red sentence for everything: `errorStatus`
+                            // is what lets a 422 read as "the server refused this request"
+                            // instead of "cannot connect".
+                            InlineFailureBar(message: error,
+                                             status: store.errorStatus,
+                                             retry: { store.retry() },
+                                             dismiss: { store.error = nil })
                         }
                         if let notice = store.notice {
                             HStack { Image(systemName: "checkmark.circle"); Text(notice); Spacer(); Button { store.notice = nil } label: { Image(systemName: "xmark") }.buttonStyle(.plain) }.font(.system(size: 12)).padding(13).background(Palette.sage, in: RoundedRectangle(cornerRadius: 12))
