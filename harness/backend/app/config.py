@@ -313,12 +313,14 @@ class Settings:
         if not 5 <= voice_timeout <= 600:
             raise ValueError('HARNESS_VOICE_TIMEOUT_SECONDS must be between 5 and 600')
         # Off in production unless explicitly enabled: an unnoticed outbound call from a
-        # hosted instance is a privacy and cost decision nobody made. Off on the desktop
-        # too, for a different reason: the shipped privacy policy lists no sub-processors,
-        # so an outbound call to Openverse, the Met, Wikimedia or NASA would make the
-        # document false. Curated video and figures come from the allowlist and the local
-        # figure engine, so the lesson still runs with media off.
-        media_default = '1' if environment in {'development', 'test'} else '0'
+        # hosted instance is a privacy and cost decision nobody made. On for the desktop
+        # (and development/test) builds: the learner explicitly asked for live image and
+        # video search, and the local privacy notice names the four image providers plus
+        # YouTube. Production stays opt-in so a hosted operator still makes that call.
+        media_default = '1' if environment in {'development', 'test', 'desktop'} else '0'
+        # Activity tracking is a separate promise and stays off on desktop even when
+        # outbound media search is on.
+        attention_default = '1' if environment in {'development', 'test'} else '0'
         # Speech is a separate switch with a separate default, because it is a separate
         # promise. ``media_enabled`` is about third-party network fetches, which is why the
         # desktop bundle leaves it off; synthesis is loopback to the learner's own VoiceStudio
@@ -359,7 +361,7 @@ class Settings:
                    voice_timeout,
                    os.getenv('HARNESS_VOICE_INSTRUCT', '').strip(),
                    os.getenv('HARNESS_VOICE_ENABLED', voice_default) == '1',
-                   os.getenv('HARNESS_ATTENTION_MONITOR', media_default) == '1',
+                   os.getenv('HARNESS_ATTENTION_MONITOR', attention_default) == '1',
                    os.getenv('HARNESS_REALTIME_PROVIDER', 'openai'),
                    os.getenv('HARNESS_REALTIME_KEY', ''),
                    os.getenv('HARNESS_REALTIME_MODEL', 'gpt-4o-realtime-preview-2024-12-17'),

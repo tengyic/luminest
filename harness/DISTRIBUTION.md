@@ -257,15 +257,17 @@ App Store Connect 上传同样要求先过这一步,alpha 阶段没有绕开它�
 存在的理由只有一个:桌面包需要**production 级别的门禁**,但 `production` 会要求 PostgreSQL 和
 32 位 `HARNESS_SECRET` 并拒绝启动——一个刚双击打开的应用不能"起不来"。
 
-与 `development` 相比只有三个默认值不同,每一个都对应一条对外承诺:
+与 `development` 相比,桌面包改两个默认值;`media_enabled` 保持开启,因为桌面端
+明确需要联网图片/视频搜索,而 `privacy.md` 已列出 Openverse、Met、Wikimedia、NASA
+与 YouTube 这几条出站路径:
 
 | 默认值 | development | desktop | 对应承诺 |
 |---|---|---|---|
 | `require_launch_gate` | 关 | **开** | `privacy.md` 说产品面向 13+;注册要 `age_confirmed` + `accept_terms` |
 | `attention_monitor` | 开 | **关** | `privacy.md` 与设置页都说"活动信号默认关" |
-| `media_enabled` | 开 | **关** | 外发请求(Openverse/Met/Wikimedia/NASA)不在隐私政策的子处理者表里 |
+| `media_enabled` | 开 | **开** | 桌面端要现场搜图/搜视频；提供方已在隐私政策披露 |
 
-策展视频与图示不受影响——它们来自白名单与本地图示引擎,不是搜索。
+联网搜索与策展视频并存:白名单/本地图示引擎仍然优先,搜索只是补上白名单没有的概念。
 
 两个耦合点必须一起记住,否则新加一个环境值会静默毁掉 app:
 

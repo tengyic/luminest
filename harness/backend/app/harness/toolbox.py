@@ -663,11 +663,13 @@ def compose_content(ctx: ToolContext, concept_id: str, kind: str,
                       citations=artifact.citations, notes=artifact.notes)
 
 
-def find_image(ctx: ToolContext, concept_id: str) -> ToolResult:
+def find_image(ctx: ToolContext, concept_id: str, query: str = '') -> ToolResult:
     """Find one internet photograph for a concept, licence-cleared before download.
 
     The gate is the licence, not the search ranking: a candidate whose own licence does not
     permit this project to store a copy is dropped with its reason, whatever it looks like.
+    ``query`` narrows the search to the visual the caller is about to show; the licence,
+    size and relevance gates are unchanged.
     """
     from . import media
     settings = getattr(ctx, 'settings', None)
@@ -677,7 +679,7 @@ def find_image(ctx: ToolContext, concept_id: str) -> ToolResult:
     title = (node or {}).get('title', concept_id)
     summary = (node or {}).get('summary', '')
     found = media.find_image(settings, title, summary=summary,
-                             alt_text=f'Photograph illustrating {title}')
+                             alt_text=f'Photograph illustrating {title}', query=query)
     citations = []
     if found.get('asset'):
         asset = found['asset']
@@ -1114,8 +1116,10 @@ _register(ToolSpec('compose_content',
           compose_content)
 _register(ToolSpec('find_image',
                    'Find one internet photograph for a concept. Nothing is downloaded until '
-                   'the image\'s own licence has been classified and cleared.',
-                   'concept_id: str', 'ingestible',
+                   'the image\'s own licence has been classified and cleared. Pass query to '
+                   'search for a specific visual (for example "fraction bar") instead of the '
+                   'concept title.',
+                   'concept_id: str, query: str = ""', 'ingestible',
                    '{asset, outcome, seen, accepted, rejections: [{source, title, why}]}'),
           find_image)
 _register(ToolSpec('find_video',

@@ -25,7 +25,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from . import (accounts, courses, curriculum_route, experiments, figures, harness, learning,
-               learning_science, planner, procedure_service, schemas, simulation_map,
+               learning_science, lecture, planner, procedure_service, schemas, simulation_map,
                teacher_clone, tutor)
 from .harness import agent_loop
 from .harness import ta as ta_jobs
@@ -2332,13 +2332,15 @@ def create_app(settings=None):
                          'deletion cover them.'}
 
     @app.get(API+'/media/image')
-    def media_image(concept_id: str = Query(max_length=64), auth=Depends(authenticated)):
-        """Find one licence-cleared photograph for a concept."""
+    def media_image(concept_id: str = Query(max_length=64),
+                    query: str = Query(default='', max_length=120),
+                    auth=Depends(authenticated)):
+        """Find one licence-cleared photograph for a concept, optionally a specific visual."""
         db, user = auth
         block_exam_help(db, user)
         resolved = resolve_concept(concept_id, user)
         return harness.toolbox.invoke(harness_context(db, user, settings), 'find_image',
-                                      {'concept_id': resolved}).to_dict()
+                                      {'concept_id': resolved, 'query': query}).to_dict()
 
     @app.get(API+'/media/video')
     def media_video(concept_id: str = Query(max_length=64), auth=Depends(authenticated)):
@@ -2348,6 +2350,87 @@ def create_app(settings=None):
         resolved = resolve_concept(concept_id, user)
         return harness.toolbox.invoke(harness_context(db, user, settings), 'find_video',
                                       {'concept_id': resolved}).to_dict()
+
+    # ------------------------------------------------------------------ auto lecture
+    #
+    # The self-paced procedure answers "what next"; this surface answers "teach me for
+    # forty-five minutes without making me drive". The storyboard is compiled from the
+    # learner's own concept and the material this instance holds, then played segment by
+    # segment. Each segment applies its own whiteboard page through the normal versioned
+    # board path, so the board the client polls is the board the lecture drew.
+
+    def _lecture_concept(user, concept_id: str) -> tuple[dict, dict]:
+        node = resolve_course_node(user, concept_id)
+        if node is None:
+            raise HTTPException(404, 'Unknown concept for this course')
+        # Keep the id the client selected. The Stage binds its board to
+        # ``board-<concept_id>``; resolving an authored id such as ``fractions`` to the
+        # graph node ``fraction_equivalence`` and then drawing on that board would put the
+        # lecture on a different document from the one the learner is watching.
+        cid = str(concept_id or node.get('id') or '')
+        lesson = concept_meta(cid) or concept_meta(str(node.get('id') or '')) or {}
+        concept = {
+            'id': cid,
+            'title': str(node.get('title') or lesson.get('title') or cid),
+            'summary': str(node.get('summary') or lesson.get('summary') or ''),
+            'keywords': list(node.get('keywords') or lesson.get('keywords') or []),
+        }
+        return concept, lesson
+
+    def _lecture_board_id(concept_id: str) -> str:
+        safe = re.sub(r'[^a-z0-9_.-]+', '-', (concept_id or '').casefold())[:60].strip('-')
+        return 'board-' + (safe or 'concept')
+
+    @app.get(API+'/lecture/{concept_id}')
+    def lecture_preview(concept_id: str,
+                        minutes: int = Query(default=lecture.DEFAULT_MINUTES, ge=5, le=90),
+                        auth=Depends(authenticated)):
+        """Compile (or return cached) the 45-minute storyboard without starting it."""
+        db, user = auth
+        block_exam_help(db, user)
+        concept, lesson = _lecture_concept(user, concept_id)
+        return lecture.compile_lecture(settings, concept, lesson, minutes=minutes)
+
+    @app.post(API+'/lecture/{concept_id}/start')
+    def lecture_start(concept_id: str,
+                      minutes: int = Query(default=lecture.DEFAULT_MINUTES, ge=5, le=90),
+                      auth=Depends(authenticated)):
+        """Compile the lecture and give the client the board it will be taught on."""
+        db, user = auth
+        block_exam_help(db, user)
+        concept, lesson = _lecture_concept(user, concept_id)
+        plan = lecture.compile_lecture(settings, concept, lesson, minutes=minutes)
+        board_id = _lecture_board_id(concept['id'])
+        version = lecture.apply_board_page(settings, board_id, user.id, [], reset=True)
+        return {'lecture': plan, 'board_id': board_id, 'board_version': version,
+                'note': 'The board is cleared for the first page. Each segment applies one '
+                        'versioned page; the client only renders the document it is given.'}
+
+    @app.post(API+'/lecture/{concept_id}/segment/{index}')
+    def lecture_segment(concept_id: str, index: int,
+                        minutes: int = Query(default=lecture.DEFAULT_MINUTES, ge=5, le=90),
+                        auth=Depends(authenticated)):
+        """One segment: draw its board page, resolve its media, return the spoken text."""
+        db, user = auth
+        block_exam_help(db, user)
+        concept, lesson = _lecture_concept(user, concept_id)
+        plan = lecture.compile_lecture(settings, concept, lesson, minutes=minutes)
+        segments = plan.get('segments') or []
+        if not segments:
+            raise HTTPException(409, 'The lecture compiled no segments')
+        if index < 0 or index >= len(segments):
+            raise HTTPException(404, 'No such lecture segment')
+        segment = segments[index]
+        board_id = _lecture_board_id(concept['id'])
+        version = lecture.apply_board_page(settings, board_id, user.id,
+                                           segment.get('board_ops') or [], reset=True)
+        media_payload = lecture.segment_media(settings, concept, segment,
+                                              enrolled_course(user).id)
+        return {'index': index, 'total': len(segments),
+                'lecture_title': plan.get('title') or concept['title'],
+                'segment': segment, 'board_id': board_id, 'board_version': version,
+                'media': media_payload,
+                'source': plan.get('source') or 'unknown'}
 
     @app.get(API+'/simulations')
     def simulations_for_course(course_id: str | None = Query(default=None, max_length=64),
@@ -3185,7 +3268,11 @@ def create_app(settings=None):
         # The draw-aloud protocol rides with it, and only with it: its rules are about a
         # surface that exists only when a board id is in scope.
         board_id = str((payload.context or {}).get('board_id') or '')
-        if re.fullmatch(r'wb-[a-z0-9_.-]{1,72}', board_id):
+        # Both spellings reach the same node board: the tutor panel sends ``wb-`` and the
+        # canvas's "ask about this selection" sends ``board-``. Accepting only ``wb-`` meant
+        # the canvas path never received the draw-aloud protocol, so the tutor answered in
+        # prose while a whiteboard sat in front of the learner.
+        if re.fullmatch(r'(?:wb|board)-[a-z0-9_.-]{1,72}', board_id):
             system += (f' The shared Stage whiteboard for this concept has id {board_id}. '
                        'When the explanation benefits from a drawn diagram, written key '
                        'line or a pinned image, use the whiteboard_* tools against that '
@@ -3495,7 +3582,8 @@ def create_app(settings=None):
         # A completed tutor turn has consumed the raised hands it was told about: the
         # interrupt state is consumed exactly once, at the turn that addressed it.
         board_id = str((payload.context or {}).get('board_id') or '')
-        if re.fullmatch(r'wb-[a-z0-9_.-]{1,72}', board_id) and final.get('reason') == 'completed':
+        if re.fullmatch(r'(?:wb|board)-[a-z0-9_.-]{1,72}', board_id) \
+                and final.get('reason') == 'completed':
             try:
                 boards.clear_interrupts(settings, board_id)
             except Exception:

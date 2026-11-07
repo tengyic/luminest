@@ -49,8 +49,10 @@ def test_desktop_is_strict_about_consent_and_quiet_about_telemetry(tmp_path, mon
     assert settings.require_launch_gate is True
     # Activity tracking is off, which is what privacy.md and the settings UI already say.
     assert settings.attention_monitor is False
-    # No undisclosed sub-processors: with media off, the policy's table stays true.
-    assert settings.media_enabled is False
+    # Live image/video search is on for the desktop build. The four image providers
+    # and YouTube are named in the privacy notice, so this is disclosed rather than
+    # silent; production still requires the operator to opt in.
+    assert settings.media_enabled is True
     # ...but speech stays on, because it is not an outbound fetch. Synthesis is a loopback
     # call to the VoiceStudio the learner is already running, so the "no outbound media"
     # line says nothing about it. These two were the same switch once, and the bundle

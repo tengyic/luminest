@@ -75,11 +75,16 @@ does not operate that service, does not receive a copy of the exchange, and hold
 its own. Delete the file to stop it. The provider's own privacy terms govern what it does
 with those requests — read them, because we cannot make promises on their behalf.
 
-Two further outbound paths exist and are **off by default** in this build:
+Two further outbound paths exist. **Image and video search are on in the desktop build**
+and off in a hosted production instance unless its operator enables them:
 
-- **Image search.** When enabled, the app queries open image collections (Openverse, the
-  Metropolitan Museum, Wikimedia, NASA) for figures. It sends a search term, not your
-  identity. Off by default, so the shipped app makes none of these calls.
+- **Image search.** The app queries open image collections (Openverse, the Metropolitan
+  Museum, Wikimedia, NASA) for figures. It sends a search term, not your identity. A
+  candidate is downloaded only when its own licence permits local storage; otherwise it
+  remains a linked reference.
+- **Video search.** The app reads YouTube's public results pages and oEmbed endpoint to
+  verify that a video can be embedded. It sends the concept or segment search phrase, not
+  your identity.
 - **Curated links.** Lessons link to external resources such as Khan Academy, OpenStax and
   PhET. Opening one is an ordinary web request from your browser to that site, which will see
   your IP address as any website would. Luminfest does not embed trackers in those links.
@@ -101,7 +106,7 @@ independent copy of your progress.
 |---|---|---|
 | None | Learner data is never transmitted to us | — |
 | Your chosen LLM provider *(only if you configure one)* | Answers your tutor messages | Wherever that provider operates |
-| Your chosen image provider *(only if you enable search)* | Returns image results for a search term | Wherever that provider operates |
+| Openverse, the Metropolitan Museum, Wikimedia, NASA, YouTube | Returns image/video results and embed verification for a search phrase | Wherever those providers operate |
 
 The last two rows are **your** contracts, not ours. We disclose them so that the set of
 parties who could see anything is complete.

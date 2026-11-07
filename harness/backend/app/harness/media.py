@@ -1259,18 +1259,23 @@ def acquire(settings, query: str, *, providers: Sequence[str] = PROVIDERS,
 
 
 def find_image(settings, concept_title: str, *, summary: str = '',
-               alt_text: str = '') -> dict[str, Any]:
+               alt_text: str = '', query: str = '') -> dict[str, Any]:
     """The concept-facing entry point: build a query from a concept, then acquire one image.
 
     The query is derived from the concept's own title and summary rather than hand-written,
     so a lesson for a concept nobody curated still has a chance of a real photograph - and
     the lexical filter above is what stops that generality from turning into noise.
+
+    ``query`` lets a caller that knows what a particular slide/segment needs search for
+    that instead of the whole concept title (for example "fraction bar" rather than
+    "Fractions and equivalent quantities"). It is still passed through the same licence,
+    size and relevance gates; a caller cannot use it to bypass them.
     """
     title = ' '.join((concept_title or '').split())
     if not title:
         return {'outcome': 'no_concept', 'asset': None,
                 'notes': ['No concept title supplied.']}
-    query = _concept_query(title, summary)
+    query = ' '.join((query or '').split()) or _concept_query(title, summary)
     payload = acquire(settings, query, alt_text=alt_text or f'Photograph of {title}',
                       support=summary)
     payload['concept_title'] = title
