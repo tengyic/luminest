@@ -467,12 +467,17 @@ struct SettingsPage: View {
                     increasesContrast = NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
                 }
             }
-            .confirmationDialog("Sign out of Luminfest?", isPresented: $logoutPrompt, titleVisibility: .visible) { Button("Sign out") { store.run { await store.signOut() } }; Button("Cancel", role: .cancel) {} }
+            .confirmationDialog("Sign out of Luminest?", isPresented: $logoutPrompt, titleVisibility: .visible) { Button("Sign out") { store.run { await store.signOut() } }; Button("Cancel", role: .cancel) {} }
             .confirmationDialog("Change the backend and sign out?", isPresented: $endpointPrompt, titleVisibility: .visible) { Button("Change server") { do { try store.changeEndpoint(server) } catch { store.error = error.localizedDescription } }; Button("Cancel", role: .cancel) {} }
             .sheet(isPresented: $deletePrompt) {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Permanently delete your account?").font(.system(size: 22, weight: .semibold))
-                    Text("This removes your account and learning records from the backend. Export your data first if you want a copy. This cannot be undone.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
+                    // This sentence used to end at "cannot be undone", which was true of the
+                    // login and false about the data: the app keeps recovery snapshots on
+                    // this Mac, so a copy can survive the deletion. Saying so is the whole
+                    // point of aligning the policy with the implementation — an
+                    // under-claim here is still a false statement to the person deleting.
+                    Text("This removes your account and its learning records from the backend immediately. The app keeps recovery snapshots on this Mac, so a copy of that data can remain for up to 30 days — though an old snapshot cannot sign back in. Export your data first if you want a copy; the account itself cannot be recovered.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
                     TextField("Type DELETE MY ACCOUNT", text: $deletePhrase).textFieldStyle(.roundedBorder)
                     HStack { Button("Cancel") { deletePrompt = false }.buttonStyle(LuminfestButtonStyle(primary: false)); Spacer(); Button("Delete permanently", role: .destructive) { store.run { await store.deleteAccount(); if !store.authenticated { deletePrompt = false } } }.buttonStyle(LuminfestButtonStyle()).disabled(deletePhrase != "DELETE MY ACCOUNT") }
                     if let error = store.error { Text(error).font(.system(size: 11)).foregroundStyle(.red) }
