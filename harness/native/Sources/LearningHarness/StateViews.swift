@@ -406,7 +406,11 @@ enum FailureCause {
 struct InlineFailureBar: View {
     let message: String
     var status: Int? = nil
-    var retry: () -> Void = {}
+    /// Optional on purpose. A caller that has nothing to re-run must not get a button
+    /// labelled "Try Again" that only closes the bar: at the registration step
+    /// `AppStore.retryAction` is nil, so the button would promise a retry and deliver a
+    /// dismissal. No action, no button.
+    var retry: (() -> Void)? = nil
     var dismiss: () -> Void = {}
 
     private var cause: FailureCause {
@@ -436,8 +440,10 @@ struct InlineFailureBar: View {
 
             Spacer(minLength: 8)
 
-            Button(L10n.t("action.retry"), action: retry)
-                .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+            if let retry {
+                Button(L10n.t("action.retry"), action: retry)
+                    .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+            }
 
             Button(action: dismiss) {
                 Image(systemName: "xmark").font(Typography.captionEmphasis)

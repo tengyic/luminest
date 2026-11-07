@@ -45,6 +45,7 @@ struct StudioView: View {
     @State private var presenting = false
     @State private var activeSection = 0
     @State private var showBoard = false
+    @State private var showLecture = false
 
     /// Indices of lesson blocks that carry a heading — these are the "sections" the
     /// reading rail steps through, mirroring Learn Your Way's chunk paginator.
@@ -96,6 +97,9 @@ struct StudioView: View {
         .sheet(isPresented: $store.showDeckEditor) { DeckEditorView(deckID: store.selectedConcept, store: store).frame(minWidth: 900, minHeight: 620) }
         .sheet(isPresented: $store.showPlayground) { PlaygroundSheet() }
         .sheet(isPresented: $showBoard) { BoardSheet(conceptID: store.selectedConcept) }
+        .sheet(isPresented: $showLecture) {
+            LectureTheater(conceptID: store.selectedConcept).environmentObject(store)
+        }
         .onChange(of: store.selectedConcept) { _, _ in speech.stop(); presenting = false; activeSection = 0 }
         .onChange(of: store.page) { _, _ in speech.stop(); presenting = false }
         .onAppear { speech.bind(api: store.api) }
@@ -116,6 +120,7 @@ struct StudioView: View {
                         }
                     }
                     HStack {
+                        Button { speech.stop(); showLecture = true } label: { Label("45-min lecture", systemImage: "play.rectangle.on.rectangle") }.buttonStyle(LuminfestButtonStyle(primary: true)).disabled(store.selectedConcept.isEmpty).help("Speak, turn pages, draw each whiteboard page, and show media for 45 minutes").accessibilityIdentifier("lesson.lecture")
                         Button { if speech.isSpeaking { speech.stop() } else { speech.read(lesson: store.lesson) } } label: { Label(speech.isSpeaking ? "Stop reading" : "Read lesson aloud", systemImage: "speaker.wave.2") }.buttonStyle(LuminfestButtonStyle(primary: false)).accessibilityIdentifier("lesson.read")
                         Button { speech.stop(); presenting = true } label: { Label("Explain mode", systemImage: "rectangle.on.rectangle") }.buttonStyle(LuminfestButtonStyle(primary: false)).accessibilityIdentifier("lesson.present")
                         Button { store.run { await store.buildDeck() } } label: { Label(store.deckBusy ? "Assembling deck…" : "Narrated deck", systemImage: "film.stack") }.buttonStyle(LuminfestButtonStyle(primary: false)).disabled(store.deckBusy || store.selectedConcept.isEmpty).accessibilityIdentifier("lesson.deck")
@@ -834,9 +839,17 @@ struct TutorPanel: View {
                 // their own text still sitting in the composer. If a turn cannot answer,
                 // this is where it says why.
                 if let error = store.error {
-                    Label(error, systemImage: "exclamationmark.triangle")
-                        .font(.system(size: 10))
-                        .foregroundStyle(Palette.peachDeep)
+                    // This is the streaming endpoint, i.e. the screen a learner sits and
+                    // waits on — so a refused request must not read as an unreachable
+                    // server here. `errorStatus` is what makes the two distinguishable;
+                    // the sentence the server sent stays attached when it names a field.
+                    let cause = FailureCause(AppFailure(message: error, status: store.errorStatus))
+                    Label(cause.surfacesServerSentence
+                            ? "\(L10n.t(cause.titleKey)) \(error)"
+                            : L10n.t(cause.titleKey),
+                          systemImage: cause.icon)
+                        .font(Typography.footnote)
+                        .foregroundStyle(cause.tint)
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("tutor.error")
                 }
