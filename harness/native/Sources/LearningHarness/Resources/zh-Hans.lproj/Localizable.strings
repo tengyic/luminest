@@ -105,6 +105,16 @@
 "error.server" = "服务端报告了内部错误。";
 "error.unknown" = "发生了未预期的错误。";
 
+/* MARK: - 后端启动失败 */
+
+/* 全部使用位置参数：译文会改变服务地址、两个数据结构版本、日志路径的先后顺序，
+   裸 %d/%@ 只能按出现顺序绑定。版本冲突拆成两条键，因为 nil 表示「服务端声明的版本
+   本构建读不懂」，不是 0 号版本；填 0 会重新制造这次修掉的假版本号。 */
+
+"backend.schema.mismatch" = "已有一个不同的 Luminfest 服务端正在 %1$@ 上运行。它报告的数据结构版本是 v%2$d，而本构建要求 v%3$d。请退出另一个 Luminfest 副本（或重启 Mac），然后重新打开本构建。数据没有任何改动，也没有在同一个数据库上另起第二个服务端。";
+"backend.schema.mismatch.unreadable" = "已有一个不同的 Luminfest 服务端正在 %1$@ 上运行。它报告的数据结构版本本构建无法读取，而本构建要求 v%2$d。请退出另一个 Luminfest 副本（或重启 Mac），然后重新打开本构建。数据没有任何改动，也没有在同一个数据库上另起第二个服务端。";
+"backend.schema.upgradeRequired" = "内置的学习服务未能启动。它的日志写着：「Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.」这意味着 %1$@ 是由另一个 Luminfest 版本写入的。数据没有任何改动。完整日志见 %2$@；在移动或迁移该数据库之前，请先做好备份。";
+
 /* MARK: - 诊断 */
 
 "diagnostics.title" = "诊断信息";
@@ -121,3 +131,13 @@
 "a11y.progress" = "阅读进度";
 "a11y.sidebar" = "主导航";
 "a11y.languagePicker" = "界面语言";
+
+/* MARK: - 后端数据结构版本失败 */
+
+"backend.schema.versionTag" = "数据结构版本 v%1$d";
+"backend.schema.unreadableVersion" = "当前版本无法识别的数据结构版本";
+"backend.schema.mismatch" = "%1$@ 上已经有一个不同版本的 Luminest 服务在运行。它报告的是 %2$@，而当前版本需要 schema v%3$d。请退出另一份 Luminest（或重启 Mac）后再打开本版本。没有改动任何数据，也没有在同一个数据库上再启动第二个服务。";
+
+/* 引号里那句是服务端日志原文，所有语言都保留英文：用户要拿它去日志里搜索，
+   翻译过的引文在那里搜不到。 */
+"backend.schema.upgradeRequired" = "打包的学习服务拒绝启动。它的日志原文是：\"Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.\" 这说明 %1$@ 是由另一个 Luminest 版本写入的。没有改动任何数据。完整追踪见 %2$@；在移动或迁移该数据库之前请先备份。";

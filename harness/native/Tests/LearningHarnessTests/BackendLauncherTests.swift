@@ -9,6 +9,15 @@ import Darwin
 @MainActor
 final class BackendLauncherTests: XCTestCase {
 
+    /// These cases assert on the wording of user-facing failure messages, and that wording
+    /// is now localized. Pin the development language so the result does not depend on the
+    /// system language of whichever machine runs the suite — a Chinese Mac would otherwise
+    /// fail assertions that match English copy, for a reason that has nothing to do with the
+    /// launcher.
+    private func pinEnglish() {
+        Localization.shared.set(.english)
+    }
+
     func testItsOwnFallbackPortsCountAsItsOwn() {
         for port in 8765...8785 {
             XCTAssertTrue(BackendLauncher.isOwnLocalEndpoint("http://127.0.0.1:\(port)"),
@@ -133,6 +142,7 @@ final class BackendLauncherTests: XCTestCase {
     /// The failure has to send the reader to the real fix. "Cannot reach the server" is
     /// what made this a support thread: nothing is unreachable.
     func testMismatchMessageNamesBothVersionsAndTheFix() {
+        pinEnglish()
         let message = BackendLauncher.incompatibleSchemaMessage(
             origin: "http://127.0.0.1:8765", server: 10, expected: 11)
         XCTAssertTrue(message.contains("http://127.0.0.1:8765"))
@@ -144,6 +154,7 @@ final class BackendLauncherTests: XCTestCase {
     }
 
     func testMismatchMessageCoversAValueItCannotRead() {
+        pinEnglish()
         let message = BackendLauncher.incompatibleSchemaMessage(
             origin: "http://127.0.0.1:8766", server: nil, expected: 11)
         XCTAssertTrue(message.contains("cannot read"))
@@ -165,10 +176,11 @@ final class BackendLauncherTests: XCTestCase {
     """
 
     func testSchemaGuardInTheLogBecomesTheFailureReason() throws {
+        pinEnglish()
         let message = try XCTUnwrap(BackendLauncher.startupFailure(
             logText: schemaGuardTrace, dataDirectory: "/Users/x/Library/Application Support/Luminfest Learning Harness"))
         XCTAssertTrue(message.contains("Schema upgrade required"), message)
-        XCTAssertTrue(message.contains("different Luminfest version"), message)
+        XCTAssertTrue(message.contains("different Luminest version"), message)
         XCTAssertTrue(message.contains("harness.sqlite3"), message)
         XCTAssertTrue(message.contains("backend.log"), message)
         XCTAssertTrue(message.contains("back that database up"), message)

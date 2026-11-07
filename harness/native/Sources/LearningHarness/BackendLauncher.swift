@@ -234,14 +234,18 @@ enum HealthVerdict: Equatable {
     ///
     /// It has to name the two versions and send the reader to the actual fix - quit the
     /// other copy - because the failure looks like a network fault and is not one.
+    /// A schema version as the reader should see it, or an honest "cannot read it".
+    nonisolated static func schemaLabel(_ version: Int?) -> String {
+        guard let version else { return L10n.t("backend.schema.unreadableVersion") }
+        return L10n.tf("backend.schema.versionTag", version)
+    }
+
     nonisolated static func incompatibleSchemaMessage(origin: String,
                                                       server: Int?,
                                                       expected: Int) -> String {
-        let found = server.map { "schema v\($0)" } ?? "a schema version this build cannot read"
-        return "A different Luminfest server is already running at \(origin). It reports \(found), "
-            + "and this build expects schema v\(expected). Quit the other copy of Luminfest "
-            + "(or restart the Mac) and open this build again. Nothing was changed, and no "
-            + "second server was started on the same database."
+        // `table:` is passed explicitly even though it is nil: the parameter sits before
+        // the variadic, so `tf("key", origin, ...)` would bind `origin` to `table`.
+        L10n.tf("backend.schema.mismatch", table: nil, origin, schemaLabel(server), expected)
     }
 
     /// What the port scan concluded.
@@ -302,6 +306,13 @@ enum HealthVerdict: Equatable {
 
     func startIfBundled() async {
         guard !ProcessInfo.processInfo.arguments.contains("--ui-test"), !ready else { return }
+        // Every attempt starts from a clean slate. ``failure`` used to be set and never
+        // cleared, so after a learner quit the incompatible server and pressed Try Again,
+        // a healthy launch left the old sentence on screen - an error over a working
+        // server. Clearing here rather than at each success path keeps the invariant in
+        // one place: "ready" is the only thing a caller may trust.
+        failure = nil
+        adoptedSchemaVersion = nil
         let configured = UserDefaults.standard.string(forKey: "luminfest.endpoint")
             ?? Self.defaultOrigin
         // A configured endpoint means the user pointed the app at a server of their own;
@@ -487,11 +498,8 @@ enum HealthVerdict: Equatable {
     nonisolated static func startupFailure(logText: String, dataDirectory: String) -> String? {
         guard logText.contains("Schema upgrade required") else { return nil }
         let database = dataDirectory + "/harness.sqlite3"
-        return "The bundled learning server refused to start. Its log says: \"Schema upgrade required; "
-            + "run scripts/init_db.py explicitly. Startup never migrates existing tables.\" That means "
-            + "\(database) was written by a different Luminfest version. Nothing was changed. "
-            + "Read \(dataDirectory)/backend.log for the full trace, and back that database up "
-            + "before moving or migrating it."
+        return L10n.tf("backend.schema.upgradeRequired", table: nil,
+                       database, dataDirectory + "/backend.log")
     }
 
     /// Bounded grace between SIGTERM and any escalation. This runs on the main

@@ -103,6 +103,17 @@
 "error.server" = "The server reported an internal error.";
 "error.unknown" = "An unexpected error occurred.";
 
+/* MARK: - Backend launch failures */
+
+/* Positional specifiers throughout: a translation reorders the endpoint, the two schema
+   versions and the log path, and bare %d/%@ bind by order. The two mismatch variants are
+   separate keys because `nil` means "the server declared a version this build cannot
+   read", not version 0 — substituting 0 would recreate the fake-version bug this fixes. */
+
+"backend.schema.mismatch" = "A different Luminfest server is already running at %1$@. It reports schema v%2$d, and this build expects schema v%3$d. Quit the other copy of Luminfest (or restart the Mac) and open this build again. Nothing was changed, and no second server was started on the same database.";
+"backend.schema.mismatch.unreadable" = "A different Luminfest server is already running at %1$@. It reports a schema version this build cannot read, and this build expects schema v%2$d. Quit the other copy of Luminfest (or restart the Mac) and open this build again. Nothing was changed, and no second server was started on the same database.";
+"backend.schema.upgradeRequired" = "The bundled learning server refused to start. Its log says: \"Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.\" That means %1$@ was written by a different Luminfest version. Nothing was changed. Read %2$@ for the full trace, and back that database up before moving or migrating it.";
+
 /* MARK: - Diagnostics */
 
 "diagnostics.title" = "Diagnostics";
@@ -119,3 +130,17 @@
 "a11y.progress" = "Reading progress";
 "a11y.sidebar" = "Main navigation";
 "a11y.languagePicker" = "Interface language";
+
+/* MARK: - Backend schema failures */
+
+/* The wording here is asserted by BackendLauncherTests ("schema v10", "schema v11",
+   "Quit the other copy"). Change the copy only together with those assertions. */
+
+"backend.schema.versionTag" = "schema v%1$d";
+"backend.schema.unreadableVersion" = "a schema version this build cannot read";
+"backend.schema.mismatch" = "A different Luminest server is already running at %1$@. It reports %2$@, and this build expects schema v%3$d. Quit the other copy of Luminest (or restart the Mac) and open this build again. Nothing was changed, and no second server was started on the same database.";
+
+/* The quoted sentence is the server's own log line. It is left in English in every
+   language on purpose: the reader is told to search the log for it, and a translated
+   quote would not be found there. */
+"backend.schema.upgradeRequired" = "The bundled learning server refused to start. Its log says: \"Schema upgrade required; run scripts/init_db.py explicitly. Startup never migrates existing tables.\" That means %1$@ was written by a different Luminest version. Nothing was changed. Read %2$@ for the full trace, and back that database up before moving or migrating it.";
