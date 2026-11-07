@@ -1,0 +1,735 @@
+{
+  "program": "Program 1 — Stabilization and correctness",
+  "product": "Luminest / Luminfest Learning Harness",
+  "version": 1,
+  "updated": "2026-11-07",
+  "purpose": "One register for the whole application: what the learner sees, where it is implemented natively, where it is implemented on the server, what it persists, what proves it, and the measurable condition that makes it done.",
+  "boundaries": {
+    "database_security": "A parallel agent owns database/tenant security hardening. This register records the current expected path and the existing security tests, but makes no change to security code and does not claim that hardening is complete.",
+    "rule": "A row is only 'implemented' when all six elements are present and the cited test path exists. 'Partial' means the user-facing path exists but a listed element is incomplete. 'Absent' is a finding, not a TODO."
+  },
+  "status_legend": {
+    "implemented": "User path, native path, backend path, data path and an automated test exist.",
+    "partial": "The feature runs, but one or more of the six elements is incomplete (for example no native surface, or no direct test).",
+    "absent": "No implementation exists; the register names the gap so it cannot be mistaken for done.",
+    "external": "Owned by another agent or outside this program; recorded for completeness, not claimed as verified here."
+  },
+  "areas": [
+    {
+      "id": "auth",
+      "title": "Authentication and onboarding",
+      "features": [
+        {
+          "id": "AUTH-01",
+          "name": "Account registration and launch gate",
+          "status": "implemented",
+          "user_facing": "Create an account with name, email and password; the launch gate requires the 13+ confirmation and acceptance of the Terms and Privacy Policy.",
+          "native": "native/Sources/LearningHarness/LuminfestApp.swift — OnboardingView, register/sign-in segmented control, age and terms toggles.",
+          "backend": "backend/app/main.py POST /api/v1/auth/register; backend/app/accounts.py; backend/app/security.py (Argon2 hashing, session issue).",
+          "data": "db.py User (role, age_confirmed_at, terms_accepted_at, course_id, telemetry_consent) and ConsentLedger (terms/privacy rows).",
+          "tests": "backend/tests/test_accounts.py; backend/tests/test_api.py registration cases; backend/tests/test_desktop_environment.py desktop 422/201 gate.",
+          "acceptance": "Missing age_confirmed or accept_terms → 422; valid registration → 201 and a usable bearer token; duplicate email → 409; the first account on a local desktop instance is role=teacher."
+        },
+        {
+          "id": "AUTH-02",
+          "name": "Sign-in, refresh and sign-out",
+          "status": "implemented",
+          "user_facing": "Sign in with email/password; the session persists across launches; sign-out revokes the session.",
+          "native": "native/Sources/LearningHarness/LuminfestApp.swift (auth form); native/Sources/LearningHarness/Core.swift (token/session calls); SessionVault.swift (Keychain store, currently not wired).",
+          "backend": "backend/app/main.py POST /api/v1/auth/login, /auth/refresh, /auth/logout, /auth/sessions; backend/app/security.py rotate_refresh/revoke_session.",
+          "data": "db.py Token (access token digest, TTL) and RefreshToken (rotation, reuse detection, revocation).",
+          "tests": "backend/tests/test_accounts.py (login, refresh rotation, logout, session revocation); backend/tests/test_security_contract.py.",
+          "acceptance": "Access token TTL is 3600 s; refresh rotates and the old refresh token is rejected; logout revokes the session; a revoked token gets 401."
+        },
+        {
+          "id": "AUTH-03",
+          "name": "First-run course setup",
+          "status": "implemented",
+          "user_facing": "Three-step setup: choose a course, state a goal (optional), choose daily minutes (5–90), then Start learning.",
+          "native": "native/Sources/LearningHarness/CourseSetup.swift — subjectStep, goalStep, paceStep, setup.finish; native/Sources/LearningHarness/Core.swift saveSetup.",
+          "backend": "backend/app/main.py PATCH /api/v1/me; backend/app/planner.py course pacing; backend/app/courses.py catalogue/enrolment.",
+          "data": "db.py User.goal, User.daily_minutes, User.course_id; course graph packs.",
+          "tests": "backend/tests/test_api.py settings/plan cases; backend/tests/test_planner.py; backend/tests/test_curriculum_route.py.",
+          "acceptance": "Start learning persists course_id, goal and daily_minutes; the Today page returns a plan with a non-zero budget; changing course later does not mix evidence across concepts."
+        },
+        {
+          "id": "AUTH-04",
+          "name": "Teacher/learner role separation",
+          "status": "implemented",
+          "user_facing": "A teacher account can use whiteboard, deck, simulation and authoring tools; a learner account gets a named refusal instead of a silent failure.",
+          "native": "native/Sources/LearningHarness/Studio.swift (TutorPanel activity chips); native/Sources/LearningHarness/ProjectsInsightsSettings.swift (role-gated surfaces where present).",
+          "backend": "backend/app/security.py principal(); backend/app/user_scope.py (tenant isolation); backend/app/harness/toolbox.py _require_teacher; backend/app/accounts.py _ensure_operator.",
+          "data": "db.py User.role (learner/teacher/staff/admin).",
+          "tests": "backend/tests/test_operator_role.py; backend/tests/test_user_scope.py; backend/tests/test_security_contract.py.",
+          "acceptance": "A learner calling a teacher-facing tool gets ok=false with a refusal that names the remedy; a teacher succeeds; server role is re-derived from the principal, never from model arguments."
+        },
+        {
+          "id": "AUTH-05",
+          "name": "Email verification and password reset",
+          "status": "partial",
+          "user_facing": "The account model and token routes exist, but the shipped mailer is inert/offline; the desktop build cannot email a verification link or a reset link.",
+          "native": "No dedicated verification/reset UI; OnboardingView shows the auth form only.",
+          "backend": "backend/app/accounts.py send_verification; backend/app/security.py issue_auth_token/consume_auth_token; AuthToken table; mailer transport defaults offline.",
+          "data": "db.py AuthToken (purpose, digest, expiry, consumed_at).",
+          "tests": "backend/tests/test_accounts.py (token lifecycle where present); no end-to-end mail transport test.",
+          "acceptance": "If a transport is configured: verification/reset token is single-use, expires, and a reset changes the password; currently the honest status is 'unavailable without a mail transport', not 'delivered'."
+        }
+      ]
+    },
+    {
+      "id": "courses",
+      "title": "Courses and curriculum",
+      "features": [
+        {
+          "id": "COURSE-01",
+          "name": "Course catalogue and enrolment",
+          "status": "implemented",
+          "user_facing": "Browse courses, see size and authored share, switch course from Settings, and keep evidence separated per course.",
+          "native": "native/Sources/LearningHarness/CourseSetup.swift (CourseOptionRow, CourseSwitcher); native/Sources/LearningHarness/ProjectsInsightsSettings.swift Change course or goal.",
+          "backend": "backend/app/main.py GET /api/v1/courses, /courses/{id}; backend/app/courses.py; enrolled_course() in main.py.",
+          "data": "Curriculum packs under backend/app/curriculum_packs; db.py User.course_id.",
+          "tests": "backend/tests/test_multisubject.py; backend/tests/test_curriculum_route.py; backend/tests/test_course_builder.py.",
+          "acceptance": "The default catalogue returns the authored mathematics course; enrolling changes the map and practice items; switching back restores prior evidence without mixing concept ids."
+        },
+        {
+          "id": "COURSE-02",
+          "name": "Knowledge graph and prerequisite order",
+          "status": "implemented",
+          "user_facing": "The Knowledge map shows concepts by strand/unit/depth, prerequisites, and what each concept unlocks.",
+          "native": "native/Sources/LearningHarness/TodayKnowledge.swift — KnowledgeView, graph search, depth explanation, graph.openLesson.",
+          "backend": "backend/app/knowledge_graph.py; backend/app/courses.py graph_for(); backend/app/main.py GET /api/v1/knowledge-graph and /knowledge-graph/{concept_id}.",
+          "data": "Graph packs (nodes/edges/strands/units); db.py State for per-concept mastery.",
+          "tests": "backend/tests/test_knowledge_graph.py; backend/tests/test_kst.py; backend/tests/test_curriculum_route.py.",
+          "acceptance": "Integrated Mathematics I exposes 164 concepts and 183 edges; every lesson node resolves to a graph node; prerequisite chains are acyclic; a concept with no lesson is labeled rather than hidden."
+        },
+        {
+          "id": "COURSE-03",
+          "name": "Course generation from source",
+          "status": "partial",
+          "user_facing": "Paste text, a URL or a file and generate a course; the native app has no course-creation screen, so this runs through the web workbench's Course Studio.",
+          "native": "None in the native client. Web: web/index.html Course Studio + web/app.js.",
+          "backend": "backend/app/routes_create.py; backend/app/course_builder.py; POST /api/v1/create/preview and /create/course; URL fetch with DNS/private-address checks.",
+          "data": "Created course pack/lesson records; SQLite course store.",
+          "tests": "backend/tests/test_course_builder.py; backend/tests/test_creation_tools.py; backend/tests/test_source_extension.py.",
+          "acceptance": "A source shorter than 400 characters or 80 words, with fewer than 2 paragraphs or fewer than 4 concepts, is refused with the actual counts; a valid source produces a deterministic course with concepts and questions; URL input rejects private/loopback hosts."
+        },
+        {
+          "id": "COURSE-04",
+          "name": "Authored versus generated content honesty",
+          "status": "implemented",
+          "user_facing": "The lesson says whether it is hand-authored, generated from a course map, or has no lesson; missing content is a named gap, never an invented lesson.",
+          "native": "native/Sources/LearningHarness/Studio.swift lesson body; native/Sources/LearningHarness/TodayKnowledge.swift authored-lesson counts.",
+          "backend": "backend/app/curriculum.py CONCEPTS/GRAPH_TO_LESSON; backend/app/generated_curriculum.py; backend/app/procedure_service.py tier labels.",
+          "data": "Authored lesson packs; generated course packs; concept metadata.",
+          "tests": "backend/tests/test_lesson_format.py; backend/tests/test_curriculum_route.py; backend/tests/test_lesson_procedure.py.",
+          "acceptance": "The course reports 30 authored of 164 graph nodes; a generated lesson carries a generated-tier label and its source; a concept with no lesson returns the named gap and does not claim a lesson."
+        }
+      ]
+    },
+    {
+      "id": "lessons",
+      "title": "Lessons and practice",
+      "features": [
+        {
+          "id": "LESSON-01",
+          "name": "Lesson reader and sections",
+          "status": "implemented",
+          "user_facing": "Read a lesson as sections with headings, concept blocks, worked examples, retrieval prompts and a reading rail.",
+          "native": "native/Sources/LearningHarness/Studio.swift — lessonBody, LessonBlock, readingRail, section progress; MarkdownText for tutor output.",
+          "backend": "backend/app/main.py GET /api/v1/lessons/{concept_id}; backend/app/curriculum.py lesson records.",
+          "data": "Lesson packs (blocks, titles, bodies, media); no per-read progress table (reading is not mastery).",
+          "tests": "backend/tests/test_lesson_format.py; backend/tests/test_lesson_procedure.py; native MarkdownBlocks tests.",
+          "acceptance": "Every block kind in a lesson renders without raw markdown; section changes preserve the selected concept; reading a lesson does not change mastery."
+        },
+        {
+          "id": "LESSON-02",
+          "name": "Lesson procedure compiler",
+          "status": "implemented",
+          "user_facing": "Today shows a run of show for the concept; the learner starts it, completes or skips blocks, and sees why activities were refused.",
+          "native": "native/Sources/LearningHarness/LessonProcedure.swift — LessonProcedureCard, block rows, Start/Done/Skip, artifact sheet; used on Today.",
+          "backend": "backend/app/routes_procedure.py; backend/app/procedure_service.py; backend/app/harness/teaching/procedure.py; GET/POST /api/v1/procedure/{concept}[/start|/advance].",
+          "data": "db.py ProcedureRun (procedure_hash, blocks, completed append-only list, status).",
+          "tests": "backend/tests/test_lesson_procedure.py; backend/tests/test_harness.py.",
+          "acceptance": "A compiled lesson has 3–6 blocks and total_minutes ≤ budget; every skipped block carries a reason; the same evidence + artifacts produce the same procedure_hash; advancing an unknown or stale order returns 409 rather than double-counting."
+        },
+        {
+          "id": "LESSON-03",
+          "name": "Question serving and answer submission",
+          "status": "implemented",
+          "user_facing": "Answer a multiple-choice or written question, state confidence, submit once, and receive feedback or an exam-withheld state.",
+          "native": "native/Sources/LearningHarness/QuestionView.swift — option/text input, confidence slider, Submit answer, retry-frozen-answer; Core.swift submitAnswer.",
+          "backend": "backend/app/main.py GET /api/v1/questions/next and POST /api/v1/attempts; backend/app/learning.py; receipt validation.",
+          "data": "db.py Attempt (question_id, concept_id, mode, correct, elapsed, confidence, diagnosis) and Receipt.",
+          "tests": "backend/tests/test_api.py attempt cases; backend/tests/test_learning.py; backend/tests/test_psychometrics.py.",
+          "acceptance": "An attempt without a valid receipt is refused; a duplicate client_event_id does not create a second attempt; a scored attempt writes an Attempt row; the response identifies the correct answer/explanation when feedback is allowed."
+        },
+        {
+          "id": "LESSON-04",
+          "name": "Diagnosis and mastery update",
+          "status": "implemented",
+          "user_facing": "Feedback names the kind of error (concept, calculation or procedure) and shows an estimated mastery only after real work.",
+          "native": "native/Sources/LearningHarness/QuestionView.swift feedback card (diagnosis, mastery, review date); Core.swift question state.",
+          "backend": "backend/app/learning.py; backend/app/psychometrics.py; backend/app/curriculum.py diagnosis triples; backend/app/memory.py FSRS update.",
+          "data": "db.py State (mastery, mastery_known, stability, difficulty, due_at) and Attempt.",
+          "tests": "backend/tests/test_learning.py; backend/tests/test_psychometrics.py; backend/tests/test_memory.py; backend/tests/test_leveling.py.",
+          "acceptance": "Before any attempt, mastery_known=false and the prior 0.15 is not displayed as the learner's mastery; after a scored attempt, mastery_known=true and the state's due date is scheduled; the diagnosis is specific, not generic."
+        },
+        {
+          "id": "LESSON-05",
+          "name": "Shared whiteboard and tutor drawing",
+          "status": "implemented",
+          "user_facing": "The Stage whiteboard shows the tutor's drawing and the learner's ink; the tutor can draw when asked, and the learner can ask about a selection.",
+          "native": "native/Sources/LearningHarness/Stage.swift — StageView/BoardEditor; Board.swift (BoardStore, 2.5 s poll); BoardEditor.swift; CanvasView.swift.",
+          "backend": "backend/app/main.py /api/v1/boards and /agent/chat board context; backend/app/harness/board.py; backend/app/harness/tools_whiteboard.py; backend/app/harness/whiteboard.py.",
+          "data": "Board JSON node document (path/shape/connector/text/image/video/simulation/answer), versioned; no SQL table.",
+          "tests": "backend/tests/test_board.py; backend/tests/test_stage_whiteboard.py; backend/tests/test_whiteboard_unification.py; backend/tests/test_lecture.py; native Board tests where present.",
+          "acceptance": "A teacher turn with board_id wb-<concept> or board-<concept> can call whiteboard_apply and bumps the board version; a drawing yields at least one node; a student ink write accepts only path ops; a stale base_version returns 409, never a silent overwrite."
+        },
+        {
+          "id": "LESSON-06",
+          "name": "Deck, shipped images and 45-minute auto-lecture",
+          "status": "implemented",
+          "user_facing": "Generate an editable narrated deck with real credited images; run a 45-minute lecture that auto-advances, speaks, turns pages, draws a board page and shows an image or video.",
+          "native": "native/Sources/LearningHarness/MediaTools.swift (DeckPhotograph, slideView); Studio.swift Narrated deck; LectureMode.swift LectureTheater/LectureStore/LectureNarrator.",
+          "backend": "backend/app/routes_deck.py /deck/from-concept and .pptx export; backend/app/lecture.py /lecture preview/start/segment; backend/app/media_packs/image_seed.json + images; backend/app/harness/media.py shipped_for.",
+          "data": "Deck JSON document; image_seed.json (sha256, licence, attribution); cached lecture storyboard JSON.",
+          "tests": "backend/tests/test_deck.py; backend/tests/test_shipped_image_pack.py; backend/tests/test_lecture.py; backend/tests/test_package_notarization_order.py for export surface.",
+          "acceptance": "A deck exports valid OOXML; a shipped image carries title/credit/licence and is served from /media/images/{sha}/bytes; a lecture has 9–16 segments (model path 15–16; deterministic fallback 9), sums to 2700 s, every segment has board_ops, and at least one image and one video slot; a media refusal returns a reference card, not a fake file."
+        }
+      ]
+    },
+    {
+      "id": "reviews",
+      "title": "Flashcards and scheduled reviews",
+      "features": [
+        {
+          "id": "REVIEW-01",
+          "name": "Grounded flashcard generation",
+          "status": "implemented",
+          "user_facing": "Generate flashcards for a concept; each card has a front, back, hint and provenance; generation is idempotent.",
+          "native": "native/Sources/LearningHarness/Flashcards.swift — deck list, generate, review controls; Core.swift flashcard calls.",
+          "backend": "backend/app/main.py /api/v1/flashcards/generate and /flashcards; backend/app/flashcards.py source_exists.",
+          "data": "db.py Flashcard (front, back, hint, tags, source JSON, front_key, unique user/concept/front_key).",
+          "tests": "backend/tests/test_flashcards.py — grounded provenance, misconception card, idempotence, no-provenance 422.",
+          "acceptance": "A generated card with a dangling source is refused; a card without provenance returns 422; generating the same concept twice does not duplicate rows; every persisted card's source resolves to a real block, question or concept."
+        },
+        {
+          "id": "REVIEW-02",
+          "name": "FSRS-6 review scheduling",
+          "status": "implemented",
+          "user_facing": "Review a card with Again/Hard/Good/Easy; the next due date changes according to the rating.",
+          "native": "native/Sources/LearningHarness/Flashcards.swift review buttons; Core.swift review submission.",
+          "backend": "backend/app/main.py /flashcards/{id}/review; backend/app/memory.py FSRS-6 DSR update; /flashcards/session.",
+          "data": "db.py Flashcard due_at, stability, difficulty, reps, lapses, last_review_at, last_grade, state.",
+          "tests": "backend/tests/test_flashcards.py::test_good_schedules_further_out_than_again and stats/schedule cases; backend/tests/test_memory.py.",
+          "acceptance": "Good schedules a later due_at than Again for the same starting state; a grade outside 1..4 returns 422; after a review, reps increments and due_at > now; the session never serves a card twice in one pass."
+        },
+        {
+          "id": "REVIEW-03",
+          "name": "Daily review queue",
+          "status": "implemented",
+          "user_facing": "Today/Review shows cards due now, starts a review session, and explains an empty queue instead of inventing work.",
+          "native": "native/Sources/LearningHarness/TodayKnowledge.swift ReviewView; Flashcards.swift deck/session.",
+          "backend": "backend/app/main.py GET /api/v1/reviews and /flashcards/session; backend/app/memory.py due selection.",
+          "data": "db.py Flashcard.due_at; db.py State for concept-level review dates.",
+          "tests": "backend/tests/test_flashcards.py session/interleave cases; backend/tests/test_api.py reviews.",
+          "acceptance": "Only cards with due_at ≤ now are served; an empty queue renders the named empty state; a session interleaves two concepts when both are due; no review row is created merely by opening the page."
+        },
+        {
+          "id": "REVIEW-04",
+          "name": "Flashcard import and export",
+          "status": "implemented",
+          "user_facing": "Export the deck as JSON or CSV and import it back without losing front/back/source.",
+          "native": "native/Sources/LearningHarness/Flashcards.swift export/import controls where present.",
+          "backend": "backend/app/main.py /flashcards/export and /flashcards/import; backend/app/flashcards.py.",
+          "data": "db.py Flashcard.",
+          "tests": "backend/tests/test_flashcards.py export cases.",
+          "acceptance": "JSON and CSV exports round-trip front/back/source; duplicate fronts are deduplicated by front_key; import of a malformed row returns a named error rather than a partial silent write."
+        }
+      ]
+    },
+    {
+      "id": "assessment",
+      "title": "Assessment and grading",
+      "features": [
+        {
+          "id": "ASSESS-01",
+          "name": "Diagnostic and calibration",
+          "status": "implemented",
+          "user_facing": "Start a short diagnostic; after enough calibrated items the app shows a level instead of a guess.",
+          "native": "native/Sources/LearningHarness/TodayKnowledge.swift Start diagnostic; QuestionView.swift diagnostic flow.",
+          "backend": "backend/app/main.py GET /questions/next?mode=diagnostic and /assessments; backend/app/psychometrics.py CAT/IRT; backend/app/leveling.py.",
+          "data": "db.py Assessment (mode/total/answered/correct/complete) and Attempt.",
+          "tests": "backend/tests/test_psychometrics.py; backend/tests/test_leveling.py; backend/tests/test_api.py diagnostic cases.",
+          "acceptance": "With 0 calibrated items, /ability returns known=false and label='Not yet measured'; a level appears only after at least 5 calibrated items; the response says the level is not certified."
+        },
+        {
+          "id": "ASSESS-02",
+          "name": "Practice exam and scoring",
+          "status": "implemented",
+          "user_facing": "Take a practice exam; feedback is withheld until the exam ends; a final score and item breakdown appear.",
+          "native": "native/Sources/LearningHarness/QuestionView.swift exam mode and feedback; Core.swift requestFinishQuestion.",
+          "backend": "backend/app/main.py POST /assessments/exam/end and /attempts; backend/app/exam_guard.py.",
+          "data": "db.py Assessment and Attempt; Receipt for issued items.",
+          "tests": "backend/tests/test_api.py assessment cases; backend/tests/test_psychometrics.py; backend/tests/test_interruption.py.",
+          "acceptance": "Exam answers are stored but correctness is withheld until exam end; the final score equals correct/total; ending an exam marks it abandoned/complete exactly once; a second end is idempotent."
+        },
+        {
+          "id": "ASSESS-03",
+          "name": "Ability estimate and level card",
+          "status": "implemented",
+          "user_facing": "See theta/SE, CEFR/grade after calibration, and an explicit 'not certified' note.",
+          "native": "native/Sources/LearningHarness/Studio.swift LevelCard; Core.swift analytics refresh.",
+          "backend": "backend/app/main.py GET /api/v1/ability; backend/app/psychometrics.py; backend/app/leveling.py cefr_from_theta/grade_from_theta.",
+          "data": "db.py State and Attempt.",
+          "tests": "backend/tests/test_psychometrics.py; backend/tests/test_leveling.py.",
+          "acceptance": "theta and SE are finite; SE shrinks as calibrated attempts increase; CEFR/grade are null before 5 items; the card never presents a prior as a measurement."
+        },
+        {
+          "id": "ASSESS-04",
+          "name": "Unit-level gradebook",
+          "status": "absent",
+          "user_facing": "A formal unit grade judged against academic standards, with a gradebook view.",
+          "native": "None.",
+          "backend": "No unit-gradebook route; only per-assessment scores exist in main.py.",
+          "data": "No unit-grade table; Assessment holds one exam, not a unit aggregate.",
+          "tests": "None; the absence is the finding.",
+          "acceptance": "Not met. A unit gradebook must aggregate graded items per unit, expose the weighting, and be reproducible from Attempt/Assessment rows; none of those paths exists today."
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "Projects and course creation",
+      "features": [
+        {
+          "id": "PROJECT-01",
+          "name": "Project brief, submission and rubric",
+          "status": "implemented",
+          "user_facing": "Open a project brief, submit text with an AI-use disclosure and reflection, and receive formative rubric feedback.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift — ProjectsView/ProjectEditor; Core.swift submitProject.",
+          "backend": "backend/app/main.py GET /api/v1/projects and POST /projects/{id}/submit; backend/app/curriculum.py project rubric.",
+          "data": "db.py Project (status, submission, feedback, ai_disclosure, reflection).",
+          "tests": "backend/tests/test_api.py project cases; backend/tests/test_harness.py whole-use cases.",
+          "acceptance": "Submission requires ≥10 characters of text, a non-empty AI disclosure and a non-empty reflection; missing fields return 422; a valid submission sets status=submitted and returns rubric evidence; the rubric never claims correctness it did not check."
+        },
+        {
+          "id": "PROJECT-02",
+          "name": "Course authoring from source",
+          "status": "partial",
+          "user_facing": "Create a course from pasted text, a URL or a file; the native client has no authoring screen, so this runs in the web workbench.",
+          "native": "None in native; web/index.html Course Studio.",
+          "backend": "backend/app/routes_create.py; backend/app/course_builder.py; /create/preview, /create/course, /create/search.",
+          "data": "Created course packs and lesson records in the local store.",
+          "tests": "backend/tests/test_course_builder.py; backend/tests/test_creation_tools.py; backend/tests/test_source_extension.py.",
+          "acceptance": "Same source → same course (determinism); refusals name the missing structure and actual counts; a URL fetch rejects private/loopback destinations and revalidates each redirect."
+        },
+        {
+          "id": "PROJECT-03",
+          "name": "Lesson authoring and the foundry",
+          "status": "partial",
+          "user_facing": "Draft, extend and validate a lesson; inspect the authored-versus-generated overlay.",
+          "native": "No dedicated native authoring surface.",
+          "backend": "backend/app/routes_authoring.py; backend/app/authoring_overlay.py; backend/app/harness/toolbox.py authoring tools.",
+          "data": "Authoring overlay bundles and lesson packs.",
+          "tests": "backend/tests/test_authoring.py; backend/tests/test_authoring_overlay.py.",
+          "acceptance": "A draft validates against the lesson schema; a missing block is named; generated text is labeled and never presented as hand-authored; an overlay write is versioned or refused."
+        },
+        {
+          "id": "PROJECT-04",
+          "name": "Unit projects with capture and presentation",
+          "status": "absent",
+          "user_facing": "A small project after each unit: an on-camera presentation or a research task with limited AI use, with capture, submission and a rubric.",
+          "native": "None; no camera capture or recording surface.",
+          "backend": "No camera/recording route; Project accepts text only.",
+          "data": "Project stores text/disclosure/reflection; no media artifact row.",
+          "tests": "None; the absence is the finding.",
+          "acceptance": "Not met. A unit project must capture a learner artifact, store it as a submission, score it against a rubric, and retain the disclosure; only the text path exists."
+        }
+      ]
+    },
+    {
+      "id": "tutor",
+      "title": "Tutor and voice",
+      "features": [
+        {
+          "id": "TUTOR-01",
+          "name": "Classic tutor chat and fallback",
+          "status": "implemented",
+          "user_facing": "Ask the tutor a question; the reply is formatted, persisted, and labeled with the provider that actually answered.",
+          "native": "native/Sources/LearningHarness/Studio.swift TutorPanel; MarkdownText/MarkdownBlocks; Core.swift messages.",
+          "backend": "backend/app/main.py POST /api/v1/chat; backend/app/tutor.py; backend/app/harness/provider.py chat.",
+          "data": "db.py Message (role, content, provider, concept_id, session_id).",
+          "tests": "backend/tests/test_tutor_voice.py; backend/tests/test_provider.py; backend/tests/test_agent_loop.py.",
+          "acceptance": "A turn persists one user and one assistant message; the assistant row's provider matches the answer path; a provider failure returns 200 with grounded offline content and a truthful provider label; no empty bubble is stored."
+        },
+        {
+          "id": "TUTOR-02",
+          "name": "Agentic tool loop and activity trace",
+          "status": "implemented",
+          "user_facing": "The tutor can call tools (draw, search, build) and the chat shows human-readable activity chips while it works.",
+          "native": "native/Sources/LearningHarness/Studio.swift TutorPanel; Core.swift serverEvents/agent stream; activity chips.",
+          "backend": "backend/app/main.py /api/v1/agent/chat and /agent/stream; backend/app/harness/agent_loop.py; backend/app/harness/toolbox.py (51 tools).",
+          "data": "db.py Message and UsageLedger; tool results are ephemeral events.",
+          "tests": "backend/tests/test_agent_loop.py; backend/tests/test_teacher_wiring.py; backend/tests/test_harness.py.",
+          "acceptance": "Every tool event has a label, never the raw tool name; a refused tool is surfaced as a refusal, not a success; the loop is bounded; a completed turn persists the user/assistant messages exactly once."
+        },
+        {
+          "id": "TUTOR-03",
+          "name": "Text-to-speech through VoiceStudio",
+          "status": "implemented",
+          "user_facing": "Ask the tutor to speak; audio plays from the local VoiceStudio voice, and the UI says which engine is speaking.",
+          "native": "native/Sources/LearningHarness/Voice.swift; Studio.swift speaker/speech controls; LectureNarrator is a separate local lecture voice.",
+          "backend": "backend/app/harness/speech.py (voice_enabled gate); backend/app/harness/voice.py (loopback VoiceStudio); POST /api/v1/voice/speak.",
+          "data": "Cached audio under data_dir/media/audio; no learner text is persisted for TTS beyond the chat message.",
+          "tests": "backend/tests/test_speech_outcomes.py; backend/tests/test_voice_bridge.py; backend/tests/test_voice_model.py.",
+          "acceptance": "With VoiceStudio ready, /voice/speak returns 200 audio/mpeg with non-zero bytes; with it absent, the route returns 503 with the reason; voice_enabled is independent of media_enabled; no text leaves loopback."
+        },
+        {
+          "id": "TUTOR-04",
+          "name": "Duplex voice (OpenAI Realtime)",
+          "status": "partial",
+          "user_facing": "A two-way voice conversation with barge-in; the Settings card stores the key in Keychain.",
+          "native": "native/Sources/LearningHarness/VoiceRealtime.swift; RealtimeKey.swift; Settings secure field.",
+          "backend": "Realtime provider configuration; key is client-side and never written to the database.",
+          "data": "macOS Keychain item (service com.luminfest.learning-harness.realtime).",
+          "tests": "backend/tests/test_voice_busy.py; backend/tests/test_voice_model.py; no end-to-end Realtime test without a key.",
+          "acceptance": "Without a key, the UI states the channel is unavailable and does not open a fake call; with a key, the session uses 24 kHz PCM16, server VAD and barge-in; TTS and duplex do not fight for the microphone."
+        },
+        {
+          "id": "TUTOR-05",
+          "name": "Teacher profile and clone",
+          "status": "partial",
+          "user_facing": "Optionally personalize the tutor from an authorized teacher transcript; the profile can be reviewed and cleared.",
+          "native": "native/Sources/LearningHarness/TeacherProfile.swift; Studio.swift teacher.profile sheet.",
+          "backend": "backend/app/teacher_clone.py; consent-gated transcript analysis; TeacherStyleProfile persistence.",
+          "data": "db.py TeacherStyleProfile.",
+          "tests": "backend/tests/test_teacher_clone.py; backend/tests/test_teacher_core.py.",
+          "acceptance": "The profile is built only from a consented transcript; it never claims video/face/voice analysis; clearing the profile removes its effect; the UI states the source."
+        }
+      ]
+    },
+    {
+      "id": "playgrounds",
+      "title": "Interactive playgrounds",
+      "features": [
+        {
+          "id": "PLAY-01",
+          "name": "First-party playground catalogue",
+          "status": "implemented",
+          "user_facing": "Browse 45 first-party games across six packs and open one inside the workspace.",
+          "native": "native/Sources/LearningHarness/Playground.swift; GeneratedSimulation.swift; SimulationDetail.swift.",
+          "backend": "backend/app/playground_routes.py; backend/app/harness/playground/*; media_packs/playground_games_*.json.",
+          "data": "Game packs (archetype + spec); PlaygroundRun for completed tasks.",
+          "tests": "backend/tests/test_playground.py; test_playground_gallery.py; test_playground_pipeline.py.",
+          "acceptance": "The catalogue exposes 45 games from six packs; every game has a valid archetype/spec and a reachable entry; a headless click/drag test passes for each; no dead links."
+        },
+        {
+          "id": "PLAY-02",
+          "name": "Scored playground evidence",
+          "status": "implemented",
+          "user_facing": "Commit an answer inside a game and see it count as evidence; the mastery state moves only after a committed answer.",
+          "native": "native/Sources/LearningHarness/Playground.swift; Core.swift playground run submission.",
+          "backend": "backend/app/playground_routes.py; backend/app/harness/playground/evidence.py; /playground/*/submit.",
+          "data": "db.py PlaygroundRun (artifact_id, slug, archetype, concept_id, task_id, correct, tries, mastery_before/after, detail JSON).",
+          "tests": "backend/tests/test_playground_correctness.py; test_playground_guided.py.",
+          "acceptance": "A committed answer writes one PlaygroundRun; correct/incorrect and mastery_before/after are recorded; opening a game without committing writes nothing; free text is never stored in detail."
+        },
+        {
+          "id": "PLAY-03",
+          "name": "Generated HTML simulations",
+          "status": "implemented",
+          "user_facing": "Create, edit and run a sandboxed HTML simulation with versioned artifacts.",
+          "native": "native/Sources/LearningHarness/GeneratedSimulation.swift; Playground.swift.",
+          "backend": "backend/app/main.py /api/v1/sims; backend/app/sims_store.py; backend/app/harness/sims_check.py; frame-token route.",
+          "data": "Simulation artifacts on disk (HTML, version history); no SQL row for the artifact body.",
+          "tests": "backend/tests/test_guided_sim.py; test_sims_check.py; test_web_frame_token.py.",
+          "acceptance": "An empty or external-script document is refused with the problem list; a saved edit creates a new version; a non-finite number in visible text fails the runtime check; the iframe token is scoped and short-lived."
+        },
+        {
+          "id": "PLAY-04",
+          "name": "External simulations (PhET/Gizmos)",
+          "status": "implemented",
+          "user_facing": "Open a verified external simulation, with attribution and a clear statement that it is not evidence.",
+          "native": "native/Sources/LearningHarness/SimulationDetail.swift; Studio.swift external simulations card.",
+          "backend": "backend/app/main.py /simulations/{concept_id}/external; backend/app/simulation_map.py.",
+          "data": "Simulation map packs (provider, url, observable=false).",
+          "tests": "backend/tests/test_playground_attribution.py; test_sims_check.py.",
+          "acceptance": "An external simulation is always observable=false and never feeds mastery; attribution is present; a missing simulation returns the named gap, not a generic link."
+        }
+      ]
+    },
+    {
+      "id": "insights",
+      "title": "Insights and analytics",
+      "features": [
+        {
+          "id": "INSIGHT-01",
+          "name": "Level and ability card",
+          "status": "implemented",
+          "user_facing": "See the current level after calibration, with theta/SE and a 'not certified' note.",
+          "native": "native/Sources/LearningHarness/Studio.swift LevelCard.",
+          "backend": "backend/app/main.py GET /api/v1/ability; backend/app/psychometrics.py; backend/app/leveling.py.",
+          "data": "db.py State, Attempt.",
+          "tests": "backend/tests/test_leveling.py; test_psychometrics.py.",
+          "acceptance": "0 calibrated items → known=false; ≥5 → a CEFR/grade label; SE is finite and decreases with more items; the UI never presents the prior as measured ability."
+        },
+        {
+          "id": "INSIGHT-02",
+          "name": "Mastery map and coverage",
+          "status": "implemented",
+          "user_facing": "See per-concept mastery, coverage and prerequisites on the Knowledge map.",
+          "native": "native/Sources/LearningHarness/TodayKnowledge.swift KnowledgeView.",
+          "backend": "backend/app/main.py /knowledge-graph, /knowledge-graph/coverage/me; backend/app/kst.py.",
+          "data": "db.py State; graph packs.",
+          "tests": "backend/tests/test_knowledge_graph.py; test_kst.py.",
+          "acceptance": "Coverage counts only concepts with real state; an untouched concept reports unknown, not 0 mastery; the map's prerequisite order matches the graph."
+        },
+        {
+          "id": "INSIGHT-03",
+          "name": "Attention, streak and struggle",
+          "status": "implemented",
+          "user_facing": "See foreground activity, streak days and struggle signals; insufficient data is stated, not guessed.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift InsightsView; TodayKnowledge streak card.",
+          "backend": "backend/app/main.py /attention/check, /attention/window, /analytics; backend/app/harness/attention.py; backend/app/harness/teaching/motivation.py.",
+          "data": "db.py TelemetryEvent, State, Attempt.",
+          "tests": "backend/tests/test_telemetry.py; test_learning_science.py; test_rewards.py.",
+          "acceptance": "With too little interaction, reading.state='unclear' with a reason; a streak counts only days with real practice; attention/fatigue never punish or ban."
+        },
+        {
+          "id": "INSIGHT-04",
+          "name": "Multi-perspective analytics",
+          "status": "partial",
+          "user_facing": "Participation, struggle, attention and streak exist; collaboration, creativity and soft skills do not.",
+          "native": "InsightsView shows the implemented dimensions; no collaboration surface.",
+          "backend": "backend/app/harness/classroom.py, attention.py, motivation.py; no collaboration/creativity/soft-skill scoring module.",
+          "data": "TelemetryEvent, State, Attempt, PlaygroundRun; no collaboration/creativity rubric rows.",
+          "tests": "backend/tests/test_learning_science.py; no tests for the three absent dimensions.",
+          "acceptance": "Three named dimensions (collaboration, creativity, soft skills) have a scoring path and a display; today only the first four dimensions exist, so this is partial."
+        },
+        {
+          "id": "INSIGHT-05",
+          "name": "Usage and metering ledger",
+          "status": "implemented",
+          "user_facing": "Operator-facing usage/cost accounting for tutor turns and provider fallbacks.",
+          "native": "No learner-facing cost screen; operator data is served by the API.",
+          "backend": "backend/app/main.py usage/ledger routes; backend/app/accounts.py record_usage; backend/app/harness/provider.py meter_usage.",
+          "data": "db.py UsageLedger, UsageDailyRollup, QuotaCounter.",
+          "tests": "backend/tests/test_metering.py; test_capabilities.py.",
+          "acceptance": "Every tutor turn writes one UsageLedger row, including offline fallback with outcome=fallback and zero tokens; latency and provider/model are recorded; a failed write does not silently disappear."
+        }
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Consent and privacy",
+      "features": [
+        {
+          "id": "PRIV-01",
+          "name": "Age and terms gate",
+          "status": "implemented",
+          "user_facing": "Registration requires the 13+ confirmation and acceptance of Terms and Privacy; the consent is recorded.",
+          "native": "native/Sources/LearningHarness/LuminfestApp.swift OnboardingView auth.age/auth.terms.",
+          "backend": "backend/app/main.py /auth/register; backend/app/config.py require_launch_gate; backend/app/legal_guard.py.",
+          "data": "db.py User.age_confirmed_at, terms_accepted_at, terms_version; ConsentLedger.",
+          "tests": "backend/tests/test_desktop_environment.py (422/201); test_accounts.py; test_legal_guard.py.",
+          "acceptance": "Missing either declaration → 422; valid → 201; terms_version is stored; the desktop build requires the gate; legal documents are served and contain no placeholders."
+        },
+        {
+          "id": "PRIV-02",
+          "name": "Interaction telemetry consent",
+          "status": "implemented",
+          "user_facing": "Activity tracking is off by default; enabling it is explicit and can be revoked; the app says it does not track screen/keystrokes/other apps.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift settings.telemetry; ClickTelemetry.swift.",
+          "backend": "backend/app/main.py PATCH /me and POST /events; backend/app/harness/telemetry.py (closed grammar, EVIDENCE=False).",
+          "data": "db.py User.telemetry_consent, TelemetryEvent.",
+          "tests": "backend/tests/test_telemetry.py; test_web_telemetry_helper.py.",
+          "acceptance": "Default consent is false; /events returns 403 without consent; payloads accept only click/tap/key/blur/focus with no key value and no window title; telemetry never counts as learning evidence."
+        },
+        {
+          "id": "PRIV-03",
+          "name": "Model-training consent",
+          "status": "implemented",
+          "user_facing": "A separate opt-in controls whether responses may be used for model improvement; activity consent does not imply it.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift settings.training.",
+          "backend": "backend/app/main.py POST /training/consent and /training/status; backend/app/training.py.",
+          "data": "db.py TrainingConsent, ConsentLedger.",
+          "tests": "backend/tests/test_ml_training.py; test_learning_science.py.",
+          "acceptance": "Training consent defaults off and is independent of telemetry; only opted-in pseudonymized rows are exported; no live training or unlearning guarantee is claimed."
+        },
+        {
+          "id": "PRIV-04",
+          "name": "Outbound media disclosure",
+          "status": "implemented",
+          "user_facing": "Image/video search is disclosed; the desktop build may contact Openverse, the Met, Wikimedia, NASA and YouTube; production is opt-in.",
+          "native": "No extra toggle; search runs when the feature requests media.",
+          "backend": "backend/app/config.py media_enabled; backend/app/harness/media.py; backend/app/harness/video_search.py; backend/legal/privacy.md; DISTRIBUTION.md.",
+          "data": "No learner identifier is sent; cached asset carries licence/attribution.",
+          "tests": "backend/tests/test_desktop_environment.py; test_media_pipeline.py; test_media_pipeline.py image/video gates.",
+          "acceptance": "Desktop media_enabled=true and privacy.md names the providers; production defaults off; a search sends a query, not an identity; an unclassified licence is refused."
+        },
+        {
+          "id": "PRIV-05",
+          "name": "Data minimisation and tenant isolation",
+          "status": "external",
+          "user_facing": "One learner cannot read another learner's boards, flashcards, messages or progress; sensitive fields are not collected.",
+          "native": "No cross-account UI; the client only reads the authenticated account.",
+          "backend": "backend/app/user_scope.py USER_SCOPED_TABLES/UnsafeQueryError; backend/app/security.py; backend/app/db.py foreign keys. Database-security hardening is owned by the parallel security agent.",
+          "data": "All user-scoped tables; unscoped() requires a non-empty reason and is audited.",
+          "tests": "backend/tests/test_user_scope.py; test_security_contract.py; test_accounts.py privacy cases.",
+          "acceptance": "Every user-scoped query is scoped or fails closed; a board/flashcard/message owned by another account returns 404, not 403; no content, key value or window title is stored. This row is recorded, not claimed as security-complete."
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Export and deletion",
+      "features": [
+        {
+          "id": "DATA-01",
+          "name": "Account export",
+          "status": "implemented",
+          "user_facing": "Settings → Export data writes a JSON file of the learner's own records.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift settings.export; Core.swift exportAccount (NSSavePanel).",
+          "backend": "backend/app/main.py GET /api/v1/export; backend/app/user_scope.py.",
+          "data": "All user-scoped rows (profile, states, attempts, messages, flashcards, projects, runs); password hashes, token digests and secrets excluded.",
+          "tests": "backend/tests/test_api.py export cases; test_harness.py; test_learning_science.py.",
+          "acceptance": "Export returns JSON with the learner's rows; a second account's data is absent; password_hash/token digests/refresh tokens are absent; the file opens and parses as JSON."
+        },
+        {
+          "id": "DATA-02",
+          "name": "Account deletion",
+          "status": "implemented",
+          "user_facing": "Settings → Delete account requires typing DELETE MY ACCOUNT and permanently removes the account.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift settings.delete; Core.swift deleteAccount.",
+          "backend": "backend/app/main.py DELETE /api/v1/me; backend/app/account_erasure.py; foreign-key cascades.",
+          "data": "All user-scoped rows and owned media; no orphan rows.",
+          "tests": "backend/tests/test_api.py deletion 422/204; test_harness.py; test_user_scope.py.",
+          "acceptance": "Wrong confirmation → 422; correct phrase → 204; the account and its dependent rows are gone; a second delete returns 401/404; no orphan board/flashcard/message remains."
+        },
+        {
+          "id": "DATA-03",
+          "name": "Database backup and restore",
+          "status": "implemented",
+          "user_facing": "Operator-facing backup/restore with an integrity manifest; not exposed as a learner button.",
+          "native": "None.",
+          "backend": "backend/app/database_backup.py; backend/scripts/init_db.py migration/backup.",
+          "data": "SQLite database plus SHA-256 manifest; WAL-safe copy.",
+          "tests": "backend/tests/test_database_backup.py; test_backup_resilience.py.",
+          "acceptance": "A backup passes PRAGMA integrity_check and a SHA-256 manifest check; restore reproduces the database; a corrupt/truncated backup is refused; a migration takes a pre-migration backup."
+        },
+        {
+          "id": "DATA-04",
+          "name": "Cached media deletion",
+          "status": "partial",
+          "user_facing": "Deleting an account removes its cached images/audio; the learner is not told a file remains.",
+          "native": "No separate cache-clear UI.",
+          "backend": "backend/app/account_erasure.py; backend/app/harness/media.py cache; backend/app/routes_media.py.",
+          "data": "data_dir/media/images.jsonl and image/audio files.",
+          "tests": "backend/tests/test_media_pipeline.py; test_database_backup.py; no dedicated cache-erasure assertion.",
+          "acceptance": "After account deletion, the user's cached media manifests/files are gone; export includes the licence metadata; a shared shipped pack is not deleted. Currently the account path exists but a direct cache-erasure test is missing."
+        }
+      ]
+    },
+    {
+      "id": "offline",
+      "title": "Offline operation",
+      "features": [
+        {
+          "id": "OFFLINE-01",
+          "name": "Bundled backend and local database",
+          "status": "implemented",
+          "user_facing": "The desktop app launches its own loopback backend and local SQLite database; no hosted service is required.",
+          "native": "native/Sources/LearningHarness/BackendLauncher.swift (port scan 8765–8785, readiness wait).",
+          "backend": "backend/desktop_entry.py; backend/app/config.py HARNESS_ENV=desktop; backend/app/db.py SQLite; packaging freeze.",
+          "data": "~/Library/Application Support/Luminfest Learning Harness/harness.sqlite3.",
+          "tests": "backend/tests/test_desktop_environment.py; test_resource_paths.py; test_packaging_manifest.py.",
+          "acceptance": "Cold start reaches /health ready:true within 120 s; no PostgreSQL or external DB is required; the bundle contains the feature routes; a stale endpoint does not suppress spawning the bundled backend."
+        },
+        {
+          "id": "OFFLINE-02",
+          "name": "Offline tutor fallback",
+          "status": "implemented",
+          "user_facing": "With no model key or provider failure, the tutor answers from the curriculum and says so instead of showing an empty bubble.",
+          "native": "native/Sources/LearningHarness/Studio.swift TutorPanel error/fallback copy.",
+          "backend": "backend/app/harness/provider.py (never raises, returns None); backend/app/tutor.py offline_answer(); backend/app/main.py fallback turn.",
+          "data": "db.py Message.provider = grounded-offline; UsageLedger outcome=fallback.",
+          "tests": "backend/tests/test_provider.py; test_tutor_voice.py; test_speech_outcomes.py.",
+          "acceptance": "provider unset or HTTP 402 → 200 with a grounded curriculum answer and a label naming the fallback; no empty content is persisted; the attempt is metered as fallback."
+        },
+        {
+          "id": "OFFLINE-03",
+          "name": "Shipped media and curated video",
+          "status": "implemented",
+          "user_facing": "Decks and lectures still have real pictures and a curated video when the network is unavailable.",
+          "native": "native/Sources/LearningHarness/MediaTools.swift DeckPhotograph/InlineSVGView; LectureMode.swift media cards.",
+          "backend": "backend/app/media_packs/image_seed.json + images; backend/app/media_packs/video_allowlist_seed.json; backend/app/harness/media.py shipped_for; backend/app/harness/video.py allowlist.",
+          "data": "107 curated image rows with sha256/credit/licence; curated video allowlist rows.",
+          "tests": "backend/tests/test_shipped_image_pack.py; test_video_seed.py; test_runtime_data_packs.py.",
+          "acceptance": "The shipped pack contains 107 images with bytes; a deck for a covered concept returns a real image with attribution offline; a missing concept returns a named gap, not a decorative placeholder; a curated video is embed-verified."
+        },
+        {
+          "id": "OFFLINE-04",
+          "name": "No-network media behavior",
+          "status": "implemented",
+          "user_facing": "When outbound media is disabled or the network is down, the lesson says why and still runs with text, figures and curated assets.",
+          "native": "native/Sources/LearningHarness/LectureMode.swift reference/note cards; MediaTools failure states.",
+          "backend": "backend/app/harness/media.py enabled()/network_disabled; backend/app/harness/media.py find_image; backend/app/harness/video_search.py.",
+          "data": "No asset row is written on refusal.",
+          "tests": "backend/tests/test_media_pipeline.py; test_image_fetch.py; test_video_seed.py.",
+          "acceptance": "media_enabled=false → outcome network_disabled with a reason; no download is attempted; the deterministic figure/deck remains available; a failed search does not produce a fake asset."
+        },
+        {
+          "id": "OFFLINE-05",
+          "name": "Voice dependency and fallback",
+          "status": "implemented",
+          "user_facing": "If VoiceStudio is not running, speech says so and the app can fall back to the Mac voice; the tutor text still works.",
+          "native": "native/Sources/LearningHarness/Voice.swift (AVSpeechSynthesizer fallback); Studio.swift speech labels.",
+          "backend": "backend/app/harness/speech.py; backend/app/harness/voice.py; POST /voice/speak.",
+          "data": "No database row; cached audio under data_dir/media/audio.",
+          "tests": "backend/tests/test_speech_outcomes.py; test_voice_bridge.py; test_voice_model.py.",
+          "acceptance": "VoiceStudio absent → 503 with a named reason; the Mac voice fallback still reads the lesson; text chat is unaffected; a missing voice never blocks a lesson."
+        }
+      ]
+    },
+    {
+      "id": "supplementary",
+      "title": "Supplementary teaching and presentation surfaces",
+      "features": [
+        {
+          "id": "REWARD-01",
+          "name": "Rewards and celebration",
+          "status": "implemented",
+          "user_facing": "Milestones and streaks produce a celebration overlay; rewards are recognition, not a substitute for mastery.",
+          "native": "native/Sources/LearningHarness/RewardCenter.swift; CelebrationOverlay.swift; LumiCompanion.swift.",
+          "backend": "backend/app/routes_rewards.py; backend/app/harness/teaching/motivation.py; /api/v1/rewards/events.",
+          "data": "db.py State and reward/streak fields; no reward row may substitute for an Attempt.",
+          "tests": "backend/tests/test_rewards.py; backend/tests/test_learning_science.py.",
+          "acceptance": "A reward event is idempotent; a streak ends but is never taken away as punishment; a celebration cannot raise mastery; a learner with no real practice gets no invented streak."
+        },
+        {
+          "id": "STREAM-01",
+          "name": "Browser window stream",
+          "status": "partial",
+          "user_facing": "A teacher can open the running desktop window in a browser tab and send input back; the page is a window into the app, not a second frontend.",
+          "native": "native/Sources/LearningHarness/WindowStream.swift (window frame reporter).",
+          "backend": "backend/app/routes_stream.py; /api/v1/stream/status|frame|window|input|enable; macOS screen-capture and Accessibility permissions.",
+          "data": "No database row; frame/window state is ephemeral.",
+          "tests": "backend/tests/test_stream.py (17 cases).",
+          "acceptance": "Off by default and teacher-only; learner gets 403; missing Screen Recording/Accessibility returns a named reason, not a black canvas; measured rate is ~4 fps. A hosted production instance refuses to enable it."
+        },
+        {
+          "id": "A11Y-01",
+          "name": "Localization, theme and accessibility",
+          "status": "external",
+          "user_facing": "Language switching, dark/high-contrast themes, reduced motion and larger text; navigation is localized, while most lesson prose remains English.",
+          "native": "native/Sources/LearningHarness/Localization.swift; Theme.swift; Design.swift; Resources/en.lproj and zh-Hans.lproj.",
+          "backend": "backend/app/content_locale.py (content locale metadata); no server-side UI rendering.",
+          "data": "User preferences (locale/theme) in UserPreference or app defaults.",
+          "tests": "backend/tests/test_content_locale.py; native UI/theme tests where present. A parallel agent is actively changing this surface on feature/a11y-i18n.",
+          "acceptance": "A chosen language/theme persists; text scaling does not clip primary controls; reduced motion disables decorative canvases; the current build's localization coverage is partial (80 keys, mostly navigation/settings), so this row is recorded as external until that agent's work lands."
+        }
+      ]
+    }
+  ]
+}
