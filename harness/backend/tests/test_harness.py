@@ -232,6 +232,15 @@ def test_every_tool_returns_a_typed_result():
         result = toolbox.invoke(ctx, name, arguments)
         assert isinstance(result, toolbox.ToolResult), name
         assert result.tool == name
+        if name == 'check_understanding':
+            # Serving an answerable item now requires a signed-in account, a live
+            # database and receipt signing. A bare harness context must refuse with a
+            # named reason rather than invent an unanswerable question; the success path
+            # (signed receipt -> /attempts -> Attempt row) is covered end to end in
+            # tests/test_tool_access_receipts.py.
+            assert not result.ok and 'signed-in account' in result.refused, (name, result)
+            assert result.data is None
+            continue
         assert result.ok, (name, result.refused or result.error)
 
 

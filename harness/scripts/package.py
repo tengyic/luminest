@@ -1244,15 +1244,25 @@ def notarize_app(app, profile):
 
 
 def notarize(dmg, archive, profile, identity):
-    """Submit the disk image and the zip to Apple's notary service and staple the ticket.
+    """Sign and verify the DMG before submitting both downloads and stapling its ticket.
 
-    Both artifacts are submitted because the DMG is what most users download and the zip
-    is what a managed deployment extracts; an unstapled artifact is refused by Gatekeeper
-    when the machine is offline. The app inside them was already notarized and stapled by
-    ``notarize_app()`` before ``make_archives()`` ran - see ``main`` for the ordering.
+    The app inside each download was already notarized and stapled by ``notarize_app()``.
+    The DMG container also needs its own expected Developer ID signature before Apple
+    receives it; notarization cannot substitute for an unsigned container.
     """
     if not profile:
         raise RuntimeError("Notarization requires --notary-profile (a notarytool keychain profile)")
+    if not isinstance(identity, str) or not re.fullmatch(
+            r"Developer ID Application: .+ \([A-Z0-9]{10}\)", identity):
+        raise RuntimeError("DMG notarization requires an explicit Developer ID Application identity")
+    run(["/usr/bin/codesign", "--force", "--sign", identity, "--timestamp", dmg])
+    run(["/usr/bin/codesign", "--verify", "--strict", dmg])
+    displayed = run(["/usr/bin/codesign", "--display", "--verbose=4", dmg],
+                    capture_output=True, text=True)
+    fields = (displayed.stdout + displayed.stderr).splitlines()
+    team = identity.rsplit("(", 1)[1].rstrip(")")
+    if f"Authority={identity}" not in fields or f"TeamIdentifier={team}" not in fields:
+        raise RuntimeError("DMG signature does not match the expected Developer ID Application")
     for artifact in (dmg, archive):
         run(["/usr/bin/xcrun", "notarytool", "submit", artifact, "--keychain-profile", profile,
              "--wait", "--output-format", "json"])

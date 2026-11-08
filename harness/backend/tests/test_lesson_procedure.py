@@ -77,6 +77,7 @@ def assets(**overrides) -> ProcedureAssets:
         practice_prompts=('Add 2/3 and 1/4.', 'Are 2/6 and 1/3 the same?'),
         practice_count=4, prerequisites=('Place value',), dependants=('Ratios',))
     base.update(overrides)
+    base.setdefault('practice_items', tuple(f'item-{n}' for n in range(base['practice_count'])))
     return ProcedureAssets(**base)
 
 
@@ -545,6 +546,27 @@ def test_the_agent_loop_carries_the_procedure_to_its_tool_registry(wired, monkey
     assert "This turn's teaching decision" in system
 
 
+def _answer_current_block(client, headers, run, *, incorrect=False):
+    """Exercise the real signed scoring route before a question block can finish."""
+    from uuid import uuid4
+    for _ in range(16):
+        response = client.get(f"/api/v1/procedure/runs/{run['run_id']}/next-item",
+                              headers=headers)
+        assert response.status_code == 200, response.text
+        item = response.json()['question']
+        if item is None:
+            return
+        from app.curriculum import QUESTIONS
+        option = next(o['id'] for o in item['options']
+                      if o['id'] != QUESTIONS[item['id']]['answer_id']) if incorrect else item['options'][0]['id']
+        result = client.post('/api/v1/attempts', headers=headers, json={
+            'question_id': item['id'], 'option_id': option,
+            'receipt': item['receipt'], 'client_event_id': uuid4().hex,
+            'elapsed_seconds': 0, 'self_explanation': 'I checked the common denominator and the numerator calculation.'})
+        assert result.status_code == 200, result.text
+    raise AssertionError('Question block did not terminate')
+
+
 def test_progress_shapes_the_next_turn(wired, monkeypatch):
     """The prompt must move with the learner, not be a constant that merely looks
     dynamic."""
@@ -554,6 +576,7 @@ def test_progress_shapes_the_next_turn(wired, monkeypatch):
     assert started.status_code == 200, started.text
     run = started.json()
     first = run['blocks'][0]
+    _answer_current_block(wired, headers, run)
 
     assert wired.post(f"/api/v1/procedure/runs/{run['run_id']}/advance", headers=headers,
                       json={'order': first['order']}).status_code == 200
@@ -621,6 +644,7 @@ def test_advancing_every_block_completes_the_run(wired):
     run = wired.post(f'/api/v1/procedure/{CONCEPT}/start', headers=headers).json()
     assert run['status'] == 'active' and run['current'] is not None
     for block in run['blocks']:
+        _answer_current_block(wired, headers, run)
         response = wired.post(f"/api/v1/procedure/runs/{run['run_id']}/advance",
                               headers=headers, json={'order': block['order']})
         assert response.status_code == 200, response.text
@@ -637,6 +661,7 @@ def test_a_double_tap_is_refused_rather_than_recorded_twice(wired):
     headers, _ = _account(wired, 'double')
     run = wired.post(f'/api/v1/procedure/{CONCEPT}/start', headers=headers).json()
     order = run['blocks'][0]['order']
+    _answer_current_block(wired, headers, run)
     url = f"/api/v1/procedure/runs/{run['run_id']}/advance"
     assert wired.post(url, headers=headers, json={'order': order}).status_code == 200
     again = wired.post(url, headers=headers, json={'order': order})
@@ -673,6 +698,8 @@ def test_another_learners_run_is_a_404_not_a_403(wired):
     owner, _ = _account(wired, 'owner')
     other, _ = _account(wired, 'intruder')
     run = wired.post(f'/api/v1/procedure/{CONCEPT}/start', headers=owner).json()
+    assert wired.get(f"/api/v1/procedure/runs/{run['run_id']}/next-item",
+                     headers=other).status_code == 404
     assert wired.get(f"/api/v1/procedure/runs/{run['run_id']}",
                      headers=other).status_code == 404
     assert wired.post(f"/api/v1/procedure/runs/{run['run_id']}/advance",
@@ -694,14 +721,145 @@ def test_advancing_writes_no_evidence(wired):
     headers, _ = _account(wired, 'noevidence')
     run = wired.post(f'/api/v1/procedure/{CONCEPT}/start', headers=headers).json()
     for block in run['blocks']:
-        wired.post(f"/api/v1/procedure/runs/{run['run_id']}/advance", headers=headers,
-                   json={'order': block['order']})
+        skipped = wired.post(f"/api/v1/procedure/runs/{run['run_id']}/advance", headers=headers,
+                             json={'order': block['order'], 'outcome': 'skipped'})
+        assert skipped.status_code == 200, skipped.text
     with wired.app.state.factory() as db:
         user = db.scalar(select(User).where(User.email == 'noevidence@example.test'))
         assert list(db.scalars(select(State).where(State.user_id == user.id))) == []
         assert list(db.scalars(select(Attempt).where(Attempt.user_id == user.id))) == []
         stored = db.scalar(select(ProcedureRun).where(ProcedureRun.user_id == user.id))
         assert stored.status == 'completed'
+
+
+def test_lesson_answers_persist_and_update_learning_evidence(wired):
+    from app.curriculum import QUESTIONS
+    from uuid import uuid4
+    headers, account = _account(wired, 'evidence-loop')
+    run = wired.post('/api/v1/procedure/fractions/start', headers=headers).json()
+    url = f"/api/v1/procedure/runs/{run['run_id']}"
+    assert wired.post(url + '/advance', headers=headers, json={'order': 1}).status_code == 409
+    item = wired.get(url + '/next-item?order=1', headers=headers).json()['question']
+    assert not {'answer_id', 'answer_text', 'explanation', 'distractor_diagnoses'} & item.keys()
+    # Refreshing the same question reuses its receipt and records no observation.
+    assert wired.get(url + '/next-item?order=1', headers=headers).json()['question']['receipt'] == item['receipt']
+    wrong = next(o['id'] for o in item['options'] if o['id'] != QUESTIONS[item['id']]['answer_id'])
+    payload = {'question_id': item['id'], 'option_id': wrong, 'receipt': item['receipt'],
+               'client_event_id': uuid4().hex, 'elapsed_seconds': 0,
+               'self_explanation': 'I combined the fractions and checked each arithmetic step.'}
+    scored = wired.post('/api/v1/attempts', headers=headers, json=payload)
+    assert scored.status_code == 200, scored.text
+    result = scored.json()
+    assert result['correct'] is False
+    assert result['diagnosis']['category'] in {'conceptual', 'calculation', 'procedural'}
+    assert result['diagnosis']['next_action'] and result['review_at']
+    # Exact retries do not double count attempts, state, or mastery.
+    assert wired.post('/api/v1/attempts', headers=headers, json=payload).json() == result
+    with wired.app.state.factory() as db:
+        user = db.get(User, account['user']['id'])
+        rows = list(db.scalars(select(Attempt).where(Attempt.user_id == user.id)))
+        assert len(rows) == 1
+        state = db.scalar(select(State).where(State.user_id == user.id, State.concept_id == 'fractions'))
+        assert state.data['attempts'] == 1 and state.data['mastery_known'] is True
+        assert state.data['mastery'] != 0.15 and state.data['due_at'] > state.data['last_at']
+        assert state.data['next_check']['category'] == result['diagnosis']['category']
+    after = wired.get(url, headers=headers).json()
+    assert after['current']['answers']['answered'] == 1
+    assert after['blocks'][-1]['answers']['answered'] == 0
+    _answer_current_block(wired, headers, run, incorrect=True)
+    assert wired.post(url + '/advance', headers=headers, json={'order': 1}).status_code == 200
+    # A non-question current activity must not fetch future practice out of order.
+    assert wired.get(url + '/next-item', headers=headers).json()['question'] is None
+    assert wired.get(url + f"/next-item?order={run['blocks'][-1]['order']}", headers=headers).status_code == 409
+    assert wired.post(url + '/advance', headers=headers,
+                      json={'order': run['blocks'][-1]['order']}).status_code == 409
+    fresh = wired.get('/api/v1/procedure/fractions', headers=headers).json()
+    assert fresh['evidence']['attempts'] == 2
+    assert fresh['evidence']['top_error']
+    assert fresh['active']['hash'] == run['hash']
+
+
+def test_historical_answers_and_skipped_blocks_do_not_complete_fresh_work(wired):
+    headers, _ = _account(wired, 'fresh-work')
+    old = wired.get('/api/v1/questions/next?mode=practice&concept_id=fractions', headers=headers).json()
+    from uuid import uuid4
+    response = wired.post('/api/v1/attempts', headers=headers, json={
+        'question_id': old['id'], 'option_id': old['options'][0]['id'],
+        'receipt': old['receipt'], 'client_event_id': uuid4().hex, 'elapsed_seconds': 0,
+        'self_explanation': 'I checked the common denominator and the numerator calculation.'})
+    assert response.status_code == 200, response.text
+    run = wired.post('/api/v1/procedure/fractions/start', headers=headers).json()
+    practice = next(b for b in run['blocks'] if b['kind'] == 'practice')
+    assert practice['answers']['answered'] == 0 and practice['answers']['complete'] is False
+    url = f"/api/v1/procedure/runs/{run['run_id']}"
+    for block in run['blocks']:
+        assert wired.post(url + '/advance', headers=headers,
+                          json={'order': block['order'], 'outcome': 'skipped'}).status_code == 200
+    assert wired.get(url + '/next-item', headers=headers).status_code == 409
+    restarted = wired.post('/api/v1/procedure/fractions/start', headers=headers).json()
+    assert all(b['answers']['answered'] == 0 for b in restarted['blocks'] if b.get('answers'))
+
+
+def test_legacy_empty_question_plan_is_explicitly_unavailable(wired):
+    headers, account = _account(wired, 'legacy-question')
+    run = wired.post('/api/v1/procedure/fractions/start', headers=headers).json()
+    with wired.app.state.factory() as db:
+        stored = db.get(ProcedureRun, run['run_id'])
+        blocks = [dict(b) for b in stored.blocks]
+        blocks[0] = {**blocks[0], 'artifact': {'kind': 'questions', 'count': 2}}
+        stored.blocks = blocks
+        db.commit()
+    url = f"/api/v1/procedure/runs/{run['run_id']}"
+    response = wired.get(url + '/next-item', headers=headers).json()
+    assert response['question'] is None and response['progress']['complete'] is False
+    assert 'no bound scored items' in response['reason']
+    assert wired.post(url + '/advance', headers=headers, json={'order': 1}).status_code == 409
+    assert wired.post(url + '/advance', headers=headers,
+                      json={'order': 1, 'outcome': 'skipped'}).status_code == 200
+
+
+def test_a_missing_bank_is_skipped_not_promised_as_empty_scored_work():
+    procedure = lesson(assets_=assets(practice_count=0, practice_items=()), budget=20)
+    assert 'diagnostic' not in kinds_of(procedure)
+    assert 'practice' not in kinds_of(procedure)
+    assert 'No scored items' in reason_for(procedure, 'practice')
+    assert 'No scored items' in reason_for(procedure, 'diagnostic')
+    assert kinds_of(procedure), 'Available teaching should remain usable without fake quiz evidence'
+
+
+def test_direct_lesson_evidence_wins_over_graph_memory_only_row(wired):
+    headers, account = _account(wired, 'canonical-state')
+    with wired.app.state.factory() as db:
+        user = db.get(User, account['user']['id'])
+        db.add(State(user_id=user.id, concept_id='fraction_equivalence',
+                     data={'stability': 3.5, 'mastery': 0.15}))
+        db.add(State(user_id=user.id, concept_id='fractions',
+                     data={'attempts': 4, 'correct_count': 3, 'mastery': 0.72,
+                           'mastery_known': True}))
+        db.commit()
+    preview = wired.get('/api/v1/procedure/fractions', headers=headers).json()
+    assert preview['evidence']['attempts'] == 4
+    assert preview['evidence']['mastery'] == 0.72
+
+
+def test_thin_bank_allocator_stops_at_the_actual_pool():
+    procedure = lesson(assets_=assets(practice_count=1), budget=40)
+    for block in procedure.blocks:
+        if block.artifact.get('kind') == 'questions':
+            assert block.artifact['count'] == len(block.artifact['items']) == 1
+    assert procedure.total_minutes <= 40
+
+
+def test_bound_items_change_plan_identity_but_runtime_receipts_do_not():
+    first = lesson()
+    from dataclasses import replace
+    blocks = list(first.blocks)
+    index = next(i for i, b in enumerate(blocks) if b.kind == 'practice')
+    blocks[index] = replace(blocks[index], artifact={**blocks[index].artifact, 'items': ['different-item']})
+    assert procedure_hash(first) != procedure_hash(replace(first, blocks=tuple(blocks)))
+    blocks = list(first.blocks)
+    blocks[index] = replace(blocks[index], artifact={**blocks[index].artifact, 'item_receipts': {'item-1': ['receipt-1']}})
+    assert procedure_hash(first) == procedure_hash(replace(first, blocks=tuple(blocks)))
 
 
 def test_the_exam_guard_covers_the_whole_lesson(wired):
@@ -717,6 +875,9 @@ def test_the_exam_guard_covers_the_whole_lesson(wired):
                           total=8, answered=0, correct=0,
                           expires_at=now_ts() + 3600))
         db.commit()
+    assert wired.get('/api/v1/procedure', headers=headers).status_code == 403
+    assert wired.get(f"/api/v1/procedure/runs/{run['run_id']}/next-item",
+                     headers=headers).status_code == 403
     assert wired.get(f'/api/v1/procedure/{CONCEPT}', headers=headers).status_code == 403
     assert wired.post(f'/api/v1/procedure/{CONCEPT}/start', headers=headers).status_code == 403
     assert wired.get(f"/api/v1/procedure/runs/{run['run_id']}",
@@ -933,8 +1094,11 @@ def test_the_resolver_refuses_a_symbolic_figure_for_a_non_mathematics_subject():
     assert 'mathematics' in reason
 
 
-def test_the_resolver_never_promises_a_video_that_is_not_curated():
+def test_the_resolver_never_promises_a_video_that_is_not_curated(monkeypatch):
     from app.config import Settings
+    # A missing curation entry is the case under test, not a permanently empty
+    # physics catalogue: adding a real acceleration video must not break this guard.
+    monkeypatch.setattr('app.harness.video.load_allowlist', lambda settings: {'physics': []})
     settings = Settings.from_env()
     video, reason = procedure_service._video('physics', 'acceleration', settings)
     assert video is None

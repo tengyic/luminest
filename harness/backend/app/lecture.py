@@ -152,7 +152,7 @@ def _fallback(concept: Mapping[str, Any], lesson: Mapping[str, Any] | None,
             picked.append(pool[(start + offset) % len(pool)])
         return picked
 
-    plan_titles = [
+    core_titles = [
         ('The destination', 'What this lecture will make you able to do.'),
         ('The core idea', 'The definition the rest of the lecture rests on.'),
         ('Why it works', 'The relationship behind the rule, not just the rule.'),
@@ -163,7 +163,22 @@ def _fallback(concept: Mapping[str, Any], lesson: Mapping[str, Any] | None,
         ('Your turn', 'A question to answer before the recap.'),
         ('Recap and next step', 'Three things to keep, and what comes next.'),
     ]
-    n = len(plan_titles)
+    # The page count follows the requested length. This used to be always these nine
+    # pages, so a 5-minute lecture and a 45-minute lecture were the same nine pages with
+    # the pause stretched to fill the slot -- a "45-minute lecture" that stopped talking
+    # after nine short paragraphs. One page every ~TARGET_MINUTES_PER_SEGMENT minutes,
+    # bounded, and any extension reuses the same concepts rather than inventing new ones.
+    target_minutes = 3.0
+    n = int(round(minutes / target_minutes))
+    n = max(len(core_titles), min(MAX_SEGMENTS, n))
+    plan_titles = list(core_titles)
+    if n > len(plan_titles):
+        spiral = core_titles[1:7]
+        extra = n - len(plan_titles)
+        for k in range(extra):
+            base_title, base_focus = spiral[k % len(spiral)]
+            plan_titles.append((f'{base_title} (revisited)',
+                                f'{base_focus} Another pass, in different words.'))
     per = max(120, (minutes * 60) // n)
     segments: list[dict[str, Any]] = []
     for i, (segment_title, focus) in enumerate(plan_titles):
@@ -183,6 +198,10 @@ def _fallback(concept: Mapping[str, Any], lesson: Mapping[str, Any] | None,
         elif i == 3:
             narration += ('Watch the moves rather than the answer: what is identified first, '
                           'what is substituted, and where the check happens.')
+        elif segment_title.endswith('(revisited)'):
+            narration += ('This is the same structure from a different angle. Notice what '
+                          'stayed fixed and what changed; the fixed part is the idea you '
+                          'are meant to keep.')
         elif i == 4:
             narration += ('The board now carries the structure: the title, the key terms, '
                           'and the relationship between them. Trace it with your eyes before '

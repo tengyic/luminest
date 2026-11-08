@@ -69,6 +69,8 @@ enum SpeechLocale {
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
     private let synthesizer = AVSpeechSynthesizer()
+    /// The product's voice. Shared with the lecture so both surfaces sound like one teacher.
+    let clipPlayer = LectureNarrator()
     private lazy var recognizer = SFSpeechRecognizer(locale: SpeechLocale.locale)
     private var detector = VoiceActivityDetector()
     /// When the current utterance's audio began, and when speech was last heard in it.
@@ -357,22 +359,78 @@ enum SpeechLocale {
 
     // ---- TTS ----
 
-    func speak(_ text: String) {
+    /// Speak ``text`` in the product's own voice.
+    ///
+    /// This used to be this Mac's ``AVSpeechSynthesizer``, so the same tutor sounded like
+    /// VoiceStudio when it answered a spoken turn and like the system robot when the
+    /// learner pressed the speaker button. The button now asks the backend for the same
+    /// clip queue a spoken turn gets (``wait: false``), and plays the first clip while the
+    /// rest render. When the backend sends no clips -- voice switched off, VoiceStudio not
+    /// running -- ``Reader`` falls back to the on-device voice rather than going mute.
+    func speak(_ text: String, clips: [String] = []) {
         let clean = text.replacingOccurrences(of: "[#*`_]", with: "", options: .regularExpression)
         guard !clean.isEmpty else { return }
-        synthesizer.stopSpeaking(at: .immediate)
-        let utterance = AVSpeechUtterance(string: String(clean.prefix(1200)))
-        if let voice = SpeechLocale.voice { utterance.voice = voice }
-        utterance.rate = 0.5
-        utterance.pitchMultiplier = 1.0
-        synthesizer.delegate = self
-        synthesizer.speak(utterance)
-        speaking = true
+        stopSpeaking()
+        let api = AppStore.current?.api
+        let player = self.clipPlayer
+        player.speak(clips: clips, fallback: String(clean.prefix(4_000))) { path in
+            try? await api?.artifact(path)
+        }
+        // The player reports its own end (it outlives one on-device utterance); this flag
+        // only has to be true when speech starts, so barge-in can see it.
+        player.onEnd = { [weak self] in
+            Task { @MainActor in
+                self?.speaking = false
+                self?.lastSpeechEndedAt = Date()
+            }
+        }
+        speaking = player.speaking
         if conversation { status = "speaking — talk over me to interrupt" }
+    }
+
+    func speak(_ text: String) {
+        speak(text, clips: [])
+    }
+
+    /// Ask for this text in the product's voice, then speak it.
+    ///
+    /// ``wait: false`` returns the clip queue at once, so the first sentence is heard while
+    /// the rest renders. If the backend has no voice (switched off, VoiceStudio absent,
+    /// a network hiccup) this still speaks -- on-device -- because a silent speaker button
+    /// with no explanation is worse than the robot voice.
+    func speakThroughVoiceStudio(_ text: String, onNote: ((String) -> Void)? = nil) {
+        let clean = text.replacingOccurrences(of: "[#*`_]", with: "", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !clean.isEmpty else { return }
+        guard let api = AppStore.current?.api else {
+            speak(clean, clips: [])
+            return
+        }
+        Task { [weak self] in
+            var clips: [String] = []
+            if let reply = try? await api.json("/voice/speak", method: "POST",
+                                               body: ["text": String(clean.prefix(4_000)),
+                                                      "wait": false]) {
+                clips = reply["clips"].array.map(\.string).filter { !$0.isEmpty }
+                let first = reply["url"].string
+                if clips.isEmpty, !first.isEmpty {
+                    clips = [first]
+                }
+                if clips.isEmpty {
+                    let note = reply["reason"].string.isEmpty
+                        ? "The voice service is unavailable; reading on-device."
+                        : reply["reason"].string
+                    self?.status = note
+                    onNote?(note)
+                }
+            }
+            self?.speak(clean, clips: clips)
+        }
     }
 
     func stopSpeaking() {
         synthesizer.stopSpeaking(at: .immediate)
+        clipPlayer.stop()
         speaking = false
         lastSpeechEndedAt = Date()
         if conversation { status = "listening — just talk" }

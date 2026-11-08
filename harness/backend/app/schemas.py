@@ -325,6 +325,25 @@ class AttentionCheck(Input):
     signals: dict = Field(default_factory=dict)
 
 
+class PerspectiveObservation(Input):
+    """One written rubric observation about a learner's real artifact.
+
+    ``reviewer_role`` is validated against the caller's role in the route: a learner may
+    only describe their own work, while a teacher may record an observation about a
+    learner they teach. ``group_size`` is required for a collaboration observation,
+    because solo work is not collaboration evidence.
+    """
+
+    subject_id: str = Field(min_length=1, max_length=36)
+    artifact_type: str = Field(min_length=1, max_length=24)
+    artifact_id: str = Field(min_length=1, max_length=64)
+    dimension: str = Field(min_length=1, max_length=32)
+    score: int = Field(ge=0, le=4, strict=True)
+    evidence_note: str = Field(min_length=1, max_length=2000)
+    reviewer_role: str = Field(default='self', min_length=1, max_length=16)
+    group_size: int | None = Field(default=None, ge=2, le=40, strict=True)
+
+
 class ClassroomTick(Input):
     """One polling tick for the classroom decision engine.
 

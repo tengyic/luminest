@@ -120,7 +120,8 @@ def main():
     email = f'first-person-{uuid.uuid4().hex[:12]}@example.test'
     password = 'First-Person-Acceptance!2026'
     tables = ('users', 'attempts', 'learning_states', 'procedure_runs', 'created_courses',
-              'messages', 'flashcards', 'assessments', 'decks')
+              'messages', 'flashcards', 'assessments', 'decks',
+              'unit_grades', 'perspective_reviews')
 
     def health_ok(e):
         """GET /health returns ready:true and declares its own model/tutor limits."""
@@ -162,12 +163,27 @@ def main():
         return e.get('status') == 200 and bool(body.get('message'))
 
     def agent_answer_ok(e):
-        """A free-form question to the agent must produce a non-empty learner-visible reply."""
+        """The unseen-topic turn answers, or declares a named fallback with a reason and a next action.
+
+        A configured provider can teach a topic that is not in the course. Without one
+        the offline tutor must not invent a lesson - but a blank panel is not honest
+        either, so the turn has to say why and tell the learner what to do next. The
+        reason is checked, not merely the presence of `unavailable`.
+        """
         body = e.get('body') or {}
-        return e.get('status') == 200 and bool(str(body.get('message') or '').strip())
+        if e.get('status') != 200:
+            return False
+        if str(body.get('message') or '').strip():
+            return True
+        notice = body.get('notice') or {}
+        return (body.get('finish_reason') == 'unavailable'
+                and body.get('grounded_offline') is False
+                and notice.get('kind') == 'unavailable'
+                and bool(str(notice.get('reason') or '').strip())
+                and bool(str(notice.get('next_action') or '').strip()))
 
     agent_evidence = run.step(
-        '04 ask to be taught the unseen topic (agent chat)', agent_answer_ok,
+        '04 ask to be taught the unseen topic (answer or declared fallback)', agent_answer_ok,
         lambda: run.request('POST', API + '/agent/chat',
                             {'message': f'Teach me {args.topic}. Build a syllabus and start the first lesson.',
                              'context': {}, 'speak': False}))[1]
@@ -179,6 +195,7 @@ def main():
         'tool_calls': [ev.get('tool') or ev.get('name') for ev in body.get('events', [])
                        if ev.get('type') in ('tool_call', 'tool_result', 'tool')],
         'message': clip(body.get('message'), 600),
+        'notice': clip(body.get('notice'), 600),
     }
 
     def scoped_agent_ok(e):
@@ -276,20 +293,110 @@ def main():
         blocks = start_body.get('blocks') or []
         run.context['first_blocks'] = [b.get('kind') for b in blocks if isinstance(b, dict)]
 
+        # Advancing a block is a progress record, not an answer. A commitment block has
+        # real scored items bound into the compiled plan; its answers arrive only through
+        # next-item -> POST /attempts. The steps below prove that "done" without those
+        # answers is refused, that the signed question is served without leaking the key,
+        # and that "done" succeeds once the attempts exist.
         counts_before = run.db_counts(('attempts',))
         if blocks and run_id:
-            first_order = (blocks[0] or {}).get('order', 1)
+            def commitment_block():
+                return next((b for b in blocks
+                             if isinstance(b, dict) and (b.get('answers') or {}).get('total')), None)
 
-            def advance_ok(e):
-                """Advancing the first block with outcome=done must write an attempt row for the learner's answer."""
-                return e.get('status') == 200 and counts_after.get('attempts', 0) > counts_before.get('attempts', 0)
+            commitment = commitment_block()
 
-            advance_result = run.request('POST', API + '/procedure/runs/' + str(run_id) + '/advance',
-                                         {'order': first_order, 'outcome': 'done', 'seconds': 30})
-            counts_after = run.db_counts(('attempts',))
-            run.step('09 complete first block (done) writes an attempt', advance_ok,
-                     lambda: {'request': advance_result, 'counts_before': counts_before,
-                              'counts_after': counts_after, 'advance_body': clip(advance_result.get('body'), 500)})
+            def commitment_ok(e):
+                """The compiled lesson plan binds real scored items to at least one block."""
+                return bool(e.get('order')) and e.get('total', 0) > 0
+
+            run.step('09 lesson plan binds answerable questions', commitment_ok,
+                     lambda: {'order': (commitment or {}).get('order'),
+                              'total': ((commitment or {}).get('answers') or {}).get('total', 0),
+                              'block_kinds': run.context['first_blocks']})
+
+            if commitment:
+                order = int(commitment.get('order') or 0)
+                # Reach the question block without claiming work happened in between.
+                for earlier in blocks:
+                    earlier_order = int(earlier.get('order') or 0)
+                    if not earlier_order or earlier_order >= order:
+                        continue
+                    run.request('POST', API + '/procedure/runs/' + str(run_id) + '/advance',
+                                {'order': earlier_order, 'outcome': 'skipped', 'seconds': 1})
+
+                def premature_ok(e):
+                    """Marking a question block done with no answers is refused (409) and writes no attempt."""
+                    refusal = e.get('refusal') or {}
+                    detail = str((refusal.get('body') or {}).get('detail') or '')
+                    return (refusal.get('status') == 409
+                            and e.get('counts_after', {}).get('attempts', 0)
+                            == e.get('counts_before', {}).get('attempts', 0)
+                            and 'answer recorded' in detail)
+
+                premature = run.request('POST', API + '/procedure/runs/' + str(run_id) + '/advance',
+                                        {'order': order, 'outcome': 'done', 'seconds': 30})
+                run.step('09a done is refused before the answers exist', premature_ok,
+                         lambda: {'refusal': premature, 'counts_before': counts_before,
+                                  'counts_after': run.db_counts(('attempts',))})
+
+                def lesson_question_ok(e):
+                    """The lesson serves a signed question with options, with no answer or explanation leaked."""
+                    question = (e.get('body') or {}).get('question') or {}
+                    leaked = {'answer_id', 'answer_text', 'explanation',
+                              'distractor_diagnoses'} & set(question)
+                    return (e.get('status') == 200 and bool(question.get('receipt'))
+                            and bool(question.get('options')) and not leaked)
+
+                first_item = run.step(
+                    '09b the lesson serves its bound signed question', lesson_question_ok,
+                    lambda: run.request('GET', API + '/procedure/runs/' + str(run_id)
+                                        + '/next-item?order=' + str(order)))[1]
+                run.context['lesson_question'] = clip((first_item.get('body') or {}).get('question'), 700)
+
+                def answer_block():
+                    """Answer every item the block promised through the one scoring route."""
+                    answered = []
+                    for _ in range(16):
+                        response = run.request('GET', API + '/procedure/runs/' + str(run_id) + '/next-item')
+                        question = (response.get('body') or {}).get('question')
+                        if not question:
+                            break
+                        option = (question.get('options') or [{}])[0]
+                        option_id = option.get('id') if isinstance(option, dict) else str(option)
+                        payload = {'question_id': question.get('id'), 'option_id': option_id,
+                                   'receipt': question.get('receipt'),
+                                   'client_event_id': 'first-person-lesson-' + uuid.uuid4().hex[:10],
+                                   'elapsed_seconds': 0.5, 'confidence': 0.6,
+                                   'self_explanation': 'I am choosing this option because the units must stay consistent when the quantities are combined.'}
+                        scored = run.request('POST', API + '/attempts', payload)
+                        answered.append({'question_id': question.get('id'),
+                                         'status': scored.get('status'),
+                                         'diagnosis': (scored.get('body') or {}).get('diagnosis')})
+                        if scored.get('status') != 200:
+                            break
+                    current = run.request('GET', API + '/procedure/runs/' + str(run_id))
+                    return {'answered': answered, 'run': current.get('body'),
+                            'counts_before': counts_before,
+                            'counts_after': run.db_counts(('attempts',))}
+
+                def answered_ok(e):
+                    """Scored answers write attempt rows and make the block's answers.complete true."""
+                    current = (e.get('run') or {}).get('current') or {}
+                    return (bool(e.get('answered'))
+                            and all(a['status'] == 200 for a in e['answered'])
+                            and e['counts_after'].get('attempts', 0) > e['counts_before'].get('attempts', 0)
+                            and (current.get('answers') or {}).get('complete') is True)
+
+                run.step('09c answers are scored and recorded', answered_ok, answer_block)
+
+                def finish_ok(e):
+                    """Once every promised question has an answer, done is accepted (200)."""
+                    return e.get('status') == 200
+
+                run.step('09d done is accepted after the answers', finish_ok,
+                         lambda: run.request('POST', API + '/procedure/runs/' + str(run_id) + '/advance',
+                                             {'order': order, 'outcome': 'done', 'seconds': 30}))
 
         def question_ok(e):
             """A real question with a signed receipt and answer options is served."""
@@ -382,6 +489,109 @@ def main():
 
         run.step('15 lesson ends with a summary', lesson_ends_ok, lambda: final)
         run.context['final_run'] = clip(final.get('body'), 1200)
+
+    # ---- 2026-11-08 repairs: unit grade book and written perspective evidence ----
+    # These steps drive the same HTTP surface the native app uses, and every criterion
+    # is an observable response/row. A "no grade yet" state is a real outcome, not a skip.
+    def gradebook_ok(e):
+        """The grade book declares standards and shows no invented percentage before it has evidence."""
+        body = e.get('body') or {}
+        units = body.get('units') or []
+        if e.get('status') != 200 or not units or not body.get('scope_note'):
+            return False
+        first = units[0]
+        if not first.get('standards'):
+            return False
+        # No evidence -> no percentage. Full evidence -> a percentage, never an average
+        # over the easy half of the unit.
+        return (first.get('percent') is None if not first.get('gradeable')
+                else first.get('percent') is not None)
+
+    gb_evidence = run.step('16 gradebook declares standards and no invented grade',
+                           gradebook_ok, lambda: run.request('GET', API + '/gradebook'))[1]
+    gb_body = gb_evidence.get('body') or {}
+    first_unit = (gb_body.get('units') or [{}])[0]
+    first_key = first_unit.get('key') or ''
+    if first_key and not first_unit.get('gradeable'):
+        def refused_ok(e):
+            """An unevidenced unit grade is refused (409) and names the missing standards."""
+            detail = (e.get('body') or {}).get('detail') or {}
+            return e.get('status') == 409 and bool(detail.get('missing_standards'))
+        run.step('16b an unevidenced unit grade is refused with reasons', refused_ok,
+                 lambda: run.request('POST', API + '/gradebook/' + first_key + '/grade'))
+    elif first_key:
+        def frozen_ok(e):
+            """A fully evidenced unit grade is frozen with its standards snapshot."""
+            body = e.get('body') or {}
+            return (e.get('status') == 200 and body.get('status') == 'final'
+                    and body.get('percent') is not None and bool(body.get('standards')))
+        run.step('16b a fully evidenced unit grade is frozen', frozen_ok,
+                 lambda: run.request('POST', API + '/gradebook/' + first_key + '/grade'))
+
+    def perspectives_ok(e):
+        """With no observation, every perspective is null with a reason; nothing is inferred from activity."""
+        body = e.get('body') or {}
+        dims = body.get('dimensions') or []
+        if e.get('status') != 200 or len(dims) != 5:
+            return False
+        if any(d.get('value') is not None for d in dims):
+            return False
+        collab = next((d for d in dims if d.get('code') == 'collaboration'), {})
+        return (collab.get('status') == 'not_measured'
+                and bool(body.get('privacy')) and bool(body.get('accreditation')))
+
+    run.step('17 empty perspectives are absent, not zero', perspectives_ok,
+             lambda: run.request('GET', API + '/perspectives'))
+
+    me = run.request('GET', API + '/me')
+    me_body = me.get('body') or {}
+    subject = (me_body.get('user') or me_body).get('id') or ''
+    projects = run.request('GET', API + '/projects')
+    items = (projects.get('body') or {}).get('items') or []
+    artifact = items[0].get('id') if items else ''
+    observation = {
+        'subject_id': subject, 'artifact_type': 'project', 'artifact_id': artifact,
+        'dimension': 'communication', 'score': 3,
+        'evidence_note': 'Defined each quantity before using it, then checked the units.',
+        'reviewer_role': 'self',
+    }
+
+    def observation_evidence():
+        short = run.request('POST', API + '/perspectives/reviews',
+                            observation | {'evidence_note': 'ok'})
+        invented = run.request('POST', API + '/perspectives/reviews',
+                               observation | {'artifact_id': 'invented-artifact'})
+        created = run.request('POST', API + '/perspectives/reviews', observation)
+        analytics = run.request('GET', API + '/analytics')
+        dims = (analytics.get('body') or {}).get('dimensions') or []
+        communication = next((d for d in dims if d.get('code') == 'communication'), {})
+        review_id = (created.get('body') or {}).get('id') or ''
+        withdrawn = (run.request('DELETE', API + '/perspectives/reviews/' + review_id)
+                     if review_id else {'status': -1, 'body': {}})
+        return {'short_note': short.get('status'), 'invented_artifact': invented.get('status'),
+                'created': created.get('status'), 'analytics_value': communication.get('value'),
+                'attention_last': dims[-1].get('name') if dims else None,
+                'attention_value': dims[-1].get('value') if dims else 'missing',
+                'withdrawn': withdrawn.get('status')}
+
+    def observation_ok(e):
+        """A real artifact plus written evidence is scored; bare scores and invented artifacts are refused."""
+        return (e.get('short_note') == 422 and e.get('invented_artifact') == 422
+                and e.get('created') == 200 and e.get('analytics_value') is not None
+                and e.get('attention_last') == 'Cognitive attention'
+                and e.get('attention_value') is None and e.get('withdrawn') == 200)
+
+    run.step('18 a written observation is scored only on a real artifact', observation_ok,
+             observation_evidence)
+
+    def export_ok(e):
+        """The account export includes the two new record types, so erasure and portability cover them."""
+        body = e.get('body') or {}
+        return (e.get('status') == 200 and 'unit_grades' in body
+                and 'perspective_reviews' in body)
+
+    run.step('19 export covers grade book and perspective records', export_ok,
+             lambda: run.request('GET', API + '/export'))
 
     run.context['final_counts'] = run.db_counts(tables)
     passed = sum(1 for s in run.steps if s['passed'])

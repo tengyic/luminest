@@ -1,14 +1,19 @@
 # Luminest — macOS 分发与签名指南
 
-状态(2026-10-25):打包管线完整;当前产物为 **ad-hoc 签名**。要产出 Gatekeeper 直接放行的
-公开分发包,缺的是**两件事,不是一件**:运营者的 **Apple Developer 账号凭据**(签名 + 公证),
-以及**法律文本的 59 处占位符填完**(`backend/legal/FILL_IN_SHEET.md`)。前者无法用任何技术手段
-绕过或替代,也不应伪造(见下文硬依赖);后者不是技术问题,是法务事实,`package.py` 的
-`legal_gate` 会**拒绝**打包未填完的发布版,所以它同样是发布前的硬门槛。
+Release boundary reviewed on 2026-11-08. The observed `outputs/.packaging/package-result.json`
+records version `1.2.0`, `legal_gate.ship_ready: true`, and zero legal placeholders, but
+`sign_identity`, `app_notarization`, and `notarization` are null. That recorded build is
+**not a public release**. These observations do not establish that its bytes match the
+current source tree or that its legal text has independent legal approval.
 
-两个门槛都只在**发布**时生效。给具名内测者用 `--allow-template-legal` 打包是被允许的,但那样
-产出的包文件名会带 `-ALPHA-TEMPLATE-LEGAL`,且 bundle 内 `Contents/Resources/NOT_RELEASABLE.txt`
-会写明它不可发布——因为"这是内测包"如果只记在 `.packaging/` 里,拿到文件的人看不到。
+Every public direct download requires genuine Developer ID Application signatures,
+Apple notarization, validated stapled app and DMG tickets, passing build/smoke/provenance
+checks, and legal approval. Metadata or successful local launch cannot replace these
+checks. `scripts/release_kit.py` fails closed when release evidence is absent or rejected.
+
+`--allow-template-legal` is for development-only template builds, never a public beta or
+end-user download. Their filenames carry `-ALPHA-TEMPLATE-LEGAL`, and their bundle carries
+`Contents/Resources/NOT_RELEASABLE.txt`; these markers must not be removed or relabeled.
 
 ## 打包产物里已就位的东西
 
@@ -17,7 +22,7 @@
 | Privacy manifest | `Contents/Resources/PrivacyInfo.xcprivacy`(无条件复制) | ✅ 随每次打包进入 bundle |
 | Entitlements | `LuminfestLearningHarness-Direct.entitlements`(直发,hardened runtime)或 `-Sandbox`(Mac App Store) | ✅ 签名时施加 |
 | 签名顺序 | 内层 Mach-O 自底向上 → bundle(禁用 `--deep`) | ✅ `sign_bundle()` |
-| 公证 | `notarytool submit --wait` + `stapler staple/validate`,DMG 与 zip 双产物 | ✅ `notarize()` |
+| DMG signing and notarization | Sign and verify the expected Developer ID before `notarytool submit --wait`; staple/validate app before archiving and DMG after submission | Implemented by `notarize_app()` / `notarize()`; public release still requires live verification |
 | distribution.json | 记录 signing/sandboxed/notarized/notice | ✅ 每包自带 |
 | 课程/媒体 pack | `--add-data` 进 bundle(`PACK_DATA_DIRS`) | ✅ 冻结冒烟断言图谱非空、媒体与仿真路由可用 |
 | 法律文本草稿 | `backend/legal/` 以 `--add-data` 进 bundle(`LEGAL_DATA_DIR`) | ✅ 冻结冒烟断言 `/legal` 非空;发布门禁仍拦未填占位符 |
@@ -52,14 +57,15 @@ spctl assess --type execute --verbose=2 "outputs/Luminest.app"   # 期望 accept
 注意:`--notarize` 和 `--sandbox` 都**要求** `--sign-identity`(脚本强制;ad-hoc 公证/沙盒
 会被 Apple 拒绝,所以脚本直接报错而不是产出废包)。
 
-**Alpha / 内测构建**用同一命令但不签名,并显式接受"法律文本仍是草稿"这件事:
+**Development-only template build example — not an end-user installation or public beta:**
 
 ```bash
 python3 harness/scripts/package.py --version 1.1.9 --allow-template-legal
 ```
 
-`--allow-template-legal` 会在记录里写下 `legal_gate.ship_ready: false` 和占位符数量,所以
-"这是模板构建"是记录在案的,不是靠人记住。**不要**对公开发布使用这个开关。
+This explicitly records `legal_gate.ship_ready: false` and the placeholder count. It does
+not waive public signing, notarization, or legal requirements. Do not pass such a build
+to `release_kit.py`, rename it as a public release, or strip its non-release markers.
 
 ## 冷启动:首次启动比预热慢一个数量级
 
@@ -88,98 +94,29 @@ python3 harness/scripts/package.py --version 1.1.9 --allow-template-legal
 缺少这两者时的诚实产物是:当前 ad-hoc 包 + `distribution.json` 里的 notice
 ("Ad-hoc signed, not notarized...")。管线不会伪造一个"看起来能分发"的包。
 
-## 没有 Apple Developer 账号怎么发布
+## 公开分发门禁
 
-先把边界说清楚,因为这里最容易被"找个开关关掉 Gatekeeper"这种答案带偏。
+没有 Developer ID Application 证书和 Apple 公证凭据，**不能生成公开发布目录**。Ad-hoc 签名的本地开发构建可以用于开发者自己的机器，但不能被 `scripts/release_kit.py` 当作可分发版本；不得清除隔离属性、建议安全设置例外，或用安装脚本绕过 Gatekeeper。法律文本、版本、后端冒烟及摘要检查同样是必要门禁，任何一个通过都不等于全部通过。
 
-**做不到的事。** `spctl` 对一个 ad-hoc 签名、带 quarantine 标记的 app 一律 `rejected`。这是
-Apple 的密码学判断,不是配置项:没有 Developer ID 证书就无法生成 Apple 认可的签名链,没有
-Apple ID 就无法提交公证。任何声称"改个 plist / 加个 entitlements 就过"的说法都是错的,而且
-在 macOS 15 之后连"右键→打开"这条老路都基本失效了。
-
-**做得到的事。** Gatekeeper 拦的不是"这个 app",是"这个**下载来的**文件":它的判据是
-`com.apple.quarantine` 这个扩展属性,而那是下载器写上去的元数据,**不是签名的一部分**。安装器
-在把 bundle 拷进 `/Applications` 之后清掉这个属性,用户就再也看不到那个对话框——系统设置里
-"仍要打开"按钮做的是同一件事,只是手动、且藏在两层菜单下面。
-
-所以"没有开发者账号怎么发"的真实答案不是绕过 Gatekeeper,而是**让用户不必自己面对它**:
-把清理动作放进一个可读、可验证的安装器里。
-
-### 三条路径,按用户摩擦从低到高
-
-| 路径 | 用户要做什么 | 前提 |
-|---|---|---|
-| Homebrew cask | `brew install --cask --no-quarantine luminfest` | 需要一个公开 URL 放 DMG |
-| 安装脚本 | 双击/`sh install.sh`,或把 DMG 交给它 | 无,离线可用 |
-| 手动 | 拖进应用程序 + 一条 `xattr` 命令 | 无,离线可用 |
-
-三条路径都由 `scripts/release_kit.py` 一次产出,见下节。
-
-### 一次产出一个可发布的目录
+公开分发的顺序是：准备正式法律文本 → 使用明确的 Developer ID 身份签名 App → 提交 App 公证并 stapler 验证 → 签名 DMG、提交 DMG 与 ZIP 公证、验证 DMG ticket → 运行发布门禁。`scripts/release_kit.py` 会实际检查 App、DMG 和 ZIP 内 App 的签名身份、Gatekeeper 来源及公证凭据，而不是只相信 `distribution.json` 的布尔字段；缺少证书、凭据或 Apple 验证工具时拒绝发布，不会制造一个看似可安装的替代物。
 
 ```bash
-python3 scripts/package.py --version 1.1.16 \
-  --python "$PWD/ui-tests/.venv/bin/python"
-
-python3 scripts/release_kit.py --version 1.1.16 --verify
-# 有公开下载地址时,再生成 Homebrew cask:
-python3 scripts/release_kit.py --version 1.1.16 --verify --base-url https://example.test/v1.1.16
+python3 scripts/package.py --version <version> \
+  --python "$PWD/ui-tests/.venv/bin/python" \
+  --sign-identity "Developer ID Application: <name> (<team-id>)" \
+  --notarize --notary-profile <keychain-profile>
+python3 scripts/release_kit.py --version <version> --verify
+# 只有已验证的公开下载地址才生成 Homebrew cask：
+python3 scripts/release_kit.py --version <version> --verify --base-url https://example.test/releases/<version>
 ```
 
-产物在 `outputs/release/<version>/`:
+成功的 `outputs/release/<version>/` 包含版本化 DMG/ZIP、`INSTALL.txt`、`SHA256SUMS.txt`、`RELEASE.md`、`release.json`，以及提供 `--base-url` 时的 cask。没有 `install.sh`，也不使用 `--no-quarantine`。`--verify` 复验复制后的成品，**不能**跳过源文件的签名和公证检查。接收者走正常的已签名、公证的 DMG 拖放或 ZIP 解压流程；如果系统拒绝，停止分发并排查证书、公证与包完整性，而不是绕过警告。
 
-| 文件 | 作用 |
-|---|---|
-| `Luminest-<version>-arm64.dmg` | 版本化命名,与 zip 同源 |
-| `Luminest-<version>-arm64.zip` | 网盘/微信传输用,比 DMG 更耐中转 |
-| `install.sh` | 挂载、拷贝、清 quarantine、校验签名 |
-| `INSTALL.txt` | 三条路径的人话说明,含失败时怎么办 |
-| `SHA256SUMS.txt` | DMG / zip / install.sh 三个摘要 |
-| `RELEASE.md` | 这一版是什么、怎么装、签名状态 |
-| `luminfest.rb` | Homebrew cask(仅 `--base-url` 时生成) |
-| `release.json` | 机器可读的发布记录 |
+本机源码构建是开发流程，**不是**公开发布或给测试者提供未经验证下载的替代办法。摘要可辅助核对下载完整性，但单独的 SHA-256 值不能证明发布者身份或公证状态。
 
-`release_kit.py` **拒绝**从"构建记录说自己不可发布"的产物组装发布目录,四种情况会直接退出:
-`legal_gate.ship_ready` 为假、版本号与包不符、后端冒烟没过、DMG/zip 的 sha256 与记录不一致。
-这不是礼貌性检查——1.1.10 曾经把旧字节贴上过新版本号,而当时唯一的证据是一个没人读的字段。
+## 构建记录检查（不能代替发布门禁）
 
-`--verify` 做的事:把 DMG 复制到临时目录、**真的打上 quarantine 标记**、用 `install.sh` 装到
-一个临时 `INSTALL_DIR`,然后断言 (1) 安装成功、(2) quarantine 属性已消失、(3) `codesign
---verify --strict` 通过。也就是说它验证的不是"脚本存在",而是"用户那条路真的通"。
-
-### `$99` 到底买到什么
-
-买了之后仍然要做的:建 Developer ID 证书、`notarytool store-credentials`、打包时加
-`--sign-identity` 与 `--notarize`(管线里已有,见上文)。
-
-买到的**只有一件事**:用户下载后双击即开,没有任何对话框。它买到的是"零摩擦",不是"能运行"。
-如果分发范围是自己 + 几位同学,为这一件事付年费不划算;如果要挂到公开站点让陌生人下载,
-它就是必须的——不是因为法律要求,而是因为绝大多数人在看到"无法验证开发者"时不会读完说明,
-他们直接删掉。
-
-还有一条与钱无关的路径:把源码交给对方,让他在本机 `swift build` + 打包。本机构建出来的 app
-不带 quarantine 标记,所以 Gatekeeper 不拦。这条路径的代价是对方要有 Xcode 和 Python 环境,
-只适合开发者本人。
-
-### 一个必须随包说清楚的事实
-
-ad-hoc 签名意味着**签名不绑定任何身份**。所以"这个包是不是我发的"无法用签名回答,只能用
-`SHA256SUMS.txt` 回答。发布时请把摘要贴在你发布它的那个地方(README、群公告、网盘说明),
-否则中间人替换一个包,接收方没有任何办法分辨。
-
-## Alpha 测试分发(无 Developer ID 也能发)
-
-适用:小范围熟人测试。产物是 ad-hoc 签名的 zip/DMG,测试者首次打开需手动过一次 Gatekeeper。
-
-**发给测试者的东西**:`outputs/Luminest-arm64.zip`(比 DMG 更适合网盘/微信传输;DMG 与 zip
-由同一条命令同时写出,只有其中一个新鲜就说明构建中途失败,**不要发**)。要求:Apple
-Silicon Mac、macOS 14+。**不需要发任何源码**——bundle 内不含可读项目源码(见下节),后端是
-PyInstaller 字节码冻结、UI 是编译后的二进制。
-
-> ⚠️ **发之前先核对本次构建记录,不要凭文件名和记忆。** 这里出过一次事故:本文档长期写着
-> "约 44MB",而磁盘上那个 `Luminest-arm64.zip` 是**上一次**构建——87.8MB、知识图谱为空、
-> pack 数据全无,修复后的包就安静地放在它旁边。文件名不随版本变化,所以唯一可靠的判据是
-> 构建记录本身:
+以下记录能发现陈旧包、缺失知识图谱或功能路由，是公开发布检查的**必要但不充分**条件。曾有文件名看似正确、内容却是上一次构建的包。即使冒烟通过，只有上节的 Developer ID、公证与真实成品验证全部通过，才能分发。
 
 ```bash
 python3 - <<'PY'
@@ -194,9 +131,9 @@ for name, info in r["artifacts"].items():
 PY
 ```
 
-期望看到 `passed: True`、`checks` 含 `knowledge_graph_populated` / `media_sources_present` /
-`simulations_present` / `legal_documents_present` / `feature_routers_mounted`,且
-`legal_documents` 列出 `terms, privacy, ai, accessibility`。任何一项缺失都说明这个包不该发出去。
+期望看到 `passed: True`，`checks` 含 `knowledge_graph_populated` / `media_sources_present` /
+`simulations_present` / `legal_documents_present` / `feature_routers_mounted`，且
+`legal_documents` 列出 `terms, privacy, ai, accessibility`。这只验证这些内容随包存在，**不**等于法律审查、签名、公证或原生交互验收。任何一项缺失都阻止分发。
 
 同一份记录里的 `backend_smoke.feature_routes` 会逐条列出**十二个**功能路由的实际状态码:
 
@@ -208,31 +145,7 @@ PY
 这里 **405 是正常的**——`/create/search` 只有 POST,用 GET 探它必然 405,而 405 已经证明
 该模块被挂载了。**只有 404 是故障**:它意味着那个 `routes_*` 模块根本没进 bundle。
 
-**测试者首次打开步骤**(随包附一段话即可):
-
-```bash
-# 解压后,把 Luminest.app 拖进「应用程序」,然后:
-xattr -cr /Applications/Luminest.app
-open /Applications/Luminest.app
-```
-
-说明:未公证的 app 首次启动会被 Gatekeeper 拦("无法验证开发者"),上面第一条命令移除
-隔离属性即可(只需一次)。macOS 15+ 的"右键打开"对未签名包已基本失效,直接给 xattr 命令。
-图形界面方式:系统设置 → 隐私与安全性 → 底部"仍要打开"。
-
-**Alpha 阶段建议随包附带的说明**:
-- 这是 pre-alpha 内测版,法律文本仍是草稿(见 `backend/legal/FILL_IN_SHEET.md`)。草稿现在
-  **已随包进入 bundle**,App 内可读、`GET /api/v1/legal` 可列出,不再是空白——但正式发布前
-  仍必须把占位符填完并让打包门禁放行;
-- 数据全部本地存储,卸载即删。注意"默认关"这句话在 1.1.9 及更早的包里**是假的**:
-  那时 `HARNESS_ENV=development`,而 `config.py` 在 development 下 `media_default='1'`,
-  于是 `HARNESS_ATTENTION_MONITOR` 与 `HARNESS_MEDIA_ENABLED` **都默认开**,与
-  `legal/privacy.md` 的"off by default"直接冲突。1.1.10 起 bundle 用 `HARNESS_ENV=desktop`,
-  两者默认关、启动门禁(13+ 与条款)默认开,这句话才成立。改动前先看 `config.py`
-  里 `media_default`/`gate_default`/`invite_default` 三个默认值,不要凭这段说明推断;
-- 无模型 API key 时,导师由**确定性离线导师**作答(读课程、你自己的作答记录与课程图,带引用),
-  不是空回复;配上 `HARNESS_TUTOR_*` 后自动改用模型;
-- 反馈渠道 + 你希望测试者重点看的路径(今天页 / 知识图谱 / 设置页)。
+对测试者应如实说明：模型提供方缺席时使用声明的离线后备；交互活动信号需要单独同意，不能当作注意力测量；本机资料可能保存在 Application Support，**不能声称卸载 App 自动删除全部数据**。法律文本进入 bundle 只能证明文件存在，正式法律审查和占位符清理仍是独立门禁。给出反馈渠道和需要验证的原生路径；公开下载仍须先满足上节的签名和公证条件。
 
 **给双击启动的 app 配模型(不需要终端)**:把 `HARNESS_TUTOR_*`(或 `DEEPSEEK_*` 别名)写进
 
@@ -248,8 +161,7 @@ open /Applications/Luminest.app
 provider 却缺 URL/model/key,启动器**留在离线导师**并在 `backend.log` 写一行说明,而不是让
 服务起不来:那样 app 只会显示"服务器未就绪",把读者指向错误的问题。
 
-**升级到"双击即开"的唯一路径**:Developer ID 签名 + 公证(见上节)。TestFlight /
-App Store Connect 上传同样要求先过这一步,alpha 阶段没有绕开它的意义。
+**直接面向 macOS 用户分发**需要 Developer ID 签名与公证（见上节）。TestFlight / Mac App Store 是另一套 Apple 分发流程，不应与直接下载的 Developer ID 门禁混为一谈。
 
 ## 运行环境:`desktop`,不是 `development`
 

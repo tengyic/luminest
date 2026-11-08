@@ -28,8 +28,18 @@ struct ProcedureStep: Identifiable {
     let why: String
     let artifact: JSON
     let done: Bool
+    var answers: JSON = .null
 
     var id: Int { order }
+    var isScored: Bool { kind == "diagnostic" || kind == "practice" }
+    var answersComplete: Bool { answers["complete"].bool }
+    var completionReason: String {
+        guard isScored, !answersComplete else { return "" }
+        if answers.isNull {
+            return "Answer progress has not been verified. Open the questions or retry loading; Skip remains available."
+        }
+        return "Answer all scheduled questions before Done (\(answers["answered"].int) of \(answers["total"].int) answered). Skip remains available."
+    }
 
     /// The interactive this block plays, when it is a first-party playground game.
     ///
@@ -205,7 +215,8 @@ struct LessonProcedureState {
                         purpose: row.text("purpose"),
                         why: row.text("why"),
                         artifact: row["artifact"],
-                        done: done.contains(row["order"].int))
+                        done: done.contains(row["order"].int),
+                        answers: row["answers"])
         }
         currentOrder = blocks.first { !$0.done }?.order ?? 0
         skipped = source["skipped"].array.map {
@@ -238,13 +249,290 @@ struct LessonProcedureState {
                         purpose: row.text("purpose"),
                         why: row.text("why"),
                         artifact: row["artifact"],
-                        done: done.contains(row["order"].int))
+                        done: done.contains(row["order"].int),
+                        answers: row["answers"])
         }
         currentOrder = blocks.first { !$0.done }?.order ?? 0
         skipped = run["skipped"].array.map {
             (kind: $0.text("kind"), label: $0.text("label", fallback: $0.text("kind")),
              reason: $0.text("reason"))
         }
+    }
+}
+
+@MainActor
+final class ProcedureQuestionStore: ObservableObject {
+    @Published private(set) var question: JSON = .null
+    @Published private(set) var attempt: JSON = .null
+    @Published private(set) var loading = false
+    @Published private(set) var submitting = false
+    @Published private(set) var error = ""
+    @Published private(set) var reason = ""
+    @Published private(set) var frozen = false
+    @Published private(set) var elapsed: Double = 0
+    @Published var optionID = ""
+    @Published var answerText = ""
+    @Published var explanation = ""
+    @Published var confidence = 0.5
+    private var runID = ""
+    private var order = 0
+    private var version = UUID()
+    private var eventID = UUID().uuidString
+    private var payload: [String: Any]?
+    private var lastTick = ProcessInfo.processInfo.systemUptime
+
+    func isBound(runID: String, order: Int) -> Bool {
+        self.runID == runID && self.order == order
+    }
+
+    func reset(runID: String = "", order: Int = 0) {
+        version = UUID()
+        self.runID = runID; self.order = order
+        question = .null; attempt = .null; error = ""; reason = ""
+        loading = false; submitting = false; frozen = false; payload = nil
+        optionID = ""; answerText = ""; explanation = ""; confidence = 0.5; elapsed = 0
+        eventID = UUID().uuidString
+        lastTick = ProcessInfo.processInfo.systemUptime
+    }
+
+    func load(store: AppStore, runID: String, order: Int) async {
+        guard store.authenticated, store.lessonProcedure.isRunning,
+              store.lessonProcedure.runID == runID,
+              store.lessonProcedure.currentOrder == order else { return }
+        if !isBound(runID: runID, order: order) { reset(runID: runID, order: order) }
+        guard !loading, !submitting, !frozen || !attempt.isNull else { return }
+        let generation = version, epoch = store.epoch
+        loading = true; error = ""
+        defer { if version == generation { loading = false } }
+        do {
+            try await store.refreshLessonProcedure(runID: runID)
+            guard version == generation, store.epoch == epoch, store.authenticated,
+                  store.lessonProcedure.isRunning, store.lessonProcedure.runID == runID,
+                  store.lessonProcedure.currentOrder == order else { return }
+            let result = try await store.api.json("/procedure/runs/" + runID + "/next-item",
+                                                 query: [URLQueryItem(name: "order", value: String(order))])
+            guard version == generation, store.epoch == epoch, store.authenticated,
+                  store.lessonProcedure.runID == runID,
+                  store.lessonProcedure.currentOrder == order, !Task.isCancelled else { return }
+            guard result.text("run_id") == runID, result["block_order"].int == order else {
+                throw AppFailure(message: "The server returned a different lesson block. No question was opened; refresh the lesson and retry.", status: nil)
+            }
+            let next = result["question"]
+            if !next.isNull, next.text("id").isEmpty || next.text("receipt").isEmpty || next.text("prompt").isEmpty {
+                throw AppFailure(message: "The scheduled question is missing its prompt or signed receipt. Retry loading, or skip this block.", status: nil)
+            }
+            question = next
+            attempt = .null; optionID = ""; answerText = ""; explanation = ""; confidence = 0.5
+            frozen = false; payload = nil; eventID = UUID().uuidString; elapsed = 0
+            lastTick = ProcessInfo.processInfo.systemUptime
+            reason = result.text("reason", fallback: next.isNull
+                                 ? (result["progress"]["complete"].bool ? "All scheduled answers are recorded. You can mark this block Done." : "No scheduled question could be served. Retry loading, or skip this block.") : "")
+            try await store.refreshLessonProcedure(runID: runID)
+        } catch {
+            guard version == generation, store.epoch == epoch else { return }
+            self.error = "The scheduled question could not be loaded: " + error.localizedDescription
+            store.record(error)
+        }
+    }
+
+    func tick() {
+        let now = ProcessInfo.processInfo.systemUptime
+        defer { lastTick = now }
+        guard NSApp.isActive, !question.isNull, attempt.isNull, !frozen, !loading, !submitting else { return }
+        elapsed = min(7200, elapsed + max(0, min(2, now - lastTick)))
+    }
+
+    func submit(store: AppStore) async {
+        guard store.authenticated, store.lessonProcedure.isRunning,
+              store.lessonProcedure.runID == runID, store.lessonProcedure.currentOrder == order,
+              !loading, !submitting, attempt.isNull, !question.isNull else { return }
+        if payload == nil {
+            let text = answerText.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !optionID.isEmpty || !text.isEmpty else { return }
+            tick()
+            let why = explanation.trimmingCharacters(in: .whitespacesAndNewlines)
+            payload = ["question_id": question.text("id"), "receipt": question.text("receipt"),
+                       "client_event_id": eventID, "elapsed_seconds": elapsed, "confidence": confidence]
+            if question["options"].array.isEmpty { payload?["answer_text"] = text }
+            else { payload?["option_id"] = optionID }
+            if !why.isEmpty { payload?["self_explanation"] = why; payload?["reasoning"] = why }
+        }
+        let generation = version, epoch = store.epoch, boundRun = runID
+        frozen = true; submitting = true; error = ""
+        store.noteLearnerAction()
+        defer { if version == generation { submitting = false } }
+        do {
+            let result = try await store.api.json("/attempts", method: "POST", body: payload)
+            guard version == generation, store.epoch == epoch, store.authenticated,
+                  store.lessonProcedure.runID == boundRun else { return }
+            guard !result.text("id").isEmpty else {
+                throw AppFailure(message: "The server did not return an attempt confirmation. Retry the same submission to check whether it was recorded.", status: nil)
+            }
+            attempt = result
+            try await store.refreshLessonProcedure(runID: boundRun)
+            await store.refresh()
+            await store.load("/reviews") { store.reviews = $0 }
+        } catch {
+            guard version == generation, store.epoch == epoch else { return }
+            if attempt.isNull, let status = (error as? AppFailure)?.status {
+                if [400, 422].contains(status) { payload = nil; frozen = false }
+                if status == 410 {
+                    payload = nil; frozen = false; question = .null
+                    reason = "The signed question expired or was withdrawn. Reload this block for a new receipt, or skip it."
+                }
+            }
+            self.error = attempt.isNull
+                ? "The answer was not confirmed: " + error.localizedDescription
+                : "Your answer was scored, but live lesson progress could not be refreshed: " + error.localizedDescription
+            store.record(error)
+        }
+    }
+}
+
+struct ProcedureQuestionView: View {
+    @EnvironmentObject var store: AppStore
+    @ObservedObject var questions: ProcedureQuestionStore
+    let runID: String
+    let order: Int
+
+    private var current: ProcedureStep? {
+        guard store.authenticated, store.lessonProcedure.isRunning,
+              store.lessonProcedure.runID == runID,
+              store.lessonProcedure.currentOrder == order else { return nil }
+        return store.lessonProcedure.current
+    }
+    private var canSubmit: Bool {
+        !questions.optionID.isEmpty || !questions.answerText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                if let current, questions.isBound(runID: runID, order: order) {
+                    Text("\(current.answers["answered"].int) of \(current.answers["total"].int) scheduled questions answered")
+                        .font(.system(size: 12)).foregroundStyle(Palette.secondary)
+                        .accessibilityIdentifier("procedure.question.progress")
+                    if questions.loading { ProgressView("Loading this block's question…") }
+                    else if !questions.question.isNull { answerForm }
+                    if !questions.reason.isEmpty {
+                        Text(questions.reason).font(.system(size: 12))
+                            .accessibilityIdentifier("procedure.question.reason")
+                    }
+                    if !questions.attempt.isNull { feedback }
+                    if !questions.error.isEmpty {
+                        Text(questions.error + (questions.frozen && questions.attempt.isNull
+                             ? "\nRetry sends the same frozen answer and event ID; it cannot create a second attempt." : ""))
+                            .font(.system(size: 12)).foregroundStyle(.red).textSelection(.enabled)
+                            .accessibilityIdentifier("procedure.question.error")
+                    }
+                    HStack(spacing: 10) {
+                        if !questions.question.isNull, questions.attempt.isNull {
+                            Button(questions.frozen ? "Retry submission" : "Submit answer") {
+                                store.run { await questions.submit(store: store) }
+                            }
+                            .buttonStyle(LuminfestButtonStyle(primary: true))
+                            .disabled(!canSubmit || questions.loading || questions.submitting || store.lessonProcedureBusy)
+                            .accessibilityIdentifier("procedure.question.submit")
+                        } else if !current.answersComplete || !questions.error.isEmpty {
+                            Button(questions.attempt.isNull ? "Retry loading question" : "Next scheduled question / refresh") {
+                                store.run { await questions.load(store: store, runID: runID, order: order) }
+                            }
+                            .buttonStyle(LuminfestButtonStyle(primary: false))
+                            .disabled(questions.loading || questions.submitting || store.lessonProcedureBusy)
+                            .accessibilityIdentifier("procedure.question.next")
+                        }
+                        if questions.submitting { ProgressView("Scoring answer…").controlSize(.small) }
+                    }
+                } else {
+                    Text("This is no longer the current lesson block. Close this sheet and open the current activity; no future question will be shown.")
+                        .font(.system(size: 12)).accessibilityIdentifier("procedure.question.not-current")
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(18)
+        }
+        .task {
+            while !Task.isCancelled {
+                if current != nil { questions.tick() }
+                do { try await Task.sleep(nanoseconds: 1_000_000_000) } catch { break }
+            }
+        }
+    }
+
+    private var answerForm: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text(questions.question.text("prompt"))
+                .font(.system(size: 21, weight: .medium)).lineSpacing(5)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("procedure.question.prompt")
+            if questions.question["options"].array.isEmpty {
+                TextField("Your written or numeric answer", text: $questions.answerText, axis: .vertical)
+                    .lineLimit(2...5).textFieldStyle(.roundedBorder)
+                    .disabled(questions.frozen || !questions.attempt.isNull)
+                    .accessibilityIdentifier("procedure.question.answer")
+            } else {
+                ForEach(questions.question["options"].array, id: \.["id"].string) { option in
+                    Button { questions.optionID = option.text("id") } label: {
+                        HStack(alignment: .top, spacing: 10) {
+                            Image(systemName: questions.optionID == option.text("id") ? "largecircle.fill.circle" : "circle")
+                            Text(option.text("text")).multilineTextAlignment(.leading)
+                            Spacer()
+                        }
+                        .padding(12).frame(maxWidth: .infinity, alignment: .leading)
+                        .background(questions.optionID == option.text("id") ? Palette.sage : Palette.surface,
+                                    in: RoundedRectangle(cornerRadius: 10))
+                    }
+                    .buttonStyle(.plain).disabled(questions.frozen || !questions.attempt.isNull)
+                    .accessibilityIdentifier("procedure.question.option." + option.text("id"))
+                    .accessibilityAddTraits(questions.optionID == option.text("id") ? .isSelected : [])
+                }
+            }
+            Text("Explain why your answer works (required when the lesson's self-explanation gate is enabled).")
+                .font(.system(size: 11)).foregroundStyle(Palette.secondary)
+            TextEditor(text: $questions.explanation).font(.system(size: 12))
+                .frame(height: 80).padding(8).background(Palette.surface, in: RoundedRectangle(cornerRadius: 10))
+                .disabled(questions.frozen || !questions.attempt.isNull)
+                .accessibilityIdentifier("procedure.question.self-explanation")
+            HStack {
+                Text("Confidence").font(.system(size: 11))
+                Slider(value: $questions.confidence, in: 0...1).frame(maxWidth: 220)
+                    .disabled(questions.frozen || !questions.attempt.isNull)
+                    .accessibilityIdentifier("procedure.question.confidence")
+                Text("\(Int(questions.confidence * 100))% · \(Int(questions.elapsed))s active")
+                    .font(.system(size: 11, design: .monospaced))
+            }
+        }
+    }
+
+    private var feedback: some View {
+        let result = questions.attempt
+        return Card(color: result["correct"].bool ? Palette.sage : Palette.peach, padding: 16) {
+            VStack(alignment: .leading, spacing: 9) {
+                Text(result["correct"].isNull ? "Answer recorded; feedback withheld." : (result["correct"].bool ? "Correct" : "Not quite — review the explanation"))
+                    .font(.system(size: 16, weight: .semibold))
+                    .accessibilityIdentifier("procedure.question.correctness")
+                if !result["correct_answer"].isNull { Text("Correct answer: " + result.text("correct_answer")) }
+                Text(result.text("explanation")).lineSpacing(4).textSelection(.enabled)
+                    .accessibilityIdentifier("procedure.question.explanation")
+                if !result["diagnosis"].isNull {
+                    Divider()
+                    Text(result["diagnosis"].text("category").replacingOccurrences(of: "_", with: " ").capitalized)
+                        .fontWeight(.semibold).accessibilityIdentifier("procedure.question.diagnosis")
+                    Text(result["diagnosis"].text("reason"))
+                    Text(result["diagnosis"].text("next_action"))
+                        .accessibilityIdentifier("procedure.question.next-action")
+                }
+                if !result["mastery"].isNull {
+                    Text("Estimated mastery: " + percent(result["mastery"]))
+                        .accessibilityIdentifier("procedure.question.mastery")
+                }
+                if !result["review_at"].isNull {
+                    Text("Review: " + friendlyDate(result.text("review_at")))
+                        .accessibilityIdentifier("procedure.question.review")
+                }
+            }.font(.system(size: 12))
+        }
+        .accessibilityIdentifier("procedure.question.feedback")
     }
 }
 
@@ -257,6 +545,8 @@ struct LessonProcedureCard: View {
     /// the sheet shows what was on screen when the learner clicked rather than whatever the
     /// run has moved on to since.
     @State private var presenting: ProcedureStep?
+    @State private var presentingRunID = ""
+    @StateObject private var questions = ProcedureQuestionStore()
 
     private var state: LessonProcedureState { store.lessonProcedure }
 
@@ -283,7 +573,8 @@ struct LessonProcedureCard: View {
                         .font(.system(size: 11))
                         .foregroundStyle(Palette.secondary)
                         .lineSpacing(3)
-                } else if state.blocks.isEmpty {
+                }
+                if state.blocks.isEmpty {
                     EmptyState(icon: "list.bullet.rectangle",
                                title: "No lesson compiled yet",
                                message: "Pick a concept and the harness will compile a lesson from your own evidence and the material this course actually holds.")
@@ -297,6 +588,10 @@ struct LessonProcedureCard: View {
                         }
                     }
                     controls
+                    if state.isRunning, let current = state.current, !current.completionReason.isEmpty {
+                        Text(current.completionReason).font(.system(size: 11)).foregroundStyle(Palette.secondary)
+                            .accessibilityIdentifier("procedure.done.reason")
+                    }
                     if !state.skipped.isEmpty { refusals }
                     Text("Advancing a block records that you did the activity. It does not raise your mastery — only answers and simulations do.")
                         .font(.system(size: 10))
@@ -306,8 +601,16 @@ struct LessonProcedureCard: View {
             }
         }
         .sheet(item: $presenting) { step in
-            LessonBlockSheet(step: step, conceptTitle: state.conceptTitle)
+            LessonBlockSheet(step: step, conceptTitle: state.conceptTitle,
+                             runID: presentingRunID, questions: questions)
                 .environmentObject(store)
+        }
+        .task(id: "\(store.epoch):\(state.runID):\(state.currentOrder):\(state.isRunning)") {
+            guard store.authenticated, state.isRunning, let current = state.current, current.isScored else {
+                questions.reset()
+                return
+            }
+            await questions.load(store: store, runID: state.runID, order: current.order)
         }
     }
 
@@ -356,11 +659,15 @@ struct LessonProcedureCard: View {
                 }
             }
             Spacer(minLength: 4)
-            if let presentation = block.presentation, isNow || block.done {
+            if block.isScored, isNow, state.isRunning {
+                Button("Answer questions") { presentingRunID = state.runID; presenting = block }
+                    .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                    .accessibilityIdentifier("procedure.questions.open.\(block.order)")
+            } else if let presentation = block.presentation, isNow || block.done {
                 // A finished block stays openable: the deck a learner read on Monday is
                 // still the right thing to re-read before Thursday's practice, and the
                 // procedure does not have to re-schedule it to make it reachable.
-                Button(isNow ? presentation.actionTitle : "Review") { presenting = block }
+                Button(isNow ? presentation.actionTitle : "Review") { presentingRunID = state.runID; presenting = block }
                     .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
             } else if isNow, !block.playgroundSlug.isEmpty {
                 Button("Open") { store.openPlayground(slug: block.playgroundSlug) }
@@ -396,12 +703,15 @@ struct LessonProcedureCard: View {
                 store.run { await store.advanceLessonProcedure(order: current.order, outcome: "done") }
             }
             .buttonStyle(LuminfestButtonStyle(primary: state.isRunning))
-            .disabled(store.lessonProcedureBusy)
+            .disabled(!state.isRunning || store.lessonProcedureBusy || questions.submitting ||
+                      (current.isScored && !current.answersComplete))
+            .accessibilityIdentifier("procedure.done")
             Button("Skip it") {
                 store.run { await store.advanceLessonProcedure(order: current.order, outcome: "skipped") }
             }
             .buttonStyle(LuminfestButtonStyle(primary: false))
-            .disabled(store.lessonProcedureBusy)
+            .disabled(!state.isRunning || store.lessonProcedureBusy || questions.submitting)
+            .accessibilityIdentifier("procedure.skip")
         }
         if state.isComplete {
             Button("Plan another lesson") {
@@ -560,6 +870,8 @@ struct LessonBlockSheet: View {
     @Environment(\.dismiss) private var dismiss
     let step: ProcedureStep
     let conceptTitle: String
+    let runID: String
+    @ObservedObject var questions: ProcedureQuestionStore
 
     @StateObject private var deckCursor = DeckCursorStore()
     @State private var showNotes = false
@@ -573,7 +885,8 @@ struct LessonBlockSheet: View {
     }
 
     private var isCurrent: Bool {
-        store.lessonProcedure.isRunning && store.lessonProcedure.currentOrder == step.order
+        store.lessonProcedure.isRunning && store.lessonProcedure.runID == runID &&
+            store.lessonProcedure.currentOrder == step.order
     }
 
     var body: some View {
@@ -627,12 +940,16 @@ struct LessonBlockSheet: View {
 
     @ViewBuilder
     private var content: some View {
-        switch step.presentation {
-        case .deck: deck
-        case .video: video
-        case .reading: reading
-        case .simulation: exploration
-        case nil: unavailable
+        if step.isScored {
+            ProcedureQuestionView(questions: questions, runID: runID, order: step.order)
+        } else {
+            switch step.presentation {
+            case .deck: deck
+            case .video: video
+            case .reading: reading
+            case .simulation: exploration
+            case nil: unavailable
+            }
         }
     }
 
@@ -889,9 +1206,11 @@ struct DeckImageView: View {
 
     private var footer: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
-            Text(isCurrent
-                 ? "Advancing records that you did the activity. It does not raise your mastery."
-                 : "This block is not the current one, so it opens for review only.")
+            Text(!store.lessonProcedure.error.isEmpty ? store.lessonProcedure.error : (isCurrent
+                 ? (step.isScored && !(store.lessonProcedure.current?.answersComplete ?? false)
+                    ? store.lessonProcedure.current?.completionReason ?? "Answer all scheduled questions before Done. Skip remains available."
+                    : "Advancing records that you did the activity. It does not raise your mastery.")
+                 : "This block is not the current one, so it opens for review only."))
                 .font(.system(size: 10))
                 .foregroundStyle(Palette.tertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -899,7 +1218,13 @@ struct DeckImageView: View {
             if isCurrent {
                 Button("Done: \(step.label.lowercased())") { finish() }
                     .buttonStyle(LuminfestButtonStyle(primary: true))
-                    .disabled(store.lessonProcedureBusy)
+                    .disabled(store.lessonProcedureBusy || questions.submitting ||
+                              (step.isScored && !(store.lessonProcedure.current?.answersComplete ?? false)))
+                    .accessibilityIdentifier("procedure.sheet.done")
+                Button("Skip it") { finish(outcome: "skipped") }
+                    .buttonStyle(LuminfestButtonStyle(primary: false))
+                    .disabled(store.lessonProcedureBusy || questions.submitting)
+                    .accessibilityIdentifier("procedure.sheet.skip")
             }
         }
     }
@@ -909,10 +1234,11 @@ struct DeckImageView: View {
     /// `advanceLessonProcedure` records a failure rather than throwing it, so success is
     /// read from the state it left behind. Closing unconditionally would hide a rejected
     /// advance behind a dismissed sheet, which is exactly the case the learner needs to see.
-    private func finish() {
+    private func finish(outcome: String = "done") {
+        guard isCurrent else { return }
         let before = store.lessonProcedure.doneCount
         store.run {
-            await store.advanceLessonProcedure(order: step.order, outcome: "done")
+            await store.advanceLessonProcedure(order: step.order, outcome: outcome)
             if store.lessonProcedure.doneCount > before { dismiss() }
         }
     }

@@ -499,6 +499,12 @@ def test_agent_chat_offline_returns_a_clean_event(client):
     assert body['message'] is None
     error = next(event for event in body['events'] if event['type'] == 'error')
     assert 'not configured' in error['message']
+    # The blank panel used to say only "the turn finished without a reply". The
+    # fallback now names its reason and tells the learner what to do instead.
+    assert body['notice']['kind'] == 'unavailable'
+    assert 'No tutor model is configured' in body['notice']['reason']
+    assert 'Open a concept from your course' in body['notice']['next_action']
+    assert body['events'][-1]['notice'] == body['notice']
 
 
 def test_agent_chat_requires_authentication(client):
@@ -533,6 +539,8 @@ def test_a_concept_scoped_offline_turn_is_answered_by_the_grounded_tutor(client)
     assert body['finish_reason'] == 'unavailable'
     assert body['grounded_offline'] is True
     assert body['answered_by'] == 'Grounded offline tutor'
+    # A turn that really answered must not also carry an "unavailable" notice.
+    assert not body.get('notice')
     # It is the grounded turn and not a filler string: the reply carries its citations.
     assert body['grounding'] and body['grounding'][0]['title']
     # The prose also travels as an ordinary message_delta, so a client that renders the
@@ -552,8 +560,10 @@ def test_an_offline_turn_without_a_concept_in_scope_stays_honestly_empty(client)
     """The other half of the contract, and the reason the fallback is gated.
 
     With no concept in scope there is nothing to ground an answer in. Producing one
-    anyway would be exactly the fabrication the offline tutor refuses to make, so the
-    turn stays empty and says why.
+    anyway would be exactly the fabrication the offline tutor refuses to make, so
+    ``message`` stays empty and ``grounded_offline`` stays false. What changed is
+    that the turn now *says why*, with a next action, in a structured ``notice``
+    that no client can mistake for an answer.
     """
     headers, _ = account(client)
     body = client.post('/api/v1/agent/chat', headers=headers,
@@ -561,6 +571,10 @@ def test_an_offline_turn_without_a_concept_in_scope_stays_honestly_empty(client)
     assert body['message'] is None
     assert body['grounded_offline'] is False
     assert body['finish_reason'] == 'unavailable'
+    notice = body['notice']
+    assert notice['kind'] == 'unavailable'
+    assert 'no grounded material' in notice['reason']
+    assert 'configured tutor provider' in notice['next_action']
 
 
 def test_a_concept_the_course_does_not_own_is_not_answered(client):
@@ -575,6 +589,7 @@ def test_a_concept_the_course_does_not_own_is_not_answered(client):
                              'context': {'concept_id': 'not_a_concept_at_all'}}).json()
     assert body['message'] is None
     assert body['grounded_offline'] is False
+    assert body['notice']['kind'] == 'unavailable'
 
 
 def test_agent_stream_emits_the_sse_contract(client):

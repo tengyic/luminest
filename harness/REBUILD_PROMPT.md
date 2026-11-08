@@ -126,20 +126,36 @@ a plausible artifact.
 
 ---
 
-## 6. Gaps from the product brief still open
+## 6. Gaps from the product brief — status 2026-11-08
 
-Details and file pointers in `context/04-open-gaps.md`.
+Details and file pointers in `context/04-open-gaps.md`. Evidence:
+`docs/evidence/2026-11-08-first-person.md`.
 
-1. **Unit projects** — absent. The brief wants a small project after each unit: a
-   presentation delivered on camera with speaking, or a research task with limited AI use.
-   There is no student artifact today: no capture, no submission, no rubric.
-2. **Multi-perspective analytics** — `collaboration`, `creativity`, `soft skills` have zero
-   implementation. Participation, struggle, attention and streak exist. These are rubric
-   fields over data already logged; collaboration additionally has no product surface.
-3. **Formally graded unit tests** — graded items exist, but there is no unit-level grade
-   book judged against academic standards.
-4. **Teacher clone** — transcript-only. The brief wanted video CV, facial expression, body
-   language, voice tone. It was called a bonus; do it last or not at all.
+1. **Unit projects — partial.** Written submission, reflection, AI disclosure, the unit
+   rubric, formative feedback and per-account drafts exist (`Project`, `ProjectDrafts.swift`,
+   `ProjectsView`). An observation can be attached to the real artifact. **Still missing:**
+   camera capture / on-camera presentation recording, and a teacher-scored certified grade.
+   The feedback text says plainly that it is a formative rubric checklist, not a correctness
+   claim.
+2. **Multi-perspective analytics — implemented, with declared limits.** All five named
+   dimensions now have a scoring path in `app/perspectives.py` and a native surface. A
+   dimension is populated **only** by a written rubric observation attached to an artifact
+   that exists; an unobserved dimension is `value: null`, never a percentage inferred from
+   foreground activity. Cognitive attention stays explicitly `not_measured`. Collaboration
+   requires a teacher-recorded group observation (`group_size >= 2`); there is still no
+   direct peer-to-peer collaboration surface. These are human judgements, not validated
+   psychometric instruments.
+3. **Formally graded unit tests — partial.** `app/assessment_book.py` declares one standard
+   per unit topic, scores it from server-graded `Attempt` rows, and refuses a unit grade
+   until **every** declared standard has at least two attempts; a frozen `unit_grades` row
+   keeps the standards as they were at grading time. **Still missing:** alignment to
+   external academic standards (Common Core / AP). The API states that the score is a
+   formative, course-local mastery measure — not an accredited, proctored or AP grade.
+4. **Teacher clone — still transcript-only.** The brief wanted video CV, facial expression,
+   body language and voice tone. It was called a bonus; still do it last or not at all.
+5. **Live training — deliberately not built.** `training.py` is a consent ledger plus an
+   offline worker export. IRT/KST are fitted, not gradient-trained; "training while the
+   user is using it" is a different product decision, not a missing function.
 
 ---
 

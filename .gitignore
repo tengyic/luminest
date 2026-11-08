@@ -47,3 +47,19 @@ reference/prior-app/ai-learning-software/
 # Its node_modules is generated regardless, so ignore both.
 /luminest-miniprogram/
 node_modules/
+
+# relay coordination channel: local state, never shared
+/.relay/
+
+# Scratch left in the working directory by local concurrency and tool-access test runs.
+# These are databases and temporary directories, not source; without these lines a
+# `git add -A` would publish someone's local test state.
+/.relay-test/
+/.relay-test-*/
+/harness/backend/.tool-access-tests.*/
+/relay/
+
+# A separate experimental rebuild with its own Git root. Committing it would record a
+# gitlink that clones back as an empty directory, so it is deliberately not part of
+# this repository's history.
+/luminest-v2/

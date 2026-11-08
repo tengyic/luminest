@@ -1244,12 +1244,59 @@ def _formula_in(span: str) -> str:
     return candidate
 
 
+def _worked_walkthrough(title: str, span: str,
+                        prerequisites: list[ConceptNode],
+                        dependants: list[ConceptNode]) -> str:
+    """A worked example that is a *method*, not a second copy of the source.
+
+    The ``concept`` block already states the idea and ``source_span`` preserves the
+    exact wording. Repeating that sentence as the worked example left the learner
+    with nothing to work through - the first-person acceptance run recorded it as
+    the generated lesson's missing independent example.
+
+    Every step below is an operation on words the learner supplied or on edges in
+    their own course graph. Nothing about the subject matter is invented, so the
+    example stays honest while being a different artefact from the passage: it can
+    be read, performed, and checked, which is what makes it a worked example.
+    """
+    quote = ' '.join(str(span or '').split())
+    neighbour = (prerequisites[0].title if prerequisites
+                 else (dependants[0].title if dependants else ''))
+    steps = [
+        f'Step 1 - Read the exact passage you supplied for {title}: "{quote}"',
+        'Step 2 - Mark the words that say what this idea is or does. Put one bracket '
+        'around its subject and another around the claim made about that subject.',
+        'Step 3 - Close the source and restate the bracketed claim in one sentence of '
+        'your own words. Reopen the passage and check that your sentence kept the same '
+        'subject and the same claim.',
+    ]
+    if neighbour:
+        steps.append(
+            f'Step 4 - Say how {title} differs from {neighbour} using only what your '
+            'source states. If you cannot name a difference, write down the exact words '
+            'you would need to look up rather than guessing one.')
+        steps.append(
+            'Step 5 - Write one statement that would be wrong if this passage were wrong. '
+            'That is the claim to retrieve tomorrow: the retrieval block below asks for '
+            'it with the source closed.')
+    else:
+        steps.append(
+            f'Step 4 - {title} has no neighbouring concept in your source yet. Write one '
+            'statement that would be wrong if this passage were wrong, and name the words '
+            'in the passage that make your statement right.')
+        steps.append(
+            'Step 5 - Retrieve that statement tomorrow with the source closed, then '
+            'compare it against the passage and note any word you had to add yourself.')
+    return ' '.join(steps)
+
+
 def lesson_blocks(node: ConceptNode, graph: KnowledgeGraph, concept: ExtractedConcept) -> list[dict[str, Any]]:
     """Teaching blocks in the schema ``app.curriculum`` already renders.
 
-    The ``worked_example`` block is the source span itself, verbatim. It is not a
-    paraphrase of the learner's material and it is not a manufactured example:
-    it is the passage the concept came from, presented as the worked material.
+    The verbatim passage stays on the ``concept`` block as ``source_span`` (and on
+    the concept itself as provenance). The ``worked_example`` is now an independent
+    walkthrough of that passage: it quotes the learner's own words, then gives a
+    numbered method for working with them. No fact about the subject is invented.
     """
     title = node.title
     prerequisites = [graph.nodes[p] for p in graph.parents(node.id) if p in graph.nodes]
@@ -1265,7 +1312,9 @@ def lesson_blocks(node: ConceptNode, graph: KnowledgeGraph, concept: ExtractedCo
     return [
         {'kind': 'concept', 'title': 'Core idea', 'body': core,
          'formula': _formula_in(concept.span), 'source_span': concept.span},
-        {'kind': 'worked_example', 'title': 'From your source', 'body': concept.span, 'formula': ''},
+        {'kind': 'worked_example', 'title': 'Work through your source',
+         'body': _worked_walkthrough(title, concept.span, prerequisites, dependants),
+         'formula': ''},
         {'kind': 'retrieval', 'title': 'Check before you go on',
          'body': (f'Close the source and say what {title} means in your own words. Then reopen it '
                   f'and compare against the passage you supplied'

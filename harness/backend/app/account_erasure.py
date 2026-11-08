@@ -90,9 +90,11 @@ def policy() -> dict[str, Any]:
             {'what': 'All rows keyed to the account',
              'detail': 'attempts, assessments, receipts, learning states, tutor messages, '
                        'projects and reflections, memory notes, harness runs, flashcards, '
-                       'procedure and playground runs, telemetry, consent records, tokens, '
-                       'preferences, style profiles, quota counters, experiment assignments, '
-                       'invite redemptions, daily usage rollups, learner-built courses'},
+                       'projects and reflections, unit grade-book records, written '
+                       'multi-perspective observations, procedure and playground runs, '
+                       'telemetry, consent records, tokens, preferences, style profiles, '
+                       'quota counters, experiment assignments, invite redemptions, '
+                       'daily usage rollups, learner-built courses'},
             {'what': 'Feedback you submitted', 'detail': 'including its contact email field'},
             {'what': 'Your pre-launch waitlist entry, if you had one',
              'detail': 'matched by the address you signed up with; other people on the list '

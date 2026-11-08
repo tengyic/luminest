@@ -33,17 +33,18 @@ from typing import Any, Mapping, Sequence
 
 from sqlalchemy import func, select
 
-from . import courses
+from . import courses, receipts
 from .curriculum import course_concepts, course_questions
-from .db import Message, ProcedureRun, Project, State, UserPreference, now_ts
+from .db import Attempt, Message, ProcedureRun, Project, Receipt, State, UserPreference, now_ts
 from .harness.playground import catalogue
 from .harness.teaching import (ConceptFacts, ProcedureAssets, build_evidence,
                                compile_procedure, concept_facts, default_profile,
-                               procedure_hash)
+                               procedure_hash, served_items)
 
 __all__ = ['UnknownConcept', 'advance_run', 'assets_for', 'compile_for', 'concept_title_for',
-           'current_run', 'deck_cursor', 'deck_section_count', 'materialize',
-           'prompt_context', 'recent_kinds', 'run_to_dict', 'set_deck_cursor', 'start_run']
+           'current_run', 'deck_cursor', 'deck_section_count', 'item_progress',
+           'materialize', 'next_item', 'prompt_context', 'recent_kinds', 'run_to_dict',
+           'set_deck_cursor', 'start_run', 'with_item_progress']
 
 
 class UnknownConcept(Exception):
@@ -338,8 +339,17 @@ def _lesson_key(user, concept_id: str) -> str:
 
 
 def assets_for(concept_id: str, *, course_id: str, graph, settings,
-               subject_kind: str = 'mathematics') -> ProcedureAssets:
-    """Everything this instance can deliver for this concept, with the reasons it cannot."""
+               subject_kind: str = 'mathematics',
+               order: Sequence[str] = ()) -> ProcedureAssets:
+    """Everything this instance can deliver for this concept, with the reasons it cannot.
+
+    ``order`` is the scheduler's ranking of this concept's scored items, computed by
+    :func:`_practice_order` from the learner's own states. It is a parameter rather than a
+    lookup here because this function has no user: the inventory resolver answers "what
+    exists", and which item comes first is an evidence question. Ids in ``order`` that are
+    not in this concept's bank are dropped, and bank items missing from ``order`` are kept
+    after it - an ordering that lost an item would quietly shrink the lesson.
+    """
     concepts = course_concepts(course_id)
     lesson_id = _resolve_lesson_id(concepts, concept_id)
     lesson = dict(concepts.get(lesson_id) or {})
@@ -388,8 +398,10 @@ def assets_for(concept_id: str, *, course_id: str, graph, settings,
                     for block in lesson.get('blocks') or []
                     if isinstance(block, Mapping) and block.get('kind') == 'retrieval')
     bank = course_questions(course_id)
-    practice_count = sum(1 for question in bank.values()
-                         if str(question.get('concept_id')) == lesson_id)
+    bank_ids = tuple(str(question.get('id')) for question in bank.values()
+                     if str(question.get('concept_id')) == lesson_id)
+    practice_count = len(bank_ids)
+    practice_items = _ranked_items(bank_ids, order)
 
     prerequisites: tuple[str, ...] = ()
     dependants: tuple[str, ...] = ()
@@ -403,8 +415,71 @@ def assets_for(concept_id: str, *, course_id: str, graph, settings,
         concept_id=lesson_id, concept_title=title, course_id=course_id,
         deck_sections=deck, simulation=simulation, video=video,
         worked_example=example, practice_prompts=prompts,
+        practice_items=practice_items,
         practice_count=practice_count, prerequisites=prerequisites,
         dependants=dependants, reasons=reasons)
+
+
+def _ranked_items(bank_ids: Sequence[str], order: Sequence[str]) -> tuple[str, ...]:
+    """The bank in scheduler order, with nothing lost.
+
+    ``order`` is advisory: it is computed from evidence that may be stale, and the bank is
+    the fact. Anything the ranking forgot is appended in bank order, and anything it
+    invented is dropped, so the returned tuple is always exactly the concept's items.
+    """
+    known = set(bank_ids)
+    ranked = [str(item) for item in order if str(item) in known]
+    seen = set(ranked)
+    return tuple(ranked + [item for item in bank_ids if item not in seen])
+
+
+def _practice_order(db, user, course_id: str, lesson_id: str, *,
+                    target: float = 0.7) -> tuple[str, ...]:
+    """This concept's scored items, in the order the practice scheduler would serve them.
+
+    The lesson used to say "3 example questions" and carry no questions at all, so a
+    client could complete the block without one being served - the defect that starved
+    every measurement downstream of it. Binding the ids means the plan names the items it
+    promises, and `adapting to evidence` keeps meaning one thing whether the learner is
+    practising from a lesson or from the practice card: both ask
+    :func:`learning.recommend`, the same scheduler, over the same bank.
+
+    Two deliberate limits. The order is computed once, when the plan is compiled, because
+    a plan is a promise - a mid-lesson re-ranking would make "the second question" mean a
+    different item on every refresh. And when the scheduler cannot rank (a concept whose
+    id is not in the authored graph raises inside it, as does an empty pool), the items
+    are served in bank order with no loss: a lesson missing one of its questions is worse
+    than a lesson whose questions are ordered plainly.
+
+    Calibration is passed as ``None`` on purpose. The pooled item-difficulty table is a
+    cross-user aggregate read, and this function runs on the lesson *preview* path as well
+    as on start; a read-only preview should not pay for it. Without it the ranking falls
+    back to mastery distance and unanswered-first, which is the part of the policy the
+    learned offsets were only ever adjusting.
+    """
+    from . import learning
+
+    bank = course_questions(course_id)
+    pool = [dict(question) for question in bank.values()
+            if str(question.get('concept_id')) == lesson_id]
+    if len(pool) < 2:
+        return tuple(str(question.get('id')) for question in pool)
+    states = {row.concept_id: (row.data or {}) for row in db.scalars(
+        select(State).where(State.user_id == user.id))}
+    ordered: list[str] = []
+    remaining = pool
+    try:
+        while remaining:
+            question, _reason = learning.recommend(states, remaining, 'practice',
+                                                  None, target)
+            ordered.append(str(question.get('id')))
+            rest = [row for row in remaining if str(row.get('id')) != str(question.get('id'))]
+            if len(rest) == len(remaining):
+                raise ValueError('Scheduler returned an item outside its candidate pool')
+            remaining = rest
+    except (KeyError, ValueError, TypeError, AttributeError, IndexError):
+        return tuple(str(question.get('id')) for question in pool)
+    return tuple(ordered)
 
 
 def _speak_lesson_id(procedure, lesson_id: str, lesson_title: str = ''):
@@ -439,8 +514,12 @@ def _state_for(db, user, concept_id: str, node_id: str, parents: Sequence[str]) 
     rows = {row.concept_id: (row.data or {})
             for row in db.scalars(select(State).where(State.user_id == user.id,
                                                       State.concept_id.in_(wanted)))}
-    return (rows.get(node_id) or rows.get(concept_id) or {},
-            {parent: rows.get(parent, {}) for parent in parents})
+    # A graph-keyed implicit-memory row (no direct attempts) must not eclipse
+    # actual scored evidence stored under the authored lesson id.
+    direct = [rows.get(concept_id) or {}, rows.get(node_id) or {}]
+    state = max(direct, key=lambda row: (int(row.get('attempts') or 0),
+                                        float(row.get('last_at') or 0)))
+    return (state, {parent: rows.get(parent, {}) for parent in parents})
 
 
 def _session_minutes(db, user, concept_id: str, now: float) -> float:
@@ -491,7 +570,10 @@ def compile_for(db, user, concept_id: str, *, settings,
     subject_kind = str(getattr(spec, 'subject_kind', '') or 'mathematics')
     facts = concept_facts(lesson_id, graph=graph, subject_kind=subject_kind)
     assets = assets_for(lesson_id, course_id=spec.id, graph=graph, settings=settings,
-                        subject_kind=subject_kind)
+                        subject_kind=subject_kind,
+                        order=_practice_order(
+                            db, user, spec.id, lesson_id,
+                            target=float(getattr(settings, 'target_correctness', 0.7))))
     node_id = str(facts.id)
     parents = tuple(graph.parents(node_id)) if node_id in graph.nodes else ()
     state, parent_states = _state_for(db, user, lesson_id, node_id, parents)
@@ -642,6 +724,141 @@ def start_run(db, user, procedure) -> ProcedureRun:
     return run
 
 
+def item_progress(db, run: ProcedureRun) -> dict[int, dict[str, Any]]:
+    """Scored evidence from receipts issued for this run and this block, not lifetime work.
+
+    A diagnostic answered yesterday cannot complete today's practice. Runtime receipt ids
+    sit beside the immutable item pool; only /attempts creates the evidence they point at.
+    Old plans without a bound pool are explicitly unavailable, never vacuously complete.
+    """
+    progress: dict[int, dict[str, Any]] = {}
+    for block in run.blocks or []:
+        if not isinstance(block, Mapping):
+            continue
+        artifact = block.get('artifact') if isinstance(block.get('artifact'), Mapping) else {}
+        if artifact.get('kind') != 'questions':
+            continue
+        items = served_items(artifact)
+        links = artifact.get('item_receipts') or {}
+        links = links if isinstance(links, Mapping) else {}
+        receipt_ids = [str(rid) for ids in links.values() if isinstance(ids, list)
+                       for rid in ids]
+        answered = set(db.scalars(select(Attempt.question_id).where(
+            Attempt.user_id == run.user_id, Attempt.receipt_id.in_(receipt_ids)))) if receipt_ids else set()
+        outstanding = [item for item in items if item not in answered]
+        total = len(items)
+        reason = ''
+        if not items:
+            total = max(0, int(artifact.get('count') or 0))
+            reason = ('This stored block has no bound scored items. Skip it or start a '
+                      'new lesson after rebuilding the course question bank.')
+        progress[int(block.get('order') or 0)] = {
+            'answered': len(items) - len(outstanding), 'total': total,
+            'outstanding': outstanding, 'complete': bool(items) and not outstanding,
+            **({'reason': reason} if reason else {})}
+    return progress
+
+
+def with_item_progress(db, run: ProcedureRun,
+                       payload: Mapping[str, Any]) -> dict[str, Any]:
+    """Attach :func:`item_progress` to a serialised run, block by block.
+
+    Every response goes through this, so a client never has to ask a second endpoint
+    whether the block it is looking at is answered - and cannot be handed a plan whose
+    blocks disagree with the run it was reading a moment ago.
+    """
+    progress = item_progress(db, run)
+    if not progress:
+        return dict(payload)
+    blocks = []
+    for block in payload.get('blocks') or []:
+        row = dict(block)
+        info = progress.get(int(row.get('order') or 0))
+        if info:
+            row['answers'] = info
+        blocks.append(row)
+    current = payload.get('current')
+    if isinstance(current, Mapping):
+        info = progress.get(int(current.get('order') or 0))
+        current = {**dict(current), 'answers': info} if info else dict(current)
+    return {**dict(payload), 'blocks': blocks, 'current': current}
+
+
+def next_item(db, user, run: ProcedureRun, *, secret: str, ttl: float,
+              settings=None, order: int | None = None) -> dict[str, Any]:
+    """The next unanswered item of the current commitment block only.
+
+    This is the missing half of the lesson: a block used to name a count of questions and
+    carry none, so "answer it" had no address. The item served is always one the block
+    already promised - the plan is a promise, and an item the plan never bound would make
+    the card's "2 of 3" a claim about a different lesson.
+
+    Returns the question payload with its signed receipt and the block's position in the
+    block, or a payload with ``question: None`` and the reason when nothing is owed.
+    """
+    if run.user_id != user.id:
+        raise KeyError('Unknown lesson run')
+    if run.status != 'active':
+        raise ValueError(f'This lesson is {run.status}, not active')
+    done = {int(row.get('order') or 0) for row in run.completed or []}
+    current = next((block for block in run.blocks or []
+                    if isinstance(block, Mapping) and int(block.get('order') or 0) not in done), None)
+    current_order = int((current or {}).get('order') or 0)
+    if order is not None and int(order) != current_order:
+        raise ValueError('This is not the current lesson block. Refresh the lesson before answering.')
+    progress = item_progress(db, run)
+    for block in [current] if current else []:
+        order = int(block.get('order') or 0)
+        info = progress.get(order)
+        if not info:
+            return {'run_id': run.id, 'block_order': order, 'question': None,
+                    'reason': 'The current activity is not a scored question block.', 'progress': {}}
+        if info['complete'] or not info['outstanding']:
+            return {'run_id': run.id, 'block_order': order, 'question': None,
+                    'reason': info.get('reason') or 'Every question in this block has an answer recorded.',
+                    'progress': info}
+        item_id = str(info['outstanding'][0])
+        bank = course_questions(run.course_id)
+        question = bank.get(item_id)
+        if question is None:
+            # The bank changed under a stored plan (a course was rebuilt). The plan is
+            # still the promise, so the block keeps owing the item and says why it cannot
+            # serve it - silently substituting a different question would be the plan
+            # lying about what it promised.
+            return {'run_id': run.id, 'block_order': order, 'question': None,
+                    'reason': (f'Scheduled item {item_id!r} is no longer in this '
+                               'course\'s question bank, so it cannot be served. Skip '
+                               'the block or rebuild the lesson.'),
+                    'progress': info}
+        artifact = dict(block.get('artifact') or {})
+        links = dict(artifact.get('item_receipts') or {})
+        ids = list(links.get(item_id) or [])
+        existing = db.scalar(select(Receipt).where(
+            Receipt.id.in_(ids), Receipt.user_id == user.id,
+            Receipt.question_id == item_id, Receipt.used.is_(False),
+            Receipt.expires_at > now_ts()).order_by(Receipt.issued_at.desc()).limit(1)) if ids else None
+        position = {'block_order': order, 'answered': info['answered'], 'total': info['total']}
+        reason = 'A question bound to this lesson block; submit its signed receipt through /attempts.'
+        if existing is not None:
+            payload = receipts.public(question, existing, secret, position, reason)
+        else:
+            payload = receipts.issue(db, user, question, mode='practice', ttl=ttl,
+                                     secret=secret, progress=position, reason=reason)
+            ids.append(payload.pop('receipt_id'))
+            links[item_id] = ids
+            artifact['item_receipts'] = links
+            # Reassign the JSON column so SQLAlchemy persists the runtime binding.
+            run.blocks = [{**dict(row), 'artifact': artifact}
+                          if int(row.get('order') or 0) == order else dict(row)
+                          for row in run.blocks or []]
+            db.flush()
+        return {'run_id': run.id, 'block_order': order, 'question': payload,
+                'progress': info}
+    return {'run_id': run.id, 'block_order': 0, 'question': None,
+            'reason': 'Every question this lesson promised has an answer recorded.',
+            'progress': {}}
+
+
 def advance_run(db, run: ProcedureRun, order: int, *, outcome: str = 'done',
                 seconds: int | None = None, note: str = '') -> ProcedureRun:
     """Mark one block done (or skipped) and return the run.
@@ -650,6 +867,13 @@ def advance_run(db, run: ProcedureRun, order: int, *, outcome: str = 'done',
     longer active. Each refusal is a real client bug - a double tap, a stale screen - and
     silently accepting it would make the progress record lie about how far the learner
     got.
+
+    It also refuses to complete a commitment block whose promised questions have no
+    answers. That refusal is the whole point of binding items: a block could previously
+    be marked "done" with nothing answered, which recorded a lesson that taught nobody
+    and left every measurement downstream of it with no input. Skipping is still allowed
+    and still recorded honestly - declining to practise is an outcome, whereas "done"
+    means the work happened.
     """
     if run.status != 'active':
         raise ValueError(f'This lesson is {run.status}, not active')
@@ -662,12 +886,29 @@ def advance_run(db, run: ProcedureRun, order: int, *, outcome: str = 'done',
     completed = list(run.completed or [])
     if any(int(row.get('order') or 0) == int(order) for row in completed):
         raise ValueError(f'Block {order} is already complete')
+    done_orders = {int(row.get('order') or 0) for row in completed}
+    current = next((row for row in blocks if int(row.get('order') or 0) not in done_orders), None)
+    if current is None or int(current.get('order') or 0) != int(order):
+        raise ValueError('This is not the current lesson block. Refresh the lesson before advancing.')
     if outcome not in {'done', 'skipped'}:
         raise ValueError('outcome must be done or skipped')
+    artifact = block.get('artifact') if isinstance(block.get('artifact'), Mapping) else {}
+    matters = served_items(artifact)
+    info = item_progress(db, run).get(int(order)) or {}
+    if outcome == 'done' and info and not info.get('complete'):
+        raise ValueError(
+            f'Block {order} promised {info["total"]} scored question(s) and '
+            f'{info["answered"]} have an answer recorded. '
+            + (info.get('reason') or 'Answer the rest before marking it done, or skip the block.'))
     completed.append({'order': int(order), 'kind': str(block.get('kind') or ''),
                       'outcome': outcome, 'at': now_ts(),
                       'seconds': int(seconds) if seconds is not None else None,
-                      'note': str(note or '')[:200]})
+                      'note': str(note or '')[:200],
+                      # What the block was worth, recorded beside what the learner said
+                      # they did. "Done" and "done, 0 of 3 answered" are different
+                      # facts and the progress record must not flatten them.
+                      **({'answers': {'answered': info['answered'],
+                                      'total': info['total']}} if matters else {})})
     run.completed = completed
     run.status = 'completed' if len(completed) >= len(blocks) else 'active'
     run.updated_at = now_ts()
@@ -791,13 +1032,13 @@ def _plan_dict(db, user, run: ProcedureRun) -> dict[str, Any]:
     ``.get`` fallbacks in the renderer.
     """
     blocks = [dict(row) for row in (run.blocks or []) if isinstance(row, Mapping)]
-    return {'enabled': True, 'concept_id': run.concept_id,
+    return with_item_progress(db, run, {'enabled': True, 'concept_id': run.concept_id,
             'concept_title': concept_title_for(user, run.concept_id),
             'course_id': run.course_id, 'budget_minutes': run.budget_minutes,
             'total_minutes': run.total_minutes, 'profile': run.profile_name,
             'hash': run.procedure_hash, 'blocks': blocks,
             'skipped': [dict(row) for row in (run.skipped or [])
-                        if isinstance(row, Mapping)]}
+                        if isinstance(row, Mapping)]})
 
 
 def prompt_context(db, user, concept_id: str, *, settings) -> tuple[dict[str, Any] | None, tuple[int, ...]]:

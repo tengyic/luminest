@@ -186,6 +186,34 @@ def test_every_concept_carries_a_verbatim_span_of_the_source():
         assert plan.graph.nodes[concept_id].provenance['licence_class'] == 'cc_by'
 
 
+def test_a_generated_lesson_has_an_independent_worked_example():
+    """The worked example must be work the learner can do, not the source pasted twice.
+
+    The first-person acceptance run published this as one of its three known
+    failures: the generated lesson's ``worked_example`` was a verbatim copy of
+    ``source_span``, so a lesson built from the learner's own notes had an
+    "example" that taught nothing. Provenance still has to stay exact, so the
+    passage is quoted *inside* the walkthrough while the block as a whole is a
+    numbered method built from that passage and the learner's own graph.
+    """
+    plan = build()
+    assert len(plan.concepts) >= cb.MIN_CONCEPTS
+    for concept_id, entry in plan.concepts.items():
+        blocks = entry['blocks']
+        example = next((b for b in blocks if b['kind'] == 'worked_example'), None)
+        assert example is not None, f'{concept_id} has no worked example'
+        body = example['body']
+        span = entry['source_span']
+        core = next(b['body'] for b in blocks if b['kind'] == 'concept')
+        assert body.strip() != span.strip(), f'{concept_id} repeats the source verbatim'
+        assert body.strip() != core.strip(), f'{concept_id} repeats the core idea verbatim'
+        assert len(body.split()) >= 25, f'{concept_id} has no real method to work through'
+        assert span.strip() in body, f'{concept_id} lost the exact source quotation'
+        assert entry['title'] in body, f'{concept_id} does not name its own subject'
+        for step in range(1, 6):
+            assert f'Step {step} -' in body, f'{concept_id} is missing step {step}'
+
+
 def test_extraction_is_deterministic():
     first, second = build(), build()
     assert [entry['title'] for entry in first.concepts.values()] == \

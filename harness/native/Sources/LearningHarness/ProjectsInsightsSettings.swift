@@ -30,6 +30,20 @@ struct ProjectEditor: View {
     @State private var reflection = ""
     @State private var usedAI = false
     @State private var disclosureConfirmed = false
+    /// A draft belongs to an account, not to a window. Scoping it to the signed-in
+    /// user id keeps two learners on one Mac from reading each other's unsubmitted
+    /// writing; the endpoint is the fallback before the account payload has loaded.
+    private var draftAccount: String {
+        let id = store.user["id"].string
+        return id.isEmpty ? store.endpoint : id
+    }
+    private var projectID: String { project["id"].string }
+    private func saveDraft() {
+        ProjectDrafts.save(account: draftAccount, project: projectID,
+                           draft: .init(text: text, reflection: reflection,
+                                        usedAI: usedAI, confirmed: disclosureConfirmed,
+                                        updatedAt: Date().timeIntervalSinceReferenceDate))
+    }
     var body: some View {
         HStack(alignment: .top, spacing: 20) {
             Card {
@@ -54,7 +68,25 @@ struct ProjectEditor: View {
             }.frame(width: 245)
         }.onChange(of: project) { _, updated in
             if !updated["feedback"].isNull { disclosureConfirmed = false }
-        }.onAppear { text = project["submission"].text("text", fallback: project["submission"].string); reflection = project["reflection"].string; usedAI = project["ai_disclosure"].string.hasPrefix("AI assistance was used") }
+        }.onAppear {
+            // A saved draft wins over the last *submission*: the latter is graded work,
+            // not what the learner is writing now. With no draft, a submitted project
+            // still opens showing what was handed in.
+            if let draft = ProjectDrafts.load(account: draftAccount, project: projectID) {
+                text = draft.text
+                reflection = draft.reflection
+                usedAI = draft.usedAI
+                disclosureConfirmed = draft.confirmed
+            } else {
+                text = project["submission"].text("text", fallback: project["submission"].string)
+                reflection = project["reflection"].string
+                usedAI = project["ai_disclosure"].string.hasPrefix("AI assistance was used")
+            }
+        }
+        .onChange(of: text) { _, _ in saveDraft() }
+        .onChange(of: reflection) { _, _ in saveDraft() }
+        .onChange(of: usedAI) { _, _ in saveDraft() }
+        .onChange(of: disclosureConfirmed) { _, _ in saveDraft() }
     }
 }
 struct InsightsView: View {
@@ -102,6 +134,8 @@ struct InsightsView: View {
                     }
                 }
             }
+            GradebookCard()
+            PerspectiveCard()
         }
     }
 }
@@ -472,13 +506,14 @@ struct SettingsPage: View {
             .sheet(isPresented: $deletePrompt) {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Permanently delete your account?").font(.system(size: 22, weight: .semibold))
-                    // Third revision, and the first two were wrong for the same reason: an
-                    // absolute sentence about irreversibility. "Cannot sign in or reach any
-                    // route again" is true while the erasure record survives and false if
-                    // both of its copies are removed or the whole data folder is replaced
-                    // from a backup — measured, not theorised. Each clause below is one a
-                    // reader could check, and the limit is stated rather than implied.
-                    Text("This removes your account and its learning records from the backend immediately, and signs it out everywhere on this Mac. The deletion is recorded outside the database, so restoring an old snapshot does not let the account sign back in. Recovery snapshots of the data can stay on this Mac until you remove them — the newest snapshot of each kind is kept indefinitely. If everything the app keeps in its data folder is removed or replaced from a backup, the app can no longer tell that the account was deleted. Export your data first if you want a copy.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
+                    // Fourth revision. The previous one got the direction of the caveat
+                    // wrong: the erasure record has a second copy *outside* the data
+                    // folder, so removing or replacing that folder does not lose it —
+                    // measured, that case still answers 401. What actually defeats the
+                    // record is deleting it, or replacing the folder that contains both.
+                    // "up to four rollback copies" is added because the newest-of-each-kind
+                    // clause alone understated what is kept.
+                    Text("This removes your account and its learning records from the backend immediately, and signs it out everywhere on this Mac. The deletion is recorded outside the database, so restoring an old snapshot does not let the account sign back in. Recovery snapshots of the data can stay on this Mac until you remove them — the newest snapshot of each kind, and up to four rollback copies, are kept. If the deletion record itself is removed, or the whole folder the app keeps its data in is replaced from an older backup, the app can no longer tell that the account was deleted. Export your data first if you want a copy.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
                     TextField("Type DELETE MY ACCOUNT", text: $deletePhrase).textFieldStyle(.roundedBorder)
                     HStack { Button("Cancel") { deletePrompt = false }.buttonStyle(LuminfestButtonStyle(primary: false)); Spacer(); Button("Delete permanently", role: .destructive) { store.run { await store.deleteAccount(); if !store.authenticated { deletePrompt = false } } }.buttonStyle(LuminfestButtonStyle()).disabled(deletePhrase != "DELETE MY ACCOUNT") }
                     if let error = store.error { Text(error).font(.system(size: 11)).foregroundStyle(.red) }

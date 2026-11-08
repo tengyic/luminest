@@ -59,7 +59,7 @@ from .evidence import ConceptFacts, LearnerEvidence
 
 __all__ = ['ACTIVITIES', 'INPUT_KINDS', 'CourseProcedure', 'ProcedureAssets',
            'ProcedureBlock', 'compile_procedure', 'procedure_hash',
-           'render_procedure_block']
+           'render_procedure_block', 'served_items']
 
 
 #: Every activity a lesson may contain, with the two facts the planner needs about it:
@@ -165,6 +165,16 @@ class ProcedureAssets:
     worked_example: Mapping[str, Any] | None = None
     #: Authored retrieval prompts, verbatim, for the in-chat example questions.
     practice_prompts: tuple[str, ...] = ()
+    #: The concept's scored items, in the order the scheduler would serve them.
+    #:
+    #: A commitment block binds the ids it promises, and that list is the whole point:
+    #: before it existed a practice block said "3 example questions" and carried no
+    #: questions, so a client could mark it done without one ever being served or
+    #: answered. The ids come from the resolver, not from the compiler, because ordering
+    #: them needs the learner's states and the compiler is a pure function of its inputs.
+    #: Empty means "no scored items exist for this concept", which the compiler reports
+    #: rather than filling with something invented.
+    practice_items: tuple[str, ...] = ()
     #: How many scored items the question bank holds for this concept.
     practice_count: int = 0
     prerequisites: tuple[str, ...] = ()
@@ -402,6 +412,11 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
     def push(kind: str, minutes: int, title: str, purpose: str, why: str,
              artifact: Mapping[str, Any] | None = None,
              produces: Sequence[str] = (), optional: bool = True) -> None:
+        if kind in {'diagnostic', 'practice'} and not assets.practice_items:
+            skip(kind, 'No scored items are available for this concept. Teaching can '
+                       'continue, but this lesson cannot produce quiz evidence until '
+                       'the course question bank is rebuilt.')
+            return
         blocks.append(ProcedureBlock(
             order=len(blocks) + 1, kind=kind, minutes=max(1, int(minutes)),
             title=title, purpose=purpose, why=why,
@@ -445,18 +460,21 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
     # than a guess about what the learner needs, and they are the only block that can
     # legitimately run before anything has been taught.
     diagnostic = False
+    diagnostic_items: list[str] = []
     if evidence.attempts == 0:
-        diagnostic = True
+        diagnostic = bool(assets.practice_items)
         size = max(1, int(cfg.diagnostic_items))
         if assets.practice_count:
             size = min(size, assets.practice_count)
+        diagnostic_items = _promised_items(assets, size)
         push('diagnostic', _minutes_for('diagnostic', cfg), 'Quick check',
              ACTIVITIES['diagnostic']['does'],
              'No scored attempt exists for this concept, so there is no evidence to '
              'teach against yet. Two low-stakes questions cost three minutes and '
              'replace an assumption with a measurement.',
              {'kind': 'questions', 'mode': 'practice', 'concept_id': facts.id,
-              'count': size, 'purpose': 'diagnostic', 'scored': True},
+              'count': len(diagnostic_items) or size, 'purpose': 'diagnostic',
+              'scored': True, 'items': diagnostic_items},
              produces=('accuracy',))
     else:
         skip('diagnostic', f'Not needed: {evidence.attempts} recorded attempt(s) '
@@ -584,6 +602,7 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
              else 'The scheduler chooses the items; the harness chooses how many.')),
          {'kind': 'questions', 'mode': 'practice', 'concept_id': facts.id,
           'count': size, 'selection': 'scheduler',
+          'items': _practice_pool(assets, diagnostic_items),
           'examples': [prompt for prompt in assets.practice_prompts[:2]]},
          produces=('attempts', 'mastery'), optional=False)
 
@@ -769,7 +788,8 @@ def _allocate(blocks: list[ProcedureBlock], budget: int, cfg, skip,
     if practice is not None:
         while preferred and _practice_count_of(practice) < preferred:
             grown = _set_practice(practice, _practice_count_of(practice) + 1, cfg)
-            if total - practice.minutes + grown.minutes > budget:
+            if (_practice_count_of(grown) <= _practice_count_of(practice)
+                    or total - practice.minutes + grown.minutes > budget):
                 break
             total += grown.minutes - practice.minutes
             chosen[chosen.index(practice)] = grown
@@ -790,7 +810,8 @@ def _allocate(blocks: list[ProcedureBlock], budget: int, cfg, skip,
     if practice is not None:
         while _practice_count_of(practice) < limit:
             grown = _set_practice(practice, _practice_count_of(practice) + 1, cfg)
-            if total - practice.minutes + grown.minutes > budget:
+            if (_practice_count_of(grown) <= _practice_count_of(practice)
+                    or total - practice.minutes + grown.minutes > budget):
                 break
             total += grown.minutes - practice.minutes
             chosen[chosen.index(practice)] = grown
@@ -834,15 +855,78 @@ def _practice_count_of(block: ProcedureBlock) -> int:
         return 1
 
 
+def _promised_items(assets: ProcedureAssets, size: int) -> list[str]:
+    """The items a commitment block binds: at most ``size``, never more than exist.
+
+    A block promising three questions over a two-item bank is a lie in the interface, and
+    the learner discovers it at question three - which is also why the caller has already
+    clamped ``size`` to ``practice_count``. An empty list is a real answer here (the
+    concept has no scored items); it is not a placeholder for "some questions somewhere".
+    """
+    return [str(item) for item in assets.practice_items[:max(0, int(size))]]
+
+
+def _practice_pool(assets: ProcedureAssets, already_promised: Sequence[str]) -> list[str]:
+    """The pool a practice block draws from, after the diagnostic has taken its items.
+
+    A lesson whose diagnostic asks 1/2 + 1/4 and whose practice then asks the same item
+    records two attempts that look like two observations and are one. The practice pool is
+    therefore the scheduler's order minus what the diagnostic already bound, so a normal
+    four-item bank yields four distinct questions instead of a two-item bank asked twice.
+
+    When the bank cannot cover both blocks, repetition is the honest fallback rather than
+    an empty practice block: the lesson still needs the evidence practice produces, and the
+    alternative - a practice block with nothing to ask - is the defect this whole change
+    exists to remove.
+    """
+    pool = [str(item) for item in assets.practice_items]
+    remaining = [item for item in pool if item not in set(already_promised)]
+    return remaining or pool
+
+
+def served_items(artifact: Mapping[str, Any]) -> list[str]:
+    """The items a block will actually serve, in the order it will serve them.
+
+    Two numbers, one list. ``count`` says how much of the pool this session spends (the
+    allocator moves it as the budget changes); ``items`` says which items the pool holds.
+    Everything that asks "is this block answered yet?" reads this function, so the guard
+    in the route, the client's progress badge and the tutor's prompt cannot each decide
+    the question differently.
+
+    Blocks compiled before item binding existed carry no ``items`` key and therefore an
+    empty list: they are not refused, they simply have no commitment to enforce, which is
+    the honest reading of a plan that only ever promised an activity.
+    """
+    raw = artifact.get('items') if isinstance(artifact, Mapping) else None
+    pool = [str(item) for item in (raw or []) if str(item)]
+    try:
+        count = int(artifact.get('count') or len(pool) or 0)
+    except (TypeError, ValueError):
+        count = len(pool)
+    return pool[:count] if count >= 0 else pool
+
+
 def _set_practice(block: ProcedureBlock, count: int, cfg) -> ProcedureBlock:
     """One practice block at an exact item count, with every field moved together.
 
     A block whose title says "4 example questions" while its artifact says ``count: 2``
     is worse than either number alone: the prompt and the client would disagree about
     what the learner is doing.
+
+    ``count`` is how many items the lesson will *serve*; ``items`` is the fixed,
+    scheduler-ordered pool it serves them from, and it is deliberately not truncated.
+    Truncating it looked tidier and was wrong: allocation cuts the block to one item
+    first and grows it back as budget allows, so the cut would have thrown away the
+    second and third ids and a block that grew back to three questions could only ever
+    serve one. The pool is the promise; ``count`` is how much of it this session uses
+    (``served_items``) - clamped to the pool, because growing to four questions over a
+    three-item pool is the same lie in the other direction.
     """
     count = max(1, int(count))
     artifact = dict(block.artifact)
+    pool = artifact.get('items')
+    if pool:
+        count = max(1, min(count, len(pool)))
     artifact['count'] = count
     minutes = max(1, math.ceil(count * float(cfg.practice_minutes_per_item)))
     return ProcedureBlock(
@@ -917,7 +1001,7 @@ def _artifact_identity(artifact: Mapping[str, Any]) -> dict[str, Any]:
     happen to live today.
     """
     keep = ('kind', 'concept_id', 'mode', 'slug', 'title', 'count', 'purpose',
-            'provider', 'watch_url', 'slide_count')
+            'provider', 'watch_url', 'slide_count', 'items')
     return {key: artifact[key] for key in keep if key in artifact}
 
 
@@ -1017,6 +1101,14 @@ def render_procedure_block(procedure: Any, *, completed: Sequence[int] = (),
         for row in skipped[:8]:
             lines.append(f'    - {str(row.get("kind") or "")[:24]}: '
                          f'{str(row.get("reason") or "")[:220]}')
+    if current is not None and (current.get('artifact') or {}).get('kind') == 'questions':
+        info = current.get('answers') or {}
+        lines.insert(3, '- Answer channel: the native lesson question sheet serves the bound '
+                        'items with signed receipts and sends answers through /attempts. '
+                        f'Recorded for this block: {info.get("answered", 0)} of '
+                        f'{info.get("total", (current.get("artifact") or {}).get("count", 0))}. '
+                        'Do not interpret a chat claim, a timer or Done as a scored answer. '
+                        'Keep error diagnoses tentative and use their next_action for support.')
     if current is not None:
         lines.append(f'- This turn runs block {current.get("order")} only. Do not '
                      'preview later blocks in detail, and do not start a later block '

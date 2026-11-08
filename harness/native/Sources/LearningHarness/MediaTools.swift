@@ -25,6 +25,11 @@ struct SafeLessonLink: View {
     /// button says which engine is talking, because "no third-party AI" is no
     /// longer true once the instance runs a voice backend.
     @Published var usingBackendVoice = false
+    /// What the last read-aloud actually did, in one sentence. A press that produces
+    /// no sound and no explanation reads as a broken button; the refusal is named
+    /// instead of swallowed, so the learner can tell "no lesson loaded" from
+    /// "the voice backend is down" from "it is reading".
+    @Published var status = ""
     private let synthesizer = AVSpeechSynthesizer()
     private var player: AVAudioPlayer?
     private weak var api: APIClient?
@@ -42,7 +47,11 @@ struct SafeLessonLink: View {
         stop()
         let blocks = lesson["blocks"].array.filter { LessonBlock.kinds.contains($0["kind"].string) || $0["kind"].string.isEmpty }
         let text = ([lesson["title"].string] + blocks.flatMap { [$0["title"].string, $0["body"].string, $0["formula"].string] }).filter { !$0.isEmpty }.joined(separator: ". ")
-        guard !text.isEmpty else { return }
+        guard !text.isEmpty else {
+            status = "There is no lesson text to read yet. Open a lesson on Studio first."
+            return
+        }
+        status = ""
         readAloud(text)
     }
 
@@ -52,17 +61,25 @@ struct SafeLessonLink: View {
     /// is slow. A read-aloud button that dies because a local service is down is
     /// a worse button than one that changes voice.
     func readAloud(_ text: String) {
-        guard let api else { speakOnDevice(text); return }
+        guard let api else {
+            status = "Reading with this Mac's built-in voice (no local voice backend is connected)."
+            speakOnDevice(text)
+            return
+        }
         // The provider caps one request at 4096 characters; the device voice has
         // no such limit, so a long lesson reads in full either way.
         let payload = String(text.prefix(4096))
+        status = "Asking the local voice backend to read this lesson…"
         Task {
             do {
                 let data = try await api.data("/voice/speak", method: "POST",
                                              body: ["text": payload])
                 try self.play(data)
                 self.usingBackendVoice = true
+                self.status = "Reading with the local VoiceStudio voice backend."
             } catch {
+                self.status = "The local voice backend refused (\(error.localizedDescription)); "
+                    + "reading with this Mac's built-in voice instead."
                 self.speakOnDevice(text)
             }
         }
@@ -90,6 +107,7 @@ struct SafeLessonLink: View {
         synthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
         usingBackendVoice = false
+        status = ""
     }
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) { Task { @MainActor in self.isSpeaking = false } }
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) { Task { @MainActor in self.isSpeaking = self.synthesizer.isSpeaking } }

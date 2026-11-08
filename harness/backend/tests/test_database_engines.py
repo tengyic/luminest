@@ -20,10 +20,15 @@ import sys
 import uuid
 from pathlib import Path
 
-import psycopg
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine, inspect, text
+from sqlalchemy import inspect, text
+from sqlalchemy.engine import make_url
+
+try:
+    import psycopg
+except ImportError:
+    psycopg = None
 
 from app.config import Settings
 from app.db import SCHEMA_VERSION, make_database
@@ -47,12 +52,43 @@ def _admin_connection():
 
 
 def postgres_available() -> tuple[bool, str]:
+    if psycopg is None:
+        return False, 'PostgreSQL integration unavailable: install psycopg to run these cases'
     try:
         with _admin_connection() as connection:
             connection.execute('select 1')
         return True, ''
     except Exception as exc:  # noqa: BLE001 - any failure means "no server here"
-        return False, f'no PostgreSQL server at {ADMIN_DSN}: {type(exc).__name__}: {exc}'
+        # Connection exceptions and the admin DSN can contain credentials.
+        return False, f'no PostgreSQL server reachable via HARNESS_TEST_PG_ADMIN ({type(exc).__name__})'
+
+
+def _database_url(admin_dsn: str, database: str) -> str:
+    return make_url(admin_dsn).set(drivername='postgresql+psycopg', database=database).render_as_string(
+        hide_password=False)
+
+
+def test_postgres_database_url_preserves_connection_options():
+    admin = make_url('postgresql://parity:synthetic%40password@db.example.test:5544/postgres'
+                     '?sslmode=require&connect_timeout=7&application_name=parity')
+    target = make_url(_database_url(admin.render_as_string(hide_password=False), 'parity_test'))
+    assert target == admin.set(drivername='postgresql+psycopg', database='parity_test')
+    assert target.password == admin.password
+
+
+def test_postgres_unavailable_reason_does_not_expose_credentials(monkeypatch):
+    monkeypatch.setattr(sys.modules[__name__], 'psycopg', object())
+    monkeypatch.setattr(sys.modules[__name__], 'ADMIN_DSN', 'postgresql://user:private@host/postgres')
+
+    def unavailable():
+        raise RuntimeError('connection refused: password=private')
+
+    monkeypatch.setattr(sys.modules[__name__], '_admin_connection', unavailable)
+    available, reason = postgres_available()
+    assert not available
+    assert 'HARNESS_TEST_PG_ADMIN' in reason
+    assert 'private' not in reason
+    assert 'RuntimeError' in reason
 
 
 @pytest.fixture
@@ -64,7 +100,7 @@ def postgres_url():
     with _admin_connection() as connection:
         connection.execute(f'CREATE DATABASE {name}')
     try:
-        yield f'postgresql+psycopg:///{name}'
+        yield _database_url(ADMIN_DSN, name)
     finally:
         with _admin_connection() as connection:
             connection.execute(
@@ -152,14 +188,15 @@ def journey(client: TestClient) -> dict:
 
 @pytest.mark.parametrize('engine', ['sqlite', 'postgres'])
 def test_the_same_journey_behaves_the_same_on_both_engines(engine, monkeypatch, tmp_path,
-                                                           postgres_url):
+                                                           request):
     """SQLite and PostgreSQL must agree on every observable outcome above.
 
     The comparison is on *behaviour*, never on generated ids or epoch timestamps -- those
     legitimately differ per row. If this test fails, one engine is serving a different
     product and the desktop/hosted split is unsound.
     """
-    url = postgres_url if engine == 'postgres' else f'sqlite:///{tmp_path / "harness.sqlite3"}'
+    url = (request.getfixturevalue('postgres_url') if engine == 'postgres'
+           else f'sqlite:///{tmp_path / "harness.sqlite3"}')
     with build_client(monkeypatch, tmp_path / engine, url) as client:
         result = journey(client)
 
@@ -176,9 +213,10 @@ def test_the_same_journey_behaves_the_same_on_both_engines(engine, monkeypatch, 
 
 
 @pytest.mark.parametrize('engine', ['sqlite', 'postgres'])
-def test_a_fresh_install_creates_the_full_schema(engine, monkeypatch, tmp_path, postgres_url):
+def test_a_fresh_install_creates_the_full_schema(engine, monkeypatch, tmp_path, request):
     """A brand-new database must contain every table the product promises, not a subset."""
-    url = postgres_url if engine == 'postgres' else f'sqlite:///{tmp_path / "fresh.sqlite3"}'
+    url = (request.getfixturevalue('postgres_url') if engine == 'postgres'
+           else f'sqlite:///{tmp_path / "fresh.sqlite3"}')
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path / 'fresh'))
     monkeypatch.setenv('HARNESS_DATABASE_URL', url)

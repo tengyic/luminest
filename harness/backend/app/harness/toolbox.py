@@ -625,23 +625,62 @@ def check_understanding(ctx: ToolContext, concept_id: str, exclude: Sequence[str
     the bank stays authoritative and generation is used to *extend* it, never to
     replace it silently.
     """
-    lesson_id = concept_id if concept_id in CONCEPTS else GRAPH_TO_LESSON.get(concept_id, '')
-    pool = [q for q in QUESTIONS.values() if q['concept_id'] == lesson_id]
+    from .. import courses, exam_guard, receipts, security
+    from ..curriculum import course_concepts, course_questions
+    from fastapi import HTTPException
+
+    db, user, settings = ctx.db, ctx.user, ctx.settings
+    if db is None or user is None or not ctx.user_id or settings is None:
+        return ToolResult('check_understanding', False,
+                          refused='A signed-in account, database and receipt settings are '
+                                  'required to issue an answerable question. No receipt was issued.')
+    try:
+        user = security._live_user(db, ctx.user_id, settings)
+        exam_guard.block(db, user)
+        course = courses.course(getattr(user, 'course_id', None))
+    except HTTPException as exc:
+        return ToolResult('check_understanding', False, refused=str(exc.detail))
+    except courses.UnknownCourse:
+        return ToolResult('check_understanding', False,
+                          refused='The enrolled course is unavailable. Choose a valid course '
+                                  'before requesting a question.')
+    if ctx.course_id and ctx.course_id != course.id:
+        return ToolResult('check_understanding', False,
+                          refused='The tool course does not match the authenticated enrollment.')
+    concepts = course_concepts(course.id)
+    lesson_id = concept_id if concept_id in concepts else next(
+        (cid for cid, lesson in concepts.items()
+         if lesson.get('graph_id') == concept_id), '')
+    lesson = concepts.get(lesson_id)
+    if lesson is None:
+        return ToolResult('check_understanding', False,
+                          refused=f'Concept {concept_id!r} is not in the enrolled course.')
+    pool = [q for q in course_questions(course.id).values()
+            if q['concept_id'] == lesson_id]
     excluded = set(exclude)
     pool = [q for q in pool if q['id'] not in excluded] or pool
     if not pool:
         return ToolResult('check_understanding', False,
-                          error=f'No authored retrieval item covers {concept_id!r}',
-                          notes=['The concept exists in the graph but has no lesson-layer item yet.'])
+                          refused=f'No retrieval item covers {concept_id!r} in this course. '
+                                  'No question or receipt was invented.')
+    from ..db import Secret
+    configured_secret = getattr(settings, 'secret', '')
+    stored_secret = db.get(Secret, 'receipt') if not configured_secret else None
+    secret = configured_secret or (stored_secret.value if stored_secret else '')
+    ttl = getattr(settings, 'receipt_ttl', None)
+    if not secret or ttl is None:
+        return ToolResult('check_understanding', False,
+                          refused='Receipt signing is unavailable in this runtime. '
+                                  'Start the authenticated application before requesting a check.')
     pool.sort(key=lambda q: q['id'])
-    question = pool[0]
+    question = receipts.issue(
+        db, user, pool[0], mode='practice', ttl=ttl, secret=secret,
+        reason='The tutor requested a retrieval check for this enrolled-course concept.')
     return ToolResult('check_understanding', True,
-                      {'question': {k: question[k] for k in ('id', 'concept_id', 'concept_title',
-                                                             'prompt', 'options', 'kind',
-                                                             'expected_seconds')},
-                       'available': len(pool)},
-                      citations=[_lesson_citation(CONCEPTS[lesson_id])],
-                      notes=['Answers and diagnoses stay server-side until the attempt is scored.'])
+                      {'question': question, 'available': len(pool)},
+                      citations=[_lesson_citation(lesson)],
+                      notes=['Submit this signed question to /api/v1/attempts. Answers and '
+                             'diagnoses stay server-side until the attempt is scored.'])
 
 
 def compose_content(ctx: ToolContext, concept_id: str, kind: str,
@@ -955,23 +994,21 @@ def _require_teacher(ctx, tool: str) -> ToolResult | None:
     model-supplied arguments; an unknown or learner role gets a named refusal rather
     than an empty success, mirroring creation_gate's fail-close posture.
 
-    The refusal names the *remedy*, not just the wall. A flat "teacher-facing tool"
-    sends the tutor back to the learner with "no", which reads as "the harness cannot
-    do this" when the truth is "this account may not". On a single-user desktop
-    instance the operator is both people, so the sentence says what to change: sign in
-    as a teacher-role account (or promote this one) and the same call succeeds.
+    Shared publishing and classroom operations remain privileged. Personal creation
+    is a separate scope, not a reason to grant a learner a teacher or admin role.
     """
     role = _tools_creation._principal_role(ctx)
     if role not in {'teacher', 'staff', 'admin'}:
         return ToolResult(tool, False,
                           refused=f'{tool} is a teacher-facing tool (fail-closed); the '
                                   f'authenticated role is {role or "unknown"}. The '
-                                  f'capability exists in this harness — to use it, sign in '
-                                  f'as a teacher-role account (on a single-user instance, '
-                                  f'promote this account or create a teacher one). What '
-                                  f'works from this account right now: image_search, '
-                                  f'find_image, board_place_media, board_apply, '
-                                  f'generate_slides and text_to_speech.')
+                                  f'operation affects shared course or classroom content '
+                                  f'and requires an authorized teacher account. Personal '
+                                  f'learning tools do not require role promotion: '
+                                  f'compose_content, image_search, find_image, '
+                                  f'board_place_media, board_apply, generate_slides and '
+                                  f'text_to_speech keep their own ownership, exam and '
+                                  f'provider gates.')
     return None
 
 

@@ -134,6 +134,11 @@ struct StudioView: View {
                          ? "Read by the local VoiceStudio voice backend — the same voice the tutor uses."
                          : "Read by this Mac's built-in voice. Start VoiceStudio for the tutor's voice; the button falls back to this one when it is not running.")
                         .font(.system(size: 10)).foregroundStyle(Palette.secondary)
+                    if !speech.status.isEmpty {
+                        Text(speech.status).font(.system(size: 10)).foregroundStyle(Palette.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier("lesson.read.status")
+                    }
                     HStack(alignment: .top, spacing: 22) {
                         VStack(alignment: .leading, spacing: 16) {
                             ForEach(Array(store.lesson["blocks"].array.enumerated()), id: \.offset) { index, block in

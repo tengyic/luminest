@@ -60,7 +60,7 @@ from .motivation import badges, certificate, node_milestone, quiz_streak, streak
 from .policy import MoveScore, score_moves, select_move
 from .procedure import (ACTIVITIES, INPUT_KINDS, CourseProcedure, ProcedureAssets,
                         ProcedureBlock, compile_procedure, procedure_hash,
-                        render_procedure_block)
+                        render_procedure_block, served_items)
 from .retrieval import RetrievalPlan, ReviewItem, due_concepts, is_due, plan_retrieval
 from .render import (render_modalities_section, render_move_section, render_persona_section,
                      render_plan_block, render_retrieval_section)
@@ -81,5 +81,5 @@ __all__ = [
     'plan_session', 'procedure_hash', 'quiz_streak',
     'render_modalities_section', 'render_move_section', 'render_persona_section',
     'render_plan_block', 'render_procedure_block', 'render_retrieval_section',
-    'score_moves', 'select_move', 'streak', 'supervise',
+    'score_moves', 'select_move', 'served_items', 'streak', 'supervise',
 ]

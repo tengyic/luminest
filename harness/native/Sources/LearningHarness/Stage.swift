@@ -216,20 +216,21 @@ import WebKit
 
 // MARK: - TTS button
 
-/// Small read-aloud toggle used on tutor transcript rows. On-device voice only.
+/// Small read-aloud toggle used on tutor transcript rows. Speaks in the product's voice
+/// (VoiceStudio), and names the fallback when the voice service is not available.
 struct SpeakerButton: View {
     let text: String
     @StateObject private var voice = VoiceIO()
     var body: some View {
         Button {
-            if voice.speaking { voice.stopSpeaking() } else { voice.speak(text) }
+            if voice.speaking { voice.stopSpeaking() } else { voice.speakThroughVoiceStudio(text) }
         } label: {
             Image(systemName: voice.speaking ? "speaker.wave.3.fill" : "speaker.wave.2")
                 .font(.system(size: 10))
         }
         .buttonStyle(.plain)
         .foregroundStyle(Palette.secondary)
-        .help("Read this reply aloud (on-device voice)")
+        .help("Read this reply aloud in the tutor's voice")
     }
 }
 
@@ -285,7 +286,9 @@ struct StageView: View {
                     guard voice.conversation else { return }
                     let last = store.messages.last(where: { $0["role"].string != "user" })
                     let reply = last?.text("content", fallback: last?.text("message", fallback: "") ?? "") ?? ""
-                    if !reply.isEmpty { voice.speak(reply) }
+                    // In the tutor's own voice, not the system one: a duplex session
+                    // must not change the teacher's voice the moment the learner speaks.
+                    if !reply.isEmpty { voice.speakThroughVoiceStudio(reply) }
                 }
             }
             stage.startPolling()
@@ -349,12 +352,12 @@ struct StageView: View {
                 store.recordInteraction("voice.speak")
                 let last = store.messages.last(where: { $0["role"].string != "user" })
                 let text = last?.text("content", fallback: last?.text("message", fallback: "") ?? "")
-                if voice.speaking { voice.stopSpeaking() } else { voice.speak(text ?? "") }
+                if voice.speaking { voice.stopSpeaking() } else { voice.speakThroughVoiceStudio(text ?? "") }
             } label: {
                 Image(systemName: voice.speaking ? "speaker.wave.3" : "speaker.wave.2")
             }.buttonStyle(LuminfestButtonStyle(primary: false))
                 .disabled(store.messages.isEmpty)
-                .help("Read the tutor's latest reply aloud (on-device voice)")
+                .help("Read the tutor's latest reply aloud in the tutor's voice")
             // ASR: push-to-talk → transcript goes straight into the tutor chat.
             Button {
                 store.recordInteraction("voice.dictate")

@@ -55,6 +55,47 @@
       <button id="sim-refresh" class="btn btn-ghost btn-small" title="Reload simulation">⟳ Reload sim</button>
     </div>
 
+    <details class="lesson-panel" id="lesson-panel">
+      <summary>Lesson questions <span class="studio-note">— secondary browser companion; the native app is the primary lesson surface</span></summary>
+      <div class="lesson-content">
+        <div class="studio-row">
+          <label for="lesson-concept">Concept</label>
+          <select id="lesson-concept" class="studio-field" disabled></select>
+          <button id="lesson-preview" class="btn btn-small" disabled>Preview / resume</button>
+          <button id="lesson-start" class="btn btn-primary btn-small hidden">Start lesson</button>
+          <button id="lesson-refresh" class="btn btn-small hidden">Refresh run</button>
+        </div>
+        <div id="lesson-status" class="studio-status" role="status" aria-live="polite">Paste an access token in the sidebar to load your course.</div>
+        <div id="lesson-plan" class="lesson-plan hidden"></div>
+        <div id="lesson-current" class="hidden">
+          <h2 id="lesson-title"></h2>
+          <div id="lesson-progress" class="studio-note"></div>
+          <p id="lesson-activity"></p>
+          <form id="lesson-answer" class="hidden">
+            <fieldset id="lesson-answer-fields">
+              <legend id="lesson-prompt"></legend>
+              <div id="lesson-options" class="lesson-options"></div>
+              <div id="lesson-text-row" class="hidden">
+                <label for="lesson-answer-text">Your answer</label>
+                <input id="lesson-answer-text" class="studio-field" maxlength="2000" autocomplete="off">
+              </div>
+              <div id="lesson-explanation-row" class="hidden">
+                <label for="lesson-explanation">Explain why your answer is right in your own words (at least 20 characters).</label>
+                <textarea id="lesson-explanation" maxlength="2000" rows="3"></textarea>
+              </div>
+            </fieldset>
+            <button id="lesson-submit" class="btn btn-primary btn-small" type="submit">Submit answer</button>
+          </form>
+          <div id="lesson-feedback" class="lesson-feedback hidden" role="status" aria-live="polite"></div>
+          <div class="studio-row">
+            <button id="lesson-next" class="btn btn-small hidden">Next question</button>
+            <button id="lesson-done" class="btn btn-primary btn-small">Done</button>
+            <button id="lesson-skip" class="btn btn-small">Skip block</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
     <div class="canvas-wrap" id="canvas-wrap">
       <div class="canvas-head">
         <span class="panel-label">Simulation canvas</span>

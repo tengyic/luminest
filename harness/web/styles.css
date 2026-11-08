@@ -244,6 +244,23 @@ body { background: var(--bg-base); color: var(--text-primary); font-size: 14px; 
   .student-composer .category-row { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* ------------------------------------------------------- lesson companion */
+.lesson-panel { flex: none; max-height: 45vh; overflow-y: auto; border-bottom: 1px solid var(--border); background: var(--bg-panel); }
+.lesson-panel > summary { padding: 8px 14px; cursor: pointer; font-size: 12px; font-weight: 600; }
+.lesson-content { padding: 0 14px 12px; display: grid; gap: 8px; }
+.lesson-plan { font-size: 12px; white-space: pre-wrap; }
+#lesson-current { display: grid; gap: 8px; }
+#lesson-current h2 { margin: 0; font-size: 14px; }
+#lesson-activity { margin: 0; font-size: 12px; white-space: pre-wrap; }
+#lesson-answer { display: grid; gap: 8px; }
+#lesson-answer fieldset { margin: 0; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius); min-width: 0; display: grid; gap: 8px; }
+#lesson-prompt { white-space: pre-wrap; font-size: 13px; }
+.lesson-options { display: grid; gap: 6px; }
+.lesson-options label { display: flex; align-items: baseline; gap: 8px; font-size: 12px; white-space: pre-wrap; }
+#lesson-text-row, #lesson-explanation-row { display: grid; gap: 5px; font-size: 12px; }
+#lesson-explanation { width: 100%; resize: vertical; font: inherit; border: 1px solid var(--border); border-radius: var(--radius); padding: 6px; }
+.lesson-feedback { white-space: pre-wrap; background: var(--bg-inset); padding: 9px; border-radius: var(--radius); font-size: 12px; }
+
 /* ------------------------------------------------------- course studio */
 .course-studio {
   border-bottom: 1px solid var(--border); background: var(--bg-panel);

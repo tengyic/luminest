@@ -29,21 +29,37 @@ def generate(port=8766):
     def refs(values):
         return '(' + ', '.join(values) + ',)'
 
-    sources = sorted((ROOT / 'harness/native/Sources/LearningHarness').glob('*.swift'))
+    base = ROOT / 'harness/native/Sources/LearningHarness'
+    # Recursive on purpose: the sources are organised into Shared/ and Features/, and a
+    # non-recursive glob silently dropped every file below the top level — the UI test
+    # target still built, against a subset of the app, and nothing reported the omission.
+    sources = sorted(base.rglob('*.swift'))
     if not sources:
         raise RuntimeError('No native application Swift sources found')
-    native_refs, native_build = [], []
+    native_refs, native_build, by_directory = [], [], {}
     for source in sources:
-        ref = add('source:' + source.name, 'isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ' + quote('../../native/Sources/LearningHarness/' + source.name) + '; sourceTree = "<group>";')
+        relative = source.relative_to(base).as_posix()
+        # The identity key carries the subpath for the same reason: two files in different
+        # directories can share a basename, and a `uid` collision would fold them into one
+        # build entry — one of them compiled, the other silently absent.
+        ref = add('source:' + relative, 'isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ' + quote('../../native/Sources/LearningHarness/' + relative) + '; sourceTree = "<group>";')
         native_refs.append(ref)
-        native_build.append(add('build:' + source.name, f'isa = PBXBuildFile; fileRef = {ref};'))
+        native_build.append(add('build:' + relative, f'isa = PBXBuildFile; fileRef = {ref};'))
+        by_directory.setdefault(relative.rsplit('/', 1)[0] if '/' in relative else '', []).append(ref)
+    # Virtual groups (no `path`) so their children keep resolving through the parent group's
+    # `path = Tests`, which is what makes the "../../native/..." references line up.
+    directory_groups = [
+        add('nativegroup:' + directory,
+            f'isa = PBXGroup; name = {quote(directory)}; sourceTree = "<group>"; children = ' + refs(by_directory[directory]) + ';')
+        for directory in sorted(by_directory) if directory
+    ]
     test_ref = add('testsource', 'isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeWorkflowTests.swift; sourceTree = "<group>";')
     test_build = add('testbuild', f'isa = PBXBuildFile; fileRef = {test_ref};')
     configuration_ref = add('runnerconfig', 'isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerConfiguration.swift; sourceTree = "<group>";')
     configuration_build = add('runnerconfigbuild', f'isa = PBXBuildFile; fileRef = {configuration_ref};')
     app_product = add('appproduct', 'isa = PBXFileReference; explicitFileType = wrapper.application; path = LearningHarnessUITarget.app; sourceTree = BUILT_PRODUCTS_DIR;')
     test_product = add('testproduct', 'isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = NativeHarnessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR;')
-    native_group = add('nativegroup', 'isa = PBXGroup; name = NativeSources; path = Tests; sourceTree = "<group>"; children = ' + refs(native_refs) + ';')
+    native_group = add('nativegroup', 'isa = PBXGroup; name = NativeSources; path = Tests; sourceTree = "<group>"; children = ' + refs(by_directory.get('', []) + directory_groups) + ';')
     tests_group = add('testgroup', f'isa = PBXGroup; path = Tests; sourceTree = "<group>"; children = ({test_ref}, {configuration_ref},);')
     products_group = add('productgroup', f'isa = PBXGroup; name = Products; sourceTree = "<group>"; children = ({app_product}, {test_product},);')
     main_group = add('main', f'isa = PBXGroup; sourceTree = "<group>"; children = ({native_group}, {tests_group}, {products_group},);')
@@ -70,6 +86,12 @@ def generate(port=8766):
                 'CLANG_ENABLE_MODULES': 'YES', 'CODE_SIGN_IDENTITY': '-',
                 'CODE_SIGN_STYLE': 'Manual', 'CODE_SIGNING_ALLOWED': 'YES',
                 'CODE_SIGNING_REQUIRED': 'YES', 'ENABLE_HARDENED_RUNTIME': 'NO',
+                # Ad-hoc signed (CODE_SIGN_IDENTITY "-") and therefore has no provisioning
+                # profile. A sandboxed ad-hoc app cannot be granted a container, so libsecinit
+                # traps in _libsecinit_appsandbox during dyld initialisers and the XCTest runner
+                # dies with "exited with code 1 before establishing connection". Turning the
+                # sandbox off for the test host and runner is what makes Layer 3 runnable here.
+                'ENABLE_APP_SANDBOX': 'NO',
                 'SWIFT_OPTIMIZATION_LEVEL': '-Onone' if config == 'Debug' else '-O',
                 'ENABLE_TESTABILITY': 'YES', 'DEBUG_INFORMATION_FORMAT': 'dwarf',
             }

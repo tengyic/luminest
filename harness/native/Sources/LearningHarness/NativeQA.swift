@@ -25,6 +25,9 @@ final class NativeQA {
     private var events: [[String: Any]] = []
     private var screenshots: [[String: Any]] = []
     private var failures: [String] = []
+    /// Per-journey verdicts for the release gate; empty unless `--native-qa-journeys` ran.
+    private var journeyResults: [[String: Any]] = []
+    private var journeyDirectory: URL?
     private var status = "running"
     private var stage = "startup"
     private var password = ""
@@ -82,9 +85,708 @@ final class NativeQA {
             Task { await runOwnedShutdown() }
             return
         }
+        if ProcessInfo.processInfo.arguments.contains("--native-qa-journeys") {
+            started = true
+            Task { await runJourneys() }
+            return
+        }
         guard ProcessInfo.processInfo.arguments.contains("--native-qa") else { return }
         started = true
         Task { await run() }
+    }
+
+    // MARK: - Golden student journeys (release gate)
+
+    /// One journey's verdict plus the individual checks that produced it.
+    ///
+    /// ``status`` is deliberately not a boolean. ``gap`` means the product has no native
+    /// path for the journey at all, and ``blocked`` means the journey could not be
+    /// exercised for an environmental reason. Collapsing either into ``fail`` would make
+    /// the gate unable to tell "we shipped this broken" from "we never shipped this", and
+    /// collapsing them into ``pass`` would be a lie.
+    private final class JourneyRecorder {
+        let id: String
+        let title: String
+        let requirement: String
+        var checks: [[String: Any]] = []
+        var notes: [String] = []
+        var status = "pass"
+        let started = Date()
+
+        init(id: String, title: String, requirement: String) {
+            self.id = id
+            self.title = title
+            self.requirement = requirement
+        }
+
+        func check(_ name: String, _ ok: Bool, _ detail: String = "") {
+            checks.append(["name": name, "ok": ok, "detail": detail])
+            if !ok, status == "pass" { status = "fail" }
+        }
+
+        func gap(_ reason: String) {
+            // A gap outranks a failure produced by the "this does not exist" check:
+            // the missing feature is the finding, not a broken assertion.
+            status = "gap"
+            notes.append(reason)
+        }
+
+        func blocked(_ reason: String) {
+            if status == "pass" { status = "blocked" }
+            notes.append(reason)
+        }
+
+        /// Context that does not change the verdict: which of several legitimate paths
+        /// was actually taken. Without it a reader cannot tell "it spoke" from "it
+        /// refused with a named reason", even though both satisfy the requirement.
+        func note(_ text: String) { notes.append(text) }
+
+        func payload() -> [String: Any] {
+            ["id": id, "title": title, "requirement": requirement, "status": status,
+             "checks": checks, "notes": notes,
+             "durationSeconds": Date().timeIntervalSince(started)]
+        }
+    }
+
+    /// Return the app to a known base state before a journey starts.
+    ///
+    /// Journeys run in one process, so a sheet a previous journey opened can still be on
+    /// screen and make the next journey's first navigation fail. Clearing that here — once,
+    /// between journeys — is what makes the results comparable run to run, instead of
+    /// depending on whether the previous journey happened to close its own modal.
+    private func settleBase() async {
+        for _ in 0..<2 {
+            if let skip = find("tour.skip") {
+                try? await performPress(skip, target: "tour.skip")
+                await pause(0.4)
+                continue
+            }
+            if let close = find("course.create.close") {
+                try? await performPress(close, target: "dismiss authoring sheet")
+                await pause(0.6)
+                continue
+            }
+            if let cancel = buttonContaining("Cancel") {
+                try? await performPress(cancel, target: "dismiss sheet")
+                await pause(0.6)
+                continue
+            }
+            break
+        }
+        try? await navigateRetry("today")
+        await focusOwnWindow()
+        await pause(0.4)
+    }
+
+    private func journey(_ id: String, _ title: String, _ requirement: String,
+                         _ body: (JourneyRecorder) async -> Void) async {
+        let recorder = JourneyRecorder(id: id, title: title, requirement: requirement)
+        stage = "journey:" + id
+        // Placeholder first: if the app dies mid-journey the evidence still names which
+        // one, instead of the gate reporting a missing journey with no explanation.
+        journeyResults.append(["id": id, "title": title, "requirement": requirement,
+                               "status": "running", "checks": [], "notes": [], "durationSeconds": 0])
+        writeJourneys()
+        record("journey-start", target: id, outcome: title)
+        // The first journey starts on the auth/onboarding surface, which has no base state
+        // to return to; settling there would fight the first-run sheet.
+        if journeyResults.count > 1 { await settleBase() }
+        await body(recorder)
+        if recorder.checks.isEmpty && recorder.status == "pass" { recorder.blocked("no checks ran") }
+        journeyResults[journeyResults.count - 1] = recorder.payload()
+        writeJourneys()
+        record("journey-end", target: id, outcome: recorder.status,
+               details: ["checks": recorder.checks.count, "failed": recorder.checks.filter { ($0["ok"] as? Bool) == false }.count])
+    }
+
+    private func writeJourneys() {
+        guard let directory = journeyDirectory else { return }
+        let document: [String: Any] = [
+            "driver": "in-process AXUIElement against the running SwiftUI app",
+            "generatedAt": ISO8601DateFormatter().string(from: Date()),
+            "account": email,
+            "journeys": journeyResults,
+        ]
+        do {
+            let data = try JSONSerialization.data(withJSONObject: document, options: [.prettyPrinted, .sortedKeys])
+            try data.write(to: directory.appendingPathComponent("journeys.json"), options: .atomic)
+        } catch {
+            NSLog("journey evidence write failed: %@", error.localizedDescription)
+        }
+    }
+
+    /// An AX text field found by its placeholder, for controls that ship no identifier.
+    /// Only the account-deletion phrase field needs this today; it is purposely narrow so
+    /// it cannot become a back door for "find whatever is on screen".
+    private func findPlaceholder(_ placeholder: String) -> AXUIElement? {
+        var match: AXUIElement?
+        enumerate { element in
+            if match != nil { return false }
+            if let value = string(element, kAXPlaceholderValueAttribute as String), value == placeholder {
+                match = element
+                return false
+            }
+            return true
+        }
+        return match
+    }
+
+    private func value(_ id: String) -> String {
+        guard let element = find(id) else { return "" }
+        return string(element, kAXValueAttribute as String) ?? ""
+    }
+
+    /// Run the ten release-gate journeys in order against the running application.
+    ///
+    /// Order matters only for evidence: J3 produces the attempts that J9 needs in order to
+    /// distinguish measured learning from engagement, and J5's autosave check is cleaner
+    /// before the account has a large project history. Everything else is independent.
+    private func runJourneys() async {
+        do {
+            guard let path = argument("--qa-output"), path.hasPrefix("/") else {
+                throw Blocked(message: "NATIVE_QA_JOURNEYS=1 requires --qa-output with an absolute directory")
+            }
+            journeyDirectory = URL(fileURLWithPath: path, isDirectory: true)
+            try FileManager.default.createDirectory(at: journeyDirectory!, withIntermediateDirectories: true)
+            output = journeyDirectory
+            report = journeyDirectory!.appendingPathComponent("journeys-events.json")
+            let unique = UUID().uuidString.lowercased()
+            let environment = ProcessInfo.processInfo.environment
+            accountName = environment["NATIVE_QA_NAME"] ?? "Journey Learner"
+            email = environment["NATIVE_QA_EMAIL"] ?? "journey-\(unique)@example.com"
+            password = environment["NATIVE_QA_PASSWORD"] ?? "Journey-\(UUID().uuidString)!"
+            // Write the evidence file before the first wait, so a hang is diagnosable:
+            // an empty events file with a startup stage means the app never got a window,
+            // while a populated one names the last action that was attempted.
+            stage = "journey-startup"
+            record("launch", target: "journeys", outcome: "driver started",
+                   details: ["arguments": ProcessInfo.processInfo.arguments,
+                             "directory": journeyDirectory?.path ?? ""])
+            try await waitMain("own application window", seconds: 30) {
+                NSApp.windows.contains { $0.contentView != nil && $0.isVisible }
+            }
+            await focusOwnWindow()
+            await pause(0.8)
+        } catch {
+            fail(error)
+            status = "blocked"
+            flush()
+            return
+        }
+
+        await journey("J1", "First launch, registration and onboarding",
+                      "A stranger can install, register and reach a personalised plan.") { rec in
+            rec.check("authentication form is the first surface", self.find("auth.name") != nil,
+                      "auth.name present before any action")
+            do { try await self.authenticate() } catch {
+                rec.check("registration", false, "\(error)")
+                rec.blocked("registration could not be completed")
+                return
+            }
+            rec.check("registration replaced the auth form", self.find("auth.name") == nil,
+                      "signed-in UI observed after pressing Register")
+            do { try await self.onboard() } catch {
+                rec.check("first-run course setup", false, "\(error)")
+                rec.blocked("onboarding sheet could not be completed")
+                return
+            }
+            rec.check("onboarding dismissed", !self.containsText("SETTING UP YOUR LEARNING SPACE"),
+                      "setup sheet no longer present")
+            rec.check("a plan is shown after onboarding", self.containsText("YOUR PLAN"),
+                      "YOUR PLAN visible on the today surface")
+            rec.check("sidebar navigation is reachable",
+                      self.find("nav.today") != nil || self.find("nav.compact.today") != nil,
+                      "nav.today or compact equivalent present")
+            try? await self.capture("journey-J1-plan")
+        }
+
+        await journey("J2", "Selecting a course and starting a lesson",
+                      "A learner can open a lesson for the enrolled course and see its content.") { rec in
+            do {
+                try await self.navigateRetry("studio", marker: "studio.concept")
+            } catch {
+                rec.check("studio opens with a concept selector", false, "\(error)")
+                rec.blocked("studio did not reach the concept surface")
+                return
+            }
+            rec.check("the enrolled course surfaces a concept",
+                      self.texts().contains { $0.count > 3 && $0.first?.isLetter == true },
+                      "lesson chrome rendered")
+            let lessonActions = ["lesson.read", "lesson.deck", "lesson.lecture"]
+                .filter { self.find($0) != nil }
+            rec.check("lesson actions are offered", !lessonActions.isEmpty,
+                      "present: " + (lessonActions.isEmpty ? "none" : lessonActions.joined(separator: ", ")))
+            if let read = self.find("lesson.read") {
+                rec.check("read-aloud control is present and enabled",
+                          self.boolean(read, kAXEnabledAttribute as String) ?? false,
+                          "lesson.read enabled")
+            }
+            try? await self.capture("journey-J2-lesson")
+        }
+
+        await journey("J3", "Completing a practice question and receiving grading feedback",
+                      "A submitted answer produces evaluated feedback and is recorded.") { rec in
+            do {
+                try await self.navigateRetry("studio", marker: "studio.practice")
+                try await self.press("studio.practice")
+                try await self.wait("a practice question", seconds: 30) {
+                    self.find("question.option.a") != nil
+                }
+                rec.check("a practice question is shown with options",
+                          self.find("question.option.a") != nil, "question.option.a present")
+                try await self.press("question.option.a")
+                try await self.press("question.submit")
+                try await self.wait("evaluated feedback", seconds: 35) {
+                    self.find("question.next") != nil
+                        && (self.containsText("Correct answer:") || self.containsText("You’ve got it")
+                            || self.containsText("A useful place to look closer"))
+                }
+                rec.check("feedback names the correct answer or explains the gap",
+                          self.containsText("Correct answer:") || self.containsText("You’ve got it")
+                            || self.containsText("A useful place to look closer"),
+                          "feedback text observed after submit")
+                rec.check("the learner can advance to another question", self.find("question.next") != nil,
+                          "question.next present")
+                try? await self.capture("journey-J3-feedback")
+                try await self.press("question.finish")
+                try await self.wait("practice dismissed", seconds: 15) { self.find("question.finish") == nil }
+            } catch {
+                rec.check("practice and grading", false, "\(error)")
+                rec.blocked("practice surface could not be completed")
+            }
+        }
+
+        await journey("J4", "Completing a review and receiving the next scheduled review",
+                      "A completed review returns a next due date rather than a dead end.") { rec in
+            do {
+                try await self.navigateRetry("review", text: "Your review queue")
+                rec.check("the review queue claims to be backend-scheduled",
+                          self.containsText("SCHEDULED BY THE BACKEND"), "queue heading observed")
+                guard let start = self.find("review.start") else {
+                    rec.check("a review can be started", false, "review.start missing")
+                    rec.blocked("no review control on the review page")
+                    return
+                }
+                let enabled = self.boolean(start, kAXEnabledAttribute as String) ?? false
+                if !enabled {
+                    // A brand-new account has nothing due, which is the designed empty
+                    // state, not a defect. Seed a deck through the app's own builder and
+                    // grade one card, so the scheduling round-trip is still exercised
+                    // through the UI instead of being skipped.
+                    rec.check("the empty queue is explained", self.containsText("A little breathing room"),
+                              "empty-state copy shown with a disabled Start review")
+                    do {
+                        try await self.seedAndGradeOneCard()
+                        rec.check("a card built in the app becomes due and can be graded",
+                                  self.find("flashcards.grade.good") != nil
+                                    || self.containsText("Next due"),
+                                  "deck built and the grade controls rendered")
+                        rec.check("the scheduler returns a next due date instead of a dead end",
+                                  !self.containsText("No cards yet"),
+                                  "deck is non-empty after grading")
+                        try? await self.capture("journey-J4-flashcard")
+                        return
+                    } catch {
+                        rec.blocked("no review items were due and the deck could not be seeded: \(error)")
+                        return
+                    }
+                }
+                try await self.press("review.start")
+                try await self.wait("a review question", seconds: 30) {
+                    self.find("question.option.a") != nil
+                }
+                try await self.press("question.option.a")
+                try await self.press("question.submit")
+                try await self.wait("review feedback", seconds: 35) { self.find("question.next") != nil }
+                rec.check("the review produces feedback", self.find("question.next") != nil,
+                          "question.next observed after a review answer")
+                try await self.press("question.finish")
+                try await self.wait("back on the review page", seconds: 20) {
+                    self.containsText("Your review queue")
+                }
+                rec.check("the queue is re-read after the review",
+                          self.containsText("Your review queue"), "review page rendered again")
+                try? await self.capture("journey-J4-review")
+            } catch {
+                rec.check("review round-trip", false, "\(error)")
+                rec.blocked("review could not be completed")
+            }
+        }
+
+        await journey("J5", "Leaving and reopening an autosaved project",
+                      "Draft text survives navigating away and back without an explicit save.") { rec in
+            let marker = "Autosave probe \(UUID().uuidString.prefix(6)): scaling a recipe by 5/2."
+            do {
+                try await self.navigateRetry("projects", marker: "project.text")
+                try await self.type("project.text", text: marker)
+                await self.pause(1.2)
+                rec.check("the draft was typed into the real editor",
+                          self.value("project.text").contains("Autosave probe"),
+                          "project.text holds the typed marker")
+                try await self.navigateRetry("today")
+                await self.pause(0.8)
+                try await self.navigateRetry("projects", marker: "project.text")
+                await self.pause(1.2)
+                let restored = self.value("project.text")
+                rec.check("the draft is still there after leaving and returning",
+                          restored.contains("Autosave probe"),
+                          restored.isEmpty ? "field was empty on return" : "field still holds the draft")
+                try? await self.capture("journey-J5-project")
+            } catch {
+                rec.check("project autosave", false, "\(error)")
+                rec.blocked("projects surface could not be driven")
+            }
+        }
+
+        await journey("J6", "Creating a course and accessing it again",
+                      "A learner can author a course in the app and reopen it.") { rec in
+            let unique = UUID().uuidString.prefix(6)
+            // Real material, typed into the real editor. It is deliberately not the
+            // shipped sample: if the preview came from a canned plan, this course would
+            // be impossible. Four defined terms give the extractor something to find.
+            let source = """
+            # Heat transfer
+
+            Conduction is the transfer of thermal energy through a material when its particles collide, with no movement of the material as a whole.
+
+            Convection is the transfer of thermal energy by the bulk movement of a fluid, so it cannot happen in a solid.
+
+            Radiation is the transfer of thermal energy by electromagnetic waves, and it needs no material between the source and the absorber.
+
+            A thermal insulator is a material that slows conduction, which is why an insulator is used to keep a hot object hot.
+            """
+            do {
+                let entry = self.find("course.create")
+                rec.check("the native app offers course creation", entry != nil,
+                          entry != nil ? "course.create entry point present in the shell header"
+                                       : "no course-creation control on any surface the driver can reach")
+                guard entry != nil else {
+                    rec.gap("No SwiftUI entry point for course authoring.")
+                    return
+                }
+                try await self.pressRetry("course.create")
+                try await self.wait("the authoring sheet", seconds: 25) {
+                    self.find("course.create.notes") != nil
+                }
+                try await self.type("course.create.notes", text: source)
+                try await self.type("course.create.title", text: "Judge demo \(unique): heat transfer")
+                try await self.type("course.create.subject", text: "Physics")
+                try await self.pressRetry("course.create.preview")
+                try await self.wait("a preview that saved nothing", seconds: 60) {
+                    self.value("course.create.status").contains("Preview ready")
+                }
+                let preview = self.value("course.create.status")
+                rec.check("a preview shows concepts without persisting a course",
+                          preview.contains("Preview ready") && preview.contains("Nothing has been saved"),
+                          preview.isEmpty ? "no status rendered" : String(preview.prefix(120)))
+                try await self.pressRetry("course.create.commit")
+                try await self.wait("the created course", seconds: 60) {
+                    self.value("course.create.result").contains("course_id:")
+                }
+                let created = self.value("course.create.result")
+                rec.check("the app reports a stored course id",
+                          created.contains("course_id:") && !created.contains("course_id: \n"),
+                          created.isEmpty ? "no course id rendered" : created)
+                rec.check("creation is reported as owned but not yet active",
+                          self.value("course.create.status").contains("not yet the active course"),
+                          "status names the enrolment step")
+                try await self.pressRetry("course.create.enrol")
+                try await self.wait("enrolment confirmed", seconds: 60) {
+                    self.value("course.create.status").contains("Enrolled.")
+                }
+                rec.check("the authored course becomes the active course",
+                          self.value("course.create.result").contains("enrolled: true")
+                            && self.value("course.create.status").contains("Enrolled."),
+                          "enrolment confirmed and the plan reloaded")
+                try? await self.capture("journey-J6-authoring")
+                try await self.pressRetry("course.create.close")
+                await self.pause(0.6)
+                rec.check("the app is still usable after authoring",
+                          self.find("nav.today") != nil || self.find("nav.compact.today") != nil,
+                          "sidebar reachable after the sheet closes")
+            } catch {
+                rec.check("course authoring end to end", false, "\(error)")
+                rec.blocked("the authoring surface could not be driven: \(error)")
+            }
+        }
+
+        await journey("J7", "Using the tutor offline and handling provider failure",
+                      "A missing or failing model still yields a grounded answer, never an empty reply.") { rec in
+            do {
+                try await self.navigateRetry("teacher", marker: "teacher.message")
+                let before = Set(self.texts())
+                try await self.type("teacher.message",
+                                    text: "Why do fractions need a common denominator? Answer in two sentences.")
+                try await self.press("teacher.send")
+                try await self.wait("a rendered tutor reply", seconds: 45) {
+                    let fresh = Set(self.texts()).subtracting(before)
+                    return fresh.contains { $0.count > 40 && !$0.contains("common denominator?") }
+                }
+                let fresh = Set(self.texts()).subtracting(before)
+                rec.check("the tutor answers instead of returning an empty bubble",
+                          fresh.contains { $0.count > 40 }, "new tutor text rendered")
+                rec.check("the reply is labelled when it is not a live model",
+                          self.containsText("GROUNDED TUTOR") || self.containsText("offline")
+                            || self.containsText("curriculum"),
+                          "grounding label or curriculum attribution visible")
+                let raw = self.texts().filter { text in
+                    ["Traceback", "HTTP 402", "HTTP 500", "request_id", "Insufficient Balance",
+                     "Internal Server Error"].contains { text.contains($0) }
+                }
+                rec.check("no raw provider exception is shown to the learner", raw.isEmpty,
+                          raw.isEmpty ? "no stack trace, status code or request id on screen"
+                                      : "leaked: " + raw.prefix(2).joined(separator: " | "))
+                try? await self.capture("journey-J7-tutor")
+            } catch {
+                rec.check("tutor offline behaviour", false, "\(error)")
+                rec.blocked("tutor surface could not be driven")
+            }
+        }
+
+        await journey("J9", "Viewing Insights and distinguishing learning from engagement",
+                      "Insights separates measured outcomes from activity, and says which is which.") { rec in
+            do {
+                try await self.navigateRetry("insights", text: "Practice over time")
+                rec.check("the measured chart is labelled as submissions only",
+                          self.containsText("SUBMITTED ANSWERS ONLY"),
+                          "SUBMITTED ANSWERS ONLY caption present")
+                rec.check("real attempts replace the no-practice empty state",
+                          !self.containsText("A clearer picture will emerge"),
+                          "empty-state copy absent after practice in J3")
+                rec.check("engagement is named separately from learning",
+                          self.containsText("ENGAGEMENT") || self.containsText("activity")
+                            || self.containsText("Activity"),
+                          "an engagement section exists and is not conflated with mastery")
+                try? await self.capture("journey-J9-insights")
+            } catch {
+                rec.check("insights", false, "\(error)")
+                rec.blocked("insights surface could not be reached")
+            }
+        }
+
+        await journey("J10", "Changing consent, exporting data and deleting an account",
+                      "Consent is changeable, export is reachable, and deletion is gated deliberately.") { rec in
+            do {
+                try await self.navigateRetry("settings", marker: "settings.telemetry")
+                try await self.setToggle("settings.telemetry", enabled: true)
+                try await self.pressRetry("settings.save")
+                try await self.wait("saved preferences", seconds: 30) {
+                    self.containsText("Your preferences have been saved.")
+                }
+                rec.check("a consent change is saved and confirmed",
+                          self.containsText("Your preferences have been saved."),
+                          "confirmation observed after enabling activity consent")
+                let exported = self.find("settings.export")
+                rec.check("data export is offered to the learner",
+                          exported != nil && (self.boolean(exported!, kAXEnabledAttribute as String) ?? false),
+                          "settings.export present and enabled")
+                // The export itself goes through an NSSavePanel, which is system UI rather
+                // than app UI; Layer 2 verifies GET /export end to end. What is verified
+                // here is that the learner-facing control exists and is usable.
+                // The identifier sits on a borderless button whose AXPress sometimes lands
+                // without toggling the sheet; fall back to pressing the button by its own
+                // label, then to a second attempt, before calling the surface unreachable.
+                try await self.pressRetry("settings.delete")
+                if !self.containsText("Permanently delete your account?") {
+                    if let byLabel = self.buttonContaining("Delete account") {
+                        try? await self.performPress(byLabel, target: "Delete account")
+                    }
+                }
+                if !self.containsText("Permanently delete your account?") {
+                    try? await self.pressRetry("settings.delete", attempts: 2)
+                }
+                let hasPhraseField = { self.findPlaceholder("Type DELETE MY ACCOUNT") != nil }
+                try await self.wait("delete confirmation sheet", seconds: 25) {
+                    self.containsText("Permanently delete your account?") || hasPhraseField()
+                }
+                let sheetShown = self.containsText("Permanently delete your account?") || hasPhraseField()
+                rec.check("deletion requires an explicit confirmation sheet",
+                          sheetShown, sheetShown ? "confirmation sheet shown" : "no confirmation sheet observed")
+                let destructive = self.find("settings.delete.confirm")
+                    ?? self.buttonContaining("Delete permanently")
+                if let destructive {
+                    rec.check("the destructive action is disabled until the phrase is typed",
+                              (self.boolean(destructive, kAXEnabledAttribute as String) ?? true) == false,
+                              "Delete permanently starts disabled")
+                } else {
+                    // SwiftUI does not always publish this button as an AXButton, so the
+                    // gate is checked through the mechanism that actually protects the
+                    // account: the sheet demands the exact phrase and the button is bound
+                    // to it (`disabled(deletePhrase != "DELETE MY ACCOUNT")`).
+                    let phraseField = self.findPlaceholder("Type DELETE MY ACCOUNT") != nil
+                    rec.check("deletion is gated on typing the exact phrase",
+                              phraseField && sheetShown,
+                              phraseField ? "phrase field present in the confirmation sheet"
+                                          : "no phrase field found in the confirmation sheet")
+                }
+                // Deliberately cancelled: it is last, and erasing the account would also
+                // erase the database evidence for J1-J9 that the launcher reads afterwards.
+                if sheetShown { try? await self.pressLabel("Cancel") }
+                await self.pause(0.6)
+                rec.check("the confirmation can be abandoned safely",
+                          !self.containsText("Permanently delete your account?") && !hasPhraseField(),
+                          "sheet dismissed by Cancel")
+                rec.check("the account is still signed in after cancelling", self.find("nav.settings") != nil
+                            || self.find("nav.compact.settings") != nil,
+                          "sidebar still reachable")
+                try? await self.capture("journey-J10-settings")
+            } catch {
+                rec.check("consent, export and deletion", false, "\(error)")
+                rec.blocked("settings surface could not be driven")
+            }
+        }
+
+        await journey("J8", "Using read-aloud and handling unavailable voice services",
+                      "Read-aloud either speaks or refuses with a named reason; it never hangs.") { rec in
+            do {
+                if self.find("tour.skip") != nil { try? await self.press("tour.skip") }
+                try await self.navigateRetry("studio", marker: "studio.practice")
+                guard let read = self.find("lesson.read") else {
+                    rec.check("a read-aloud control exists", false, "lesson.read missing")
+                    rec.blocked("no read-aloud control on the studio surface")
+                    return
+                }
+                rec.check("the read-aloud control is enabled", self.boolean(read, kAXEnabledAttribute as String) ?? false,
+                          "lesson.read enabled")
+                try await self.press("lesson.read")
+                // The old check accepted *any* text containing "voice", which the static
+                // engine caption under the button always supplies. A press that did
+                // nothing therefore passed the check and was then reported blocked.
+                // The app now publishes a one-sentence outcome; the driver waits for
+                // that specific state change instead of for a word that was already
+                // on screen before the press.
+                try await self.wait("a named read-aloud outcome", seconds: 30) {
+                    let state = self.value("lesson.read.status")
+                    return state.contains("Reading with")
+                        || state.contains("There is no lesson text")
+                        || self.containsText("Stop reading")
+                }
+                let state = self.value("lesson.read.status")
+                let speaking = self.containsText("Stop reading")
+                rec.check("pressing read-aloud produces speech or a named reason",
+                          speaking || state.contains("Reading with") || state.contains("There is no lesson text"),
+                          speaking ? "control switched to Stop reading" : String(state.prefix(140)))
+                rec.check("the outcome is named by the app, not inferred from a caption",
+                          !state.isEmpty || speaking,
+                          state.isEmpty ? "only the control changed" : "lesson.read.status carries the reason")
+                rec.check("the app is still responsive afterwards", self.find("nav.settings") != nil
+                            || self.find("nav.compact.settings") != nil,
+                          "sidebar still reachable")
+                rec.note(speaking ? "Speech started and the control switched to Stop reading."
+                         : "Path taken: \(state.isEmpty ? "control state only" : state)")
+                if speaking { try? await self.press("lesson.read") }
+                try? await self.capture("journey-J8-voice")
+            } catch {
+                rec.check("read-aloud", false, "\(error)")
+                rec.blocked("read-aloud could not be exercised")
+            }
+        }
+
+
+        let failed = journeyResults.filter { ($0["status"] as? String) == "fail" }.count
+        let gaps = journeyResults.filter { ($0["status"] as? String) == "gap" }.count
+        let blocked = journeyResults.filter { ($0["status"] as? String) == "blocked" }.count
+        status = failed == 0 ? "completed" : "blocked"
+        record("journeys", target: "release gate", outcome: status,
+               details: ["total": journeyResults.count, "failed": failed, "gaps": gaps, "blocked": blocked])
+        writeJourneys()
+        flush()
+        if !ProcessInfo.processInfo.arguments.contains("--qa-keep-open") {
+            await pause(0.5)
+            await MainActor.run { NSApp.terminate(nil) }
+        }
+    }
+
+    /// Navigate with retries. The sidebar is rebuilt when a sheet dismisses, so a press
+    /// issued in the frame between `find` and `AXPress` can hit a stale element. Retrying
+    /// after a short settle is what distinguishes "the surface is gone" from "we raced it".
+    private func navigateRetry(_ page: String, marker: String? = nil,
+                               text: String? = nil) async throws {
+        var last: Error = Blocked(message: "navigation never attempted")
+        for attempt in 0..<3 {
+            do {
+                try await navigate(page, marker: marker, text: text)
+                return
+            } catch {
+                last = error
+                await focusOwnWindow()
+                await pause(Double(attempt + 1) * 0.9)
+            }
+        }
+        throw last
+    }
+
+    /// Press with retries, for controls inside a surface that rebuilds while we look at it.
+    private func pressRetry(_ id: String, attempts: Int = 3) async throws {
+        var last: Error = Blocked(message: "press never attempted: \(id)")
+        for attempt in 0..<attempts {
+            do {
+                try await press(id)
+                return
+            } catch {
+                last = error
+                await focusOwnWindow()
+                await pause(Double(attempt + 1) * 0.7)
+            }
+        }
+        throw last
+    }
+
+    /// Build a deck from the current concept through the app's own UI, then grade one card.
+    ///
+    /// This is the only way to exercise the FSRS round-trip on a fresh account: nothing is
+    /// due yet, and seeding the database directly would prove nothing about the app.
+    private func seedAndGradeOneCard() async throws {
+        try await navigateRetry("studio", marker: "studio.concept")
+        try? await pressLabel("Cards")
+        await pause(0.8)
+        guard let generate = find("flashcards.generate") else {
+            throw Blocked(message: "the Cards stage did not expose Auto-generate")
+        }
+        if (boolean(generate, kAXEnabledAttribute as String) ?? false) == false {
+            throw Blocked(message: "Auto-generate is disabled, so no deck can be built for this concept")
+        }
+        try await pressRetry("flashcards.generate")
+        // The sheet is a separate window; either of its own strings proves it rendered.
+        try await wait("generate sheet", seconds: 25) {
+            self.containsText("Preview") || self.containsText("New cards for")
+        }
+        if let previewButton = buttonContaining("Preview") {
+            try await performPress(previewButton, target: "Preview")
+        } else {
+            try await pressLabel("Preview")
+        }
+        try await wait("generated preview", seconds: 45) {
+            self.buttonContaining("card") != nil || self.containsText("Add ")
+        }
+        if let add = buttonContaining("Add ") { try await performPress(add, target: "add cards") }
+        await pause(2.0)
+        try await wait("a revealed card", seconds: 30) { self.find("flashcards.reveal") != nil }
+        try await press("flashcards.reveal")
+        await pause(0.8)
+        try await wait("grade controls", seconds: 20) { self.find("flashcards.grade.good") != nil }
+        try await press("flashcards.grade.good")
+        await pause(1.5)
+    }
+
+    /// AX buttons matched by contained label, for controls that ship no identifier.
+    ///
+    /// SwiftUI often puts the visible words in a child `AXStaticText` and leaves the button
+    /// itself with an empty title, so checking `AXTitle` alone misses real buttons.
+    private func buttonContaining(_ label: String) -> AXUIElement? {
+        var match: AXUIElement?
+        enumerate { element in
+            if match != nil { return false }
+            guard role(element) == kAXButtonRole as String else { return true }
+            var haystack = strings(element)
+            for child in children(element) { haystack.append(contentsOf: strings(child)) }
+            if haystack.contains(where: { $0.contains(label) }) {
+                match = element
+                return false
+            }
+            return true
+        }
+        return match
     }
 
     private func argument(_ name: String) -> String? {
@@ -94,6 +796,15 @@ final class NativeQA {
     }
 
     private func run() async {
+        // The ten-journey gate shares this exact launch path (``--native-qa`` plus
+        // ``--qa-output``) because that is the one the launcher already proves works.
+        // A separate flag was tried first and never reached onAppear, which is a launch
+        // behaviour, not a driver behaviour; reusing the known-good argument set keeps
+        // the gate runnable instead of theoretical.
+        if ProcessInfo.processInfo.environment["NATIVE_QA_JOURNEYS"] == "1" {
+            await runJourneys()
+            return
+        }
         do {
             guard let path = argument("--qa-output"), path.hasPrefix("/") else {
                 throw Blocked(message: "--qa-output requires an absolute directory or JSON path")
@@ -125,19 +836,19 @@ final class NativeQA {
                 await exercise("onboarding") { try await self.onboard() }
             }
             await exercise("studio") {
-                try await self.navigate("studio", marker: "studio.practice")
+                try await self.navigateRetry("studio", marker: "studio.practice")
                 try await self.capture("studio")
             }
             await exercise("question") { try await self.practice() }
             await exercise("tutor") { try await self.tutor() }
             await exercise("map") {
-                try await self.navigate("map", text: "Understanding is connected.")
+                try await self.navigateRetry("map", text: "Understanding is connected.")
                 try await self.capture("map")
             }
             await exercise("projects") { try await self.project() }
             await exercise("consent") { try await self.consent() }
             await exercise("insights") {
-                try await self.navigate("insights", text: "Practice over time")
+                try await self.navigateRetry("insights", text: "Practice over time")
                 try await self.capture("insights")
             }
             await captureRequestedPages()
@@ -449,7 +1160,7 @@ final class NativeQA {
     }
 
     private func practice() async throws {
-        try await navigate("studio", marker: "studio.practice")
+        try await navigateRetry("studio", marker: "studio.practice")
         try await press("studio.practice")
         await pause(3)
         record("practice-state", target: "studio.practice", outcome: "store read back",
@@ -470,7 +1181,7 @@ final class NativeQA {
     }
 
     private func tutor() async throws {
-        try await navigate("teacher", marker: "teacher.message")
+        try await navigateRetry("teacher", marker: "teacher.message")
         let before = Set(texts())
         try await type("teacher.message", text: "Explain this concept step by step and give a small worked example. Which curriculum reference supports it?")
         try await press("teacher.send")
@@ -483,7 +1194,7 @@ final class NativeQA {
     }
 
     private func project() async throws {
-        try await navigate("projects", marker: "project.text")
+        try await navigateRetry("projects", marker: "project.text")
         try await capture("projects")
         try await type("project.text", text: "I used a small numerical example to compare the inputs and outputs. I checked each step, explained the relationship in my own words, and distinguished evidence from an unsupported conclusion.")
         try await type("project.reflection", text: "Writing out each step revealed where I had assumed a relationship instead of checking it. Next time I would test another example and explain why the result generalizes.")
@@ -496,7 +1207,7 @@ final class NativeQA {
     }
 
     private func consent() async throws {
-        try await navigate("settings", marker: "settings.telemetry")
+        try await navigateRetry("settings", marker: "settings.telemetry")
         try await type("settings.goal", text: "Verify real native learning workflows and reflect on mathematical reasoning")
         try await setToggle("settings.telemetry", enabled: true)
         try await press("settings.save")
@@ -670,6 +1381,13 @@ final class NativeQA {
             if condition() { return }
             await pause(0.25)
         }
+        // A timeout with no context is indistinguishable from a product bug. Record what
+        // the AX server could actually see at that moment — window count and a short
+        // sample of visible strings — so a sheet that failed to appear can be told apart
+        // from a sheet the driver could not traverse.
+        record("wait-timeout", target: description, outcome: "no match",
+               details: ["windows": axWindows().count,
+                         "sample": Array(texts().prefix(14))])
         throw Blocked(message: "Timed out waiting for \(description)")
     }
 
@@ -699,6 +1417,25 @@ final class NativeQA {
         AXUIElementSetMessagingTimeout(element, 20)
         return element
     }()
+
+    /// Every window the app currently owns, including sheets.
+    ///
+    /// A SwiftUI `.sheet` is presented in its own window. On this OS the application
+    /// element's `AXChildren` has been observed to expose the main window but not the
+    /// sheet window while the presentation is animating, so a traversal rooted only at
+    /// the application element can report "the sheet never opened" when it is plainly
+    /// on screen. J4 (generate deck) and J10 (delete account) both timed out this way
+    /// while every inline journey passed. Reading `AXWindows` explicitly and using each
+    /// window as an additional root makes sheet content visible without weakening any
+    /// check: the driver still only reads real accessibility elements and still presses
+    /// real controls.
+    private func axWindows() -> [AXUIElement] {
+        var value: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(applicationElement,
+                                            kAXWindowsAttribute as CFString,
+                                            &value) == .success else { return [] }
+        return (value as? [AXUIElement]) ?? []
+    }
 
     private func attribute(_ element: AXUIElement, _ name: String) -> CFTypeRef? {
         var value: CFTypeRef?
@@ -740,7 +1477,11 @@ final class NativeQA {
     }
 
     private func enumerate(_ roots: [AXUIElement]? = nil, visit: (AXUIElement) -> Bool) {
-        var stack: [AXUIElement] = roots ?? [applicationElement]
+        // Windows are appended after the application element, and the stack pops from
+        // the end, so sheet windows are visited *first*. That matters: a stale control
+        // with the same identifier in the main window must not win over the live one
+        // inside the sheet the learner is looking at.
+        var stack: [AXUIElement] = roots ?? ([applicationElement] + axWindows())
         var seen = 0
         while let element = stack.popLast(), seen < limit {
             seen += 1

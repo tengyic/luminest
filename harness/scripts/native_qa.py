@@ -152,6 +152,26 @@ def inspect_database(database, output, python, expected, password, course=None):
         return {'checks': checks, 'databaseCounts': counts, 'records': records}
 
 
+def read_journeys(output):
+    path = output / 'journeys.json'
+    if not path.is_file():
+        return {'journeys': [], 'error': 'journeys.json was never written'}
+    return json.loads(path.read_text())
+
+
+def journey_gate(document):
+    """A journey gate passes only when all ten ran and none failed, gapped or blocked."""
+    rows = document.get('journeys', [])
+    statuses = {row.get('id'): row.get('status') for row in rows}
+    failed = [k for k, v in statuses.items() if v == 'fail']
+    gaps = [k for k, v in statuses.items() if v == 'gap']
+    blocked = [k for k, v in statuses.items() if v == 'blocked']
+    missing = [f'J{i}' for i in range(1, 11) if f'J{i}' not in statuses]
+    return {'total': len(rows), 'passed': [k for k, v in statuses.items() if v == 'pass'],
+            'failed': failed, 'gaps': gaps, 'blocked': blocked, 'missing': missing,
+            'allGreen': len(rows) == 10 and not (failed or gaps or blocked or missing)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app', '--executable', dest='app', type=Path,
@@ -176,6 +196,9 @@ def main():
                              'transient notice banner before each frame. Layout and state unchanged.')
     parser.add_argument('--backend-python', type=Path, default=HARNESS / 'ui-tests/.venv/bin/python')
     parser.add_argument('--timeout', type=float, default=420, help='Native process timeout in seconds')
+    parser.add_argument('--journeys', action='store_true',
+                        help='Run the ten golden student journeys through the app instead of the '
+                             'legacy single workflow. Writes journeys.json next to the evidence.')
     args = parser.parse_args()
     if sys.platform != 'darwin':
         parser.error('Native QA requires macOS and an interactive desktop session')
@@ -261,7 +284,8 @@ def main():
                                NATIVE_QA_NAME=expected['name'], NATIVE_QA_EMAIL=expected['email'],
                                NATIVE_QA_PASSWORD=password, NATIVE_QA_COURSE=args.course,
                                NATIVE_QA_CAPTURE_PAGES=args.capture_pages,
-                               NATIVE_QA_SKIP_SETUP='1' if args.skip_setup else '0')
+                               NATIVE_QA_SKIP_SETUP='1' if args.skip_setup else '0',
+                               NATIVE_QA_JOURNEYS='1' if args.journeys else '0')
         summary['stage'] = 'native-ui'
         save_json(summary_path, summary)
         with (output / 'app.stdout.log').open('w') as stdout, (output / 'app.stderr.log').open('w') as stderr:
@@ -301,6 +325,14 @@ def main():
                           'reason': 'No native evidence produced; integrate NativeQA.shared.runIfRequested() onAppear and rebuild'}
                 save_json(report_path, native)
             summary['nativeStatus'] = native.get('status')
+            if args.journeys:
+                summary['journeys'] = read_journeys(output)
+                summary['journeyGate'] = journey_gate(summary['journeys'])
+                success = (summary.get('status') != 'blocked' and summary.get('appExitCode') == 0
+                           and summary['journeyGate']['allGreen'])
+                summary['status'] = 'passed' if success else 'blocked'
+                summary['stage'] = 'finished'
+                summary['databaseVerified'] = bool(summary.get('databaseCounts', {}).get('attempts', 0))
             summary['nativeFailures'] = native.get('failures', [])
             summary['screenshots'] = native.get('screenshots', [])
             files = [output / item['file'] for item in summary['screenshots']]

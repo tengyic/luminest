@@ -37,6 +37,14 @@
     taSend: $('ta-send'), taStatus: $('ta-status'), taJobs: $('ta-jobs'), taResults: $('ta-results'),
     devToggle: $('dev-toggle'), devPanel: $('dev-panel'), devMode: $('dev-mode'), devRaw: $('dev-raw'),
     toast: $('toast'),
+    lessonConcept: $('lesson-concept'), lessonPreview: $('lesson-preview'), lessonStart: $('lesson-start'),
+    lessonRefresh: $('lesson-refresh'), lessonStatus: $('lesson-status'), lessonPlan: $('lesson-plan'),
+    lessonCurrent: $('lesson-current'), lessonTitle: $('lesson-title'), lessonProgress: $('lesson-progress'),
+    lessonActivity: $('lesson-activity'), lessonAnswer: $('lesson-answer'), lessonFields: $('lesson-answer-fields'),
+    lessonPrompt: $('lesson-prompt'), lessonOptions: $('lesson-options'), lessonTextRow: $('lesson-text-row'),
+    lessonText: $('lesson-answer-text'), lessonExplanationRow: $('lesson-explanation-row'),
+    lessonExplanation: $('lesson-explanation'), lessonSubmit: $('lesson-submit'),
+    lessonFeedback: $('lesson-feedback'), lessonNext: $('lesson-next'), lessonDone: $('lesson-done'), lessonSkip: $('lesson-skip'),
   };
 
   const STORAGE = { sessions: 'luminfest.sessions.v1', token: 'luminfest.token', role: 'luminfest.role' };
@@ -89,7 +97,9 @@
     const response = await fetch(path, { ...options, headers: authHeaders(options.headers || {}) });
     if (response.status === 401) {
       els.authRow.classList.remove('hidden');
-      throw new Error('Unauthorized — paste a valid access token in the sidebar');
+      const err = new Error('Unauthorized — paste a valid access token in the sidebar');
+      err.status = 401;
+      throw err;
     }
     if (!response.ok) {
       let detail = response.statusText;
@@ -218,6 +228,293 @@
   function safeJson(value) {
     try { return typeof value === 'string' ? value : JSON.stringify(value); }
     catch { return String(value); }
+  }
+
+  // ------------------------------------------------------- lesson companion
+
+  const lesson = { epoch: 0, busy: false, ready: false, plan: null, run: null,
+    question: null, shownAt: 0, pending: null, feedback: null, explanationRequired: false };
+
+  function lessonStatus(text, error = false) {
+    els.lessonStatus.textContent = text;
+    els.lessonStatus.className = 'studio-status' + (error ? ' error' : '');
+  }
+
+  function scoredBlock(block) {
+    return !!block && (block.kind === 'diagnostic' || block.kind === 'practice' || !!block.answers);
+  }
+
+  function lessonControls() {
+    const block = lesson.run && lesson.run.status === 'active' && lesson.run.current;
+    els.lessonConcept.disabled = lesson.busy || !lesson.ready || !!lesson.pending;
+    els.lessonPreview.disabled = lesson.busy || !lesson.ready || !els.lessonConcept.value || !!lesson.pending;
+    els.lessonStart.disabled = lesson.busy || !lesson.plan;
+    els.lessonRefresh.disabled = lesson.busy || !!lesson.pending;
+    els.lessonFields.disabled = lesson.busy || !!lesson.pending || !!lesson.feedback;
+    els.lessonSubmit.disabled = lesson.busy || !lesson.question || !!lesson.feedback;
+    els.lessonSubmit.textContent = lesson.pending ? 'Retry same answer' : 'Submit answer';
+    els.lessonNext.disabled = lesson.busy;
+    els.lessonDone.disabled = lesson.busy || !block || !!lesson.pending
+      || (scoredBlock(block) && (!block.answers || block.answers.complete !== true));
+    els.lessonSkip.disabled = lesson.busy || !block;
+  }
+
+  function renderLesson() {
+    const run = lesson.run;
+    const block = run && run.status === 'active' && run.current;
+    els.lessonStart.classList.toggle('hidden', !!run || !lesson.plan);
+    els.lessonRefresh.classList.toggle('hidden', !run || run.status !== 'active');
+    els.lessonPlan.classList.toggle('hidden', !lesson.plan || !!run);
+    if (lesson.plan && !run) {
+      els.lessonPlan.textContent = (lesson.plan.blocks || []).map((b) =>
+        `${b.order}. ${b.title || b.kind} (${b.minutes || 0} min)`).join('\n')
+        + (lesson.plan.rationale ? '\n' + lesson.plan.rationale : '');
+    }
+    els.lessonCurrent.classList.toggle('hidden', !block);
+    if (!block) {
+      if (run) lessonStatus('Lesson ' + run.status + '. Completion records activities, not mastery.');
+      lessonControls();
+      return;
+    }
+    els.lessonTitle.textContent = `${run.concept_title || run.concept_id} — ${block.title || block.kind}`;
+    const answers = block.answers;
+    els.lessonProgress.textContent = `Block ${block.order} of ${(run.blocks || []).length}`
+      + (scoredBlock(block) ? ` · ${answers ? answers.answered : 0}/${answers ? answers.total : '?'} answered` : '');
+    els.lessonActivity.textContent = scoredBlock(block)
+      ? 'Answer the promised questions below. Done is available only when the server confirms every answer is recorded; Skip records that you declined this block.'
+      : [block.purpose, block.why, 'This companion does not run the full native multimedia lesson. Complete this activity in the native app, then refresh here, or explicitly acknowledge it with Done / Skip.'].filter(Boolean).join('\n');
+    els.lessonAnswer.classList.toggle('hidden', !lesson.question || !!lesson.feedback);
+    els.lessonFeedback.classList.toggle('hidden', !lesson.feedback);
+    if (lesson.feedback) {
+      const result = lesson.feedback;
+      const diagnosis = result.diagnosis || {};
+      els.lessonFeedback.textContent = [result.correct === true ? 'Correct.' : result.correct === false ? 'Not correct yet.' : 'Answer recorded; correctness withheld.',
+        result.correct_answer ? 'Answer: ' + result.correct_answer : '', result.explanation,
+        diagnosis.category ? 'Diagnosis: ' + diagnosis.category + (diagnosis.tentative ? ' (tentative)' : '') : '',
+        diagnosis.reason, diagnosis.next_action, diagnosis.scope ? 'Scope: ' + diagnosis.scope : '',
+        typeof result.mastery === 'number' ? 'Estimated mastery: ' + Math.round(result.mastery * 100) + '%' : '',
+        result.review_at ? 'Next review: ' + new Date(result.review_at).toLocaleString() : ''].filter(Boolean).join('\n');
+    }
+    els.lessonNext.classList.toggle('hidden', !lesson.feedback || !scoredBlock(block) || !!(answers && answers.complete));
+    lessonControls();
+  }
+
+  function setLessonRun(run) {
+    const before = lesson.run && lesson.run.current;
+    if (!lesson.run || lesson.run.run_id !== run.run_id || (before && before.order) !== (run.current && run.current.order)) {
+      lesson.question = null;
+      lesson.pending = null;
+      lesson.feedback = null;
+    }
+    lesson.run = run;
+    if (run.current && run.current.answers && run.current.answers.complete === true && !lesson.pending) {
+      lesson.question = null;
+    }
+    renderLesson();
+  }
+
+  async function lessonAction(action) {
+    if (lesson.busy) return;
+    const epoch = lesson.epoch;
+    lesson.busy = true;
+    lessonControls();
+    try { await action(epoch); }
+    catch (error) {
+      if (epoch === lesson.epoch) lessonStatus(error.message || 'Lesson request failed.', true);
+    } finally {
+      if (epoch === lesson.epoch) { lesson.busy = false; lessonControls(); }
+    }
+  }
+
+  async function loadLessonContext() {
+    const epoch = ++lesson.epoch;
+    Object.assign(lesson, { busy: true, ready: false, plan: null, run: null, question: null, pending: null, feedback: null, explanationRequired: false });
+    els.lessonConcept.textContent = '';
+    renderLesson();
+    if (!state.token) {
+      els.authRow.classList.remove('hidden');
+      lessonStatus('Paste an access token in the sidebar to load your course.');
+      lesson.busy = false;
+      lessonControls();
+      return;
+    }
+    lessonStatus('Loading your active course and answer requirements…');
+    try {
+      const [curriculum, assignment] = await Promise.all([
+        api('/api/v1/curriculum'), api('/api/v1/experiments/assignments/me')]);
+      if (epoch !== lesson.epoch) return;
+      lesson.explanationRequired = !!(assignment.flags && assignment.flags.self_explanation_gate);
+      for (const concept of curriculum.concepts || []) {
+        const option = document.createElement('option');
+        option.value = concept.id;
+        option.textContent = concept.title || concept.id;
+        els.lessonConcept.appendChild(option);
+      }
+      lesson.ready = true;
+      lessonStatus(els.lessonConcept.value ? 'Choose a concept, then preview or resume its lesson.' : 'Your active course has no concepts available.');
+    } catch (error) {
+      if (epoch === lesson.epoch) lessonStatus('Could not load your course or experiment requirements: ' + error.message, true);
+    } finally {
+      if (epoch === lesson.epoch) { lesson.busy = false; lessonControls(); }
+    }
+  }
+
+  async function refreshLessonRun(epoch) {
+    const runId = lesson.run.run_id;
+    const run = await api('/api/v1/procedure/runs/' + encodeURIComponent(runId));
+    if (epoch !== lesson.epoch) return false;
+    setLessonRun(run);
+    return true;
+  }
+
+  async function loadLessonQuestion(epoch) {
+    const run = lesson.run;
+    const block = run && run.status === 'active' && run.current;
+    if (!scoredBlock(block) || (block.answers && block.answers.complete)) return;
+    lessonStatus('Loading the current block’s signed question…');
+    const item = await api('/api/v1/procedure/runs/' + encodeURIComponent(run.run_id)
+      + '/next-item?order=' + encodeURIComponent(block.order));
+    if (epoch !== lesson.epoch) return;
+    if (item.run_id !== run.run_id || item.block_order !== block.order) {
+      throw new Error('The returned question is not for the current lesson block. Refresh the run.');
+    }
+    if (item.progress) {
+      lesson.run.current = { ...block, answers: item.progress };
+    }
+    lesson.question = item.question;
+    lesson.pending = null;
+    lesson.feedback = null;
+    if (!item.question) {
+      renderLesson();
+      lessonStatus(item.reason || 'No question is available for this block. Refresh the run or skip the block.');
+      return;
+    }
+    const question = item.question;
+    if (!question.id || !question.receipt) {
+      lesson.question = null;
+      throw new Error('The server returned a question without a signed receipt. Refresh the run.');
+    }
+    lesson.shownAt = performance.now();
+    els.lessonPrompt.textContent = question.prompt || '';
+    els.lessonOptions.textContent = '';
+    const options = question.options || [];
+    for (const option of options) {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio'; input.name = 'lesson-option'; input.value = option.id; input.required = true;
+      label.append(input, document.createTextNode(option.text || option.id));
+      els.lessonOptions.appendChild(label);
+    }
+    els.lessonTextRow.classList.toggle('hidden', options.length > 0);
+    els.lessonText.required = options.length === 0;
+    els.lessonText.value = '';
+    els.lessonExplanation.value = '';
+    els.lessonExplanationRow.classList.toggle('hidden', !lesson.explanationRequired);
+    els.lessonExplanation.required = lesson.explanationRequired;
+    renderLesson();
+    lessonStatus(question.selection_reason || 'Choose an answer and submit it for scoring.');
+  }
+
+  els.lessonPreview.addEventListener('click', () => lessonAction(async (epoch) => {
+    lessonStatus('Previewing your lesson…');
+    const preview = await api('/api/v1/procedure/' + encodeURIComponent(els.lessonConcept.value));
+    if (epoch !== lesson.epoch) return;
+    lesson.plan = preview.plan;
+    lesson.run = null;
+    lesson.question = null;
+    lesson.feedback = null;
+    if (preview.active) {
+      setLessonRun(preview.active);
+      await loadLessonQuestion(epoch);
+    } else {
+      renderLesson();
+      lessonStatus('Preview only — Start lesson creates or resumes your server-compiled plan.');
+    }
+  }));
+
+  els.lessonStart.addEventListener('click', () => lessonAction(async (epoch) => {
+    lessonStatus('Starting your lesson…');
+    const run = await api('/api/v1/procedure/' + encodeURIComponent(els.lessonConcept.value) + '/start', { method: 'POST' });
+    if (epoch !== lesson.epoch) return;
+    setLessonRun(run);
+    lessonStatus('Lesson started.');
+    await loadLessonQuestion(epoch);
+  }));
+
+  els.lessonConcept.addEventListener('change', () => {
+    lesson.plan = null; lesson.run = null; lesson.question = null; lesson.feedback = null;
+    renderLesson();
+    lessonStatus('Preview or resume the selected concept.');
+  });
+
+  els.lessonRefresh.addEventListener('click', () => lessonAction(async (epoch) => {
+    if (!await refreshLessonRun(epoch)) return;
+    lessonStatus('Run refreshed from the server.');
+    if (!lesson.feedback) await loadLessonQuestion(epoch);
+  }));
+  els.lessonNext.addEventListener('click', () => lessonAction(async (epoch) => {
+    if (await refreshLessonRun(epoch)) await loadLessonQuestion(epoch);
+  }));
+
+  els.lessonAnswer.addEventListener('submit', (event) => {
+    event.preventDefault();
+    lessonAction(async (epoch) => {
+      if (!lesson.question || lesson.feedback) return;
+      if (!lesson.pending) {
+        const selected = els.lessonOptions.querySelector('input:checked');
+        const text = els.lessonText.value.trim();
+        const explanation = els.lessonExplanation.value.trim();
+        if (!selected && !text) throw new Error('Choose an option or enter your answer first.');
+        if (lesson.explanationRequired && explanation.length < 20) throw new Error('Explain your answer in at least 20 characters before submitting.');
+        // Retry exactly these bytes, including timing: the server hashes the whole submission.
+        lesson.pending = { question_id: lesson.question.id, receipt: lesson.question.receipt,
+          client_event_id: 'web-lesson-' + crypto.randomUUID(),
+          elapsed_seconds: Math.min(7200, Math.max(0, Math.floor((performance.now() - lesson.shownAt) / 1000))),
+          ...(selected ? { option_id: selected.value } : { answer_text: text }),
+          ...(explanation ? { self_explanation: explanation } : {}) };
+      }
+      lessonControls();
+      lessonStatus('Submitting your answer…');
+      let result;
+      try { result = await api('/api/v1/attempts', { method: 'POST', body: JSON.stringify(lesson.pending) }); }
+      catch (error) {
+        if (epoch !== lesson.epoch) return;
+        if (error.status && error.status < 500) {
+          lesson.pending = null;
+          if (error.status === 422 && /self-explanation/i.test(error.message)) {
+            lesson.explanationRequired = true;
+            els.lessonExplanationRow.classList.remove('hidden');
+            els.lessonExplanation.required = true;
+          }
+        } else {
+          lessonStatus('Answer delivery is unconfirmed. Retry same answer sends the same receipt, answer, timing and idempotency key. ' + error.message, true);
+          return;
+        }
+        throw error;
+      }
+      if (epoch !== lesson.epoch) return;
+      lesson.pending = null;
+      lesson.feedback = result;
+      renderLesson();
+      lessonStatus('Answer recorded. Refreshing server progress…');
+      if (await refreshLessonRun(epoch)) lessonStatus('Answer recorded. Review the feedback, then continue.');
+    });
+  });
+
+  for (const [button, outcome] of [[els.lessonDone, 'done'], [els.lessonSkip, 'skipped']]) {
+    button.addEventListener('click', () => lessonAction(async (epoch) => {
+      const run = lesson.run;
+      const block = run && run.current;
+      if (!block || (outcome === 'done' && scoredBlock(block) && (!block.answers || block.answers.complete !== true))) {
+        throw new Error('Answer every promised question before Done, or skip this block.');
+      }
+      const updated = await api('/api/v1/procedure/runs/' + encodeURIComponent(run.run_id) + '/advance', {
+        method: 'POST', body: JSON.stringify({ order: block.order, outcome }) });
+      if (epoch !== lesson.epoch) return;
+      setLessonRun(updated);
+      lessonStatus(outcome === 'skipped' ? 'Block skipped, not counted as answered.' : 'Block completed.');
+      await loadLessonQuestion(epoch);
+    }));
   }
 
   // ------------------------------------------------------------ simulation
@@ -571,6 +868,13 @@
         // The generator has no return channel: the final assistant text also
         // travels on turn_end.content — use it if deltas did not carry it.
         if (!live.text && data.content) live.text = data.content;
+        // A turn that could not answer declares a reason and a next action. Show
+        // the action alongside the streamed error, but never as assistant prose:
+        // it is a status notice, not an answer to the learner's question.
+        if (data.notice && data.notice.next_action) {
+          const line = `Next: ${data.notice.next_action}`;
+          if (!live.text.includes(line)) live.text += (live.text ? '\n' : '') + line;
+        }
         break;
       case 'error':
         live.text += (live.text ? '\n' : '') + '⚠ ' + (data.message || 'stream error');
@@ -869,6 +1173,7 @@
       els.studioSave.classList.add('hidden');
       studioStatus(`Saved — “${escapeHtml(course.title || url)}” is your active course.`, 'ok');
       toast('Course saved and made active.');
+      loadLessonContext();
       refreshSimMeta();
     } catch (err) {
       studioStatus(err.message, 'error');
@@ -920,6 +1225,7 @@
         studioStatus(`Saved — “${escapeHtml(payload.course && payload.course.title || payload.title || '')}”
           is your active course.`, 'ok');
         toast('Course saved and made active.');
+        loadLessonContext();
         refreshSimMeta();
       } else {
         els.studioSave.classList.remove('hidden');
@@ -1280,6 +1586,7 @@
     loadSimList();
     loadServerRole();
     loadTelemetryConsent();
+    loadLessonContext();
   });
 
   if (els.telemetryToggle) {
@@ -1326,4 +1633,5 @@
   loadSimList();
   loadServerRole();
   loadTelemetryConsent();
+  loadLessonContext();
 })();

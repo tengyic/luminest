@@ -161,6 +161,8 @@ def resolve_account(request, db, *, rate_key: str = 'api', limit: int = 180) -> 
     throws it away.
     """
     request.state.principal_resolved = True
+    factory = getattr(request.app.state, 'factory', None)
+    settings = getattr(request.app.state, 'settings', None)
     cached = getattr(request.state, 'principal', _UNSET)
     if cached is not _UNSET:
         if cached is None:
@@ -168,9 +170,16 @@ def resolve_account(request, db, *, rate_key: str = 'api', limit: int = 180) -> 
             # a route that demands a principal must not accept that answer.
             raise HTTPException(401, 'Valid bearer token required',
                                 headers={'WWW-Authenticate': 'Bearer'})
-        return cached
-    factory = getattr(request.app.state, 'factory', None)
-    settings = getattr(request.app.state, 'settings', None)
+        # The router-level guard resolves in a short-lived session of its own, so the
+        # cached ORM object is detached by the time a handler asks again. Returning it
+        # would let a handler write course_id or consent to an object no session owns,
+        # and db.commit() would silently discard the change: enrolment once answered 200
+        # while /me still reported the default course. Re-load the same account in THIS
+        # session. The cache still avoids the second rate-limit and token read, but every
+        # returned User is bound to the session that will actually commit it.
+        cached_id = getattr(request.state, 'principal_id', None) or getattr(cached, 'id', None)
+        if cached_id:
+            return _live_user(db, cached_id, settings)
     raw = bearer_raw(request)
     if factory is not None:
         rate_limit(factory, f'{rate_key}:' + digest(raw), limit)
@@ -182,6 +191,7 @@ def resolve_account(request, db, *, rate_key: str = 'api', limit: int = 180) -> 
     request.state.token_digest = token.digest
     request.state.session_digest = token.digest
     request.state.principal = user
+    request.state.principal_id = user.id
     return user
 
 
@@ -201,11 +211,20 @@ def resolve_optional_account(request, db, *, rate_key: str = 'api', limit: int =
         request.state.principal = None
         return None
     request.state.principal_resolved = True
-    cached = getattr(request.state, 'principal', _UNSET)
-    if cached is not _UNSET:
-        return cached
     factory = getattr(request.app.state, 'factory', None)
     settings = getattr(request.app.state, 'settings', None)
+    cached = getattr(request.state, 'principal', _UNSET)
+    if cached is not _UNSET:
+        if cached is None:
+            return None
+        # Same cross-session rule as resolve_account: never hand back a detached ORM
+        # object from the router guard, re-bind it to this request's session.
+        cached_id = getattr(request.state, 'principal_id', None) or getattr(cached, 'id', None)
+        if cached_id:
+            user = db.get(User, cached_id)
+            if refuse_if_erased(db, user, settings):
+                raise HTTPException(401, 'Account unavailable')
+            return user
     if factory is not None:
         rate_limit(factory, f'{rate_key}:' + digest(raw), limit)
     token = db.get(Token, digest(raw))
@@ -216,6 +235,7 @@ def resolve_optional_account(request, db, *, rate_key: str = 'api', limit: int =
     if refuse_if_erased(db, user, settings):
         raise HTTPException(401, 'Account unavailable')
     request.state.principal = user
+    request.state.principal_id = user.id
     return user
 
 

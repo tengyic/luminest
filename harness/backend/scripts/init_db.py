@@ -72,6 +72,7 @@ from app.database_backup import (MAINTENANCE_LOCK_NAME, BackupError,
 # ``routes_create``, which imports ``course_builder``, so the table was always registered
 # there. Keep this list in step with any new out-of-``db`` model.
 from app import course_builder  # noqa: F401  - registers ``created_courses``
+from app import assessment_book, perspectives  # noqa: F401 - register unit_grades, perspective_reviews
 
 #: Versions this migration path knows how to bring forward.
 KNOWN_VERSIONS = (None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)

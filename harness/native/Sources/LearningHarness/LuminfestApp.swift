@@ -508,6 +508,9 @@ enum SidebarLayout {
 
 struct AppShell: View {
     @EnvironmentObject var store: AppStore
+    /// Course authoring lives in the shell, not in a page, so the entry point is
+    /// reachable from every destination and in both the expanded and compact layout.
+    @State private var showCourseAuthoring = false
     /// The current destination's hue, used for the page eyebrow, title and aura.
     var pageAccent: Accent { Palette.accent(at: Page.allCases.firstIndex(of: store.page) ?? 0) }
     var body: some View {
@@ -571,6 +574,7 @@ struct AppShell: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .sheet(isPresented: $showCourseAuthoring) { CourseAuthoringSheet() }
     }
 
     /// Below 1,120 pt the labelled sidebar becomes an icon rail. Every icon keeps an
@@ -738,6 +742,14 @@ struct AppShell: View {
             HeaderRefreshButton {
                 store.run { await store.loadPage() }
             }
+
+            Button { showCourseAuthoring = true } label: {
+                Label("Create a course", systemImage: "square.and.pencil")
+                    .font(.system(size: 11, weight: .medium))
+            }
+            .buttonStyle(.borderless)
+            .accessibilityIdentifier("course.create")
+            .help("Build a course from your own notes")
 
             Rectangle().fill(Palette.line).frame(width: 1, height: 24)
 

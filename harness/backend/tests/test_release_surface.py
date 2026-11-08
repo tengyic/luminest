@@ -13,6 +13,8 @@ record says it is not shippable. That refusal is the whole point of the script; 
 that only checked it produced files would let the guard be deleted without notice.
 """
 import json
+import shutil
+import zipfile
 import subprocess
 import sys
 from pathlib import Path
@@ -135,49 +137,184 @@ def test_release_kit_refuses_an_artifact_changed_after_packaging(tmp_path):
     assert 'changed since it was packaged' in str(exc.value)
 
 
-def test_release_kit_accepts_a_clean_record(tmp_path):
-    release_kit.assert_shippable(_record(tmp_path), '1.1.16')  # must not raise
+def test_release_kit_refuses_unsigned_public_release(tmp_path):
+    with pytest.raises(SystemExit, match='Developer ID Application'):
+        release_kit.assert_shippable(_record(tmp_path), '1.1.16')
 
 
-def test_install_script_is_valid_posix_sh(tmp_path):
-    script = tmp_path / 'install.sh'
-    script.write_text(release_kit.INSTALL_SH, encoding='utf-8')
-    completed = subprocess.run(['/bin/sh', '-n', str(script)], capture_output=True, text=True)
-    assert completed.returncode == 0, completed.stderr
+@pytest.fixture
+def signed_package(tmp_path, monkeypatch):
+    """Synthetic metadata and fake Apple command output; not real signing evidence."""
+    record = _record(tmp_path)
+    app = tmp_path / 'Luminest.app'
+    resources = app / 'Contents' / 'Resources'
+    resources.mkdir(parents=True)
+    identity = 'Developer ID Application: Test Publisher (A1B2C3D4E5)'
+    distribution = {'signing': identity, 'notarized': True, 'version': record['version'],
+                    'releasable': True, 'legal_gate': record['legal_gate']}
+    (resources / 'distribution.json').write_text(json.dumps(distribution), encoding='utf-8')
+    archive = Path(record['archive'])
+    with zipfile.ZipFile(archive, 'w') as zipped:
+        zipped.write(resources / 'distribution.json', 'Luminest.app/Contents/Resources/distribution.json')
+    record.update(app=str(app), sign_identity=identity,
+                  app_notarization={'stapled_app': str(app), 'profile': 'synthetic'},
+                  notarization={'notarized': [record['dmg'], record['archive']],
+                                'stapled': record['dmg'], 'profile': 'synthetic'})
+    record['artifacts'][archive.name]['sha256'] = release_kit.sha256(archive)
+    state = {'commands': [], 'fail': None, 'identity': identity,
+             'source': 'Notarized Developer ID', 'different_zip': False}
+
+    def run(command, **kwargs):
+        state['commands'].append(command)
+        assert kwargs['timeout'] == 120
+        if state['fail'] and state['fail'](command):
+            return subprocess.CompletedProcess(command, 1, '', 'rejected: synthetic failure')
+        if command[:2] == ['/usr/bin/hdiutil', 'attach']:
+            mount = Path(command[command.index('-mountpoint') + 1])
+            shutil.copytree(app, mount / app.name)
+        if command[:3] == ['/usr/bin/ditto', '-x', '-k']:
+            shutil.copytree(app, Path(command[-1]) / app.name)
+        output = ''
+        if '--display' in command:
+            cdhash = 'b' * 40 if state['different_zip'] and '/archive/' in command[-1] else 'a' * 40
+            output = f'Authority={state["identity"]}\nTeamIdentifier=A1B2C3D4E5\nCDHash={cdhash}\n'
+        if command[0] == '/usr/sbin/spctl':
+            output = f'{command[-1]}: accepted\nsource={state["source"]}\n'
+        return subprocess.CompletedProcess(command, 0, '', output)
+
+    monkeypatch.setattr(release_kit.subprocess, 'run', run)
+    return record, state
 
 
-def test_install_script_refuses_a_path_it_did_not_install(tmp_path):
-    """The guard that stops a mistyped INSTALL_DIR from deleting something else."""
-    assert 'case "$TARGET" in' in release_kit.INSTALL_SH
-    assert '*/"$APP.app")' in release_kit.INSTALL_SH
+def test_release_kit_requires_live_signed_and_notarized_artifacts(signed_package):
+    record, state = signed_package
+    evidence = release_kit.assert_shippable(record, record['version'])
+    assert set(evidence) == {'app', 'dmg', 'dmg_app', 'zip_app'}
+    assert all(row['stapled_ticket_valid'] for row in evidence.values())
+    commands = state['commands']
+    assert any(command[:4] == ['/usr/bin/codesign', '--verify', '--deep', '--strict']
+               for command in commands)
+    assert any(command[:4] == ['/usr/sbin/spctl', '--assess', '--type', 'open']
+               and 'context:primary-signature' in command for command in commands)
+    assert sum(command[:3] == ['/usr/bin/xcrun', 'stapler', 'validate']
+               for command in commands) == 4
+    assert any(command[:2] == ['/usr/bin/hdiutil', 'detach'] for command in commands)
+    assert not any('submit' in command or 'staple' in command or '--sign' in command
+                   for command in commands)
 
 
-def test_cask_points_at_the_versioned_dmg(tmp_path):
+@pytest.mark.parametrize('check', ['app_signature', 'dmg_signature', 'notarization', 'ticket',
+                                  'dmg_ticket', 'zip_ticket'])
+def test_forged_metadata_cannot_replace_apple_verification(signed_package, check):
+    record, state = signed_package
+    state['fail'] = {
+        'app_signature': lambda cmd: cmd[:2] == ['/usr/bin/codesign', '--verify']
+                                      and cmd[-1] == record['app'],
+        'dmg_signature': lambda cmd: cmd[:2] == ['/usr/bin/codesign', '--verify']
+                                      and cmd[-1] == record['dmg'],
+        'notarization': lambda cmd: cmd[0] == '/usr/sbin/spctl',
+        'ticket': lambda cmd: cmd[:3] == ['/usr/bin/xcrun', 'stapler', 'validate'],
+        'dmg_ticket': lambda cmd: cmd[:3] == ['/usr/bin/xcrun', 'stapler', 'validate']
+                                   and cmd[-1] == record['dmg'],
+        'zip_ticket': lambda cmd: cmd[:3] == ['/usr/bin/xcrun', 'stapler', 'validate']
+                                   and '/archive/' in cmd[-1],
+    }[check]
+    with pytest.raises(SystemExit, match='verification failed'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_release_kit_refuses_a_different_developer_identity(signed_package):
+    record, state = signed_package
+    state['identity'] = 'Developer ID Application: Different Publisher (A1B2C3D4E5)'
+    with pytest.raises(SystemExit, match='expected Developer ID'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_release_kit_refuses_gatekeeper_acceptance_without_notarization(signed_package):
+    record, state = signed_package
+    state['source'] = 'Developer ID'
+    with pytest.raises(SystemExit, match='did not confirm Notarized Developer ID'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_release_kit_refuses_missing_notarization_record(signed_package):
+    record, _ = signed_package
+    record['app_notarization'] = None
+    with pytest.raises(SystemExit, match='missing app/DMG notarization'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+@pytest.mark.parametrize('change', ['legal', 'version', 'notarized', 'marker'])
+def test_release_kit_honors_the_signed_bundle_contract(signed_package, change):
+    record, _ = signed_package
+    resources = Path(record['app']) / 'Contents' / 'Resources'
+    path = resources / 'distribution.json'
+    distribution = json.loads(path.read_text())
+    if change == 'marker':
+        (resources / 'NOT_RELEASABLE.txt').write_text('not releasable')
+    elif change == 'legal':
+        distribution['legal_gate'] = {'ship_ready': False}
+    elif change == 'version':
+        distribution['version'] = 'old'
+    else:
+        distribution['notarized'] = False
+    path.write_text(json.dumps(distribution))
+    with pytest.raises(SystemExit, match='contract|NOT_RELEASABLE'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_release_kit_checks_the_app_actually_shipped_in_the_zip(signed_package):
+    record, state = signed_package
+    state['different_zip'] = True
+    with pytest.raises(SystemExit, match='zip does not contain the recorded signed app'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_release_kit_names_missing_apple_tools(signed_package, monkeypatch):
+    record, _ = signed_package
+
+    def missing(command, **kwargs):
+        raise FileNotFoundError(command[0])
+
+    monkeypatch.setattr(release_kit.subprocess, 'run', missing)
+    with pytest.raises(SystemExit, match='verification unavailable'):
+        release_kit.assert_shippable(record, record['version'])
+
+
+def test_cask_points_at_the_versioned_dmg_without_bypassing_gatekeeper():
     text = release_kit.cask_text('1.1.16', 'https://example.test/v1.1.16', 'a' * 64)
     assert 'url "https://example.test/v1.1.16/Luminest-1.1.16-arm64.dmg"' in text
-    assert "depends_on arch: :arm64" in text
-    # The caveat must name the flag, because without it the app is quarantined and blocked.
-    assert '--no-quarantine' in text
+    assert 'depends_on arch: :arm64' in text
+    assert '--no-quarantine' not in text
+    assert 'xattr' not in text
 
 
-def test_release_directory_explains_itself(tmp_path):
-    """A release folder has to be actionable by whoever receives it, not just by us."""
+def test_release_directory_explains_itself_without_a_bypass_installer(signed_package, tmp_path):
+    record, _ = signed_package
+    record_path = tmp_path / 'package-result.json'
+    record_path.write_text(json.dumps(record), encoding='utf-8')
+    out = tmp_path / 'release'
+    release_kit.main(['--version', '1.1.16', '--result', str(record_path), '--out', str(out)])
+    for name in ('Luminest-1.1.16-arm64.dmg', 'Luminest-1.1.16-arm64.zip',
+                 'INSTALL.txt', 'SHA256SUMS.txt', 'RELEASE.md', 'release.json'):
+        assert (out / name).is_file(), name
+    assert not (out / 'install.sh').exists()
+    assert not (out / 'luminfest.rb').exists()
+    sums = (out / 'SHA256SUMS.txt').read_text(encoding='utf-8')
+    assert 'Luminest-1.1.16-arm64.dmg' in sums
+    assert 'install.sh' not in sums
+    report = json.loads((out / 'release.json').read_text(encoding='utf-8'))
+    assert report['cask'] is False
+    assert report['notarized'] is True
+    assert report['public_release'] is True
+    assert report['verification']['app']['stapled_ticket_valid'] is True
+    assert 'Do not remove quarantine' in (out / 'INSTALL.txt').read_text()
+
+
+def test_unsigned_release_does_not_create_a_release_directory(tmp_path):
     record_path = tmp_path / 'package-result.json'
     record_path.write_text(json.dumps(_record(tmp_path)), encoding='utf-8')
     out = tmp_path / 'release'
-
-    release_kit.main(['--version', '1.1.16', '--result', str(record_path), '--out', str(out)])
-
-    for name in ('Luminest-1.1.16-arm64.dmg', 'Luminest-1.1.16-arm64.zip',
-                 'install.sh', 'INSTALL.txt', 'SHA256SUMS.txt', 'RELEASE.md', 'release.json'):
-        assert (out / name).is_file(), name
-
-    sums = (out / 'SHA256SUMS.txt').read_text(encoding='utf-8')
-    assert 'install.sh' in sums and 'Luminest-1.1.16-arm64.dmg' in sums
-
-    # Without a public URL there is no cask: a formula pointing at a host that does not
-    # exist is worse than no formula, because it looks installable.
-    assert not (out / 'luminfest.rb').exists()
-    report = json.loads((out / 'release.json').read_text(encoding='utf-8'))
-    assert report['cask'] is False
-    assert report['notarized'] is False
+    with pytest.raises(SystemExit, match='Developer ID Application'):
+        release_kit.main(['--version', '1.1.16', '--result', str(record_path), '--out', str(out)])
+    assert not out.exists()

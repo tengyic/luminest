@@ -1,0 +1,137 @@
+{
+  "program": "Program 2 — Test engineering and release gate",
+  "product": "Luminest (Lumen harness)",
+  "updated": "2026-11-07",
+  "layers": [
+    {
+      "id": 1,
+      "name": "Unit",
+      "scope": "Services, models, calculations, schedulers, permissions and business rules.",
+      "runner": "pytest backend/tests/test_memory.py test_flashcards.py test_learning_science.py test_memory_properties.py test_learning_properties.py test_security_contract.py",
+      "gate": "All green. Property tests run 150-200 generated cases each; a failure prints the minimal counterexample."
+    },
+    {
+      "id": 2,
+      "name": "Integration",
+      "scope": "API endpoints, persistence, transactions, migrations and external-provider failure.",
+      "runner": "pytest backend/tests/test_api.py test_database_engines.py test_provider_failure.py",
+      "gate": "All green on SQLite and on PostgreSQL. The PostgreSQL half skips only when no server is reachable, and a skip is reported as a skip, never as a pass."
+    },
+    {
+      "id": 3,
+      "name": "Native UI",
+      "scope": "Real SwiftUI interactions: navigation, forms, dialogs, accessibility, error states.",
+      "runner": "python3 scripts/native_qa.py --journeys",
+      "gate": "All ten journeys exercised through AXUIElement presses and typing against the running app, with a screenshot per journey."
+    },
+    {
+      "id": 4,
+      "name": "End-to-end system",
+      "scope": "Complete journeys across app, backend, database, offline behaviour and distribution.",
+      "runner": "python3 scripts/quality_gate.py --layers 4",
+      "gate": "Journey verdicts are corroborated by the isolated database the launcher inspects after the app exits (attempts, messages, saved preferences), so a green UI cannot stand alone."
+    }
+  ],
+  "journeys": [
+    {
+      "id": "J1",
+      "title": "First launch, registration and onboarding",
+      "requirement": "A stranger can install the app, create an account, complete first-run setup and reach a personalised plan.",
+      "native": "OnboardingView / CourseSetup.swift: auth.name, auth.email, auth.password, auth.age, auth.terms, auth.register; setup.course.*, setup.goal, setup.pace.*, setup.finish.",
+      "backend": "POST /api/v1/auth/register; GET /api/v1/courses; POST /api/v1/setup or profile update; plan compiled by app/planner.py.",
+      "data": "users (id, email, password_hash, course_id, goal, daily_minutes, age_confirmed_at, terms_accepted_at), tokens, refresh_tokens.",
+      "tests": "tests/test_api.py (registration, compliance gate); tests/test_accounts.py; this journey.",
+      "acceptance": "The auth form is replaced by the shell, the setup sheet is gone, YOUR PLAN is visible, and the launcher finds exactly one user row with the registered email."
+    },
+    {
+      "id": "J2",
+      "title": "Selecting a course and starting a lesson",
+      "requirement": "A learner can open a lesson for the enrolled course and see that course's content.",
+      "native": "Core.swift Page.studio; Studio.swift concept header and lesson.read / lesson.deck / lesson.lecture actions.",
+      "backend": "GET /api/v1/lessons/{concept}; GET /api/v1/curriculum (course-scoped); GET /api/v1/procedure/{concept}.",
+      "data": "users.course_id, curriculum packs (curriculum_packs/), procedure_runs.",
+      "tests": "tests/test_course_registry.py; tests/test_whole_use.py; this journey.",
+      "acceptance": "The studio opens on the enrolled course, at least one lesson action is present and enabled, and the lesson text belongs to that course rather than the mathematics fallback."
+    },
+    {
+      "id": "J3",
+      "title": "Completing a practice question and receiving grading feedback",
+      "requirement": "A submitted answer is graded, explained, and written down as an attempt.",
+      "native": "Studio.swift practice action; QuestionView.swift question.option.*, question.reasoning, question.submit, question.next, question.finish.",
+      "backend": "POST /api/v1/attempts (HarnessOutcome); GET /api/v1/questions; app/learning.diagnose.",
+      "data": "attempts (question_id, concept_id, correct, mode, payload), learning_states (mastery, stability, difficulty, due_at).",
+      "tests": "tests/test_api.py::test_attempt_updates_state; tests/test_quiz.py; this journey.",
+      "acceptance": "Feedback names the correct answer or explains the gap, Next question is offered, and the isolated database contains one more attempt than before the journey."
+    },
+    {
+      "id": "J4",
+      "title": "Completing a review and receiving the next scheduled review",
+      "requirement": "A completed review schedules the next one; the queue is not a dead end.",
+      "native": "TodayKnowledge.swift ReviewView: review.start, question.*; Flashcards.swift flashcards.reveal and flashcards.grade.*.",
+      "backend": "GET /api/v1/reviews; POST /api/v1/flashcards/{id}/review; app/memory.py (FSRS-6).",
+      "data": "learning_states, flashcards (stability, difficulty, due_at, reps, lapses).",
+      "tests": "tests/test_flashcards.py; tests/test_memory_properties.py; this journey.",
+      "acceptance": "After a graded review the queue is re-read from the backend and the item's next due date moves forward. An empty queue is recorded as blocked with its reason, never as a pass."
+    },
+    {
+      "id": "J5",
+      "title": "Leaving and reopening an autosaved project",
+      "requirement": "Draft work survives navigating away, with no explicit save.",
+      "native": "ProjectsInsightsSettings.swift project.text, project.reflection; navigation through nav.projects / nav.today.",
+      "backend": "PATCH /api/v1/projects/draft; GET /api/v1/projects.",
+      "data": "projects (body, reflection, draft, updated_at).",
+      "tests": "tests/test_projects.py; this journey.",
+      "acceptance": "Text typed into the real editor is still in the field after navigating to Today and back."
+    },
+    {
+      "id": "J6",
+      "title": "Creating a course and accessing it again",
+      "requirement": "A learner can author a course in the app and reopen it later.",
+      "native": "LuminfestApp.swift shell header 'Create a course' (course.create) opens CourseAuthoringSheet: title/subject/level/notes, preview, create, enrol, close; NativeQA.swift J6 drives every control through AXUIElement.",
+      "backend": "POST /api/v1/create/preview, POST /api/v1/create/course, POST /api/v1/my-courses/{id}/enrol; app/course_builder.py.",
+      "data": "created_courses, course units and lessons (JSON), users.course_id.",
+      "tests": "backend/tests/test_authoring.py; backend/tests/test_course_creation.py; native/Sources/LearningHarness/NativeQA.swift journey J6 (first-person AX driver).",
+      "acceptance": "Preview names extracted concepts and saves nothing; create returns a course id owned by the account but not yet active; enrol confirms and reloads the plan; the sidebar is reachable after the sheet closes. A missing entry point or any undrivable step is reported as gap/blocked, never as pass."
+    },
+    {
+      "id": "J7",
+      "title": "Using the tutor offline and handling provider failure",
+      "requirement": "A missing or failing model still produces a grounded answer, never an empty bubble.",
+      "native": "Studio.swift teacher.message, teacher.send, tutor.error; MarkdownText rendering of the reply.",
+      "backend": "POST /api/v1/agent/chat; app/tutor.py offline_answer() fallback on provider failure; provider label.",
+      "data": "messages (role, content, provider, grounded), harness_runs.",
+      "tests": "tests/test_api.py::test_provider_failure_falls_back_to_the_curriculum; tests/test_tutor.py; this journey.",
+      "acceptance": "New tutor text appears, it is labelled as curriculum-grounded rather than a live model, and no raw provider exception is shown."
+    },
+    {
+      "id": "J8",
+      "title": "Using read-aloud and handling unavailable voice services",
+      "requirement": "Read-aloud speaks, or refuses with a named reason; it never silently does nothing.",
+      "native": "Studio.swift lesson.read, tutor.speak; Voice.swift speech client; Stop reading state.",
+      "backend": "POST /api/v1/speech/plan; app/harness/speech.py gated on voice_enabled.",
+      "data": "No learner data is written; a refusal returns a named reason.",
+      "tests": "tests/test_tutor_voice.py; tests/test_desktop_environment.py; this journey.",
+      "acceptance": "Pressing read-aloud changes visible state, and with no voice service the refusal is named rather than silent."
+    },
+    {
+      "id": "J9",
+      "title": "Viewing Insights and distinguishing learning from engagement",
+      "requirement": "Insights separates measured outcomes from activity and says which is which.",
+      "native": "ProjectsInsightsSettings.swift insights charts; SUBMITTED ANSWERS ONLY caption; engagement section.",
+      "backend": "GET /api/v1/insights; GET /api/v1/analytics; app/learning_science.brier_decomposition.",
+      "data": "attempts, telemetry_events (consented), learning_states.",
+      "tests": "tests/test_insights.py; this journey.",
+      "acceptance": "The measured chart is captioned as submissions only, the no-practice empty state is gone after J3, and engagement is labelled separately from mastery."
+    },
+    {
+      "id": "J10",
+      "title": "Changing consent, exporting data and deleting an account",
+      "requirement": "Consent is changeable, export is reachable, and deletion is deliberate and gated.",
+      "native": "ProjectsInsightsSettings.swift settings.telemetry, settings.save, settings.export, settings.delete; deletion sheet phrase field and Delete permanently.",
+      "backend": "PATCH /api/v1/me; GET /api/v1/export; DELETE /api/v1/me with a typed confirmation phrase; app/account_erasure.py.",
+      "data": "users.telemetry_consent, training_consent_ledger, erasure ledger outside the database.",
+      "tests": "tests/test_accounts.py; tests/test_account_deletion.py; this journey.",
+      "acceptance": "The consent change is confirmed, export is offered and enabled, and the destructive action stays disabled until DELETE MY ACCOUNT is typed. Cancelling leaves the account signed in."
+    }
+  ]
+}

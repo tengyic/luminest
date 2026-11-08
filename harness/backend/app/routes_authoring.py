@@ -26,12 +26,12 @@ The contract::
 
 Two boundaries enforced here, and nowhere else
 ---------------------------------------------
-**Authoring is teacher-only, and the role is server-derived.** A course is shared
-content: it appears in the picker and is served to every learner enrolled in it. A
-learner who could author one could publish unreviewed material under the product's name.
-The role is read from the authenticated account and compared by exact string, fail-closed
-- the same posture ``app.harness.creation_gate`` takes for simulations, and for the same
-reason: a privilege that is normalised into existence is not a boundary.
+**Personal previews are authenticated; publishing remains teacher-only.** A preview or
+``save=false`` build belongs to the requesting account and is never stored or registered.
+Publishing, replacing and administering shared courses still requires a canonical
+teacher, staff or admin role from the authenticated account, never from client fields.
+Personal authoring does not promote the account or grant access to another author's
+blueprint, and active exams block these learning activities before any model call.
 
 **Preview is a real preview.** ``/preview`` runs the same synthesizer and the same audit
 as ``/courses`` and persists nothing, so a teacher can see the lessons, the items and
@@ -129,6 +129,14 @@ def _author(request: Request, db) -> User:
     return user
 
 
+def _creator(request: Request, db, *, publish: bool) -> User:
+    from . import exam_guard
+
+    user = _author(request, db) if publish else _authenticate(request, db)
+    exam_guard.block(db, user)
+    return user
+
+
 def _settings(request: Request):
     settings = request.app.state.settings
     registry.hydrate(settings)
@@ -165,8 +173,8 @@ def list_courses(request: Request, db=Depends(_session)):
 @router.post(API + '/preview')
 def preview(body: BlueprintBody, request: Request, db=Depends(_session)):
     """Synthesize and audit without storing. The honest dry run."""
-    _author(request, db)
-    plan, problems = blueprint.parse(body.blueprint, author='operator')
+    user = _creator(request, db, publish=False)
+    plan, problems = blueprint.parse(body.blueprint, author=user.id)
     if plan is None:
         return {'ok': False, 'stored': False, 'problems': _problems(problems)}
     course = synthesize.build(plan)
@@ -180,9 +188,9 @@ def preview(body: BlueprintBody, request: Request, db=Depends(_session)):
 @router.post(API + '/courses')
 def create_course(body: BlueprintBody, request: Request, db=Depends(_session)):
     """Build, audit, store and publish one authored course."""
-    _author(request, db)
-    settings = _settings(request)
-    plan, problems = blueprint.parse(body.blueprint, author='operator')
+    user = _creator(request, db, publish=body.save)
+    settings = _settings(request) if body.save else request.app.state.settings
+    plan, problems = blueprint.parse(body.blueprint, author=user.id)
     if plan is None:
         raise HTTPException(422, {'message': 'The blueprint could not be read',
                                   'problems': _problems(problems)})
@@ -212,9 +220,9 @@ def create_course(body: BlueprintBody, request: Request, db=Depends(_session)):
 
 @router.post(API + '/draft')
 def draft_course(body: DraftBody, request: Request, db=Depends(_session)):
-    """Author a course from a topic, using the harness's own model provider."""
-    _author(request, db)
-    settings = _settings(request)
+    """Draft privately, or publish with the server-side author role."""
+    _creator(request, db, publish=body.save)
+    settings = _settings(request) if body.save else request.app.state.settings
     try:
         drafted = draft_module.draft(settings, body.topic, units=body.units,
                                      level=body.level, profile_name=body.profile,

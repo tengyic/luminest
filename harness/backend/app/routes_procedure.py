@@ -13,6 +13,7 @@ The serving contract::
     GET  /api/v1/procedure/{concept_id}       -> the compiled plan, and any active run
     POST /api/v1/procedure/{concept_id}/start -> start it; materialises the bound deck
     GET  /api/v1/procedure/runs/{run_id}      -> one run: plan, progress, current block
+    GET  /api/v1/procedure/runs/{run_id}/next-item -> the next promised question + receipt
     POST /api/v1/procedure/runs/{run_id}/advance -> mark a block done or skipped
     POST /api/v1/procedure/runs/{run_id}/abandon -> stop the run without completing it
     GET  /api/v1/procedure/{concept_id}/deck-cursor -> which slide is showing
@@ -24,7 +25,14 @@ Three boundaries enforced here
 activity and nothing else. Mastery still moves only through the question route and the
 playground's own outcome route, so a learner cannot raise their own estimate by tapping
 "next" through a lesson. That is why ``advance`` writes to ``procedure_runs`` and to no
-other table.
+other table - and why answering a lesson's question goes through ``POST /attempts``, the
+one scoring path, rather than through a second grader that would eventually disagree with
+it.
+
+**A commitment block is answered, not acknowledged.** A practice or diagnostic block binds
+the exact items it promises. ``advance`` refuses to mark one done while any of them has no
+recorded attempt, because the block used to complete on a tap and the whole adaptive loop
+downstream of it starved for input. Skipping stays honest and available.
 
 **Someone else's run is a 404, never a 403.** A 403 would confirm that the run exists.
 The lookup is scoped to the authenticated account before anything else happens.
@@ -112,16 +120,21 @@ def _run_or_404(db, user, run_id: str) -> ProcedureRun:
     return run
 
 
-def _payload(user, run: ProcedureRun) -> dict:
+def _payload(db, user, run: ProcedureRun) -> dict:
     """One serialiser for every response, so no route can forget the concept title.
 
     The row stores an id; the card needs a title. Six routes each calling ``run_to_dict``
     directly is six chances to omit it, and the omission is invisible until a learner sees
     "Fraction Equivalence" on a card for a lesson the course calls "Fractions and
     equivalent quantities".
+
+    Answer progress rides on the same call for the same reason: whether a promised
+    question has been answered is a property of the block the learner is looking at, and a
+    client that had to ask a second endpoint would sometimes render a stale count.
     """
-    return procedure_service.run_to_dict(
+    payload = procedure_service.run_to_dict(
         run, concept_title=procedure_service.concept_title_for(user, run.concept_id))
+    return procedure_service.with_item_progress(db, run, payload)
 
 
 class AdvanceInput(BaseModel):
@@ -146,17 +159,48 @@ def running(auth=Depends(authenticated)):
     "continue where you left off" surface after a restart without guessing concept ids.
     """
     db, user = auth
+    exam_guard.block(db, user)
     rows = list(db.scalars(select(ProcedureRun).where(
         ProcedureRun.user_id == user.id, ProcedureRun.status == 'active')
         .order_by(ProcedureRun.updated_at.desc()).limit(20)))
-    return {'runs': [_payload(user, row) for row in rows]}
+    return {'runs': [_payload(db, user, row) for row in rows]}
 
 
 @router.get(API + '/runs/{run_id}')
 def read_run(run_id: str, auth=Depends(authenticated)):
     db, user = auth
     exam_guard.block(db, user)
-    return _payload(user, _run_or_404(db, user, run_id))
+    return _payload(db, user, _run_or_404(db, user, run_id))
+
+
+@router.get(API + '/runs/{run_id}/next-item')
+def next_item(run_id: str, request: Request,
+              order: int | None = Query(default=None, ge=1, le=64),
+              auth=Depends(authenticated)):
+    """The next question this lesson promised, with the receipt that lets it be answered.
+
+    This is the address the answer channel was missing. The block names its items; this
+    hands over one of them, signed, along with where the learner stands inside the block.
+    The answer then goes to ``POST /attempts`` - the same route the practice card uses -
+    so a lesson answer and a practice answer are graded by one implementation, produce one
+    kind of ``attempt`` row, and move mastery through one path.
+
+    ``question: null`` is not an error. It means the block owes nothing: every promised
+    item is answered (the block can be completed) or the item vanished from the bank (the
+    reason says so, and the plan is not silently repaired).
+    """
+    db, user = auth
+    exam_guard.block(db, user)
+    run = _run_or_404(db, user, run_id)
+    if run.status != 'active':
+        raise HTTPException(409, f'This lesson is {run.status}, not active')
+    settings = _settings(request)
+    try:
+        return procedure_service.next_item(
+            db, user, run, secret=request.app.state.signing_secret,
+            ttl=float(settings.receipt_ttl), settings=settings, order=order)
+    except (ValueError, KeyError) as exc:
+        raise HTTPException(409, str(exc)) from exc
 
 
 @router.post(API + '/runs/{run_id}/advance')
@@ -167,6 +211,10 @@ def advance(run_id: str, payload: AdvanceInput, request: Request,
     A double tap, a stale screen or an unknown order is refused with a 409 rather than
     accepted silently, because the progress record is what the next turn's prompt is
     built from: a record that says a block ran twice would make the tutor repeat it.
+
+    A practice or diagnostic block also carries a 409 while any question it promised is
+    unanswered - ``next-item`` serves those, ``POST /attempts`` scores them. The learner
+    is never stuck: skipping is always available, and says so in the refusal.
     """
     db, user = auth
     exam_guard.block(db, user)
@@ -186,7 +234,7 @@ def advance(run_id: str, payload: AdvanceInput, request: Request,
     except Exception:   # noqa: BLE001 - a rendering failure must not fail the advance
         log.warning('deck materialisation failed for %s', run.concept_id, exc_info=True)
     db.flush()
-    return _payload(user, run)
+    return _payload(db, user, run)
 
 
 @router.post(API + '/runs/{run_id}/abandon')
@@ -205,7 +253,7 @@ def abandon(run_id: str, auth=Depends(authenticated)):
     run.status = 'abandoned'
     run.updated_at = now_ts()
     db.flush()
-    return _payload(user, run)
+    return _payload(db, user, run)
 
 
 class DeckCursorInput(BaseModel):
@@ -285,7 +333,7 @@ def plan(concept_id: str, request: Request,
                          'top_error': evidence.top_error,
                          'frustrated': evidence.frustrated,
                          'session_minutes': round(evidence.session_minutes, 1)},
-            'active': _payload(user, active) if active else None}
+            'active': _payload(db, user, active) if active else None}
 
 
 @router.post(API + '/{concept_id}/start')
@@ -321,7 +369,7 @@ def start(concept_id: str, request: Request,
     except Exception:   # noqa: BLE001 - an unbuilt deck degrades the block, not the run
         log.warning('deck materialisation failed for %s', run.concept_id, exc_info=True)
     db.flush()
-    payload = _payload(user, run)
+    payload = _payload(db, user, run)
     payload['started'] = True
     return payload
 

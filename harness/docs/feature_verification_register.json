@@ -2,7 +2,7 @@
   "program": "Program 1 — Stabilization and correctness",
   "product": "Luminest / Luminfest Learning Harness",
   "version": 1,
-  "updated": "2026-11-07",
+  "updated": "2026-11-08",
   "purpose": "One register for the whole application: what the learner sees, where it is implemented natively, where it is implemented on the server, what it persists, what proves it, and the measurable condition that makes it done.",
   "boundaries": {
     "database_security": "A parallel agent owns database/tenant security hardening. This register records the current expected path and the existing security tests, but makes no change to security code and does not claim that hardening is complete.",
@@ -287,14 +287,14 @@
         },
         {
           "id": "ASSESS-04",
-          "name": "Unit-level gradebook",
-          "status": "absent",
-          "user_facing": "A formal unit grade judged against academic standards, with a gradebook view.",
-          "native": "None.",
-          "backend": "No unit-gradebook route; only per-assessment scores exist in main.py.",
-          "data": "No unit-grade table; Assessment holds one exam, not a unit aggregate.",
-          "tests": "None; the absence is the finding.",
-          "acceptance": "Not met. A unit gradebook must aggregate graded items per unit, expose the weighting, and be reproducible from Attempt/Assessment rows; none of those paths exists today."
+          "name": "Unit-level gradebook against declared standards",
+          "status": "partial",
+          "user_facing": "Per-unit standards with per-standard evidence counts, a percentage only when every declared standard has enough graded attempts, and a frozen grade record. The UI says \"NO GRADE YET\" instead of showing an average over the easy half of the syllabus.",
+          "native": "native/Sources/LearningHarness/AssessmentInsights.swift — GradebookCard; AppStore+Assessment.swift — finaliseUnitGrade; InsightsView loads /gradebook.",
+          "backend": "backend/app/assessment_book.py (units_of, evaluate, UnitGrade); main.py GET /api/v1/gradebook, GET /api/v1/gradebook/{unit_key}, POST /api/v1/gradebook/{unit_key}/grade.",
+          "data": "unit_grades table: frozen standards snapshot, score, max_score, percent, standards_met/total, attempt count, scope_note. Scored from Attempt rows filtered by main.graded_attempts.",
+          "tests": "backend/tests/test_assessment_and_perspectives.py — declares standards, refuses a grade with no evidence, refuses a grade with partial evidence, freezes once, upserts rather than duplicating, and hides another course’s unit.",
+          "acceptance": "A unit with any standard below 2 graded attempts has percent=null and POST /grade returns 409 with the missing standards; once every standard has evidence a frozen grade is stored and re-grading updates the same row. Remaining delta: standards are this course’s declared objectives, not external academic standards (Common Core/AP alignment), and the grade is explicitly formative and non-accredited."
         }
       ]
     },
@@ -317,12 +317,12 @@
           "id": "PROJECT-02",
           "name": "Course authoring from source",
           "status": "partial",
-          "user_facing": "Create a course from pasted text, a URL or a file; the native client has no authoring screen, so this runs in the web workbench.",
-          "native": "None in native; web/index.html Course Studio.",
+          "user_facing": "Create a course from pasted text, a URL or a file; the native shell header's 'Create a course' sheet now builds a course from pasted notes and can enrol in it. URL/file sources remain a web-workbench path.",
+          "native": "native/Sources/LearningHarness/CourseAuthoring.swift (CourseAuthoringSheet), opened from LuminfestApp.swift (course.create); first-person journey J6 in NativeQA.swift. web/index.html Course Studio for URL/file sources.",
           "backend": "backend/app/routes_create.py; backend/app/course_builder.py; /create/preview, /create/course, /create/search.",
           "data": "Created course packs and lesson records in the local store.",
-          "tests": "backend/tests/test_course_builder.py; backend/tests/test_creation_tools.py; backend/tests/test_source_extension.py.",
-          "acceptance": "Same source → same course (determinism); refusals name the missing structure and actual counts; a URL fetch rejects private/loopback destinations and revalidates each redirect."
+          "tests": "backend/tests/test_course_builder.py; backend/tests/test_creation_tools.py; backend/tests/test_source_extension.py; native/Sources/LearningHarness/NativeQA.swift journey J6 (real AX controls).",
+          "acceptance": "Same source → same course (determinism); refusals name the missing structure and actual counts; a URL fetch rejects private/loopback destinations and revalidates each redirect; native preview saves nothing, create returns the owned course id, enrol reloads the plan."
         },
         {
           "id": "PROJECT-03",
@@ -337,14 +337,14 @@
         },
         {
           "id": "PROJECT-04",
-          "name": "Unit projects with capture and presentation",
-          "status": "absent",
-          "user_facing": "A small project after each unit: an on-camera presentation or a research task with limited AI use, with capture, submission and a rubric.",
-          "native": "None; no camera capture or recording surface.",
-          "backend": "No camera/recording route; Project accepts text only.",
-          "data": "Project stores text/disclosure/reflection; no media artifact row.",
-          "tests": "None; the absence is the finding.",
-          "acceptance": "Not met. A unit project must capture a learner artifact, store it as a submission, score it against a rubric, and retain the disclosure; only the text path exists."
+          "name": "Unit projects with submission, rubric and AI disclosure",
+          "status": "partial",
+          "user_facing": "A project per concept with a written submission, a reflection, an explicit AI-use disclosure, the unit rubric, and formative feedback. Drafts survive leaving the page; observations can be attached to the real artifact.",
+          "native": "native/Sources/LearningHarness/ProjectsInsightsSettings.swift — ProjectsView and ProjectEditor; ProjectDrafts.swift keeps per-account drafts; AssessmentInsights.swift — PerspectiveCard attaches an observation to a real project.",
+          "backend": "backend/app/main.py GET /api/v1/projects and POST /api/v1/projects/{id}/submit; backend/app/perspectives.py anchors observations to the Project row.",
+          "data": "projects table (submission, feedback, ai_disclosure, reflection, status); perspective_reviews table anchors written observations to a project id.",
+          "tests": "backend/tests/test_assessment_and_perspectives.py — a self-review is refused for an invented artifact and accepted for a real project; test_api.py covers project submission; test_account_deletion.py covers erasure.",
+          "acceptance": "A learner can write, keep a draft, submit, disclose AI use, read the rubric and feedback, and attach a written perspective observation. Remaining delta: no camera capture or on-camera presentation recording, and no teacher-scored certified grade; the feedback explicitly says it is a formative rubric checklist, not a correctness claim."
         }
       ]
     },
@@ -498,14 +498,14 @@
         },
         {
           "id": "INSIGHT-04",
-          "name": "Multi-perspective analytics",
-          "status": "partial",
-          "user_facing": "Participation, struggle, attention and streak exist; collaboration, creativity and soft skills do not.",
-          "native": "InsightsView shows the implemented dimensions; no collaboration surface.",
-          "backend": "backend/app/harness/classroom.py, attention.py, motivation.py; no collaboration/creativity/soft-skill scoring module.",
-          "data": "TelemetryEvent, State, Attempt, PlaygroundRun; no collaboration/creativity rubric rows.",
-          "tests": "backend/tests/test_learning_science.py; no tests for the three absent dimensions.",
-          "acceptance": "Three named dimensions (collaboration, creativity, soft skills) have a scoring path and a display; today only the first four dimensions exist, so this is partial."
+          "name": "Multi-perspective analytics from written rubric evidence",
+          "status": "implemented",
+          "user_facing": "Five perspective dimensions (participation, communication, creativity, collaboration, soft skills) with a published measurement definition beside each number. A learner writes a self-observation on a real project; a teacher records group observations; either can be withdrawn.",
+          "native": "native/Sources/LearningHarness/AssessmentInsights.swift — PerspectiveCard; InsightsView renders every analytics dimension; AppStore+Assessment.swift — recordSelfObservation, withdrawObservation.",
+          "backend": "backend/app/perspectives.py (DIMENSIONS, validate_observation, summary, public_definitions); main.py GET /api/v1/perspectives, GET /api/v1/perspectives/dimensions, POST/DELETE /api/v1/perspectives/reviews; analytics_data() includes the rows.",
+          "data": "perspective_reviews table: subject, real artifact anchor, dimension, 0-4 score, written evidence note, reviewer role, group size, timestamps. Unique per (subject, artifact, dimension, reviewer).",
+          "tests": "backend/tests/test_assessment_and_perspectives.py — empty dimensions are null not zero, short notes and invented artifacts are refused, learners cannot score another learner, collaboration requires a teacher-recorded group observation, withdrawal works, export and erasure cover the rows; test_api.py/test_final_contract.py still pin Cognitive attention as the last dimension with value null.",
+          "acceptance": "No observation means value=null and status insufficient_evidence/not_measured, never a percentage derived from foreground activity. Cognitive attention remains explicitly not measured. A 409/422 is returned for an invented artifact, a bare score, or a cross-account self-review. Limitation: these are human judgements with written evidence, not validated psychometric instruments; collaboration has no direct peer-to-peer surface, only teacher-recorded group observations."
         },
         {
           "id": "INSIGHT-05",

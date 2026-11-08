@@ -27,9 +27,9 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from . import account_erasure
 from . import content_locale
 
-from . import (accounts, courses, curriculum_route, experiments, figures, harness, learning,
-               learning_science, lecture, planner, procedure_service, schemas, simulation_map,
-               teacher_clone, tutor)
+from . import (accounts, assessment_book, courses, curriculum_route, experiments, figures,
+               harness, learning, learning_science, lecture, perspectives, planner,
+               procedure_service, schemas, simulation_map, teacher_clone, tutor)
 from .harness import agent_loop
 from .harness import ta as ta_jobs
 from .harness import board as node_boards
@@ -40,7 +40,9 @@ from .harness import voice as voice_backend
 from .harness.teaching import (build_evidence, concept_facts, default_profile,
                                plan_session)
 from .config import Settings
-from . import exam_guard
+from . import exam_guard, receipts
+from .api.v1.account import build_router as build_account_router
+from .core.errors import install as install_error_handlers
 from .feature_routers import FEATURE_ROUTERS
 from .curriculum import (CONCEPTS, GRAPH_TO_LESSON, LESSON_TARGETS, QUESTIONS,
                          authored_share, course_concepts, course_questions,
@@ -266,9 +268,13 @@ def exam_breakdown(db, assessment):
 
 
 def public_question(question, receipt, secret, progress, reason):
-    result = {k: question[k] for k in ('id', 'concept_id', 'concept_title', 'prompt', 'options', 'kind', 'expected_seconds')}
-    return {**result, 'mode': receipt.mode, 'issued_at': iso(receipt.issued_at),
-            'receipt': sign_receipt(receipt, secret), 'progress': progress, 'selection_reason': reason}
+    """The question payload every issuing surface returns.
+
+    Delegates to :func:`app.receipts.public` so the practice card and a lesson block serve
+    the same shape. Two copies of "which keys does a client need" is two chances for one
+    of them to omit ``options`` and render a question nobody can answer.
+    """
+    return receipts.public(question, receipt, secret, progress, reason)
 
 
 def exam_active(db, user):
@@ -282,17 +288,26 @@ def block_exam_help(db, user):
     exam_guard.block(db, user)
 
 
-def dimensions(attempts):
+def dimensions(attempts, perspective_reviews=None):
+    """The learner's evidence, with measured and unmeasured things kept distinguishable.
+
+    ``perspective_reviews`` are written rubric observations from ``app.perspectives`` —
+    never telemetry. They are inserted *before* the cognitive-attention row because that
+    row is deliberately last: clients and contract tests use "the final dimension has no
+    value" as the assertion that attention is still not being inferred from activity.
+    """
     count = len(attempts)
     reasoned = [a for a in attempts if a.payload.get('reasoning')]
     confident = [a for a in attempts if a.confidence is not None]
-    return [
+    observed = [
         {'name': 'Retrieval accuracy', 'value': sum(a.correct for a in attempts)/count if count else None,
          'evidence': f'{count} scored retrieval attempts; task-specific observation, not general intelligence.', 'status': 'observed' if count else 'insufficient_evidence'},
         {'name': 'Written explanation coverage', 'value': len(reasoned)/count if count else None,
          'evidence': f'{len(reasoned)} attempts include learner reasoning; presence does not certify reasoning quality.', 'status': 'observed' if count else 'insufficient_evidence'},
         {'name': 'Confidence calibration', 'value': sum((a.confidence-int(a.correct))**2 for a in confident)/len(confident) if confident else None,
          'evidence': f'Brier error over {len(confident)} self-reported confidences; lower is better.', 'status': 'observed' if confident else 'insufficient_evidence'},
+    ]
+    return observed + perspectives.summary(perspective_reviews) + [
         {'name': 'Cognitive attention', 'value': None, 'evidence': 'Not inferred. Consented active-window intervals measure interaction time only.', 'status': 'not_measured'},
     ]
 
@@ -415,7 +430,8 @@ def analytics_data(db, user):
     for attempt in attempts:
         if not attempt.correct:
             errors[attempt.category] = errors.get(attempt.category, 0)+1
-    return {'daily': [daily[k] for k in sorted(daily)], 'dimensions': dimensions(attempts),
+    return {'daily': [daily[k] for k in sorted(daily)],
+            'dimensions': dimensions(attempts, own_rows(db, perspectives.PerspectiveReview, user)),
             'errors': [{'category': k, 'count': v} for k, v in sorted(errors.items())], 'streak': streak,
             'focus_note': 'Active seconds are consented foreground-window intervals, capped at 15 seconds per validated server interval. They do not measure cognitive attention.'}
 
@@ -876,6 +892,11 @@ def create_app(settings=None):
         # what was written, because a failed write must never be reported as a success.
         log.exception('storage failure on %s %s', request.method, request.url.path)
         return JSONResponse({'detail': 'Storage operation unavailable; no successful write is reported'}, status_code=503)
+
+    # The error contract (``ApplicationError`` and a JSON, non-leaking 500) lives in
+    # ``app/core/errors.py``. One call site; the more specific handlers above and
+    # FastAPI's own still win, because Starlette matches by exception MRO.
+    install_error_handlers(app)
 
     def authenticated(request: Request):
         """The session dependency. Token validation, the erasure check and the 401 wording
@@ -1691,7 +1712,9 @@ def create_app(settings=None):
             raise HTTPException(422, 'Elapsed time exceeds the server-observed receipt interval')
         if receipt.mode != 'exam':
             block_exam_help(db, user)
-        question = QUESTIONS[receipt.question_id]
+        question = my_questions(user).get(receipt.question_id)
+        if question is None:
+            raise HTTPException(410, 'This issued question is no longer available in your enrolled course')
         # P-2/P-3 switches come from the account's experiment assignment (M-3), so each
         # can run as a controlled comparison instead of a global flip.
         flags = experiments.snapshot(db, user.id)['flags']
@@ -1727,7 +1750,8 @@ def create_app(settings=None):
         if not state_row:
             state_row = State(user_id=user.id, concept_id=question['concept_id'], data={})
             db.add(state_row)
-        state_row.data = learning.update(state_row.data, correct, payload.elapsed_seconds, now)
+        state_row.data = {**learning.update(state_row.data, correct, payload.elapsed_seconds, now),
+                          'mastery_known': True}
         # FIRe-style implicit credit: a success on this concept is weak evidence its
         # prerequisites are solid, so they receive a fractional, distance-decayed
         # stability increment on the same DSR memory state.
@@ -1885,6 +1909,170 @@ def create_app(settings=None):
     def analytics(auth=Depends(authenticated)):
         block_exam_help(*auth)
         return analytics_data(*auth)
+
+    # ------------------------------------------------------- assessment book & perspectives
+    # Two gaps the November 8 audit named: no unit-level grade book judged against
+    # declared standards, and no implementation of creativity/communication/collaboration/
+    # soft-skills evidence. Both live behind the same rule: an empty measurement is an
+    # empty measurement, not a zero, and never an inference from foreground activity.
+    def _gradebook_rows(db, user):
+        units = assessment_book.units_of(course_graph(user))
+        rows = assessment_book.evaluate(units, graded_attempts(db, user),
+                                        course_id=enrolled_course(user).id)
+        return rows
+
+    @app.get(API+'/gradebook')
+    def gradebook(auth=Depends(authenticated)):
+        """Every unit, its declared standards, and any finalised grade."""
+        db, user = auth
+        block_exam_help(db, user)
+        rows = _gradebook_rows(db, user)
+        grades = {g.unit_key: g for g in own_rows(db, assessment_book.UnitGrade, user)
+                  if g.course_id == enrolled_course(user).id}
+        return {
+            'course_id': enrolled_course(user).id,
+            'units': [dict(row, grade=assessment_book.grade_json(grades[row['key']])
+                           if row['key'] in grades else None) for row in rows],
+            'standards_note': ('A standard is one topic inside a unit of your enrolled '
+                               'course. It is scored only after at least '
+                               f'{assessment_book.MIN_ATTEMPTS_PER_STANDARD} graded '
+                               'attempts; a unit with any unevidenced standard has no '
+                               'overall grade.'),
+            'scope_note': assessment_book.SCOPE_NOTE,
+        }
+
+    @app.get(API+'/gradebook/{unit_key}')
+    def gradebook_unit(unit_key: str, auth=Depends(authenticated)):
+        """One unit's standards and per-standard evidence, or 404 for another course's unit."""
+        db, user = auth
+        block_exam_help(db, user)
+        row = next((r for r in _gradebook_rows(db, user) if r['key'] == unit_key), None)
+        if row is None:
+            raise HTTPException(404, 'Unknown unit for this course')
+        row['grade'] = next((assessment_book.grade_json(g) for g in
+                            own_rows(db, assessment_book.UnitGrade, user)
+                            if g.unit_key == unit_key), None)
+        return row
+
+    @app.post(API+'/gradebook/{unit_key}/grade')
+    def finalise_unit_grade(unit_key: str, auth=Depends(authenticated)):
+        """Freeze a unit grade, but only when every declared standard has evidence.
+
+        Refusing the grade is the feature: an average over the standards a learner happened
+        to answer would look like a grade and would not be one.
+        """
+        db, user = auth
+        block_exam_help(db, user)
+        row = next((r for r in _gradebook_rows(db, user) if r['key'] == unit_key), None)
+        if row is None:
+            raise HTTPException(404, 'Unknown unit for this course')
+        if not row['gradeable']:
+            raise HTTPException(409, {'reason': 'This unit has no defensible grade yet.',
+                                     'missing_standards': row['missing'],
+                                     'requirement': ('Every declared standard needs at least '
+                                                     f'{assessment_book.MIN_ATTEMPTS_PER_STANDARD} '
+                                                     'graded attempts.')})
+        course_id = enrolled_course(user).id
+        grade = db.scalar(select(assessment_book.UnitGrade).where(
+            assessment_book.UnitGrade.user_id == user.id,
+            assessment_book.UnitGrade.course_id == course_id,
+            assessment_book.UnitGrade.unit_key == unit_key))
+        if grade is None:
+            grade = assessment_book.UnitGrade(
+                user_id=user.id, course_id=course_id, unit_key=unit_key,
+                strand=row['strand'], unit=row['unit'])
+            db.add(grade)
+        grade.standards = row['standards']
+        grade.score = row['correct']
+        grade.max_score = row['answered']
+        grade.percent = row['percent']
+        grade.standards_met = row['standards_met']
+        grade.standards_total = row['standards_total']
+        grade.attempts = row['answered']
+        grade.graded_at = now_ts()
+        grade.scope_note = assessment_book.SCOPE_NOTE
+        db.commit()
+        return assessment_book.grade_json(grade)
+
+    @app.get(API+'/perspectives/dimensions')
+    def perspective_definitions(auth=Depends(authenticated)):
+        """What each perspective number means, and what it is not allowed to mean."""
+        return perspectives.public_definitions()
+
+    @app.get(API+'/perspectives')
+    def my_perspectives(auth=Depends(authenticated)):
+        """This learner's own rubric observations. Never another account's notes."""
+        db, user = auth
+        block_exam_help(db, user)
+        reviews = own_rows(db, perspectives.PerspectiveReview, user)
+        definitions = perspectives.public_definitions()
+        return {
+            'dimensions': perspectives.summary(reviews),
+            'reviews': [perspectives.review_json(r) for r in
+                        sorted(reviews, key=lambda r: r.created_at, reverse=True)],
+            'scale': definitions['scale'],
+            'privacy': definitions['privacy'],
+            'accreditation': definitions['accreditation'],
+        }
+
+    @app.post(API+'/perspectives/reviews')
+    def record_perspective(payload: schemas.PerspectiveObservation,
+                           auth=Depends(authenticated)):
+        """Attach a written rubric observation to an artifact that really exists."""
+        db, user = auth
+        block_exam_help(db, user)
+        subject = db.get(User, payload.subject_id)
+        if subject is None or subject.deleted_at is not None:
+            raise HTTPException(404, 'Unknown learner')
+        if payload.artifact_type in ('project', 'group_project'):
+            artifact = db.scalar(select(Project).where(Project.id == payload.artifact_id))
+            exists = artifact is not None and artifact.user_id == payload.subject_id
+        else:
+            artifact = db.scalar(select(assessment_book.UnitGrade).where(
+                assessment_book.UnitGrade.id == payload.artifact_id,
+                assessment_book.UnitGrade.user_id == payload.subject_id))
+            exists = artifact is not None
+        error = perspectives.validate_observation(
+            payload.model_dump(), caller_id=user.id, caller_role=user.role,
+            subject_id=payload.subject_id, artifact_exists=exists)
+        if error:
+            raise HTTPException(422, error)
+        row = db.scalar(select(perspectives.PerspectiveReview).where(
+            perspectives.PerspectiveReview.user_id == payload.subject_id,
+            perspectives.PerspectiveReview.artifact_type == payload.artifact_type,
+            perspectives.PerspectiveReview.artifact_id == payload.artifact_id,
+            perspectives.PerspectiveReview.dimension == payload.dimension,
+            perspectives.PerspectiveReview.reviewer_id == user.id))
+        if row is None:
+            row = perspectives.PerspectiveReview(
+                user_id=payload.subject_id, artifact_type=payload.artifact_type,
+                artifact_id=payload.artifact_id, dimension=payload.dimension,
+                reviewer_id=user.id)
+            db.add(row)
+        row.score = payload.score
+        row.evidence_note = payload.evidence_note.strip()
+        row.reviewer_role = payload.reviewer_role
+        row.group_size = payload.group_size if payload.reviewer_role == 'peer' else None
+        row.updated_at = now_ts()
+        try:
+            db.commit()
+        except IntegrityError as exc:
+            db.rollback()
+            raise HTTPException(409, 'That observation was already recorded.') from exc
+        return perspectives.review_json(row)
+
+    @app.delete(API+'/perspectives/reviews/{review_id}')
+    def withdraw_perspective(review_id: str, auth=Depends(authenticated)):
+        """Withdraw an observation you wrote. Consent includes the right to take it back."""
+        db, user = auth
+        row = db.scalar(select(perspectives.PerspectiveReview).where(
+            perspectives.PerspectiveReview.id == review_id,
+            perspectives.PerspectiveReview.reviewer_id == user.id))
+        if row is None:
+            raise HTTPException(404, 'Observation not found')
+        db.delete(row)
+        db.commit()
+        return {'withdrawn': True, 'id': review_id}
 
     # ------------------------------------------------------- learning-science surface
     # P-2 calibration, P-3 self-explanation export and the M-3 experiment wiring. Each
@@ -2495,10 +2683,24 @@ def create_app(settings=None):
                                            segment.get('board_ops') or [], reset=True)
         media_payload = lecture.segment_media(settings, concept, segment,
                                               enrolled_course(user).id)
+        # The lecture is spoken by the same engine as the tutor, on purpose. The native
+        # player used its own on-device synthesiser, so entering a lecture changed the
+        # teacher's voice mid-session; handing the segment back with a queue of clips
+        # from ``speech`` removes that seam. Clips are planned here and rendered in
+        # order by the speech worker, so a long narration becomes audio the learner can
+        # hear page by page rather than one silence the length of the page.
+        try:
+            speech_payload = harness.speech.request_sequence(
+                settings, str(segment.get('narration') or ''))
+        except Exception:  # noqa: BLE001 - a voice that will not render is not a failed page
+            log.warning('lecture speech request failed', exc_info=True)
+            speech_payload = {'state': 'failed', 'reason': 'Speech rendering raised.',
+                              'url': '', 'digest': '', 'clips': []}
         return {'index': index, 'total': len(segments),
                 'lecture_title': plan.get('title') or concept['title'],
                 'segment': segment, 'board_id': board_id, 'board_version': version,
                 'media': media_payload,
+                'speech': speech_payload,
                 'source': plan.get('source') or 'unknown'}
 
     @app.get(API+'/simulations')
@@ -3182,6 +3384,9 @@ def create_app(settings=None):
         voice: str = Field(default='', max_length=80)
         rate: str = Field(default='', max_length=16)
         tone: str = Field(default='', max_length=200)
+        #: ``True`` (default) synthesises before answering, so the body is the mp3.
+        #: ``False`` answers at once with clip descriptors the client plays in order.
+        wait: bool = True
 
     @app.post(API+'/voice/speak')
     def voice_speak(payload: VoiceSpeakInput, auth=Depends(authenticated)):
@@ -3192,8 +3397,20 @@ def create_app(settings=None):
         profile) as the tutor instead of the device's synthetic voice. A backend
         that is not running is a 503 with the reason — the client falls back to
         on-device speech rather than failing the button.
+
+        ``wait`` defaults to ``true``: a read-aloud button is a direct request for
+        audio and cannot be served from a cache the way the tutor's turn is, so the
+        old behaviour -- return only after synthesis finished -- is unchanged for
+        every existing client. ``wait=false`` returns the same clip *plan* the tutor
+        turn returns (a queue of clips, in order) instead, which is what a player
+        needs to start hearing the first sentence while the rest renders.
         """
         db, user = auth
+        if not payload.wait:
+            sequence = harness.speech.request_sequence(
+                settings, payload.text, voice=payload.voice, rate=payload.rate,
+                tone=payload.tone.strip() or voice_backend.default_instruct(settings))
+            return sequence
         speed, _ = voice_backend.speed_from_rate(payload.rate)
         chosen, _ = voice_backend.resolve_voice(payload.voice, settings)
         instruct, _ = voice_backend.resolve_instruct(
@@ -3470,6 +3687,27 @@ def create_app(settings=None):
                     final['suggested_actions'] = actions
                     final['grounded_offline'] = True
                     yield {'type': 'message_delta', 'text': content}
+            # A turn that cannot answer still owes the learner a *visible* reason and a
+            # next action. Before this, the panel said only "the turn finished without a
+            # reply", which reads as a broken app rather than a designed fallback. The
+            # notice is deliberately not prose in ``content``: it is not an answer to the
+            # question, and must never be mistaken for one by the chat history, the ledger
+            # or a client that renders ``message``. ``finish_reason`` stays 'unavailable'.
+            if not final.get('content') and reason in ('unavailable', 'provider_error'):
+                final['notice'] = {
+                    'kind': 'unavailable',
+                    'reason': (
+                        'No tutor model is configured on this instance, and this question is '
+                        'not scoped to a concept in your course, so there is no grounded '
+                        'material to teach from.' if reason == 'unavailable' else
+                        'The configured tutor model did not complete this turn, and no '
+                        'grounded offline answer was available for it.'),
+                    'next_action': (
+                        'Open a concept from your course and ask again, or build a course '
+                        'from your own notes so the offline tutor has a source to ground '
+                        'its answer in. Teaching a topic that is not in your course yet '
+                        'requires a configured tutor provider.'),
+                }
             # Speak the reply itself. Off the request path on purpose: a local synthesis
             # costs 20-40 s, and a learner must be able to read the answer and look at the
             # board while the voice renders. The descriptor rides on the turn so both the
@@ -3676,6 +3914,9 @@ def create_app(settings=None):
                 'answered_by': answered_by,
                 'grounded_offline': bool(final.get('grounded_offline')),
                 'grounding': final.get('grounding') or [],
+                # A declared fallback with a reason and a next action, or None when the
+                # turn actually answered. Never prose in ``message``: it is not an answer.
+                'notice': final.get('notice'),
                 'speech': final.get('speech') or None,
                 'media': media_from_events(events, settings),
                 'usage': {key: usage.get(key, 0) for key in
@@ -4013,27 +4254,11 @@ def create_app(settings=None):
 
     # ------------------------------------------------------------------ usage & preferences
 
-    @app.get(API+'/usage')
-    def usage(auth=Depends(authenticated)):
-        db, user = auth
-        return accounts.usage_summary(db, user)
-
-    @app.get(API+'/preferences')
-    def get_preferences(auth=Depends(authenticated)):
-        db, user = auth
-        row = accounts.preferences_for(db, user)
-        db.commit()
-        return accounts.preferences_json(row)
-
-    @app.patch(API+'/preferences')
-    def patch_preferences(payload: schemas.PreferencePatch, auth=Depends(authenticated)):
-        db, user = auth
-        row = accounts.preferences_for(db, user)
-        for key, value in payload.model_dump(exclude_unset=True).items():
-            setattr(row, key, value)
-        row.updated_at = now_ts()
-        db.commit()
-        return accounts.preferences_json(row)
+    # Relocated verbatim to ``app/api/v1/account.py``; mounted here, at the position the
+    # three decorators used to occupy, so route registration order - and therefore path
+    # resolution - is unchanged. The router is handed the same ``authenticated`` closure
+    # the inline handlers used, so the dependency FastAPI executes is the same object.
+    app.include_router(build_account_router(authenticated=authenticated))
 
     # ------------------------------------------------------------------ feedback
 
@@ -4148,6 +4373,9 @@ def create_app(settings=None):
                                       if (a.payload.get('self_explanation') or '').strip()],
                 'messages': serialize(own_rows(db, Message, user)),
                 'projects': serialize(own_rows(db, Project, user)),
+                'unit_grades': serialize(own_rows(db, assessment_book.UnitGrade, user)),
+                'perspective_reviews': serialize(own_rows(db, perspectives.PerspectiveReview,
+                                                          user)),
                 'events': serialize(own_rows(db, TelemetryEvent, user)),
                 'memory_notes': serialize(own_rows(db, MemoryNote, user)),
                 'harness_runs': serialize(own_rows(db, HarnessRun, user)),

@@ -26,6 +26,7 @@ from fastapi.testclient import TestClient
 from sqlalchemy import text
 
 from app import account_erasure
+from app import assessment_book, perspectives
 from app import deck as deck_store
 from app.config import Settings
 from app.database_backup import create_sqlite_backup, restore_sqlite_backup, sqlite_path_from_engine
@@ -157,6 +158,15 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
             PlaygroundRun(user_id=user_id, artifact_id='sim-1', slug='game', archetype='pick',
                           concept_id='fractions', correct=True),
             ProcedureRun(user_id=user_id, concept_id='fractions', procedure_hash='h1'),
+            assessment_book.UnitGrade(
+                user_id=user_id, course_id='integrated_math_1', unit_key='seeded-unit',
+                strand='Number', unit='Fractions', standards=[], score=1, max_score=2,
+                percent=0.5, standards_met=1, standards_total=1, attempts=2),
+            perspectives.PerspectiveReview(
+                user_id=user_id, artifact_type='project', artifact_id='seeded-project',
+                dimension='communication', score=2,
+                evidence_note='Explained the method but skipped the units.',
+                reviewer_id=user_id, reviewer_role='self'),
             course, feedback, ledger,
         ])
         db.commit()

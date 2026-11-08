@@ -99,11 +99,31 @@ def test_every_feature_router_has_a_frozen_artifact_probe(package_module):
         f"unknown {sorted(set(probes) - set(FEATURE_ROUTERS))}")
 
 
+def _declared_paths(router) -> set[str]:
+    """Every path a router declares, including routers FastAPI nested into it.
+
+    FastAPI 0.143 represents ``include_router`` with an ``_IncludedRouter`` wrapper that
+    has no ``.path``; the real routes live on ``original_router.routes``. Walking only the
+    top level would report a real, served probe as undeclared - the same class of false
+    negative this test exists to prevent, but in the other direction.
+    """
+    found: set[str] = set()
+    for route in router.routes:
+        nested = getattr(getattr(route, 'original_router', None), 'routes', None)
+        if nested:
+            found |= _declared_paths(route.original_router)
+            continue
+        path = getattr(route, 'path', None)
+        if path:
+            found.add(path)
+    return found
+
+
 def test_each_probe_names_a_route_its_module_really_declares(package_module):
     """A probe pointing at the wrong path would pass the build and prove nothing."""
     for name, route in package_module.FEATURE_ROUTE_PROBES:
         module = importlib.import_module(f"app.{name}")
-        declared = {path.path for path in module.router.routes}
+        declared = _declared_paths(module.router)
         assert f"/api/v1{route}" in declared, (
             f"app.{name} does not declare /api/v1{route}; it declares {sorted(declared)}")
 

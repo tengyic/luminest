@@ -14,6 +14,10 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "LearningHarness",
+            // Features/README.md documents the split for humans only. SwiftPM treats an
+            // undeclared file as an unhandled resource and warns on every build; naming
+            // it here keeps the manifest honest without bundling prose into the app.
+            exclude: ["Features/README.md"],
             resources: [.process("Resources")]
         ),
         .testTarget(name: "LearningHarnessTests", dependencies: ["LearningHarness"])

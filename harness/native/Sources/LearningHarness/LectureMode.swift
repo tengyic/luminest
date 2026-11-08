@@ -47,6 +47,10 @@ final class LectureStore: ObservableObject {
     @Published var plan: LecturePlan?
     @Published var segment: LectureSegment?
     @Published var media: JSON = .null
+    /// Clips the server queues for this page, spoken by the same VoiceStudio engine as
+    /// the tutor. Empty when the segment carries no speech.
+    @Published var speechClips: [String] = []
+    @Published var speechState = ""
     @Published var index = 0
     @Published var boardID = ""
     @Published var boardVersion = 0
@@ -85,6 +89,9 @@ final class LectureStore: ObservableObject {
                                            method: "POST", body: [String: Any]())
             segment = LectureSegment(value["segment"])
             media = value["media"]
+            let speech = value["speech"]
+            speechClips = speech["clips"].array.map(\.string).filter { !$0.isEmpty }
+            speechState = speech["state"].string
             boardID = value["board_id"].string.isEmpty ? boardID : value["board_id"].string
             boardVersion = value["board_version"].int
             index = value["index"].int
@@ -95,24 +102,138 @@ final class LectureStore: ObservableObject {
     }
 }
 
-/// Local speech for the lecture, chunked so a 300-word segment is not truncated.
+/// The lecture's voice: the same clips the tutor speaks with.
 ///
-/// The tutor's `VoiceIO` caps one utterance at 1,200 characters, which is right for a chat
-/// reply and wrong for a lecture. Chunks queue on one synthesizer; the completion callback
-/// fires only when the queue is empty.
+/// This used to be the Mac's `AVSpeechSynthesizer`, which meant entering a lecture swapped
+/// the teacher's voice mid-session — the tutor in VoiceStudio, the lecture in the system
+/// robot. The server now plans each page as an ordered queue of clips through the same
+/// engine (``/lecture/{concept}/segment/{n}`` returns ``speech``), and this player fetches
+/// and plays them in order.
+///
+/// Why clips rather than one recording: the engine renders slower than the voice is heard,
+/// so a page delivered as one file is silence until the whole page is done. Clip *n* is
+/// fetched while clip *n-1* plays, which is as close to real time as a local render allows.
+///
+/// On-device speech remains the fallback for a machine with no VoiceStudio: ``speak`` takes
+/// narration and, when the server sent no clips, reads it locally rather than going mute.
 @MainActor
-final class LectureNarrator: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+final class LectureNarrator: NSObject, ObservableObject, AVAudioPlayerDelegate,
+                             AVSpeechSynthesizerDelegate {
     private let synthesizer = AVSpeechSynthesizer()
+    private var player: AVAudioPlayer?
+    private var queue: [String] = []
+    private var pending: String = ""
+    private var fetching = false
+    private var load: (@MainActor (String) async -> Data?)?
     @Published var speaking = false
+    /// True when the page is being read by the Mac rather than by VoiceStudio, so the UI
+    /// can say which voice the learner is hearing instead of silently changing it.
+    @Published var usingSystemVoice = false
     var onFinish: (() -> Void)?
+    /// Called when the whole queue has been heard (or gave up). ``VoiceIO`` uses it to
+    /// clear its "speaking" flag; the lecture leaves it nil.
+    var onEnd: (() -> Void)?
 
     override init() {
         super.init()
         synthesizer.delegate = self
     }
 
-    func speak(_ text: String) {
+    /// Play one page. ``clips`` are artifact paths in order; ``fallback`` is the narration
+    /// to read on-device when the server sent none (voice switched off, engine absent).
+    func speak(clips: [String], fallback: String,
+               load: @escaping @MainActor (String) async -> Data?) {
         stop()
+        self.load = load
+        currentFallback = fallback
+        usingSystemVoice = false
+        speaking = true
+        if clips.isEmpty {
+            speakLocally(fallback)
+            return
+        }
+        queue = Array(clips.dropFirst())
+        pending = clips[0]
+        fetching = true
+        fetch(pending)
+    }
+
+    /// One fetch at a time. The first clip of a page goes straight to the player; later
+    /// ones are staged while the current clip is heard.
+    private func fetch(_ path: String) {
+        guard let load else { return }
+        fetching = true
+        Task { [weak self] in
+            let data = await load(path)
+            await self?.arrived(data)
+        }
+    }
+
+    private func arrived(_ data: Data?) {
+        fetching = false
+        guard let data, !data.isEmpty else {
+            // A clip that never arrives must not stop the lecture: fall back to reading
+            // the page on-device so the learner still hears the words.
+            pending = ""
+            queue = []
+            speakLocally(currentFallback)
+            return
+        }
+        if player == nil {
+            play(data)
+            return
+        }
+        staged = data
+    }
+
+    private var currentFallback = ""
+    private var staged: Data?
+
+    private func play(_ data: Data) {
+        guard let audio = try? AVAudioPlayer(data: data), audio.duration > 0 else {
+            nextClip()
+            return
+        }
+        audio.delegate = self
+        audio.prepareToPlay()
+        audio.play()
+        player = audio
+        // Fetch the next clip while this one plays, so the page continues without a gap
+        // the length of a render.
+        if !queue.isEmpty, !fetching {
+            pending = queue.removeFirst()
+            fetch(pending)
+        }
+    }
+
+    private func nextClip() {
+        player = nil
+        if let staged {
+            let data = staged
+            self.staged = nil
+            play(data)
+            return
+        }
+        if !queue.isEmpty || fetching {
+            // Still waiting on the next fetch: retry shortly rather than dropping the page.
+            Task { [weak self] in
+                try? await Task.sleep(nanoseconds: 300_000_000)
+                await MainActor.run { self?.nextClip() }
+            }
+            return
+        }
+        speaking = false
+        onEnd?()
+        onFinish?()
+    }
+
+    nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        Task { @MainActor in self.nextClip() }
+    }
+
+    private func speakLocally(_ text: String) {
+        stop()
+        usingSystemVoice = true
         let clean = text.replacingOccurrences(of: "[#*`_]", with: "", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
         guard !clean.isEmpty else { return }
@@ -140,6 +261,11 @@ final class LectureNarrator: NSObject, ObservableObject, AVSpeechSynthesizerDele
 
     func stop() {
         synthesizer.stopSpeaking(at: .immediate)
+        player?.stop()
+        player = nil
+        queue = []
+        staged = nil
+        fetching = false
         speaking = false
     }
 
@@ -400,7 +526,7 @@ struct LectureTheater: View {
             await lecture.load(index: wanted, conceptID: conceptID)
             if !lecture.boardID.isEmpty { await board.loadExisting(lecture.boardID) }
             if let segment = lecture.segment {
-                narrator.speak(segment.narration)
+                speakPage(segment)
             }
         }
     }
@@ -434,13 +560,23 @@ struct LectureTheater: View {
             narrator.stop()
         } else {
             playing = true
-            if let segment = lecture.segment { narrator.speak(segment.narration) }
+            if let segment = lecture.segment { speakPage(segment) }
         }
     }
 
     private func restart() {
         narrator.stop()
         play(0)
+    }
+
+    /// Speak this page in the tutor's voice when the server queued clips for it, and in
+    /// the Mac's own voice only when it did not. The route is the same artifact path the
+    /// tutor's replies come from, so both surfaces are heard in one voice.
+    private func speakPage(_ segment: LectureSegment) {
+        let api = store.api
+        narrator.speak(clips: lecture.speechClips, fallback: segment.narration) { path in
+            try? await api.artifact(path)
+        }
     }
 
     private func timeText(_ seconds: Int) -> String {
