@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800" width="1440" height="800" role="img" aria-label="Luminest architecture: learning materials feed personalized instruction, which produces evidence of mastery, which drives continuous adaptation back into instruction.">
+  <rect width="1440" height="800" fill="#F7F5F0"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6F9176"/>
+    </marker>
+    <style>
+      .title { font: 600 34px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #202824; }
+      .sub { font: 400 18px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #6A746E; }
+      .h { font: 600 24px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #202824; }
+      .b { font: 400 17px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #44504A; }
+      .code { font: 400 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #6A746E; }
+      .pill { font: 600 14px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #4D7057; }
+      .foot { font: 400 16px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; fill: #6A746E; }
+    </style>
+  </defs>
+
+  <text x="60" y="68" class="title">Luminest — four parts, one loop</text>
+  <text x="60" y="104" class="sub">Each stage feeds the next; the last one changes what the first one teaches.</text>
+
+  <g>
+    <rect x="60" y="170" width="290" height="250" rx="18" fill="#FFFFFF" stroke="#DCDCD4" stroke-width="2"/>
+    <rect x="84" y="194" width="112" height="28" rx="14" fill="#EAF0E8"/>
+    <text x="100" y="213" class="pill">01  MATERIALS</text>
+    <text x="84" y="262" class="h">What the learner brings</text>
+    <text x="84" y="302" class="b">Textbooks, notes, PDFs,</text>
+    <text x="84" y="328" class="b">assignments, links</text>
+    <text x="84" y="366" class="code">routes_create.py</text>
+    <text x="84" y="390" class="code">course_builder.py</text>
+  </g>
+
+  <g>
+    <rect x="400" y="170" width="290" height="250" rx="18" fill="#FFFFFF" stroke="#DCDCD4" stroke-width="2"/>
+    <rect x="424" y="194" width="136" height="28" rx="14" fill="#EAF0E8"/>
+    <text x="440" y="213" class="pill">02  INSTRUCTION</text>
+    <text x="424" y="262" class="h">Personalized teaching</text>
+    <text x="424" y="302" class="b">Lessons, questions, decks,</text>
+    <text x="424" y="328" class="b">whiteboard, voice, tutor</text>
+    <text x="424" y="366" class="code">harness/loop.py</text>
+    <text x="424" y="390" class="code">routes_procedure.py</text>
+  </g>
+
+  <g>
+    <rect x="740" y="170" width="290" height="250" rx="18" fill="#FFFFFF" stroke="#DCDCD4" stroke-width="2"/>
+    <rect x="764" y="194" width="126" height="28" rx="14" fill="#EAF0E8"/>
+    <text x="780" y="213" class="pill">03  EVIDENCE</text>
+    <text x="764" y="262" class="h">What was understood</text>
+    <text x="764" y="302" class="b">Attempts, mastery, gaps,</text>
+    <text x="764" y="328" class="b">misconception diagnosis</text>
+    <text x="764" y="366" class="code">learning.py · psychometrics.py</text>
+    <text x="764" y="390" class="code">knowledge_graph.py</text>
+  </g>
+
+  <g>
+    <rect x="1080" y="170" width="300" height="250" rx="18" fill="#FFFFFF" stroke="#DCDCD4" stroke-width="2"/>
+    <rect x="1104" y="194" width="152" height="28" rx="14" fill="#EAF0E8"/>
+    <text x="1120" y="213" class="pill">04  ADAPTATION</text>
+    <text x="1104" y="262" class="h">What happens next</text>
+    <text x="1104" y="302" class="b">FSRS-6, IRT/CAT, KST,</text>
+    <text x="1104" y="328" class="b">five decision layers</text>
+    <text x="1104" y="366" class="code">memory.py · kst.py</text>
+    <text x="1104" y="390" class="code">classroom.py · supervision.py</text>
+  </g>
+
+  <g stroke="#6F9176" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M 356 295 L 392 295"/>
+    <path d="M 696 295 L 732 295"/>
+    <path d="M 1036 295 L 1072 295"/>
+  </g>
+
+  <path d="M 1230 440 C 1230 540, 545 540, 545 432" stroke="#6F9176" stroke-width="3" fill="none" stroke-dasharray="9 7" marker-end="url(#arrow)"/>
+  <rect x="716" y="500" width="348" height="36" rx="18" fill="#EAF0E8"/>
+  <text x="734" y="524" class="pill">changes what and how the learner sees next</text>
+
+  <line x1="60" y1="630" x2="1380" y2="630" stroke="#DCDCD4" stroke-width="2"/>
+  <text x="60" y="670" class="foot">SwiftUI macOS client  ·  FastAPI backend  ·  SQLite / PostgreSQL  ·  51 registered agent tools</text>
+  <text x="60" y="704" class="foot">Decision layers never collapse: teaching policy → session → procedure → supervision → classroom.</text>
+  <text x="60" y="738" class="foot">Absence is designed: a missing provider degrades to a declared fallback with a reason, never a fabricated answer.</text>
+</svg>

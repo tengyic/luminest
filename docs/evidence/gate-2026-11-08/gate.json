@@ -1,0 +1,64 @@
+{
+  "runId": "20261108-131016",
+  "startedAt": "2026-11-08T13:11:39+0800",
+  "python": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+  "layers": [
+    "1",
+    "2"
+  ],
+  "results": [
+    {
+      "command": [
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/outputs/quality/20261108-131016/tmp-unit/bt",
+        "tests/test_memory.py",
+        "tests/test_flashcards.py",
+        "tests/test_learning_science.py",
+        "tests/test_memory_properties.py",
+        "tests/test_learning_properties.py",
+        "tests/test_security_contract.py"
+      ],
+      "cwd": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend",
+      "exit": 0,
+      "seconds": 38.5,
+      "stdout": "..................................................................       [100%]\n=============================== warnings summary ===============================\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464: PytestConfigWarning: Unknown config option: timeout\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464: PytestConfigWarning: Unknown config option: timeout_method\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n66 passed, 3 warnings in 33.98s\n",
+      "stderr": "",
+      "layer": "unit",
+      "passed": true
+    },
+    {
+      "command": [
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/outputs/quality/20261108-131016/tmp-integration/bt",
+        "tests/test_api.py",
+        "tests/test_database_engines.py",
+        "tests/test_desktop_environment.py"
+      ],
+      "cwd": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend",
+      "exit": 0,
+      "seconds": 44.4,
+      "stdout": ".............................................                            [100%]\n=============================== warnings summary ===============================\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464: PytestConfigWarning: Unknown config option: timeout\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/_pytest/config/__init__.py:1464: PytestConfigWarning: Unknown config option: timeout_method\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n45 passed, 3 warnings in 40.48s\n",
+      "stderr": "",
+      "layer": "integration",
+      "passed": true
+    }
+  ],
+  "extras": [
+    {
+      "layer": "dependencies",
+      "skipped": true,
+      "reason": "pip-audit is not installed in the build environment",
+      "passed": false
+    }
+  ],
+  "blockers": [],
+  "passed": true
+}

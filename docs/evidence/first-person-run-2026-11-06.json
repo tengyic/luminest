@@ -1,0 +1,2633 @@
+{
+ "generated_at": "2026-11-06 22:00:53 +0800",
+ "base_url": "http://127.0.0.1:8794",
+ "topic": "creep deformation of titanium aluminide turbine blades",
+ "database": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.tmp-first-person/20261106-220000-deliverable/harness.sqlite3",
+ "passed": 17,
+ "total": 20,
+ "failed": 3,
+ "steps": [
+  {
+   "step": "01 health",
+   "passed": true,
+   "criterion": "GET /health returns ready:true and declares its own model/tutor limits.",
+   "seconds": 0.002,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "ready": true,
+     "service": "luminfest-learning-harness",
+     "schema_version": 11,
+     "model_status": {
+      "name": "FSRS-6 DSR memory model (upstream defaults v6.3.2) + heuristic BKT mastery",
+      "trained": false,
+      "domain": "mathematics; memory model is principled, mastery prior is not calibrated",
+      "commercial_ready": false
+     },
+     "tutor": {
+      "provider": "offline",
+      "availability": "local"
+     },
+     "harness": {
+      "moves": 9,
+      "tools": 51,
+      "artefacts": 11,
+      "memory_kinds": [
+       "episodic",
+       "semantic",
+       "procedural"
+      ],
+      "memory_half_life_days": 21.0,
+      "sandbox_boundaries": [
+       "path-confinement",
+       "static-guard",
+       "runtime-audit-hook",
+       "seatbelt"
+      ],
+      "generation_mode": "grounded-offline"
+     }
+    }
+   }
+  },
+  {
+   "step": "02 register fresh learner",
+   "passed": true,
+   "criterion": "A brand-new account is created (201) with a bearer token and a learner role.",
+   "seconds": 0.052,
+   "evidence": {
+    "status": 201,
+    "body": {
+     "token": "REDACTED",
+     "refresh_token": "REDACTED",
+     "token_type": "Bearer",
+     "expires_in": 3600,
+     "user": {
+      "id": "59972875-488c-4ae0-afd4-3d2e7717d7ef",
+      "name": "First Person Learner",
+      "email": "REDACTED",
+      "goal": "Build real understanding",
+      "daily_minutes": 20,
+      "telemetry_consent": false,
+      "training_consent": false,
+      "course_id": "integrated_math_1",
+      "onboarding_complete": false,
+      "email_verified": false,
+      "role": "learner",
+      "status": "active",
+      "cohort_id": null
+     }
+    }
+   }
+  },
+  {
+   "step": "02b no operator promotion",
+   "passed": true,
+   "criterion": "The first account in HARNESS_ENV=test must stay a learner.",
+   "evidence": {
+    "role": "learner"
+   }
+  },
+  {
+   "step": "03 topic is unseen",
+   "passed": true,
+   "criterion": "The named topic is genuinely absent from the knowledge graph.",
+   "seconds": 0.006,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "query": "creep deformation of titanium aluminide turbine blades",
+     "results": []
+    }
+   }
+  },
+  {
+   "step": "04 ask to be taught the unseen topic (agent chat)",
+   "passed": false,
+   "criterion": "A free-form question to the agent must produce a non-empty learner-visible reply.",
+   "seconds": 0.006,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "message": null,
+     "finish_reason": "unavailable",
+     "events": [
+      {
+       "type": "error",
+       "message": "Model not configured. The harness falls back to deterministic, grounded-offline content when no provider is set."
+      },
+      {
+       "type": "turn_end",
+       "reason": "unavailable",
+       "content": null
+      }
+     ],
+     "provider": "grounded-offline",
+     "answered_by": "grounded-offline",
+     "grounded_offline": false,
+     "grounding": [],
+     "speech": null,
+     "media": [],
+     "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+     }
+    }
+   }
+  },
+  {
+   "step": "04b agent chat scoped to a concept",
+   "passed": true,
+   "criterion": "The same agent turn scoped to a real concept must return the grounded offline answer.",
+   "seconds": 1.895,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "message": "Grounded offline tutor — curriculum retrieval, not an LLM.\n\nA fraction describes equal parts of a whole. Equivalent fractions multiply numerator and denominator by the same nonzero number.\n\nChoose a common unit before adding numerators.\nFrom your own recorded work: No prior observations recorded for this learner.\nCourse-map connections: builds on Greatest common factor and least common multiple.\nWhat quantities are given, what must you find, and which first step preserves the mathematical relationship?\nA wrong answer alone cannot identify its cause. We can test your explanation with a targeted cross-check.",
+     "finish_reason": "unavailable",
+     "events": [
+      {
+       "type": "error",
+       "message": "Model not configured. The harness falls back to deterministic, grounded-offline content when no provider is set."
+      },
+      {
+       "type": "message_delta",
+       "text": "Grounded offline tutor — curriculum retrieval, not an LLM.\n\nA fraction describes equal parts of a whole. Equivalent fractions multiply numerator and denominator by the same nonzero number.\n\nChoose a common unit before adding numerators.\nFrom your own recorded work: No prior observations recorded for this learner.\nCourse-map connections: builds on Greatest common factor and least common multiple.\nWhat quantities are given, what must you find, and which first step preserves the mathematical relationship?\nA wrong answer alone cannot identify its cause. We can test your explanation with a targeted cross-check."
+      },
+      {
+       "type": "turn_end",
+       "reason": "unavailable",
+       "content": "Grounded offline tutor — curriculum retrieval, not an LLM.\n\nA fraction describes equal parts of a whole. Equivalent fractions multiply numerator and denominator by the same nonzero number.\n\nChoose a common unit before adding numerators.\nFrom your own recorded work: No prior observations recorded for this learner.\nCourse-map connections: builds on Greatest common factor and least common multiple.\nWhat quantities are given, what must you find, and which first step preserves the mathematical relationship?\nA wrong answer alone cannot identify its cause. We can test your explanation with a targeted cross-check.",
+       "provider": "Grounded offline tutor",
+       "grounding": [
+        {
+         "title": "Original hand-authored curriculum: Fractions and equivalent quantities",
+         "url": ""
+        },
+        {
+         "title": "OpenStax — external reference, not app content",
+         "url": "https://openstax.org/details/books/elementary-algebra-2e"
+        },
+        {
+         "title": "Khan Academy — external, unofficial reference and terms",
+         "url": "https://www.khanacademy.org/about/tos"
+        },
+        {
+         "title": "Khan Academy (video, embedded via YouTube) — video, opens in the provider's player",
+         "url": "https://www.khanacademy.org/"
+        },
+        {
+         "title": "3Blue1Brown (video, embedded via YouTube) — video, opens in the provider's player",
+         "url": "https://www.3blue1brown.com/"
+        },
+        {
+         "title": "PhET Interactive Simulations (University of Colorado Boulder) — interactive simulation",
+         "url": "https://phet.colorado.edu/"
+        },
+        {
+         "title": "ExploreLearning Gizmos (subscription) — interactive simulation",
+         "url": "https://gizmos.explorelearning.com/"
+        }
+       ],
+       "suggested_actions": [
+        "Explain the next step in your own words",
+        "Try a fresh retrieval question",
+        "Check the worked example"
+       ],
+       "grounded_offline": true
+      }
+     ],
+     "provider": "grounded-offline",
+     "answered_by": "Grounded offline tutor",
+     "grounded_offline": true,
+     "grounding": [
+      {
+       "title": "Original hand-authored curriculum: Fractions and equivalent quantities",
+       "url": ""
+      },
+      {
+       "title": "OpenStax — external reference, not app content",
+       "url": "https://openstax.org/details/books/elementary-algebra-2e"
+      },
+      {
+       "title": "Khan Academy — external, unofficial reference and terms",
+       "url": "https://www.khanacademy.org/about/tos"
+      },
+      {
+       "title": "Khan Academy (video, embedded via YouTube) — video, opens in the provider's player",
+       "url": "https://www.khanacademy.org/"
+      },
+      {
+       "title": "3Blue1Brown (video, embedded via YouTube) — video, opens in the provider's player",
+       "url": "https://www.3blue1brown.com/"
+      },
+      {
+       "title": "PhET Interactive Simulations (University of Colorado Boulder) — interactive simulation",
+       "url": "https://phet.colorado.edu/"
+      },
+      {
+       "title": "ExploreLearning Gizmos (subscription) — interactive simulation",
+       "url": "https://gizmos.explorelearning.com/"
+      }
+     ],
+     "speech": null,
+     "media": [],
+     "usage": {
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0
+     }
+    }
+   }
+  },
+  {
+   "step": "05 generate a course from the topic name",
+   "passed": true,
+   "criterion": "POST /create/auto on an unseen topic must return a course plan, not a silent empty.",
+   "seconds": 3.729,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "course_id": "mine_2491ba2358",
+     "title": "Gas-turbine engine",
+     "subject": "Blades, Creep, Turbine",
+     "level": "project_led",
+     "concepts": 42,
+     "questions": 168,
+     "graph_stats": {
+      "concepts": 42,
+      "edges": 5,
+      "sequence_edges": 41,
+      "strands": 1,
+      "units": 1,
+      "topics": 26,
+      "roots": 37,
+      "leaves": 38,
+      "max_depth": 1,
+      "mean_prerequisites": 0.119,
+      "with_lesson": 42,
+      "outline_only": 0,
+      "by_strand": {
+       "Blades, Creep, Turbine": 42
+      },
+      "by_unit": {
+       "Gas-turbine engine": 42
+      },
+      "by_tier": {
+       "extension": 5,
+       "foundation": 37
+      },
+      "difficulty_histogram": {
+       "1": 37,
+       "2": 0,
+       "3": 0,
+       "4": 5,
+       "5": 0
+      },
+      "density": 0.0029
+     },
+     "source_rights": {
+      "name": "Wikipedia (REST API)",
+      "url": "https://en.wikipedia.org/api/rest_v1/",
+      "licence": "Text under Creative Commons Attribution-ShareAlike 4.0 (per Wikipedia's reuse notice); attribution travels with every fetched article.",
+      "licence_class": "cc_by_sa",
+      "attribution": "\"<Title>\", Wikipedia, The Free Encyclopedia, <url>, CC BY-SA 4.0.",
+      "needs_attribution": true
+     },
+     "personalisation": {
+      "goal": "Build real understanding",
+      "level": "project_led",
+      "level_reason": "Your goal is building something, so the course keeps the ideas needed to finish a piece of work.",
+      "daily_minutes": 20,
+      "concepts": 42,
+      "practice_items": 168,
+      "sessions_to_finish": 15,
+      "weeks_to_finish": 3,
+      "first_session": [
+       "A gas turbine"
+      ],
+      "goal_matches": []
+     },
+     "candidate": {
+      "id": "64c6d5570c6e691b0f2e",
+      "title": "Gas-turbine engine",
+      "url": "https://en.wikipedia.org/wiki/Gas-turbine_engine",
+      "provider": "wikipedia",
+      "summary": "Type of continuous-flow turbine engine",
+      "licence": "Text under Creative Commons Attribution-ShareAlike 4.0 (per Wikipedia's reuse notice); attribution travels with every fetched article.",
+      "licence_class": "cc_by_sa",
+      "ingestible": true,
+      "can_build_course": true,
+      "attribution": "\"<Title>\", Wikipedia, The Free Encyclopedia, <url>, CC BY-SA 4.0.",
+      "why": "Matches on blades, creep, turbine.",
+      "topics": [
+       "blades",
+       "creep",
+       "turbine"
+      ],
+      "concepts": []
+     },
+     "rights_note": "This material is stored only in your account and is never added to the shared catalogue or shown to another learner. You are responsible for having the right to use what you supply.",
+     "created": false,
+     "enrolled": false,
+     "next": "Send the same request with \"save\": true to store it."
+    }
+   }
+  },
+  {
+   "step": "05b save and enrol the generated course",
+   "passed": true,
+   "criterion": "Saving and enrolling the generated course makes its concepts the learner's active curriculum.",
+   "seconds": 3.347,
+   "evidence": {
+    "status": 201,
+    "body": {
+     "course_id": "mine_092a17e1ce",
+     "title": "Gas-turbine engine",
+     "subject": "Blades, Creep, Turbine",
+     "level": "project_led",
+     "concepts": 42,
+     "questions": 168,
+     "graph_stats": {
+      "concepts": 42,
+      "edges": 5,
+      "sequence_edges": 41,
+      "strands": 1,
+      "units": 1,
+      "topics": 26,
+      "roots": 37,
+      "leaves": 38,
+      "max_depth": 1,
+      "mean_prerequisites": 0.119,
+      "with_lesson": 42,
+      "outline_only": 0,
+      "by_strand": {
+       "Blades, Creep, Turbine": 42
+      },
+      "by_unit": {
+       "Gas-turbine engine": 42
+      },
+      "by_tier": {
+       "extension": 5,
+       "foundation": 37
+      },
+      "difficulty_histogram": {
+       "1": 37,
+       "2": 0,
+       "3": 0,
+       "4": 5,
+       "5": 0
+      },
+      "density": 0.0029
+     },
+     "source_rights": {
+      "name": "Wikipedia (REST API)",
+      "url": "https://en.wikipedia.org/api/rest_v1/",
+      "licence": "Text under Creative Commons Attribution-ShareAlike 4.0 (per Wikipedia's reuse notice); attribution travels with every fetched article.",
+      "licence_class": "cc_by_sa",
+      "attribution": "\"<Title>\", Wikipedia, The Free Encyclopedia, <url>, CC BY-SA 4.0.",
+      "needs_attribution": true
+     },
+     "personalisation": {
+      "goal": "Build real understanding",
+      "level": "project_led",
+      "level_reason": "Your goal is building something, so the course keeps the ideas needed to finish a piece of work.",
+      "daily_minutes": 20,
+      "concepts": 42,
+      "practice_items": 168,
+      "sessions_to_finish": 15,
+      "weeks_to_finish": 3,
+      "first_session": [
+       "A gas turbine"
+      ],
+      "goal_matches": []
+     },
+     "candidate": {
+      "id": "64c6d5570c6e691b0f2e",
+      "title": "Gas-turbine engine",
+      "url": "https://en.wikipedia.org/wiki/Gas-turbine_engine",
+      "provider": "wikipedia",
+      "summary": "Type of continuous-flow turbine engine",
+      "licence": "Text under Creative Commons Attribution-ShareAlike 4.0 (per Wikipedia's reuse notice); attribution travels with every fetched article.",
+      "licence_class": "cc_by_sa",
+      "ingestible": true,
+      "can_build_course": true,
+      "attribution": "\"<Title>\", Wikipedia, The Free Encyclopedia, <url>, CC BY-SA 4.0.",
+      "why": "Matches on blades, creep, turbine.",
+      "topics": [
+       "blades",
+       "creep",
+       "turbine"
+      ],
+      "concepts": []
+     },
+     "rights_note": "This material is stored only in your account and is never added to the shared catalogue or shown to another learner. You are responsible for having the right to use what you supply.",
+     "course": {
+      "id": "mine_092a17e1ce",
+      "title": "Gas-turbine engine",
+      "subject": "Blades, Creep, Turbine",
+      "level": "project_led",
+      "authored": false,
+      "generated": true,
+      "custom": true,
+      "expected_weeks": 8,
+      "source": {
+       "kind": "url",
+       "label": "Gas-turbine engine",
+       "url": "https://en.wikipedia.org/wiki/Gas-turbine_engine",
+       "format": "text",
+       "characters": 62415
+      },
+      "concepts": 42,
+      "questions": 168,
+      "stats": {
+       "concepts": 42,
+       "edges": 5,
+       "sequence_edges": 41,
+       "strands": 1,
+       "units": 1,
+       "topics": 26,
+       "roots": 37,
+       "leaves": 38,
+       "max_depth": 1,
+       "mean_prerequisites": 0.119,
+       "with_lesson": 42,
+       "outline_only": 0,
+       "by_strand": {
+        "Blades, Creep, Turbine": 42
+       },
+       "by_unit": {
+        "Gas-turbine engine": 42
+       },
+       "by_tier": {
+        "extension": 5,
+        "foundation": 37
+       },
+       "difficulty_histogram": {
+        "1": 37,
+        "2": 0,
+        "3": 0,
+        "4": 5,
+        "5": 0
+       },
+       "density": 0.0029
+      },
+      "created_at": 1793973619.732803
+     },
+     "created": true,
+     "enrolled": true,
+     "active_course": "mine_092a17e1ce",
+     "next": "This course is your active course now: Today, the map, the lessons and the practice items all come from it."
+    }
+   }
+  },
+  {
+   "step": "05c generated lesson has independent worked example",
+   "passed": false,
+   "criterion": "A worked example must not be a verbatim restatement of the source sentence, and must contain real steps.",
+   "seconds": 0.003,
+   "evidence": {
+    "lesson": {
+     "id": "mine_092a17e1ce_a_gas_turbine",
+     "title": "A gas turbine",
+     "unit": "Gas-turbine engine",
+     "strand": "Blades, Creep, Turbine",
+     "topic": "General",
+     "tier": "foundation",
+     "difficulty": 1,
+     "blocks": [
+      {
+       "kind": "concept",
+       "title": "Core idea",
+       "body": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+       "formula": "",
+       "source_span": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+      },
+      {
+       "kind": "worked_example",
+       "title": "From your source",
+       "body": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+       "formula": ""
+      },
+      {
+       "kind": "retrieval",
+       "title": "Check before you go on",
+       "body": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied.",
+       "formula": ""
+      },
+      {
+       "kind": "reflection",
+       "title": "Reflect",
+       "body": "Which part of A gas turbine is still unclear to you? Name the specific term or step rather than the whole idea. Understanding it unlocks 1 later concept(s): Concept cars. If you used any AI tool while studying this, say where.",
+       "formula": ""
+      }
+     ],
+     "simulation": {
+      "kind": "concept_map",
+      "title": "A gas turbine: how it connects",
+      "scope": "A concept map derived from your own source's prerequisite order and your recorded mastery. It is not a physical or mathematical model.",
+      "parameters": []
+     },
+     "project": {
+      "title": "A gas turbine: explain and apply",
+      "prompt": "Explain A gas turbine in your own words using only what your source states, then apply it to one example of your own.",
+      "rubric": [
+       "State the idea in your own words, not the source wording.",
+       "Point to the passage in your source it came from.",
+       "Connect it explicitly to at least one concept that comes before it.",
+       "Name one thing you are still unsure about, and disclose any AI assistance."
+      ]
+     },
+     "media": [],
+     "hint": "Read the passage you supplied for A gas turbine before trying to use it.",
+     "prerequisites": [],
+     "summary": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+     "generated": true,
+     "course_id": "mine_092a17e1ce"
+    }
+   }
+  },
+  {
+   "step": "06 available courses",
+   "passed": true,
+   "criterion": "A course/concept list exists so a lesson can be started.",
+   "seconds": 0.015,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "courses": [
+      {
+       "id": "integrated_math_1",
+       "title": "Integrated Mathematics I",
+       "subject": "Mathematics",
+       "subject_kind": "mathematics",
+       "description": "A full-year integrated mathematics course: number and quantity, algebra, functions, geometry and measurement, statistics and probability.",
+       "expected_weeks": 36,
+       "authored": true,
+       "uses_symbolic_engine": true,
+       "stats": {
+        "concepts": 164,
+        "edges": 183,
+        "sequence_edges": 26,
+        "strands": 5,
+        "units": 17,
+        "topics": 43,
+        "roots": 22,
+        "leaves": 31,
+        "max_depth": 14,
+        "mean_prerequisites": 1.116,
+        "with_lesson": 30,
+        "outline_only": 134,
+        "by_strand": {
+         "Algebra": 51,
+         "Functions": 37,
+         "Geometry & Measurement": 17,
+         "Number & Quantity": 31,
+         "Statistics & Probability": 28
+        },
+        "by_unit": {
+         "Algebraic expressions": 10,
+         "Bivariate data and inference": 9,
+         "Coordinate plane and relations": 9,
+         "Descriptive statistics": 9,
+         "Exponential functions": 9,
+         "Exponents, radicals and irrational numbers": 9,
+         "Geometric foundations": 9,
+         "Linear equations": 11,
+         "Linear functions": 11,
+         "Linear inequalities": 9,
+         "Measurement and geometric modelling": 8,
+         "Number foundations": 12,
+         "Probability": 10,
+         "Quadratic expressions and equations": 12,
+         "Ratios, rates and proportional reasoning": 10,
+         "Systems of linear equations": 9,
+         "Transformations and absolute value functions": 8
+        },
+        "by_tier": {
+         "core": 87,
+         "extension": 15,
+         "foundation": 62
+        },
+        "difficulty_histogram": {
+         "1": 42,
+         "2": 70,
+         "3": 36,
+         "4": 13,
+         "5": 3
+        },
+        "density": 0.00685
+       },
+       "enrolled": false
+      },
+      {
+       "id": "physics",
+       "title": "Physics",
+       "subject": "Physics",
+       "subject_kind": "science",
+       "description": "Algebra-based physics: measurement and modelling, mechanics, waves and optics, electricity and magnetism, thermal and modern physics.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 120,
+        "edges": 153,
+        "sequence_edges": 9,
+        "strands": 6,
+        "units": 12,
+        "topics": 22,
+        "roots": 8,
+        "leaves": 14,
+        "max_depth": 39,
+        "mean_prerequisites": 1.275,
+        "with_lesson": 0,
+        "outline_only": 120,
+        "by_strand": {
+         "Electricity and Magnetism": 23,
+         "Measurement and Modelling": 14,
+         "Mechanics": 41,
+         "Modern Physics": 11,
+         "Thermal Physics": 11,
+         "Waves and Optics": 20
+        },
+        "by_unit": {
+         "Circuits": 8,
+         "Electric charge and fields": 6,
+         "Energy, momentum and rotation": 19,
+         "Forces and Newton's laws": 11,
+         "Gravitation and oscillations": 11,
+         "Heat, temperature and gases": 11,
+         "Magnetism and induction": 9,
+         "Physical quantities and reasoning": 6,
+         "Quantum and nuclear physics": 11,
+         "Sound and geometric optics": 11,
+         "Vectors and kinematics in one dimension": 8,
+         "Wave behaviour": 9
+        },
+        "by_tier": {
+         "core": 34,
+         "extension": 38,
+         "foundation": 48
+        },
+        "difficulty_histogram": {
+         "1": 42,
+         "2": 25,
+         "3": 42,
+         "4": 11,
+         "5": 0
+        },
+        "density": 0.01071
+       },
+       "enrolled": false
+      },
+      {
+       "id": "chemistry",
+       "title": "Chemistry",
+       "subject": "Chemistry",
+       "subject_kind": "science",
+       "description": "Atomic structure and periodicity, bonding and structure, quantitative chemistry, reactions and energetics, equilibrium, organic and analytical.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 74,
+        "edges": 94,
+        "sequence_edges": 7,
+        "strands": 4,
+        "units": 7,
+        "topics": 14,
+        "roots": 7,
+        "leaves": 8,
+        "max_depth": 22,
+        "mean_prerequisites": 1.27,
+        "with_lesson": 0,
+        "outline_only": 74,
+        "by_strand": {
+         "Atomic Structure and Periodicity": 21,
+         "Chemical Reactions": 21,
+         "Foundations of Chemistry": 12,
+         "Organic and Analytical Chemistry": 20
+        },
+        "by_unit": {
+         "Analysis and the atmosphere": 8,
+         "Atomic structure": 10,
+         "Bonding and structure": 11,
+         "Energetics and equilibrium": 9,
+         "Matter, measurement and the mole": 12,
+         "Organic chemistry": 12,
+         "Reaction types and equations": 12
+        },
+        "by_tier": {
+         "core": 24,
+         "extension": 21,
+         "foundation": 29
+        },
+        "difficulty_histogram": {
+         "1": 22,
+         "2": 23,
+         "3": 22,
+         "4": 7,
+         "5": 0
+        },
+        "density": 0.0174
+       },
+       "enrolled": false
+      },
+      {
+       "id": "biology",
+       "title": "Biology",
+       "subject": "Biology",
+       "subject_kind": "science",
+       "description": "The chemistry of life, cell structure and transport, bioenergetics, genetics and inheritance, evolution, and ecology and physiology.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 64,
+        "edges": 81,
+        "sequence_edges": 4,
+        "strands": 5,
+        "units": 7,
+        "topics": 11,
+        "roots": 7,
+        "leaves": 9,
+        "max_depth": 14,
+        "mean_prerequisites": 1.266,
+        "with_lesson": 0,
+        "outline_only": 64,
+        "by_strand": {
+         "Bioenergetics": 8,
+         "Cells": 13,
+         "Ecology and Physiology": 16,
+         "Genetics and Evolution": 17,
+         "Molecules of Life": 10
+        },
+        "by_unit": {
+         "Biological molecules and enzymes": 10,
+         "Cell structure and division": 13,
+         "Ecology": 8,
+         "Evolution and classification": 6,
+         "Inheritance": 11,
+         "Physiology and control": 8,
+         "Respiration and photosynthesis": 8
+        },
+        "by_tier": {
+         "core": 32,
+         "extension": 11,
+         "foundation": 21
+        },
+        "difficulty_histogram": {
+         "1": 19,
+         "2": 25,
+         "3": 14,
+         "4": 5,
+         "5": 1
+        },
+        "density": 0.02009
+       },
+       "enrolled": false
+      },
+      {
+       "id": "computer_science",
+       "title": "Computer Science",
+       "subject": "Computer Science",
+       "subject_kind": "computing",
+       "description": "Computational thinking, programming fundamentals, data structures and algorithms, systems and networks, and the ethics of computing.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 58,
+        "edges": 78,
+        "sequence_edges": 5,
+        "strands": 4,
+        "units": 4,
+        "topics": 9,
+        "roots": 8,
+        "leaves": 6,
+        "max_depth": 18,
+        "mean_prerequisites": 1.345,
+        "with_lesson": 0,
+        "outline_only": 58,
+        "by_strand": {
+         "Computational Thinking": 8,
+         "Data Structures and Algorithms": 14,
+         "Programming": 20,
+         "Systems, Networks and Society": 16
+        },
+        "by_unit": {
+         "Core structures and analysis": 14,
+         "Foundations of computing": 8,
+         "How computers work": 16,
+         "Programming fundamentals": 20
+        },
+        "by_tier": {
+         "core": 19,
+         "extension": 9,
+         "foundation": 30
+        },
+        "difficulty_histogram": {
+         "1": 26,
+         "2": 21,
+         "3": 8,
+         "4": 3,
+         "5": 0
+        },
+        "density": 0.02359
+       },
+       "enrolled": false
+      },
+      {
+       "id": "earth_space_science",
+       "title": "Earth and Space Science",
+       "subject": "Earth Science",
+       "subject_kind": "science",
+       "description": "Earth's place in the universe, plate tectonics and Earth's structure, weather and climate, and resources and human impact.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 44,
+        "edges": 51,
+        "sequence_edges": 2,
+        "strands": 4,
+        "units": 5,
+        "topics": 7,
+        "roots": 4,
+        "leaves": 4,
+        "max_depth": 17,
+        "mean_prerequisites": 1.159,
+        "with_lesson": 0,
+        "outline_only": 44,
+        "by_strand": {
+         "Atmosphere and Climate": 12,
+         "Earth in the Universe": 8,
+         "Resources and Human Impact": 6,
+         "Solid Earth": 18
+        },
+        "by_unit": {
+         "Earth's structure and plate tectonics": 12,
+         "Resources and sustainability": 6,
+         "Space systems": 8,
+         "Surface processes": 6,
+         "Weather and climate systems": 12
+        },
+        "by_tier": {
+         "core": 20,
+         "extension": 8,
+         "foundation": 16
+        },
+        "difficulty_histogram": {
+         "1": 11,
+         "2": 19,
+         "3": 10,
+         "4": 4,
+         "5": 0
+        },
+        "density": 0.02696
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_macroeconomics",
+       "title": "AP Macroeconomics",
+       "subject": "Economics",
+       "subject_kind": "social_science",
+       "description": "The whole-economy view: scarcity and market fundamentals, national income and price determination, the financial sector, stabilisation policy and its long-run consequences, and the open economy.",
+       "expected_weeks": 30,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 51,
+        "edges": 46,
+        "sequence_edges": 16,
+        "strands": 6,
+        "units": 11,
+        "topics": 11,
+        "roots": 8,
+        "leaves": 16,
+        "max_depth": 21,
+        "mean_prerequisites": 0.902,
+        "with_lesson": 0,
+        "outline_only": 51,
+        "by_strand": {
+         "Basic Economic Concepts": 11,
+         "Economic Indicators and the Business Cycle": 9,
+         "Long-Run Consequences of Stabilization Policies": 6,
+         "National Income and Price Determination": 10,
+         "Open Economy: International Trade and Finance": 6,
+         "The Financial Sector": 9
+        },
+        "by_unit": {
+         "Central banking and monetary policy": 4,
+         "Demand, supply and equilibrium": 7,
+         "Exchange rates and policy": 4,
+         "Expectations and the long run": 6,
+         "Fiscal policy": 5,
+         "Inflation, unemployment and the cycle": 5,
+         "Measuring output": 4,
+         "Money, banking and interest": 5,
+         "Scarcity and choice": 4,
+         "The aggregate demand-aggregate supply model": 5,
+         "Trade and the balance of payments": 2
+        },
+        "by_tier": {
+         "core": 13,
+         "extension": 15,
+         "foundation": 23
+        },
+        "difficulty_histogram": {
+         "1": 21,
+         "2": 12,
+         "3": 13,
+         "4": 5,
+         "5": 0
+        },
+        "density": 0.01804
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_microeconomics",
+       "title": "AP Microeconomics",
+       "subject": "Economics",
+       "subject_kind": "social_science",
+       "description": "The firm-and-market view: scarcity and marginal analysis, supply and demand with elasticity, production and cost, market structure from perfect competition to oligopoly, factor markets, and market failure.",
+       "expected_weeks": 30,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 57,
+        "edges": 54,
+        "sequence_edges": 16,
+        "strands": 6,
+        "units": 9,
+        "topics": 9,
+        "roots": 3,
+        "leaves": 15,
+        "max_depth": 39,
+        "mean_prerequisites": 0.947,
+        "with_lesson": 0,
+        "outline_only": 57,
+        "by_strand": {
+         "Basic Economic Concepts": 7,
+         "Factor Markets": 8,
+         "Imperfect Competition": 10,
+         "Market Failure and the Role of Government": 9,
+         "Production, Cost, and the Perfect Competition Model": 11,
+         "Supply and Demand": 12
+        },
+        "by_unit": {
+         "Elasticity": 5,
+         "Externalities and public goods": 9,
+         "Labour, capital and income": 8,
+         "Monopoly": 5,
+         "Perfect competition": 6,
+         "Production and cost": 5,
+         "Scarcity, choice and marginal analysis": 7,
+         "Strategic interaction": 5,
+         "Welfare, taxes and intervention": 7
+        },
+        "by_tier": {
+         "core": 20,
+         "extension": 22,
+         "foundation": 15
+        },
+        "difficulty_histogram": {
+         "1": 14,
+         "2": 16,
+         "3": 15,
+         "4": 11,
+         "5": 1
+        },
+        "density": 0.01692
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_biology",
+       "title": "AP Biology",
+       "subject": "Biology",
+       "subject_kind": "science",
+       "description": "The chemistry of life, cell structure and function, cellular energetics, cell communication and the cell cycle, heredity, gene expression and regulation, natural selection, and ecology.",
+       "expected_weeks": 34,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 81,
+        "edges": 77,
+        "sequence_edges": 21,
+        "strands": 8,
+        "units": 15,
+        "topics": 15,
+        "roots": 4,
+        "leaves": 16,
+        "max_depth": 35,
+        "mean_prerequisites": 0.951,
+        "with_lesson": 0,
+        "outline_only": 81,
+        "by_strand": {
+         "Cell Communication and Cell Cycle": 10,
+         "Cell Structure and Function": 12,
+         "Cellular Energetics": 10,
+         "Chemistry of Life": 11,
+         "Ecology": 10,
+         "Gene Expression and Regulation": 10,
+         "Heredity": 9,
+         "Natural Selection": 9
+        },
+        "by_unit": {
+         "Cell architecture": 6,
+         "Chromosomes and recombination": 3,
+         "Ecosystems and the biosphere": 6,
+         "Energy and metabolism": 3,
+         "Enzymes and reaction conditions": 5,
+         "Evolution by natural selection": 9,
+         "From DNA to protein": 5,
+         "Membranes and transport": 6,
+         "Patterns of inheritance": 6,
+         "Populations and communities": 4,
+         "Regulation and biotechnology": 5,
+         "Respiration and photosynthesis": 7,
+         "Signal transduction": 4,
+         "The cell cycle": 6,
+         "Water and biological molecules": 6
+        },
+        "by_tier": {
+         "core": 29,
+         "extension": 21,
+         "foundation": 31
+        },
+        "difficulty_histogram": {
+         "1": 24,
+         "2": 29,
+         "3": 19,
+         "4": 9,
+         "5": 0
+        },
+        "density": 0.01188
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_chemistry",
+       "title": "AP Chemistry",
+       "subject": "Chemistry",
+       "subject_kind": "science",
+       "description": "Atomic structure and properties, compound structure and properties, properties of substances and mixtures, chemical reactions, kinetics, thermodynamics, equilibrium, acids and bases, and applications of thermodynamics.",
+       "expected_weeks": 34,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 72,
+        "edges": 68,
+        "sequence_edges": 21,
+        "strands": 9,
+        "units": 11,
+        "topics": 11,
+        "roots": 4,
+        "leaves": 19,
+        "max_depth": 19,
+        "mean_prerequisites": 0.944,
+        "with_lesson": 0,
+        "outline_only": 72,
+        "by_strand": {
+         "Acids and Bases": 10,
+         "Applications of Thermodynamics": 6,
+         "Atomic Structure and Properties": 9,
+         "Chemical Reactions": 8,
+         "Compound Structure and Properties": 8,
+         "Equilibrium": 7,
+         "Kinetics": 8,
+         "Properties of Substances and Mixtures": 10,
+         "Thermodynamics": 6
+        },
+        "by_unit": {
+         "Atoms and the mole": 4,
+         "Bonding and geometry": 8,
+         "Buffers and titrations": 4,
+         "Dynamic equilibrium": 7,
+         "Electrochemistry": 6,
+         "Electrons in atoms": 5,
+         "Energy and enthalpy": 6,
+         "Proton transfer in water": 6,
+         "Reaction rates": 8,
+         "Reaction types and stoichiometry": 8,
+         "States, gases and solutions": 10
+        },
+        "by_tier": {
+         "core": 35,
+         "extension": 19,
+         "foundation": 18
+        },
+        "difficulty_histogram": {
+         "1": 16,
+         "2": 30,
+         "3": 20,
+         "4": 6,
+         "5": 0
+        },
+        "density": 0.0133
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_psychology",
+       "title": "AP Psychology",
+       "subject": "Psychology",
+       "subject_kind": "social_science",
+       "description": "The vocabulary of evidence, biological bases of behaviour, cognition, development and learning, social psychology and personality, and mental and physical health.",
+       "expected_weeks": 30,
+       "authored": false,
+       "uses_symbolic_engine": false,
+       "stats": {
+        "concepts": 141,
+        "edges": 85,
+        "sequence_edges": 68,
+        "strands": 6,
+        "units": 19,
+        "topics": 19,
+        "roots": 58,
+        "leaves": 67,
+        "max_depth": 11,
+        "mean_prerequisites": 0.603,
+        "with_lesson": 0,
+        "outline_only": 141,
+        "by_strand": {
+         "Biological Bases of Behavior": 29,
+         "Cognition": 24,
+         "Development and Learning": 21,
+         "Foundations": 30,
+         "Mental and Physical Health": 17,
+         "Social Psychology and Personality": 20
+        },
+        "by_unit": {
+         "Development": 12,
+         "Health and positive psychology": 4,
+         "Heredity and environment": 4,
+         "History and approaches": 10,
+         "Learning": 9,
+         "Memory": 7,
+         "Motivation and emotion": 5,
+         "Nervous system and brain": 10,
+         "Neural communication": 5,
+         "Perception": 6,
+         "Personality": 6,
+         "Psychological disorders": 8,
+         "Research methods": 11,
+         "Sensation": 6,
+         "Sleep": 4,
+         "Social cognition": 9,
+         "Statistics and ethics": 9,
+         "Thinking and intelligence": 11,
+         "Treatment": 5
+        },
+        "by_tier": {
+         "core": 25,
+         "extension": 13,
+         "foundation": 103
+        },
+        "difficulty_histogram": {
+         "1": 86,
+         "2": 36,
+         "3": 14,
+         "4": 5,
+         "5": 0
+        },
+        "density": 0.00431
+       },
+       "enrolled": false
+      },
+      {
+       "id": "algebra_2",
+       "title": "Algebra 2",
+       "subject": "Mathematics",
+       "subject_kind": "mathematics",
+       "description": "Polynomial and rational functions, complex numbers, exponents, radicals and logarithms, transformations, trigonometry, conic sections, sequences and series, probability and matrices.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": true,
+       "stats": {
+        "concepts": 80,
+        "edges": 78,
+        "sequence_edges": 12,
+        "strands": 7,
+        "units": 13,
+        "topics": 13,
+        "roots": 2,
+        "leaves": 12,
+        "max_depth": 63,
+        "mean_prerequisites": 0.975,
+        "with_lesson": 0,
+        "outline_only": 80,
+        "by_strand": {
+         "Complex Numbers": 5,
+         "Conic Sections, Series and Probability": 18,
+         "Equations and Modelling": 6,
+         "Exponentials and Logarithms": 14,
+         "Functions": 12,
+         "Polynomials": 18,
+         "Trigonometry": 7
+        },
+        "by_unit": {
+         "Angles and the unit circle": 7,
+         "Conic sections": 5,
+         "Exponential and logarithmic functions": 10,
+         "Extending the number system": 5,
+         "Matrices": 5,
+         "Polynomial arithmetic and factoring": 5,
+         "Polynomial factorisation and division": 8,
+         "Polynomial graphs": 5,
+         "Rational exponents and radicals": 4,
+         "Rational functions": 6,
+         "Sequences, series and counting": 8,
+         "Solving and modelling": 6,
+         "Transformations and inverses": 6
+        },
+        "by_tier": {
+         "core": 34,
+         "extension": 31,
+         "foundation": 15
+        },
+        "difficulty_histogram": {
+         "1": 4,
+         "2": 21,
+         "3": 27,
+         "4": 23,
+         "5": 5
+        },
+        "density": 0.01234
+       },
+       "enrolled": false
+      },
+      {
+       "id": "ap_calculus",
+       "title": "AP Calculus",
+       "subject": "Mathematics",
+       "subject_kind": "mathematics",
+       "description": "Limits and continuity, differentiation and its applications, integration and accumulation, differential equations, applications of integration, and the parametric, polar, vector and series topics of the BC course.",
+       "expected_weeks": 36,
+       "authored": false,
+       "uses_symbolic_engine": true,
+       "stats": {
+        "concepts": 79,
+        "edges": 78,
+        "sequence_edges": 18,
+        "strands": 10,
+        "units": 12,
+        "topics": 12,
+        "roots": 1,
+        "leaves": 15,
+        "max_depth": 52,
+        "mean_prerequisites": 0.987,
+        "with_lesson": 0,
+        "outline_only": 79,
+        "by_strand": {
+         "Analytical Applications of Differentiation": 9,
+         "Applications of Integration": 7,
+         "Contextual Applications of Differentiation": 5,
+         "Differential Equations": 5,
+         "Differentiation: Composite, Implicit and Inverse Functions": 8,
+         "Differentiation: Definition and Fundamental Properties": 10,
+         "Infinite Sequences and Series (BC)": 12,
+         "Integration and Accumulation of Change": 10,
+         "Limits and Continuity": 8,
+         "Parametric, Polar and Vector Functions (BC)": 5
+        },
+        "by_unit": {
+         "Accumulation": 10,
+         "Chain and implicit rules": 8,
+         "Continuity": 3,
+         "Convergence": 9,
+         "Derivatives in context": 5,
+         "Limits": 5,
+         "Modelling change": 5,
+         "Other coordinate systems": 5,
+         "Representing functions as series": 3,
+         "Shape of a graph": 9,
+         "The derivative": 10,
+         "Using the integral": 7
+        },
+        "by_tier": {
+         "core": 35,
+         "extension": 30,
+         "foundation": 14
+        },
+        "difficulty_histogram": {
+         "1": 8,
+         "2": 28,
+         "3": 29,
+         "4": 6,
+         "5": 8
+        },
+        "density": 0.01266
+       },
+       "enrolled": false
+      }
+     ],
+     "enrolled": "mine_092a17e1ce",
+     "total_concepts": 1085,
+     "note": "Each course is its own knowledge graph. Switching course switches the map, the practice items and the figures; recorded evidence is kept per concept and is not mixed between courses."
+    }
+   }
+  },
+  {
+   "step": "07 chat on an unknown topic is refused",
+   "passed": true,
+   "criterion": "A learner asking about an untaught topic in /chat gets an explicit error, not a hallucinated lesson.",
+   "seconds": 0.003,
+   "evidence": {
+    "status": 404,
+    "body": {
+     "detail": "Unknown concept for this course"
+    }
+   }
+  },
+  {
+   "step": "08 start a lesson",
+   "passed": true,
+   "criterion": "Starting the lesson returns a run with at least one block.",
+   "seconds": 16.17,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "run_id": "394a370e-b706-412d-a7f7-30346bbcc51f",
+     "concept_id": "mine_092a17e1ce_a_gas_turbine",
+     "concept_title": "A gas turbine",
+     "course_id": "mine_092a17e1ce",
+     "hash": "91ac8d47a06853d22910267d0bd94ef5",
+     "status": "active",
+     "budget_minutes": 20,
+     "total_minutes": 14,
+     "blocks": [
+      {
+       "order": 1,
+       "kind": "diagnostic",
+       "label": "Quick check",
+       "role": "commitment",
+       "minutes": 3,
+       "title": "Quick check",
+       "purpose": "Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.",
+       "why": "No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.",
+       "artifact": {
+        "kind": "questions",
+        "mode": "practice",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "count": 2,
+        "purpose": "diagnostic",
+        "scored": true
+       },
+       "produces": [
+        "accuracy"
+       ],
+       "optional": true
+      },
+      {
+       "order": 2,
+       "kind": "deck",
+       "label": "Slides",
+       "role": "input",
+       "minutes": 5,
+       "title": "Lesson deck",
+       "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+       "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+       "artifact": {
+        "kind": "slides",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "concept_title": "A gas turbine",
+        "sections": [
+         {
+          "heading": "A gas turbine",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+           "Nothing in your source has to come before it, so it is a place you can start."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+          "image": {
+           "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+           "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+           "alt": "Illustration for A gas turbine",
+           "title": "Austin 250hp gas turbine, shaft view.jpg",
+           "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "licence": "CC BY-SA 3.0",
+           "licence_class": "cc_by_sa",
+           "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+           "width": 3000,
+           "height": 4000
+          }
+         },
+         {
+          "heading": "Worked example",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+         },
+         {
+          "heading": "Check yourself",
+          "bullets": [
+           "Close the source and say what A gas turbine means in your own words.",
+           "Then reopen it and compare against the passage you supplied."
+          ],
+          "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         }
+        ],
+        "slide_count": 3,
+        "tool": "generate_slides",
+        "artifact_id": "deck-52ef18a7e74d",
+        "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+        "pptx_file": "v1.pptx",
+        "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+        "materialized": true
+       },
+       "produces": [],
+       "optional": true
+      },
+      {
+       "order": 3,
+       "kind": "practice",
+       "label": "Example questions",
+       "role": "commitment",
+       "minutes": 6,
+       "title": "4 example questions",
+       "purpose": "Answer questions on this concept, with feedback on each one.",
+       "why": "Practice is the only activity that produces a scored observation. Its size is set by mastery: a learner below the threshold gets the floor done properly, and a consolidating learner gets one more for durability. The scheduler chooses the items; the harness chooses how many.",
+       "artifact": {
+        "kind": "questions",
+        "mode": "practice",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "count": 4,
+        "selection": "scheduler",
+        "examples": [
+         "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+        ]
+       },
+       "produces": [
+        "attempts",
+        "mastery"
+       ],
+       "optional": false
+      }
+     ],
+     "completed": [],
+     "skipped": [
+      {
+       "kind": "video",
+       "label": "Video",
+       "reason": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+      },
+      {
+       "kind": "worked_example",
+       "label": "Worked example",
+       "reason": "Not this lesson: a structured first pass through the concept comes before a single solved instance."
+      },
+      {
+       "kind": "explain",
+       "label": "Explanation",
+       "reason": "Replaced by the deck, which covers the same ground in a form the learner can revisit."
+      },
+      {
+       "kind": "simulation",
+       "label": "Interactive",
+       "reason": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself."
+      },
+      {
+       "kind": "discussion",
+       "label": "Explain it back",
+       "reason": "Not this lesson: a discussion needs a conceptual error to surface and enough mastery to reason from; neither holds right now."
+      },
+      {
+       "kind": "recap",
+       "label": "Recap",
+       "reason": "Not this lesson: there is not yet a structure to connect, or the concept has no recorded neighbours."
+      }
+     ],
+     "rationale": "3 block(s) in 14 of 20 minutes: diagnostic -> deck -> practice. Evidence: mastery 0.15 over 0 attempt(s), recent accuracy None, top error none, 6 activity/activities refused with reasons. Profile 'default'.",
+     "current": {
+      "order": 1,
+      "kind": "diagnostic",
+      "label": "Quick check",
+      "role": "commitment",
+      "minutes": 3,
+      "title": "Quick check",
+      "purpose": "Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.",
+      "why": "No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.",
+      "artifact": {
+       "kind": "questions",
+       "mode": "practice",
+       "concept_id": "mine_092a17e1ce_a_gas_turbine",
+       "count": 2,
+       "purpose": "diagnostic",
+       "scored": true
+      },
+      "produces": [
+       "accuracy"
+      ],
+      "optional": true
+     },
+     "progress": 0.0,
+     "started": true
+    }
+   }
+  },
+  {
+   "step": "09 complete first block (done) writes an attempt",
+   "passed": false,
+   "criterion": "Advancing the first block with outcome=done must write an attempt row for the learner's answer.",
+   "seconds": 0.0,
+   "evidence": {
+    "request": {
+     "status": 200,
+     "body": {
+      "run_id": "394a370e-b706-412d-a7f7-30346bbcc51f",
+      "concept_id": "mine_092a17e1ce_a_gas_turbine",
+      "concept_title": "A gas turbine",
+      "course_id": "mine_092a17e1ce",
+      "hash": "91ac8d47a06853d22910267d0bd94ef5",
+      "status": "active",
+      "budget_minutes": 20,
+      "total_minutes": 14,
+      "blocks": [
+       {
+        "order": 1,
+        "kind": "diagnostic",
+        "label": "Quick check",
+        "role": "commitment",
+        "minutes": 3,
+        "title": "Quick check",
+        "purpose": "Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.",
+        "why": "No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.",
+        "artifact": {
+         "kind": "questions",
+         "mode": "practice",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "count": 2,
+         "purpose": "diagnostic",
+         "scored": true
+        },
+        "produces": [
+         "accuracy"
+        ],
+        "optional": true
+       },
+       {
+        "order": 2,
+        "kind": "deck",
+        "label": "Slides",
+        "role": "input",
+        "minutes": 5,
+        "title": "Lesson deck",
+        "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+        "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+        "artifact": {
+         "kind": "slides",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "concept_title": "A gas turbine",
+         "sections": [
+          {
+           "heading": "A gas turbine",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+            "Nothing in your source has to come before it, so it is a place you can start."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+           "image": {
+            "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+            "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+            "alt": "Illustration for A gas turbine",
+            "title": "Austin 250hp gas turbine, shaft view.jpg",
+            "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "licence": "CC BY-SA 3.0",
+            "licence_class": "cc_by_sa",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+            "width": 3000,
+            "height": 4000
+           }
+          },
+          {
+           "heading": "Worked example",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          },
+          {
+           "heading": "Check yourself",
+           "bullets": [
+            "Close the source and say what A gas turbine means in your own words.",
+            "Then reopen it and compare against the passage you supplied."
+           ],
+           "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+          }
+         ],
+         "slide_count": 3,
+         "tool": "generate_slides",
+         "artifact_id": "deck-52ef18a7e74d",
+         "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+         "pptx_file": "v1.pptx",
+         "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+         "materialized": true
+        },
+        "produces": [],
+        "optional": true
+       },
+       {
+        "order": 3,
+        "kind": "practice",
+        "label": "Example questions",
+        "role": "commitment",
+        "minutes": 6,
+        "title": "4 example questions",
+        "purpose": "Answer questions on this concept, with feedback on each one.",
+        "why": "Practice is the only activity that produces a scored observation. Its size is set by mastery: a learner below the threshold gets the floor done properly, and a consolidating learner gets one more for durability. The scheduler chooses the items; the harness chooses how many.",
+        "artifact": {
+         "kind": "questions",
+         "mode": "practice",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "count": 4,
+         "selection": "scheduler",
+         "examples": [
+          "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         ]
+        },
+        "produces": [
+         "attempts",
+         "mastery"
+        ],
+        "optional": false
+       }
+      ],
+      "completed": [
+       {
+        "order": 1,
+        "kind": "diagnostic",
+        "outcome": "done",
+        "at": 1793973635.942888,
+        "seconds": 30,
+        "note": ""
+       }
+      ],
+      "skipped": [
+       {
+        "kind": "video",
+        "label": "Video",
+        "reason": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+       },
+       {
+        "kind": "worked_example",
+        "label": "Worked example",
+        "reason": "Not this lesson: a structured first pass through the concept comes before a single solved instance."
+       },
+       {
+        "kind": "explain",
+        "label": "Explanation",
+        "reason": "Replaced by the deck, which covers the same ground in a form the learner can revisit."
+       },
+       {
+        "kind": "simulation",
+        "label": "Interactive",
+        "reason": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself."
+       },
+       {
+        "kind": "discussion",
+        "label": "Explain it back",
+        "reason": "Not this lesson: a discussion needs a conceptual error to surface and enough mastery to reason from; neither holds right now."
+       },
+       {
+        "kind": "recap",
+        "label": "Recap",
+        "reason": "Not this lesson: there is not yet a structure to connect, or the concept has no recorded neighbours."
+       }
+      ],
+      "rationale": "3 block(s) in 14 of 20 minutes: diagnostic -> deck -> practice. Evidence: mastery 0.15 over 0 attempt(s), recent accuracy None, top error none, 6 activity/activities refused with reasons. Profile 'default'.",
+      "current": {
+       "order": 2,
+       "kind": "deck",
+       "label": "Slides",
+       "role": "input",
+       "minutes": 5,
+       "title": "Lesson deck",
+       "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+       "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+       "artifact": {
+        "kind": "slides",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "concept_title": "A gas turbine",
+        "sections": [
+         {
+          "heading": "A gas turbine",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+           "Nothing in your source has to come before it, so it is a place you can start."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+          "image": {
+           "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+           "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+           "alt": "Illustration for A gas turbine",
+           "title": "Austin 250hp gas turbine, shaft view.jpg",
+           "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "licence": "CC BY-SA 3.0",
+           "licence_class": "cc_by_sa",
+           "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+           "width": 3000,
+           "height": 4000
+          }
+         },
+         {
+          "heading": "Worked example",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+         },
+         {
+          "heading": "Check yourself",
+          "bullets": [
+           "Close the source and say what A gas turbine means in your own words.",
+           "Then reopen it and compare against the passage you supplied."
+          ],
+          "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         }
+        ],
+        "slide_count": 3,
+        "tool": "generate_slides",
+        "artifact_id": "deck-52ef18a7e74d",
+        "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+        "pptx_file": "v1.pptx",
+        "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+        "materialized": true
+       },
+       "produces": [],
+       "optional": true
+      },
+      "progress": 0.3333333333333333
+     }
+    },
+    "counts_before": {
+     "attempts": 0
+    },
+    "counts_after": {
+     "attempts": 0
+    },
+    "advance_body": "{\"run_id\": \"394a370e-b706-412d-a7f7-30346bbcc51f\", \"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"concept_title\": \"A gas turbine\", \"course_id\": \"mine_092a17e1ce\", \"hash\": \"91ac8d47a06853d22910267d0bd94ef5\", \"status\": \"active\", \"budget_minutes\": 20, \"total_minutes\": 14, \"blocks\": [{\"order\": 1, \"kind\": \"diagnostic\", \"label\": \"Quick check\", \"role\": \"commitment\", \"minutes\": 3, \"title\": \"Quick check\", \"purpose\": \"Answer a few questions so the lesson starts from evidence rather than from an assumptio …[9064 chars]"
+   }
+  },
+  {
+   "step": "10 serve a real question",
+   "passed": true,
+   "criterion": "A real question with a signed receipt and answer options is served.",
+   "seconds": 0.013,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "id": "mine_092a17e1ce-mine_092a17e1ce_a_gas_turbine-0",
+     "concept_id": "mine_092a17e1ce_a_gas_turbine",
+     "concept_title": "A gas turbine",
+     "prompt": "Which statement best describes A gas turbine?",
+     "options": [
+      {
+       "id": "a",
+       "text": "The following are advantages and disadvantages of gas-turbine engines:"
+      },
+      {
+       "id": "b",
+       "text": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+      },
+      {
+       "id": "c",
+       "text": "A turboprop engine is a turbine engine that drives an aircraft propeller using a reduction gear to translate high turbine section operating speed (often in the 10s of thousands) into low thousands necessary for efficient propeller operation"
+      },
+      {
+       "id": "d",
+       "text": "A turbocharger is an exhaust-driven turbine and compressor used to boost a reciprocating engine, while a turbo-compound engine is a reciprocating engine with power-recovery turbines in its exhaust system."
+      }
+     ],
+     "kind": "generated_multiple_choice",
+     "expected_seconds": 45,
+     "mode": "practice",
+     "issued_at": "2026-11-06T14:00:35.946779+00:00",
+     "receipt": "4d97f0f9-fd15-4677-8ef3-dc9c9e46d4ed.93cf5c8c2da8bde4cdbce8fd268c99d68c35df830315db0c521aa367ba2df1e0",
+     "progress": {
+      "answered": 0,
+      "total": 0
+     },
+     "selection_reason": "Predicted P(correct)=0.35; target=0.70 is a configurable practice hypothesis, not a scientific optimum. BKT response prior plus monotonic empirical-Bayes item logit offset from 0 actual responses (low_data); prerequisite evidence constrains selection."
+    }
+   }
+  },
+  {
+   "step": "11 answer the question",
+   "passed": true,
+   "criterion": "Submitting an answer must be accepted and produce a specific diagnosis category.",
+   "seconds": 0.006,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "id": "aa48b4bc-0cff-458a-b3b8-6500d00140ad",
+     "correct": false,
+     "correct_answer": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+     "explanation": "The correct option is the sentence your own source uses for A gas turbine. The others are the source's statements about different concepts, which is what makes them plausible.",
+     "diagnosis": {
+      "category": "conceptual",
+      "reason": "Tentative: This belongs to \"Advantages and disadvantages\", not to \"A gas turbine\". Naming which idea a wrong option belongs to turns a wrong answer into a diagnosis. This option is compatible with, but does not prove, that error process.",
+      "next_action": "Re-read the passage you supplied for A gas turbine.",
+      "confidence": 0.35,
+      "alternatives": [
+       "An arithmetic slip",
+       "Misreading or accidental selection",
+       "A conceptual or procedural gap"
+      ],
+      "response_confidence": 0.6,
+      "scope": "Task-level hypothesis; confidence is a heuristic, not calibrated diagnostic probability."
+     },
+     "mastery": 0.14022988505747125,
+     "review_at": "2026-11-06T22:31:51.441013+00:00",
+     "assessment_complete": false,
+     "assessment_progress": {
+      "answered": 0,
+      "total": 0
+     },
+     "exam_complete": false,
+     "grade": null
+    }
+   }
+  },
+  {
+   "step": "12 learning state moved and next review scheduled",
+   "passed": true,
+   "criterion": "After a scored attempt, a learning_states row exists with a scheduled due_at.",
+   "seconds": 0.002,
+   "evidence": {
+    "states": [
+     {
+      "concept_id": "mine_092a17e1ce_a_gas_turbine",
+      "data": {
+       "stability": 0.3550402910611492,
+       "difficulty": 7.40027437198288,
+       "last_review": 1793973635.959865,
+       "reps": 1,
+       "lapses": 1,
+       "memory_model": "fsrs-6",
+       "memory_model_note": "stability seeded from legacy half_life_days (Leitner heuristic); FSRS updates take over from here",
+       "last_recall_probability": null,
+       "last_stability_gain": -0.6449597089388508,
+       "mastery": 0.14022988505747125,
+       "attempts": 1,
+       "correct_count": 0,
+       "last_at": 1793973635.959865,
+       "half_life_days": 0.3550402910611492,
+       "due_at": 1794004311.4410129,
+       "last_correct": false,
+       "last_elapsed": 0.5,
+       "prior_kind": "FSRS-6 memory model with published default weights; heuristic BKT mastery prior",
+       "response_confidence": 0.6,
+       "next_check": {
+        "category": "conceptual",
+        "reason": "Tentative: This belongs to \"Advantages and disadvantages\", not to \"A gas turbine\". Naming which idea a wrong option belongs to turns a wrong answer into a diagnosis. This option is compatible with, but does not prove, that error process.",
+        "next_action": "Re-read the passage you supplied for A gas turbine.",
+        "confidence": 0.35,
+        "alternatives": [
+         "An arithmetic slip",
+         "Misreading or accidental selection",
+         "A conceptual or procedural gap"
+        ],
+        "response_confidence": 0.6,
+        "scope": "Task-level hypothesis; confidence is a heuristic, not calibrated diagnostic probability.",
+        "question_id": "mine_092a17e1ce-mine_092a17e1ce_a_gas_turbine-0"
+       }
+      }
+     }
+    ],
+    "reviews_endpoint": {
+     "status": 200,
+     "body": {
+      "items": [],
+      "total": 0
+     }
+    }
+   }
+  },
+  {
+   "step": "13 recompile plan after the answer",
+   "passed": true,
+   "criterion": "The compiled lesson plan must list the evidence it adapted on after an attempt.",
+   "seconds": 15.261,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "plan": {
+      "concept_id": "mine_092a17e1ce_a_gas_turbine",
+      "concept_title": "A gas turbine",
+      "course_id": "mine_092a17e1ce",
+      "profile": "default",
+      "version": "1",
+      "hash": "22e738485416fe86b5f001e6e769c382",
+      "enabled": true,
+      "budget_minutes": 20,
+      "total_minutes": 11,
+      "blocks": [
+       {
+        "order": 1,
+        "kind": "deck",
+        "label": "Slides",
+        "role": "input",
+        "minutes": 5,
+        "title": "Lesson deck",
+        "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+        "why": "Mastery is below the consolidation point and no verified video is curated, so the authored deck is the honest first pass.",
+        "artifact": {
+         "kind": "slides",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "concept_title": "A gas turbine",
+         "sections": [
+          {
+           "heading": "A gas turbine",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+            "Nothing in your source has to come before it, so it is a place you can start."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+           "image": {
+            "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+            "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+            "alt": "Illustration for A gas turbine",
+            "title": "Austin 250hp gas turbine, shaft view.jpg",
+            "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "licence": "CC BY-SA 3.0",
+            "licence_class": "cc_by_sa",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+            "width": 3000,
+            "height": 4000
+           }
+          },
+          {
+           "heading": "Worked example",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          },
+          {
+           "heading": "Check yourself",
+           "bullets": [
+            "Close the source and say what A gas turbine means in your own words.",
+            "Then reopen it and compare against the passage you supplied."
+           ],
+           "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+          }
+         ],
+         "slide_count": 3,
+         "tool": "generate_slides"
+        },
+        "produces": [],
+        "optional": true
+       },
+       {
+        "order": 2,
+        "kind": "practice",
+        "label": "Example questions",
+        "role": "commitment",
+        "minutes": 6,
+        "title": "4 example questions",
+        "purpose": "Answer questions on this concept, with feedback on each one.",
+        "why": "Practice is the only activity that produces a scored observation. Its size is set by mastery: a learner below the threshold gets the floor done properly, and a consolidating learner gets one more for durability. The scheduler chooses the items; the harness chooses how many.",
+        "artifact": {
+         "kind": "questions",
+         "mode": "practice",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "count": 4,
+         "selection": "scheduler",
+         "examples": [
+          "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         ]
+        },
+        "produces": [
+         "attempts",
+         "mastery"
+        ],
+        "optional": false
+       }
+      ],
+      "skipped": [
+       {
+        "kind": "diagnostic",
+        "label": "Quick check",
+        "reason": "Not needed: 1 recorded attempt(s) already say where this learner is, and a diagnostic would re-measure the record."
+       },
+       {
+        "kind": "video",
+        "label": "Video",
+        "reason": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+       },
+       {
+        "kind": "worked_example",
+        "label": "Worked example",
+        "reason": "Not this lesson: a structured first pass through the concept comes before a single solved instance."
+       },
+       {
+        "kind": "explain",
+        "label": "Explanation",
+        "reason": "Replaced by the deck, which covers the same ground in a form the learner can revisit."
+       },
+       {
+        "kind": "simulation",
+        "label": "Interactive",
+        "reason": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself."
+       },
+       {
+        "kind": "discussion",
+        "label": "Explain it back",
+        "reason": "Not this lesson: a discussion needs a conceptual error to surface and enough mastery to reason from; neither holds right now."
+       },
+       {
+        "kind": "recap",
+        "label": "Recap",
+        "reason": "Not this lesson: there is not yet a structure to connect, or the concept has no recorded neighbours."
+       }
+      ],
+      "assets": {
+       "deck": {
+        "slides": 3,
+        "headings": [
+         "A gas turbine",
+         "Worked example",
+         "Check yourself"
+        ]
+       },
+       "simulation": null,
+       "video": null,
+       "worked_example": true,
+       "questions": 4,
+       "unavailable": {
+        "simulation": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself.",
+        "video": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+       }
+      },
+      "rationale": "2 block(s) in 11 of 20 minutes: deck -> practice. Evidence: mastery 0.14 over 1 attempt(s), recent accuracy None, top error conceptual, 7 activity/activities refused with reasons. Profile 'default'."
+     },
+     "evidence": {
+      "mastery": 0.1402,
+      "recent_accuracy": null,
+      "attempts": 1,
+      "top_error": "conceptual",
+      "frustrated": false,
+      "session_minutes": 0.0
+     },
+     "active": {
+      "run_id": "394a370e-b706-412d-a7f7-30346bbcc51f",
+      "concept_id": "mine_092a17e1ce_a_gas_turbine",
+      "concept_title": "A gas turbine",
+      "course_id": "mine_092a17e1ce",
+      "hash": "91ac8d47a06853d22910267d0bd94ef5",
+      "status": "active",
+      "budget_minutes": 20,
+      "total_minutes": 14,
+      "blocks": [
+       {
+        "order": 1,
+        "kind": "diagnostic",
+        "label": "Quick check",
+        "role": "commitment",
+        "minutes": 3,
+        "title": "Quick check",
+        "purpose": "Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.",
+        "why": "No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.",
+        "artifact": {
+         "kind": "questions",
+         "mode": "practice",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "count": 2,
+         "purpose": "diagnostic",
+         "scored": true
+        },
+        "produces": [
+         "accuracy"
+        ],
+        "optional": true
+       },
+       {
+        "order": 2,
+        "kind": "deck",
+        "label": "Slides",
+        "role": "input",
+        "minutes": 5,
+        "title": "Lesson deck",
+        "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+        "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+        "artifact": {
+         "kind": "slides",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "concept_title": "A gas turbine",
+         "sections": [
+          {
+           "heading": "A gas turbine",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+            "Nothing in your source has to come before it, so it is a place you can start."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+           "image": {
+            "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+            "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+            "alt": "Illustration for A gas turbine",
+            "title": "Austin 250hp gas turbine, shaft view.jpg",
+            "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+            "licence": "CC BY-SA 3.0",
+            "licence_class": "cc_by_sa",
+            "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+            "width": 3000,
+            "height": 4000
+           }
+          },
+          {
+           "heading": "Worked example",
+           "bullets": [
+            "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+           ],
+           "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          },
+          {
+           "heading": "Check yourself",
+           "bullets": [
+            "Close the source and say what A gas turbine means in your own words.",
+            "Then reopen it and compare against the passage you supplied."
+           ],
+           "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+          }
+         ],
+         "slide_count": 3,
+         "tool": "generate_slides",
+         "artifact_id": "deck-52ef18a7e74d",
+         "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+         "pptx_file": "v1.pptx",
+         "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+         "materialized": true
+        },
+        "produces": [],
+        "optional": true
+       },
+       {
+        "order": 3,
+        "kind": "practice",
+        "label": "Example questions",
+        "role": "commitment",
+        "minutes": 6,
+        "title": "4 example questions",
+        "purpose": "Answer questions on this concept, with feedback on each one.",
+        "why": "Practice is the only activity that produces a scored observation. Its size is set by mastery: a learner below the threshold gets the floor done properly, and a consolidating learner gets one more for durability. The scheduler chooses the items; the harness chooses how many.",
+        "artifact": {
+         "kind": "questions",
+         "mode": "practice",
+         "concept_id": "mine_092a17e1ce_a_gas_turbine",
+         "count": 4,
+         "selection": "scheduler",
+         "examples": [
+          "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         ]
+        },
+        "produces": [
+         "attempts",
+         "mastery"
+        ],
+        "optional": false
+       }
+      ],
+      "completed": [
+       {
+        "order": 1,
+        "kind": "diagnostic",
+        "outcome": "done",
+        "at": 1793973635.942888,
+        "seconds": 30,
+        "note": ""
+       }
+      ],
+      "skipped": [
+       {
+        "kind": "video",
+        "label": "Video",
+        "reason": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+       },
+       {
+        "kind": "worked_example",
+        "label": "Worked example",
+        "reason": "Not this lesson: a structured first pass through the concept comes before a single solved instance."
+       },
+       {
+        "kind": "explain",
+        "label": "Explanation",
+        "reason": "Replaced by the deck, which covers the same ground in a form the learner can revisit."
+       },
+       {
+        "kind": "simulation",
+        "label": "Interactive",
+        "reason": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself."
+       },
+       {
+        "kind": "discussion",
+        "label": "Explain it back",
+        "reason": "Not this lesson: a discussion needs a conceptual error to surface and enough mastery to reason from; neither holds right now."
+       },
+       {
+        "kind": "recap",
+        "label": "Recap",
+        "reason": "Not this lesson: there is not yet a structure to connect, or the concept has no recorded neighbours."
+       }
+      ],
+      "rationale": "3 block(s) in 14 of 20 minutes: diagnostic -> deck -> practice. Evidence: mastery 0.15 over 0 attempt(s), recent accuracy None, top error none, 6 activity/activities refused with reasons. Profile 'default'.",
+      "current": {
+       "order": 2,
+       "kind": "deck",
+       "label": "Slides",
+       "role": "input",
+       "minutes": 5,
+       "title": "Lesson deck",
+       "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+       "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+       "artifact": {
+        "kind": "slides",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "concept_title": "A gas turbine",
+        "sections": [
+         {
+          "heading": "A gas turbine",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+           "Nothing in your source has to come before it, so it is a place you can start."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+          "image": {
+           "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+           "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+           "alt": "Illustration for A gas turbine",
+           "title": "Austin 250hp gas turbine, shaft view.jpg",
+           "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "licence": "CC BY-SA 3.0",
+           "licence_class": "cc_by_sa",
+           "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+           "width": 3000,
+           "height": 4000
+          }
+         },
+         {
+          "heading": "Worked example",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+         },
+         {
+          "heading": "Check yourself",
+          "bullets": [
+           "Close the source and say what A gas turbine means in your own words.",
+           "Then reopen it and compare against the passage you supplied."
+          ],
+          "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         }
+        ],
+        "slide_count": 3,
+        "tool": "generate_slides",
+        "artifact_id": "deck-52ef18a7e74d",
+        "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+        "pptx_file": "v1.pptx",
+        "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+        "materialized": true
+       },
+       "produces": [],
+       "optional": true
+      },
+      "progress": 0.3333333333333333
+     }
+    }
+   }
+  },
+  {
+   "step": "14 voice behaviour is honest",
+   "passed": true,
+   "criterion": "Voice either produces audio or names the missing service with an actionable reason; never a fake success.",
+   "seconds": 0.0,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "raw_bytes": 41132,
+     "preview": "ID3\u0004\u0000\u0000\u0000\u0000\u0000\"TSSE\u0000\u0000\u0000\u000e\u0000\u0000\u0003Lavf61.7.100\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000����\u0000<\\:\u0004\u001e�\r\u0010\u0000K%�K`@1V���\u001d1�\u001d1�Ab5ȥZ6\u0000�L#\u00031\u0015\u000b`�\u0004�e��4(\u0014��`0\u0019\u000fm�@H\u0004\u0007C1.>��\t\u0004�y�홙��bY0�b�\u0003\u0002@�$\b��\u001b�pn\r��7\u0011ā �����dɓ�Ƃ`0\u001ag���\"\b!\u0011�� � \u0000 �\u0007���&��0\u0000A\u0002\bF_0"
+    }
+   }
+  },
+  {
+   "step": "14b tutor actually speaks",
+   "passed": true,
+   "criterion": "The tutor actually speaks: /voice/speak returns audio (200).",
+   "seconds": 0.0,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "raw_bytes": 41132,
+     "preview": "ID3\u0004\u0000\u0000\u0000\u0000\u0000\"TSSE\u0000\u0000\u0000\u000e\u0000\u0000\u0003Lavf61.7.100\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000����\u0000<\\:\u0004\u001e�\r\u0010\u0000K%�K`@1V���\u001d1�\u001d1�Ab5ȥZ6\u0000�L#\u00031\u0015\u000b`�\u0004�e��4(\u0014��`0\u0019\u000fm�@H\u0004\u0007C1.>��\t\u0004�y�홙��bY0�b�\u0003\u0002@�$\b��\u001b�pn\r��7\u0011ā �����dɓ�Ƃ`0\u001ag���\"\b!\u0011�� � \u0000 �\u0007���&��0\u0000A\u0002\bF_0"
+    }
+   }
+  },
+  {
+   "step": "15 lesson ends with a summary",
+   "passed": true,
+   "criterion": "Advancing all blocks ends the lesson with a completed run and a full progress record.",
+   "seconds": 0.0,
+   "evidence": {
+    "status": 200,
+    "body": {
+     "run_id": "394a370e-b706-412d-a7f7-30346bbcc51f",
+     "concept_id": "mine_092a17e1ce_a_gas_turbine",
+     "concept_title": "A gas turbine",
+     "course_id": "mine_092a17e1ce",
+     "hash": "91ac8d47a06853d22910267d0bd94ef5",
+     "status": "completed",
+     "budget_minutes": 20,
+     "total_minutes": 14,
+     "blocks": [
+      {
+       "order": 1,
+       "kind": "diagnostic",
+       "label": "Quick check",
+       "role": "commitment",
+       "minutes": 3,
+       "title": "Quick check",
+       "purpose": "Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.",
+       "why": "No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.",
+       "artifact": {
+        "kind": "questions",
+        "mode": "practice",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "count": 2,
+        "purpose": "diagnostic",
+        "scored": true
+       },
+       "produces": [
+        "accuracy"
+       ],
+       "optional": true
+      },
+      {
+       "order": 2,
+       "kind": "deck",
+       "label": "Slides",
+       "role": "input",
+       "minutes": 5,
+       "title": "Lesson deck",
+       "purpose": "Read a short, ordered deck built from this concept's own lesson.",
+       "why": "First exposure is better served by an ordered, revisitable deck built from this concept's own authored lesson than by a single worked instance.",
+       "artifact": {
+        "kind": "slides",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "concept_title": "A gas turbine",
+        "sections": [
+         {
+          "heading": "A gas turbine",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine.",
+           "Nothing in your source has to come before it, so it is a place you can start."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine. Nothing in your source has to come before it, so it is a place you can start.",
+          "image": {
+           "sha256": "4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227",
+           "url": "/api/v1/media/images/4ed219cb2b88cea8b5e65acccad82c28b0ae95bbc568c4df765c7d2afff1e227/bytes",
+           "alt": "Illustration for A gas turbine",
+           "title": "Austin 250hp gas turbine, shaft view.jpg",
+           "credit": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "attribution": "\"Austin 250hp gas turbine, shaft view.jpg\" by Andy Dingley — CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) via commons.wikimedia.org",
+           "licence": "CC BY-SA 3.0",
+           "licence_class": "cc_by_sa",
+           "source_url": "https://commons.wikimedia.org/wiki/File:Austin_250hp_gas_turbine,_shaft_view.jpg",
+           "width": 3000,
+           "height": 4000
+          }
+         },
+         {
+          "heading": "Worked example",
+          "bullets": [
+           "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+          ],
+          "notes": "A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and the resulting hot gas expands through a turbine."
+         },
+         {
+          "heading": "Check yourself",
+          "bullets": [
+           "Close the source and say what A gas turbine means in your own words.",
+           "Then reopen it and compare against the passage you supplied."
+          ],
+          "notes": "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+         }
+        ],
+        "slide_count": 3,
+        "tool": "generate_slides",
+        "artifact_id": "deck-52ef18a7e74d",
+        "raw_url": "/api/v1/sims/deck-52ef18a7e74d/raw",
+        "pptx_file": "v1.pptx",
+        "pptx_url": "/api/v1/sims/deck-52ef18a7e74d/download/v1.pptx",
+        "materialized": true
+       },
+       "produces": [],
+       "optional": true
+      },
+      {
+       "order": 3,
+       "kind": "practice",
+       "label": "Example questions",
+       "role": "commitment",
+       "minutes": 6,
+       "title": "4 example questions",
+       "purpose": "Answer questions on this concept, with feedback on each one.",
+       "why": "Practice is the only activity that produces a scored observation. Its size is set by mastery: a learner below the threshold gets the floor done properly, and a consolidating learner gets one more for durability. The scheduler chooses the items; the harness chooses how many.",
+       "artifact": {
+        "kind": "questions",
+        "mode": "practice",
+        "concept_id": "mine_092a17e1ce_a_gas_turbine",
+        "count": 4,
+        "selection": "scheduler",
+        "examples": [
+         "Close the source and say what A gas turbine means in your own words. Then reopen it and compare against the passage you supplied."
+        ]
+       },
+       "produces": [
+        "attempts",
+        "mastery"
+       ],
+       "optional": false
+      }
+     ],
+     "completed": [
+      {
+       "order": 1,
+       "kind": "diagnostic",
+       "outcome": "done",
+       "at": 1793973635.942888,
+       "seconds": 30,
+       "note": ""
+      },
+      {
+       "order": 2,
+       "kind": "deck",
+       "outcome": "skipped",
+       "at": 1793973653.573699,
+       "seconds": null,
+       "note": ""
+      },
+      {
+       "order": 3,
+       "kind": "practice",
+       "outcome": "skipped",
+       "at": 1793973653.57677,
+       "seconds": null,
+       "note": ""
+      }
+     ],
+     "skipped": [
+      {
+       "kind": "video",
+       "label": "Video",
+       "reason": "No verified, concept-specific video is curated for this concept. A generic provider link is a reference, not a lesson, so it is not offered as one."
+      },
+      {
+       "kind": "worked_example",
+       "label": "Worked example",
+       "reason": "Not this lesson: a structured first pass through the concept comes before a single solved instance."
+      },
+      {
+       "kind": "explain",
+       "label": "Explanation",
+       "reason": "Replaced by the deck, which covers the same ground in a form the learner can revisit."
+      },
+      {
+       "kind": "simulation",
+       "label": "Interactive",
+       "reason": "No first-party interactive is bound to this concept. The symbolic engine is valid only for mathematics, and drawing a generic function plot for this subject would present a model as the phenomenon itself."
+      },
+      {
+       "kind": "discussion",
+       "label": "Explain it back",
+       "reason": "Not this lesson: a discussion needs a conceptual error to surface and enough mastery to reason from; neither holds right now."
+      },
+      {
+       "kind": "recap",
+       "label": "Recap",
+       "reason": "Not this lesson: there is not yet a structure to connect, or the concept has no recorded neighbours."
+      }
+     ],
+     "rationale": "3 block(s) in 14 of 20 minutes: diagnostic -> deck -> practice. Evidence: mastery 0.15 over 0 attempt(s), recent accuracy None, top error none, 6 activity/activities refused with reasons. Profile 'default'.",
+     "current": null,
+     "progress": 1.0
+    }
+   }
+  }
+ ],
+ "context": {
+  "health": {
+   "ready": true,
+   "service": "luminfest-learning-harness",
+   "schema_version": 11,
+   "model_status": {
+    "name": "FSRS-6 DSR memory model (upstream defaults v6.3.2) + heuristic BKT mastery",
+    "trained": false,
+    "domain": "mathematics; memory model is principled, mastery prior is not calibrated",
+    "commercial_ready": false
+   },
+   "tutor": {
+    "provider": "offline",
+    "availability": "local"
+   },
+   "harness": {
+    "moves": 9,
+    "tools": 51,
+    "artefacts": 11,
+    "memory_kinds": [
+     "episodic",
+     "semantic",
+     "procedural"
+    ],
+    "memory_half_life_days": 21.0,
+    "sandbox_boundaries": [
+     "path-confinement",
+     "static-guard",
+     "runtime-audit-hook",
+     "seatbelt"
+    ],
+    "generation_mode": "grounded-offline"
+   }
+  },
+  "account": {
+   "email": "REDACTED",
+   "role": "learner"
+  },
+  "agent": {
+   "answered_by": "grounded-offline",
+   "provider": "grounded-offline",
+   "grounded_offline": false,
+   "finish_reason": "unavailable",
+   "tool_calls": [],
+   "message": "null"
+  },
+  "counts_after_generation": {
+   "users": 1,
+   "attempts": 0,
+   "learning_states": 0,
+   "procedure_runs": 1,
+   "created_courses": 0,
+   "messages": 2,
+   "flashcards": 0,
+   "assessments": 0
+  },
+  "generated_course_id": "mine_092a17e1ce",
+  "generated_concept_id": "mine_092a17e1ce_a_gas_turbine",
+  "generated_lesson_blocks": "null",
+  "concept_id": "mine_092a17e1ce_a_gas_turbine",
+  "run_id": "394a370e-b706-412d-a7f7-30346bbcc51f",
+  "first_blocks": [
+   "diagnostic",
+   "deck",
+   "practice"
+  ],
+  "diagnosis": {
+   "category": "conceptual",
+   "reason": "Tentative: This belongs to \"Advantages and disadvantages\", not to \"A gas turbine\". Naming which idea a wrong option belongs to turns a wrong answer into a diagnosis. This option is compatible with, but does not prove, that error process.",
+   "next_action": "Re-read the passage you supplied for A gas turbine.",
+   "confidence": 0.35,
+   "alternatives": [
+    "An arithmetic slip",
+    "Misreading or accidental selection",
+    "A conceptual or procedural gap"
+   ],
+   "response_confidence": 0.6,
+   "scope": "Task-level hypothesis; confidence is a heuristic, not calibrated diagnostic probability."
+  },
+  "counts_after_answer": {
+   "users": 1,
+   "attempts": 1,
+   "learning_states": 1,
+   "procedure_runs": 2,
+   "created_courses": 1,
+   "messages": 2,
+   "flashcards": 0,
+   "assessments": 0
+  },
+  "learning_states_after_answer": "[{\"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"data\": {\"stability\": 0.3550402910611492, \"difficulty\": 7.40027437198288, \"last_review\": 1793973635.959865, \"reps\": 1, \"lapses\": 1, \"memory_model\": \"fsrs-6\", \"memory_model_note\": \"stability seeded from legacy half_life_days (Leitner heuristic); FSRS updates take over from here\", \"last_recall_probability\": null, \"last_stability_gain\": -0.6449597089388508, \"mastery\": 0.14022988505747125, \"attempts\": 1, \"correct_count\": 0, \"last_at\": 1793973635.959865, \"half_life_days\": 0.3550402910611492, \"due_at\": 1794004311.4410129, \"last_correct\": false, \"last_elapsed\": 0.5, \"prior_kind\": \"FSRS-6 memory model with published default weights; heuristic BKT mastery prior\", \"response_confidence\": 0.6, \"next_check\": {\"category\": \"conceptual\", \"reason\": \"Tentative: This belongs to \\\"Advantages and disadvantages\\\", not to \\\"A gas turbine\\\". Naming which idea a wrong option belongs to turns a wrong answer into a diagnosis. This option is compatible with, but do …[1435 chars]",
+  "plan_after_answer": "{\"plan\": {\"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"concept_title\": \"A gas turbine\", \"course_id\": \"mine_092a17e1ce\", \"profile\": \"default\", \"version\": \"1\", \"hash\": \"22e738485416fe86b5f001e6e769c382\", \"enabled\": true, \"budget_minutes\": 20, \"total_minutes\": 11, \"blocks\": [{\"order\": 1, \"kind\": \"deck\", \"label\": \"Slides\", \"role\": \"input\", \"minutes\": 5, \"title\": \"Lesson deck\", \"purpose\": \"Read a short, ordered deck built from this concept's own lesson.\", \"why\": \"Mastery is below the consolidation point and no verified video is curated, so the authored deck is the honest first pass.\", \"artifact\": {\"kind\": \"slides\", \"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"concept_title\": \"A gas turbine\", \"sections\": [{\"heading\": \"A gas turbine\", \"bullets\": [\"A gas turbine is a complete continuous-flow internal combustion engine in which air is compressed, fuel is burned in the compressed air, and th …[15113 chars]",
+  "final_run": "{\"run_id\": \"394a370e-b706-412d-a7f7-30346bbcc51f\", \"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"concept_title\": \"A gas turbine\", \"course_id\": \"mine_092a17e1ce\", \"hash\": \"91ac8d47a06853d22910267d0bd94ef5\", \"status\": \"completed\", \"budget_minutes\": 20, \"total_minutes\": 14, \"blocks\": [{\"order\": 1, \"kind\": \"diagnostic\", \"label\": \"Quick check\", \"role\": \"commitment\", \"minutes\": 3, \"title\": \"Quick check\", \"purpose\": \"Answer a few questions so the lesson starts from evidence rather than from an assumption about what you know.\", \"why\": \"No scored attempt exists for this concept, so there is no evidence to teach against yet. Two low-stakes questions cost three minutes and replace an assumption with a measurement.\", \"artifact\": {\"kind\": \"questions\", \"mode\": \"practice\", \"concept_id\": \"mine_092a17e1ce_a_gas_turbine\", \"count\": 2, \"purpose\": \"diagnostic\", \"scored\": true}, \"produces\": [\"accuracy\"], \"optional\": true}, {\"order\": 2, \"kind\": \"deck\", \"label\": \"Slides\", \"role\": \"input\", \"minutes\": 5, \"title\": \"Lesson deck\", \"purpose\": \"Read a short, ordered deck built from this concept's own lesson.\", \"why\": \"First exposure is better served by an ordered, revisitable deck built from this concept's own …[6375 chars]",
+  "final_counts": {
+   "users": 1,
+   "attempts": 1,
+   "learning_states": 1,
+   "procedure_runs": 2,
+   "created_courses": 1,
+   "messages": 2,
+   "flashcards": 0,
+   "assessments": 0
+  }
+ },
+ "note": "A FAIL is observed behaviour, not a claim that the whole subsystem is broken. Refusals with reasons are designed fallbacks."
+}
