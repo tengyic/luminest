@@ -41,15 +41,16 @@ import base64
 import hashlib
 import re
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import Depends, APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse, Response
 
 from . import courses, deck
 from .db import Token, User, now_ts
 from .harness import media, presentation
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("deck", 600))])
 
 PPTX_MEDIA_TYPE = ('application/vnd.openxmlformats-officedocument.presentationml.'
                    'presentation')
@@ -61,23 +62,11 @@ PPTX_MEDIA_TYPE = ('application/vnd.openxmlformats-officedocument.presentationml
 def _authenticate(request: Request, db) -> User:
     """Resolve the account behind the bearer token, or raise 401.
 
-    Deliberately the same digest lookup the rest of the API performs — no second auth scheme,
-    and no anonymous path: a deck belongs to an account, so a request without one is refused
-    even in development.
+    Delegates to ``security.resolve_account``: no second auth scheme, no anonymous path,
+    and - the part this module's own copy was missing - an erased account's still-valid
+    token is refused and its row re-deleted rather than returning that account's decks.
     """
-    factory = getattr(request.app.state, 'factory', None)
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required', headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'deck:' + digest(raw), 600)
-    token = db.get(Token, digest(raw))
-    if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-        raise HTTPException(401, 'Invalid or expired token')
-    user = db.get(User, token.user_id)
-    if not user or getattr(user, 'status', 'active') != 'active':
-        raise HTTPException(401, 'Account unavailable')
-    return user
+    return resolve_account(request, db, rate_key='deck', limit=600)
 
 
 def _user_id(request: Request) -> str:

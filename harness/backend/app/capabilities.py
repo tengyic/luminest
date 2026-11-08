@@ -773,25 +773,13 @@ def require_capability(capability_id: str):
     client can explain rather than silently downgrade; a degraded caller gets 503
     because the provider really is off and the fallback lives on a different route.
     """
-    from .db import Token, User
+    from .security import resolve_account
 
     def dependency(request: Request):
         factory = getattr(request.app.state, 'factory', None)
         settings = getattr(request.app.state, 'settings', None)
-        header = request.headers.get('authorization', '')
-        if not header.startswith('Bearer ') or len(header) > 200:
-            raise HTTPException(401, 'Valid bearer token required',
-                                headers={'WWW-Authenticate': 'Bearer'})
-        raw = header[7:]
-        from .security import rate_limit
-        rate_limit(factory, 'capabilities:' + digest(raw), 120)
         with factory() as db:
-            token = db.get(Token, digest(raw))
-            if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-                raise HTTPException(401, 'Invalid or expired token')
-            user = db.scalar(select(User).where(User.id == token.user_id))
-            if not user or getattr(user, 'status', 'active') != 'active':
-                raise HTTPException(401, 'Account unavailable')
+            user = resolve_account(request, db, rate_key='capabilities', limit=120)
             resolved = resolve(user, settings, db=db)
         entry = next((row for row in resolved['capabilities']
                       if row['id'] == capability_id), None)

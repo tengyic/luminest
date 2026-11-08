@@ -48,9 +48,10 @@ from sqlalchemy import select
 
 from . import courses, curriculum, exam_guard, procedure_service
 from .db import ProcedureRun, Token, User, now_ts
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 log = logging.getLogger('luminfest.procedure')
 
@@ -58,30 +59,19 @@ API = '/api/v1/procedure'
 
 
 def authenticated(request: Request):
-    """Resolve ``(db, user)`` from the bearer token, exactly as ``main.authenticated`` does.
+    """Resolve ``(db, user)`` from the bearer token, through ``security.resolve_account``.
 
-    ``main.create_app`` defines its auth dependency as a closure, so a router module
-    cannot import it. This mirrors it line for line - same header check, same rate limit,
-    same token and user lookup, same commit on exit - because a divergence between the
-    two would be an authentication bug, and the whole point of the mirror is that there
-    is only one rule.
+    The docstring here used to argue that mirroring ``main.authenticated`` line for line
+    was what guaranteed "there is only one rule". The mirror is what broke it: neither
+    copy consulted the erasure ledger, so a deleted account's token still returned its
+    runs. One resolver, called from every module, is what actually guarantees it.
     """
     from .main import start_write
     factory = request.app.state.factory
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'api:' + digest(raw), 180)
     with factory() as db:
+        user = resolve_account(request, db, rate_key='api', limit=180)
         start_write(db)
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.scalar(select(User).where(User.id == token.user_id).with_for_update())
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        token = request.state.token
         token.last_used_at = now_ts()
         user.last_seen_at = now_ts()
         yield db, user

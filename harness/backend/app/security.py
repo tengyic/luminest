@@ -1,18 +1,21 @@
 import hashlib
 import hmac
 import json
+import logging
 import secrets
 import time
 
 from argon2 import PasswordHasher
 from argon2.exceptions import InvalidHashError, VerificationError
-from fastapi import HTTPException
+from fastapi import HTTPException, Request
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
-from .db import AuthToken, RateBucket, RefreshToken, Secret, Token, now_ts
+from .db import AuthToken, RateBucket, RefreshToken, Secret, Token, User, now_ts
 from .user_scope import unscoped
+
+log = logging.getLogger('luminfest.security')
 
 HASHER = PasswordHasher(time_cost=3, memory_cost=65536, parallelism=2)
 DUMMY_HASH = HASHER.hash(secrets.token_urlsafe(32))
@@ -33,6 +36,309 @@ def password_ok(password, encoded):
         return HASHER.verify(encoded or DUMMY_HASH, password)
     except (VerificationError, InvalidHashError):
         return False
+
+
+# --------------------------------------------------------------------- account resolution
+#
+# One resolver, called by every route module. Twelve modules used to carry their own copy
+# of the bearer parsing, each documented as "line-for-line identical to
+# main.authenticated"; they had forked, and none of them asked the erasure ledger, so a
+# deleted account's still-valid token kept returning its flashcards, decks and courses from
+# whichever module had the copy. A second copy is not a style problem here - it is an
+# authorisation bypass - so ``tests/test_account_auth_single_source.py`` fails if one
+# reappears outside this file.
+
+
+#: Query parameter names a client might carry a credential in. The HTTP boundary treats
+#: any of them as a credential, because a credential that does not arrive in the header is
+#: otherwise invisible to it (verification mounted a `?t=` route and got the card body).
+CREDENTIAL_QUERY_KEYS = ('t', 'token', 'access_token')
+
+
+def _bearer_value(request) -> str | None:
+    """The credential from the ``Authorization`` header, or ``None``.
+
+    The scheme is compared case-insensitively: RFC 7235 defines it as case-insensitive, so
+    ``bearer <tok>`` is a valid request from a compliant client. Comparing with
+    ``startswith('Bearer ')`` rejected those clients *and* - the reason this matters - made
+    the boundary skip its check for them, because the boundary used the same comparison.
+    """
+    header = request.headers.get('authorization', '')
+    if not header or len(header) > 200:
+        return None
+    scheme, _, value = header.partition(' ')
+    if scheme.lower() != 'bearer':
+        return None
+    value = value.strip()
+    return value or None
+
+
+def bearer_raw(request) -> str:
+    """The raw bearer credential, or 401. The only place the header is parsed."""
+    value = _bearer_value(request)
+    if value is None:
+        raise HTTPException(401, 'Valid bearer token required',
+                            headers={'WWW-Authenticate': 'Bearer'})
+    return value
+
+
+def has_bearer(request) -> bool:
+    """Whether the request carries a credential in the header at all."""
+    return _bearer_value(request) is not None
+
+
+def credential_present(request) -> bool:
+    """Whether the request carries a credential anywhere the app might read it.
+
+    The HTTP boundary uses this to decide whether a 2xx response needed a resolved
+    principal. It covers the ``Authorization`` header **and** the query-string names a
+    client could pass a token in; a route that reads ``?token=`` and answers without the
+    resolver is otherwise invisible to the boundary, which is exactly the hole verification
+    found.
+    """
+    if _bearer_value(request) is not None:
+        return True
+    return any(request.query_params.get(key) for key in CREDENTIAL_QUERY_KEYS)
+
+
+def refuse_if_erased(db, user, settings) -> bool:
+    """Whether the erasure ledger condemns this account; finishes the delete when it does.
+
+    The token path and the credential path ask the same question, so they ask it here:
+    ``resolve_account`` for a bearer token, and the login / refresh / reset routes for a
+    password or a refresh token, which mint a session before any token is checked.
+
+    An unreadable ledger is not "no erasures": it is a 503 that refuses the credential.
+    """
+    from . import account_erasure
+
+    if user is None or settings is None:
+        return False
+    try:
+        condemned = account_erasure.is_erased(settings, str(user.id))
+    except account_erasure.ErasureLedgerUnreadable as exc:
+        log.error('erasure ledger unreadable; refusing credentials: %s', exc)
+        raise HTTPException(
+            503, 'Account deletion records cannot be read; sign-in is refused') from exc
+    if not condemned:
+        return False
+    account_erasure.purge_stale(db, settings, str(user.id))
+    return True
+
+
+def _live_user(db, user_id: str, settings):
+    """The account, or 401. An erased account is purged and refused, never returned.
+
+    The erasure ledger lives outside the database (``app/account_erasure.py``), so a
+    restored snapshot can put the row back. This is the one place every route asks, which
+    is why the check cannot be forgotten by a new module.
+    """
+    user = db.get(User, user_id)
+    if refuse_if_erased(db, user, settings):
+        raise HTTPException(401, 'Account unavailable')
+    if not user or getattr(user, 'status', 'active') != 'active':
+        raise HTTPException(401, 'Account unavailable')
+    return user
+
+
+def resolve_account(request, db, *, rate_key: str = 'api', limit: int = 180) -> User:
+    """Resolve the signed-in account for a request, or raise the same 401 everywhere.
+
+    Every route module calls this instead of parsing the header itself. It performs the
+    one bearer check, the rate limit under the caller's key, the token lookup, the status
+    check and - the part the twelve forked copies were missing - the erasure check. The
+    resolved token is left on ``request.state`` for the caller that needs its digest
+    (``main.authenticated`` writes the session heartbeat through it).
+
+    ``rate_key`` and ``limit`` exist because the route families had set their own ceilings
+    (180 for the API, 900 for the playground, 120 for media). They are the only thing that
+    legitimately differed between the copies.
+
+    Every call marks ``request.state.principal_resolved``; the HTTP boundary refuses any
+    2xx response to a request that carried a credential and never reached this function.
+    That is what makes the resolver structural rather than a convention: an alternative
+    dependency written with different spelling still produces a response, and the boundary
+    throws it away.
+    """
+    request.state.principal_resolved = True
+    cached = getattr(request.state, 'principal', _UNSET)
+    if cached is not _UNSET:
+        if cached is None:
+            # An optional resolver already established that this request is anonymous;
+            # a route that demands a principal must not accept that answer.
+            raise HTTPException(401, 'Valid bearer token required',
+                                headers={'WWW-Authenticate': 'Bearer'})
+        return cached
+    factory = getattr(request.app.state, 'factory', None)
+    settings = getattr(request.app.state, 'settings', None)
+    raw = bearer_raw(request)
+    if factory is not None:
+        rate_limit(factory, f'{rate_key}:' + digest(raw), limit)
+    token = db.get(Token, digest(raw))
+    if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
+        raise HTTPException(401, 'Invalid or expired token')
+    user = _live_user(db, token.user_id, settings)
+    request.state.token = token
+    request.state.token_digest = token.digest
+    request.state.session_digest = token.digest
+    request.state.principal = user
+    return user
+
+
+def resolve_optional_account(request, db, *, rate_key: str = 'api', limit: int = 180):
+    """The account when a usable token is present, ``None`` for no token at all.
+
+    For endpoints that must serve a signed-out visitor (waitlist, feedback). Two cases are
+    deliberately *not* folded into anonymous:
+
+    * a token that exists but has expired or been revoked is still allowed to fall through
+      to anonymous, which is the behaviour those routes shipped with;
+    * a token that resolves to an **erased** account is a 401, because a deleted account is
+      not "someone who has not signed in" - its credential must stop working everywhere.
+    """
+    raw = _bearer_value(request)
+    if raw is None:
+        request.state.principal = None
+        return None
+    request.state.principal_resolved = True
+    cached = getattr(request.state, 'principal', _UNSET)
+    if cached is not _UNSET:
+        return cached
+    factory = getattr(request.app.state, 'factory', None)
+    settings = getattr(request.app.state, 'settings', None)
+    if factory is not None:
+        rate_limit(factory, f'{rate_key}:' + digest(raw), limit)
+    token = db.get(Token, digest(raw))
+    if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
+        request.state.principal = None
+        return None
+    user = db.get(User, token.user_id)
+    if refuse_if_erased(db, user, settings):
+        raise HTTPException(401, 'Account unavailable')
+    request.state.principal = user
+    return user
+
+
+# --------------------------------------------------------------------- route-level wiring
+#
+# ``resolve_account`` inside a handler is a function call, and a FastAPI dependency graph
+# cannot see it. So each authenticated router declares a dependency that runs the resolver
+# before the handler: every route on that router then has it in ``route.dependant``, and a
+# route mounted without it is visible to ``routes_without_principal``. The resolver caches
+# on ``request.state.principal``, so the handler's own call is a lookup, not a second
+# rate-limit or a second token read.
+
+_UNSET = object()
+
+#: Attribute carried by every callable that resolves the principal. The route-graph guard
+#: (``routes_without_principal``) looks for it in each route's dependency tree.
+RESOLVES_PRINCIPAL = '_resolves_principal'
+
+#: Routes that answer without a principal, as ``(METHOD, path template)``.
+#:
+#: This is a decision list, not a pattern: every entry is a route that must work for a
+#: signed-out visitor. It is used twice - by ``routes_without_principal`` (a route that is
+#: not here and has no resolver fails the guard) and by the HTTP boundary (a credentialed
+#: request is only exempt from the principal requirement when it hits one of these). A new
+#: public route must be added here deliberately, and a route that is here by mistake shows
+#: up as a test failure rather than as a silent hole.
+PUBLIC_ROUTES: frozenset[tuple[str, str]] = frozenset({
+    ('GET', '/health'),
+    ('GET', '/api/v1/health'),
+    ('GET', '/api/v1/legal'),
+    ('GET', '/api/v1/legal/{slug}'),
+    ('GET', '/api/v1/share/{token}'),
+    ('GET', '/playground'),
+    ('POST', '/api/v1/auth/register'),
+    ('POST', '/api/v1/auth/login'),
+    ('POST', '/api/v1/auth/refresh'),
+    ('POST', '/api/v1/auth/forgot-password'),
+    ('POST', '/api/v1/auth/reset-password'),
+    ('POST', '/api/v1/feedback'),
+    ('POST', '/api/v1/waitlist'),
+    ('POST', '/api/v1/waitlist/confirm'),
+})
+
+
+def require_principal(rate_key: str = 'api', limit: int = 180):
+    """A FastAPI dependency that resolves the account or raises the resolver's own 401.
+
+    Returned as a closure because each route family keeps its own rate-limit ceiling. The
+    marker is set on the closure, which is the object FastAPI stores in the dependency
+    graph.
+    """
+    def dependency(request: Request):
+        factory = getattr(request.app.state, 'factory', None)
+        with factory() as db:
+            return resolve_account(request, db, rate_key=rate_key, limit=limit)
+
+    setattr(dependency, RESOLVES_PRINCIPAL, True)
+    return dependency
+
+
+def require_optional_principal(rate_key: str = 'api', limit: int = 180):
+    """The anonymous-or-signed-in variant, for routers with public reads."""
+    def dependency(request: Request):
+        factory = getattr(request.app.state, 'factory', None)
+        with factory() as db:
+            return resolve_optional_account(request, db, rate_key=rate_key, limit=limit)
+
+    setattr(dependency, RESOLVES_PRINCIPAL, True)
+    return dependency
+
+
+def _dependant_resolves(dependant) -> bool:
+    if getattr(getattr(dependant, 'call', None), RESOLVES_PRINCIPAL, False):
+        return True
+    return any(_dependant_resolves(child) for child in dependant.dependencies)
+
+
+def routes_without_principal(app, public) -> list[str]:
+    """Routes that can answer without the resolver having run.
+
+    ``public`` is a set of ``(METHOD, path)`` pairs a reviewer has decided need no
+    principal. Everything else must have a resolver in its dependency tree - not an import
+    of the resolver, not a similar-looking check: the dependency graph is what FastAPI
+    actually executes, so it is the only claim worth testing.
+
+    Routes are enumerated from the app, including routers mounted by FastAPI's
+    ``_IncludedRouter`` wrapper, so a new ``routes_*.py`` cannot be born outside the check.
+    The second half of the guarantee is at runtime: the HTTP boundary refuses any 2xx
+    response to a request that carried a credential when ``principal_resolved`` is unset,
+    which catches a hand-rolled dependency even if this graph walk is fooled.
+    """
+    # FastAPI 0.143 names it ``APIWebSocketRoute``; Starlette's base class is what
+    # ``isinstance`` needs if a raw Starlette route is ever mounted.
+    from fastapi.routing import APIRoute, APIWebSocketRoute
+    from starlette.routing import WebSocketRoute as StarletteWebSocketRoute
+
+    missing: list[str] = []
+
+    def visit(routes):
+        for route in routes:
+            children = getattr(getattr(route, 'original_router', None), 'routes', None)
+            if children:
+                visit(children)
+                continue
+            if isinstance(route, (APIWebSocketRoute, StarletteWebSocketRoute)):
+                # Not an APIRoute, so this walk is the *only* layer that can see it: the
+                # HTTP boundary never sees a WebSocket handshake or frame. There are no
+                # WebSocket routes today; the first one added inherits the check instead of
+                # the gap.
+                methods, path = {'WS'}, route.path
+            elif isinstance(route, APIRoute):
+                methods = {str(m).upper() for m in (route.methods or ())}
+                path = route.path
+            else:
+                continue
+            if methods and all((method, path) in public for method in methods):
+                continue
+            if not _dependant_resolves(route.dependant):
+                missing.append(f'{",".join(sorted(methods))} {path}')
+
+    visit(app.routes)
+    return missing
+
 
 
 def issue_token(db, user, ttl):

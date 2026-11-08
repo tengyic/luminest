@@ -19,3 +19,12 @@ psycopg[binary]>=3.2,<4
 #   A deployment that wants the tool installs this file and then runs
 #   ``playwright install chromium``.
 playwright==1.62.0
+#
+# pycryptodome - the AES-256-GCM backend for encrypted database backups
+#   (``app/database_backup.py``). Detected at runtime, never assumed: with no
+#   ``LUMINEST_BACKUP_KEY`` in the environment backups are written as plaintext SQLite
+#   copies and no import is attempted; with a key set, a missing import is a hard
+#   ``BackupEncryptionError`` rather than a silent plaintext backup. Any deployment that
+#   sets the key must install this, so it stays out of ``requirements.txt`` -- the
+#   desktop bundle ships without a key and therefore without a reason to carry it.
+pycryptodome==3.23.0

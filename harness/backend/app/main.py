@@ -24,6 +24,7 @@ from sqlalchemy import Integer, delete, func, inspect, select, text
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
+from . import account_erasure
 from . import content_locale
 
 from . import (accounts, courses, curriculum_route, experiments, figures, harness, learning,
@@ -57,6 +58,9 @@ from .user_scope import unscoped
 from .security import (ACCESS_TTL_SECONDS, HASHER, REFRESH_TTL_SECONDS, RESET_TTL_SECONDS,
                        VERIFY_TTL_SECONDS, consume_auth_token, digest, issue_auth_token,
                        issue_session, issue_token, new_secret, password_ok, rate_limit,
+                       PUBLIC_ROUTES, credential_present, refuse_if_erased,
+                       resolve_account,
+                       resolve_optional_account,
                        revoke_all_sessions, revoke_session, rotate_refresh, sign_receipt,
                        signing_secret, verify_receipt)
 
@@ -728,6 +732,23 @@ def create_app(settings=None):
                 _ensure_operator(db, settings)
             except Exception as exc:  # noqa: BLE001 - boot must not depend on a role fix
                 log.warning('operator promotion skipped: %s', exc)
+        # A restore replaces the whole database file, so an account deleted before the
+        # snapshot was taken is present in it again. The erasure ledger lives outside the
+        # database for exactly that reason; applying it here is what makes the deletion
+        # survive a restore. Idempotent, and a stat when nothing was ever erased.
+        try:
+            repurged = account_erasure.reconcile(factory, settings)
+            if repurged:
+                log.warning('account deletion re-applied to %s account(s) after a restore: %s',
+                            len(repurged), ', '.join(repurged))
+        except account_erasure.ErasureLedgerUnreadable as exc:
+            # Fail closed at boot: a security list you cannot read is not a list of zero,
+            # and starting anyway would let every deleted account sign in.
+            raise RuntimeError(
+                'Refusing to start: the account-deletion ledger exists but cannot be read. '
+                f'Fix its permissions or restore it before launching. ({exc})') from exc
+        except Exception as exc:  # noqa: BLE001 - boot must not depend on the ledger
+            log.warning('erasure reconciliation skipped: %s', exc)
         # Load the speech engine now rather than on the first sentence of a lesson. A
         # cold model takes longer than a render is allowed to, so without this the
         # teacher's opening line is the one that goes missing. Runs in its own thread;
@@ -821,6 +842,30 @@ def create_app(settings=None):
                 watcher.cancel()
         else:
             response = await call_next(request)
+        # The structural half of the auth guarantee. A route may not answer a request that
+        # carried a credential unless the resolver ran: a hand-rolled dependency - whatever
+        # it spells the header, however it looks up the token - leaves
+        # ``principal_resolved`` unset, and its 200 is thrown away here instead of returned
+        # with a deleted (or any other) account's data. The public routes are exempt
+        # because they hold no account data; the list is ``security.PUBLIC_ROUTES``, which
+        # the route-graph test also checks against the app.
+        matched = request.scope.get('route')
+        template = getattr(matched, 'path', request.url.path)
+        # A redirect for a public path (``/health/`` -> ``/health``) has no matched route,
+        # so the template is the raw path; a trailing slash must not turn a monitoring
+        # probe's 307 into a 401.
+        public = ((request.method, template) in PUBLIC_ROUTES
+                  or (request.method, template.rstrip('/') or '/') in PUBLIC_ROUTES)
+        if (response.status_code < 400
+                # Case-insensitive, and query credentials count: a boundary that only saw
+                # ``Bearer `` would let ``bearer`` and ``?t=`` through untouched.
+                and credential_present(request)
+                and not getattr(request.state, 'principal_resolved', False)
+                and not public):
+            log.error('refused a credentialed response from a route that never resolved a '
+                      'principal: %s %s', request.method, request.url.path)
+            response = JSONResponse({'detail': 'Account could not be verified'},
+                                    status_code=401)
         response.headers['Cache-Control'] = 'no-store'
         response.headers['X-Content-Type-Options'] = 'nosniff'
         return response
@@ -833,21 +878,17 @@ def create_app(settings=None):
         return JSONResponse({'detail': 'Storage operation unavailable; no successful write is reported'}, status_code=503)
 
     def authenticated(request: Request):
-        header = request.headers.get('authorization', '')
-        if not header.startswith('Bearer ') or len(header) > 200:
-            raise HTTPException(401, 'Valid bearer token required', headers={'WWW-Authenticate': 'Bearer'})
-        raw = header[7:]
-        rate_limit(factory, 'api:'+digest(raw), 180)
+        """The session dependency. Token validation, the erasure check and the 401 wording
+        all live in ``security.resolve_account``, which every route module calls; a second
+        copy of the bearer parsing here is how twelve modules ended up bypassing the
+        tombstone."""
         with factory() as db:
+            # Resolve before taking the SQLite write lock: the resolver applies the rate
+            # limit on its own connection, and ``BEGIN IMMEDIATE`` here would make that
+            # second writer wait for this one (the 35-second "database is locked" path).
+            user = resolve_account(request, db, rate_key='api', limit=180)
             start_write(db)
-            token = db.get(Token, digest(raw))
-            if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-                raise HTTPException(401, 'Invalid or expired token')
-            user = db.scalar(select(User).where(User.id == token.user_id).with_for_update())
-            if not user or getattr(user, 'status', 'active') != 'active':
-                raise HTTPException(401, 'Account unavailable')
-            request.state.token_digest = token.digest
-            request.state.session_digest = token.digest
+            token = request.state.token
             token.last_used_at = now_ts()
             user.last_seen_at = now_ts()
             # The heartbeat commits NOW, not at teardown. For a streaming route this
@@ -862,10 +903,22 @@ def create_app(settings=None):
             yield db, user
             db.commit()
 
+    # The route-graph guard (``security.routes_without_principal``) looks for this marker on
+    # the dependency object FastAPI executes. Setting it here is a claim; the HTTP boundary
+    # below is what makes the claim true - it replaces any 2xx response to a credentialed
+    # request whose principal was never resolved with 401, so a dependency that only *says*
+    # it authenticates does not get to answer.
+    authenticated._resolves_principal = True
+
     def auth_limits(request, email):
         address = request.client.host if request.client else 'unknown'
         rate_limit(factory, 'auth:ip:'+address, 30, 300)
-        rate_limit(factory, 'auth:email:'+email, 10, 300)
+        # Normalised before hashing, for two reasons. The bucket key is an unsalted
+        # digest, so "R@x" and "r@x" were two buckets - a way around the sign-in limit,
+        # and two rows an erasure request would have to find. One canonical spelling
+        # makes the limit one limit, and makes the row computable at deletion time from
+        # the address the account holds (``account_erasure`` deletes it).
+        rate_limit(factory, 'auth:email:'+accounts.normalize_email(email), 10, 300)
 
     def client_ip(request: Request):
         return request.client.host if request.client else None
@@ -953,6 +1006,9 @@ def create_app(settings=None):
             user = db.scalar(select(User).where(User.email == payload.email).with_for_update())
             if not password_ok(payload.password, user.password_hash if user else None):
                 raise HTTPException(401, 'Invalid email or password')
+            if refuse_if_erased(db, user, settings):
+                # Same answer as a wrong password: a deleted account is not an account.
+                raise HTTPException(401, 'Invalid email or password')
             if getattr(user, 'status', 'active') != 'active':
                 raise HTTPException(403, 'This account is not active. Contact support.')
             if HASHER.check_needs_rehash(user.password_hash):
@@ -978,6 +1034,8 @@ def create_app(settings=None):
                 raise HTTPException(401, 'Refresh token is invalid, expired or already used')
             access, new_refresh, _, user_id = rotated
             user = db.scalar(select(User).where(User.id == user_id))
+            if refuse_if_erased(db, user, settings):
+                raise HTTPException(401, 'Refresh token is invalid, expired or already used')
             db.commit()
             return session_payload(access, new_refresh, user)
 
@@ -1018,6 +1076,8 @@ def create_app(settings=None):
         with factory() as db:
             start_write(db)
             user = db.scalar(select(User).where(User.email == payload.email))
+            if user and refuse_if_erased(db, user, settings):
+                user = None
             if user and getattr(user, 'status', 'active') == 'active':
                 raw = issue_auth_token(db, user, 'reset_password', RESET_TTL_SECONDS)
                 link = app.state.mailer.link('/reset-password', raw)
@@ -1038,7 +1098,7 @@ def create_app(settings=None):
             if not row:
                 raise HTTPException(400, 'This reset link is invalid, expired or already used.')
             user = db.scalar(select(User).where(User.id == row.user_id).with_for_update())
-            if not user:
+            if not user or refuse_if_erased(db, user, settings):
                 raise HTTPException(400, 'This reset link is invalid, expired or already used.')
             user.password_hash = HASHER.hash(payload.password)
             # A reset is a security event: every existing session is ended.
@@ -3814,16 +3874,12 @@ def create_app(settings=None):
         """Resolve the caller if a valid token is present, otherwise ``None``.
 
         Used by endpoints that must work for a signed-out visitor (waitlist, feedback)
-        without turning a missing token into a 401.
+        without turning a missing token into a 401. The token lookup and the erasure check
+        are ``security.resolve_optional_account``'s, so this path cannot disagree with the
+        authenticated one about a deleted account.
         """
-        header = request.headers.get('authorization', '')
-        if not header.startswith('Bearer '):
-            return None
         with factory() as db:
-            token = db.get(Token, digest(header[7:]))
-            if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-                return None
-            return db.scalar(select(User).where(User.id == token.user_id))
+            return resolve_optional_account(request, db, rate_key='optional', limit=180)
 
     @app.post(API+'/waitlist', status_code=201)
     def join_waitlist(payload: schemas.WaitlistJoin, request: Request):
@@ -4101,10 +4157,19 @@ def create_app(settings=None):
 
     @app.delete(API+'/me', status_code=204)
     def delete_me(payload: schemas.DeleteAccount, auth=Depends(authenticated)):
+        """Delete the account and everything the database is the only index for.
+
+        The policy - what goes, what survives, for how long - is stated in
+        ``app/account_erasure.py`` and restated for the reader in ``legal/privacy.md``
+        section 7. The status stays 204 because clients treat it as "gone, no body"; the
+        one number the caller might need is repeated in a header for audit tooling.
+        """
         db, user = auth
-        db.delete(user)
-        db.commit()
-        return Response(status_code=204)
+        receipt = account_erasure.erase(db, settings, user)
+        return Response(status_code=204, headers={
+            'X-Erasure-Ledger': Path(receipt['ledger']).name,
+            'X-Erasure-Backup-Retention-Days': str(receipt['backup_retention_days']),
+        })
 
     @app.get(API+'/health')
     @app.get('/health')

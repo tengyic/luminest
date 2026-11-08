@@ -30,9 +30,10 @@ from sqlalchemy import select
 
 from .db import State, Token, User, now_ts
 from .harness.teaching import supervision
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 log = logging.getLogger('luminfest.supervision')
 
@@ -45,23 +46,13 @@ PRIOR_MASTERY = 0.15
 
 
 def authenticated(request: Request):
-    """Resolve ``(db, user)`` from the bearer token, mirroring ``main.authenticated``."""
+    """Resolve ``(db, user)`` from the bearer token, through ``security.resolve_account``."""
     from .main import start_write
     factory = request.app.state.factory
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'api:' + digest(raw), 180)
     with factory() as db:
+        user = resolve_account(request, db, rate_key='api', limit=180)
         start_write(db)
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.scalar(select(User).where(User.id == token.user_id).with_for_update())
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        token = request.state.token
         token.last_used_at = now_ts()
         user.last_seen_at = now_ts()
         yield db, user

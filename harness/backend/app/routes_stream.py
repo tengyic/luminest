@@ -44,8 +44,10 @@ from .resources import resource_dir
 #: The same bearer dependency every other feature router uses. Imported, not copied: a
 #: second auth implementation is a second place for it to drift.
 from .routes_supervision import authenticated
+from .security import require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 API = '/api/v1/stream'
 

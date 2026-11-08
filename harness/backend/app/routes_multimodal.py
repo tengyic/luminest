@@ -22,16 +22,17 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import Depends, APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from . import capabilities
 from .db import Token, User, now_ts
-from .security import digest, rate_limit
+from .security import digest, has_bearer, rate_limit, resolve_account, require_optional_principal
+
 
 log = logging.getLogger('luminfest.multimodal.routes')
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_optional_principal("capabilities", 120))])
 
 API = '/api/v1/capabilities'
 
@@ -58,33 +59,18 @@ def _resolve_for(request: Request) -> dict:
     The read endpoints are anonymous on purpose: a client must be able to render the
     store (what exists, what it costs, what it degrades to) before the learner has an
     account. A token that is present but invalid is still a 401 -- silently treating a
-    broken token as anonymous would show a paid learner the wrong plan. Every row of
-    database work happens inside the ``with`` and only plain dicts cross the boundary,
-    which is the same discipline ``app/routes_media.py`` keeps.
+    broken token as anonymous would show a paid learner the wrong plan, and a token
+    belonging to a deleted account would show them a plan they no longer have. Every row
+    of database work happens inside the ``with`` and only plain dicts cross the boundary.
     """
     factory = getattr(request.app.state, 'factory', None)
     settings = request.app.state.settings
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer '):
+    if not has_bearer(request):
         return capabilities.resolve(None, settings)
     if factory is None:
         raise HTTPException(503, 'Account storage is unavailable')
-    if len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'capabilities:' + digest(raw), 120)
     with factory() as db:
-        token = db.get(Token, digest(raw))
-        if not token:
-            # No token row at all is the anonymous case for a *read*; the write
-            # routes re-check and 401 on the same condition.
-            return capabilities.resolve(None, settings)
-        if token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.get(User, token.user_id)
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        user = resolve_account(request, db, rate_key='capabilities', limit=120)
         return capabilities.resolve(user, settings, db=db)
 
 
@@ -129,19 +115,8 @@ def grant_capability(capability_id: str, payload: GrantInput, request: Request):
     # The lifespan seeds this from HARNESS_SECRET or a persisted random secret; fall
     # back to settings so a direct call without a lifespan still verifies.
     key = getattr(request.app.state, 'signing_secret', None) or None
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'capabilities:' + digest(raw), 120)
     with factory() as db:
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.get(User, token.user_id)
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        user = resolve_account(request, db, rate_key='capabilities', limit=120)
         ok, reason, record = capabilities.grant(
             db, user, capability_id, settings=settings,
             receipt=payload.receipt.strip() or None, key=key)
@@ -173,19 +148,8 @@ def grant_capability(capability_id: str, payload: GrantInput, request: Request):
 def revoke_capability(capability_id: str, request: Request):
     """Revoke the entitlement: refunds, support corrections, end of a comp."""
     factory = request.app.state.factory
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'capabilities:' + digest(raw), 120)
     with factory() as db:
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.get(User, token.user_id)
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        user = resolve_account(request, db, rate_key='capabilities', limit=120)
         removed = capabilities.revoke(db, user, capability_id)
         db.commit()
         return {'capability': capability_id, 'revoked': removed,

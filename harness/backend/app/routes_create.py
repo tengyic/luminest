@@ -46,9 +46,10 @@ from starlette.datastructures import UploadFile
 from . import course_builder, courses
 from .course_builder import BuildRefused, IntakeRefused
 from .db import Token, User, now_ts
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("create", 240))])
 
 #: Ceiling on a pasted body. Above this the learner is uploading a book, not
 #: pasting notes, and the upload path is the right one. The boundary middleware's
@@ -104,24 +105,17 @@ class _Upload:
 def account(request: Request):
     """The authenticated learner, and the session this request writes through.
 
-    Mirrors the rest of the API's bearer-token check (Token digest lookup) rather
-    than introducing a second scheme, and registers the session factory with the
-    course builder so a persisted course can be re-hydrated on a later request.
+    The bearer check, the rate limit and the erasure check come from
+    ``security.resolve_account`` - this module used to keep its own copy and therefore
+    never asked whether the account had been deleted. The one thing that is this
+    module's own is registering the session factory with the course builder, so a
+    persisted course can be re-hydrated on a later request.
     """
     factory = getattr(request.app.state, 'factory', None)
-    header = request.headers.get('authorization', '')
-    if factory is None or not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'create:' + digest(raw), 240)
+    if factory is None:
+        raise HTTPException(503, 'Account storage is unavailable')
     with factory() as db:
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.get(User, token.user_id)
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        user = resolve_account(request, db, rate_key='create', limit=240)
         course_builder.attach_store(factory)
         request.state.course_factory = factory
         yield db, user

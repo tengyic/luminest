@@ -56,9 +56,15 @@ from .harness import guided_sim
 from .harness.playground import archetypes as archetype_registry
 from .harness.playground import catalogue, evidence, pipeline
 from .resources import resource_dir
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
+
+# The HTML page is public: a learner opens the playground before signing in, and the page
+# itself carries no account data. The JSON API behind it is not, so it lives on its own
+# router carrying the principal dependency; a router-level dependency cannot be removed for
+# one route, which is why there are two routers rather than one.
 router = APIRouter()
+api = APIRouter(dependencies=[Depends(require_principal("playground", 900))])
 
 #: Where the playground lives. One constant, so a route cannot be added under a
 #: slightly different prefix and become unreachable from the client.
@@ -92,23 +98,10 @@ def _session(request: Request) -> Iterator[Any]:
 def _authenticate(request: Request, db) -> User:
     """Resolve the account behind the bearer token, or raise 401.
 
-    The same digest lookup the rest of the API performs: no second auth scheme, and no
-    anonymous path. A run belongs to an account, so a request without one is refused.
+    ``security.resolve_account`` owns the token check, the erased-account check and the
+    401 wording; a run belongs to an account, so there is no anonymous path.
     """
-    factory = getattr(request.app.state, 'factory', None)
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'playground:' + digest(raw), 900)
-    token = db.get(Token, digest(raw))
-    if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-        raise HTTPException(401, 'Invalid or expired token')
-    user = db.get(User, token.user_id)
-    if not user or getattr(user, 'status', 'active') != 'active':
-        raise HTTPException(401, 'Account unavailable')
-    return user
+    return resolve_account(request, db, rate_key='playground', limit=900)
 
 
 def _settings(request: Request):
@@ -189,7 +182,7 @@ class DraftRequest(BaseModel):
 # ---------------------------------------------------------------------- reading
 
 
-@router.get(API)
+@api.get(API)
 def gallery(subject: str = Query(default='', max_length=40),
             course_id: str = Query(default='', max_length=64),
             archetype: str = Query(default='', max_length=40),
@@ -205,7 +198,7 @@ def gallery(subject: str = Query(default='', max_length=40),
                                archetype_id=archetype, difficulty=difficulty)
 
 
-@router.get(API + '/archetypes')
+@api.get(API + '/archetypes')
 def archetypes(db=Depends(_session), request: Request = None):
     """The template catalogue: what an author can build, and the schema they must fill."""
     _authenticate(request, db)
@@ -217,7 +210,7 @@ def archetypes(db=Depends(_session), request: Request = None):
     }
 
 
-@router.get(API + '/posture')
+@api.get(API + '/posture')
 def posture(db=Depends(_session), request: Request = None):
     """How the pipeline works, and what it guarantees. For the transparency panel."""
     _authenticate(request, db)
@@ -226,14 +219,14 @@ def posture(db=Depends(_session), request: Request = None):
             'catalogue': catalogue.summary()}
 
 
-@router.get(API + '/summary')
+@api.get(API + '/summary')
 def summary(db=Depends(_session), request: Request = None):
     """Catalogue counts and this account's play history."""
     user = _authenticate(request, db)
     return {'catalogue': catalogue.summary(), 'learner': evidence.summary(db, user)}
 
 
-@router.get(API + '/runs')
+@api.get(API + '/runs')
 def runs(limit: int = Query(default=20, ge=1, le=200), db=Depends(_session),
          request: Request = None):
     """This account's playground runs, newest first."""
@@ -242,7 +235,7 @@ def runs(limit: int = Query(default=20, ge=1, le=200), db=Depends(_session),
             'note': 'A run is not a graded attempt. The answer key belongs to the game.'}
 
 
-@router.get(API + '/games/{slug}')
+@api.get(API + '/games/{slug}')
 def one_game(slug: str, db=Depends(_session), request: Request = None):
     """One game's full spec and metadata, so an author can copy and adapt it."""
     _authenticate(request, db)
@@ -252,7 +245,7 @@ def one_game(slug: str, db=Depends(_session), request: Request = None):
             'play_url': f'{API}/games/{slug}/html'}
 
 
-@router.get(API + '/games/{slug}/html')
+@api.get(API + '/games/{slug}/html')
 def game_html(slug: str, db=Depends(_session), request: Request = None):
     """The playable page itself, served as ``text/html``.
 
@@ -279,7 +272,7 @@ def game_html(slug: str, db=Depends(_session), request: Request = None):
 # ---------------------------------------------------------------------- playing
 
 
-@router.post(API + '/games/{slug}/instantiate')
+@api.post(API + '/games/{slug}/instantiate')
 def instantiate(slug: str, refresh: bool = Query(default=False),
                 db=Depends(_session), request: Request = None):
     """Store a bundled game as a versioned artifact and return its serving URL.
@@ -304,7 +297,7 @@ def instantiate(slug: str, refresh: bool = Query(default=False),
                     'content revision; changing the spec produces a new version.'}
 
 
-@router.post(API + '/games/{slug}/outcome')
+@api.post(API + '/games/{slug}/outcome')
 def record_outcome(slug: str, payload: Outcome, db=Depends(_session),
                    request: Request = None):
     """Record one committed, scored task.
@@ -386,7 +379,7 @@ def record_outcome(slug: str, payload: Outcome, db=Depends(_session),
 # -------------------------------------------------------------------- authoring
 
 
-@router.post(API + '/compose')
+@api.post(API + '/compose')
 def compose(payload: ComposeRequest, db=Depends(_session), request: Request = None):
     """Turn an authored spec into a stored, playable game.
 
@@ -407,7 +400,7 @@ def compose(payload: ComposeRequest, db=Depends(_session), request: Request = No
             'note': 'The archetype owns the mechanic; the spec only supplied content.'}
 
 
-@router.post(API + '/draft')
+@api.post(API + '/draft')
 def draft(payload: DraftRequest, db=Depends(_session), request: Request = None):
     """Ask a configured model to fill an archetype's schema, then store the result.
 
@@ -426,3 +419,6 @@ def draft(payload: DraftRequest, db=Depends(_session), request: Request = None):
         # the body says which stage failed so the caller can act on it.
         return JSONResponse(status_code=503, content=result)
     return result
+
+# The public page above and the authenticated API below are one module, two routers.
+router.include_router(api)

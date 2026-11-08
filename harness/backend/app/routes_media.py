@@ -22,17 +22,18 @@ import hashlib
 import logging
 import re
 
-from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi import Depends, APIRouter, HTTPException, Query, Request
 from pydantic import BaseModel, Field
 
 from . import courses, curriculum
 from .db import Token, User, now_ts
 from .harness import media
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
+
 
 log = logging.getLogger('luminfest.media.routes')
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_principal("images", 120))])
 
 #: Ceiling on one library page. The library is a picker, not an export; a client that wants
 #: everything asks again with a filter rather than paging through thousands of rows.
@@ -44,25 +45,15 @@ def _account(request: Request) -> dict:
 
     Deliberately stricter than the web workbench's ``principal``: media has no development
     anonymous mode, because an unauthenticated fetch would write a cached, licence-cleared
-    file that no account owns and no account could delete.
+    file that no account owns and no account could delete. The token and erasure checks are
+    ``security.resolve_account``'s, so a deleted account's library is not served here.
     """
     factory = getattr(request.app.state, 'factory', None)
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
     if factory is None:
         raise HTTPException(503, 'Account storage is unavailable')
-    raw = header[7:]
-    rate_limit(factory, 'images:' + digest(raw), 120)
     with factory() as db:
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.get(User, token.user_id)
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
-        return {'user_id': token.user_id,
+        user = resolve_account(request, db, rate_key='images', limit=120)
+        return {'user_id': user.id,
                 'course_id': str(getattr(user, 'course_id', '') or ''),
                 'account_role': str(getattr(user, 'role', '') or '')}
 

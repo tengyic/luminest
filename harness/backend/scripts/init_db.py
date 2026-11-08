@@ -59,8 +59,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from app.config import Settings
 from app.db import Base, SCHEMA_VERSION, SchemaVersion, make_database
 from app.database_backup import (MAINTENANCE_LOCK_NAME, BackupError,
-                                 create_sqlite_backup, maintenance_lock,
-                                 sqlite_path_from_engine)
+                                 create_sqlite_backup, default_backup_dir,
+                                 list_sqlite_backups, maintenance_lock,
+                                 schema_fingerprint, sqlite_path_from_engine)
 
 # Import every module that declares a model on the shared ``Base``. ``create_all`` only
 # creates tables that have been *registered*, and a model defined outside ``app.db`` is
@@ -124,6 +125,30 @@ ADDED_COLUMNS = {
     ),
 }
 
+#: The first version each piece of schema appeared in. ``ADDED_COLUMNS`` says how to add a
+#: column; this says *when* it arrived, which is what a half-finished migration needs.
+#:
+#: A SIGKILL between two ``ALTER TABLE`` statements leaves a database stamped at the old
+#: version with the new columns already in place. A retry then sees "version 5", decides it
+#: still needs to upgrade, and writes another ``pre-migration`` snapshot -- of a database
+#: that is no longer pre-migration at all. Ten retries and the retention cap has discarded
+#: the one honest snapshot. These landmarks are how that contradiction is caught instead.
+SCHEMA_LANDMARKS: dict[str, int] = {
+    'users.training_consent': 2,
+    'memory_notes': 3,
+    'harness_runs': 3,
+    'users.course_id': 5,
+    'users.age_confirmed_at': 6,
+    'users.terms_accepted_at': 6,
+    'users.terms_version': 6,
+    'refresh_tokens': 6,
+    'auth_tokens': 6,
+    'assessments.delay_days': 8,
+    'experiment_exposures': 8,
+    'flashcards': 9,
+    'procedure_runs': 11,
+}
+
 
 def _columns(engine, table):
     inspector = inspect(engine)
@@ -162,6 +187,83 @@ def _needs_upgrade(engine, current):
     return users is not None and 'training_consent' not in users
 
 
+def _schema_ahead(engine, current):
+    """Schema features from a *later* version than the stamp says, as ``(name, version)``.
+
+    Only the earliest offender is returned: it is the evidence that the last migration
+    died part way through, and its version is the one the operator has to reconcile.
+    """
+    if current is None:
+        return []
+    tables = set(inspect(engine).get_table_names())
+    ahead = []
+    for landmark, version in SCHEMA_LANDMARKS.items():
+        if version <= current:
+            continue
+        table, _, column = landmark.partition('.')
+        if table not in tables:
+            continue
+        if column:
+            present = _columns(engine, table)
+            if present is None or column not in present:
+                continue
+        ahead.append((landmark, version))
+    ahead.sort(key=lambda item: item[1])
+    return ahead
+
+
+def _refuse_if_schema_ahead(engine, current, backup_dir):
+    """Never migrate a database whose own schema contradicts its version stamp.
+
+    A crash between two DDL statements leaves exactly this state, and a retry would write
+    another ``pre-migration`` snapshot of an already half-upgraded database until retention
+    discarded the last honest one.
+
+    The evidence has to be a *snapshot*, not just a shape: a fixture (or a hand-built test
+    database) can legitimately present a current schema with an old stamp and no snapshot,
+    and refusing that would block a migration there is nothing to protect. Any crash that
+    mutated the schema already wrote its pre-migration snapshot first -- the backup is taken
+    before the first DDL statement -- so a snapshot of this version plus a schema that no
+    longer matches it is proof that a previous attempt ran.
+    """
+    ahead = _schema_ahead(engine, current)
+    if not ahead:
+        return
+    path = sqlite_path_from_engine(engine)
+    if path is None:
+        return
+    directory = (
+        Path(backup_dir) if backup_dir is not None else default_backup_dir(path)
+    )
+    anchor = _earliest_pre_migration(directory, current)
+    if anchor is None:
+        return  # nothing honest to protect; the copy about to be written is the first
+    live = schema_fingerprint(path)
+    if live is not None and anchor.get('schema_fingerprint') == live:
+        return  # this database already *is* the anchor: a clean retry from a restored copy
+    landmark, version = ahead[0]
+    raise RuntimeError(
+        f'Refusing to migrate: the database records schema version {current} but already '
+        f'contains {landmark}, which arrived in version {version}. A previous migration '
+        f'did not finish, so migrating again would snapshot a half-upgraded database and '
+        f'retention would eventually discard the last honest one. Restore the earliest '
+        f'pre-migration snapshot, {anchor["path"]}, and retry from there.'
+    )
+
+
+def _earliest_pre_migration(directory, version=None):
+    """The oldest usable ``pre-migration`` snapshot in ``directory``, or ``None``."""
+    candidates = [
+        row for row in list_sqlite_backups(directory)
+        if row.get('kind') == 'pre-migration' and row.get('checksum_valid')
+        and (version is None or row.get('from_version') == version)
+    ]
+    if not candidates:
+        return None
+    candidates.sort(key=lambda row: (row.get('created_at') or '', row.get('name') or ''))
+    return candidates[0]
+
+
 def initialize(engine, *, automatic_backup=True, backup_dir=None,
                backup_creator=create_sqlite_backup):
     """Create a fresh schema or apply data-preserving migrations.
@@ -187,6 +289,12 @@ def initialize(engine, *, automatic_backup=True, backup_dir=None,
             raise ValueError(f'Unsupported schema version {current}; refusing to modify tables')
     elif not is_fresh:
         current = 1  # legacy pre-version-table database
+
+    # Before deciding to migrate, check that the schema does not already contradict the
+    # stamp. A crash mid-migration leaves exactly that state, and migrating it again would
+    # write a `pre-migration` snapshot of a database that is already half-upgraded.
+    if not is_fresh:
+        _refuse_if_schema_ahead(engine, current, backup_dir)
 
     needs_upgrade = True if is_fresh else _needs_upgrade(engine, current)
 

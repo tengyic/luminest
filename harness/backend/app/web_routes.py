@@ -37,15 +37,16 @@ import secrets
 import time
 from pathlib import Path
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import Depends, APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse
 
 from .db import Token, User, now_ts
 from .harness import creation_gate, sims_store
 from .resources import resource_dir
-from .security import digest, rate_limit, signing_secret
+from .security import digest, has_bearer, rate_limit, resolve_account, signing_secret, require_optional_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_optional_principal("web", 240))])
 
 #: The static workbench, resolved through :mod:`app.resources` so the frozen bundle finds
 #: ``_internal/web`` rather than looking one directory above it and serving 404s.
@@ -99,9 +100,9 @@ CONTENT_TYPES = {
 def principal(request: Request, *, required: bool = False) -> dict:
     """Resolve the authenticated account for a request.
 
-    Bearer tokens are validated exactly like the rest of the API (Token digest
-    lookup). Anonymous access is a development convenience only; production
-    requires the session token. No new auth scheme is introduced.
+    Bearer tokens are validated by ``security.resolve_account`` - the same resolver the
+    API uses, including its erased-account check. Anonymous access is a development
+    convenience only; production requires the session token. No new auth scheme.
 
     Returns ``{'user_id': str, 'account_role': str}`` where ``account_role`` is
     the *server-side* role from ``users.role`` (``learner``/``teacher``/...),
@@ -109,20 +110,12 @@ def principal(request: Request, *, required: bool = False) -> dict:
     """
     settings = request.app.state.settings
     factory = getattr(request.app.state, 'factory', None)
-    header = request.headers.get('authorization', '')
-    if header.startswith('Bearer ') and len(header) <= 200:
+    if has_bearer(request):
         if factory is None:
             raise HTTPException(401, 'Valid bearer token required', headers={'WWW-Authenticate': 'Bearer'})
-        raw = header[7:]
-        rate_limit(factory, 'web:' + digest(raw), 240)
         with factory() as db:
-            token = db.get(Token, digest(raw))
-            if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-                raise HTTPException(401, 'Invalid or expired token')
-            user = db.get(User, token.user_id)
-            if not user or getattr(user, 'status', 'active') != 'active':
-                raise HTTPException(401, 'Account unavailable')
-            return {'user_id': token.user_id, 'account_role': str(getattr(user, 'role', '') or '')}
+            user = resolve_account(request, db, rate_key='web', limit=240)
+            return {'user_id': user.id, 'account_role': str(getattr(user, 'role', '') or '')}
     if settings.environment == 'production' or required:
         raise HTTPException(401, 'Valid bearer token required', headers={'WWW-Authenticate': 'Bearer'})
     return {'user_id': 'anonymous', 'account_role': ''}

@@ -50,9 +50,10 @@ from .db import Token, User, now_ts
 from .harness.authoring import (audit as audit_module, blueprint, draft as draft_module,
                                 illustrate as illustrate_module, methodology, registry,
                                 synthesize)
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("author", 300))])
 
 API = '/api/v1/author'
 
@@ -115,19 +116,7 @@ def _session(request: Request) -> Iterator[Any]:
 
 
 def _authenticate(request: Request, db) -> User:
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required',
-                            headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(request.app.state.factory, 'author:' + digest(raw), 300)
-    token = db.get(Token, digest(raw))
-    if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-        raise HTTPException(401, 'Invalid or expired token')
-    user = db.get(User, token.user_id)
-    if not user or getattr(user, 'status', 'active') != 'active':
-        raise HTTPException(401, 'Account unavailable')
-    return user
+    return resolve_account(request, db, rate_key='author', limit=300)
 
 
 def _author(request: Request, db) -> User:

@@ -33,8 +33,10 @@ from .db import Attempt, ProcedureRun, State, now_ts
 #: The same bearer dependency the other feature routers use. Imported rather than pasted:
 #: a third copy of the auth check is a third place for it to drift.
 from .routes_supervision import authenticated
+from .security import require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 API = '/api/v1/rewards'
 

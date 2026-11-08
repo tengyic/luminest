@@ -16,9 +16,10 @@ from sqlalchemy import select
 
 from . import flashcards
 from .db import Flashcard, Token, User, now_ts
-from .security import digest, rate_limit
+from .security import digest, rate_limit, resolve_account, require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 API = '/api/v1/flashcards'
 
@@ -28,28 +29,19 @@ MAX_PAGE = 200
 
 
 def authenticated(request: Request):
-    """Resolve ``(db, user)`` from the bearer token, exactly as ``main.authenticated`` does.
+    """Resolve ``(db, user)`` from the bearer token, through ``security.resolve_account``.
 
-    ``main.create_app`` defines its auth dependency as a closure, so a router module cannot
-    import it. Rather than weaken the rule, this mirrors it line for line: same header
-    check, same rate limit, same token/user lookup, same commit on exit. A divergence here
-    would be an authentication bug, so the two are kept deliberately identical.
+    The comment that used to sit here said this mirrored ``main.authenticated`` line for
+    line "and a divergence would be an authentication bug". It had diverged: neither copy
+    asked the erasure ledger, so a deleted account's live token returned its cards. One
+    resolver now, called from here and from every other route module.
     """
     from .main import start_write
     factory = request.app.state.factory
-    header = request.headers.get('authorization', '')
-    if not header.startswith('Bearer ') or len(header) > 200:
-        raise HTTPException(401, 'Valid bearer token required', headers={'WWW-Authenticate': 'Bearer'})
-    raw = header[7:]
-    rate_limit(factory, 'api:' + digest(raw), 180)
     with factory() as db:
+        user = resolve_account(request, db, rate_key='api', limit=180)
         start_write(db)
-        token = db.get(Token, digest(raw))
-        if not token or token.expires_at <= now_ts() or token.revoked_at is not None:
-            raise HTTPException(401, 'Invalid or expired token')
-        user = db.scalar(select(User).where(User.id == token.user_id).with_for_update())
-        if not user or getattr(user, 'status', 'active') != 'active':
-            raise HTTPException(401, 'Account unavailable')
+        token = request.state.token
         token.last_used_at = now_ts()
         user.last_seen_at = now_ts()
         yield db, user

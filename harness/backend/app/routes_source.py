@@ -34,10 +34,12 @@ from . import course_builder
 from . import source_extension
 from .db import now_ts
 from .routes_create import account  # one auth scheme, borrowed rather than rebuilt
+from .security import require_principal
+
 
 log = logging.getLogger('luminfest.source.routes')
 
-router = APIRouter()
+router = APIRouter(dependencies=[Depends(require_principal("create", 240))])
 
 #: A pasted source is capped at the same ceiling the paste path in ``routes_create``
 #: uses. Stated as data so the refusal that names it is generated from the number the

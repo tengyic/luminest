@@ -37,8 +37,10 @@ from . import courses, figures
 from .db import State
 from .harness.teaching import assets, supervision
 from .routes_supervision import AssessInput, _stored_mastery, authenticated
+from .security import require_principal
 
-router = APIRouter()
+
+router = APIRouter(dependencies=[Depends(require_principal("api", 180))])
 
 log = logging.getLogger('luminfest.ta')
 

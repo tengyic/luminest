@@ -31,3 +31,16 @@ pyarrow==26.0.0
 scipy==1.18.1
 scikit-learn==1.9.1
 threadpoolctl==3.7.0
+
+# Property-based testing for the scheduling and grading maths. Layer 1 uses it to search
+# for counterexamples instead of pinning a handful of hand-picked numbers; a failure prints
+# the minimal input that reproduces it. Pinned like everything else so a green run is
+# reproducible rather than "whatever PyPI served that morning".
+hypothesis==6.170.15
+# Layer 2 runs the whole application against PostgreSQL as well as SQLite. psycopg is the
+# only driver app/db.py accepts for a PostgreSQL URL (`postgresql+psycopg://`), so without
+# this the PostgreSQL half of the parity test cannot even connect and the run would skip.
+psycopg[binary]==3.3.8
+# Dependency and vulnerability scanning for the release gate. Lives in the dev file because
+# nothing imports it at runtime, for the same reason pytest does not live in requirements.
+pip-audit==2.9.0
