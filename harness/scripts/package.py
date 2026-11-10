@@ -115,6 +115,9 @@ FEATURE_ROUTE_PROBES = (
     # pass: it proves the module landed. Only a 404 — what an uncollected router produces —
     # is a failure.
     ("routes_stream", "/stream/status"),
+    # The scratch-board agent is a separate capability from the teacher's board tools;
+    # probe its catalog so a frozen bundle that drops the router fails loudly.
+    ("routes_whiteboard_agent", "/whiteboard-agent/catalog"),
 )
 
 

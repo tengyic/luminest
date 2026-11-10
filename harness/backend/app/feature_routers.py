@@ -38,6 +38,10 @@ FEATURE_ROUTERS = (
     'routes_rewards',
     'routes_ta',
     'routes_stream',
+    # Dedicated scratch-board drawing agent. It is intentionally a separate router:
+    # the tutor's teacher-gated whiteboard_* tools keep the lesson canvas, while this
+    # one owns region=scratch. See app/harness/whiteboard_agent.py.
+    'routes_whiteboard_agent',
 )
 
 __all__ = ['FEATURE_ROUTERS']

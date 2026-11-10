@@ -268,6 +268,11 @@ PUBLIC_ROUTES: frozenset[tuple[str, str]] = frozenset({
     ('GET', '/api/v1/legal'),
     ('GET', '/api/v1/legal/{slug}'),
     ('GET', '/api/v1/share/{token}'),
+    # Reviewed public read: the drawing agent's protocol/renderer catalog. It returns a
+    # static document - no account data, no principal - and doubles as the frozen-bundle
+    # probe that proves the router was collected. Its sibling endpoints (/boards, /draw)
+    # are deliberately NOT here: both carry require_principal on the route.
+    ('GET', '/api/v1/whiteboard-agent/catalog'),
     ('GET', '/playground'),
     ('POST', '/api/v1/auth/register'),
     ('POST', '/api/v1/auth/login'),

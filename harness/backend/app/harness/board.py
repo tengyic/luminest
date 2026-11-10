@@ -34,7 +34,7 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
-NODE_KINDS = ('path', 'shape', 'connector', 'text', 'image', 'video', 'simulation', 'answer')
+NODE_KINDS = ('path', 'shape', 'connector', 'text', 'image', 'video', 'simulation', 'answer', 'visual')
 SHAPES = ('rect', 'ellipse', 'arrow')
 # Mirror of MediaEmbed.hosts on the Swift side: the only hosts a board node may
 # embed. Gizmos is deep-link only and never appears here.
@@ -348,6 +348,13 @@ def _clean_payload(kind: str, payload: Any, *, geom: tuple = ()) -> dict | None:
             out['withheld_reason'] = reason
         return out
 
+    if kind == 'visual':
+        # Structured visual objects own a separate validator. Unknown spec keys, unsafe
+        # expressions, forged status/provider and oversized payloads are refused there,
+        # so a client cannot persist a lie about a renderer's availability.
+        from .visual_specs import clean_visual_payload
+        return clean_visual_payload(payload)
+
     return None
 
 
@@ -362,9 +369,13 @@ def _clean_node(raw: Any) -> dict | None:
     if x is None or y is None:
         return None
     w = _num(raw.get('w'), 0) or 0 if kind in ('path', 'shape', 'connector', 'image',
-                                               'video', 'simulation', 'answer') else 0
+                                               'video', 'simulation', 'answer', 'visual') else 0
     h = _num(raw.get('h'), 0) or 0 if kind in ('path', 'shape', 'connector', 'image',
-                                               'video', 'simulation', 'answer') else 0
+                                               'video', 'simulation', 'answer', 'visual') else 0
+    if kind == 'visual' and (w <= 0 or h <= 0):
+        # A WKWebView needs a real frame. Refuse a zero-sized visual node rather than
+        # storing an invisible hole in the board.
+        return None
     if kind == 'shape':
         # The shape validator needs the node geometry that was just read.
         payload = _clean_payload('shape', raw.get('payload'), geom=(x, y, w, h))
@@ -465,12 +476,19 @@ def delete(settings, board_id: str, *, owner_id: str) -> bool:
     return True
 
 
-def list_for_owner(settings, owner_id: str) -> list[dict]:
+def list_for_owner_prefix(settings, owner_id: str, prefix: str = 'board-') -> list[dict]:
+    """Boards belonging to one owner whose file name starts with ``prefix``.
+
+    The scratch diagram agent writes ``agent-scratch-*`` files so its boards never
+    surface in the teacher's ``board-*`` listing (and vice versa): same storage
+    directory, different prefix, different listing. That separation is the point of
+    giving the drawing agent its own namespace.
+    """
     root = _root(settings)
     if not root.exists():
         return []
     out = []
-    for path in sorted(root.glob('board-*.json')):
+    for path in sorted(root.glob(f'{prefix}*.json')):
         try:
             doc = json.loads(path.read_text(encoding='utf-8'))
         except Exception:
@@ -483,6 +501,10 @@ def list_for_owner(settings, owner_id: str) -> list[dict]:
                     'updated_at': doc.get('updated_at', 0)})
     out.sort(key=lambda row: -row['updated_at'])
     return out
+
+
+def list_for_owner(settings, owner_id: str) -> list[dict]:
+    return list_for_owner_prefix(settings, owner_id, prefix='board-')
 
 
 def apply_mutations(settings, board_id: str, *, owner_id: str, base_version: int,
