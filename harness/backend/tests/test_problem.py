@@ -97,13 +97,21 @@ def test_to_student_strips_figure_description():
     assert student['figure_svg'] == p.figure_svg
 
 
-def test_render_payloads_emits_tikz():
+def test_render_payloads_emits_tikz_and_tex():
     p = parse_problem(_mc())
     payloads = p.render_payloads()
     types = {pl['type'] for pl in payloads}
-    assert types == {'tikz'}
+    assert types == {'tikz', 'tex'}
     tikz = next(pl for pl in payloads if pl['type'] == 'tikz')
     assert tikz['spec']['source'] == p.figure_svg
+    tex = next(pl for pl in payloads if pl['type'] == 'tex')
+    assert tex['spec']['latex'] == p.given_equation
+    assert tex['spec']['display'] is True
+
+
+def test_render_payloads_omit_empty_fields():
+    p = parse_problem(_mc(given_equation=None, figure_svg=None))
+    assert p.render_payloads() == []
 
 
 def test_given_equation_refuses_unsafe_latex():

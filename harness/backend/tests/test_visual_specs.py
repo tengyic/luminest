@@ -48,6 +48,7 @@ VALID_SPECS: dict[str, dict] = {
     },
     'desmos': {'expressions': [{'latex': 'x^2'}]},
     'tikz': {'source': r'\begin{tikzpicture}\draw (0,0) circle (1in);\end{tikzpicture}'},
+    'tex': {'latex': r'x^2 + 1', 'display': True},
 }
 
 
@@ -84,7 +85,7 @@ def test_catalog_states_are_explicit():
     assert CATALOG['desmos']['provider'] == 'external'
     assert CATALOG['desmos']['requires'] == 'desmosApiKey'
     assert CATALOG['tikz']['requires'] == 'tikzAssets'
-    for kind in ('mafs', 'plotly', 'jsxgraph', 'mathbox', 'molecule'):
+    for kind in ('mafs', 'plotly', 'jsxgraph', 'mathbox', 'molecule', 'tex'):
         assert CATALOG[kind]['provider'] == 'bundled'
         assert CATALOG[kind]['status'] == 'available'
 
@@ -169,6 +170,25 @@ def test_desmos_refuses_html_in_latex():
     assert clean_visual_payload(_payload('desmos', {
         'expressions': [{'latex': '<img src=x onerror=alert(1)>'}],
     })) is None
+
+
+def test_tex_refuses_markup_and_oversize():
+    assert clean_visual_payload(_payload('tex', {
+        'latex': '<img src=x onerror=alert(1)>', 'display': True,
+    })) is None
+    assert clean_visual_payload(_payload('tex', {
+        'latex': 'a' * 601, 'display': True,
+    })) is None
+    assert clean_visual_payload(_payload('tex', {
+        'latex': r'\write18{rm -rf /}', 'display': True,
+    })) is None
+    # unknown keys are refused (the closed payload envelope)
+    assert clean_visual_payload(_payload('tex', {
+        'latex': 'x^2', 'display': 'yes', 'extra': 1,
+    })) is None
+    cleaned = clean_visual_payload(_payload('tex', {'latex': 'x^2'}))
+    assert cleaned is not None
+    assert cleaned['spec']['display'] is True  # defaults to True when omitted
 
 
 def test_molecule_refuses_markup_and_unknown_format():

@@ -41,6 +41,18 @@ APP = OUTPUTS / f"{APP_NAME}.app"
 #: Settings > Language & Region lists it under one language and the per-app override is
 #: offered for one language only.
 LOCALIZATIONS = ("en", "zh-Hans")
+#: The WKWebView host is a directory *tree*, not a flat list of resources. SwiftPM's
+#: ``.process`` rule flattens a directory: index.html survives while every relative
+#: fetch (vendor/*.js, vendor/tikzjax/fonts/*.ttf, the TeX WASM) 404s. The app still
+#: launches and each visual then renders RENDERER_ASSETS_NOT_INSTALLED, so this is a
+#: build-time gate rather than a runtime warning.
+VISUAL_ASSET_DIR = "Visuals"
+#: TikZJax's Bakoma font set. A partial download draws boxes instead of glyphs without
+#: raising anything, so the count is asserted rather than "at least one font".
+VISUAL_TIKZ_MIN_FONTS = 140
+#: Bound to ``app.harness.visual_specs.VISUAL_TYPES`` by
+#: ``tests/test_visual_assets_gate.py`` so the catalog and the packaging gate cannot drift.
+VISUAL_RENDERER_TYPES = 8
 NATIVE = HARNESS / "native"
 PRIVACY_MANIFEST = NATIVE / "Resources" / "PrivacyInfo.xcprivacy"
 ENTITLEMENTS_SANDBOX = NATIVE / "LuminfestLearningHarness.entitlements"
@@ -118,6 +130,10 @@ FEATURE_ROUTE_PROBES = (
     # The scratch-board agent is a separate capability from the teacher's board tools;
     # probe its catalog so a frozen bundle that drops the router fails loudly.
     ("routes_whiteboard_agent", "/whiteboard-agent/catalog"),
+    # The model Settings screen is how a customer supplies an API key. Its catalog is
+    # public, so a frozen bundle that drops this router answers 404 and fails the smoke
+    # test instead of shipping an app that cannot be configured.
+    ("routes_model_config", "/settings/model-config/catalog"),
 )
 
 
@@ -520,6 +536,79 @@ def verify_portability(directory):
             "bundle_localizations": declared_localizations}
 
 
+def verify_visual_assets(bundle_dir):
+    """Fail the build unless the offline WKWebView host survived ``ditto`` intact.
+
+    ``MANIFEST.sha256`` is written by ``web-visuals/build.mjs`` from the files it
+    actually published, so the required inventory is *derived* from it instead of
+    restated here: adding a renderer cannot quietly fall outside the packaging gate.
+    Digests are checked too - a truncated WASM has the right name, is present, and only
+    fails on the learner's first TeX diagram.
+    """
+    visuals = Path(bundle_dir) / VISUAL_ASSET_DIR
+    if not visuals.is_dir():
+        raise RuntimeError(
+            f"WebView visual assets are missing or flattened: expected {visuals}. "
+            'Declare them with .copy("Visuals") in Package.swift; .process() flattens '
+            'the vendor/ tree and every relative fetch then fails at runtime.')
+    manifest = visuals / "MANIFEST.sha256"
+    if not manifest.is_file():
+        raise RuntimeError(
+            f"Visual asset manifest is missing: {manifest}; run web-visuals/npm run build")
+    entries: list[str] = []
+    for line in manifest.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        fields = line.split(None, 1)
+        if len(fields) != 2 or len(fields[0]) != 64:
+            raise RuntimeError(f"Malformed visual asset manifest line: {line!r}")
+        digest, relative = fields[0], fields[1].strip()
+        pure = Path(relative)
+        if pure.is_absolute() or ".." in pure.parts:
+            raise RuntimeError(f"Visual asset manifest escapes the bundle: {relative!r}")
+        path = visuals / pure
+        if not path.is_file():
+            raise RuntimeError(f"Visual asset listed in the manifest is absent: {path}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != digest:
+            raise RuntimeError(
+                f"Visual asset digest mismatch: {pure} (shipped {actual}, manifest {digest})")
+        entries.append(pure.as_posix())
+    names = set(entries)
+    for required in ("index.html", "styles.css", "visuals.bundle.js", "catalog.json"):
+        if required not in names:
+            raise RuntimeError(f"Visual host is missing {required}; the WebView cannot boot")
+    tikz_prefix = "vendor/tikzjax/"
+    tikz = [name for name in entries if name.startswith(tikz_prefix)]
+    if (len([n for n in tikz if n.endswith(".wasm")]) != 1
+            or len([n for n in tikz if n.endswith(".gz")]) != 1):
+        raise RuntimeError(
+            "TikZ offline TeX engine is incomplete: exactly one WASM and one core dump required")
+    fonts = [n for n in tikz if n.endswith(".ttf")
+             and n.startswith(tikz_prefix + "fonts/")]
+    if len(fonts) < VISUAL_TIKZ_MIN_FONTS:
+        raise RuntimeError(
+            f"TikZ font set is incomplete: {len(fonts)} of {VISUAL_TIKZ_MIN_FONTS} Bakoma fonts")
+    try:
+        catalog = json.loads((visuals / "catalog.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError) as error:
+        raise RuntimeError(f"Visual catalog is unreadable: {error}") from error
+    types = catalog.get("types") or {}
+    if len(types) < VISUAL_RENDERER_TYPES:
+        raise RuntimeError(
+            f"Visual catalog declares {len(types)} renderer types; expected "
+            f"{VISUAL_RENDERER_TYPES}. Re-run web-visuals/npm run build.")
+    # These two are the only types whose availability is decided at runtime. Losing the
+    # prerequisite makes the native host treat them as fully offline and fail closed on
+    # first use, which looks like a renderer bug rather than a packaging omission.
+    for gated in ("desmos", "tikz"):
+        if not (types.get(gated) or {}).get("requires"):
+            raise RuntimeError(
+                f"Visual catalog lost the runtime prerequisite for {gated}")
+    return {"visual_asset_count": len(entries), "visual_asset_digests_verified": True,
+            "tikz_fonts": len(fonts), "visual_renderer_types": len(types)}
+
+
 def feature_router_modules():
     """The feature routers the app mounts, read from their single definition.
 
@@ -716,6 +805,12 @@ def build_backend(python, include_research):
     command.append(HARNESS / "backend" / "desktop_entry.py")
     build_env = os.environ.copy()
     build_env["PYINSTALLER_CONFIG_DIR"] = str(WORK / "pyinstaller-cache")
+    # PyInstaller --noconfirm deletes an existing dist/ tree (904 files in this build)
+    # before writing the new one. A hardened build environment treats that as a bulk
+    # delete and aborts the freeze after analysis, with an error that names no product
+    # file. Retire the previous output the same way assemble_app already does: the
+    # freezer always starts from an absent path, and the old build stays recoverable.
+    retire(BACKEND)
     run(command, cwd=ROOT, env=build_env)
     if source_digest() != before:
         raise RuntimeError("Backend sources changed during freezing; rerun --backend-only")
@@ -797,8 +892,7 @@ def clean_runtime_environment(data_dir, port):
     env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin", "HOME": str(Path.home()),
            "LANG": "en_US.UTF-8", "TMPDIR": tempfile.gettempdir(),
            "HARNESS_DATA_DIR": str(data_dir), "HARNESS_AUTO_CREATE": "1", "HARNESS_ENV": "test",
-           "HARNESS_PORT": str(port), "HARNESS_ADAPTATION": "0", "HARNESS_TUTOR_PROVIDER": "offline",
-           "HARNESS_ALLOWED_HOSTS": "127.0.0.1,localhost"}
+           "HARNESS_PORT": str(port), "HARNESS_ADAPTATION": "0", "HARNESS_ALLOWED_HOSTS": "127.0.0.1,localhost"}
     return env
 
 
@@ -1138,6 +1232,10 @@ def assemble_app(executable, version, sign_identity=None, sandbox=False, notariz
                 + ", ".join(f"{name}.lproj" for name in absent)
                 + f" in {staged_bundle}. Rebuild the native target so SwiftPM processes "
                 "Sources/LearningHarness/Resources into the bundle.")
+        # Same class of failure as the translations above, but worse to diagnose: a
+        # flattened or half-copied Visuals/ tree still lets the board draw, and only
+        # reports RENDERER_ASSETS_NOT_INSTALLED once a learner inserts a diagram.
+        visual_assets = verify_visual_assets(staged_bundle)
         run(["/usr/bin/ditto", BACKEND, resources / "backend" / "LuminfestBackend"])
         # The manifest must sit at Contents/Resources/PrivacyInfo.xcprivacy, which is the
         # only location App Store review looks in.
@@ -1170,6 +1268,7 @@ def assemble_app(executable, version, sign_identity=None, sandbox=False, notariz
                     "legal_gate": legal or {"ship_ready": None, "placeholders": None},
                     "research_weights_are_not_a_math_model": True,
                     "offline_training_not_included": True,
+                    "visual_assets": visual_assets,
                     **provenance})
         if not releasable:
             # A plain-text marker next to the binary, because the DMG filename is the only
@@ -1184,6 +1283,7 @@ def assemble_app(executable, version, sign_identity=None, sandbox=False, notariz
                 "See backend/legal/FILL_IN_SHEET.md and rebuild without the override.\n",
                 encoding="utf-8")
         checks = verify_portability(staged)
+        checks["visual_assets"] = visual_assets
         smoke = smoke_backend(resources / "backend" / "LuminfestBackend" / "LuminfestBackend")
         sign_bundle(staged, sign_identity, entitlements)
         # Retired, not deleted: see retire(). The staged bundle is moved into place only
@@ -1312,6 +1412,26 @@ def make_archives(template_legal=False):
         resource_prefix = f"{APP.name}/Contents/Resources/{resource_bundle_name()}/"
         if not any(name.startswith(resource_prefix) for name in names):
             missing.append(resource_prefix)
+        visual_prefix = f"{resource_prefix}{VISUAL_ASSET_DIR}/"
+        # Synthetic apps in the packaging tests have no Visuals tree; those tests are
+        # about signing/ordering. A real build has just been gated by assemble_app, so
+        # here we only check that the archive did not drop what staging verified.
+        if (APP / "Contents" / "Resources" / resource_bundle_name()
+                / VISUAL_ASSET_DIR).is_dir():
+            visual_names = [n for n in names if n.startswith(visual_prefix)]
+            for required in ("index.html", "visuals.bundle.js", "catalog.json",
+                             "MANIFEST.sha256"):
+                if f"{visual_prefix}{required}" not in names:
+                    missing.append(f"{visual_prefix}{required}")
+            tikz_prefix = f"{visual_prefix}vendor/tikzjax/"
+            if not any(n.startswith(tikz_prefix) and n.endswith(".wasm")
+                       for n in visual_names):
+                missing.append(f"{tikz_prefix}*.wasm")
+            fonts = [n for n in visual_names
+                     if n.startswith(tikz_prefix + "fonts/") and n.endswith(".ttf")]
+            if len(fonts) < VISUAL_TIKZ_MIN_FONTS:
+                missing.append(
+                    f"{tikz_prefix}fonts/*.ttf ({len(fonts)}/{VISUAL_TIKZ_MIN_FONTS})")
         if bad_member or missing:
             raise RuntimeError(f"Archive integrity or executable layout failure: {bad_member or missing}")
     # Only now is the staged copy expendable: both artifacts are on disk and the zip has

@@ -1,0 +1,154 @@
+{
+  "order": [
+    "mafs",
+    "plotly",
+    "jsxgraph",
+    "mathbox",
+    "molecule",
+    "desmos",
+    "tikz",
+    "tex"
+  ],
+  "types": {
+    "desmos": {
+      "defaultSize": [
+        600,
+        400
+      ],
+      "label": "Interactive equations",
+      "provider": "external",
+      "purpose": "interactive equations and function graphs in the calculator tools",
+      "renderer": "Desmos API v1.11 (loaded from www.desmos.com)",
+      "requirement": "Official Desmos API key + network access; the loader cannot be vendored offline. Without a key the host reports EXTERNAL_PROVIDER_UNAVAILABLE.",
+      "requires": "desmosApiKey",
+      "specKeys": [
+        "expressions",
+        "viewport"
+      ],
+      "status": "available"
+    },
+    "jsxgraph": {
+      "defaultSize": [
+        560,
+        380
+      ],
+      "label": "Coordinate geometry",
+      "provider": "bundled",
+      "purpose": "coordinate graphs and interactive geometry",
+      "renderer": "JSXGraph 1.10.1",
+      "requires": "",
+      "specKeys": [
+        "viewport",
+        "functions",
+        "points",
+        "segments",
+        "polygons"
+      ],
+      "status": "available"
+    },
+    "mafs": {
+      "defaultSize": [
+        560,
+        360
+      ],
+      "label": "2D mathematics",
+      "provider": "bundled",
+      "purpose": "two-dimensional mathematical visuals",
+      "renderer": "Mafs 0.21.0",
+      "requires": "",
+      "specKeys": [
+        "viewport",
+        "curves",
+        "points",
+        "segments",
+        "vectors"
+      ],
+      "status": "available"
+    },
+    "mathbox": {
+      "defaultSize": [
+        600,
+        420
+      ],
+      "label": "3D mathematics",
+      "provider": "bundled",
+      "purpose": "three-dimensional mathematical scenes",
+      "renderer": "MathBox 2.3.2-rc1 / three 0.162.0",
+      "requires": "",
+      "specKeys": [
+        "range",
+        "surfaces",
+        "curves3d"
+      ],
+      "status": "available"
+    },
+    "molecule": {
+      "defaultSize": [
+        480,
+        420
+      ],
+      "label": "Molecular viewer",
+      "provider": "bundled",
+      "purpose": "chemical structures and molecular shapes",
+      "renderer": "3Dmol.js 2.4.2",
+      "requires": "",
+      "specKeys": [
+        "format",
+        "data",
+        "style",
+        "spin"
+      ],
+      "status": "available"
+    },
+    "plotly": {
+      "defaultSize": [
+        600,
+        400
+      ],
+      "label": "Data charts & 3D plots",
+      "provider": "bundled",
+      "purpose": "data charts and three-dimensional plots",
+      "renderer": "Plotly.js 2.35.2",
+      "requires": "",
+      "specKeys": [
+        "traces",
+        "layout"
+      ],
+      "status": "available"
+    },
+    "tikz": {
+      "defaultSize": [
+        520,
+        380
+      ],
+      "label": "TikZ diagrams",
+      "provider": "bundled",
+      "purpose": "illustrations, flowcharts, schematic diagrams",
+      "renderer": "TikZJax (TeX-in-WASM), vendored GPL-3.0/LPPL-1.3c assets",
+      "requirement": "Requires the vendored tex.wasm, core dump and 140 Bakoma fonts. If packaging omits them the host reports RENDERER_ASSETS_NOT_INSTALLED.",
+      "requires": "tikzAssets",
+      "specKeys": [
+        "source"
+      ],
+      "status": "available"
+    },
+    "tex": {
+      "defaultSize": [
+        360,
+        120
+      ],
+      "label": "Equation (LaTeX)",
+      "provider": "bundled",
+      "purpose": "a single LaTeX equation or formula, rendered by the client LaTeX engine",
+      "renderer": "KaTeX (client-side)",
+      "requirement": "Rendered from one LaTeX expression by the client LaTeX engine (KaTeX on the web host). The native host needs a LaTeX renderer wired into the visual pipeline before it can paint this node.",
+      "requires": "",
+      "specKeys": [
+        "latex",
+        "display"
+      ],
+      "status": "available"
+    }
+  },
+  "version": 1
+}

@@ -27,11 +27,11 @@ Two boundaries, copied from the source design:
 
 * ``figure_description`` is tutor-only. ``to_student`` strips it so a learner payload can
   never leak the solution-annotation the author wrote for the teacher.
-* ``render_payloads`` turns the renderable field (``figure_svg`` -> tikz) into the validated
-  visual-spec payload the board already knows how to draw. ``given_equation`` is NOT a board
-  node: it is rendered inline by the client's KaTeX from the problem card, so it carries no
-  visual-spec payload here. Nothing here executes a spec; it only produces data the client
-  renderer consumes.
+* ``render_payloads`` turns the renderable fields into validated visual-spec payloads the
+  board already knows how to draw: ``figure_svg`` -> tikz (the diagram node), ``given_equation``
+  -> tex (a client KaTeX equation node). The equation is also carried inline on the problem
+  card for KaTeX. Nothing here executes a spec; it only produces data the client renderer
+  consumes.
 """
 from __future__ import annotations
 
@@ -138,13 +138,19 @@ class ProblemBase(BaseModel):
 
         ``figure_svg`` is emitted as a TikZ spec (Luminest's diagram renderer consumes TikZ
         source; a raw-SVG string would be refused by the validator and dropped).
-        ``given_equation`` is NOT emitted here - it is rendered inline by the client's KaTeX
-        from the problem card, not drawn as a board node.
+        ``given_equation`` is emitted as a ``tex`` spec (the client's KaTeX engine); it is
+        already held to the same closed LaTeX set by the field validator, so it passes the
+        board cleaner. Empty fields contribute nothing.
         """
         out: list[dict[str, Any]] = []
         if self.figure_svg:
             node = visual_specs.clean_visual_payload(
                 {"type": "tikz", "title": "", "spec": {"source": self.figure_svg}})
+            if node is not None:
+                out.append(node)
+        if self.given_equation:
+            node = visual_specs.clean_visual_payload(
+                {"type": "tex", "title": "", "spec": {"latex": self.given_equation, "display": True}})
             if node is not None:
                 out.append(node)
         return out

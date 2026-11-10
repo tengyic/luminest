@@ -5,7 +5,8 @@ A ``visual`` board node carries one structured content object::
     {"kind": "visual", "x": ..., "y": ..., "w": ..., "h": ...,
      "payload": {"type": "mafs", "title": "Parabola", "spec": {...}}}
 
-``type`` is one of the seven renderer families; ``spec`` is type-specific. This module
+``type`` is one of the renderer families (mafs, plotly, jsxgraph, mathbox, molecule,
+desmos, tikz, tex); ``spec`` is type-specific. This module
 owns BOTH the catalog that clients render their tool palette from, and the fail-close
 validator that decides what the board is allowed to store. Nothing here executes a spec:
 strings are data, expressions go through a closed grammar, and unknown keys are refused
@@ -29,7 +30,7 @@ import re
 from typing import Any
 
 VISUAL_TYPES: tuple[str, ...] = (
-    'mafs', 'plotly', 'jsxgraph', 'mathbox', 'molecule', 'desmos', 'tikz',
+    'mafs', 'plotly', 'jsxgraph', 'mathbox', 'molecule', 'desmos', 'tikz', 'tex',
 )
 
 # These are statements about the JavaScript bundle that actually ships, not intent.
@@ -106,6 +107,17 @@ CATALOG: dict[str, dict[str, Any]] = {
                         'If packaging omits them the host reports '
                         'RENDERER_ASSETS_NOT_INSTALLED.'),
     },
+    'tex': {
+        'status': 'available', 'provider': 'bundled', 'requires': '',
+        'label': 'Equation (LaTeX)',
+        'purpose': 'a single LaTeX equation or formula, rendered by the client LaTeX engine',
+        'renderer': 'KaTeX (client-side)',
+        'defaultSize': [360, 120],
+        'specKeys': ['latex', 'display'],
+        'requirement': ('Rendered from one LaTeX expression by the client LaTeX engine '
+                        '(KaTeX on the web host). The native host needs a LaTeX renderer '
+                        'wired into the visual pipeline before it can paint this node.'),
+    },
 }
 
 CATALOG_VERSION = 1
@@ -117,6 +129,7 @@ MAX_TRACE_COUNT = 12
 MAX_ELEMENT_COUNT = 64
 MAX_MOLECULE_CHARS = 200_000
 MAX_TIKZ_CHARS = 20_000
+MAX_TEX_CHARS = 600
 
 _HEX = re.compile(r'^#[0-9a-fA-F]{6}$')
 _EXPR_CHARS = re.compile(r'^[0-9A-Za-z_+\-*/^().,\s]+$')
@@ -576,6 +589,23 @@ def _clean_tikz(spec: dict) -> dict | None:
     return {'source': source}
 
 
+def _clean_tex(spec: dict) -> dict | None:
+    if not _only_keys(spec, ('latex', 'display')):
+        return None
+    latex = spec.get('latex')
+    if not isinstance(latex, str) or not latex.strip() or len(latex) > MAX_TEX_CHARS:
+        return None
+    # Same closed LaTeX character set the problem card and desmos expressions use: refuse
+    # angle brackets (a markup escape in a WebView context) and TeX shell-escape / file
+    # inclusion. A bare '<' / '>' is not valid math here, so it is refused outright rather
+    # than relying on KaTeX never emitting it.
+    if '<' in latex or '>' in latex or not _LATEX_SAFE.match(latex):
+        return None
+    if '\\write18' in latex or '\\input{' in latex or '\\include{' in latex:
+        return None
+    return {'latex': latex, 'display': bool(spec.get('display', True))}
+
+
 _CLEANERS = {
     'mafs': _clean_mafs,
     'plotly': _clean_plotly,
@@ -584,6 +614,7 @@ _CLEANERS = {
     'molecule': _clean_molecule,
     'desmos': _clean_desmos,
     'tikz': _clean_tikz,
+    'tex': _clean_tex,
 }
 
 
@@ -625,6 +656,6 @@ def clean_visual_payload(payload: Any) -> dict | None:
 
 
 __all__ = [
-    'CATALOG', 'CATALOG_VERSION', 'VISUAL_TYPES', 'catalog_document',
+    'CATALOG', 'CATALOG_VERSION', 'VISUAL_TYPES', 'MAX_TEX_CHARS', 'catalog_document',
     'clean_visual_payload',
 ]

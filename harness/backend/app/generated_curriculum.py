@@ -518,6 +518,11 @@ def as_problem(item: Mapping[str, Any]):
     Reconstructing the object this way (rather than round-tripping through a dict) also runs
     :class:`MultipleChoiceProblem`'s ``correct_label in choices`` check, so a malformed
     generated item fails loudly instead of shipping a silently wrong answer key.
+
+    ``module`` / ``domain`` / ``difficulty`` / ``figure_svg`` / ``figure_description`` /
+    ``figure_caption`` / ``given_equation`` are passed through when the source item carries
+    them (an authored overlay can supply a figure or an equation; a generated item leaves
+    them absent, which is exactly the honest case the schema's optional fields describe).
     """
     options = list(item.get('options') or [])
     correct_label = item.get('answer_id')
@@ -538,6 +543,13 @@ def as_problem(item: Mapping[str, Any]):
         choices=choices,
         correct_label=correct_label,
         distractors=distractors,
+        module=item.get('module'),
+        domain=item.get('domain'),
+        difficulty=item.get('difficulty'),
+        figure_svg=item.get('figure_svg'),
+        figure_description=item.get('figure_description'),
+        figure_caption=item.get('figure_caption'),
+        given_equation=item.get('given_equation'),
     )
 
 
