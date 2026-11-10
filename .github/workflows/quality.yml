@@ -10,6 +10,9 @@ name: quality
 #     layer must never look like a passing one.
 #   * Every job pins its Python dependencies from requirements-dev.txt, so a green run is
 #     reproducible rather than "whatever PyPI served that morning".
+#   * `full-suite-on-the-shipping-runtime` runs the *whole* suite on the Python version the
+#     container image uses. The layered jobs below each run a named subset; before this job
+#     existed no run anywhere had executed all of tests/ on the interpreter that ships.
 
 on:
   push:
@@ -105,6 +108,77 @@ jobs:
             exit 1
           fi
 
+  releasable-tree:
+    name: The tree git carries is the tree that runs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refuse load-bearing files that are not tracked
+        run: python3 harness/scripts/verify_releasable_tree.py
+
+  full-suite-on-the-shipping-runtime:
+    name: Full suite — every test, on the Python the image ships
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      HARNESS_TEST_PG_ADMIN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          # Kept equal to `harness/backend/Dockerfile` by the assertion below, not by memory.
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: harness/backend/requirements-dev.txt
+      - name: Install pinned dependencies
+        run: pip install -r harness/backend/requirements-dev.txt
+      # A green run on an interpreter nobody ships is not evidence. Every other job here
+      # used 3.13 while the container is python:3.12-slim, so the shipping runtime had
+      # never executed the suite at all. This step makes that drift a build failure rather
+      # than something a reviewer has to notice.
+      - name: Prove this job runs the same Python as the image
+        run: |
+          python - <<'PY'
+          import pathlib, re, sys
+          dockerfile = pathlib.Path('harness/backend/Dockerfile').read_text(encoding='utf-8')
+          match = re.search(r'^FROM\s+python:(\d+)\.(\d+)', dockerfile, re.MULTILINE)
+          if not match:
+              sys.exit('::error::no FROM python:X.Y line in harness/backend/Dockerfile')
+          image = f'{match.group(1)}.{match.group(2)}'
+          running = f'{sys.version_info.major}.{sys.version_info.minor}'
+          print(f'image python={image}  job python={running}')
+          if image != running:
+              sys.exit(
+                  f'::error::this job runs Python {running} but the image ships {image}; '
+                  'update python-version in .github/workflows/quality.yml or the Dockerfile'
+              )
+          PY
+      - name: Run every test
+        working-directory: harness/backend
+        run: python -m pytest -q -rs
+      # The suite reports `skipped` when PostgreSQL is unreachable, so a broken service
+      # container would otherwise look like a pass. This is the same guard layer-2 uses.
+      - name: Fail if the PostgreSQL half silently skipped
+        working-directory: harness/backend
+        run: |
+          python -m pytest -q tests/test_database_engines.py -rs | tee /tmp/pg-full.txt
+          if grep -q 'SKIPPED.*PostgreSQL' /tmp/pg-full.txt; then
+            echo '::error::The PostgreSQL parity tests skipped; the service container was not used.'
+            exit 1
+          fi
+
   layer-3-native:
     name: Layer 3 — the ten golden journeys through the app
     runs-on: macos-14
@@ -148,9 +222,15 @@ jobs:
         with:
           python-version: '3.13'
       - name: Install audit tooling
-        run: pip install pip-audit
+        run: pip install 'pip-audit==2.9.0'
+      # Both files, because the image installs both (`backend/Dockerfile` runs
+      # `-r requirements.txt -r requirements-optional.txt`). Every requirement in them is
+      # pinned exactly; `pip-audit` refuses a range, which is why a scan of the shipped set
+      # could not produce a verdict before the pins were corrected.
       - name: Audit the pinned runtime requirements
-        run: pip-audit -r harness/backend/requirements.txt --progress-spinner off
+        run: |
+          pip-audit -r harness/backend/requirements.txt --progress-spinner off
+          pip-audit -r harness/backend/requirements-optional.txt --progress-spinner off
 
   mutation:
     name: Mutation check on the scheduling and grading maths

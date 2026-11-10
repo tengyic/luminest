@@ -35,7 +35,7 @@ def _desktop_settings(tmp_path, monkeypatch) -> Settings:
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     return Settings.from_env()
 
 
@@ -90,7 +90,7 @@ def test_development_keeps_its_convenient_defaults(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_ENV', 'development')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     settings = Settings.from_env()
     assert settings.require_launch_gate is False
     assert settings.media_enabled is True

@@ -402,15 +402,23 @@ enum SpeechLocale {
         let clean = text.replacingOccurrences(of: "[#*`_]", with: "", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
         guard !clean.isEmpty else { return }
-        guard let api = AppStore.current?.api else {
+        guard let store = AppStore.current else {
             speak(clean, clips: [])
             return
         }
+        // Resolve before the detached work: the selection lives on the store, and the
+        // clip digest covers the voice and tone, so a read-aloud must carry the same
+        // pair as the tutor's spoken reply or it will render a different teacher.
+        let api = store.api
+        let voiceName = store.effectiveVoice
+        let tone = store.effectiveTone
         Task { [weak self] in
             var clips: [String] = []
             if let reply = try? await api.json("/voice/speak", method: "POST",
                                                body: ["text": String(clean.prefix(4_000)),
-                                                      "wait": false]) {
+                                                      "wait": false,
+                                                      "voice": voiceName,
+                                                      "tone": tone]) {
                 clips = reply["clips"].array.map(\.string).filter { !$0.isEmpty }
                 let first = reply["url"].string
                 if clips.isEmpty, !first.isEmpty {

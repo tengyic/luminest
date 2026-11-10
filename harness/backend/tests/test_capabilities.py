@@ -33,7 +33,7 @@ def settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.delenv('HARNESS_ENTITLEMENTS', raising=False)
     return Settings.from_env()
 
@@ -68,7 +68,7 @@ def media_off_client(tmp_path, monkeypatch):
     """An instance where the operator has switched network media off."""
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '0')
     with TestClient(create_app(Settings.from_env())) as client:
         yield client
@@ -239,7 +239,7 @@ def test_tampered_and_expired_receipts_are_refused(client):
 def test_operator_comp_grants_without_any_receipt(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_ENTITLEMENTS', '*:images,staff@example.test:video')
     with TestClient(create_app(Settings.from_env())) as client:
         headers = account(client, 'comped')
@@ -462,7 +462,7 @@ def test_require_capability_refuses_a_degraded_provider(tmp_path, monkeypatch):
     """
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '0')
     settings = Settings.from_env()
     from app.db import Base

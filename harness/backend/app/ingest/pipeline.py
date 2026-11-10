@@ -195,13 +195,38 @@ def cmd_textbook(args) -> int:
     contradicts its audit is refused, and a network failure is stored as
     ``unavailable`` rather than invented. This command changes *whether the fetch
     is reachable*, never *what is allowed to be stored*.
+
+    ``--catalogue`` prints the complete audited OpenStax catalogue and each book's
+    rights position without touching the network. ``--book``/``--page`` fetch one
+    real section of any audited book, which is how the 38 text-eligible books beyond
+    the hand-mapped concepts become usable: the mapping is a curated starting point,
+    not the limit of what the catalogue permits.
     """
     from ..config import Settings
     from ..ingest.sources import openstax as openstax_textbook
 
+    if args.catalogue:
+        posture = openstax_textbook.catalogue()
+        print(f"Catalogue: {posture['catalogue_books']} books, "
+              f"{posture['text_eligible']} text-eligible, "
+              f"{posture['noncommercial_link_only']} non-commercial link-only, "
+              f"{posture['unlicensed_refused']} unlicensed (refused); "
+              f"audited {posture.get('retrieved_at') or 'unknown'}.")
+        for row in posture['books']:
+            flag = 'refused' if row['unlicensed'] else (
+                'text' if row['text_eligible'] else 'link')
+            print(f'  [{flag:7}] {row["slug"]}  ({row["licence_class"]})')
+        return 0
+
     settings = Settings.from_env()
-    mapped = openstax_textbook.SECTION_MAP
-    if args.concept:
+    if args.book or args.page:
+        if not (args.book and args.page):
+            print('--book and --page must be given together.')
+            return 1
+        mapped = {f'{args.book}/{args.page}': (args.book, args.page)}
+    else:
+        mapped = openstax_textbook.SECTION_MAP
+    if args.concept and not (args.book or args.page):
         if args.concept not in mapped:
             print(f'No mapped textbook section for {args.concept!r}.')
             print(f'Mapped concepts: {", ".join(sorted(mapped))}')
@@ -264,6 +289,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     textbook = sub.add_parser('textbook', help='fetch OpenStax sections for the grounded textbook layer (network)')
     textbook.add_argument('--concept', default='',
                           help='fetch only this mapped concept (default: every mapped concept)')
+    textbook.add_argument('--book', default='',
+                          help='fetch one section from this audited book slug instead of the map')
+    textbook.add_argument('--page', default='',
+                          help='section slug to fetch with --book (from the book\'s table of contents)')
+    textbook.add_argument('--catalogue', action='store_true',
+                          help='print the complete audited OpenStax catalogue with rights positions')
     textbook.set_defaults(func=cmd_textbook)
 
     args = parser.parse_args(argv)

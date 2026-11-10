@@ -22,7 +22,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
     case select, hand
     case pen, highlighter, eraser
     case text, sticky
-    case rect, ellipse, line, arrow, connector, diagram
+    case rect, ellipse, line, arrow, connector, diagram, visual
     case image
     case lasso
 
@@ -36,7 +36,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
         case .select, .hand: return .navigate
         case .pen, .highlighter, .eraser: return .ink
         case .text, .sticky, .rect, .ellipse, .line, .arrow, .connector, .diagram: return .draw
-        case .image: return .content
+        case .image, .visual: return .content
         case .lasso: return .ask
         }
     }
@@ -56,6 +56,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
         case .arrow: return "arrow.up.right"
         case .connector: return "arrow.triangle.branch"
         case .diagram: return "scribble.variable"
+        case .visual: return "chart.xyaxis.line"
         case .image: return "photo"
         case .lasso: return "lasso.and.sparkles"
         }
@@ -76,6 +77,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
         case .arrow: return "Arrow"
         case .connector: return "Connector"
         case .diagram: return "AI diagram"
+        case .visual: return "Interactive visual"
         case .image: return "Image"
         case .lasso: return "Circle & ask"
         }
@@ -98,6 +100,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
         case .arrow: return "A"
         case .connector: return "C"
         case .diagram: return "G"
+        case .visual: return "U"
         case .image: return "I"
         case .lasso: return "Q"
         }
@@ -114,7 +117,7 @@ enum BoardTool: String, CaseIterable, Identifiable {
         case .rect, .ellipse, .line, .arrow: return "shape"
         case .connector: return "connector"
         case .image: return "image"
-        case .select, .hand, .eraser, .lasso, .diagram: return nil
+        case .select, .hand, .eraser, .lasso, .diagram, .visual: return nil
         }
     }
 

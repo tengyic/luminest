@@ -33,7 +33,7 @@ def app_factory(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
 
     def build(stream_enabled: bool):
         monkeypatch.setenv('HARNESS_STREAM_ENABLED', '1' if stream_enabled else '0')

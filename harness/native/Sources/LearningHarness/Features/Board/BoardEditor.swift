@@ -116,6 +116,8 @@ struct BoardEditor: View {
     @State var vectorizeAt = CGPoint.zero
     @State var vectorizeSize = CGSize(width: 760, height: 480)
     @State var canvasPreviewNodes: [BoardNode] = []
+    @State var showingVisualGallery = false
+    @State var visualAnchor: CGPoint? = nil
 
     var body: some View {
         VStack(spacing: 0) {
@@ -144,6 +146,19 @@ struct BoardEditor: View {
         .sheet(isPresented: $showingCurves) { curveSheet }
         .sheet(isPresented: $showingDiagramCatalog) { diagramCatalogSheet }
         .sheet(isPresented: $showingVectorizer) { vectorizerSheet }
+        .sheet(isPresented: $showingVisualGallery) {
+            VisualGalleryView(catalog: VisualResources.catalog,
+                onCreate: { type, title, spec in
+                    insertVisual(type: type, title: title, spec: spec)
+                    showingVisualGallery = false
+                    visualAnchor = nil
+                    tool = .select
+                },
+                onCancel: {
+                    showingVisualGallery = false
+                    visualAnchor = nil
+                })
+        }
         .onChange(of: showingDiagramCatalog) { _, shown in
             if shown {
                 catalogPreview = nil
@@ -414,6 +429,9 @@ struct BoardEditor: View {
                     drawOverlays(in: &context, size: canvasSize)
                 }
                 .allowsHitTesting(false)
+                // Interactive renderers live above the Canvas. They are positioned with
+                // the same viewport transform, so panning and zooming track the ink.
+                visualOverlay(in: size)
                 if board.busy {
                     VStack {
                         ProgressView().controlSize(.small)

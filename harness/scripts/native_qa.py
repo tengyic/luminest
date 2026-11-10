@@ -226,7 +226,7 @@ def main():
     environment.update({'HARNESS_ENV': 'test', 'HARNESS_DATA_DIR': str(state),
                         'HARNESS_DATABASE_URL': 'sqlite:///' + str(database), 'HARNESS_AUTO_CREATE': '1',
                         'HARNESS_PORT': str(args.port), 'HARNESS_SECRET': secrets.token_urlsafe(48),
-                        'HARNESS_TUTOR_PROVIDER': 'offline', 'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost',
+                        'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost',
                         'PYTHONDONTWRITEBYTECODE': '1'})
     command = [str(executable), '--ui-test', '--native-qa', '--qa-output', str(output),
                '--qa-endpoint', str(args.port)]

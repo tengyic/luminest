@@ -1,0 +1,457 @@
+{
+ "course": "ACT English - Rhetorical Skill and Conventions of Standard English",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A focused course in the two halves of ACT English: the rhetorical decisions that decide what a passage says and how well it says it, and the conventions that decide whether its sentences are correct. The first unit judges purpose and focus, then organisation, unity and cohesion -- whether a sentence earns its place, which transition names the real relation, where a sentence belongs, and what keeps a paragraph on one idea. The second unit works on expression and style: concision, redundancy, precise wording, clarity of reference, tone, register and figurative language. The third unit drills the conventions the test rewards: fragments, run-ons and clause boundaries, parallelism and modifier placement, agreement, pronoun case, tense consistency, idiomatic preposition, and the punctuation of clauses, series, lists and possessives.",
+ "expected_weeks": 30,
+ "strands": [
+  {
+   "strand": "Production of Writing",
+   "units": [
+    {
+     "unit": "Production of Writing",
+     "topics": [
+      {
+       "topic": "Purpose and Focus",
+       "concepts": [
+        {
+         "title": "Relevance of an Added Sentence",
+         "summary": "A sentence proposed for addition belongs only where it supports the paragraph's controlling idea, so when it opens a subject the paragraph never develops the correct choice leaves the passage unchanged, however accurate the sentence is on its own.",
+         "keywords": [
+          "relevance",
+          "added sentence",
+          "paragraph focus"
+         ]
+        },
+        {
+         "title": "Deciding Whether to Delete a Sentence",
+         "summary": "A sentence is deleted when it repeats information already given, contradicts the paragraph's claim, or drifts into a subject the passage abandons, while it is kept when it supplies the particular kind of support the paragraph is missing.",
+         "keywords": [
+          "deletion",
+          "stray detail",
+          "support"
+         ],
+         "prerequisites": [
+          "Relevance of an Added Sentence"
+         ]
+        },
+        {
+         "title": "Purpose of a Sentence in Context",
+         "summary": "A purpose question asks what a sentence does for the reader rather than what it says, so the right answer names its function -- to introduce, illustrate, qualify or conclude -- and an answer that merely paraphrases the sentence is wrong even when the paraphrase is exact.",
+         "keywords": [
+          "rhetorical purpose",
+          "function",
+          "context"
+         ],
+         "prerequisites": [
+          "Deciding Whether to Delete a Sentence"
+         ]
+        },
+        {
+         "title": "The Paragraph's Controlling Idea",
+         "summary": "Each paragraph carries one controlling idea, usually announced in its opening sentence, so a question about where a sentence belongs is settled by finding the paragraph whose announced idea that sentence develops.",
+         "keywords": [
+          "controlling idea",
+          "topic sentence",
+          "paragraph unity"
+         ],
+         "prerequisites": [
+          "Purpose of a Sentence in Context"
+         ]
+        },
+        {
+         "title": "Passage Focus Against the Prompt",
+         "summary": "The whole passage answers one prompt, so an addition that shifts the subject, the intended audience or the writer's position fails at passage level even when it fits neatly into the paragraph it would enter.",
+         "keywords": [
+          "passage focus",
+          "prompt",
+          "audience"
+         ],
+         "prerequisites": [
+          "The Paragraph's Controlling Idea"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Organization, Unity, and Cohesion",
+       "concepts": [
+        {
+         "title": "Transitions Name a Logical Relation",
+         "summary": "A transition is correct only when it names the relation that actually holds between the two sentences it joins, so \"however\" fails where the second sentence supports the first and \"therefore\" fails where it merely restates it.",
+         "keywords": [
+          "transition",
+          "logical relation",
+          "contrast"
+         ]
+        },
+        {
+         "title": "Placement Follows the Words a Sentence Depends On",
+         "summary": "A sentence goes where the words it depends on have already appeared, which is why a sentence opening \"This process ...\" cannot precede the description of the process, and why a paragraph opener must announce the idea its sentences then develop rather than start inside an example.",
+         "keywords": [
+          "sentence placement",
+          "antecedent",
+          "sequence"
+         ],
+         "prerequisites": [
+          "Transitions Name a Logical Relation"
+         ]
+        },
+        {
+         "title": "Unity Repaired by Moving, Not Patching",
+         "summary": "A paragraph is unified when every sentence supports its controlling idea, so an off-topic sentence is repaired by moving or deleting it rather than by inserting a transition that pretends the two ideas connect.",
+         "keywords": [
+          "unity",
+          "coherence",
+          "off-topic sentence"
+         ],
+         "prerequisites": [
+          "Placement Follows the Words a Sentence Depends On"
+         ]
+        },
+        {
+         "title": "Cohesion Through a Deliberate Reference Chain",
+         "summary": "Cohesion holds when a key term or a clear pronoun carries the topic from one sentence to the next, so replacing a repeated term with a loose synonym breaks the chain even though every sentence still parses.",
+         "keywords": [
+          "cohesion",
+          "repetition",
+          "reference chain"
+         ],
+         "prerequisites": [
+          "Unity Repaired by Moving, Not Patching"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Knowledge of Language",
+   "units": [
+    {
+     "unit": "Knowledge of Language",
+     "topics": [
+      {
+       "topic": "Expressing Ideas Clearly",
+       "concepts": [
+        {
+         "title": "Concision Between Equivalent Choices",
+         "summary": "When two choices are both grammatical and mean the same thing, the shorter one is the answer, so \"the reason is because\" loses to \"because\" and \"at this point in time\" loses to \"now\".",
+         "keywords": [
+          "concision",
+          "wordiness",
+          "economy"
+         ]
+        },
+        {
+         "title": "Redundancy Hidden Inside a Phrase",
+         "summary": "A phrase is redundant when one of its words already contains the meaning of another, which is why \"past history\", \"annual ... each year\" and \"return back\" fail although no single word in them is ungrammatical.",
+         "keywords": [
+          "redundancy",
+          "tautology",
+          "repetition"
+         ],
+         "prerequisites": [
+          "Concision Between Equivalent Choices"
+         ]
+        },
+        {
+         "title": "Precision Over Vague Approximation",
+         "summary": "The correct word names exactly the relation or quantity the passage establishes, so a choice that overstates (\"always\" for \"often\") or understates (\"changed\" for \"declined\") is wrong even when it is not strictly false.",
+         "keywords": [
+          "precision",
+          "denotation",
+          "word choice"
+         ],
+         "prerequisites": [
+          "Redundancy Hidden Inside a Phrase"
+         ]
+        },
+        {
+         "title": "Ambiguity in Reference and Attachment",
+         "summary": "A sentence is unclear when a pronoun could point to either of two nouns or a trailing phrase could attach to either of two constituents, so the repair makes the referent or the attachment explicit rather than merely grammatical.",
+         "keywords": [
+          "ambiguity",
+          "clear reference",
+          "attachment"
+         ],
+         "prerequisites": [
+          "Precision Over Vague Approximation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Style",
+       "concepts": [
+        {
+         "title": "Tone Must Fit Audience and Purpose",
+         "summary": "Tone is the writer's attitude toward the subject, and a passage written to inform a general reader rejects sarcasm, slang and rhetorical questions even when the sentence carrying them is grammatical.",
+         "keywords": [
+          "tone",
+          "audience",
+          "attitude"
+         ]
+        },
+        {
+         "title": "Register Stays Consistent",
+         "summary": "Register is the level of formality a passage sustains, so a single colloquial phrase inside academic prose -- \"a whole lot of\" in a report -- is the element to change rather than the sentences around it.",
+         "keywords": [
+          "register",
+          "formality",
+          "consistency"
+         ],
+         "prerequisites": [
+          "Tone Must Fit Audience and Purpose"
+         ]
+        },
+        {
+         "title": "Figurative Language Serves the Comparison",
+         "summary": "A metaphor or simile earns its place when it sharpens a comparison the passage is already making, and it fails when it introduces an image the passage never uses or mixes two incompatible images in one clause.",
+         "keywords": [
+          "figurative language",
+          "metaphor",
+          "mixed image"
+         ],
+         "prerequisites": [
+          "Register Stays Consistent"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Production of Writing"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Conventions of Standard English",
+   "units": [
+    {
+     "unit": "Conventions of Standard English",
+     "topics": [
+      {
+       "topic": "Sentence Structure and Formation",
+       "concepts": [
+        {
+         "title": "Fragments Have No Independent Clause",
+         "summary": "A word group is a fragment when it lacks a subject-verb pair that can stand alone, which is why a subordinate clause beginning \"because\", a participial phrase or an appositive cannot be punctuated as a sentence.",
+         "keywords": [
+          "fragment",
+          "independent clause",
+          "sentence completeness"
+         ]
+        },
+        {
+         "title": "Run-Ons and Comma Splices",
+         "summary": "Two independent clauses joined with no punctuation make a run-on, and the same two joined by a comma alone make a comma splice, so the repair is a period, a semicolon, or a comma with a coordinating conjunction.",
+         "keywords": [
+          "run-on",
+          "comma splice",
+          "independent clause"
+         ],
+         "prerequisites": [
+          "Fragments Have No Independent Clause"
+         ]
+        },
+        {
+         "title": "Clause Boundaries Decide the Join",
+         "summary": "Whether a clause can stand alone decides how it may be joined to its neighbour, so inserting \"although\" turns an independent clause into a dependent one that a comma may then attach to the main clause.",
+         "keywords": [
+          "clause boundary",
+          "subordination",
+          "coordination"
+         ],
+         "prerequisites": [
+          "Run-Ons and Comma Splices"
+         ]
+        },
+        {
+         "title": "Parallel Structure in a Series",
+         "summary": "Items joined by \"and\", \"or\" or a correlative pair must share grammatical form, so a series mixing a noun, a gerund and a clause is repaired by casting all three members in the same form.",
+         "keywords": [
+          "parallelism",
+          "series",
+          "correlative conjunction"
+         ],
+         "prerequisites": [
+          "Clause Boundaries Decide the Join"
+         ]
+        },
+        {
+         "title": "Modifier Placement and Dangling Modifiers",
+         "summary": "A modifier is read as attaching to the nearest word it can modify, so an introductory participial phrase must be followed immediately by the subject that performs its action or the phrase dangles.",
+         "keywords": [
+          "modifier placement",
+          "dangling modifier",
+          "misplaced modifier"
+         ],
+         "prerequisites": [
+          "Parallel Structure in a Series"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Usage Conventions",
+       "concepts": [
+        {
+         "title": "Subject-Verb Agreement Across Intervening Words",
+         "summary": "The verb agrees with the grammatical subject rather than with a noun inside a prepositional phrase between them, so \"the list of items is\" is correct although \"items\" stands directly beside the verb.",
+         "keywords": [
+          "subject-verb agreement",
+          "intervening phrase",
+          "number"
+         ]
+        },
+        {
+         "title": "Compound and Indefinite Subjects",
+         "summary": "Subjects joined by \"and\" take a plural verb while \"each\", \"everyone\" and \"neither\" used alone take a singular one, and with \"either ... or\" or \"neither ... nor\" the verb agrees with the nearer subject.",
+         "keywords": [
+          "compound subject",
+          "indefinite pronoun",
+          "agreement"
+         ],
+         "prerequisites": [
+          "Subject-Verb Agreement Across Intervening Words"
+         ]
+        },
+        {
+         "title": "Pronoun Case by Grammatical Slot",
+         "summary": "A pronoun takes subject case where it is the subject of a verb and object case where it is the object of a verb or a preposition, so \"between you and me\" is correct and \"for whoever calls\" keeps \"whoever\" as the subject of \"calls\".",
+         "keywords": [
+          "pronoun case",
+          "who and whom",
+          "object of preposition"
+         ],
+         "prerequisites": [
+          "Compound and Indefinite Subjects"
+         ]
+        },
+        {
+         "title": "Pronoun-Antecedent Agreement",
+         "summary": "A pronoun must match its antecedent in number and person, so a singular antecedent such as \"a student\" or \"the company\" takes a singular pronoun in formal written English no matter how far away it stands.",
+         "keywords": [
+          "pronoun agreement",
+          "antecedent",
+          "singular"
+         ],
+         "prerequisites": [
+          "Pronoun Case by Grammatical Slot"
+         ]
+        },
+        {
+         "title": "Tense Consistency Within a Passage",
+         "summary": "A passage keeps one time frame until a shift is marked, so a narrative cast in the past tense keeps its verbs past while a comment on a text that still exists stays in the present.",
+         "keywords": [
+          "tense consistency",
+          "time frame",
+          "sequence of tenses"
+         ],
+         "prerequisites": [
+          "Pronoun-Antecedent Agreement"
+         ]
+        },
+        {
+         "title": "Idiom Fixes the Preposition",
+         "summary": "English idiom fixes which preposition a verb or adjective takes, so \"differ from\", \"capable of\" and \"preoccupied with\" are correct forms that no rule of grammar derives and that have to be recognised rather than reasoned out.",
+         "keywords": [
+          "idiom",
+          "preposition",
+          "usage"
+         ],
+         "prerequisites": [
+          "Tense Consistency Within a Passage"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Punctuation Conventions",
+       "concepts": [
+        {
+         "title": "Non-Essential Clauses Take Two Commas",
+         "summary": "A non-essential clause or appositive is set off by commas on both sides, so closing it with one comma only fuses it to the rest of the sentence and misreads which information is parenthetical.",
+         "keywords": [
+          "non-essential clause",
+          "comma pair",
+          "appositive"
+         ]
+        },
+        {
+         "title": "Comma Before a Conjunction Joining Clauses",
+         "summary": "A comma is required before \"and\", \"but\" or \"so\" only when it joins two independent clauses, so a compound predicate takes no comma while two full clauses do.",
+         "keywords": [
+          "comma",
+          "coordinating conjunction",
+          "compound sentence"
+         ],
+         "prerequisites": [
+          "Non-Essential Clauses Take Two Commas"
+         ]
+        },
+        {
+         "title": "Commas in a Series and Between Coordinate Adjectives",
+         "summary": "Commas separate three or more items in a series and separate coordinate adjectives that each modify the noun independently, but no comma goes between a cumulative adjective and the one that forms a unit with the noun, as in \"a small wooden box\".",
+         "keywords": [
+          "serial comma",
+          "coordinate adjectives",
+          "list"
+         ],
+         "prerequisites": [
+          "Comma Before a Conjunction Joining Clauses"
+         ]
+        },
+        {
+         "title": "Semicolon Where a Period Could Stand",
+         "summary": "A semicolon may join two independent clauses or separate list items that already contain commas, but it may not follow a dependent clause, introduce a list, or attach a fragment to a sentence.",
+         "keywords": [
+          "semicolon",
+          "independent clause",
+          "complex list"
+         ],
+         "prerequisites": [
+          "Commas in a Series and Between Coordinate Adjectives"
+         ]
+        },
+        {
+         "title": "Colon After a Complete Statement",
+         "summary": "A colon must follow an independent clause and introduce what that clause promises -- a list, an explanation or a quotation -- so a colon between a verb and its object, after \"such as\", or inside a clause is wrong.",
+         "keywords": [
+          "colon",
+          "introduce a list",
+          "complete clause"
+         ],
+         "prerequisites": [
+          "Semicolon Where a Period Could Stand"
+         ]
+        },
+        {
+         "title": "Apostrophe for Possession or Omission",
+         "summary": "An apostrophe marks possession or a contraction and never a plain plural, so \"its\" is possessive, \"it's\" means \"it is\", and a plural such as \"the 1990s\" takes none.",
+         "keywords": [
+          "apostrophe",
+          "possession",
+          "contraction"
+         ],
+         "prerequisites": [
+          "Colon After a Complete Statement"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Knowledge of Language"
+     ]
+    }
+   ]
+  }
+ ]
+}

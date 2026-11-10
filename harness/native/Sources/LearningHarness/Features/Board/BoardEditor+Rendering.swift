@@ -40,6 +40,7 @@ extension BoardEditor {
         case "answer": drawAnswer(node, in: &ctx)
         case "image": drawImage(node, in: &ctx)
         case "video", "simulation": drawChip(node, in: &ctx)
+        case "visual": drawVisualCard(node, in: &ctx)
         default: break
         }
     }
@@ -221,6 +222,24 @@ extension BoardEditor {
         if !credit.isEmpty {
             drawWrapped(credit, in: &ctx, at: CGPoint(x: 0, y: box.maxY + 3), size: 9, tint: .secondary)
         }
+    }
+
+    /// The Canvas layer draws a labelled frame where the live WebView will be overlaid.
+    /// It never claims the interactive content is present here.
+    func drawVisualCard(_ node: BoardNode, in ctx: inout GraphicsContext) {
+        let box = node.frame
+        var card = Path()
+        card.addRoundedRect(in: box, cornerSize: CGSize(width: 8, height: 8))
+        ctx.fill(card, with: .color(Palette.surface))
+        ctx.stroke(card, with: .color(Palette.indigoDeep), lineWidth: max(hairline, 1.1))
+        let kind = node.payload["type"].string.uppercased()
+        let heading = node.payload.text("title", fallback: kind)
+        drawWrapped(heading, in: &ctx,
+                    at: CGPoint(x: box.minX + 11, y: box.minY + 10),
+                    size: 12, width: box.width - 22, tint: Palette.ink)
+        drawWrapped("Interactive visual (\(kind)) — live render is above this layer",
+                    in: &ctx, at: CGPoint(x: box.minX + 11, y: box.minY + 30),
+                    size: 9, width: box.width - 22, tint: Palette.tertiary)
     }
 
     func drawChip(_ node: BoardNode, in ctx: inout GraphicsContext) {

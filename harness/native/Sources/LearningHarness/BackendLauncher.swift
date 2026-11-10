@@ -404,18 +404,29 @@ enum HealthVerdict: Equatable {
                 if let value = operatorEnv[key], !value.isEmpty { return value }
                 return nil
             }
-            var provider = tutorValue("HARNESS_TUTOR_PROVIDER") ?? "offline"
-            // A typo in tutor.env must not make the app unusable: `Settings` rejects a provider
-            // without a URL, model or key, the server exits, and the app reports a server that
-            // "did not become ready" - a message pointing at the wrong problem. Stay offline and
-            // say why in the log instead, which is where the reader is already sent.
-            if provider != "offline" {
-                let missing = ["HARNESS_TUTOR_URL", "HARNESS_TUTOR_MODEL", "HARNESS_TUTOR_KEY"]
+            // An empty provider is *unconfigured*, not an offline mode. The backend now
+            // rejects HARNESS_TUTOR_PROVIDER=offline, so writing that legacy value here
+            // would stop the app from booting at all. The app boots in a declared
+            // "model-required" state and the Settings screen is where the user adds a key.
+            var provider = tutorValue("HARNESS_TUTOR_PROVIDER") ?? ""
+            if provider == "offline" {
+                try? logHandle?.write(contentsOf: Data(
+                    "tutor.env sets HARNESS_TUTOR_PROVIDER=offline, which is no longer supported; starting unconfigured so a model can be added in Settings.\n".utf8))
+                provider = ""
+            }
+            // An incomplete tutor.env must not make the app unusable: `Settings` rejects a
+            // provider without a URL, model or key, the server exits, and the app reports a
+            // server that "did not become ready" - a message pointing at the wrong problem.
+            // Stay unconfigured and say why in the log instead.
+            if !provider.isEmpty {
+                let missing = ["HARNESS_TUTOR_URL", "HARNESS_TUTOR_MODEL"]
                     .filter { tutorValue($0) == nil }
-                if !missing.isEmpty {
+                let needsKey = provider != "ollama" && tutorValue("HARNESS_TUTOR_KEY") == nil
+                if !missing.isEmpty || needsKey {
+                    let names = missing + (needsKey ? ["HARNESS_TUTOR_KEY"] : [])
                     try? logHandle?.write(contentsOf: Data(
-                        "tutor.env asks for HARNESS_TUTOR_PROVIDER=\(provider) but sets no \(missing.joined(separator: ", ")); staying on the offline tutor.\n".utf8))
-                    provider = "offline"
+                        "tutor.env asks for HARNESS_TUTOR_PROVIDER=\(provider) but sets no \(names.joined(separator: ", ")); starting unconfigured (model-required).\n".utf8))
+                    provider = ""
                 }
             }
             environment["HARNESS_TUTOR_PROVIDER"] = provider

@@ -273,6 +273,10 @@ PUBLIC_ROUTES: frozenset[tuple[str, str]] = frozenset({
     # probe that proves the router was collected. Its sibling endpoints (/boards, /draw)
     # are deliberately NOT here: both carry require_principal on the route.
     ('GET', '/api/v1/whiteboard-agent/catalog'),
+    # Reviewed public read: the model provider preset catalog. Static data with no
+    # account information or secret; it is also the frozen-bundle probe for the Settings
+    # router. The sibling GET/PUT/DELETE/test routes all carry require_principal.
+    ('GET', '/api/v1/settings/model-config/catalog'),
     ('GET', '/playground'),
     ('POST', '/api/v1/auth/register'),
     ('POST', '/api/v1/auth/login'),

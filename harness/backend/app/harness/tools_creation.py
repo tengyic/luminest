@@ -208,9 +208,9 @@ def write_simulation(ctx, title: str, description: str = '', requirements=None) 
         return _result('write_simulation', False,
                        data={'gate': decision},
                        refused='Simulation authoring needs a configured language model. '
-                               'No provider is configured for this instance '
-                               '(HARNESS_TUTOR_PROVIDER is offline), so no HTML was '
-                               'generated and nothing was stored.',
+                               'No model is configured for this instance; add a provider, '
+                               'model and API key in Settings. No HTML was generated and '
+                               'nothing was stored.',
                        notes=['The gate approved the request; the provider is the missing piece.'])
     requirement = decision['requirement']
     system = creation_gate.SIM_CREATION_SYSTEM_PROMPT

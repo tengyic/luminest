@@ -353,9 +353,13 @@ def _enhance(ctx_tool, segments: list[Segment],
     is the one failure this deck format cannot afford.
     """
     settings = getattr(ctx_tool, 'settings', None)
-    if not provider.available(settings) or options.get('no_model'):
-        return segments, 'grounded-offline', ['Narration composed deterministically; no '
-                                             'language model was used.']
+    if not provider.available(settings):
+        return segments, 'model-required', [
+            'No language model is configured. Add a provider, model and API key in '
+            'Settings; this narration is a grounded fallback, not model-generated teaching.']
+    if options.get('no_model'):
+        return segments, 'model-required', [
+            'This request explicitly asked for no model; the grounded narration was kept.']
     narrations = [s.narration for s in segments]
     system = ('You are tightening narration for a narrated slide deck. Rewrite each line so it '
               'is clearer and easier to read aloud. You must not add any new fact, number, '
@@ -374,8 +378,8 @@ def _enhance(ctx_tool, segments: list[Segment],
                      'citation or slide structure was modified.')
         return segments, provider.label(settings), notes
     notes.append('The configured model was unavailable or returned unusable output; the '
-                 'deterministic narration was kept.')
-    return segments, 'grounded-offline', notes
+                 'grounded narration was kept and is labelled as a fallback.')
+    return segments, 'model-unavailable', notes
 
 
 # --------------------------------------------------------------------- assembly
@@ -516,7 +520,7 @@ footer{{max-width:1000px;margin:0 auto;padding:14px 30px 60px;color:var(--ink3);
   <h1>{esc(title)}</h1>
   <div class="meta">{len(segments)} slides · {total}s estimated narration
   {f'· {esc(course)}' if course else ''}<br>
-  Built by: {esc(str(meta.get('mode', 'grounded-offline')))} ·
+  Built by: {esc(str(meta.get('mode', 'model-required')))} ·
   figures are deterministic · no image model was used<br>
   Timing is estimated from word count; the client synthesiser is authoritative.</div>
 </header>

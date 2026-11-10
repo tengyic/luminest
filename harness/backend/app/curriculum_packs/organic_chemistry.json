@@ -1,0 +1,4164 @@
+{
+ "schema": 1,
+ "name": "organic_chemistry",
+ "title": "Organic Chemistry",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Organic Chemistry - Structure, Mechanism and Synthesis",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A full-year organic chemistry course: structure, bonding and representation; acids, bases and electronic effects; isomerism, conformation and stereochemistry; curved-arrow mechanisms and reaction energy; then the reaction families in mechanism order -- alkanes and radicals, alkenes and alkynes, substitution and elimination, spectroscopy, conjugation and aromaticity, aromatic substitution, alcohols, ethers and sulfur compounds, carbonyl addition, acyl substitution, enolates and condensations, amines and heterocycles, multistep synthesis and retrosynthesis, and the bioorganic molecules, pericyclic reactions and polymers that close the course.",
+  "id_namespace": {
+   "prefix": "organic_chemistry_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "",
+   "supplements": [],
+   "link_only_note": "OpenStax Organic Chemistry: A Tenth Edition reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored or quoted.",
+   "units": {
+    "Structure, Bonding, and Representations": [],
+    "Acids, Bases, and Electronic Effects": [],
+    "Isomerism, Conformation, and Stereochemistry": [],
+    "Mechanisms, Energy, and Reaction Strategy": [],
+    "Alkanes, Cycloalkanes, and Radical Chemistry": [],
+    "Alkenes and Alkynes": [],
+    "Substitution and Elimination": [],
+    "Spectroscopy and Structure Determination": [],
+    "Conjugation and Aromaticity": [],
+    "Aromatic Reactions": [],
+    "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds": [],
+    "Aldehydes and Ketones: Carbonyl Addition": [],
+    "Carboxylic Acids and Derivatives: Acyl Substitution": [],
+    "Enols, Enolates, and Condensations": [],
+    "Amines and Heterocycles": [],
+    "Multistep Synthesis and Retrosynthesis": [],
+    "Bioorganic Molecules and Materials": []
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Structure, Bonding, and Representations": {
+    "Structure, Bonding, and Representations": [
+     "Organic Representations",
+     "Bonding and Hybridization",
+     "Formal Charge and Resonance",
+     "Functional Groups"
+    ]
+   },
+   "Acids, Bases, and Electronic Effects": {
+    "Acids, Bases, and Electronic Effects": [
+     "Acid-Base Reasoning",
+     "Electronic Effects",
+     "Nucleophiles and Electrophiles",
+     "Intermolecular Forces"
+    ]
+   },
+   "Isomerism, Conformation, and Stereochemistry": {
+    "Isomerism, Conformation, and Stereochemistry": [
+     "Constitutional Isomerism and Nomenclature",
+     "Conformational Analysis",
+     "Configuration Labels",
+     "Stereoisomer Relationships"
+    ]
+   },
+   "Mechanisms, Energy, and Reaction Strategy": {
+    "Mechanisms, Energy, and Reaction Strategy": [
+     "Curved-Arrow Mechanisms",
+     "Reaction Energy and Rates",
+     "Selectivity and Rearrangements",
+     "Reaction Strategy"
+    ]
+   },
+   "Alkanes, Cycloalkanes, and Radical Chemistry": {
+    "Alkanes, Cycloalkanes, and Radical Chemistry": [
+     "Alkanes and Cycloalkanes",
+     "Radical Reactions"
+    ]
+   },
+   "Alkenes and Alkynes": {
+    "Alkenes and Alkynes": [
+     "Alkene Addition Reactions",
+     "Alkyne Reactions",
+     "Pi-Bond Synthesis and Strategy"
+    ]
+   },
+   "Substitution and Elimination": {
+    "Substitution and Elimination": [
+     "SN2 Reactions",
+     "SN1 Reactions",
+     "E1 and E2 Reactions",
+     "Substitution-Elimination Competition"
+    ]
+   },
+   "Spectroscopy and Structure Determination": {
+    "Spectroscopy and Structure Determination": [
+     "Mass Spectrometry",
+     "Infrared Spectroscopy",
+     "NMR Spectroscopy",
+     "Combined Structure Determination"
+    ]
+   },
+   "Conjugation and Aromaticity": {
+    "Conjugation and Aromaticity": [
+     "Conjugated Systems",
+     "Aromaticity"
+    ]
+   },
+   "Aromatic Reactions": {
+    "Aromatic Reactions": [
+     "Electrophilic Aromatic Substitution",
+     "Aromatic Synthesis"
+    ]
+   },
+   "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds": {
+    "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds": [
+     "Alcohols and Phenols",
+     "Oxidation and Reduction",
+     "Ethers and Epoxides",
+     "Sulfur Compounds and Protecting Groups"
+    ]
+   },
+   "Aldehydes and Ketones: Carbonyl Addition": {
+    "Aldehydes and Ketones: Carbonyl Addition": [
+     "Carbonyl Structure and Reactivity",
+     "Aldehyde and Ketone Additions"
+    ]
+   },
+   "Carboxylic Acids and Derivatives: Acyl Substitution": {
+    "Carboxylic Acids and Derivatives: Acyl Substitution": [
+     "Carboxylic Acids and Nitriles",
+     "Nucleophilic Acyl Substitution"
+    ]
+   },
+   "Enols, Enolates, and Condensations": {
+    "Enols, Enolates, and Condensations": [
+     "Enols and Enolates",
+     "Aldol Reactions",
+     "Claisen and Related Condensations",
+     "Conjugate Addition"
+    ]
+   },
+   "Amines and Heterocycles": {
+    "Amines and Heterocycles": [
+     "Amine Properties and Synthesis",
+     "Amine Reactions",
+     "Heterocycles"
+    ]
+   },
+   "Multistep Synthesis and Retrosynthesis": {
+    "Multistep Synthesis and Retrosynthesis": [
+     "Multistep Synthesis and Retrosynthesis"
+    ]
+   },
+   "Bioorganic Molecules and Materials": {
+    "Bioorganic Molecules and Materials": [
+     "Biomolecules",
+     "Pericyclic Reactions",
+     "Polymers and Materials"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Structure, Bonding, and Representations",
+    "units": [
+     "Structure, Bonding, and Representations"
+    ]
+   },
+   {
+    "strand": "Acids, Bases, and Electronic Effects",
+    "units": [
+     "Acids, Bases, and Electronic Effects"
+    ]
+   },
+   {
+    "strand": "Isomerism, Conformation, and Stereochemistry",
+    "units": [
+     "Isomerism, Conformation, and Stereochemistry"
+    ]
+   },
+   {
+    "strand": "Mechanisms, Energy, and Reaction Strategy",
+    "units": [
+     "Mechanisms, Energy, and Reaction Strategy"
+    ]
+   },
+   {
+    "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+    "units": [
+     "Alkanes, Cycloalkanes, and Radical Chemistry"
+    ]
+   },
+   {
+    "strand": "Alkenes and Alkynes",
+    "units": [
+     "Alkenes and Alkynes"
+    ]
+   },
+   {
+    "strand": "Substitution and Elimination",
+    "units": [
+     "Substitution and Elimination"
+    ]
+   },
+   {
+    "strand": "Spectroscopy and Structure Determination",
+    "units": [
+     "Spectroscopy and Structure Determination"
+    ]
+   },
+   {
+    "strand": "Conjugation and Aromaticity",
+    "units": [
+     "Conjugation and Aromaticity"
+    ]
+   },
+   {
+    "strand": "Aromatic Reactions",
+    "units": [
+     "Aromatic Reactions"
+    ]
+   },
+   {
+    "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+    "units": [
+     "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds"
+    ]
+   },
+   {
+    "strand": "Aldehydes and Ketones: Carbonyl Addition",
+    "units": [
+     "Aldehydes and Ketones: Carbonyl Addition"
+    ]
+   },
+   {
+    "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+    "units": [
+     "Carboxylic Acids and Derivatives: Acyl Substitution"
+    ]
+   },
+   {
+    "strand": "Enols, Enolates, and Condensations",
+    "units": [
+     "Enols, Enolates, and Condensations"
+    ]
+   },
+   {
+    "strand": "Amines and Heterocycles",
+    "units": [
+     "Amines and Heterocycles"
+    ]
+   },
+   {
+    "strand": "Multistep Synthesis and Retrosynthesis",
+    "units": [
+     "Multistep Synthesis and Retrosynthesis"
+    ]
+   },
+   {
+    "strand": "Bioorganic Molecules and Materials",
+    "units": [
+     "Bioorganic Molecules and Materials"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "organic_chemistry_1_2_versus_1_4_addition_to_enones",
+   "title": "1,2- versus 1,4-Addition to Enones",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Conjugate Addition",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_acetoacetic_and_malonic_ester_syntheses"
+   ],
+   "keywords": [
+    "conjugate addition",
+    "enone",
+    "hard soft"
+   ],
+   "summary": "A nucleophile can add to the carbonyl carbon or to the beta carbon of an enone, and a hard irreversible nucleophile such as a Grignard adds 1,2 while a soft reversible one such as a thiolate or a cuprate adds 1,4.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "organic_chemistry_acetoacetic_and_malonic_ester_syntheses",
+   "title": "Acetoacetic and Malonic Ester Syntheses",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Claisen and Related Condensations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_the_claisen_condensation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acetoacetic ester",
+    "decarboxylation",
+    "malonic ester"
+   ],
+   "summary": "A beta-keto ester or a malonate is alkylated at its acidic alpha carbon and then hydrolysed and decarboxylated, so the sequence installs a substituted acetic acid or a methyl ketone with a chosen substituent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "organic_chemistry_activating_and_deactivating_substituents",
+   "title": "Activating and Deactivating Substituents",
+   "strand": "Aromatic Reactions",
+   "unit": "Aromatic Reactions",
+   "topic": "Electrophilic Aromatic Substitution",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_the_arenium_ion_mechanism"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activating group",
+    "deactivating group",
+    "reaction rate"
+   ],
+   "summary": "An electron-donating substituent stabilises the arenium ion and accelerates substitution while an electron-withdrawing one destabilises it and slows the reaction, so toluene reacts faster than benzene and nitrobenzene far slower.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "organic_chemistry_addition_and_condensation_polymerisation",
+   "title": "Addition and Condensation Polymerisation",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Polymers and Materials",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_orbital_symmetry_and_stereospecificity"
+   ],
+   "keywords": [
+    "addition polymerization",
+    "condensation polymerization",
+    "polymer"
+   ],
+   "summary": "An addition polymer grows by repeated alkene addition with no small molecule lost, while a condensation polymer loses water or hydrogen chloride at each new link, so its repeat unit is smaller than the monomers that formed it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 132
+   }
+  },
+  {
+   "id": "organic_chemistry_addition_elimination_at_the_acyl_carbon",
+   "title": "Addition-Elimination at the Acyl Carbon",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Nucleophilic Acyl Substitution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_substituent_effects_on_acid_strength"
+   ],
+   "keywords": [
+    "acyl substitution",
+    "leaving group",
+    "tetrahedral intermediate"
+   ],
+   "summary": "A nucleophile adds to the acyl carbon to give a tetrahedral intermediate, and the carbonyl reforms by expelling the best leaving group, so the net result replaces the group on the carbonyl rather than the oxygen.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "organic_chemistry_alcohol_acidity_and_alkoxide_formation",
+   "title": "Alcohol Acidity and Alkoxide Formation",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Alcohols and Phenols",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_hydrogen_bonding_sets_alcohol_properties"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alcohol acidity",
+    "alkoxide",
+    "base strength"
+   ],
+   "summary": "An alcohol has a pKa near 16 and is deprotonated only by a stronger base such as sodium hydride or an alkyllithium, so hydroxide leaves it largely intact and an alkoxide must be made deliberately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "organic_chemistry_aldol_addition_and_condensation",
+   "title": "Aldol Addition and Condensation",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Aldol Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_keto_enol_tautomerism"
+   ],
+   "keywords": [
+    "aldol",
+    "beta-hydroxy carbonyl",
+    "dehydration"
+   ],
+   "summary": "An enolate attacks another carbonyl to give a beta-hydroxy carbonyl, and heating dehydrates it to an alpha,beta-unsaturated carbonyl because the new double bond is conjugated with the existing one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 113
+   }
+  },
+  {
+   "id": "organic_chemistry_alkene_synthesis_by_elimination",
+   "title": "Alkene Synthesis by Elimination",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Pi-Bond Synthesis and Strategy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_double_addition_to_a_triple_bond"
+   ],
+   "keywords": [
+    "alkene synthesis",
+    "beta hydrogen",
+    "elimination"
+   ],
+   "summary": "A strong base removes a beta hydrogen anti to the leaving group, so an alkyl halide or a protonated alcohol becomes an alkene and the position of the double bond is set by which beta hydrogen is removed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "organic_chemistry_allylic_resonance_and_its_consequences",
+   "title": "Allylic Resonance and Its Consequences",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Conjugated Systems",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "organic_chemistry_conjugation_extends_the_pi_system"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "allylic",
+    "carbocation",
+    "resonance"
+   ],
+   "summary": "A radical, cation or anion next to a double bond is delocalised over both ends, so an allylic carbocation is far more stable than an isolated one and attack at the allylic position can give two isomeric products.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "organic_chemistry_alpha_hydrogen_acidity",
+   "title": "Alpha-Hydrogen Acidity",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Enols and Enolates",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_ester_hydrolysis_and_saponification"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alpha hydrogen",
+    "enolate",
+    "pka"
+   ],
+   "summary": "A hydrogen on the carbon next to a carbonyl is acidic because the resulting enolate delocalises its charge onto oxygen, so a ketone has an alpha pKa near 20 and only a base stronger than that deprotonates it completely.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "organic_chemistry_amide_formation_from_amines",
+   "title": "Amide Formation from Amines",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Amine Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_reductive_amination_as_a_controlled_route"
+   ],
+   "keywords": [
+    "acid chloride",
+    "amide formation",
+    "delocalization"
+   ],
+   "summary": "An amine attacks an acid chloride or an anhydride to give an amide, and because the amide nitrogen's lone pair is delocalised into the carbonyl the product is no longer basic or nucleophilic.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 121
+   }
+  },
+  {
+   "id": "organic_chemistry_amine_basicity_and_its_limits",
+   "title": "Amine Basicity and Its Limits",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Amine Properties and Synthesis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_the_michael_addition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amine basicity",
+    "aniline",
+    "lone pair"
+   ],
+   "summary": "An amine's lone pair accepts a proton, so an alkylamine is more basic than ammonia while an aromatic amine is far less basic because its lone pair is delocalised into the ring.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "organic_chemistry_amino_acids_and_the_peptide_bond",
+   "title": "Amino Acids and the Peptide Bond",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Biomolecules",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_ordering_steps_and_protecting_groups"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amide",
+    "amino acid",
+    "peptide bond"
+   ],
+   "summary": "An amino acid carries an amine and a carboxyl group on the same carbon, and the peptide bond joining two of them is a planar amide with partial double-bond character, so the protein backbone rotates freely everywhere except at that bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 128
+   }
+  },
+  {
+   "id": "organic_chemistry_antiaromatic_and_nonaromatic_rings",
+   "title": "Antiaromatic and Nonaromatic Rings",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Aromaticity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_benzene_s_delocalisation_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antiaromatic",
+    "cyclooctatetraene",
+    "nonaromatic"
+   ],
+   "summary": "The same ring with 4n pi electrons is antiaromatic and strongly destabilised if it stays planar, but if it puckers out of planarity it becomes nonaromatic, which is why cyclooctatetraene adopts a tub shape and behaves like an ordinary polyene.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "organic_chemistry_assembling_a_structure_from_orthogonal_evidenc",
+   "title": "Assembling a Structure from Orthogonal Evidence",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Combined Structure Determination",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_degrees_of_unsaturation_constrain_the_structur"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evidence",
+    "spectra",
+    "structure elucidation"
+   ],
+   "summary": "Each technique answers a different question, so mass spectrometry gives the formula, infrared identifies the functional group and NMR fixes the connectivity, and a proposed structure must satisfy every spectrum at once.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "organic_chemistry_assigning_r_and_s",
+   "title": "Assigning R and S",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Configuration Labels",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_stereocenters_and_molecular_chirality"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cip priority",
+    "r s configuration",
+    "stereocenter"
+   ],
+   "summary": "Priorities follow atomic number, and once the lowest-priority group points away a clockwise 1-2-3 sequence is R and a counter-clockwise one is S, so the label fixes the arrangement however the drawing is rotated.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "organic_chemistry_benzene_s_delocalisation_energy",
+   "title": "Benzene's Delocalisation Energy",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Aromaticity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_huckel_s_4n_2_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "benzene",
+    "resonance energy",
+    "stability"
+   ],
+   "summary": "Benzene shares its six pi electrons equally over the ring, and the resulting resonance energy of about 150 kJ/mol makes it far more stable and far less reactive toward addition than a hypothetical cyclohexatriene would be.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "organic_chemistry_bromination_slow_and_highly_selective",
+   "title": "Bromination: Slow and Highly Selective",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Radical Reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_chlorination_fast_and_poorly_selective"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bromination",
+    "radical stability",
+    "selectivity"
+   ],
+   "summary": "Bromine abstraction is late and endothermic, so its transition state resembles the radical and the stability of that radical dominates the outcome, which is why bromination gives the tertiary bromide almost exclusively.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "organic_chemistry_bronsted_and_lewis_acid_base_pairs",
+   "title": "Bronsted and Lewis Acid-Base Pairs",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Acid-Base Reasoning",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_functional_groups_set_physical_properties"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bronsted acid",
+    "electron pair",
+    "lewis acid"
+   ],
+   "summary": "A Bronsted acid donates a proton and a Lewis acid accepts an electron pair, so every proton transfer is also a Lewis acid-base reaction and boron trifluoride or a carbocation is an acid with no proton to give.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "organic_chemistry_carbocation_rearrangements",
+   "title": "Carbocation Rearrangements",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Selectivity and Rearrangements",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_kinetic_versus_thermodynamic_control"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbocation",
+    "hydride shift",
+    "rearrangement"
+   ],
+   "summary": "A 1,2-hydride or alkyl shift moves a group with its electron pair to an adjacent carbocation when that gives a more stable cation, so a secondary cation next to a quaternary centre can rearrange before the nucleophile arrives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "organic_chemistry_carbocation_stability_sets_the_sn1_rate",
+   "title": "Carbocation Stability Sets the SN1 Rate",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN1 Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_sn1_ionisation_precedes_capture"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbocation stability",
+    "solvolysis",
+    "tertiary halide"
+   ],
+   "summary": "Because the cation forms in the rate-determining step, SN1 rates track carbocation stability, so a tertiary halide reacts orders of magnitude faster than a primary one that would have to form an unstable cation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "organic_chemistry_carbohydrates_and_lipids",
+   "title": "Carbohydrates and Lipids",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Biomolecules",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "organic_chemistry_amino_acids_and_the_peptide_bond"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbohydrate",
+    "hemiacetal",
+    "triglyceride"
+   ],
+   "summary": "A sugar is a polyhydroxy aldehyde or ketone that cyclises into a hemiacetal ring, while a triglyceride is glycerol esterified with three fatty acids, so both families are built from the carbonyl chemistry of the earlier units.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 129
+   }
+  },
+  {
+   "id": "organic_chemistry_carbon_13_signals_and_molecular_symmetry",
+   "title": "Carbon-13 Signals and Molecular Symmetry",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "NMR Spectroscopy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_integration_and_the_n_1_splitting_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbon-13 nmr",
+    "signal count",
+    "symmetry"
+   ],
+   "summary": "Carbon-13 NMR gives one signal per distinct carbon environment, so the number of signals counts the symmetry-unique carbons and a molecule with a mirror plane shows fewer signals than it has carbon atoms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "organic_chemistry_carbonyl_frequency_reports_its_environment",
+   "title": "Carbonyl Frequency Reports Its Environment",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Infrared Spectroscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_the_functional_group_region"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amide",
+    "bond order",
+    "carbonyl stretch"
+   ],
+   "summary": "A carbonyl stretches at higher frequency when its bond order rises, so an acid chloride absorbs near 1800 cm-1 while an amide absorbs near 1650 cm-1 because nitrogen donation lowers the C=O bond order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "organic_chemistry_carboxylate_resonance_and_acidity",
+   "title": "Carboxylate Resonance and Acidity",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Carboxylic Acids and Nitriles",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_imine_and_enamine_formation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acidity",
+    "carboxylate",
+    "carboxylic acid"
+   ],
+   "summary": "The carboxylate ion spreads its negative charge over two equivalent oxygens, so a carboxylic acid has a pKa near 5 and is deprotonated by bicarbonate, which distinguishes it from an alcohol or a phenol.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "organic_chemistry_checking_a_step_by_mass_and_charge",
+   "title": "Checking a Step by Mass and Charge",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Curved-Arrow Mechanisms",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_proton_transfers_as_paired_arrows"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arrow check",
+    "charge balance",
+    "valence"
+   ],
+   "summary": "A valid step conserves mass and charge, so a charged species on one side requires a charged species on the other and any carbon drawn with five bonds marks an error rather than a fast reaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "organic_chemistry_chemical_shift_reports_the_electronic_environm",
+   "title": "Chemical Shift Reports the Electronic Environment",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "NMR Spectroscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_carbonyl_frequency_reports_its_environment"
+   ],
+   "keywords": [
+    "chemical shift",
+    "deshielding",
+    "ppm"
+   ],
+   "summary": "Electron-withdrawing groups deshield nearby protons and move them downfield, so an alkane proton appears near 1 ppm, a proton on a carbon bearing oxygen near 3.5 to 4 ppm, and an aromatic proton near 7 to 8 ppm from the ring current.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "organic_chemistry_chemoselectivity_reacting_one_group_and_sparin",
+   "title": "Chemoselectivity: Reacting One Group and Sparing Another",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Reaction Strategy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_functional_group_interconversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chemoselectivity",
+    "compatibility",
+    "reagent choice"
+   ],
+   "summary": "A reagent is chosen for the group it attacks, so sodium borohydride reduces a ketone in the presence of an ester while lithium aluminium hydride reduces both, which makes the milder reagent the selective one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "organic_chemistry_chlorination_fast_and_poorly_selective",
+   "title": "Chlorination: Fast and Poorly Selective",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Radical Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_initiation_propagation_and_termination"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chlorination",
+    "exothermic",
+    "selectivity"
+   ],
+   "summary": "Chlorine abstraction of a hydrogen is early and exothermic, so its transition state is reactant-like and the tertiary product only modestly predominates over the primary one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "organic_chemistry_choosing_the_parent_chain",
+   "title": "Choosing the Parent Chain",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Constitutional Isomerism and Nomenclature",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_connectivity_defines_a_constitutional_isomer"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "iupac",
+    "parent chain",
+    "substituent"
+   ],
+   "summary": "IUPAC rules take the longest carbon chain, then the chain with the most substituents, then the one carrying the principal functional group, because the parent name must identify the largest continuous framework.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "organic_chemistry_conjugate_base_stability_sets_acidity",
+   "title": "Conjugate Base Stability Sets Acidity",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Acid-Base Reasoning",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_pka_as_a_comparable_scale"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acidity trend",
+    "charge stabilization",
+    "conjugate base"
+   ],
+   "summary": "An acid is stronger when its conjugate base spreads charge over more atoms or holds it on a more electronegative atom, which is why acetic acid at pKa 4.8 is a far stronger acid than ethanol at pKa 16.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "organic_chemistry_conjugation_extends_the_pi_system",
+   "title": "Conjugation Extends the Pi System",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Conjugated Systems",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_assembling_a_structure_from_orthogonal_evidenc"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conjugation",
+    "delocalization",
+    "homo lumo gap"
+   ],
+   "summary": "Two pi bonds separated by a single sigma bond share electron density through overlapping p orbitals, which narrows the gap between the highest occupied and lowest unoccupied orbitals and shifts absorption to a longer wavelength.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "organic_chemistry_connectivity_defines_a_constitutional_isomer",
+   "title": "Connectivity Defines a Constitutional Isomer",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Constitutional Isomerism and Nomenclature",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_dispersion_forces_and_molecular_shape"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "connectivity",
+    "constitutional isomer",
+    "physical properties"
+   ],
+   "summary": "Constitutional isomers share a molecular formula but differ in which atom is bonded to which, so they are separate compounds with different boiling points and spectra rather than one compound drawn two ways.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "organic_chemistry_crossed_and_directed_aldol_strategies",
+   "title": "Crossed and Directed Aldol Strategies",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Aldol Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_aldol_addition_and_condensation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "benzaldehyde",
+    "crossed aldol",
+    "directed aldol"
+   ],
+   "summary": "A crossed aldol between two different carbonyls gives mixtures unless one partner has no alpha hydrogens and is added slowly to the other's enolate, which is why benzaldehyde is a common electrophilic partner.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "organic_chemistry_curved_arrows_track_electron_pairs",
+   "title": "Curved Arrows Track Electron Pairs",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Curved-Arrow Mechanisms",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_meso_compounds_and_optical_activity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "curved arrow",
+    "electron pair",
+    "mechanism"
+   ],
+   "summary": "An arrow starts at a lone pair or a bond and ends where that pair goes, so a full arrow moves two electrons while a half arrow moves one, which is why an arrow never starts at an atom or at a positive charge.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "organic_chemistry_cycloalkane_strain_and_ring_opening",
+   "title": "Cycloalkane Strain and Ring Opening",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Alkanes and Cycloalkanes",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_physical_properties_of_alkanes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cycloalkane",
+    "ring opening",
+    "ring strain"
+   ],
+   "summary": "A cycloalkane carries two fewer hydrogens per ring than its open-chain analogue, and because the ring constrains its bond angles, cyclopropane opens readily under addition while cyclohexane behaves like an unstrained alkane.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "organic_chemistry_cyclohexane_chairs_and_the_ring_flip",
+   "title": "Cyclohexane Chairs and the Ring Flip",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Conformational Analysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_ethane_and_butane_rotamers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chair conformation",
+    "diaxial interaction",
+    "ring flip"
+   ],
+   "summary": "Cyclohexane adopts a chair in which every bond is staggered, and a ring flip converts each axial substituent into an equatorial one, so the more stable chair places the larger group equatorial to avoid 1,3-diaxial interactions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "organic_chemistry_degrees_of_unsaturation_constrain_the_structur",
+   "title": "Degrees of Unsaturation Constrain the Structure",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Combined Structure Determination",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_carbon_13_signals_and_molecular_symmetry"
+   ],
+   "keywords": [
+    "degrees of unsaturation",
+    "molecular formula",
+    "rings"
+   ],
+   "summary": "Degrees of unsaturation count rings and pi bonds together, computed from the formula as (2C + 2 + N - H - X)/2, so a formula with four degrees of unsaturation can be a benzene ring but not an acyclic alkene.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "organic_chemistry_diazonium_salts_as_synthetic_intermediates",
+   "title": "Diazonium Salts as Synthetic Intermediates",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Amine Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_amide_formation_from_amines"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "diazonium",
+    "nitrous acid",
+    "sandmeyer"
+   ],
+   "summary": "A primary aromatic amine treated with nitrous acid gives a diazonium salt whose nitrogen can be replaced by halide, hydroxide or cyanide, which makes it a route to substituents that electrophilic substitution cannot install directly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 122
+   }
+  },
+  {
+   "id": "organic_chemistry_dipole_dipole_forces_and_hydrogen_bonding",
+   "title": "Dipole-Dipole Forces and Hydrogen Bonding",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Intermolecular Forces",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_solvent_effects_on_nucleophilicity"
+   ],
+   "keywords": [
+    "boiling point",
+    "dipole",
+    "hydrogen bond"
+   ],
+   "summary": "A hydrogen bond needs an O-H, N-H or F-H donor and a lone pair acceptor, so ethanol boils at 78 degrees Celsius while its isomer dimethyl ether boils at minus 24 degrees Celsius from dipole-dipole forces alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "organic_chemistry_directing_effects_follow_intermediate_stabilit",
+   "title": "Directing Effects Follow Intermediate Stability",
+   "strand": "Aromatic Reactions",
+   "unit": "Aromatic Reactions",
+   "topic": "Electrophilic Aromatic Substitution",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_activating_and_deactivating_substituents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "directing effect",
+    "meta director",
+    "ortho para"
+   ],
+   "summary": "An ortho-para director donates electron density or stabilises the arenium ion at those positions, a meta director withdraws density and leaves the meta positions least destabilised, and a halogen is the exception that deactivates while still directing ortho and para.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "organic_chemistry_dispersion_forces_and_molecular_shape",
+   "title": "Dispersion Forces and Molecular Shape",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Intermolecular Forces",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_dipole_dipole_forces_and_hydrogen_bonding"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "branching",
+    "dispersion",
+    "surface area"
+   ],
+   "summary": "Dispersion forces grow with the surface area over which electrons can fluctuate, so boiling point rises with chain length and a branched isomer boils below its straight-chain counterpart of the same formula.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "organic_chemistry_double_addition_to_a_triple_bond",
+   "title": "Double Addition to a Triple Bond",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkyne Reactions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_partial_reduction_to_cis_or_trans_alkenes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkyne addition",
+    "geminal dihalide",
+    "vinyl halide"
+   ],
+   "summary": "An alkyne adds two equivalents of hydrogen halide because the first addition gives a vinyl halide that is still an alkene, and the second follows Markovnikov's rule to place both halides on the same carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "organic_chemistry_e1_through_the_shared_carbocation",
+   "title": "E1 through the Shared Carbocation",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "E1 and E2 Reactions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_zaitsev_preference_and_alkene_stability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbocation",
+    "e1",
+    "heat"
+   ],
+   "summary": "E1 shares SN1's ionisation step and then loses a beta proton, so it accompanies SN1, is favoured by heat, and yields the more substituted alkene from the same carbocation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "organic_chemistry_e2_needs_an_anti_periplanar_beta_hydrogen",
+   "title": "E2 Needs an Anti-Periplanar Beta Hydrogen",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "E1 and E2 Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_racemisation_and_solvent_assistance"
+   ],
+   "keywords": [
+    "anti-periplanar",
+    "e2",
+    "stereospecificity"
+   ],
+   "summary": "E2 removes the beta hydrogen and the leaving group together from an anti-periplanar arrangement, so a rigid ring that cannot place them anti eliminates slowly or gives the less substituted alkene.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "organic_chemistry_e_and_z_labels_for_alkenes",
+   "title": "E and Z Labels for Alkenes",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Configuration Labels",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_assigning_r_and_s"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkene geometry",
+    "cip priority",
+    "e z isomerism"
+   ],
+   "summary": "When each alkene carbon carries two different groups, the higher-priority group on each carbon decides E when the two lie opposite and Z when they lie together, so the label is required where cis and trans would be ambiguous.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "organic_chemistry_electrophilic_carbon_sites",
+   "title": "Electrophilic Carbon Sites",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Nucleophiles and Electrophiles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_nucleophilicity_versus_basicity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electrophile",
+    "polarized bond",
+    "reactive site"
+   ],
+   "summary": "A nucleophile attacks a carbon that carries a partial positive charge, an empty orbital or a polarisable halogen, so a carbonyl carbon and a carbocation are attacked while an alkane carbon is not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "organic_chemistry_enantiomers_and_diastereomers",
+   "title": "Enantiomers and Diastereomers",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Stereoisomer Relationships",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_e_and_z_labels_for_alkenes"
+   ],
+   "keywords": [
+    "diastereomer",
+    "enantiomer",
+    "stereoisomer"
+   ],
+   "summary": "Enantiomers are non-superposable mirror images that differ at every stereocenter, while diastereomers differ at some but not all of them and are therefore separated by ordinary physical methods because their properties differ.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "organic_chemistry_energy_diagrams_and_activation_energy",
+   "title": "Energy Diagrams and Activation Energy",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Reaction Energy and Rates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_checking_a_step_by_mass_and_charge"
+   ],
+   "keywords": [
+    "activation energy",
+    "energy diagram",
+    "reaction coordinate"
+   ],
+   "summary": "A reaction coordinate diagram plots free energy against progress, and the height of the highest barrier above the starting material sets the activation energy that controls the rate rather than the overall free-energy change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "organic_chemistry_ester_hydrolysis_and_saponification",
+   "title": "Ester Hydrolysis and Saponification",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Nucleophilic Acyl Substitution",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_reactivity_order_of_acid_derivatives"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ester hydrolysis",
+    "irreversible",
+    "saponification"
+   ],
+   "summary": "An ester hydrolyses by base-promoted addition-elimination, and because the carboxylate product is not attacked further, saponification with hydroxide is irreversible and consumes a full equivalent of base.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "organic_chemistry_ethane_and_butane_rotamers",
+   "title": "Ethane and Butane Rotamers",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Conformational Analysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_numbering_and_alphabetical_order"
+   ],
+   "keywords": [
+    "conformation",
+    "eclipsed",
+    "gauche"
+   ],
+   "summary": "Rotation about a C-C single bond is fast at room temperature and passes through eclipsed and staggered conformations with a 12 kJ/mol barrier in ethane, while butane's anti conformer lies about 3.8 kJ/mol below gauche because its methyl groups avoid eclipsing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "organic_chemistry_formal_charge_as_electron_bookkeeping",
+   "title": "Formal Charge as Electron Bookkeeping",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Formal Charge and Resonance",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_s_character_sets_bond_length_and_acidity"
+   ],
+   "keywords": [
+    "charge separation",
+    "formal charge",
+    "lewis structure"
+   ],
+   "summary": "Formal charge is the valence electron count minus the nonbonding electrons minus half the bonding electrons, so it identifies which of several valid Lewis structures carries the smallest charge separation and therefore contributes most.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "organic_chemistry_fragmentation_and_isotope_patterns",
+   "title": "Fragmentation and Isotope Patterns",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Mass Spectrometry",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_the_molecular_ion_and_molar_mass"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fragmentation",
+    "halogen",
+    "isotope pattern"
+   ],
+   "summary": "A molecule fragments at its weakest bonds, so losing 15 or 29 mass units marks a methyl or ethyl group, and an M+2 peak about a third the height of M marks one chlorine while a nearly equal M+2 marks one bromine.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "organic_chemistry_functional_group_interconversion",
+   "title": "Functional Group Interconversion",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Reaction Strategy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_carbocation_rearrangements"
+   ],
+   "keywords": [
+    "functional group interconversion",
+    "retrosynthesis",
+    "synthesis"
+   ],
+   "summary": "A synthesis moves a molecule between functional-group levels, so an alcohol, an alkyl halide and an alkene are interconverted in a planned order rather than chosen at random for each step.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "organic_chemistry_functional_groups_set_physical_properties",
+   "title": "Functional Groups Set Physical Properties",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Functional Groups",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_the_carbonyl_family"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boiling point",
+    "polarity",
+    "solubility"
+   ],
+   "summary": "Because the functional group fixes a molecule's polarity and hydrogen-bonding capacity, it sets boiling point and water solubility more strongly than chain length does, so ethanol boils 60 degrees above its ether isomer.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "organic_chemistry_halogenation_through_a_bridged_ion",
+   "title": "Halogenation through a Bridged Ion",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkene Addition Reactions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_hydroboration_oxidation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "anti addition",
+    "bromonium ion",
+    "halohydrin"
+   ],
+   "summary": "Bromine adds as a bridged bromonium ion that blocks one face, so the second bromide must attack the opposite face and the product is anti, and in water the solvent competes to give a halohydrin instead.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "organic_chemistry_hammond_postulate_and_transition_state_shape",
+   "title": "Hammond Postulate and Transition-State Shape",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Reaction Energy and Rates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_energy_diagrams_and_activation_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endothermic",
+    "hammond postulate",
+    "transition state"
+   ],
+   "summary": "A transition state resembles the species it is closer to in energy, so an endothermic step has a product-like transition state and an exothermic step a reactant-like one, which is why carbocation formation looks like the cation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "organic_chemistry_heat_favours_elimination",
+   "title": "Heat Favours Elimination",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "Substitution-Elimination Competition",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_substrate_and_base_choose_the_pathway"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "entropy",
+    "product ratio",
+    "temperature"
+   ],
+   "summary": "Elimination converts one molecule into two and relieves steric crowding, so raising the temperature shifts the mixture toward the alkene while a low temperature favours substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "organic_chemistry_hemiacetals_acetals_and_their_equilibrium",
+   "title": "Hemiacetals, Acetals, and Their Equilibrium",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Aldehyde and Ketone Additions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_hydride_and_organometallic_additions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acetal",
+    "acid catalysis",
+    "hemiacetal"
+   ],
+   "summary": "An alcohol adds reversibly to a carbonyl to give a hemiacetal, and acid catalyses replacement of the hydroxyl by a second alkoxy group to give an acetal, which is stable to base and therefore useful as a protected carbonyl.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "organic_chemistry_heteroatom_functional_groups",
+   "title": "Heteroatom Functional Groups",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Functional Groups",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_ranking_resonance_contributors"
+   ],
+   "keywords": [
+    "alcohol",
+    "amine",
+    "heteroatom"
+   ],
+   "summary": "An alcohol, ether, amine and thiol each place a heteroatom on an sp3 carbon, and that heteroatom's lone pairs and bond polarity decide whether the group donates a hydrogen bond, accepts one, or acts as a nucleophile.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "organic_chemistry_huckel_s_4n_2_rule",
+   "title": "Huckel's 4n+2 Rule",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Aromaticity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_ultraviolet_absorption_and_conjugation_length"
+   ],
+   "keywords": [
+    "aromatic",
+    "huckel rule",
+    "pi electrons"
+   ],
+   "summary": "A planar, fully conjugated ring with 4n+2 pi electrons is aromatic because that count exactly fills every bonding pi orbital, so benzene with six and the cyclopentadienyl anion with six are aromatic.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "organic_chemistry_hydride_and_organometallic_additions",
+   "title": "Hydride and Organometallic Additions",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Aldehyde and Ketone Additions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_reversible_and_irreversible_addition"
+   ],
+   "keywords": [
+    "grignard",
+    "hydride",
+    "workup"
+   ],
+   "summary": "Hydride from borohydride or a carbanion from a Grignard reagent adds to the carbonyl carbon and gives an alcohol after aqueous workup, and a Grignard cannot be used on a molecule that still carries an acidic proton.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "organic_chemistry_hydride_reagents_and_their_scope",
+   "title": "Hydride Reagents and Their Scope",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Oxidation and Reduction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_selective_oxidation_of_alcohols"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hydride reduction",
+    "lithium aluminium hydride",
+    "sodium borohydride"
+   ],
+   "summary": "Sodium borohydride reduces aldehydes and ketones but leaves esters and amides, while lithium aluminium hydride reduces esters, acids and amides as well, so the milder reagent is chosen when another group must survive.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "organic_chemistry_hydroboration_oxidation",
+   "title": "Hydroboration-Oxidation",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkene Addition Reactions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_markovnikov_addition_of_hydrogen_halides"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "anti-markovnikov",
+    "hydroboration",
+    "syn addition"
+   ],
+   "summary": "Borane adds in one concerted step with boron to the less hindered carbon, so hydroboration followed by oxidation gives the anti-Markovnikov alcohol without a carbocation and therefore without rearrangement.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "organic_chemistry_hydrogen_bonding_sets_alcohol_properties",
+   "title": "Hydrogen Bonding Sets Alcohol Properties",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Alcohols and Phenols",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_sequencing_substituents_on_a_ring"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alcohol",
+    "boiling point",
+    "hydrogen bonding"
+   ],
+   "summary": "The O-H group both donates and accepts hydrogen bonds, so an alcohol boils far above the ether or alkane of similar mass and a small alcohol mixes with water in all proportions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "organic_chemistry_hyperconjugation_and_carbocation_stability",
+   "title": "Hyperconjugation and Carbocation Stability",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Electronic Effects",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_inductive_withdrawal_through_sigma_bonds"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbocation",
+    "hyperconjugation",
+    "stability"
+   ],
+   "summary": "Adjacent C-H or C-C sigma bonds donate electron density into an empty p orbital, so a tertiary carbocation is more stable than a secondary one and a methyl group stabilises a double bond by the same overlap.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "organic_chemistry_imine_and_enamine_formation",
+   "title": "Imine and Enamine Formation",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Aldehyde and Ketone Additions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_hemiacetals_acetals_and_their_equilibrium"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "condensation",
+    "enamine",
+    "imine"
+   ],
+   "summary": "An amine condenses with a carbonyl under mildly acidic conditions to give an imine after water is lost, and a secondary amine stops at an enamine because it has no N-H left to eliminate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "organic_chemistry_inductive_withdrawal_through_sigma_bonds",
+   "title": "Inductive Withdrawal Through Sigma Bonds",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Electronic Effects",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_conjugate_base_stability_sets_acidity"
+   ],
+   "keywords": [
+    "distance",
+    "electronegativity",
+    "inductive effect"
+   ],
+   "summary": "An electronegative substituent pulls electron density through the sigma framework, and the effect falls off steeply with distance, so a fluorine two bonds from a carboxyl group raises acidity far more than one four bonds away.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "organic_chemistry_initiation_propagation_and_termination",
+   "title": "Initiation, Propagation, and Termination",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Radical Reactions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_cycloalkane_strain_and_ring_opening"
+   ],
+   "keywords": [
+    "initiation",
+    "propagation",
+    "radical chain"
+   ],
+   "summary": "Light or heat splits a halogen into two radicals, each propagation step consumes one radical and returns another, and two radicals combining ends the chain, which is why a radical chain needs only a trace of initiator.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "organic_chemistry_integration_and_the_n_1_splitting_rule",
+   "title": "Integration and the n+1 Splitting Rule",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "NMR Spectroscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_chemical_shift_reports_the_electronic_environm"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "integration",
+    "n plus one",
+    "splitting"
+   ],
+   "summary": "Integration is proportional to the number of equivalent protons and n equivalent neighbours split a signal into n+1 peaks, so an ethyl group appears as a triplet and a quartet that integrate in a 3 to 2 ratio.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "organic_chemistry_keto_enol_tautomerism",
+   "title": "Keto-Enol Tautomerism",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Enols and Enolates",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_alpha_hydrogen_acidity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "enol",
+    "equilibrium",
+    "tautomerism"
+   ],
+   "summary": "The keto and enol forms interconvert by a proton transfer coupled to a pi-bond shift, and the keto form usually dominates at equilibrium although the enol is the species that reacts in halogenation and in acid-catalysed racemisation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "organic_chemistry_kinetic_versus_thermodynamic_control",
+   "title": "Kinetic versus Thermodynamic Control",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Selectivity and Rearrangements",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_rate_law_as_mechanistic_evidence"
+   ],
+   "keywords": [
+    "kinetic control",
+    "reversibility",
+    "thermodynamic control"
+   ],
+   "summary": "When the reaction is reversible, the product that forms fastest dominates under kinetic control at low temperature while the more stable product dominates at equilibrium, which is why an enolate can be trapped either way.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "organic_chemistry_leaving_group_ability_and_rate",
+   "title": "Leaving-Group Ability and Rate",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN2 Reactions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_steric_access_at_the_electrophilic_carbon"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "leaving group",
+    "reaction rate",
+    "tosylate"
+   ],
+   "summary": "A better leaving group lowers the barrier because its bond breaks as the nucleophile arrives, so iodide and a tosylate react far faster than fluoride or hydroxide under the same conditions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "organic_chemistry_limits_of_friedel_crafts_reactions",
+   "title": "Limits of Friedel-Crafts Reactions",
+   "strand": "Aromatic Reactions",
+   "unit": "Aromatic Reactions",
+   "topic": "Aromatic Synthesis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_directing_effects_follow_intermediate_stabilit"
+   ],
+   "keywords": [
+    "acylation",
+    "friedel-crafts",
+    "limitations"
+   ],
+   "summary": "Friedel-Crafts alkylation fails on a deactivated ring and suffers from carbocation rearrangement and polyalkylation, whereas acylation avoids both because the acyl cation does not rearrange and the product ring is deactivated.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "organic_chemistry_markovnikov_addition_of_hydrogen_halides",
+   "title": "Markovnikov Addition of Hydrogen Halides",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkene Addition Reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_bromination_slow_and_highly_selective"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hydrohalogenation",
+    "markovnikov",
+    "regiochemistry"
+   ],
+   "summary": "Protonation gives the more stable carbocation, so the hydrogen adds to the carbon that already carries more hydrogens and the halide to the other, while a peroxide medium reverses the regiochemistry by making the first step radical.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "organic_chemistry_meso_compounds_and_optical_activity",
+   "title": "Meso Compounds and Optical Activity",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Stereoisomer Relationships",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_enantiomers_and_diastereomers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "internal symmetry",
+    "meso",
+    "optical activity"
+   ],
+   "summary": "A molecule whose stereocenters are related by an internal mirror plane is achiral overall, so a meso compound is optically inactive although it contains stereocenters, whereas a single enantiomer rotates plane-polarised light.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "organic_chemistry_nitrile_synthesis_and_hydrolysis",
+   "title": "Nitrile Synthesis and Hydrolysis",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Carboxylic Acids and Nitriles",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_carboxylate_resonance_and_acidity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cyanide",
+    "hydrolysis",
+    "nitrile"
+   ],
+   "summary": "A nitrile is made by SN2 displacement with cyanide on a primary halide and hydrolyses through an amide to a carboxylic acid in hot aqueous acid or base, so the sequence lengthens a chain by one carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
+   }
+  },
+  {
+   "id": "organic_chemistry_nucleophilicity_versus_basicity",
+   "title": "Nucleophilicity versus Basicity",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Nucleophiles and Electrophiles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_resonance_donation_and_withdrawal"
+   ],
+   "keywords": [
+    "basicity",
+    "nucleophilicity",
+    "polarizability"
+   ],
+   "summary": "Basicity measures affinity for a proton while nucleophilicity measures the rate of attack on carbon, so the two diverge and iodide is a weak base yet a strong nucleophile in a polar aprotic solvent because it is large and polarisable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "organic_chemistry_numbering_and_alphabetical_order",
+   "title": "Numbering and Alphabetical Order",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Constitutional Isomerism and Nomenclature",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_choosing_the_parent_chain"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alphabetical order",
+    "locant",
+    "numbering"
+   ],
+   "summary": "Numbering starts at the end that gives the principal group the lowest locant and then the lowest set of locants, while substituents are listed alphabetically regardless of the numbers they carry.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "organic_chemistry_orbital_symmetry_and_stereospecificity",
+   "title": "Orbital Symmetry and Stereospecificity",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Pericyclic Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_the_diels_alder_reaction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "orbital symmetry",
+    "stereospecific",
+    "woodward-hoffmann"
+   ],
+   "summary": "A concerted pericyclic reaction is allowed only when orbital symmetry is conserved, so a thermal Diels-Alder is suprafacial on both components and delivers the stereochemistry of the dienophile unchanged in the product.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 131
+   }
+  },
+  {
+   "id": "organic_chemistry_ordering_steps_and_protecting_groups",
+   "title": "Ordering Steps and Protecting Groups",
+   "strand": "Multistep Synthesis and Retrosynthesis",
+   "unit": "Multistep Synthesis and Retrosynthesis",
+   "topic": "Multistep Synthesis and Retrosynthesis",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_synthons_reagents_and_polarity_matching"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convergent synthesis",
+    "protecting group",
+    "synthesis planning"
+   ],
+   "summary": "A plan orders reactions so each reagent is compatible with the groups already present, which often requires a protecting group, and because yields multiply along a linear route a convergent plan that joins two halves late usually wins.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 127
+   }
+  },
+  {
+   "id": "organic_chemistry_partial_reduction_to_cis_or_trans_alkenes",
+   "title": "Partial Reduction to cis or trans Alkenes",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkyne Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_terminal_alkyne_acidity_and_acetylides"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkene geometry",
+    "dissolving metal reduction",
+    "lindlar catalyst"
+   ],
+   "summary": "Hydrogenation over a poisoned Lindlar catalyst stops at the cis alkene because the surface no longer adsorbs it, while sodium in liquid ammonia delivers the trans alkene through a radical-anion intermediate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "organic_chemistry_phenol_acidity_from_ring_delocalisation",
+   "title": "Phenol Acidity from Ring Delocalisation",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Alcohols and Phenols",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_alcohol_acidity_and_alkoxide_formation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acidity",
+    "phenol",
+    "phenoxide"
+   ],
+   "summary": "A phenoxide ion spreads its negative charge into the ring, so phenol has a pKa near 10 and dissolves in sodium hydroxide, and an electron-withdrawing substituent on the ring raises that acidity further.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "organic_chemistry_physical_properties_of_alkanes",
+   "title": "Physical Properties of Alkanes",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Alkanes and Cycloalkanes",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_why_alkanes_are_unreactive"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkane",
+    "boiling point",
+    "dispersion"
+   ],
+   "summary": "Alkanes interact only by dispersion forces, so they are insoluble in water and their boiling points rise smoothly with carbon number while branching lowers the boiling point at a fixed formula.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "organic_chemistry_pka_as_a_comparable_scale",
+   "title": "pKa as a Comparable Scale",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Acid-Base Reasoning",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_bronsted_and_lewis_acid_base_pairs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acid strength",
+    "equilibrium",
+    "pka"
+   ],
+   "summary": "pKa is the negative logarithm of the acid dissociation constant, so one unit lower means a tenfold stronger acid, and comparing the pKa of the acid on each side of a proton transfer predicts which direction the equilibrium favours.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "organic_chemistry_protecting_groups_in_practice",
+   "title": "Protecting Groups in Practice",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Sulfur Compounds and Protecting Groups",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_thiols_and_thioethers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acetal",
+    "protecting group",
+    "silyl ether"
+   ],
+   "summary": "A protecting group temporarily masks a reactive site, so a ketone is carried through a Grignard addition as an acetal and an alcohol as a silyl ether, and each is removed under conditions the rest of the molecule survives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "organic_chemistry_proton_transfers_as_paired_arrows",
+   "title": "Proton Transfers as Paired Arrows",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Curved-Arrow Mechanisms",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_curved_arrows_track_electron_pairs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arrow pushing",
+    "conjugate acid",
+    "proton transfer"
+   ],
+   "summary": "A proton transfer is drawn as one arrow from the base's lone pair to the hydrogen and a second from the breaking bond to the acid, so the products emerge as a conjugate acid and a conjugate base rather than as neutral fragments.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "organic_chemistry_pyridine_versus_pyrrole_basicity",
+   "title": "Pyridine versus Pyrrole Basicity",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Heterocycles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_diazonium_salts_as_synthetic_intermediates"
+   ],
+   "keywords": [
+    "heterocycle basicity",
+    "pyridine",
+    "pyrrole"
+   ],
+   "summary": "Pyridine's lone pair sits in an sp2 orbital in the ring plane and accepts a proton, while pyrrole's lone pair is part of its aromatic sextet, so protonating pyrrole destroys aromaticity and it is essentially not basic.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 123
+   }
+  },
+  {
+   "id": "organic_chemistry_racemisation_and_solvent_assistance",
+   "title": "Racemisation and Solvent Assistance",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN1 Reactions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_carbocation_stability_sets_the_sn1_rate"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ionization",
+    "protic solvent",
+    "racemization"
+   ],
+   "summary": "A planar carbocation can be attacked from either face, so SN1 gives racemisation with some net inversion because the departing group partly shields its own side, and a protic solvent stabilises the separating charges.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "organic_chemistry_ranking_resonance_contributors",
+   "title": "Ranking Resonance Contributors",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Formal Charge and Resonance",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_resonance_forms_and_the_weighted_hybrid"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amide resonance",
+    "octet",
+    "resonance ranking"
+   ],
+   "summary": "The contributor with complete octets, the fewest formal charges and any negative charge on the more electronegative atom dominates the hybrid, which is why the C-N bond of an amide is short and rotation about it is slow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "organic_chemistry_rate_law_as_mechanistic_evidence",
+   "title": "Rate Law as Mechanistic Evidence",
+   "strand": "Mechanisms, Energy, and Reaction Strategy",
+   "unit": "Mechanisms, Energy, and Reaction Strategy",
+   "topic": "Reaction Energy and Rates",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_hammond_postulate_and_transition_state_shape"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "kinetic evidence",
+    "rate law",
+    "rate-determining step"
+   ],
+   "summary": "The rate law reports which species are present in the transition state of the slow step, so a reaction first order in both substrate and nucleophile cannot have a rate-determining step that excludes the nucleophile, which is how SN1 and SN2 are distinguished.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "organic_chemistry_reactivity_of_aromatic_heterocycles",
+   "title": "Reactivity of Aromatic Heterocycles",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Heterocycles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_pyridine_versus_pyrrole_basicity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron density",
+    "electrophilic attack",
+    "heterocycle"
+   ],
+   "summary": "An electron-poor heterocycle such as pyridine resists electrophilic attack and undergoes nucleophilic substitution, whereas an electron-rich one such as furan or pyrrole is attacked by electrophiles at the position that best stabilises the intermediate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 124
+   }
+  },
+  {
+   "id": "organic_chemistry_reactivity_order_of_acid_derivatives",
+   "title": "Reactivity Order of Acid Derivatives",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Nucleophilic Acyl Substitution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_addition_elimination_at_the_acyl_carbon"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acid chloride",
+    "interconversion",
+    "reactivity order"
+   ],
+   "summary": "Reactivity falls from acid chloride to anhydride to ester to amide as the attached group donates more electron density into the carbonyl, so an acid chloride converts an amine, an alcohol or a carboxylate into the matching amide, ester or anhydride.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "organic_chemistry_reductive_amination_as_a_controlled_route",
+   "title": "Reductive Amination as a Controlled Route",
+   "strand": "Amines and Heterocycles",
+   "unit": "Amines and Heterocycles",
+   "topic": "Amine Properties and Synthesis",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_amine_basicity_and_its_limits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "imine",
+    "monoalkylation",
+    "reductive amination"
+   ],
+   "summary": "A carbonyl and an amine condense to an imine that is reduced in the same flask, so reductive amination gives a monoalkylated amine and avoids the over-alkylation that direct substitution suffers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 120
+   }
+  },
+  {
+   "id": "organic_chemistry_regiochemistry_of_epoxide_opening",
+   "title": "Regiochemistry of Epoxide Opening",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Ethers and Epoxides",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_williamson_ether_synthesis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "epoxide",
+    "regiochemistry",
+    "ring opening"
+   ],
+   "summary": "Base opens an epoxide at the less hindered carbon by SN2 while acid opens it at the carbon that better stabilises positive charge, so the two conditions give opposite products from the same epoxide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "organic_chemistry_resonance_donation_and_withdrawal",
+   "title": "Resonance Donation and Withdrawal",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Electronic Effects",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_hyperconjugation_and_carbocation_stability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activation",
+    "mesomeric effect",
+    "resonance donation"
+   ],
+   "summary": "A lone pair conjugated to a pi system donates electron density while a pi bond conjugated to an electronegative atom withdraws it, so a methoxy group activates an aromatic ring by resonance even though it withdraws by induction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "organic_chemistry_resonance_forms_and_the_weighted_hybrid",
+   "title": "Resonance Forms and the Weighted Hybrid",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Formal Charge and Resonance",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_formal_charge_as_electron_bookkeeping"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bond order",
+    "delocalization",
+    "resonance hybrid"
+   ],
+   "summary": "Resonance forms differ only in where pi and lone-pair electrons sit while every nucleus stays fixed, so the molecule is a weighted hybrid in which each bond order lies between the drawings and no single form is the real structure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "organic_chemistry_retrosynthetic_disconnection",
+   "title": "Retrosynthetic Disconnection",
+   "strand": "Multistep Synthesis and Retrosynthesis",
+   "unit": "Multistep Synthesis and Retrosynthesis",
+   "topic": "Multistep Synthesis and Retrosynthesis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_reactivity_of_aromatic_heterocycles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "disconnection",
+    "retrosynthesis",
+    "starting material"
+   ],
+   "summary": "A retrosynthesis breaks a target at a bond that a known reaction can form in the forward direction, so every disconnection must correspond to a real reagent and the analysis ends only at available starting materials.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 125
+   }
+  },
+  {
+   "id": "organic_chemistry_reversible_and_irreversible_addition",
+   "title": "Reversible and Irreversible Addition",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Carbonyl Structure and Reactivity",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_steric_and_electronic_control_of_addition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equilibrium",
+    "grignard",
+    "reversible addition"
+   ],
+   "summary": "Addition of a strong nucleophile such as a Grignard reagent is irreversible, whereas addition of an alcohol or an amine is reversible, so those products follow an equilibrium that can be driven by removing water.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "organic_chemistry_ring_strain_in_small_cycloalkanes",
+   "title": "Ring Strain in Small Cycloalkanes",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Conformational Analysis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_cyclohexane_chairs_and_the_ring_flip"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "angle strain",
+    "cycloalkane",
+    "ring strain"
+   ],
+   "summary": "Cyclopropane and cyclobutane cannot reach tetrahedral angles and must eclipse their bonds, so their angle and torsional strain makes them far more reactive toward ring-opening than unstrained cyclohexane.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "organic_chemistry_s_character_sets_bond_length_and_acidity",
+   "title": "s Character Sets Bond Length and Acidity",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Bonding and Hybridization",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_sp2_and_sp_carbon_with_pi_bonds"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acidity",
+    "bond length",
+    "s character"
+   ],
+   "summary": "More s character holds the bonding electrons closer to the nucleus, so a C-H bond shortens and strengthens from sp3 to sp2 to sp, and the sp C-H of a terminal alkyne is the most acidic of the three at pKa about 25.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "organic_chemistry_selective_oxidation_of_alcohols",
+   "title": "Selective Oxidation of Alcohols",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Oxidation and Reduction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_phenol_acidity_from_ring_delocalisation"
+   ],
+   "keywords": [
+    "jones reagent",
+    "oxidation",
+    "pcc"
+   ],
+   "summary": "PCC oxidises a primary alcohol only to the aldehyde because it is used under anhydrous conditions, aqueous Jones reagent carries it on to the carboxylic acid, and a secondary alcohol gives a ketone under either.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "organic_chemistry_sequencing_substituents_on_a_ring",
+   "title": "Sequencing Substituents on a Ring",
+   "strand": "Aromatic Reactions",
+   "unit": "Aromatic Reactions",
+   "topic": "Aromatic Synthesis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_limits_of_friedel_crafts_reactions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "directing group",
+    "sequence",
+    "synthesis planning"
+   ],
+   "summary": "Because each substituent directs the next one, a synthesis installs activating groups before deactivating ones and introduces a group that must later be converted, such as a nitro group reduced to an amine, at the point where its directing effect is wanted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "organic_chemistry_skeletal_structures_and_implied_hydrogens",
+   "title": "Skeletal Structures and Implied Hydrogens",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Organic Representations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hydrogen count",
+    "line-angle",
+    "skeletal structure"
+   ],
+   "summary": "A skeletal structure omits the carbon labels and most of the hydrogens, so every vertex and line end is a carbon carrying enough hydrogens to complete four bonds, which is why a bare line is methane and a line ending in a junction is a methyl-substituted carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "organic_chemistry_sn1_ionisation_precedes_capture",
+   "title": "SN1 Ionisation Precedes Capture",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN1 Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_leaving_group_ability_and_rate"
+   ],
+   "keywords": [
+    "carbocation",
+    "ionization",
+    "sn1"
+   ],
+   "summary": "SN1 proceeds by rate-limiting ionisation to a carbocation followed by nucleophilic capture, so the rate depends only on the substrate and the nucleophile enters after the slow step.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "organic_chemistry_sn2_is_concerted_and_inverts",
+   "title": "SN2 Is Concerted and Inverts",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN2 Reactions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_wittig_olefination_of_a_carbonyl"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "backside attack",
+    "inversion",
+    "sn2"
+   ],
+   "summary": "SN2 is one step with inversion because the nucleophile attacks opposite the leaving group as it departs, so the rate depends on both concentrations and the product has the opposite configuration at the carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "organic_chemistry_solvent_effects_on_nucleophilicity",
+   "title": "Solvent Effects on Nucleophilicity",
+   "strand": "Acids, Bases, and Electronic Effects",
+   "unit": "Acids, Bases, and Electronic Effects",
+   "topic": "Nucleophiles and Electrophiles",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_electrophilic_carbon_sites"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "polar aprotic",
+    "protic solvent",
+    "solvation"
+   ],
+   "summary": "A polar aprotic solvent leaves the nucleophile unsolvated and free to attack, while a protic solvent hydrogen-bonds it, so the halide order runs I > Br > Cl in acetone and reverses to Cl > Br > I in water.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "organic_chemistry_sp2_and_sp_carbon_with_pi_bonds",
+   "title": "sp2 and sp Carbon with Pi Bonds",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Bonding and Hybridization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_sp3_carbon_and_the_tetrahedral_frame"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "pi bond",
+    "sp",
+    "sp2"
+   ],
+   "summary": "An sp2 carbon keeps one unhybridised p orbital for a pi bond and places three sigma bonds at 120 degrees, while an sp carbon is linear at 180 degrees with two pi bonds, so a double bond fixes a plane and a triple bond fixes a line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "organic_chemistry_sp3_carbon_and_the_tetrahedral_frame",
+   "title": "sp3 Carbon and the Tetrahedral Frame",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Bonding and Hybridization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_what_a_molecular_formula_cannot_tell_you"
+   ],
+   "keywords": [
+    "hybridization",
+    "sp3",
+    "tetrahedral"
+   ],
+   "summary": "Four electron groups around carbon mix one s and three p orbitals into four sp3 hybrids pointing at 109.5 degrees, which is why methane is tetrahedral rather than square planar and why a saturated carbon has no accessible pi bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "organic_chemistry_stereocenters_and_molecular_chirality",
+   "title": "Stereocenters and Molecular Chirality",
+   "strand": "Isomerism, Conformation, and Stereochemistry",
+   "unit": "Isomerism, Conformation, and Stereochemistry",
+   "topic": "Configuration Labels",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_ring_strain_in_small_cycloalkanes"
+   ],
+   "keywords": [
+    "chirality",
+    "mirror image",
+    "stereocenter"
+   ],
+   "summary": "A carbon bearing four different groups is a stereocenter, and a molecule with exactly one such center is chiral because no rotation can superpose it on its mirror image.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "organic_chemistry_steric_access_at_the_electrophilic_carbon",
+   "title": "Steric Access at the Electrophilic Carbon",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "SN2 Reactions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_sn2_is_concerted_and_inverts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "neopentyl",
+    "steric hindrance",
+    "substrate order"
+   ],
+   "summary": "Backside attack needs an open face, so SN2 is fastest at methyl and primary carbons and effectively stops at a tertiary one, which is why a neopentyl halide reacts far more slowly than an ordinary primary halide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "organic_chemistry_steric_and_electronic_control_of_addition",
+   "title": "Steric and Electronic Control of Addition",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Carbonyl Structure and Reactivity",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_the_polarised_carbonyl_bond"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aldehyde",
+    "ketone",
+    "reactivity order"
+   ],
+   "summary": "An aldehyde is more reactive than a ketone because it is less hindered and less electron-rich, so a limiting reagent adds to the aldehyde first, and an adjacent electron-withdrawing group makes a carbonyl more electrophilic still.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "organic_chemistry_substituent_effects_on_acid_strength",
+   "title": "Substituent Effects on Acid Strength",
+   "strand": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "unit": "Carboxylic Acids and Derivatives: Acyl Substitution",
+   "topic": "Carboxylic Acids and Nitriles",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_nitrile_synthesis_and_hydrolysis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "induction",
+    "substituent effect",
+    "trichloroacetic acid"
+   ],
+   "summary": "An electron-withdrawing group stabilises the carboxylate and raises acidity, so trichloroacetic acid is far stronger than acetic acid, and the effect weakens as the substituent moves further from the carboxyl group.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "organic_chemistry_substrate_and_base_choose_the_pathway",
+   "title": "Substrate and Base Choose the Pathway",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "Substitution-Elimination Competition",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_e1_through_the_shared_carbocation"
+   ],
+   "keywords": [
+    "base strength",
+    "competition",
+    "substrate"
+   ],
+   "summary": "Methyl and primary substrates with a strong nucleophile substitute by SN2, a tertiary substrate ionises toward SN1 or E1, and a strong bulky base drives E2 even at a secondary carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "organic_chemistry_synthons_reagents_and_polarity_matching",
+   "title": "Synthons, Reagents, and Polarity Matching",
+   "strand": "Multistep Synthesis and Retrosynthesis",
+   "unit": "Multistep Synthesis and Retrosynthesis",
+   "topic": "Multistep Synthesis and Retrosynthesis",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_retrosynthetic_disconnection"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "reagent",
+    "synthon",
+    "umpolung"
+   ],
+   "summary": "A synthon is the idealised fragment a disconnection implies, and it must be matched to a real reagent of the same polarity, so an acyl anion equivalent is needed wherever an acyl anion itself cannot be used.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 126
+   }
+  },
+  {
+   "id": "organic_chemistry_tacticity_cross_linking_and_properties",
+   "title": "Tacticity, Cross-Linking, and Properties",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Polymers and Materials",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_addition_and_condensation_polymerisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cross-linking",
+    "crystallinity",
+    "tacticity"
+   ],
+   "summary": "Crystallinity raises a polymer's strength and melting point, so an isotactic chain packs better than an atactic one, and a lightly cross-linked rubber recovers its shape while a heavily cross-linked resin cannot be melted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 133
+   }
+  },
+  {
+   "id": "organic_chemistry_terminal_alkyne_acidity_and_acetylides",
+   "title": "Terminal Alkyne Acidity and Acetylides",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Alkyne Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_halogenation_through_a_bridged_ion"
+   ],
+   "keywords": [
+    "acetylide",
+    "deprotonation",
+    "terminal alkyne"
+   ],
+   "summary": "The sp C-H of a terminal alkyne has a pKa near 25, so amide deprotonates it essentially completely and the resulting acetylide attacks alkyl halides or carbonyls, which makes it a carbon nucleophile that adds a two-carbon unit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "organic_chemistry_the_arenium_ion_mechanism",
+   "title": "The Arenium Ion Mechanism",
+   "strand": "Aromatic Reactions",
+   "unit": "Aromatic Reactions",
+   "topic": "Electrophilic Aromatic Substitution",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_antiaromatic_and_nonaromatic_rings"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arenium ion",
+    "aromaticity",
+    "electrophilic aromatic substitution"
+   ],
+   "summary": "Electrophilic aromatic substitution replaces a ring hydrogen in two steps: the electrophile adds to give a resonance-stabilised arenium ion, then a base removes the proton to restore aromaticity, which is why substitution rather than addition is observed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "organic_chemistry_the_carbonyl_family",
+   "title": "The Carbonyl Family",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Functional Groups",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_heteroatom_functional_groups"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aldehyde",
+    "carbonyl",
+    "carboxylic acid"
+   ],
+   "summary": "An aldehyde, ketone, ester, amide and carboxylic acid all share a C=O group, and what else is attached to the carbonyl carbon decides whether the group is attacked by a nucleophile or substituted at that carbon.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "organic_chemistry_the_claisen_condensation",
+   "title": "The Claisen Condensation",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Claisen and Related Condensations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_crossed_and_directed_aldol_strategies"
+   ],
+   "keywords": [
+    "beta-keto ester",
+    "claisen condensation",
+    "ester enolate"
+   ],
+   "summary": "Two esters condense when one is deprotonated to an enolate that attacks the other's acyl carbon, and the product is a beta-keto ester because the alkoxide leaves and the remaining alpha proton is acidic enough to be removed by that alkoxide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "organic_chemistry_the_diels_alder_reaction",
+   "title": "The Diels-Alder Reaction",
+   "strand": "Bioorganic Molecules and Materials",
+   "unit": "Bioorganic Molecules and Materials",
+   "topic": "Pericyclic Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_carbohydrates_and_lipids"
+   ],
+   "keywords": [
+    "cycloaddition",
+    "diels-alder",
+    "s-cis"
+   ],
+   "summary": "A diene and a dienophile combine in one concerted step that forms two sigma bonds and one ring, and the reaction works best when the diene can adopt the s-cis conformation and the dienophile carries an electron-withdrawing group.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 130
+   }
+  },
+  {
+   "id": "organic_chemistry_the_functional_group_region",
+   "title": "The Functional-Group Region",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Infrared Spectroscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_fragmentation_and_isotope_patterns"
+   ],
+   "keywords": [
+    "functional group",
+    "infrared",
+    "wavenumber"
+   ],
+   "summary": "Absorption between 4000 and 1500 cm-1 marks specific bonds, so a broad band near 3300 cm-1 is an O-H, a sharp band near 1700 cm-1 a carbonyl, and a band between 2100 and 2260 cm-1 a triple bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "organic_chemistry_the_michael_addition",
+   "title": "The Michael Addition",
+   "strand": "Enols, Enolates, and Condensations",
+   "unit": "Enols, Enolates, and Condensations",
+   "topic": "Conjugate Addition",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_1_2_versus_1_4_addition_to_enones"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "enolate",
+    "michael addition",
+    "thermodynamic product"
+   ],
+   "summary": "A stabilised enolate adds to the beta carbon of an enone, and the conjugate product is the thermodynamic one because the alkene is consumed while the carbonyl survives intact.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "organic_chemistry_the_molecular_ion_and_molar_mass",
+   "title": "The Molecular Ion and Molar Mass",
+   "strand": "Spectroscopy and Structure Determination",
+   "unit": "Spectroscopy and Structure Determination",
+   "topic": "Mass Spectrometry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_heat_favours_elimination"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mass spectrometry",
+    "molar mass",
+    "molecular ion"
+   ],
+   "summary": "Electron impact removes one electron to give a radical cation whose mass-to-charge ratio is the molecular mass, and an odd nominal mass flags an odd number of nitrogen atoms in the molecule.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "organic_chemistry_the_polarised_carbonyl_bond",
+   "title": "The Polarised Carbonyl Bond",
+   "strand": "Aldehydes and Ketones: Carbonyl Addition",
+   "unit": "Aldehydes and Ketones: Carbonyl Addition",
+   "topic": "Carbonyl Structure and Reactivity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_protecting_groups_in_practice"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbonyl",
+    "nucleophilic addition",
+    "polarization"
+   ],
+   "summary": "Oxygen is more electronegative than carbon, so the C=O bond leaves a partial positive carbon that a nucleophile attacks along a trajectory perpendicular to the pi system, which is why hydride and Grignard reagents add there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "organic_chemistry_thiols_and_thioethers",
+   "title": "Thiols and Thioethers",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Sulfur Compounds and Protecting Groups",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_regiochemistry_of_epoxide_opening"
+   ],
+   "keywords": [
+    "polarizability",
+    "thioether",
+    "thiol"
+   ],
+   "summary": "Sulfur is larger and more polarisable than oxygen, so a thiol is more acidic, a better nucleophile and a better leaving group than the matching alcohol, and it is readily oxidised to a disulfide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "organic_chemistry_ultraviolet_absorption_and_conjugation_length",
+   "title": "Ultraviolet Absorption and Conjugation Length",
+   "strand": "Conjugation and Aromaticity",
+   "unit": "Conjugation and Aromaticity",
+   "topic": "Conjugated Systems",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "organic_chemistry_allylic_resonance_and_its_consequences"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chromophore",
+    "conjugation length",
+    "ultraviolet"
+   ],
+   "summary": "The longer the conjugated system the smaller the orbital gap and the longer the absorbed wavelength, which is why ethene absorbs in the far ultraviolet while carotene absorbs blue light and therefore appears orange.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "organic_chemistry_wedge_and_dash_conventions",
+   "title": "Wedge and Dash Conventions",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Organic Representations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_skeletal_structures_and_implied_hydrogens"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "perspective",
+    "tetrahedral",
+    "wedge dash"
+   ],
+   "summary": "A solid wedge points a bond out of the page and a dashed wedge points it behind the page, so the two drawings of one connectivity that differ only in wedge placement are different stereoisomers rather than the same structure redrawn.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "organic_chemistry_what_a_molecular_formula_cannot_tell_you",
+   "title": "What a Molecular Formula Cannot Tell You",
+   "strand": "Structure, Bonding, and Representations",
+   "unit": "Structure, Bonding, and Representations",
+   "topic": "Organic Representations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_wedge_and_dash_conventions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "connectivity",
+    "isomer count",
+    "molecular formula"
+   ],
+   "summary": "A molecular formula fixes only the atom counts, so C4H10O describes both butan-1-ol and its ether isomer, and the formula alone can neither name the compound nor predict its boiling point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "organic_chemistry_why_alkanes_are_unreactive",
+   "title": "Why Alkanes Are Unreactive",
+   "strand": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "unit": "Alkanes, Cycloalkanes, and Radical Chemistry",
+   "topic": "Alkanes and Cycloalkanes",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "organic_chemistry_chemoselectivity_reacting_one_group_and_sparin"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkane",
+    "sigma bond",
+    "unreactive"
+   ],
+   "summary": "An alkane contains only strong, nonpolar sigma bonds and no lone pair or empty orbital, so it offers no electrophilic or nucleophilic site and reacts by radical substitution rather than by the ionic addition an alkene undergoes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "organic_chemistry_williamson_ether_synthesis",
+   "title": "Williamson Ether Synthesis",
+   "strand": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "unit": "Alcohols, Phenols, Ethers, Epoxides, and Sulfur Compounds",
+   "topic": "Ethers and Epoxides",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "organic_chemistry_hydride_reagents_and_their_scope"
+   ],
+   "keywords": [
+    "ether",
+    "sn2",
+    "williamson synthesis"
+   ],
+   "summary": "An alkoxide attacks an unhindered primary alkyl halide by SN2 to give an ether, and the method fails with a tertiary halide because elimination takes over instead of substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "organic_chemistry_wittig_olefination_of_a_carbonyl",
+   "title": "Wittig Olefination of a Carbonyl",
+   "strand": "Alkenes and Alkynes",
+   "unit": "Alkenes and Alkynes",
+   "topic": "Pi-Bond Synthesis and Strategy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_alkene_synthesis_by_elimination"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carbonyl olefination",
+    "wittig",
+    "ylide"
+   ],
+   "summary": "A phosphonium ylide attacks a carbonyl to form an oxaphosphetane that collapses to an alkene and triphenylphosphine oxide, so the new C=C is built exactly where the C=O stood.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "organic_chemistry_zaitsev_preference_and_alkene_stability",
+   "title": "Zaitsev Preference and Alkene Stability",
+   "strand": "Substitution and Elimination",
+   "unit": "Substitution and Elimination",
+   "topic": "E1 and E2 Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [
+    "organic_chemistry_e2_needs_an_anti_periplanar_beta_hydrogen"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "alkene stability",
+    "bulky base",
+    "zaitsev rule"
+   ],
+   "summary": "With more than one beta hydrogen available, E2 gives mainly the more substituted alkene because the developing double bond is stabilised, while a bulky base or a poor anti arrangement can override that preference.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Organic Chemistry - Structure, Mechanism and Synthesis",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  }
+ ]
+}

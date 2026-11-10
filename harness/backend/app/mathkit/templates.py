@@ -22,9 +22,14 @@ from .calculus import (RULES as _CALCULUS_RULES, conic_figure, hyperbola_figure,
 # The override table below lives here because it has to name builders from both modules.
 # These five are the calculus module's own builders, reached by name so the table stays in
 # one place rather than being split across two files.
-from .calculus import (_complex_powers as _calc_complex_powers,
+from .calculus import (_accumulation as _calc_accumulation,
+                       _complex_powers as _calc_complex_powers,
                        _counting as _calc_counting,
                        _inverse_pair as _calc_inverse_pair,
+                       _limit_hole as _calc_limit_hole,
+                       _motion as _calc_motion,
+                       _sequence_terms as _calc_sequence_terms,
+                       _shape as _calc_shape,
                        _symmetry as _calc_symmetry,
                        _trig_wave as _calc_trig_wave)
 from .simulate import Mark, Parameter, Part, SimulationSpec
@@ -1142,6 +1147,22 @@ def _domain_range(concept_id: str) -> SimulationSpec:
 #: appear in a concept of a different kind, and it is placed *before* the authored rules so
 #: the more accurate figure wins.
 _OVERRIDES: tuple[tuple[tuple[str, ...], Any], ...] = (
+    # Algebra 1's on-ramp concepts. The authored vocabulary either missed them entirely --
+    # seven fell through to the generic quadratic probe, which is the exact "meaningless
+    # curve presented as the topic" defect this file exists to prevent -- or claimed them
+    # with a neighbouring rule: two order-of-operations concepts were drawn as systems of
+    # equations because the needle "substitution*" belongs to the systems rule, and
+    # "Fractional exponents" was drawn as a fraction bar. These phrases are specific enough
+    # that no concept of another kind carries them, and they sit first so the accurate
+    # figure wins.
+    (('variables and expressions', 'translating words into expressions',
+      'algebraic expression language'), _substitution),
+    (('substitution and order of operations', 'negative and rational inputs',
+      'grouping and order of operations', 'order of operations'), _substitution),
+    (('function definition',), _vertical_line_test),
+    (('recursive definition', 'sequence as function'), _calc_sequence_terms),
+    (('fractional exponent*', 'rational exponent*', 'rationalising a denominator'), _exponent),
+    (('distributive property',), _polynomial_product),
     (('ellipse*', 'conic section*', 'identifying conic*'), conic_figure),
     (('hyperbola*',), hyperbola_figure),
     (('parabola*',), _quadratic),
@@ -1253,9 +1274,91 @@ _RULES: tuple[tuple[tuple[str, ...], Any], ...] = (
 )
 
 
+#: Exact concept-id overrides, applied before any text rule. The only entries that belong
+#: here are collisions a phrase cannot resolve: ``_haystack`` carries the unit name, so the
+#: Algebra 1 unit "Units and Dimensional Analysis" makes the phrase "dimensional analysis"
+#: claim every concept in that unit. Unit cancellation has no single-variable plot, so those
+#: two concepts (one in each course that teaches the idea) get the concept map and their
+#: unit-mates keep the figures they earned.
+_CONCEPT_TEMPLATES: dict[str, Any] = {
+    'algebra_1_dimensional_analysis': no_figure,
+    'dimensional_analysis_and_unit_conversion': no_figure,
+    # --- ACT Math: the skills that are not a quantity against an input -----------------
+    # A strategy or a unit-cancellation rule has no curve. The two that do have a shape
+    # are pointed at their real figure instead of a concept map.
+    'act_math_law_of_sines_and_law_of_cosines': _angle,
+    'act_math_density_and_geometric_modelling': _ratio,
+    'act_math_building_a_model_from_a_context': no_figure,
+    'act_math_revising_a_model': no_figure,
+    'act_math_reading_parameters_and_outputs_in_context': no_figure,
+    'act_math_translating_words_into_symbols': no_figure,
+    'act_math_units_as_part_of_the_quantity': no_figure,
+    'act_math_null_hypotheses_and_p_values': no_figure,
+    # --- AP Calculus AB: strategy concepts and solids of revolution --------------------
+    # The shape-of-a-function concepts get the shape figure; procedure-selection and
+    # volume-by-slicing have no single-variable plot in this engine and get the map.
+    'ap_calculus_ab_the_candidates_test': _calc_shape,
+    'ap_calculus_ab_sign_of_the_derivative_and_monotonicity': _calc_shape,
+    'ap_calculus_ab_reading_shape_from_a_derivative_graph': _calc_shape,
+    'ap_calculus_ab_confirming_a_global_optimum': _calc_shape,
+    'ap_calculus_ab_continuity_on_open_and_closed_intervals': _calc_limit_hole,
+    'ap_calculus_ab_displacement_and_distance_from_velocity': _calc_motion,
+    'ap_calculus_ab_marginal_rate_and_accumulated_total': _calc_accumulation,
+    'ap_calculus_ab_a_decision_order_for_antidifferentiation': no_figure,
+    'ap_calculus_ab_choosing_a_differentiation_procedure': no_figure,
+    'ap_calculus_ab_agreement_across_graph_table_and_algebra': no_figure,
+    'ap_calculus_ab_applying_an_initial_condition': no_figure,
+    'ap_calculus_ab_separation_of_variables': no_figure,
+    'ap_calculus_ab_the_disc_method': no_figure,
+    'ap_calculus_ab_the_washer_method': no_figure,
+    'ap_calculus_ab_discs_about_a_shifted_axis': no_figure,
+    'ap_calculus_ab_washers_about_a_line_other_than_an_axis': no_figure,
+    'ap_calculus_ab_volumes_with_square_cross_sections': no_figure,
+    'ap_calculus_ab_units_and_meaning_of_a_derivative': no_figure,
+    # --- AP Calculus BC ---------------------------------------------------------------
+    'ap_calculus_bc_the_candidates_test': _calc_shape,
+    'ap_calculus_bc_justifying_an_optimum': _calc_shape,
+    'ap_calculus_bc_position_velocity_and_acceleration_with_integrals': _calc_motion,
+    'ap_calculus_bc_net_change_in_an_applied_model': _calc_accumulation,
+    'ap_calculus_bc_choosing_a_differentiation_procedure': no_figure,
+    'ap_calculus_bc_selecting_an_integration_technique': no_figure,
+    'ap_calculus_bc_euler_s_method': no_figure,
+    'ap_calculus_bc_separation_of_variables_and_particular_solutions': no_figure,
+    'ap_calculus_bc_interpreting_a_derivative_in_context': no_figure,
+    'ap_calculus_bc_arc_length_and_distance_travelled': no_figure,
+    'ap_calculus_bc_arc_length_of_a_parametric_curve': no_figure,
+    'ap_calculus_bc_the_disc_method_about_either_axis': no_figure,
+    'ap_calculus_bc_the_washer_method_about_either_axis': no_figure,
+    'ap_calculus_bc_square_and_rectangular_cross_sections': no_figure,
+}
+
+#: Whole courses whose subject is not "a quantity as a function of one input". Linear
+#: algebra is about vector spaces, rank and eigenvalues: every single-variable curve drawn
+#: for it would be a fabrication, so the concept map is the correct figure for the entire
+#: course rather than for a hand-picked list of 97 concepts.
+_NO_PLOT_COURSE_PREFIXES: tuple[str, ...] = ('linear_algebra_',)
+
+
 def template_for(concept: Mapping[str, Any]) -> SimulationSpec:
-    """Choose and instantiate the best template for ``concept``."""
+    """Choose and instantiate the best template for ``concept``.
+
+    An exact concept-id entry wins over every text rule. That escape hatch exists because
+    ``_haystack`` includes the *unit* name: the Algebra 1 unit "Units and Dimensional
+    Analysis" contains the phrase "dimensional analysis", so a text needle for that concept
+    also claims "Units and unit conversion" and "Precision and reasonable answers" and hands
+    them a concept map they do not need. A rule that can only be aimed by id is the honest
+    tool for that collision.
+    """
     concept_id = str(concept.get('id') or concept.get('title') or 'concept')
+    if concept_id.startswith(_NO_PLOT_COURSE_PREFIXES):
+        spec = no_figure(concept_id)
+        spec.title = f'{concept.get("title", spec.title)}: {spec.title}'
+        return spec
+    exact = _CONCEPT_TEMPLATES.get(concept_id)
+    if exact is not None:
+        spec = exact(concept_id)
+        spec.title = f'{concept.get("title", spec.title)}: {spec.title}'
+        return spec
     haystack = _haystack(concept)
     for needles, builder in _RULES:
         if _has(haystack, *needles):

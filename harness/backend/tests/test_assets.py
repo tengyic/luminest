@@ -132,7 +132,37 @@ KNOWN_WITHOUT_A_SIMULATION = {
     'algebra_2_matrix_multiplication',
     'algebra_2_matrix_notation_and_operations',
     'algebra_2_solving_systems_with_matrices',
+    # Unit cancellation is an operation on units, not a quantity varying with an input.
+    'algebra_1_dimensional_analysis',
+    'dimensional_analysis_and_unit_conversion',
+    # ACT Math's matrix/vector concepts are matched by the existing matrix rule, which is
+    # correct: neither is a quantity plotted against an input.
+    'act_math_matrix_dimensions_and_products',
+    'act_math_vector_addition_and_scalar_multiplication',
+    'act_math_vector_components_and_magnitude',
 }
+
+#: Courses with no single-variable plot at all; see the same declaration in
+#: ``tests/test_calculus_figures.py`` and ``app.mathkit.templates._NO_PLOT_COURSE_PREFIXES``.
+NO_PLOT_COURSES = {'linear_algebra'}
+
+
+def _declared_without_a_simulation() -> set[str]:
+    """The declared no-figure set: static entries plus the engine's own declarations.
+
+    Derived from ``templates._CONCEPT_TEMPLATES`` and the course-level prefix list so the
+    expectation follows the code instead of being restated (and going stale) here.
+    """
+    from app import courses as _courses
+    from app.mathkit import templates as _t
+
+    ids = {concept_id for concept_id, builder in _t._CONCEPT_TEMPLATES.items()
+           if builder is _t.no_figure}
+    ids |= set(KNOWN_WITHOUT_A_SIMULATION)
+    for course in COURSES:
+        if course.id in NO_PLOT_COURSES:
+            ids |= set(_courses.graph_for(course.id).nodes)
+    return ids
 
 
 def test_the_only_mathematics_concepts_without_a_simulation_are_the_matrices():
@@ -143,7 +173,8 @@ def test_the_only_mathematics_concepts_without_a_simulation_are_the_matrices():
     """
     fell_back = {concept['id'] for pack, concept in _mathematics_concepts()
                  if assets.review_simulation(concept, payload_of(concept))['verdict'] == 'fallback'}
-    assert fell_back == KNOWN_WITHOUT_A_SIMULATION, sorted(fell_back ^ KNOWN_WITHOUT_A_SIMULATION)
+    expected = _declared_without_a_simulation()
+    assert fell_back == expected, sorted(fell_back ^ expected)
 
 
 # ---------------------------------------------------------------- video and repair

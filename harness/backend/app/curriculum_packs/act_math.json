@@ -1,0 +1,3244 @@
+{
+ "schema": 1,
+ "name": "act_math",
+ "title": "ACT Math",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A complete ACT Mathematics course: rational and irrational numbers, exponent properties, vectors, matrices and complex numbers, linear, quadratic, polynomial, rational and radical algebra with systems and inequalities, functions and their transformations, sequences, trigonometry, exponential and logarithmic functions, geometry from transformations and similarity through coordinate geometry, conics and circles, univariate and bivariate statistics with inference and probability, the integrating essential skills the test assumes, and modelling as a practice rather than a topic.",
+  "id_namespace": {
+   "prefix": "act_math_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "OpenStax Algebra and Trigonometry (1e, CC BY 4.0)",
+   "supplements": [
+    "OpenStax College Algebra (1e, CC BY 4.0)",
+    "OpenStax Precalculus (1e, CC BY 4.0)",
+    "OpenStax Introductory Statistics (1e, CC BY 4.0)"
+   ],
+   "link_only_note": "OpenStax Algebra and Trigonometry 2e, College Algebra 2e, Precalculus 2e and Introductory Statistics 2e report CC BY-NC-SA 4.0 or link-only status and are carried as link-only study references: never stored, quoted or used as anchors. Euclidean proof, construction and circle-theorem material has no section in these four books, so those ACT topics carry no anchor instead of a stand-in citation.",
+   "units": {
+    "Number and Quantity": [
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "1-1-real-numbers-algebra-essentials"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "1-2-exponents-and-scientific-notation"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "10-8-vectors"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "2-4-complex-numbers"
+     }
+    ],
+    "Algebra": [
+     {
+      "book": "college-algebra",
+      "page": "2-2-linear-equations-in-one-variable"
+     },
+     {
+      "book": "college-algebra",
+      "page": "2-5-quadratic-equations"
+     },
+     {
+      "book": "college-algebra",
+      "page": "2-6-other-types-of-equations"
+     },
+     {
+      "book": "college-algebra",
+      "page": "7-1-systems-of-linear-equations-two-variables"
+     }
+    ],
+    "Functions": [
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "3-1-functions-and-function-notation"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "3-5-transformation-of-functions"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "13-1-sequences-and-their-notations"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "7-3-unit-circle"
+     }
+    ],
+    "Geometry": [
+     {
+      "book": "precalculus",
+      "page": "5-4-right-triangle-trigonometry"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "10-1-non-right-triangles-law-of-sines"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "2-1-the-rectangular-coordinate-systems-and-graphs"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "12-1-the-ellipse"
+     }
+    ],
+    "Statistics and Probability": [
+     {
+      "book": "introductory-statistics",
+      "page": "2-5-measures-of-the-center-of-the-data"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "12-2-scatter-plots"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "9-1-null-and-alternative-hypotheses"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "3-3-two-basic-rules-of-probability"
+     }
+    ],
+    "Integrating Essential Skills": [
+     {
+      "book": "college-algebra",
+      "page": "1-1-real-numbers-algebra-essentials"
+     },
+     {
+      "book": "college-algebra",
+      "page": "1-3-radicals-and-rational-exponents"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "2-2-histograms-frequency-polygons-and-time-series-graphs"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "3-1-terminology"
+     }
+    ],
+    "Modeling": [
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "2-3-models-and-applications"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "4-2-modeling-with-linear-functions"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "6-7-exponential-and-logarithmic-models"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "5-8-modeling-using-variation"
+     }
+    ]
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Number and Quantity": {
+    "Number and Quantity": [
+     "Rational and Irrational Numbers",
+     "Properties of Exponents",
+     "Vectors and Matrices",
+     "Complex Numbers",
+     "Quantities and Units"
+    ]
+   },
+   "Algebra": {
+    "Algebra": [
+     "Linear Expressions, Equations, and Inequalities",
+     "Quadratic Expressions, Equations, and Inequalities",
+     "Rational and Radical Expressions and Equations",
+     "Polynomial Expressions and Equations",
+     "Systems of Equations and Inequalities",
+     "Representation of Expressions and Equations"
+    ]
+   },
+   "Functions": {
+    "Functions": [
+     "Properties of Functions",
+     "Composition, Transformation, and Inverse Functions",
+     "Sequences and Series",
+     "Trigonometric Functions",
+     "Exponential and Logarithmic Functions"
+    ]
+   },
+   "Geometry": {
+    "Geometry": [
+     "Transformations, Proof, Reasoning, and Constructions",
+     "Similarity, Right Triangles, and Trigonometry",
+     "Coordinate Geometry",
+     "Conic Sections",
+     "Properties of Circles",
+     "Geometric Measurement and Modeling"
+    ]
+   },
+   "Statistics and Probability": {
+    "Statistics and Probability": [
+     "Univariate Data Analysis",
+     "Bivariate Data Analysis",
+     "Introduction to Formal Inferential Statistics",
+     "Rules of Probability",
+     "Counting, Permutations, and Combinations"
+    ]
+   },
+   "Integrating Essential Skills": {
+    "Integrating Essential Skills": [
+     "Properties of Real Numbers",
+     "Computation and Problem Solving with Real Numbers",
+     "Ratio, Proportion, and Percent",
+     "Writing Algebraic Expressions",
+     "Writing and Solving Simple Equations and Inequalities",
+     "Measurement Units and Unit Conversion",
+     "Properties of Lines, Angles, and Shapes",
+     "Perimeter, Circumference, and Area",
+     "Surface Area and Volume",
+     "The Coordinate Plane",
+     "Pythagorean Theorem",
+     "Scatterplots",
+     "Data Summaries and Displays",
+     "Informal Inferential Statistics",
+     "Basic Probability"
+    ]
+   },
+   "Modeling": {
+    "Modeling": [
+     "Producing",
+     "Interpreting",
+     "Understanding",
+     "Evaluating",
+     "Improving"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Number and Quantity",
+    "units": [
+     "Number and Quantity"
+    ]
+   },
+   {
+    "strand": "Algebra",
+    "units": [
+     "Algebra"
+    ]
+   },
+   {
+    "strand": "Functions",
+    "units": [
+     "Functions"
+    ]
+   },
+   {
+    "strand": "Geometry",
+    "units": [
+     "Geometry"
+    ]
+   },
+   {
+    "strand": "Statistics and Probability",
+    "units": [
+     "Statistics and Probability"
+    ]
+   },
+   {
+    "strand": "Integrating Essential Skills",
+    "units": [
+     "Integrating Essential Skills"
+    ]
+   },
+   {
+    "strand": "Modeling",
+    "units": [
+     "Modeling"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "act_math_addition_rule_and_mutually_exclusive_events",
+   "title": "Addition Rule and Mutually Exclusive Events",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Rules of Probability",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_probability_as_a_long_run_proportion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "addition rule",
+    "mutually exclusive",
+    "overlap"
+   ],
+   "summary": "P(A or B) = P(A) + P(B) - P(A and B), and the subtracted term vanishes only when A and B cannot occur together.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "act_math_agreement_of_equation_table_and_graph",
+   "title": "Agreement of Equation, Table, and Graph",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Representation of Expressions and Equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_interpreting_parameters_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check",
+    "multiple representations",
+    "scale"
+   ],
+   "summary": "An equation, its table, and its graph describe the same relationship, so a disagreement between any two of them exposes an algebra or scale error.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "act_math_angle_relationships_in_figures",
+   "title": "Angle Relationships in Figures",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Properties of Lines, Angles, and Shapes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_conversion_factors_in_one_step"
+   ],
+   "keywords": [
+    "supplementary",
+    "triangle angle sum",
+    "vertical angles"
+   ],
+   "summary": "Vertical angles are equal, angles on a straight line sum to 180 degrees, and the angles of a triangle sum to 180 degrees, which fixes a missing angle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "act_math_area_of_composite_figures",
+   "title": "Area of Composite Figures",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Perimeter, Circumference, and Area",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_angle_relationships_in_figures"
+   ],
+   "keywords": [
+    "composite area",
+    "decomposition",
+    "perimeter"
+   ],
+   "summary": "A composite figure is measured by adding or subtracting the areas of the shapes it decomposes into, with every length first converted to one unit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "act_math_arithmetic_sequences_and_their_sums",
+   "title": "Arithmetic Sequences and Their Sums",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Sequences and Series",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_inverse_functions"
+   ],
+   "keywords": [
+    "arithmetic sequence",
+    "common difference",
+    "series"
+   ],
+   "summary": "An arithmetic sequence adds a constant difference, so a_n = a_1 + (n - 1)d and the first n terms sum to n(a_1 + a_n)/2.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "act_math_arithmetic_with_complex_numbers",
+   "title": "Arithmetic with Complex Numbers",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Complex Numbers",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_the_imaginary_unit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complex arithmetic",
+    "distribute",
+    "i squared"
+   ],
+   "summary": "Complex numbers add part by part and multiply by distributing with i^2 = -1, so the sum and product of complex numbers stay complex.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "act_math_assumptions_and_limits_of_a_model",
+   "title": "Assumptions and Limits of a Model",
+   "strand": "Modeling",
+   "unit": "Modeling",
+   "topic": "Understanding",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_reading_parameters_and_outputs_in_context"
+   ],
+   "keywords": [
+    "assumption",
+    "domain",
+    "limitation"
+   ],
+   "summary": "Every model rests on assumptions such as a constant rate or unlimited growth, and understanding it means knowing which assumption a conclusion depends on.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "act_math_average_rate_of_change",
+   "title": "Average Rate of Change",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Properties of Functions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_domain_and_range"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate of change",
+    "interval",
+    "secant"
+   ],
+   "summary": "The average rate of change between two inputs is the change in output divided by the change in input, which is the slope of the secant line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "act_math_building_a_model_from_a_context",
+   "title": "Building a Model from a Context",
+   "strand": "Modeling",
+   "unit": "Modeling",
+   "topic": "Producing",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_probability_from_equally_likely_outcomes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "function family",
+    "model",
+    "parameter"
+   ],
+   "summary": "Producing a model means naming the input and output with their units, choosing a family that matches how the data change, and fitting its parameters to the given values.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "act_math_central_angles_and_arcs",
+   "title": "Central Angles and Arcs",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Properties of Circles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_foci_and_eccentricity"
+   ],
+   "keywords": [
+    "arc",
+    "central angle",
+    "circumference"
+   ],
+   "summary": "A central angle has the same measure as its intercepted arc, so an arc length is that fraction of the circumference.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "act_math_choosing_a_summary_statistic",
+   "title": "Choosing a Summary Statistic",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Data Summaries and Displays",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_reading_a_scatterplot"
+   ],
+   "keywords": [
+    "mean",
+    "median",
+    "skewed data"
+   ],
+   "summary": "The mean and standard deviation describe symmetric data, while the median and interquartile range describe skewed data or data carrying outliers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "act_math_chords_tangents_and_secants",
+   "title": "Chords, Tangents, and Secants",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Properties of Circles",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_inscribed_angles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chord",
+    "radius",
+    "tangent"
+   ],
+   "summary": "A tangent line is perpendicular to the radius at the point of contact, and a radius that bisects a chord is perpendicular to that chord.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "act_math_combinations_count_unordered_selections",
+   "title": "Combinations Count Unordered Selections",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Counting, Permutations, and Combinations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_permutations_count_ordered_arrangements"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combination",
+    "factorial",
+    "subset"
+   ],
+   "summary": "The number of unordered selections of r items from n is n!/(r!(n - r)!), which is the permutation count divided by the r! orders of one set.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "act_math_common_denominators_for_rational_expressions",
+   "title": "Common Denominators for Rational Expressions",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Rational and Radical Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_restricted_domains_of_rational_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common denominator",
+    "equivalent fractions",
+    "simplify"
+   ],
+   "summary": "Rational expressions are added by rewriting each over a common denominator, and multiplying numerator and denominator by the same nonzero factor changes nothing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "act_math_completing_the_square_to_classify",
+   "title": "Completing the Square to Classify",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Conic Sections",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_standard_forms_of_the_conics"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "classify",
+    "complete the square",
+    "second degree"
+   ],
+   "summary": "Completing the square in x and y turns a general second-degree equation into standard form, which shows which conic it is and whether it is degenerate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "act_math_composition_of_functions",
+   "title": "Composition of Functions",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Composition, Transformation, and Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_average_rate_of_change"
+   ],
+   "keywords": [
+    "composition",
+    "domain",
+    "order of operations"
+   ],
+   "summary": "The composition f(g(x)) applies g first and f second, so its domain excludes inputs that g rejects and inputs whose g(x) f cannot evaluate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "act_math_conditional_probability_and_independence",
+   "title": "Conditional Probability and Independence",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Rules of Probability",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_addition_rule_and_mutually_exclusive_events"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conditional probability",
+    "given",
+    "independence"
+   ],
+   "summary": "P(A given B) = P(A and B)/P(B), and A and B are independent exactly when that conditional probability equals P(A).",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "act_math_conversion_factors_in_one_step",
+   "title": "Conversion Factors in One Step",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Measurement Units and Unit Conversion",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_isolating_the_unknown"
+   ],
+   "keywords": [
+    "cancel",
+    "conversion factor",
+    "unit conversion"
+   ],
+   "summary": "A conversion factor is a ratio of two equal quantities, so multiplying by it changes only the unit and the unit being replaced must cancel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "act_math_correlation_and_prediction",
+   "title": "Correlation and Prediction",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Bivariate Data Analysis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_the_least_squares_regression_line"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "causation",
+    "correlation",
+    "prediction"
+   ],
+   "summary": "The correlation coefficient measures only the strength and direction of a linear association, so a strong correlation never by itself establishes causation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "act_math_deductive_reasoning_and_counterexamples",
+   "title": "Deductive Reasoning and Counterexamples",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Transformations, Proof, Reasoning, and Constructions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_dilations_and_scale_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conditional",
+    "counterexample",
+    "proof"
+   ],
+   "summary": "A proof derives each statement from givens and established results, and a single counterexample is enough to refute a universal claim.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "act_math_degree_zeros_and_end_behaviour",
+   "title": "Degree, Zeros, and End Behaviour",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Polynomial Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_extraneous_solutions_from_squaring"
+   ],
+   "keywords": [
+    "degree",
+    "end behaviour",
+    "zeros"
+   ],
+   "summary": "A polynomial of degree n has at most n real zeros and at most n - 1 turning points, and its end behaviour follows the sign of its leading coefficient.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "act_math_density_and_geometric_modelling",
+   "title": "Density and Geometric Modelling",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Geometric Measurement and Modeling",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_surface_area_and_volume"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "density",
+    "rate",
+    "units"
+   ],
+   "summary": "A geometric model answers a real question only when the units agree: volume times density gives mass, and area times a coverage rate gives a total amount.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "act_math_density_and_ordering_on_the_number_line",
+   "title": "Density and Ordering on the Number Line",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Rational and Irrational Numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_recognising_irrational_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "density",
+    "number line",
+    "ordering"
+   ],
+   "summary": "Between any two distinct real numbers lies both a rational and an irrational number, so there is no smallest positive real number.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "act_math_dilations_and_scale_factor",
+   "title": "Dilations and Scale Factor",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Transformations, Proof, Reasoning, and Constructions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_rigid_motions_preserve_congruence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dilation",
+    "scale factor",
+    "similarity"
+   ],
+   "summary": "A dilation multiplies every length by its scale factor and preserves angle measures, so it changes size while keeping the shape.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "act_math_dimensional_analysis",
+   "title": "Dimensional Analysis",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Quantities and Units",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_units_as_part_of_the_quantity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cancel units",
+    "conversion factor",
+    "rate"
+   ],
+   "summary": "Multiplying by a conversion factor equal to one changes the unit without changing the value, and the unwanted units must cancel completely.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "act_math_distance_and_midpoint",
+   "title": "Distance and Midpoint",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Coordinate Geometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_law_of_sines_and_law_of_cosines"
+   ],
+   "keywords": [
+    "coordinates",
+    "distance formula",
+    "midpoint"
+   ],
+   "summary": "The distance between two points is the hypotenuse of a right triangle whose legs are the coordinate differences, and the midpoint averages the coordinates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "act_math_domain_and_range",
+   "title": "Domain and Range",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Properties of Functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_function_definition_and_vertical_line_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "domain",
+    "range",
+    "restriction"
+   ],
+   "summary": "The domain is the set of inputs the rule accepts, limited by division by zero and even roots of negatives, and the range is the set of outputs actually produced.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "act_math_equations_of_circles_in_the_plane",
+   "title": "Equations of Circles in the Plane",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Coordinate Geometry",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_slope_criteria_for_parallel_and_perpendicular_lines"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "centre",
+    "circle equation",
+    "completing the square"
+   ],
+   "summary": "A circle with centre (h, k) and radius r satisfies (x - h)^2 + (y - k)^2 = r^2, and completing the square recovers the centre and radius from a general equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "act_math_equivalent_forms_of_one_relationship",
+   "title": "Equivalent Forms of One Relationship",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Representation of Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_half_planes_from_two_variable_inequalities"
+   ],
+   "keywords": [
+    "equivalent forms",
+    "standard form",
+    "vertex form"
+   ],
+   "summary": "Factored, standard, and vertex forms describe the same quadratic, so the form is chosen for what it displays: zeros, y-intercept, or turning point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "act_math_exponential_growth_and_decay",
+   "title": "Exponential Growth and Decay",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Exponential and Logarithmic Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_period_amplitude_and_midline"
+   ],
+   "keywords": [
+    "decay",
+    "exponential function",
+    "growth factor"
+   ],
+   "summary": "In f(x) = a b^x the base b is the factor per unit step, so b > 1 grows, 0 < b < 1 decays, and the percent change per step is b - 1.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "act_math_extraneous_solutions_from_squaring",
+   "title": "Extraneous Solutions from Squaring",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Rational and Radical Expressions and Equations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_common_denominators_for_rational_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check",
+    "extraneous solution",
+    "radical equation"
+   ],
+   "summary": "A radical equation can produce extraneous solutions because squaring both sides is not reversible, so every candidate is checked in the original equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "act_math_factoring_and_the_zero_product_property",
+   "title": "Factoring and the Zero Product Property",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Quadratic Expressions, Equations, and Inequalities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_solving_a_formula_for_a_variable"
+   ],
+   "keywords": [
+    "factor",
+    "solve",
+    "zero product property"
+   ],
+   "summary": "If a product equals zero then at least one factor equals zero, so a factored quadratic equation splits into two linear equations.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "act_math_field_properties_of_real_numbers",
+   "title": "Field Properties of Real Numbers",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Properties of Real Numbers",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_combinations_count_unordered_selections"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closure",
+    "distributive",
+    "field properties"
+   ],
+   "summary": "Real numbers are closed under addition and multiplication, both operations commute and associate, and multiplication distributes over addition, which is what licenses every rearrangement.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "act_math_foci_and_eccentricity",
+   "title": "Foci and Eccentricity",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Conic Sections",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_completing_the_square_to_classify"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "eccentricity",
+    "ellipse",
+    "focus"
+   ],
+   "summary": "An ellipse is the set of points whose distances to two foci have a constant sum, and its eccentricity measures how far it departs from a circle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "act_math_function_definition_and_vertical_line_test",
+   "title": "Function Definition and Vertical Line Test",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Properties of Functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_agreement_of_equation_table_and_graph"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "function",
+    "input",
+    "vertical line test"
+   ],
+   "summary": "A function assigns exactly one output to each input, so a graph is a function exactly when no vertical line meets it more than once.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "act_math_geometric_sequences_and_their_sums",
+   "title": "Geometric Sequences and Their Sums",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Sequences and Series",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_arithmetic_sequences_and_their_sums"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common ratio",
+    "finite sum",
+    "geometric sequence"
+   ],
+   "summary": "A geometric sequence multiplies by a constant ratio, so a_n = a_1 r^(n-1) and a finite sum is a_1(1 - r^n)/(1 - r) when r is not 1.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "act_math_half_planes_from_two_variable_inequalities",
+   "title": "Half-Planes from Two-Variable Inequalities",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Systems of Equations and Inequalities",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_the_three_solution_cases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary line",
+    "half-plane",
+    "test point"
+   ],
+   "summary": "The solution set of a linear inequality in two variables is a half-plane, and one test point decides which side of the boundary satisfies it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "act_math_inference_from_a_sample",
+   "title": "Inference from a Sample",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Informal Inferential Statistics",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_choosing_a_summary_statistic"
+   ],
+   "keywords": [
+    "bias",
+    "inference",
+    "random sample"
+   ],
+   "summary": "A conclusion about a population drawn from a sample is only as sound as the sample is random, so a biased sample supports no inference however large it is.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "act_math_inscribed_angles",
+   "title": "Inscribed Angles",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Properties of Circles",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_central_angles_and_arcs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inscribed angle",
+    "intercepted arc",
+    "semicircle"
+   ],
+   "summary": "An inscribed angle measures half of its intercepted arc, which is why an angle inscribed in a semicircle is a right angle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "act_math_interpreting_parameters_in_context",
+   "title": "Interpreting Parameters in Context",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Representation of Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_equivalent_forms_of_one_relationship"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "initial value",
+    "parameter",
+    "slope"
+   ],
+   "summary": "In y = mx + b the slope is the change per input unit and b is the starting value, and each parameter carries the units of the quantity it describes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "act_math_inverse_functions",
+   "title": "Inverse Functions",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Composition, Transformation, and Inverse Functions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_transformations_of_graphs"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse",
+    "one-to-one",
+    "swap"
+   ],
+   "summary": "An inverse swaps the roles of input and output and undoes the original, and it is a function only where the original is one-to-one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "act_math_isolating_the_unknown",
+   "title": "Isolating the Unknown",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Writing and Solving Simple Equations and Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_translating_words_into_symbols"
+   ],
+   "keywords": [
+    "inequality",
+    "inverse operation",
+    "isolate"
+   ],
+   "summary": "An equation or inequality is solved by undoing operations in reverse order on both sides, and multiplying or dividing by a negative reverses an inequality.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "act_math_judging_a_model_against_data",
+   "title": "Judging a Model Against Data",
+   "strand": "Modeling",
+   "unit": "Modeling",
+   "topic": "Evaluating",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_assumptions_and_limits_of_a_model"
+   ],
+   "keywords": [
+    "evaluate",
+    "fit",
+    "residual"
+   ],
+   "summary": "A model is evaluated by comparing its predictions with observed values, and a pattern in the residuals shows the family is wrong rather than merely imprecise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "act_math_law_of_sines_and_law_of_cosines",
+   "title": "Law of Sines and Law of Cosines",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Similarity, Right Triangles, and Trigonometry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_pythagorean_theorem_and_its_converse"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "law of cosines",
+    "law of sines",
+    "oblique triangle"
+   ],
+   "summary": "The law of sines relates each side to the sine of its opposite angle, and the law of cosines extends the Pythagorean theorem to triangles without a right angle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "act_math_logarithms_as_inverses",
+   "title": "Logarithms as Inverses",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Exponential and Logarithmic Functions",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_exponential_growth_and_decay"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "domain",
+    "inverse",
+    "logarithm"
+   ],
+   "summary": "log_b x is the exponent that turns b into x, so it inverts b^x and accepts only positive inputs because no power of b is zero or negative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "act_math_matrix_dimensions_and_products",
+   "title": "Matrix Dimensions and Products",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Vectors and Matrices",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_vector_addition_and_scalar_multiplication"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dimension",
+    "matrix",
+    "product"
+   ],
+   "summary": "A product AB exists only when the column count of A equals the row count of B, and matrix multiplication is not commutative in general.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "act_math_measures_of_center",
+   "title": "Measures of Center",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Univariate Data Analysis",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_density_and_geometric_modelling"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mean",
+    "median",
+    "skew"
+   ],
+   "summary": "The mean is pulled toward a skew or an outlier while the median is not, so the median better describes a typical value in a skewed distribution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "act_math_measures_of_spread",
+   "title": "Measures of Spread",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Univariate Data Analysis",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_measures_of_center"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interquartile range",
+    "range",
+    "standard deviation"
+   ],
+   "summary": "Range, interquartile range, and standard deviation all measure spread, and the interquartile range resists outliers as the median does.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "act_math_multiplying_and_dividing_polynomials",
+   "title": "Multiplying and Dividing Polynomials",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Polynomial Expressions and Equations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_remainder_and_factor_theorems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "long division",
+    "monomial",
+    "polynomial product"
+   ],
+   "summary": "Every term of one polynomial multiplies every term of the other, and division by a monomial distributes over the terms while division by a binomial needs long division.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "act_math_null_hypotheses_and_p_values",
+   "title": "Null Hypotheses and p-Values",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Introduction to Formal Inferential Statistics",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_the_central_limit_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "null hypothesis",
+    "p-value",
+    "significance"
+   ],
+   "summary": "A hypothesis test compares the observed statistic with what the null hypothesis predicts, and a small p-value means the observation is unlikely under that null.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "act_math_perimeter_circumference_and_area",
+   "title": "Perimeter, Circumference, and Area",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Geometric Measurement and Modeling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_chords_tangents_and_secants"
+   ],
+   "keywords": [
+    "area",
+    "perimeter",
+    "scale factor"
+   ],
+   "summary": "Area scales as the square of a length scale factor, so doubling every dimension of a figure multiplies its area by four.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "act_math_period_amplitude_and_midline",
+   "title": "Period, Amplitude, and Midline",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Trigonometric Functions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_unit_circle_and_radian_measure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplitude",
+    "midline",
+    "period"
+   ],
+   "summary": "For y = A sin(Bx + C) + D the amplitude is |A|, the period is 2pi/|B|, and the midline is y = D, so each parameter changes one visible feature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "act_math_permutations_count_ordered_arrangements",
+   "title": "Permutations Count Ordered Arrangements",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Counting, Permutations, and Combinations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_the_multiplication_principle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factorial",
+    "order",
+    "permutation"
+   ],
+   "summary": "The number of ordered arrangements of r items chosen from n distinct items is n!/(n - r)!, because a different order is a different arrangement.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "act_math_power_of_a_product_and_power_of_a_power",
+   "title": "Power of a Product and Power of a Power",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Properties of Exponents",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_zero_negative_and_fractional_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common error",
+    "distribute",
+    "power rule"
+   ],
+   "summary": "(ab)^n equals a^n b^n and (a^m)^n equals a^(mn), but (a+b)^n is not a^n + b^n because an exponent does not distribute over a sum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "act_math_precision_and_significant_figures",
+   "title": "Precision and Significant Figures",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Quantities and Units",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_dimensional_analysis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "precision",
+    "rounding",
+    "significant figures"
+   ],
+   "summary": "A computed result carries no more precision than its least precise input, so a calculator display is rounded to that precision rather than quoted whole.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "act_math_probability_as_a_long_run_proportion",
+   "title": "Probability as a Long-Run Proportion",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Rules of Probability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_null_hypotheses_and_p_values"
+   ],
+   "keywords": [
+    "event",
+    "long run",
+    "probability"
+   ],
+   "summary": "A probability lies between 0 and 1 and equals the proportion of trials in which the event occurs as the number of trials grows without bound.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "act_math_probability_from_equally_likely_outcomes",
+   "title": "Probability from Equally Likely Outcomes",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Basic Probability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_inference_from_a_sample"
+   ],
+   "keywords": [
+    "equally likely",
+    "favorable outcomes",
+    "sample space"
+   ],
+   "summary": "When outcomes are equally likely the probability of an event is the number of favourable outcomes divided by the total number of outcomes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "act_math_product_and_quotient_rules",
+   "title": "Product and Quotient Rules",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Properties of Exponents",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_density_and_ordering_on_the_number_line"
+   ],
+   "keywords": [
+    "base",
+    "product rule",
+    "quotient rule"
+   ],
+   "summary": "For a nonzero base a, a^m times a^n is a^(m+n) and a^m divided by a^n is a^(m-n), because multiplying counts factors and dividing cancels them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "act_math_pythagorean_theorem_and_its_converse",
+   "title": "Pythagorean Theorem and Its Converse",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Similarity, Right Triangles, and Trigonometry",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_similar_triangles_and_proportional_sides"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "converse",
+    "hypotenuse",
+    "pythagorean theorem"
+   ],
+   "summary": "In a right triangle the square of the hypotenuse equals the sum of the squares of the legs, and the converse guarantees a triangle satisfying it is right.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "act_math_rational_numbers_as_ratios",
+   "title": "Rational Numbers as Ratios",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Rational and Irrational Numbers",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ratio",
+    "rational number",
+    "terminating decimal"
+   ],
+   "summary": "A number is rational exactly when it equals a ratio of two integers, and its decimal expansion then terminates or repeats a fixed block.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "act_math_reading_a_scatterplot",
+   "title": "Reading a Scatterplot",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Scatterplots",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_right_triangles_and_the_distance_formula"
+   ],
+   "keywords": [
+    "outlier",
+    "scatterplot",
+    "trend"
+   ],
+   "summary": "A scatterplot is read for direction, strength, and form of association, and a point far off the pattern is an outlier that can dominate a fitted line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "act_math_reading_parameters_and_outputs_in_context",
+   "title": "Reading Parameters and Outputs in Context",
+   "strand": "Modeling",
+   "unit": "Modeling",
+   "topic": "Interpreting",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_building_a_model_from_a_context"
+   ],
+   "keywords": [
+    "interpret",
+    "prediction",
+    "units"
+   ],
+   "summary": "Interpreting a model means stating what each parameter and each predicted output means in the situation, including its units and the interval where it applies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "act_math_recognising_irrational_numbers",
+   "title": "Recognising Irrational Numbers",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Rational and Irrational Numbers",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_rational_numbers_as_ratios"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "irrational number",
+    "non-repeating",
+    "square root"
+   ],
+   "summary": "A number is irrational when no ratio of integers equals it, so its decimal neither terminates nor repeats, as with the square root of 2.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "act_math_recursive_versus_explicit_rules",
+   "title": "Recursive versus Explicit Rules",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Sequences and Series",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_geometric_sequences_and_their_sums"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "explicit rule",
+    "nth term",
+    "recursive rule"
+   ],
+   "summary": "A recursive rule needs a starting term and the previous term, while an explicit rule gives any term from its position alone, which is what makes a distant term computable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "act_math_remainder_and_factor_theorems",
+   "title": "Remainder and Factor Theorems",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Polynomial Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_degree_zeros_and_end_behaviour"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor theorem",
+    "remainder theorem",
+    "zero"
+   ],
+   "summary": "Dividing p(x) by x - c leaves remainder p(c), so c is a zero of p exactly when x - c is a factor of p.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "act_math_restricted_domains_of_rational_expressions",
+   "title": "Restricted Domains of Rational Expressions",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Rational and Radical Expressions and Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_sign_analysis_of_a_quadratic_inequality"
+   ],
+   "keywords": [
+    "domain",
+    "rational expression",
+    "undefined"
+   ],
+   "summary": "A rational expression is undefined where its denominator is zero, so those values are excluded before a common factor is cancelled.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "act_math_reversing_an_inequality",
+   "title": "Reversing an Inequality",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Linear Expressions, Equations, and Inequalities",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_solving_linear_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inequality",
+    "negative factor",
+    "reverse symbol"
+   ],
+   "summary": "Multiplying or dividing both sides of an inequality by a negative number reverses the symbol, because that operation reflects the number line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "act_math_revising_a_model",
+   "title": "Revising a Model",
+   "strand": "Modeling",
+   "unit": "Modeling",
+   "topic": "Improving",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_judging_a_model_against_data"
+   ],
+   "keywords": [
+    "iteration",
+    "refit",
+    "revise"
+   ],
+   "summary": "Improving a model means changing the family, the interval, or the measurements in response to the residual pattern and then re-checking the new predictions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "act_math_right_triangle_ratios",
+   "title": "Right-Triangle Ratios",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Trigonometric Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_recursive_versus_explicit_rules"
+   ],
+   "keywords": [
+    "cosine",
+    "sine",
+    "tangent"
+   ],
+   "summary": "In a right triangle sine, cosine, and tangent are fixed ratios of two sides, so one acute angle and one side determine the remaining sides.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "act_math_right_triangles_and_the_distance_formula",
+   "title": "Right Triangles and the Distance Formula",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Pythagorean Theorem",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_slope_midpoint_and_distance_from_coordinates"
+   ],
+   "keywords": [
+    "distance formula",
+    "hypotenuse",
+    "pythagorean theorem"
+   ],
+   "summary": "In a right triangle the hypotenuse squared equals the sum of the legs squared, and the coordinate distance formula is that theorem applied to the two coordinate differences.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "act_math_rigid_motions_preserve_congruence",
+   "title": "Rigid Motions Preserve Congruence",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Transformations, Proof, Reasoning, and Constructions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_solving_exponential_and_logarithmic_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "congruence",
+    "isometry",
+    "rigid motion"
+   ],
+   "summary": "Translations, rotations, and reflections preserve every length and angle, so a figure and its image under a rigid motion are congruent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "act_math_samples_and_populations",
+   "title": "Samples and Populations",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Introduction to Formal Inferential Statistics",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_correlation_and_prediction"
+   ],
+   "keywords": [
+    "population",
+    "random sampling",
+    "sample"
+   ],
+   "summary": "A statistic computed from a random sample estimates a population parameter, and the sampling method decides whether that estimate can be trusted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "act_math_scatterplots_and_association",
+   "title": "Scatterplots and Association",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Bivariate Data Analysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_shape_from_displays"
+   ],
+   "keywords": [
+    "association",
+    "direction",
+    "scatterplot"
+   ],
+   "summary": "A scatterplot displays the direction, form, and strength of an association between two quantitative variables, which a correlation alone cannot show.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "act_math_setting_up_and_solving_a_proportion",
+   "title": "Setting Up and Solving a Proportion",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Ratio, Proportion, and Percent",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_signed_arithmetic_and_order_of_operations"
+   ],
+   "keywords": [
+    "cross multiply",
+    "percent",
+    "proportion"
+   ],
+   "summary": "A proportion states two equal ratios, and cross multiplication clears the denominators, which is the same step as multiplying both sides by their product.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "act_math_shape_from_displays",
+   "title": "Shape from Displays",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Univariate Data Analysis",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_measures_of_spread"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "box plot",
+    "distribution shape",
+    "histogram"
+   ],
+   "summary": "A histogram or box plot shows shape, centre, spread, and outliers together, and no single summary statistic can reveal a second peak.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "act_math_sign_analysis_of_a_quadratic_inequality",
+   "title": "Sign Analysis of a Quadratic Inequality",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Quadratic Expressions, Equations, and Inequalities",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_the_quadratic_formula_and_discriminant"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "quadratic inequality",
+    "roots",
+    "sign chart"
+   ],
+   "summary": "A quadratic inequality is solved from its zeros and the sign of the leading coefficient: an upward parabola is positive outside its roots and negative between them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "act_math_signed_arithmetic_and_order_of_operations",
+   "title": "Signed Arithmetic and Order of Operations",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Computation and Problem Solving with Real Numbers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_field_properties_of_real_numbers"
+   ],
+   "keywords": [
+    "order of operations",
+    "precedence",
+    "signed numbers"
+   ],
+   "summary": "Grouping and exponents are evaluated first, then multiplication and division left to right, then addition and subtraction, with sign rules applied at each step.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "act_math_similar_triangles_and_proportional_sides",
+   "title": "Similar Triangles and Proportional Sides",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Similarity, Right Triangles, and Trigonometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_deductive_reasoning_and_counterexamples"
+   ],
+   "keywords": [
+    "corresponding sides",
+    "proportion",
+    "similar triangles"
+   ],
+   "summary": "Two triangles are similar when two pairs of corresponding angles agree, and then every pair of corresponding sides shares one ratio.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "act_math_slope_criteria_for_parallel_and_perpendicular_lines",
+   "title": "Slope Criteria for Parallel and Perpendicular Lines",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Coordinate Geometry",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_distance_and_midpoint"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parallel",
+    "perpendicular",
+    "slope"
+   ],
+   "summary": "Two nonvertical lines are parallel exactly when their slopes are equal and perpendicular exactly when their slopes have product -1.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "act_math_slope_midpoint_and_distance_from_coordinates",
+   "title": "Slope, Midpoint, and Distance from Coordinates",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "The Coordinate Plane",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_volume_and_surface_area_formulas"
+   ],
+   "keywords": [
+    "distance",
+    "midpoint",
+    "slope"
+   ],
+   "summary": "Between two points the slope is the ratio of the coordinate differences, the midpoint averages the coordinates, and the distance is the hypotenuse of those differences.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "act_math_solving_a_formula_for_a_variable",
+   "title": "Solving a Formula for a Variable",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Linear Expressions, Equations, and Inequalities",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_reversing_an_inequality"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "formula",
+    "literal equation",
+    "rearrange"
+   ],
+   "summary": "Rearranging a formula for a named variable treats every other variable as a constant, so the inverse operations are applied in reverse order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "act_math_solving_exponential_and_logarithmic_equations",
+   "title": "Solving Exponential and Logarithmic Equations",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Exponential and Logarithmic Functions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_logarithms_as_inverses"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check domain",
+    "exponential equation",
+    "logarithmic equation"
+   ],
+   "summary": "An exponential equation yields to a logarithm of both sides and a logarithmic equation to rewriting it in exponential form, with every candidate checked against the domain.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "act_math_solving_linear_equations",
+   "title": "Solving Linear Equations",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Linear Expressions, Equations, and Inequalities",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "act_math_precision_and_significant_figures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balance",
+    "inverse operation",
+    "linear equation"
+   ],
+   "summary": "A linear equation is solved by applying the same operation to both sides until the variable stands alone, which preserves the solution set at every step.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "act_math_standard_forms_of_the_conics",
+   "title": "Standard Forms of the Conics",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Conic Sections",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_equations_of_circles_in_the_plane"
+   ],
+   "keywords": [
+    "axis",
+    "conic",
+    "standard form"
+   ],
+   "summary": "Each conic has a standard form whose parameters display its centre or vertex, its axis, and its size, so a shape is identified from its equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "act_math_substitution_and_elimination",
+   "title": "Substitution and Elimination",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Systems of Equations and Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_multiplying_and_dividing_polynomials"
+   ],
+   "keywords": [
+    "elimination",
+    "substitution",
+    "system"
+   ],
+   "summary": "Substitution or elimination reduces a system of two linear equations to one equation in one variable, and the second variable follows by back substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "act_math_surface_area_and_volume",
+   "title": "Surface Area and Volume",
+   "strand": "Geometry",
+   "unit": "Geometry",
+   "topic": "Geometric Measurement and Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_perimeter_circumference_and_area"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "similar solids",
+    "surface area",
+    "volume"
+   ],
+   "summary": "Volume scales as the cube of a length scale factor while surface area scales as its square, so doubling a solid multiplies volume by eight and surface area by four.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "act_math_the_central_limit_theorem",
+   "title": "The Central Limit Theorem",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Introduction to Formal Inferential Statistics",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_samples_and_populations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "central limit theorem",
+    "sample mean",
+    "standard error"
+   ],
+   "summary": "For a large random sample the sample mean is approximately normal with mean mu and standard deviation sigma over the square root of n, whatever the population shape.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "act_math_the_complex_conjugate",
+   "title": "The Complex Conjugate",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Complex Numbers",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_arithmetic_with_complex_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "complex division",
+    "conjugate",
+    "real number"
+   ],
+   "summary": "Multiplying a + bi by its conjugate a - bi gives the real number a^2 + b^2, which is how a complex denominator is cleared.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "act_math_the_imaginary_unit",
+   "title": "The Imaginary Unit",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Complex Numbers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_matrix_dimensions_and_products"
+   ],
+   "keywords": [
+    "complex number",
+    "imaginary unit",
+    "square root"
+   ],
+   "summary": "The imaginary unit i satisfies i^2 = -1, which makes x^2 + 1 = 0 solvable and gives every negative real number two square roots.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "act_math_the_least_squares_regression_line",
+   "title": "The Least-Squares Regression Line",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Bivariate Data Analysis",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_scatterplots_and_association"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "least squares",
+    "regression line",
+    "residual"
+   ],
+   "summary": "The least-squares line minimises the sum of squared residuals, so it balances prediction errors rather than passing through the most data points.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "act_math_the_multiplication_principle",
+   "title": "The Multiplication Principle",
+   "strand": "Statistics and Probability",
+   "unit": "Statistics and Probability",
+   "topic": "Counting, Permutations, and Combinations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_conditional_probability_and_independence"
+   ],
+   "keywords": [
+    "counting principle",
+    "outcomes",
+    "stages"
+   ],
+   "summary": "If one stage can be done in m ways and the next in n ways, the two stages together can be done in mn ways, which multiplies through any number of stages.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "act_math_the_quadratic_formula_and_discriminant",
+   "title": "The Quadratic Formula and Discriminant",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Quadratic Expressions, Equations, and Inequalities",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_factoring_and_the_zero_product_property"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discriminant",
+    "quadratic formula",
+    "real solutions"
+   ],
+   "summary": "For ax^2 + bx + c = 0 with a not zero, x = (-b +/- sqrt(b^2 - 4ac))/(2a), and the sign of b^2 - 4ac gives two, one, or no real solutions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "act_math_the_three_solution_cases",
+   "title": "The Three Solution Cases",
+   "strand": "Algebra",
+   "unit": "Algebra",
+   "topic": "Systems of Equations and Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_substitution_and_elimination"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "consistent",
+    "dependent",
+    "inconsistent"
+   ],
+   "summary": "Two lines in a plane meet once, never, or at every point, so a linear system has exactly one solution, none, or infinitely many.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "act_math_transformations_of_graphs",
+   "title": "Transformations of Graphs",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Composition, Transformation, and Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_composition_of_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "reflection",
+    "stretch",
+    "translation"
+   ],
+   "summary": "Adding a constant to the output shifts a graph vertically, adding inside the input shifts it horizontally in the opposite direction, and a factor stretches or reflects it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "act_math_translating_words_into_symbols",
+   "title": "Translating Words into Symbols",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Writing Algebraic Expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_setting_up_and_solving_a_proportion"
+   ],
+   "keywords": [
+    "expression",
+    "grouping",
+    "translate"
+   ],
+   "summary": "Each operation word maps to one symbol and order words such as twice the sum fix the grouping, so a phrase is translated one operation at a time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "act_math_unit_circle_and_radian_measure",
+   "title": "Unit Circle and Radian Measure",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Trigonometric Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_right_triangle_ratios"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coordinates",
+    "radian",
+    "unit circle"
+   ],
+   "summary": "On the unit circle the cosine and sine of an angle are the coordinates of the point it reaches, and pi radians equal 180 degrees.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "act_math_units_as_part_of_the_quantity",
+   "title": "Units as Part of the Quantity",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Quantities and Units",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_the_complex_conjugate"
+   ],
+   "keywords": [
+    "measurement",
+    "quantity",
+    "units"
+   ],
+   "summary": "A measurement is a number together with a unit, so an answer that lacks the unit the question asked for has not answered the question.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "act_math_vector_addition_and_scalar_multiplication",
+   "title": "Vector Addition and Scalar Multiplication",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Vectors and Matrices",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "act_math_vector_components_and_magnitude"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "direction",
+    "scalar",
+    "vector addition"
+   ],
+   "summary": "Vectors add component by component and scale by multiplying each component, so a negative scalar reverses direction without changing the line of action.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "act_math_vector_components_and_magnitude",
+   "title": "Vector Components and Magnitude",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Vectors and Matrices",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_power_of_a_product_and_power_of_a_power"
+   ],
+   "keywords": [
+    "components",
+    "magnitude",
+    "vector"
+   ],
+   "summary": "A plane vector is an ordered pair of components, and its magnitude is the square root of the sum of their squares, which is a distance in the plane.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "act_math_volume_and_surface_area_formulas",
+   "title": "Volume and Surface Area Formulas",
+   "strand": "Integrating Essential Skills",
+   "unit": "Integrating Essential Skills",
+   "topic": "Surface Area and Volume",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "act_math_area_of_composite_figures"
+   ],
+   "keywords": [
+    "solid",
+    "surface area",
+    "volume"
+   ],
+   "summary": "A prism or cylinder has volume equal to base area times height, a pyramid or cone has one third of that, and surface area sums the exposed faces.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "act_math_zero_negative_and_fractional_exponents",
+   "title": "Zero, Negative, and Fractional Exponents",
+   "strand": "Number and Quantity",
+   "unit": "Number and Quantity",
+   "topic": "Properties of Exponents",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "act_math_product_and_quotient_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative exponent",
+    "rational exponent",
+    "zero exponent"
+   ],
+   "summary": "For nonzero a, a^0 is 1 and a^(-n) is 1/a^n, while a^(m/n) is the nth root of a^m whenever that root is a real number.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  }
+ ]
+}

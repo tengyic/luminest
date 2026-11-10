@@ -1,134 +1,150 @@
 {
- "course": "AP Chemistry - Structure, Reactions and Thermodynamics",
+ "course": "AP Chemistry - Structure, Equilibrium and Energy",
  "licence": "cc0",
  "source_url": "",
  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
- "description": "The AP Chemistry course framework: atomic structure and properties, compound structure and properties, properties of substances and mixtures, chemical reactions, kinetics, thermodynamics, equilibrium, acids and bases, and applications of thermodynamics.",
+ "description": "A college-level chemistry course organised around the nine AP units: atomic structure and properties, compound structure, the properties of substances and mixtures, chemical reactions, kinetics, thermochemistry, equilibrium, acids and bases, and thermodynamics with electrochemistry. Each unit works from the particulate, symbolic and graphical representations an AP exam question moves between, and every quantitative claim is tied to the condition under which it holds.",
  "expected_weeks": 34,
  "strands": [
   {
    "strand": "Atomic Structure and Properties",
    "units": [
     {
-     "unit": "Atoms and the mole",
+     "unit": "Atomic Structure and Properties",
      "topics": [
       {
-       "topic": "Moles and atomic structure",
+       "topic": "Moles and Molar Mass",
        "concepts": [
         {
-         "title": "Moles and molar mass",
-         "summary": "A mole is Avogadro's number of particles, which converts between mass and number of particles.",
+         "title": "The Mole and Molar Mass",
+         "summary": "One mole contains 6.022 x 10^23 entities, and the molar mass in grams per mole is numerically equal to the average atomic or formula mass in u, so a measured mass becomes a particle count through one ratio.",
          "keywords": [
           "mole",
           "molar mass",
-          "Avogadro"
-         ]
-        },
-        {
-         "title": "Isotopes and average atomic mass",
-         "summary": "An element's atomic mass is the abundance-weighted average of its isotopes.",
-         "keywords": [
-          "isotope",
-          "abundance",
-          "atomic mass"
-         ],
-         "prerequisites": [
-          "Moles and molar mass"
-         ]
-        },
-        {
-         "title": "Mass spectrometry",
-         "summary": "A mass spectrum measures isotope masses and abundances, which gives atomic mass and can identify a molecule.",
-         "keywords": [
-          "mass spectrometry",
-          "molecular ion",
-          "isotope pattern"
-         ],
-         "prerequisites": [
-          "Isotopes and average atomic mass"
-         ]
-        },
-        {
-         "title": "The mole and empirical formulae",
-         "summary": "Percentage composition converts to a mole ratio, which gives the empirical formula.",
-         "keywords": [
-          "empirical formula",
-          "percent composition",
-          "mole ratio"
-         ],
-         "prerequisites": [
-          "Moles and molar mass"
+          "avogadro"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Electrons in atoms",
-     "prerequisites": [
-      "Atoms and the mole"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Electronic structure",
+       "topic": "Mass Spectra of Elements",
        "concepts": [
         {
-         "title": "Electron configuration",
-         "summary": "Electrons fill orbitals in order of energy, following the aufbau principle and Hund's rule.",
+         "title": "Reading a Mass Spectrum",
+         "summary": "Each peak of a mass spectrum sits at the mass of a single isotope and its relative height is that isotope fraction, so the peak pattern gives the element isotope composition without any chemical separation.",
          "keywords": [
-          "electron configuration",
-          "orbital",
-          "aufbau"
+          "mass spectrum",
+          "isotope",
+          "abundance"
          ]
         },
         {
-         "title": "Photoelectron spectroscopy",
-         "summary": "A photoelectron spectrum reports the binding energy of each electron shell and subshell.",
+         "title": "Average Atomic Mass from Isotope Abundances",
+         "summary": "The average atomic mass is the sum of each isotope mass times its fractional abundance, so an element whose heaviest isotope dominates has a tabulated mass close to that isotope and never outside the isotope range.",
          "keywords": [
-          "photoelectron spectroscopy",
-          "binding energy",
-          "subshell"
+          "atomic mass",
+          "weighted average",
+          "isotope"
          ],
          "prerequisites": [
-          "Electron configuration"
+          "Reading a Mass Spectrum"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Elemental Composition of Pure Substances",
+       "concepts": [
         {
-         "title": "Coulomb's law and atomic structure",
-         "summary": "The attraction between nucleus and electrons depends on charge and distance, which explains periodic trends.",
+         "title": "Percent Composition from a Formula",
+         "summary": "Percent composition is the total mass of one element in a mole of the compound divided by the molar mass, so for a pure compound it is fixed by the formula and independent of sample size.",
          "keywords": [
-          "Coulomb's law",
+          "percent composition",
+          "mass fraction",
+          "formula"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Composition of Mixtures",
+       "concepts": [
+        {
+         "title": "Mass Percent of a Component in a Mixture",
+         "summary": "A mixture mass percent is the mass of one component divided by the total mixture mass, and unlike percent composition it varies between samples because a mixture carries no fixed formula.",
+         "keywords": [
+          "mass percent",
+          "mixture",
+          "composition"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Atomic Structure and Electron Configuration",
+       "concepts": [
+        {
+         "title": "Coulomb's Law and Effective Nuclear Charge",
+         "summary": "Coulomb's law makes the nucleus-electron attraction grow with the product of the charges and fall with the square of the separation, and because inner electrons shield incompletely the effective nuclear charge still rises left to right across a period.",
+         "keywords": [
+          "coulomb",
           "effective nuclear charge",
           "shielding"
-         ],
-         "prerequisites": [
-          "Electron configuration"
          ]
         },
         {
-         "title": "Periodic trends",
-         "summary": "Atomic radius, ionisation energy, electron affinity and electronegativity follow from nuclear charge and shielding.",
+         "title": "Orbital Filling and Electron Configuration",
+         "summary": "Electrons occupy the lowest-energy orbital available, filling 4s before 3d and leaving degenerate p orbitals singly occupied with parallel spins before any pairing, which is why a configuration predicts unpaired electrons and paramagnetism.",
          "keywords": [
-          "periodic trend",
-          "ionisation energy",
-          "electronegativity"
+          "electron configuration",
+          "aufbau",
+          "hund's rule"
          ],
          "prerequisites": [
-          "Coulomb's law and atomic structure"
+          "Coulomb's Law and Effective Nuclear Charge"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Photoelectron Spectroscopy",
+       "concepts": [
         {
-         "title": "Valence electrons and the periodic table",
-         "summary": "Group position gives the valence configuration, which predicts an element's chemistry.",
+         "title": "Photoelectron Spectra and Subshell Energies",
+         "summary": "Each photoelectron peak gives the binding energy of one subshell as the photon energy minus the ejected electron kinetic energy, and its area is proportional to the number of electrons in that subshell.",
          "keywords": [
-          "valence electron",
-          "group",
-          "periodic table"
-         ],
-         "prerequisites": [
-          "Periodic trends"
+          "photoelectron",
+          "binding energy",
+          "subshell"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Periodic Trends",
+       "concepts": [
+        {
+         "title": "Radius and Ionization Energy Trends",
+         "summary": "Atomic radius falls across a period as effective nuclear charge rises and grows down a group as shells are added, and first ionization energy follows the opposite pattern apart from two dips: group 13 loses a lone p electron from a higher sublevel and group 16 loses one electron of a paired set.",
+         "keywords": [
+          "atomic radius",
+          "ionization energy",
+          "trend"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Valence Electrons and Ionic Compounds",
+       "concepts": [
+        {
+         "title": "Valence Electrons and Main-Group Ion Charges",
+         "summary": "Main-group atoms gain or lose electrons to reach a noble-gas configuration, so group 1 and 2 metals form 1+ and 2+ cations while group 16 and 17 nonmetals form 2- and 1- anions.",
+         "keywords": [
+          "valence electrons",
+          "ion charge",
+          "octet"
          ]
         }
        ]
@@ -141,108 +157,133 @@
    "strand": "Compound Structure and Properties",
    "units": [
     {
-     "unit": "Bonding and geometry",
-     "prerequisites": [
-      "Electrons in atoms"
-     ],
+     "unit": "Compound Structure and Properties",
      "topics": [
       {
-       "topic": "How atoms bond",
+       "topic": "Types of Chemical Bonds",
        "concepts": [
         {
-         "title": "Types of chemical bonds",
-         "summary": "Bonds range from ionic to covalent to metallic, and the type follows from electronegativity difference.",
+         "title": "The Ionic-Covalent Continuum",
+         "summary": "A bond is largely ionic once the electronegativity difference exceeds roughly 1.7 and largely covalent when the difference is small, so the two labels mark the ends of one continuum rather than two kinds of bond.",
          "keywords": [
+          "electronegativity",
           "ionic bond",
-          "covalent bond",
-          "metallic bond"
+          "covalent bond"
          ]
         },
         {
-         "title": "Ionic bonding and lattice energy",
-         "summary": "Lattice energy grows with charge and shrinks with ion size, which controls melting point and solubility.",
+         "title": "Bond Polarity and Molecular Dipole Moments",
+         "summary": "A polar bond carries a dipole towards its more electronegative atom, but a molecule has a net dipole only when symmetry leaves the bond dipoles unable to cancel, which is why carbon dioxide is nonpolar.",
          "keywords": [
-          "lattice energy",
-          "ionic solid",
-          "Coulomb"
-         ],
-         "prerequisites": [
-          "Types of chemical bonds"
-         ]
-        },
-        {
-         "title": "Covalent bonding and Lewis structures",
-         "summary": "Lewis structures show shared and lone pairs and predict bond order and geometry.",
-         "keywords": [
-          "Lewis structure",
-          "lone pair",
-          "bond order"
-         ],
-         "prerequisites": [
-          "Types of chemical bonds"
-         ]
-        },
-        {
-         "title": "Resonance and formal charge",
-         "summary": "Resonance spreads electrons over several positions, and formal charge selects the best structure.",
-         "keywords": [
-          "resonance",
-          "formal charge"
-         ],
-         "prerequisites": [
-          "Covalent bonding and Lewis structures"
-         ]
-        },
-        {
-         "title": "VSEPR and molecular geometry",
-         "summary": "Electron domains repel and arrange as far apart as possible, which sets the shape.",
-         "keywords": [
-          "VSEPR",
-          "molecular geometry",
-          "bond angle"
-         ],
-         "prerequisites": [
-          "Covalent bonding and Lewis structures"
-         ]
-        },
-        {
-         "title": "Hybridisation and bonding models",
-         "summary": "Mixing atomic orbitals explains observed geometries and bond angles.",
-         "keywords": [
-          "hybridisation",
-          "sp",
-          "sp2",
-          "sp3"
-         ],
-         "prerequisites": [
-          "VSEPR and molecular geometry"
-         ]
-        },
-        {
-         "title": "Polarity and dipole moments",
-         "summary": "Polar bonds plus an asymmetric shape produce a net dipole, which controls intermolecular forces.",
-         "keywords": [
+          "dipole moment",
           "polarity",
-          "dipole moment"
+          "symmetry"
          ],
          "prerequisites": [
-          "VSEPR and molecular geometry"
+          "The Ionic-Covalent Continuum"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Intramolecular Force and Potential Energy",
+       "concepts": [
+        {
+         "title": "Potential Energy Curves for Covalent Bonds",
+         "summary": "A bond potential energy falls to a minimum at the equilibrium bond length and climbs steeply at shorter distances as the nuclei repel, so the depth of that well measures bond strength and, between the same two elements, a shorter equilibrium distance belongs to the deeper well.",
+         "keywords": [
+          "potential energy",
+          "bond length",
+          "bond energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Structure of Ionic Solids",
+       "concepts": [
+        {
+         "title": "Ionic Lattice Structure and Coordination",
+         "summary": "An ionic solid is a three-dimensional lattice in which every ion is surrounded by counter-ions, and its lattice energy grows with the product of the ionic charges and shrinks as the ions become larger.",
+         "keywords": [
+          "ionic lattice",
+          "coordination number",
+          "lattice energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Structure of Metals and Alloys",
+       "concepts": [
+        {
+         "title": "Metallic Bonding and Alloys",
+         "summary": "Metal cations are held by a delocalised sea of valence electrons, which explains conductivity and malleability, and an alloy distorts that lattice by substituting or inserting atoms of a different size.",
+         "keywords": [
+          "metallic bond",
+          "delocalized electrons",
+          "alloy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Lewis Diagrams",
+       "concepts": [
+        {
+         "title": "Drawing Lewis Diagrams",
+         "summary": "A Lewis diagram is built by counting all valence electrons, bonding the skeleton with single bonds, completing outer octets, then placing any remainder on the central atom or forming multiple bonds until it reaches an octet.",
+         "keywords": [
+          "lewis diagram",
+          "octet",
+          "lone pair"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Resonance and Formal Charge",
+       "concepts": [
+        {
+         "title": "Formal Charge and Resonance Hybrids",
+         "summary": "Formal charge is the valence-electron count minus the electrons an atom owns in the diagram, and the preferred structure minimises it, while forms that differ only in electron placement are resonance contributors to one delocalised hybrid.",
+         "keywords": [
+          "formal charge",
+          "resonance",
+          "delocalization"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "VSEPR and Hybridization",
+       "concepts": [
+        {
+         "title": "Electron-Domain Geometry and Molecular Shape",
+         "summary": "Electron domains spread to the arrangement that maximises their separation, and a lone pair occupies more angular space than a bonding pair, so a tetrahedral domain set becomes trigonal pyramidal or bent when lone pairs are present.",
+         "keywords": [
+          "vsepr",
+          "electron domain",
+          "bond angle"
          ]
         },
         {
-         "title": "Intermolecular forces",
-         "summary": "London dispersion, dipole-dipole and hydrogen bonding set boiling point and solubility.",
+         "title": "Hybridization and Sigma versus Pi Bonds",
+         "summary": "Mixing one s with one, two or three p orbitals gives sp, sp2 or sp3 hybrids whose directions match the observed linear, trigonal planar or tetrahedral angles, and the untouched p orbitals form the pi bond of a double or triple bond.",
          "keywords": [
-          "intermolecular force",
-          "hydrogen bond",
-          "dispersion"
+          "hybridization",
+          "sigma bond",
+          "pi bond"
          ],
          "prerequisites": [
-          "Polarity and dipole moments"
+          "Electron-Domain Geometry and Molecular Shape"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Atomic Structure and Properties"
      ]
     }
    ]
@@ -251,129 +292,217 @@
    "strand": "Properties of Substances and Mixtures",
    "units": [
     {
-     "unit": "States, gases and solutions",
-     "prerequisites": [
-      "Bonding and geometry"
-     ],
+     "unit": "Properties of Substances and Mixtures",
      "topics": [
       {
-       "topic": "Bulk properties",
+       "topic": "Intermolecular and Interparticle Forces",
        "concepts": [
         {
-         "title": "Solids, liquids and gases",
-         "summary": "The kinetic energy of particles relative to intermolecular forces decides the state.",
+         "title": "London Dispersion Forces and Polarizability",
+         "summary": "Every pair of particles attracts through instantaneous dipoles, and the force strengthens with polarizability and contact area, which is why the halogens boil at higher temperatures down the group.",
+         "keywords": [
+          "dispersion",
+          "polarizability",
+          "boiling point"
+         ]
+        },
+        {
+         "title": "Hydrogen Bonding and Dipole-Dipole Forces",
+         "summary": "A hydrogen bond is the attraction between hydrogen covalently bound to N, O or F and a lone pair on another such atom, strong enough to give water an unusually high boiling point and enthalpy of vaporisation.",
+         "keywords": [
+          "hydrogen bond",
+          "dipole-dipole",
+          "boiling point"
+         ],
+         "prerequisites": [
+          "London Dispersion Forces and Polarizability"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Solids",
+       "concepts": [
+        {
+         "title": "Order in Crystalline and Amorphous Solids",
+         "summary": "A crystalline solid has a repeating long-range lattice and melts at one temperature, while an amorphous solid lacks that order and softens over a range, so melting behaviour alone distinguishes the two.",
+         "keywords": [
+          "crystalline",
+          "amorphous",
+          "lattice"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solids, Liquids, and Gases",
+       "concepts": [
+        {
+         "title": "Particulate Structure of the Three States",
+         "summary": "Particles of a solid are fixed in place and only vibrate, particles of a liquid stay in contact but slide past one another, and particles of a gas are far apart and fill their container, so density and compressibility follow from the spacing.",
          "keywords": [
           "states of matter",
-          "kinetic energy"
+          "particulate",
+          "compressibility"
          ]
         },
         {
-         "title": "Phase changes and phase diagrams",
-         "summary": "Heating and pressure change the balance of phases, which a phase diagram maps.",
+         "title": "Vapor Pressure and Boiling",
+         "summary": "Vapor pressure rises with temperature as a larger fraction of molecules gains escape energy, and a liquid boils when that pressure equals the external pressure, which is why water boils below 100 degrees Celsius at altitude.",
          "keywords": [
-          "phase change",
-          "phase diagram",
-          "triple point"
+          "vapor pressure",
+          "boiling point",
+          "altitude"
          ],
          "prerequisites": [
-          "Solids, liquids and gases"
+          "Particulate Structure of the Three States"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Ideal Gas Law",
+       "concepts": [
         {
-         "title": "The ideal gas law",
-         "summary": "Pressure, volume, temperature and moles are linked by PV equals nRT.",
+         "title": "The Ideal Gas Law",
+         "summary": "The equation PV = nRT treats particles as point masses with no attractions, so it holds best at low pressure and high temperature and fails when particle volume and intermolecular attraction become significant.",
          "keywords": [
           "ideal gas law",
-          "PV=nRT",
-          "pressure"
-         ],
-         "prerequisites": [
-          "Solids, liquids and gases"
+          "gas constant",
+          "assumptions"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Kinetic Molecular Theory",
+       "concepts": [
         {
-         "title": "Kinetic molecular theory",
-         "summary": "Gas pressure and temperature follow from particle collisions and average kinetic energy.",
+         "title": "Kinetic Molecular Theory and Molecular Speed",
+         "summary": "Average kinetic energy depends only on absolute temperature, so at one temperature all gases share the same average kinetic energy while their root-mean-square speeds differ as the inverse square root of molar mass.",
          "keywords": [
           "kinetic molecular theory",
-          "collision",
-          "temperature"
-         ],
-         "prerequisites": [
-          "The ideal gas law"
+          "kinetic energy",
+          "rms speed"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Deviation from Ideal Gas Law",
+       "concepts": [
         {
-         "title": "Deviations from ideal behaviour",
-         "summary": "Real gases deviate at high pressure and low temperature, where volume and attraction matter.",
+         "title": "Real Gases Deviate in Both Directions",
+         "summary": "For most gases at ordinary temperature, attractions pull the measured pressure below the ideal prediction while the particles own volume pushes it above, so the compressibility factor falls below one at moderate pressure and rises above one at high pressure.",
          "keywords": [
           "real gas",
-          "van der Waals",
+          "compressibility",
           "deviation"
-         ],
-         "prerequisites": [
-          "Kinetic molecular theory"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Solutions and Mixtures",
+       "concepts": [
         {
-         "title": "Solutions and solubility",
-         "summary": "Like dissolves like, and solubility depends on temperature and pressure.",
+         "title": "Solutions Compared with Heterogeneous Mixtures",
+         "summary": "A solution is a homogeneous mixture whose components are dispersed at the particle level and cannot be separated by settling or filtering, while a heterogeneous mixture keeps visibly distinct regions that scatter light or settle on standing.",
          "keywords": [
-          "solubility",
-          "solute",
-          "solvent"
+          "solution",
+          "homogeneous",
+          "mixture"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Representations of Solutions",
+       "concepts": [
         {
-         "title": "Concentration and molarity",
-         "summary": "Molarity expresses moles of solute per litre of solution.",
+         "title": "Molarity and Solution Representations",
+         "summary": "Molarity is moles of solute per litre of solution, so dissolving one mole of a strong electrolyte such as sodium chloride yields two moles of ions, and a particulate drawing must show that doubled count.",
          "keywords": [
           "molarity",
-          "concentration",
-          "dilution"
-         ],
-         "prerequisites": [
-          "Solutions and solubility"
+          "dissociation",
+          "particulate"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Separation of Solutions and Mixtures",
+       "concepts": [
         {
-         "title": "Separating mixtures",
-         "summary": "Distillation, filtration and chromatography separate by differing physical properties.",
+         "title": "Separation by Distillation and Chromatography",
+         "summary": "Distillation separates components by boiling point, while chromatography separates them by differing affinity for a mobile and a stationary phase, so each exploits a physical property rather than a reaction.",
          "keywords": [
           "distillation",
           "chromatography",
-          "filtration"
-         ],
-         "prerequisites": [
-          "Concentration and molarity"
+          "separation"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Solubility",
+       "concepts": [
         {
-         "title": "Colligative properties",
-         "summary": "Vapour pressure, boiling point, freezing point and osmosis depend on particle count, not identity.",
+         "title": "Solubility as a Saturation Equilibrium",
+         "summary": "Solubility is the dissolved concentration in a saturated solution at a given temperature, and it is a property of the solute-solvent pair because the dissolution equilibrium shifts with temperature and with the solvent.",
          "keywords": [
-          "colligative",
-          "boiling point elevation",
-          "osmotic pressure"
-         ],
-         "prerequisites": [
-          "Concentration and molarity"
+          "solubility",
+          "saturated",
+          "equilibrium"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Spectroscopy and the Electromagnetic Spectrum",
+       "concepts": [
         {
-         "title": "Spectrophotometry and the Beer-Lambert law",
-         "summary": "Absorbance is proportional to concentration and path length, which allows concentration to be measured.",
+         "title": "Spectra Record Absorbed and Emitted Photons",
+         "summary": "A spectrum records the wavelengths a sample absorbs or emits, and because each transition needs a photon of matching energy, a line position identifies the species while a line intensity reports how much of it is present.",
          "keywords": [
-          "Beer-Lambert",
+          "spectroscopy",
+          "spectrum",
+          "transition"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Photons",
+       "concepts": [
+        {
+         "title": "Photon Energy and the Electromagnetic Spectrum",
+         "summary": "A photon carries energy equal to h times its frequency, so ultraviolet photons carry enough energy to break some bonds, visible photons excite valence electrons and infrared photons only excite vibrations, which is why the spectral region fixes the kind of interaction.",
+         "keywords": [
+          "photon",
+          "frequency",
+          "electromagnetic spectrum"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Beer-Lambert Law",
+       "concepts": [
+        {
+         "title": "The Beer-Lambert Law",
+         "summary": "Absorbance equals molar absorptivity times path length times concentration, so a calibration curve at one wavelength converts an absorbance reading into an unknown concentration, provided the absorbing species and the instrument settings are unchanged.",
+         "keywords": [
+          "beer-lambert",
           "absorbance",
-          "spectrophotometry"
-         ],
-         "prerequisites": [
-          "Concentration and molarity"
+          "calibration"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Compound Structure and Properties"
      ]
     }
    ]
@@ -382,108 +511,149 @@
    "strand": "Chemical Reactions",
    "units": [
     {
-     "unit": "Reaction types and stoichiometry",
-     "prerequisites": [
-      "States, gases and solutions"
-     ],
+     "unit": "Chemical Reactions",
      "topics": [
       {
-       "topic": "Writing and using reactions",
+       "topic": "Introduction for Reactions",
        "concepts": [
         {
-         "title": "Writing and balancing equations",
-         "summary": "Atoms are conserved, so coefficients must balance every element.",
+         "title": "What Counts as a Chemical Reaction",
+         "summary": "A chemical reaction rearranges atoms so that existing bonds break and new ones form, which is why the same atoms appear on both sides of a balanced equation in different partnerships.",
          "keywords": [
-          "balancing",
-          "chemical equation",
-          "conservation"
+          "chemical reaction",
+          "bond breaking",
+          "rearrangement"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Net Ionic Equations",
+       "concepts": [
         {
-         "title": "Types of reactions",
-         "summary": "Synthesis, decomposition, combustion, precipitation and neutralisation predict products.",
+         "title": "Writing Net Ionic Equations",
+         "summary": "A net ionic equation keeps only the species that change, so ions appearing identically on both sides are cancelled as spectators and every strong electrolyte is written as its separated ions.",
          "keywords": [
-          "reaction type",
-          "precipitation",
-          "combustion"
-         ],
-         "prerequisites": [
-          "Writing and balancing equations"
-         ]
-        },
-        {
-         "title": "Net ionic equations",
-         "summary": "Spectator ions are removed to show the species that actually change.",
-         "keywords": [
-          "net ionic equation",
+          "net ionic",
           "spectator ion",
-          "precipitate"
-         ],
-         "prerequisites": [
-          "Types of reactions"
+          "dissociation"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Representations of Reactions",
+       "concepts": [
         {
-         "title": "Stoichiometry and limiting reactants",
-         "summary": "Mole ratios from the balanced equation give theoretical yield, and the limiting reactant caps it.",
+         "title": "Representing a Reaction at the Particle Level",
+         "summary": "The balanced equation, the particulate drawing and the net ionic equation describe one change at three levels, and any acceptable representation conserves both atoms and charge.",
          "keywords": [
-          "stoichiometry",
+          "particulate",
+          "conservation",
+          "representation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Physical and Chemical Changes",
+       "concepts": [
+        {
+         "title": "Distinguishing Physical from Chemical Change",
+         "summary": "A physical change alters state or form without altering composition, while a chemical change produces new substances and is recognised by a colour change, gas evolution, precipitate or temperature change.",
+         "keywords": [
+          "physical change",
+          "chemical change",
+          "evidence"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Stoichiometry",
+       "concepts": [
+        {
+         "title": "Mole Ratios and the Limiting Reactant",
+         "summary": "Coefficients give the mole ratio linking any two species, and the limiting reactant is the one whose stoichiometric requirement runs out first, so it sets the maximum product while the excess reactant remains.",
+         "keywords": [
+          "mole ratio",
           "limiting reactant",
           "theoretical yield"
-         ],
-         "prerequisites": [
-          "Writing and balancing equations"
          ]
         },
         {
-         "title": "Percent yield",
-         "summary": "Comparing actual with theoretical yield measures how complete and selective a reaction is.",
+         "title": "Percent Yield from the Limiting Reactant",
+         "summary": "Percent yield is the actual product mass divided by the theoretical mass from the limiting reactant, so a result above 100 percent signals an impure or wet product rather than a better reaction.",
          "keywords": [
           "percent yield",
-          "actual yield"
+          "theoretical yield",
+          "purity"
          ],
          "prerequisites": [
-          "Stoichiometry and limiting reactants"
+          "Mole Ratios and the Limiting Reactant"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Titration",
+       "concepts": [
         {
-         "title": "Acid-base reactions",
-         "summary": "Proton transfer reactions neutralise acids and bases and can be followed by titration.",
-         "keywords": [
-          "acid-base",
-          "neutralisation",
-          "proton transfer"
-         ],
-         "prerequisites": [
-          "Types of reactions"
-         ]
-        },
-        {
-         "title": "Oxidation-reduction reactions",
-         "summary": "Electron transfer changes oxidation states, and half-reactions separate the two processes.",
-         "keywords": [
-          "redox",
-          "oxidation state",
-          "half-reaction"
-         ],
-         "prerequisites": [
-          "Net ionic equations"
-         ]
-        },
-        {
-         "title": "Titration",
-         "summary": "A titration uses a known concentration to find an unknown one at the equivalence point.",
+         "title": "Titration and the Equivalence Point",
+         "summary": "A titration reaches equivalence when the added titrant moles match the stoichiometric requirement of the analyte, a point computed from the balanced equation that need not sit at neutral pH.",
          "keywords": [
           "titration",
           "equivalence point",
-          "indicator"
-         ],
-         "prerequisites": [
-          "Acid-base reactions"
+          "stoichiometry"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Types of Chemical Reactions",
+       "concepts": [
+        {
+         "title": "Precipitation, Acid-Base and Redox Classes",
+         "summary": "A precipitation reaction forms an insoluble product from soluble ions, an acid-base reaction transfers a proton and a redox reaction changes oxidation numbers, so the class is identified by what is exchanged.",
+         "keywords": [
+          "precipitation",
+          "neutralization",
+          "classification"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Acid-Base Reactions",
+       "concepts": [
+        {
+         "title": "Proton Transfer in Acid-Base Reactions",
+         "summary": "In an acid-base reaction a proton moves from the acid to the base, giving the conjugate base of the acid and the conjugate acid of the base, and the equilibrium favours the weaker acid and weaker base.",
+         "keywords": [
+          "proton transfer",
+          "conjugate",
+          "acid-base"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Oxidation-Reduction (Redox) Reactions",
+       "concepts": [
+        {
+         "title": "Assigning Oxidation Numbers and Balancing Redox",
+         "summary": "Oxidation numbers follow fixed rules with oxygen at -2 and hydrogen at +1, and a redox equation balances once the electrons lost by oxidation equal the electrons gained by reduction.",
+         "keywords": [
+          "oxidation number",
+          "redox",
+          "half-reaction"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Properties of Substances and Mixtures"
      ]
     }
    ]
@@ -492,192 +662,340 @@
    "strand": "Kinetics",
    "units": [
     {
-     "unit": "Reaction rates",
-     "prerequisites": [
-      "Reaction types and stoichiometry"
-     ],
+     "unit": "Kinetics",
      "topics": [
       {
-       "topic": "How fast reactions go",
+       "topic": "Reaction Rates",
        "concepts": [
         {
-         "title": "Reaction rate",
-         "summary": "Rate is the change in concentration of a reactant or product per unit time.",
+         "title": "Average and Instantaneous Rate",
+         "summary": "Average rate is a concentration change over an interval while instantaneous rate is the tangent slope at one moment, so the two agree only when the rate is constant.",
          "keywords": [
-          "reaction rate",
-          "concentration change"
+          "average rate",
+          "instantaneous rate",
+          "slope"
          ]
         },
         {
-         "title": "Rate laws and reaction order",
-         "summary": "The rate law is determined by experiment, and its orders need not match the stoichiometric coefficients.",
+         "title": "Rate Normalised by Stoichiometric Coefficients",
+         "summary": "Dividing each species concentration change by its coefficient gives a single reaction rate, so a reactant consumed twice as fast as another still yields the same rate value.",
+         "keywords": [
+          "reaction rate",
+          "coefficient",
+          "normalization"
+         ],
+         "prerequisites": [
+          "Average and Instantaneous Rate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Rate Law",
+       "concepts": [
+        {
+         "title": "Determining a Rate Law Experimentally",
+         "summary": "A rate law is determined experimentally, not from the balanced equation, because the exponents reflect the mechanism slow step, so the orders come from varying one concentration at a time and comparing initial rates.",
          "keywords": [
           "rate law",
           "reaction order",
-          "rate constant"
-         ],
-         "prerequisites": [
-          "Reaction rate"
+          "initial rates"
          ]
         },
         {
-         "title": "Determining rate laws from data",
-         "summary": "Initial-rate and graphical methods extract orders and the rate constant.",
+         "title": "Reaction Orders and the Units of k",
+         "summary": "The exponents sum to the overall order, and the units of the rate constant follow from that order, being per second for first order and per molar per second for second order.",
          "keywords": [
-          "initial rate",
-          "method of initial rates"
+          "reaction order",
+          "rate constant",
+          "units"
          ],
          "prerequisites": [
-          "Rate laws and reaction order"
+          "Determining a Rate Law Experimentally"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Concentration Changes Over Time",
+       "concepts": [
         {
-         "title": "Integrated rate laws and half-life",
-         "summary": "Integrating the rate law gives concentration against time and the half-life for each order.",
+         "title": "Integrated Rate Laws and Half-Life",
+         "summary": "An integrated rate law gives concentration as a function of time, and a first-order reaction has a half-life of 0.693 divided by the rate constant that does not depend on the starting concentration.",
          "keywords": [
           "integrated rate law",
           "half-life",
           "first order"
-         ],
-         "prerequisites": [
-          "Determining rate laws from data"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Elementary Reactions",
+       "concepts": [
         {
-         "title": "Collision theory and activation energy",
-         "summary": "Molecules must collide with enough energy and the right orientation to react.",
+         "title": "Molecularity of an Elementary Step",
+         "summary": "An elementary step is classified by its molecularity as unimolecular, bimolecular or termolecular, and because the step happens as written its rate law follows from that molecularity rather than from experiment.",
          "keywords": [
-          "collision theory",
+          "elementary step",
+          "molecularity",
+          "termolecular"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Collision Model",
+       "concepts": [
+        {
+         "title": "Collision Model and Activation Energy",
+         "summary": "A collision reacts only if the molecules arrive with at least the activation energy and the right orientation, so heating raises the rate mainly by raising the fraction of collisions that clear the barrier rather than by raising the collision frequency.",
+         "keywords": [
+          "collision model",
           "activation energy",
           "orientation"
-         ],
-         "prerequisites": [
-          "Reaction rate"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Reaction Energy Profile",
+       "concepts": [
         {
-         "title": "The Arrhenius equation",
-         "summary": "Rate constants rise with temperature in a way that reveals activation energy.",
+         "title": "Reaction Energy Profile and the Transition State",
+         "summary": "A reaction energy profile plots potential energy along the reaction coordinate, its peak is the transition state, the reactant-to-peak gap is the activation energy and the reactant-to-product gap is the enthalpy change.",
          "keywords": [
-          "Arrhenius",
-          "activation energy",
-          "temperature dependence"
-         ],
-         "prerequisites": [
-          "Collision theory and activation energy"
+          "energy profile",
+          "transition state",
+          "activation energy"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Reaction Mechanisms",
+       "concepts": [
         {
-         "title": "Reaction mechanisms",
-         "summary": "A mechanism is a sequence of elementary steps whose slowest step sets the overall rate.",
+         "title": "Mechanism Steps and the Slow Step",
+         "summary": "A mechanism is a series of elementary steps that sum to the overall equation, and the slowest step controls the rate, so a rate law can be written from the reactants of that step alone.",
          "keywords": [
           "mechanism",
-          "elementary step",
-          "rate-determining step"
-         ],
-         "prerequisites": [
-          "Collision theory and activation energy"
+          "rate-determining step",
+          "elementary step"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Reaction Mechanism and Rate Law",
+       "concepts": [
         {
-         "title": "Catalysis",
-         "summary": "A catalyst provides a lower-energy path without being consumed, so it raises rate not yield.",
+         "title": "Rate Law Derived from the Slow Step",
+         "summary": "The rate law predicted by a mechanism uses the reactants of its slow step with that step's coefficients as exponents, so a predicted law that contradicts the measured one rules the mechanism out.",
+         "keywords": [
+          "predicted rate law",
+          "slow step",
+          "mechanism test"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Pre-Equilibrium Approximation",
+       "concepts": [
+        {
+         "title": "Pre-Equilibrium Approximation",
+         "summary": "When a fast reversible step precedes the slow step, solving the fast step for the intermediate concentration and substituting it into the slow rate gives a rate law containing only species actually present.",
+         "keywords": [
+          "pre-equilibrium",
+          "intermediate",
+          "approximation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Multistep Reaction Energy Profile",
+       "concepts": [
+        {
+         "title": "Mechanisms on an Energy Diagram",
+         "summary": "A multistep mechanism shows one peak per transition state on its energy profile, and the highest peak belongs to the slow step, so the diagram reveals which step gates the rate.",
+         "keywords": [
+          "multistep",
+          "energy diagram",
+          "intermediate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Catalysis",
+       "concepts": [
+        {
+         "title": "Catalysis and the Lower-Energy Pathway",
+         "summary": "A catalyst supplies an alternative pathway of lower activation energy without being consumed, so it raises the rate in both directions and leaves the equilibrium constant and the enthalpy change unchanged.",
          "keywords": [
           "catalyst",
-          "homogeneous",
-          "heterogeneous"
-         ],
-         "prerequisites": [
-          "Reaction mechanisms"
+          "activation energy",
+          "equilibrium"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Chemical Reactions"
      ]
     }
    ]
   },
   {
-   "strand": "Thermodynamics",
+   "strand": "Thermochemistry",
    "units": [
     {
-     "unit": "Energy and enthalpy",
-     "prerequisites": [
-      "Reaction rates"
-     ],
+     "unit": "Thermochemistry",
      "topics": [
       {
-       "topic": "Heat, work and enthalpy",
+       "topic": "Endothermic and Exothermic Processes",
        "concepts": [
         {
-         "title": "Endothermic and exothermic processes",
-         "summary": "Energy is absorbed or released, and the sign of enthalpy change reports which.",
+         "title": "Sign Conventions for Heat Flow",
+         "summary": "An exothermic process releases heat and carries a negative enthalpy change because the system loses energy, while an endothermic process absorbs heat and carries a positive one, both at constant pressure.",
          "keywords": [
-          "endothermic",
           "exothermic",
-          "enthalpy"
+          "endothermic",
+          "enthalpy sign"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Energy Diagrams",
+       "concepts": [
+        {
+         "title": "Energy Diagrams and Enthalpy Change",
+         "summary": "An energy diagram places the enthalpy of reactants and products on one vertical scale, so the difference is the enthalpy change and the barrier above the reactants is the activation energy.",
+         "keywords": [
+          "energy diagram",
+          "enthalpy",
+          "activation energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Heat Transfer and Thermal Equilibrium",
+       "concepts": [
+        {
+         "title": "Thermal Equilibrium and the Direction of Heat Flow",
+         "summary": "Heat flows spontaneously from the hotter body to the colder one until both reach the same temperature, so at thermal equilibrium the net transfer is zero even though molecular collisions continue.",
+         "keywords": [
+          "thermal equilibrium",
+          "heat flow",
+          "temperature"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Heat Capacity and Calorimetry",
+       "concepts": [
+        {
+         "title": "Specific Heat and Heat Capacity",
+         "summary": "Specific heat is the energy needed to raise one gram of a substance by one kelvin, and the value 4.18 joules per gram kelvin for liquid water makes it a slow-warming reservoir that moderates climate and body temperature.",
+         "keywords": [
+          "specific heat",
+          "heat capacity",
+          "water"
          ]
         },
         {
-         "title": "Heat capacity and calorimetry",
-         "summary": "Calorimetry measures heat exchanged using mass, specific heat and temperature change.",
+         "title": "Coffee-Cup and Bomb Calorimetry",
+         "summary": "Calorimetry finds the heat exchanged as mass times specific heat times the temperature change, with a coffee-cup calorimeter measuring at constant pressure so the heat equals the enthalpy change and a bomb calorimeter at constant volume so it equals the internal energy change.",
          "keywords": [
           "calorimetry",
-          "specific heat",
-          "heat capacity"
+          "bomb calorimeter",
+          "heat"
          ],
          "prerequisites": [
-          "Endothermic and exothermic processes"
+          "Specific Heat and Heat Capacity"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Energy of Phase Changes",
+       "concepts": [
         {
-         "title": "Enthalpy of reaction and Hess's law",
-         "summary": "Enthalpy is a state function, so reactions can be added to find an unknown enthalpy.",
+         "title": "Enthalpy of Phase Change and Heating Curves",
+         "summary": "Melting and vaporisation absorb energy without raising the temperature, so a heating curve shows flat plateaus whose lengths are set by the enthalpy of fusion or vaporisation and by the sample mass.",
          "keywords": [
-          "Hess's law",
-          "state function",
-          "enthalpy of reaction"
-         ],
-         "prerequisites": [
-          "Heat capacity and calorimetry"
+          "phase change",
+          "enthalpy of fusion",
+          "heating curve"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Enthalpy of Reaction",
+       "concepts": [
         {
-         "title": "Bond enthalpies",
-         "summary": "Breaking bonds costs energy and forming bonds releases it, which gives an estimate of reaction enthalpy.",
+         "title": "Why Reaction Heats Are Tabulated as Enthalpies",
+         "summary": "At constant pressure the heat exchanged by a reaction equals its enthalpy change, which is why reactions run in open vessels are tabulated as enthalpies rather than as internal energy changes.",
+         "keywords": [
+          "enthalpy change",
+          "constant pressure",
+          "heat"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Bond Enthalpies",
+       "concepts": [
+        {
+         "title": "Bond Enthalpies and Reaction Enthalpy",
+         "summary": "A reaction enthalpy can be estimated as the bond enthalpies broken minus those formed, a route that works best for gas-phase reactions because bond enthalpies are averages over many compounds.",
          "keywords": [
           "bond enthalpy",
-          "bond breaking"
-         ],
-         "prerequisites": [
-          "Enthalpy of reaction and Hess's law"
+          "gas phase",
+          "estimate"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Enthalpy of Formation",
+       "concepts": [
         {
-         "title": "Entropy",
-         "summary": "Entropy measures dispersal of energy and matter, and it tends to increase.",
+         "title": "Formation Enthalpy and the Zero Convention",
+         "summary": "The standard enthalpy of formation is the enthalpy change when one mole of a compound forms from its elements in their standard states, so an element in its standard state has a formation enthalpy of exactly zero.",
          "keywords": [
-          "entropy",
-          "disorder",
-          "second law"
-         ],
-         "prerequisites": [
-          "Enthalpy of reaction and Hess's law"
+          "formation enthalpy",
+          "standard state",
+          "elements"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Hess's Law",
+       "concepts": [
         {
-         "title": "Gibbs free energy",
-         "summary": "Free energy combines enthalpy and entropy to decide thermodynamic favorability.",
+         "title": "Hess's Law and Path Independence",
+         "summary": "Because enthalpy is a state function, a reaction enthalpy is the same whatever sequence of steps connects reactants to products, so it can be assembled from reactions that are easier to measure.",
          "keywords": [
-          "Gibbs free energy",
-          "spontaneity"
-         ],
-         "prerequisites": [
-          "Entropy"
+          "hess law",
+          "state function",
+          "path"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Kinetics"
      ]
     }
    ]
@@ -686,91 +1004,191 @@
    "strand": "Equilibrium",
    "units": [
     {
-     "unit": "Dynamic equilibrium",
-     "prerequisites": [
-      "Energy and enthalpy"
-     ],
+     "unit": "Equilibrium",
      "topics": [
       {
-       "topic": "Reversible reactions",
+       "topic": "Introduction to Equilibrium",
        "concepts": [
         {
-         "title": "Dynamic equilibrium",
-         "summary": "Forward and reverse rates become equal, so concentrations stop changing while reactions continue.",
+         "title": "Equal Forward and Reverse Rates",
+         "summary": "At equilibrium the forward and reverse reactions run at equal rates, so concentrations stop changing although both reactions continue, and the state is reached from either direction.",
          "keywords": [
           "dynamic equilibrium",
-          "reversible reaction"
+          "equal rates",
+          "reversible"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Direction of Reversible Reactions",
+       "concepts": [
         {
-         "title": "The equilibrium constant K",
-         "summary": "K expresses the ratio of products to reactants at equilibrium and its size reports the extent of reaction.",
+         "title": "Direction of Reversible Reactions",
+         "summary": "A reversible reaction proceeds in the direction that lowers the system free energy until the reaction quotient equals the equilibrium constant, after which no net change is observed.",
+         "keywords": [
+          "reversible",
+          "net change",
+          "direction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Reaction Quotient and Equilibrium Constant",
+       "concepts": [
+        {
+         "title": "Writing the Equilibrium Expression",
+         "summary": "The equilibrium constant is the product of product concentrations raised to their coefficients divided by the same expression for reactants, with pure solids and liquids omitted because their concentrations are constant.",
          "keywords": [
           "equilibrium constant",
-          "K"
-         ],
-         "prerequisites": [
-          "Dynamic equilibrium"
+          "expression",
+          "heterogeneous"
          ]
         },
         {
-         "title": "The reaction quotient Q",
-         "summary": "Comparing Q with K predicts the direction a system must shift to reach equilibrium.",
+         "title": "Comparing Q with K to Predict Direction",
+         "summary": "The reaction quotient has the form of K but uses current concentrations, so Q below K drives the reaction forward, Q above K drives it in reverse and Q equal to K means the system is at equilibrium.",
          "keywords": [
           "reaction quotient",
-          "Q",
-          "direction of shift"
+          "direction",
+          "comparison"
          ],
          "prerequisites": [
-          "The equilibrium constant K"
+          "Writing the Equilibrium Expression"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Calculating the Equilibrium Constant",
+       "concepts": [
         {
-         "title": "Le Chatelier's principle",
-         "summary": "A system at equilibrium shifts to partially oppose a change in concentration, pressure or temperature.",
+         "title": "Calculating K from Equilibrium Data",
+         "summary": "Substituting equilibrium concentrations into the expression gives K, whereas initial concentrations cannot be substituted unless the system has actually reached equilibrium.",
          "keywords": [
-          "Le Chatelier",
-          "stress",
-          "shift"
-         ],
-         "prerequisites": [
-          "The reaction quotient Q"
-         ]
-        },
-        {
-         "title": "Calculating equilibrium concentrations",
-         "summary": "ICE tables track initial, change and equilibrium amounts to solve for concentrations.",
-         "keywords": [
-          "ICE table",
-          "equilibrium concentration"
-         ],
-         "prerequisites": [
-          "The equilibrium constant K"
-         ]
-        },
-        {
-         "title": "Solubility equilibria and Ksp",
-         "summary": "A solubility product describes the equilibrium between a solid and its ions.",
-         "keywords": [
-          "Ksp",
-          "solubility product",
-          "common ion"
-         ],
-         "prerequisites": [
-          "Calculating equilibrium concentrations"
-         ]
-        },
-        {
-         "title": "Free energy and equilibrium",
-         "summary": "The standard free-energy change is related to K, which links thermodynamics and equilibrium.",
-         "keywords": [
-          "free energy",
           "equilibrium constant",
-          "K"
+          "calculation",
+          "equilibrium data"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Magnitude of the Equilibrium Constant",
+       "concepts": [
+        {
+         "title": "Magnitude of K and the Extent of Reaction",
+         "summary": "A K far above one means the reaction has run almost to completion, a K far below one means hardly any product forms, and a K near one leaves comparable amounts of both sides at equilibrium.",
+         "keywords": [
+          "magnitude",
+          "extent",
+          "equilibrium position"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of the Equilibrium Constant",
+       "concepts": [
+        {
+         "title": "Rules for Combining Equilibrium Constants",
+         "summary": "Reversing an equation inverts K, multiplying its coefficients raises K to that power and adding two equations multiplies their constants, so K is meaningful only for the equation as written at that temperature.",
+         "keywords": [
+          "reciprocal",
+          "power",
+          "combined reactions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Calculating Equilibrium Concentrations",
+       "concepts": [
+        {
+         "title": "ICE Tables and the Small-x Approximation",
+         "summary": "An ICE table derives each equilibrium concentration from the initial value and the stoichiometric change, and dropping x beside an initial concentration is valid only when x stays under about 5 percent of it.",
+         "keywords": [
+          "ice table",
+          "approximation",
+          "change"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Representations of Equilibrium",
+       "concepts": [
+        {
+         "title": "Particulate and Graphical Views of Equilibrium",
+         "summary": "At equilibrium a particulate drawing shows reactants and products present in unchanging numbers while collisions continue, and a concentration-time graph flattens at a nonzero value instead of reaching zero.",
+         "keywords": [
+          "particulate model",
+          "graph",
+          "nonzero concentration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Le Châtelier's Principle",
+       "concepts": [
+        {
+         "title": "Le Chatelier's Response to a Disturbance",
+         "summary": "A system at equilibrium shifts to partly offset a change in concentration, pressure or temperature, but only a temperature change alters the value of K itself.",
+         "keywords": [
+          "le chatelier",
+          "stress",
+          "temperature"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Reaction Quotient and Le Châtelier's Principle",
+       "concepts": [
+        {
+         "title": "Explaining a Shift with the Reaction Quotient",
+         "summary": "Adding a reactant or removing a product makes Q smaller than K so the forward reaction dominates, and compressing a gas mixture shifts it towards the side with fewer gas moles because that direction drives Q below K.",
+         "keywords": [
+          "reaction quotient",
+          "shift direction",
+          "pressure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Solubility Equilibria",
+       "concepts": [
+        {
+         "title": "Ksp and Molar Solubility",
+         "summary": "The solubility product is the product of the ion concentrations in a saturated solution each raised to its coefficient, so molar solubility follows from Ksp through the salt stoichiometry.",
+         "keywords": [
+          "ksp",
+          "molar solubility",
+          "saturated"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Common-Ion Effect",
+       "concepts": [
+        {
+         "title": "The Common-Ion Effect",
+         "summary": "Adding an ion the dissolving salt already produces pushes Q above Ksp, so solid precipitates until Q returns to Ksp and the salt solubility is lower than in pure water.",
+         "keywords": [
+          "common ion",
+          "solubility",
+          "precipitation"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Thermochemistry"
      ]
     }
    ]
@@ -779,228 +1197,368 @@
    "strand": "Acids and Bases",
    "units": [
     {
-     "unit": "Proton transfer in water",
-     "prerequisites": [
-      "Dynamic equilibrium"
-     ],
+     "unit": "Acids and Bases",
      "topics": [
       {
-       "topic": "Acidity and pH",
+       "topic": "Introduction to Acids and Bases",
        "concepts": [
         {
-         "title": "Acid-base definitions",
-         "summary": "Brønsted-Lowry acids donate protons and bases accept them, and Lewis definitions generalise to electron pairs.",
+         "title": "Bronsted-Lowry and Lewis Definitions",
+         "summary": "A Bronsted-Lowry acid donates a proton and a base accepts one, while the Lewis definition widens acids to electron-pair acceptors so that a species without hydrogen, such as boron trifluoride, still counts as an acid.",
          "keywords": [
-          "Brønsted-Lowry",
-          "Lewis acid",
+          "bronsted-lowry",
+          "lewis acid",
           "proton"
          ]
         },
         {
-         "title": "pH and pOH",
-         "summary": "pH is the negative logarithm of hydrogen-ion concentration, and pH plus pOH is fourteen at 25 degrees.",
+         "title": "Conjugate Pairs and Amphiprotic Species",
+         "summary": "Every Bronsted-Lowry acid has a conjugate base differing by one proton, and a species such as water or the hydrogen carbonate ion can donate or accept a proton depending on its partner.",
          "keywords": [
-          "pH",
-          "pOH",
-          "logarithm"
-         ],
-         "prerequisites": [
-          "Acid-base definitions"
-         ]
-        },
-        {
-         "title": "Strong acids and bases",
-         "summary": "Strong acids and bases ionise completely, so concentration directly gives the ion concentration.",
-         "keywords": [
-          "strong acid",
-          "strong base",
-          "complete ionisation"
-         ],
-         "prerequisites": [
-          "pH and pOH"
-         ]
-        },
-        {
-         "title": "Weak acid and base equilibria",
-         "summary": "Weak acids ionise partially, so an equilibrium calculation is needed.",
-         "keywords": [
-          "weak acid",
-          "Ka",
-          "percent ionisation"
-         ],
-         "prerequisites": [
-          "Strong acids and bases"
-         ]
-        },
-        {
-         "title": "Ka, Kb and conjugate pairs",
-         "summary": "Ka and Kb of a conjugate pair multiply to the ion product of water.",
-         "keywords": [
-          "Ka",
-          "Kb",
           "conjugate pair",
-          "Kw"
+          "amphiprotic",
+          "proton"
          ],
          "prerequisites": [
-          "Weak acid and base equilibria"
-         ]
-        },
-        {
-         "title": "Molecular structure and acid strength",
-         "summary": "Bond polarity and stability of the conjugate base explain why some acids are stronger.",
-         "keywords": [
-          "acid strength",
-          "inductive effect",
-          "conjugate base"
-         ],
-         "prerequisites": [
-          "Ka, Kb and conjugate pairs"
+          "Bronsted-Lowry and Lewis Definitions"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Buffers and titrations",
-     "prerequisites": [
-      "Proton transfer in water"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Controlling pH",
+       "topic": "pH and pOH of Strong Acids and Bases",
        "concepts": [
         {
-         "title": "Buffers",
-         "summary": "A weak acid and its conjugate base resist pH change by neutralising added acid or base.",
+         "title": "pH, pOH and the Water Ion Product",
+         "summary": "pH is the negative base-ten logarithm of the hydrogen ion concentration, and at 25 degrees Celsius pH plus pOH equals 14 because the ion product of water is 1.0 x 10^-14.",
          "keywords": [
-          "buffer",
-          "conjugate base",
-          "pH resistance"
+          "ph",
+          "poh",
+          "kw"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Weak Acid and Base Equilibria",
+       "concepts": [
+        {
+         "title": "Ka, Kb and the Conjugate Relationship",
+         "summary": "Ka measures the extent of weak-acid ionisation and Kb the extent for its conjugate base, and their product equals the water ion product, so a stronger acid always has a weaker conjugate base.",
+         "keywords": [
+          "ka",
+          "kb",
+          "conjugate"
          ]
         },
         {
-         "title": "The Henderson-Hasselbalch equation",
-         "summary": "pH depends on pKa and the ratio of conjugate base to acid, which is the buffer calculation.",
+         "title": "Solving Weak-Acid Equilibrium Problems",
+         "summary": "Combining Ka with an initial concentration and an unknown x gives the hydrogen ion concentration, and the shortcut that neglects x fails once x exceeds about 5 percent of the initial concentration, which happens for a relatively strong weak acid or a very dilute solution.",
          "keywords": [
-          "Henderson-Hasselbalch",
-          "pKa",
-          "buffer ratio"
+          "weak acid",
+          "ka",
+          "approximation"
          ],
          "prerequisites": [
-          "Buffers"
+          "Ka, Kb and the Conjugate Relationship"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Acid-Base Reactions and Buffers",
+       "concepts": [
         {
-         "title": "Acid-base titration curves",
-         "summary": "A titration curve's shape and equivalence pH depend on the strength of the acid and base.",
+         "title": "Neutralization and Buffer Formation",
+         "summary": "Adding a limited amount of strong base to a weak acid converts part of it into its conjugate base, so the mixture left behind holds the acid and conjugate base pair a buffer requires.",
+         "keywords": [
+          "neutralization",
+          "buffer formation",
+          "conjugate base"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Acid-Base Titrations",
+       "concepts": [
+        {
+         "title": "Titration Curves and the Half-Equivalence Point",
+         "summary": "On a weak-acid titration curve the pH at half-equivalence equals the acid pKa because acid and conjugate base are then equimolar, and the steepest segment of the curve brackets the equivalence point.",
          "keywords": [
           "titration curve",
-          "equivalence point",
-          "half-equivalence"
+          "half-equivalence",
+          "pka"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Molecular Structure of Acids and Bases",
+       "concepts": [
         {
-         "title": "Buffer capacity and selection",
-         "summary": "A buffer works best near its pKa and within a limited capacity.",
+         "title": "Inductive and Resonance Effects on pKa",
+         "summary": "Electron-withdrawing atoms or groups stabilise the conjugate base and lower pKa, which is why trichloroacetic acid is far stronger than acetic acid and why an oxyacid strengthens as its central atom becomes more electronegative.",
+         "keywords": [
+          "inductive effect",
+          "pka",
+          "oxyacid"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "pH and pKa",
+       "concepts": [
+        {
+         "title": "Comparing pH with pKa",
+         "summary": "When the pH is below an acid pKa the protonated form dominates and when it is above the pKa the deprotonated form dominates, so comparing the two numbers predicts the charge of the species in solution.",
+         "keywords": [
+          "ph",
+          "pka",
+          "protonation state"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Buffers",
+       "concepts": [
+        {
+         "title": "How a Buffer Responds to Added Acid or Base",
+         "summary": "A buffer neutralises added strong acid with its basic component and added strong base with its acidic component, so the pH moves only slightly until one member of the pair is used up.",
+         "keywords": [
+          "buffer action",
+          "strong acid",
+          "ph change"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Henderson-Hasselbalch Equation",
+       "concepts": [
+        {
+         "title": "Buffers and the Henderson-Hasselbalch Equation",
+         "summary": "A buffer holds a weak acid and its conjugate base in comparable amounts, and its pH equals the acid pKa plus the logarithm of the base-to-acid ratio, so the ratio rather than the absolute amounts sets the pH.",
+         "keywords": [
+          "buffer",
+          "henderson-hasselbalch",
+          "pka"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Buffer Capacity",
+       "concepts": [
+        {
+         "title": "Buffer Capacity and Effective Range",
+         "summary": "A buffer works within roughly one pH unit of its acid pKa, and its capacity grows with the absolute concentrations of the pair, so a buffer of correct ratio but low concentration fails on adding strong acid.",
          "keywords": [
           "buffer capacity",
-          "pKa",
-          "selection"
-         ],
-         "prerequisites": [
-          "The Henderson-Hasselbalch equation"
+          "buffer range",
+          "concentration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "pH and Solubility",
+       "concepts": [
+        {
+         "title": "pH-Dependent Solubility of Salts",
+         "summary": "The solubility of a salt whose anion is the conjugate base of a weak acid rises in acidic solution, because protonating the anion removes it and pulls the dissolution equilibrium towards dissolving.",
+         "keywords": [
+          "ph",
+          "solubility",
+          "protonation"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Equilibrium"
      ]
     }
    ]
   },
   {
-   "strand": "Applications of Thermodynamics",
+   "strand": "Thermodynamics and Electrochemistry",
    "units": [
     {
-     "unit": "Electrochemistry",
-     "prerequisites": [
-      "Buffers and titrations"
-     ],
+     "unit": "Thermodynamics and Electrochemistry",
      "topics": [
       {
-       "topic": "Electrons doing work",
+       "topic": "Introduction to Entropy",
        "concepts": [
         {
-         "title": "Galvanic cells",
-         "summary": "A spontaneous redox reaction separated into half-cells produces a voltage.",
+         "title": "Entropy and Microstates",
+         "summary": "Entropy measures the number of microstates available to a system, so a process that spreads matter or energy over more arrangements has a positive entropy change, as when a solid melts or a gas expands into a vacuum.",
          "keywords": [
-          "galvanic cell",
-          "half-cell",
-          "anode",
-          "cathode"
+          "entropy",
+          "microstates",
+          "dispersal"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Absolute Entropy and Entropy Change",
+       "concepts": [
+        {
+         "title": "Absolute Entropy and the Third Law",
+         "summary": "The third law sets the entropy of a perfect crystal at absolute zero to zero, so tabulated absolute entropies let a reaction entropy change be taken as products minus reactants without any arbitrary reference point.",
+         "keywords": [
+          "third law",
+          "absolute entropy",
+          "standard entropy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Gibbs Free Energy and Thermodynamic Favorability",
+       "concepts": [
+        {
+         "title": "Gibbs Free Energy as the Favorability Criterion",
+         "summary": "The free energy change equals the enthalpy change minus temperature times the entropy change, and at constant temperature and pressure a negative value means the forward process is thermodynamically favoured while zero means equilibrium.",
+         "keywords": [
+          "gibbs free energy",
+          "favorability",
+          "criterion"
          ]
         },
         {
-         "title": "Cell potential and standard reduction potentials",
-         "summary": "Standard reduction potentials give the cell potential as cathode minus anode.",
+         "title": "Temperature Dependence of Favorability",
+         "summary": "An endothermic reaction with a positive entropy change becomes favourable only above the temperature at which T times the entropy change exceeds the enthalpy change, so the sign pair decides whether a reaction is always, never or sometimes favourable.",
          "keywords": [
-          "standard reduction potential",
-          "cell potential",
-          "EMF"
+          "temperature",
+          "enthalpy",
+          "entropy"
          ],
          "prerequisites": [
-          "Galvanic cells"
+          "Gibbs Free Energy as the Favorability Criterion"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Thermodynamic and Kinetic Control",
+       "concepts": [
         {
-         "title": "Free energy and cell potential",
-         "summary": "Cell potential is proportional to the free-energy change of the reaction.",
+         "title": "Thermodynamic versus Kinetic Control",
+         "summary": "A reaction under thermodynamic control yields the more stable product, while under kinetic control the faster-forming product dominates, so the product distribution depends on temperature and on how long the reaction is allowed to run.",
+         "keywords": [
+          "thermodynamic control",
+          "kinetic control",
+          "product distribution"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Free Energy and Equilibrium",
+       "concepts": [
+        {
+         "title": "Free Energy and the Equilibrium Constant",
+         "summary": "The standard free energy change equals minus RT times the natural logarithm of K, so a large negative value corresponds to a large equilibrium constant and a reaction that runs nearly to completion.",
          "keywords": [
           "free energy",
+          "equilibrium constant",
+          "standard"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Free Energy of Dissolution",
+       "concepts": [
+        {
+         "title": "Free Energy of Dissolution",
+         "summary": "Dissolution must supply the lattice enthalpy and is repaid by the hydration enthalpy, and the sum corrected by the entropy gain of dispersing the ions decides whether the salt dissolves at all.",
+         "keywords": [
+          "dissolution",
+          "lattice enthalpy",
+          "hydration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Coupled Reactions",
+       "concepts": [
+        {
+         "title": "Coupled Reactions",
+         "summary": "A thermodynamically unfavourable reaction can be driven by coupling it to a favourable one whose free energy release exceeds the cost, as ATP hydrolysis does for the reactions of a cell.",
+         "keywords": [
+          "coupled reaction",
+          "free energy",
+          "atp"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Galvanic (Voltaic) and Electrolytic Cells",
+       "concepts": [
+        {
+         "title": "Anode, Cathode and Electron Flow",
+         "summary": "In any electrochemical cell oxidation occurs at the anode and reduction at the cathode, electrons travel through the external circuit from anode to cathode, and ions carry the current through the salt bridge or electrolyte.",
+         "keywords": [
+          "anode",
+          "cathode",
+          "salt bridge"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cell Potential and Free Energy",
+       "concepts": [
+        {
+         "title": "Cell Potential and the Sign of Free Energy",
+         "summary": "The standard cell potential is the cathode reduction potential minus the anode reduction potential, and a positive potential corresponds to a negative free energy change because that change equals minus nFE.",
+         "keywords": [
           "cell potential",
-          "faraday"
-         ],
-         "prerequisites": [
-          "Cell potential and standard reduction potentials"
+          "standard reduction potential",
+          "free energy"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Cell Potential Under Nonstandard Conditions",
+       "concepts": [
         {
-         "title": "The Nernst equation",
-         "summary": "Non-standard concentrations change cell potential in a way the Nernst equation predicts.",
+         "title": "Nernst Equation and Nonstandard Potential",
+         "summary": "Cell potential falls as the reaction quotient rises, following a potential equal to the standard potential minus RT over nF times the natural logarithm of Q, which at 25 degrees Celsius becomes the standard potential minus 0.0592 over n times log Q.",
          "keywords": [
-          "Nernst equation",
-          "concentration cell"
-         ],
-         "prerequisites": [
-          "Free energy and cell potential"
+          "nernst equation",
+          "nonstandard",
+          "cell potential"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Electrolysis and Faraday's Law",
+       "concepts": [
         {
-         "title": "Electrolytic cells",
-         "summary": "A non-spontaneous reaction can be driven by an external voltage.",
+         "title": "Electrolysis and Faraday's Law",
+         "summary": "An electrolytic cell uses an external voltage to drive a nonspontaneous reaction, and the moles of substance deposited equal the charge passed divided by nF, so the charge alone fixes the mass produced.",
          "keywords": [
-          "electrolytic cell",
           "electrolysis",
-          "overpotential"
-         ],
-         "prerequisites": [
-          "Cell potential and standard reduction potentials"
-         ]
-        },
-        {
-         "title": "Faraday's laws and quantitative electrolysis",
-         "summary": "Charge passed relates to moles of electrons and so to mass deposited.",
-         "keywords": [
-          "Faraday",
-          "electrolysis",
+          "faraday",
           "charge"
-         ],
-         "prerequisites": [
-          "Electrolytic cells"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Acids and Bases"
      ]
     }
    ]

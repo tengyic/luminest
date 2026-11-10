@@ -42,7 +42,7 @@ def settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     return Settings.from_env()
 
 

@@ -109,7 +109,7 @@ def test_final_daily_active_minutes_are_utc_day_isolated(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_ACCESS_TOKEN_TTL_SECONDS', '259200')
     settings = _Settings.from_env()
     if settings.access_token_ttl < 2 * 86400:
@@ -157,7 +157,7 @@ def test_final_chat_history_preserves_exact_provider_after_restart(settings, mon
         first = current.post('/api/v1/chat', headers=headers, json={'concept_id': 'fractions', 'message': 'Explain fractions.'})
         assert first.status_code == 200
         first_reply = first.json()
-        assert first_reply['provider'] == 'Grounded offline tutor'
+        assert first_reply['provider'] == 'model-required'
         monkeypatch.setattr(main.tutor, 'respond', lambda *args, **kwargs: (
             'Which common unit would you choose?', 'openai:model-snapshot-v1', original_grounding, []))
         second = current.post('/api/v1/chat', headers=headers, json={'concept_id': 'fractions', 'message': 'What should I check next?'})

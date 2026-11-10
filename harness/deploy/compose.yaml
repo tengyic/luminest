@@ -1,4 +1,31 @@
 name: native-learning-harness
+
+# ---------------------------------------------------------------------------------------
+# Why the language-model block is an anchor shared by `migrate` and `backend`
+# ---------------------------------------------------------------------------------------
+# `Settings.from_env()` validates the tutor settings on *every* production boot, and
+# `migrate` boots production as well: `scripts/init_db.py` calls `Settings.from_env()`
+# before it touches the database. Giving `migrate` the production flag and no tutor
+# variables therefore made it exit 1 with "Production requires a configured language
+# model", and because `backend` waits on
+# `migrate: service_completed_successfully`, the API never started. One anchor, applied
+# to both services, is the only way that stays true the next time a variable is added.
+#
+# There is no `offline` default. `HARNESS_TUTOR_PROVIDER=offline` is rejected outright by
+# `app/config.py` (the deterministic rules engine is gone), so the old `${VAR:-offline}`
+# default guaranteed a crash loop instead of a clear refusal. Every tutor variable that
+# the boot check reads is now required at interpolation time, which means
+# `docker compose config` fails on the operator's machine with a message naming the
+# variable, rather than the container failing after the database is already up.
+x-tutor-env: &tutor-env
+  HARNESS_TUTOR_PROVIDER: ${HARNESS_TUTOR_PROVIDER:?Set HARNESS_TUTOR_PROVIDER to openai or ollama; there is no offline mode}
+  HARNESS_TUTOR_URL: ${HARNESS_TUTOR_URL:?Set HARNESS_TUTOR_URL, e.g. https://api.openai.com/v1 or http://ollama:11434}
+  HARNESS_TUTOR_MODEL: ${HARNESS_TUTOR_MODEL:?Set HARNESS_TUTOR_MODEL, the model id your provider serves}
+  # Optional: a local ollama needs no key, and the backend only sends one when it is set.
+  # An HTTPS remote provider in production does need one, and a missing key surfaces as a
+  # 401 on the first tutor turn rather than at boot.
+  HARNESS_TUTOR_KEY: ${HARNESS_TUTOR_KEY:-}
+
 services:
   postgres:
     image: postgres:17-alpine
@@ -14,6 +41,25 @@ services:
       timeout: 5s
       retries: 20
     restart: unless-stopped
+
+  # Optional local model runtime. Not started by default: enable it explicitly with
+  #   docker compose --profile ollama up -d
+  # and point HARNESS_TUTOR_URL at http://ollama:11434 with HARNESS_TUTOR_PROVIDER=ollama.
+  # `app/config.py` explicitly permits the plain-HTTP `ollama` hostname in production
+  # (everything else remote must be HTTPS), which is what makes a loopback model legal
+  # here while an external provider still has to be encrypted.
+  #
+  # Pinned, like every Python dependency: an unpinned model runtime is the same
+  # "whatever the registry served that morning" problem `requirements.txt` exists to
+  # avoid, in a component that also decides which quantization answers a learner.
+  # Bump deliberately, and re-run a tutor turn after bumping.
+  ollama:
+    image: ollama/ollama:0.40.16
+    profiles: ['ollama']
+    volumes:
+      - ollama-models:/root/.ollama
+    restart: unless-stopped
+
   migrate:
     # harness/ is the context, not harness/backend/: app/resources.py resolves web/
     # and model/ by walking up from app/, so the image has to be able to COPY them.
@@ -25,11 +71,13 @@ services:
       HARNESS_DATABASE_URL: postgresql+psycopg://harness:${HARNESS_POSTGRES_PASSWORD:?Set HARNESS_POSTGRES_PASSWORD}@postgres:5432/harness
       HARNESS_SECRET: ${HARNESS_SECRET:?Set HARNESS_SECRET to a strong random secret of at least 32 characters}
       HARNESS_ALLOWED_HOSTS: ${HARNESS_ALLOWED_HOSTS:?Set explicit public hostname and localhost}
+      <<: *tutor-env
     command: [python, scripts/init_db.py]
     depends_on:
       postgres:
         condition: service_healthy
     restart: 'no'
+
   backend:
     # harness/ is the context, not harness/backend/: app/resources.py resolves web/
     # and model/ by walking up from app/, so the image has to be able to COPY them.
@@ -39,13 +87,10 @@ services:
     environment:
       HARNESS_ENV: production
       HARNESS_DATABASE_URL: postgresql+psycopg://harness:${HARNESS_POSTGRES_PASSWORD:?Set HARNESS_POSTGRES_PASSWORD}@postgres:5432/harness
-      HARNESS_SECRET: ${HARNESS_SECRET:?Set HARNESS_SECRET}
+      HARNESS_SECRET: ${HARNESS_SECRET:?Set HARNESS_SECRET to a strong random secret of at least 32 characters}
       HARNESS_ALLOWED_HOSTS: ${HARNESS_ALLOWED_HOSTS:?Set explicit public hostname and localhost}
       HARNESS_AUTO_CREATE: '0'
-      HARNESS_TUTOR_PROVIDER: ${HARNESS_TUTOR_PROVIDER:-offline}
-      HARNESS_TUTOR_URL: ${HARNESS_TUTOR_URL:-}
-      HARNESS_TUTOR_KEY: ${HARNESS_TUTOR_KEY:-}
-      HARNESS_TUTOR_MODEL: ${HARNESS_TUTOR_MODEL:-}
+      <<: *tutor-env
     command: [python, -m, uvicorn, 'app.main:create_app', --factory, --host, '0.0.0.0', --port, '8000', --no-access-log, --proxy-headers, --forwarded-allow-ips, '${HARNESS_TRUSTED_PROXY_IPS:-127.0.0.1}']
     ports:
       - '127.0.0.1:${HARNESS_PORT:-8000}:8000'
@@ -62,3 +107,4 @@ services:
     restart: unless-stopped
 volumes:
   postgres-data:
+  ollama-models:

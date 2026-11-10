@@ -169,7 +169,6 @@ def main() -> int:
         'HARNESS_SECRET': secrets.token_urlsafe(48),
         'HARNESS_ALLOWED_HOSTS': 'localhost,127.0.0.1',
         'HARNESS_STREAM_ENABLED': args.enabled,
-        'HARNESS_TUTOR_PROVIDER': 'offline',
         'HARNESS_MEDIA_ENABLED': '0',
     })
     for key in ('HTTP_PROXY', 'HTTPS_PROXY', 'ALL_PROXY', 'http_proxy', 'https_proxy'):

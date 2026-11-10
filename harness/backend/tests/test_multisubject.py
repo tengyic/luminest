@@ -42,7 +42,12 @@ def settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    # Empty rather than absent: backend/.env on a developer machine supplies a real
+    # provider, and deleting the variable lets dotenv refill it, which sends these
+    # isolation tests to a live endpoint.
+    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', '')
+    for name in ('HARNESS_TUTOR_URL', 'HARNESS_TUTOR_MODEL', 'HARNESS_TUTOR_KEY'):
+        monkeypatch.delenv(name, raising=False)
     return Settings.from_env()
 
 
@@ -126,12 +131,32 @@ def test_non_mathematics_figure_is_a_concept_map_not_a_quadratic():
 
 
 def test_mathematics_figure_is_still_symbolic():
+    """A mathematics course is drawn by the symbolic engine — except where the subject has
+    no single-variable plot at all.
+
+    Linear algebra is declared no-plot in ``templates._NO_PLOT_COURSE_PREFIXES``: vector
+    spaces and rank are not a quantity against an input, so the honest figure is the
+    concept map. That declaration is read here rather than restated, so the two cannot
+    drift apart.
+    """
+    from app.mathkit import templates
+
     for spec in MATHEMATICS:
         graph = courses.graph_for(spec.id)
-        node = next(iter(graph.nodes.values()))
+        # The first node in pack order may itself be a declared no-plot concept (AP
+        # Calculus AB starts with a procedure-selection idea), so pick a node that the
+        # engine says has a figure instead of whichever node happens to be first.
+        plotted = [n for n in graph.nodes.values()
+                   if templates.template_for(n.to_dict()).kind != figures.GENERIC_PROBE_KIND]
+        if not plotted:
+            node = next(iter(graph.nodes.values()))
+            payload = figures.figure_for(node.to_dict(), graph, {}, spec.subject_kind)
+            assert payload['engine'] == 'concept-map', spec.id
+            continue
+        node = plotted[0]
         payload = figures.figure_for(node.to_dict(), graph, {}, spec.subject_kind)
-        assert payload['engine'] == 'symbolic'
-        assert payload['figure'] in {'curve', 'scene'}
+        assert payload['engine'] == 'symbolic', (spec.id, node.id)
+        assert payload['figure'] in {'curve', 'scene'}, (spec.id, node.id)
 
 
 # ------------------------------------------------------------------ API isolation
@@ -348,8 +373,16 @@ def test_harness_plan_and_generate_work_for_every_course(client, spec):
     figure = client.get(f'/api/v1/simulations/{concept_id}', headers=headers)
     assert figure.status_code == 200, figure.text
     payload = figure.json()
-    expected_engine = 'symbolic' if spec.uses_symbolic_engine else 'concept-map'
-    assert payload['engine'] == expected_engine
+    # A mathematics course is symbolic unless the concept itself is declared no-plot
+    # (linear algebra's first node is a vector-space idea, not a curve; AP Calculus AB's is
+    # a procedure-selection idea). The declaration, not a hardcoded course list, decides.
+    from app.mathkit import templates
+
+    node_id = LESSON_TARGETS.get(concept_id, concept_id)
+    node = courses.graph_for(spec.id).nodes[node_id]
+    is_plotted = templates.template_for(node.to_dict()).kind != figures.GENERIC_PROBE_KIND
+    expected_engine = 'symbolic' if (spec.uses_symbolic_engine and is_plotted) else 'concept-map'
+    assert payload['engine'] == expected_engine, (spec.id, concept_id)
 
     for kind in ('explanation', 'flashcards', 'quiz', 'slide_deck', 'image_brief'):
         response = client.post('/api/v1/harness/generate', headers=headers,

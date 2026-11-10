@@ -34,7 +34,7 @@ def fake_engine(monkeypatch, payload: bytes = b'ID3fake-audio-bytes'):
 def voice_settings(tmp_path, monkeypatch, *, voice_enabled=True, media_enabled=False):
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_VOICE_ENABLED', '1' if voice_enabled else '0')
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '1' if media_enabled else '0')
     return Settings.from_env()

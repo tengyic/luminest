@@ -55,7 +55,7 @@ def vision_settings(tmp_path, monkeypatch, *, model='deepseek-flash'):
 def offline_settings(tmp_path, monkeypatch, **env):
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     for key, value in env.items():
         monkeypatch.setenv(key, value)
     return Settings.from_env()
@@ -124,7 +124,8 @@ def test_vision_status_names_the_missing_switch_when_offline(tmp_path, monkeypat
     settings = offline_settings(tmp_path, monkeypatch)
     ready, note = vla.vision_status(settings)
     assert ready is False
-    assert 'HARNESS_TUTOR_PROVIDER' in note
+    assert 'No language model is configured' in note
+    assert 'Settings' in note
 
 
 # --------------------------------------------------------------------- image plumbing

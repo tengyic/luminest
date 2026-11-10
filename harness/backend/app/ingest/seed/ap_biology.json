@@ -1,159 +1,172 @@
 {
- "course": "AP Biology - Molecules, Cells, Heredity and Ecology",
+ "course": "AP Biology - Information, Energetics, Evolution and Systems",
  "licence": "cc0",
  "source_url": "",
  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
- "description": "The AP Biology course framework: the chemistry of life, cell structure and function, cellular energetics, cell communication and the cell cycle, heredity, gene expression and regulation, natural selection, and ecology.",
+ "description": "A college-level biology course organised around the AP framework: the chemistry of water and macromolecules, cell structure and membrane transport, enzymes, photosynthesis and respiration, signal transduction and the cell cycle, meiosis and inheritance, gene expression and biotechnology, natural selection and phylogeny, and the ecology of populations, communities and ecosystems.",
  "expected_weeks": 34,
  "strands": [
   {
    "strand": "Chemistry of Life",
    "units": [
     {
-     "unit": "Water and biological molecules",
+     "unit": "Chemistry of Life",
      "topics": [
       {
-       "topic": "The chemistry that life is built from",
+       "topic": "Structure of Water and Hydrogen Bonding",
        "concepts": [
         {
-         "title": "Structure of water and hydrogen bonding",
-         "summary": "Hydrogen bonding gives water cohesion, adhesion, a high specific heat and solvent power, which is why life depends on it.",
+         "title": "Water as a Polar Solvent",
+         "summary": "Oxygen's higher electronegativity gives water a partial negative charge on oxygen and partial positives on its hydrogens, so water surrounds ions and polar molecules in a hydration shell, which is why salts dissolve while oils do not.",
          "keywords": [
-          "water",
-          "hydrogen bond",
+          "polarity",
+          "hydration shell",
+          "solvent"
+         ]
+        },
+        {
+         "title": "Cohesion, Adhesion and Capillary Action",
+         "summary": "Water hydrogen-bonds to itself (cohesion) and to polar surfaces (adhesion), and that combination pulls water up a narrow xylem column against gravity as long as the column stays unbroken.",
+         "keywords": [
           "cohesion",
-          "specific heat"
-         ]
-        },
-        {
-         "title": "Elements of life",
-         "summary": "Carbon, hydrogen, oxygen, nitrogen, phosphorus and sulfur build the molecules of life.",
-         "keywords": [
-          "carbon",
-          "elements",
-          "CHONPS"
+          "adhesion",
+          "capillary action"
          ],
          "prerequisites": [
-          "Structure of water and hydrogen bonding"
-         ]
-        },
-        {
-         "title": "Biological macromolecules: carbohydrates",
-         "summary": "Simple sugars join into polysaccharides that serve as fuel or as structural material.",
-         "keywords": [
-          "carbohydrate",
-          "monosaccharide",
-          "polysaccharide"
-         ],
-         "prerequisites": [
-          "Elements of life"
-         ]
-        },
-        {
-         "title": "Biological macromolecules: lipids",
-         "summary": "Fats store energy densely while phospholipids build the membranes that compartmentalise cells.",
-         "keywords": [
-          "lipid",
-          "triglyceride",
-          "phospholipid"
-         ],
-         "prerequisites": [
-          "Elements of life"
-         ]
-        },
-        {
-         "title": "Biological macromolecules: proteins",
-         "summary": "A protein folds into a shape determined by its amino acid sequence, and the shape determines its function.",
-         "keywords": [
-          "protein",
-          "amino acid",
-          "folding"
-         ],
-         "prerequisites": [
-          "Elements of life"
-         ]
-        },
-        {
-         "title": "Biological macromolecules: nucleic acids",
-         "summary": "DNA stores information in a stable double strand while RNA carries and interprets it.",
-         "keywords": [
-          "DNA",
-          "RNA",
-          "nucleotide"
-         ],
-         "prerequisites": [
-          "Biological macromolecules: proteins"
+          "Water as a Polar Solvent"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Enzymes and reaction conditions",
-     "prerequisites": [
-      "Water and biological molecules"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Catalysis in cells",
+       "topic": "Elements of Life",
        "concepts": [
         {
-         "title": "Enzymes as biological catalysts",
-         "summary": "Enzymes lower activation energy and are unchanged by the reaction they speed up.",
+         "title": "CHNOPS and Trace Elements",
+         "summary": "Carbon, hydrogen, nitrogen, oxygen, phosphorus and sulfur make up most of the mass of living tissue, while elements such as iron and iodine are needed only in trace amounts yet remain essential to specific proteins and hormones.",
          "keywords": [
-          "enzyme",
-          "catalyst",
-          "activation energy"
+          "chnops",
+          "trace elements",
+          "essential elements"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Macromolecules",
+       "concepts": [
+        {
+         "title": "Dehydration Synthesis and Hydrolysis",
+         "summary": "Monomers are joined into polymers by dehydration synthesis, which removes one water molecule per bond formed, and polymers are taken apart by hydrolysis, which adds water back at each bond.",
+         "keywords": [
+          "dehydration synthesis",
+          "hydrolysis",
+          "polymer"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Carbohydrates",
+       "concepts": [
+        {
+         "title": "Glycosidic Bonds Set Polysaccharide Function",
+         "summary": "Sugars are joined by glycosidic bonds, and the linkage pattern decides the polymer's role: alpha-linked starch stores glucose for later use, while beta-linked cellulose resists animal digestion and supplies structural support.",
+         "keywords": [
+          "glycosidic bond",
+          "starch",
+          "cellulose"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Lipids",
+       "concepts": [
+        {
+         "title": "Triglycerides, Saturation and Energy Storage",
+         "summary": "A triglyceride joins glycerol to three fatty acids by ester bonds, its highly reduced chains store about twice the energy per gram of carbohydrate, and saturated chains without double bonds pack into solids while cis-unsaturated chains kink and stay liquid.",
+         "keywords": [
+          "triglyceride",
+          "ester bond",
+          "saturated fatty acid"
          ]
         },
         {
-         "title": "Enzyme structure and the active site",
-         "summary": "A substrate binds a specific active site, and the induced fit grips it more tightly.",
+         "title": "Phospholipids Form Bilayers",
+         "summary": "A phospholipid trades one fatty acid for a phosphate-containing head, so the molecule is amphipathic and in water it self-assembles into a bilayer with the hydrophobic tails inward.",
          "keywords": [
-          "active site",
-          "induced fit",
-          "substrate"
+          "phospholipid",
+          "amphipathic",
+          "bilayer"
          ],
          "prerequisites": [
-          "Enzymes as biological catalysts"
+          "Triglycerides, Saturation and Energy Storage"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Nucleic Acids",
+       "concepts": [
+        {
+         "title": "Nucleotides and Strand Directionality",
+         "summary": "A nucleotide is a phosphate, a pentose and a nitrogenous base, and because each phosphate joins the 5' carbon of one sugar to the 3' carbon of the next, a nucleic acid strand has distinct 5-prime and 3-prime ends.",
+         "keywords": [
+          "nucleotide",
+          "sugar-phosphate backbone",
+          "directionality"
          ]
         },
         {
-         "title": "Factors affecting enzyme activity",
-         "summary": "Temperature, pH and substrate concentration change rate, and beyond the optimum the enzyme denatures.",
+         "title": "Complementary Base Pairing",
+         "summary": "Adenine pairs with thymine through two hydrogen bonds and guanine with cytosine through three, so each strand specifies its partner and the two strands of a double helix run antiparallel.",
          "keywords": [
-          "temperature",
-          "pH",
-          "denaturation"
+          "base pairing",
+          "complementary",
+          "antiparallel"
          ],
          "prerequisites": [
-          "Enzyme structure and the active site"
+          "Nucleotides and Strand Directionality"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Proteins",
+       "concepts": [
+        {
+         "title": "Peptide Bonds and Amino Acid Side Chains",
+         "summary": "The 20 amino acids differ only in their R groups, and a peptide bond forms between the carboxyl carbon of one amino acid and the amino nitrogen of the next with the loss of water.",
+         "keywords": [
+          "amino acid",
+          "peptide bond",
+          "r group"
          ]
         },
         {
-         "title": "Enzyme inhibition and regulation",
-         "summary": "Competitive and non-competitive inhibitors slow a reaction, and allosteric regulation tunes it.",
+         "title": "Four Levels of Protein Structure",
+         "summary": "Primary structure is the amino acid sequence, secondary structure is local alpha-helix and beta-sheet hydrogen bonding, tertiary structure is the folded three-dimensional shape, and quaternary structure is the assembly of several polypeptide subunits.",
          "keywords": [
-          "inhibition",
-          "allosteric",
-          "competitive"
+          "primary structure",
+          "tertiary structure",
+          "quaternary structure"
          ],
          "prerequisites": [
-          "Factors affecting enzyme activity"
+          "Peptide Bonds and Amino Acid Side Chains"
          ]
         },
         {
-         "title": "pH, buffers and cellular conditions",
-         "summary": "Buffers resist pH change, which keeps enzyme shape and function stable.",
+         "title": "Denaturation and Chaperone-Assisted Folding",
+         "summary": "Heat, extreme pH or high salt disrupts the hydrogen and ionic bonds that hold tertiary structure, so the protein denatures and loses function, while a chaperonin provides an isolated cavity in which a new chain can fold without aggregating with others.",
          "keywords": [
-          "buffer",
-          "pH",
-          "homeostasis"
+          "denaturation",
+          "chaperone",
+          "tertiary structure"
          ],
          "prerequisites": [
-          "Factors affecting enzyme activity"
+          "Four Levels of Protein Structure"
          ]
         }
        ]
@@ -163,170 +176,178 @@
    ]
   },
   {
-   "strand": "Cell Structure and Function",
+   "strand": "Cells",
    "units": [
     {
-     "unit": "Cell architecture",
-     "prerequisites": [
-      "Enzymes and reaction conditions"
-     ],
+     "unit": "Cells",
      "topics": [
       {
-       "topic": "Building a cell",
+       "topic": "Cell Structure and Function",
        "concepts": [
         {
-         "title": "Cell structure: prokaryotic and eukaryotic",
-         "summary": "Prokaryotes lack membrane-bound organelles, which is the deepest structural divide among cells.",
+         "title": "Prokaryotic and Eukaryotic Cell Plans",
+         "summary": "A eukaryotic cell keeps its DNA inside a nucleus and divides its interior with membrane-bound organelles, while a prokaryotic cell holds a single circular chromosome in a nucleoid and has no membrane-bound compartments.",
          "keywords": [
           "prokaryote",
           "eukaryote",
-          "organelle"
+          "nucleoid"
          ]
         },
         {
-         "title": "Organelles and compartmentalisation",
-         "summary": "Each organelle specialises in one job, and a cell can do only what its organelles allow.",
+         "title": "Organelles Match Their Functions",
+         "summary": "Structure tracks function inside the endomembrane system: rough ER studded with ribosomes builds secretory proteins, smooth ER synthesises lipids and detoxifies, and the Golgi modifies, sorts and packages what arrives from the ER.",
          "keywords": [
           "organelle",
-          "mitochondrion",
-          "ribosome"
+          "rough er",
+          "golgi"
          ],
          "prerequisites": [
-          "Cell structure: prokaryotic and eukaryotic"
+          "Prokaryotic and Eukaryotic Cell Plans"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cell Size",
+       "concepts": [
+        {
+         "title": "Surface Area to Volume Ratio Limits Cell Size",
+         "summary": "Volume rises with the cube of a cell's linear dimension while surface area rises only with the square, so a larger cell has less membrane per unit of volume and cannot exchange materials fast enough to keep up with its metabolism.",
+         "keywords": [
+          "surface area",
+          "volume",
+          "diffusion"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Plasma Membrane",
+       "concepts": [
+        {
+         "title": "Fluid Mosaic Model",
+         "summary": "The plasma membrane is a phospholipid bilayer with proteins, cholesterol and glycolipids embedded in it, and those components drift laterally unless anchored to the cytoskeleton, which is why the mosaic is described as fluid.",
+         "keywords": [
+          "fluid mosaic",
+          "phospholipid bilayer",
+          "cholesterol"
          ]
         },
         {
-         "title": "Endosymbiosis",
-         "summary": "Mitochondria and chloroplasts descend from engulfed bacteria, which explains their own DNA and double membrane.",
+         "title": "Integral and Peripheral Membrane Proteins",
+         "summary": "An integral protein spans the hydrophobic core and can serve as a channel, carrier, receptor or anchor, while a peripheral protein sits on one face and often links the membrane to the cytoskeleton or to a signalling partner.",
+         "keywords": [
+          "integral protein",
+          "peripheral protein",
+          "transport protein"
+         ],
+         "prerequisites": [
+          "Fluid Mosaic Model"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Membrane Permeability",
+       "concepts": [
+        {
+         "title": "Selective Permeability of the Bilayer",
+         "summary": "The hydrophobic core admits small nonpolar gases such as oxygen and carbon dioxide but blocks ions and large polar molecules, so permeability depends on a solute size, polarity and charge rather than on its concentration alone.",
+         "keywords": [
+          "selective permeability",
+          "hydrophobic core",
+          "solute"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Membrane Transport",
+       "concepts": [
+        {
+         "title": "Passive versus Active Transport",
+         "summary": "Passive transport moves a solute down its gradient without energy input, whereas active transport moves it against the gradient using ATP hydrolysis or a gradient that was built earlier.",
+         "keywords": [
+          "passive transport",
+          "active transport",
+          "concentration gradient"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Facilitated Diffusion",
+       "concepts": [
+        {
+         "title": "Carrier Saturation in Facilitated Diffusion",
+         "summary": "Facilitated diffusion carries a polar solute down its gradient through a channel or carrier, but the rate levels off at high solute concentration because the number of transport proteins in the membrane is fixed.",
+         "keywords": [
+          "facilitated diffusion",
+          "carrier protein",
+          "saturation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Tonicity and Osmoregulation",
+       "concepts": [
+        {
+         "title": "Tonicity and Water Movement",
+         "summary": "Water crosses a membrane toward the compartment with the higher solute concentration, so an animal cell shrinks in a hypertonic solution, swells and may lyse in a hypotonic one, and holds its volume only in an isotonic one.",
+         "keywords": [
+          "tonicity",
+          "osmosis",
+          "water potential"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Mechanisms of Transport",
+       "concepts": [
+        {
+         "title": "The Sodium-Potassium Pump",
+         "summary": "The sodium-potassium ATPase exports three sodium ions and imports two potassium ions per ATP hydrolysed, which keeps the interior negative and builds the sodium gradient that secondary active transport spends to import glucose.",
+         "keywords": [
+          "sodium-potassium pump",
+          "secondary active transport",
+          "membrane potential"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cell Compartmentalization",
+       "concepts": [
+        {
+         "title": "Compartments Raise Reaction Efficiency",
+         "summary": "Membrane-bound compartments keep incompatible reactions apart and concentrate reactants, which is why a lysosome can hydrolyse material at pH 5 without digesting the cytosol around it.",
+         "keywords": [
+          "compartmentalization",
+          "lysosome",
+          "ph gradient"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Origins of Cell Compartmentalization",
+       "concepts": [
+        {
+         "title": "Endosymbiotic Theory",
+         "summary": "Mitochondria and chloroplasts descend from prokaryotes engulfed by a host cell, which their double membranes, their own circular DNA and their bacteria-like ribosomes all support.",
          "keywords": [
           "endosymbiosis",
           "mitochondria",
           "chloroplast"
-         ],
-         "prerequisites": [
-          "Organelles and compartmentalisation"
-         ]
-        },
-        {
-         "title": "Cell size and surface area to volume ratio",
-         "summary": "As a cell grows its surface area to volume ratio falls, which limits how large it can be.",
-         "keywords": [
-          "surface area",
-          "volume",
-          "ratio"
-         ],
-         "prerequisites": [
-          "Organelles and compartmentalisation"
-         ]
-        },
-        {
-         "title": "Cell specialisation and differentiation",
-         "summary": "Every cell of an organism shares the same DNA, so differentiation is about which genes are expressed.",
-         "keywords": [
-          "specialisation",
-          "differentiation",
-          "gene expression"
-         ],
-         "prerequisites": [
-          "Cell size and surface area to volume ratio"
-         ]
-        },
-        {
-         "title": "Microscopy and the study of cells",
-         "summary": "Magnification and resolution are different limits, and resolution is what actually restricts detail.",
-         "keywords": [
-          "microscopy",
-          "magnification",
-          "resolution"
-         ],
-         "prerequisites": [
-          "Cell structure: prokaryotic and eukaryotic"
          ]
         }
        ]
       }
-     ]
-    },
-    {
-     "unit": "Membranes and transport",
-     "prerequisites": [
-      "Cell architecture"
      ],
-     "topics": [
-      {
-       "topic": "Movement across membranes",
-       "concepts": [
-        {
-         "title": "Cell membrane structure",
-         "summary": "The fluid mosaic model explains selective permeability as proteins embedded in a moving lipid bilayer.",
-         "keywords": [
-          "fluid mosaic",
-          "bilayer",
-          "selective permeability"
-         ]
-        },
-        {
-         "title": "Passive transport and diffusion",
-         "summary": "Net movement down a gradient needs no energy, and its rate depends on the gradient, distance and temperature.",
-         "keywords": [
-          "diffusion",
-          "concentration gradient",
-          "passive transport"
-         ],
-         "prerequisites": [
-          "Cell membrane structure"
-         ]
-        },
-        {
-         "title": "Osmosis and water potential",
-         "summary": "Water moves toward lower water potential, which is why cells shrink or burst in different solutions.",
-         "keywords": [
-          "osmosis",
-          "water potential",
-          "turgor"
-         ],
-         "prerequisites": [
-          "Passive transport and diffusion"
-         ]
-        },
-        {
-         "title": "Facilitated diffusion and channel proteins",
-         "summary": "Polar and charged solutes cross through specific proteins down their gradient, with no energy cost.",
-         "keywords": [
-          "facilitated diffusion",
-          "channel protein",
-          "carrier"
-         ],
-         "prerequisites": [
-          "Passive transport and diffusion"
-         ]
-        },
-        {
-         "title": "Active transport",
-         "summary": "Moving a substance against its gradient costs energy, which is why it stops when respiration stops.",
-         "keywords": [
-          "active transport",
-          "ATP",
-          "sodium-potassium pump"
-         ],
-         "prerequisites": [
-          "Osmosis and water potential"
-         ]
-        },
-        {
-         "title": "Bulk transport: endocytosis and exocytosis",
-         "summary": "Vesicles move large particles in and out, which is how a cell moves material the membrane cannot pass.",
-         "keywords": [
-          "endocytosis",
-          "exocytosis",
-          "vesicle"
-         ],
-         "prerequisites": [
-          "Active transport"
-         ]
-        }
-       ]
-      }
+     "prerequisites": [
+      "Chemistry of Life"
      ]
     }
    ]
@@ -335,142 +356,141 @@
    "strand": "Cellular Energetics",
    "units": [
     {
-     "unit": "Energy and metabolism",
-     "prerequisites": [
-      "Membranes and transport"
-     ],
+     "unit": "Cellular Energetics",
      "topics": [
       {
-       "topic": "Coupling energy to work",
+       "topic": "Enzymes",
        "concepts": [
         {
-         "title": "Energy, metabolism and free energy",
-         "summary": "Free-energy change decides whether a reaction can proceed spontaneously.",
+         "title": "Enzymes Lower Activation Energy",
+         "summary": "An enzyme binds its substrate at an active site and stabilises the transition state, which lowers the activation energy and speeds the reaction without changing the free-energy difference between reactants and products.",
          "keywords": [
-          "free energy",
-          "metabolism",
-          "spontaneous"
+          "activation energy",
+          "active site",
+          "catalysis"
          ]
         },
         {
-         "title": "ATP and energy coupling",
-         "summary": "ATP transfers a phosphate group, coupling an energy-releasing reaction to one that needs energy.",
+         "title": "Induced Fit and Substrate Specificity",
+         "summary": "The active site is complementary to its substrate and shifts shape as the substrate binds, which is why one enzyme catalyses only a narrow set of reactions rather than any reaction it encounters.",
          "keywords": [
-          "ATP",
-          "energy coupling",
-          "phosphorylation"
+          "induced fit",
+          "specificity",
+          "substrate"
          ],
          "prerequisites": [
-          "Energy, metabolism and free energy"
-         ]
-        },
-        {
-         "title": "Coupled reactions and metabolic pathways",
-         "summary": "Metabolism is a set of enzyme-catalysed steps, each coupled to the next.",
-         "keywords": [
-          "metabolic pathway",
-          "anabolism",
-          "catabolism"
-         ],
-         "prerequisites": [
-          "ATP and energy coupling"
+          "Enzymes Lower Activation Energy"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Respiration and photosynthesis",
-     "prerequisites": [
-      "Energy and metabolism"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Harvesting and capturing energy",
+       "topic": "Environmental Impacts on Enzyme Function",
+       "concepts": [
+        {
+         "title": "Temperature and pH Optima",
+         "summary": "Each enzyme works fastest at an optimum temperature and pH, and beyond them hydrogen and ionic bonds break, the active site loses its shape and the rate falls because denaturation is largely irreversible in the cell.",
+         "keywords": [
+          "optimum temperature",
+          "denaturation",
+          "ph"
+         ]
+        },
+        {
+         "title": "Competitive and Noncompetitive Inhibition",
+         "summary": "A competitive inhibitor occupies the active site and its effect is overcome by raising substrate concentration, while a noncompetitive inhibitor binds elsewhere and lowers the maximum rate however much substrate is supplied.",
+         "keywords": [
+          "competitive inhibition",
+          "noncompetitive inhibition",
+          "maximum rate"
+         ],
+         "prerequisites": [
+          "Temperature and pH Optima"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cellular Energy",
+       "concepts": [
+        {
+         "title": "ATP Couples Exergonic and Endergonic Reactions",
+         "summary": "ATP hydrolysis releases about 7.3 kcal per mole under standard conditions, and a cell spends that energy by phosphorylating a reactant so that the coupled pair has a negative free-energy change overall.",
+         "keywords": [
+          "atp",
+          "energy coupling",
+          "phosphorylation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Photosynthesis",
+       "concepts": [
+        {
+         "title": "Light Reactions and the Calvin Cycle",
+         "summary": "The light reactions split water, release oxygen, reduce NADP+ and build a proton gradient that makes ATP, and the Calvin cycle then spends that ATP and NADPH to fix carbon dioxide into triose phosphate.",
+         "keywords": [
+          "light reactions",
+          "calvin cycle",
+          "carbon fixation"
+         ]
+        },
+        {
+         "title": "Pigment Absorption and Action Spectra",
+         "summary": "Chlorophyll a absorbs red and blue light and reflects green, so photosynthetic rate peaks at the absorbed wavelengths and the action spectrum tracks the absorption spectra of whichever pigments the plant contains.",
+         "keywords": [
+          "chlorophyll",
+          "absorption spectrum",
+          "action spectrum"
+         ],
+         "prerequisites": [
+          "Light Reactions and the Calvin Cycle"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cellular Respiration",
        "concepts": [
         {
          "title": "Glycolysis",
-         "summary": "Glucose splits into pyruvate with a small net gain of ATP and reduced electron carriers.",
+         "summary": "Glycolysis splits one glucose into two pyruvate in the cytosol with a net gain of two ATP and two NADH, and it requires no oxygen, so it is the only ATP-yielding stage available to an anaerobic cell.",
          "keywords": [
           "glycolysis",
           "pyruvate",
-          "NADH"
+          "cytosol"
          ]
         },
         {
-         "title": "The Krebs cycle",
-         "summary": "Acetyl-CoA is oxidised completely, releasing carbon dioxide and loading electron carriers.",
+         "title": "Pyruvate Oxidation and the Citric Acid Cycle",
+         "summary": "Pyruvate loses carbon dioxide to become acetyl-CoA, which enters the citric acid cycle, and each turn releases two carbon dioxide and reduces three NAD+ and one FAD while regenerating oxaloacetate.",
          "keywords": [
-          "Krebs cycle",
           "citric acid cycle",
-          "acetyl-CoA"
+          "acetyl coa",
+          "oxaloacetate"
          ],
          "prerequisites": [
           "Glycolysis"
          ]
         },
         {
-         "title": "Oxidative phosphorylation and the electron transport chain",
-         "summary": "Electron transport pumps protons, and the resulting gradient drives ATP synthase.",
+         "title": "Oxidative Phosphorylation and Chemiosmosis",
+         "summary": "Electrons handed down the transport chain pump protons into the intermembrane space, and the returning protons drive ATP synthase; oxygen is the terminal electron acceptor, so without it the chain backs up and ATP output collapses.",
          "keywords": [
-          "electron transport chain",
+          "oxidative phosphorylation",
           "chemiosmosis",
-          "ATP synthase"
+          "atp synthase"
          ],
          "prerequisites": [
-          "The Krebs cycle"
-         ]
-        },
-        {
-         "title": "Fermentation",
-         "summary": "Without oxygen, cells regenerate the electron carrier using an organic molecule and gain far less ATP.",
-         "keywords": [
-          "fermentation",
-          "anaerobic",
-          "lactate"
-         ],
-         "prerequisites": [
-          "Glycolysis"
-         ]
-        },
-        {
-         "title": "Photosynthesis: light-dependent reactions",
-         "summary": "Light energy splits water, releasing oxygen and producing ATP and reduced carriers.",
-         "keywords": [
-          "light reactions",
-          "photosystem",
-          "photolysis"
-         ],
-         "prerequisites": [
-          "Oxidative phosphorylation and the electron transport chain"
-         ]
-        },
-        {
-         "title": "Photosynthesis: the Calvin cycle",
-         "summary": "ATP and reduced carriers fix carbon dioxide into sugar using the enzyme rubisco.",
-         "keywords": [
-          "Calvin cycle",
-          "carbon fixation",
-          "rubisco"
-         ],
-         "prerequisites": [
-          "Photosynthesis: light-dependent reactions"
-         ]
-        },
-        {
-         "title": "Factors affecting photosynthesis and respiration",
-         "summary": "Light intensity, carbon dioxide, temperature and oxygen availability each limit the rate.",
-         "keywords": [
-          "limiting factor",
-          "photosynthesis rate"
-         ],
-         "prerequisites": [
-          "Photosynthesis: the Calvin cycle"
+          "Pyruvate Oxidation and the Citric Acid Cycle"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Cells"
      ]
     }
    ]
@@ -479,142 +499,131 @@
    "strand": "Cell Communication and Cell Cycle",
    "units": [
     {
-     "unit": "Signal transduction",
-     "prerequisites": [
-      "Respiration and photosynthesis"
-     ],
+     "unit": "Cell Communication and Cell Cycle",
      "topics": [
       {
-       "topic": "How cells talk",
+       "topic": "Cell Communication",
        "concepts": [
         {
-         "title": "Signal transduction pathways",
-         "summary": "A signal is received, transduced through a cascade and converted into a cellular response.",
+         "title": "Local and Long-Distance Signalling",
+         "summary": "Paracrine signals diffuse to nearby cells, synaptic signals cross a narrow cleft to one target, and endocrine hormones travel in blood to any cell that carries the matching receptor.",
          "keywords": [
-          "signal transduction",
+          "paracrine",
+          "endocrine",
+          "synaptic"
+         ]
+        },
+        {
+         "title": "Reception, Transduction and Response",
+         "summary": "A signal pathway runs from ligand binding at a receptor, through intracellular relay and amplification, to a response that alters gene expression, enzyme activity or the cytoskeleton.",
+         "keywords": [
           "reception",
+          "transduction",
           "response"
-         ]
-        },
-        {
-         "title": "Receptors and ligands",
-         "summary": "A ligand binds a specific receptor, and the receptor type decides whether the cell changes fast or slowly.",
-         "keywords": [
-          "receptor",
-          "ligand",
-          "specificity"
          ],
          "prerequisites": [
-          "Signal transduction pathways"
-         ]
-        },
-        {
-         "title": "Signal amplification and second messengers",
-         "summary": "A cascade multiplies the signal so a few molecules produce a large response.",
-         "keywords": [
-          "second messenger",
-          "amplification",
-          "cAMP"
-         ],
-         "prerequisites": [
-          "Receptors and ligands"
-         ]
-        },
-        {
-         "title": "Feedback and homeostasis",
-         "summary": "Negative feedback opposes a change while positive feedback amplifies it.",
-         "keywords": [
-          "negative feedback",
-          "positive feedback",
-          "homeostasis"
-         ],
-         "prerequisites": [
-          "Signal transduction pathways"
+          "Local and Long-Distance Signalling"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "The cell cycle",
-     "prerequisites": [
-      "Signal transduction"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Division and control",
+       "topic": "Introduction to Signal Transduction",
        "concepts": [
         {
-         "title": "The cell cycle and its regulation",
-         "summary": "Growth, synthesis and division are ordered phases policed by checkpoints.",
+         "title": "G Protein-Coupled and Tyrosine Kinase Receptors",
+         "summary": "A G protein-coupled receptor activates an intracellular G protein when its ligand binds, whereas a receptor tyrosine kinase dimerises and phosphorylates itself, so the two classes launch different intracellular relays.",
          "keywords": [
-          "cell cycle",
+          "g protein",
+          "receptor tyrosine kinase",
+          "dimerisation"
+         ]
+        },
+        {
+         "title": "Second Messengers",
+         "summary": "A second messenger such as cAMP or calcium ion carries the signal from the membrane into the cytoplasm, and because one activated receptor makes many messenger molecules the internal signal greatly exceeds the bound ligand.",
+         "keywords": [
+          "second messenger",
+          "camp",
+          "calcium"
+         ],
+         "prerequisites": [
+          "G Protein-Coupled and Tyrosine Kinase Receptors"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Signal Transduction Pathways",
+       "concepts": [
+        {
+         "title": "Amplification in Kinase Cascades",
+         "summary": "A signal transduction pathway amplifies the original signal because each activated kinase activates many downstream molecules, which is why a single hormone molecule can produce a large cellular response.",
+         "keywords": [
+          "amplification",
+          "kinase cascade",
+          "signal"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Feedback",
+       "concepts": [
+        {
+         "title": "Negative and Positive Feedback",
+         "summary": "Negative feedback reverses a deviation and holds a variable near its set point, while positive feedback reinforces the deviation and drives a process to completion, as oxytocin release does during labour.",
+         "keywords": [
+          "negative feedback",
+          "positive feedback",
+          "set point"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cell Cycle",
+       "concepts": [
+        {
+         "title": "Phases of the Cell Cycle",
+         "summary": "Interphase occupies most of the cycle with G1 growth, S-phase replication and G2 preparation, after which mitosis divides the nucleus and cytokinesis divides the cytoplasm.",
+         "keywords": [
           "interphase",
+          "s phase",
+          "cytokinesis"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Regulation of Cell Cycle",
+       "concepts": [
+        {
+         "title": "Cyclins, Cdks and Checkpoints",
+         "summary": "A cyclin binds its cyclin-dependent kinase and the complex phosphorylates the proteins that carry a cell past the G1, G2 and spindle checkpoints, and cyclin degradation resets the switch at the end of each cycle.",
+         "keywords": [
+          "cyclin",
+          "cdk",
           "checkpoint"
          ]
         },
         {
-         "title": "Mitosis",
-         "summary": "Mitosis produces genetically identical cells for growth and repair.",
+         "title": "Loss of Cycle Control and Cancer",
+         "summary": "Cancer begins when mutation removes the control on a proto-oncogene or disables a tumour suppressor, so a cell divides without a growth signal and its descendants accumulate further mutations.",
          "keywords": [
-          "mitosis",
-          "chromosome",
-          "identical cells"
+          "proto-oncogene",
+          "tumour suppressor",
+          "cancer"
          ],
          "prerequisites": [
-          "The cell cycle and its regulation"
-         ]
-        },
-        {
-         "title": "Checkpoints and cancer",
-         "summary": "Failure of cell-cycle control lets damaged cells divide unchecked.",
-         "keywords": [
-          "cancer",
-          "checkpoint",
-          "oncogene"
-         ],
-         "prerequisites": [
-          "Mitosis"
-         ]
-        },
-        {
-         "title": "Apoptosis",
-         "summary": "Programmed cell death removes damaged or unneeded cells as a normal part of development.",
-         "keywords": [
-          "apoptosis",
-          "programmed cell death"
-         ],
-         "prerequisites": [
-          "Checkpoints and cancer"
-         ]
-        },
-        {
-         "title": "Meiosis",
-         "summary": "Meiosis halves the chromosome number and reshuffles genes, creating genetic variation.",
-         "keywords": [
-          "meiosis",
-          "haploid",
-          "crossing over"
-         ],
-         "prerequisites": [
-          "Mitosis"
-         ]
-        },
-        {
-         "title": "Genetic variation in meiosis",
-         "summary": "Independent assortment and crossing over make each gamete genetically distinct.",
-         "keywords": [
-          "independent assortment",
-          "crossing over",
-          "variation"
-         ],
-         "prerequisites": [
-          "Meiosis"
+          "Cyclins, Cdks and Checkpoints"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Cellular Energetics"
      ]
     }
    ]
@@ -623,118 +632,118 @@
    "strand": "Heredity",
    "units": [
     {
-     "unit": "Patterns of inheritance",
-     "prerequisites": [
-      "The cell cycle"
-     ],
+     "unit": "Heredity",
      "topics": [
       {
-       "topic": "From genes to traits",
+       "topic": "Meiosis",
        "concepts": [
         {
-         "title": "Mendelian inheritance",
-         "summary": "Alleles segregate and assort independently, which predicts the ratios of offspring phenotypes.",
+         "title": "Two Divisions Yield Four Haploid Cells",
+         "summary": "Meiosis separates homologous chromosomes in meiosis I and sister chromatids in meiosis II, so one diploid cell gives four haploid cells carrying half the parent's chromosome number.",
          "keywords": [
-          "Mendel",
-          "allele",
-          "segregation"
+          "meiosis",
+          "haploid",
+          "homologous chromosomes"
          ]
         },
         {
-         "title": "Monohybrid and dihybrid crosses",
-         "summary": "Punnett squares predict offspring ratios from parental genotypes.",
+         "title": "Crossing Over in Prophase I",
+         "summary": "Homologues pair as tetrads in prophase I and exchange segments at chiasmata, which recombines alleles that were linked on the same chromosome.",
          "keywords": [
-          "monohybrid",
-          "dihybrid",
-          "Punnett square"
+          "prophase i",
+          "crossing over",
+          "chiasma"
          ],
          "prerequisites": [
-          "Mendelian inheritance"
-         ]
-        },
-        {
-         "title": "Probability in genetics",
-         "summary": "Inheritance follows probability rules, so larger samples approach predicted ratios.",
-         "keywords": [
-          "probability",
-          "chi-square",
-          "ratio"
-         ],
-         "prerequisites": [
-          "Monohybrid and dihybrid crosses"
-         ]
-        },
-        {
-         "title": "Non-Mendelian inheritance",
-         "summary": "Incomplete dominance, codominance and multiple alleles produce phenotypes that simple dominance cannot explain.",
-         "keywords": [
-          "incomplete dominance",
-          "codominance",
-          "multiple alleles"
-         ],
-         "prerequisites": [
-          "Mendelian inheritance"
-         ]
-        },
-        {
-         "title": "Sex-linked inheritance",
-         "summary": "Genes on the sex chromosomes produce different inheritance patterns in males and females.",
-         "keywords": [
-          "sex-linked",
-          "X chromosome",
-          "carrier"
-         ],
-         "prerequisites": [
-          "Non-Mendelian inheritance"
-         ]
-        },
-        {
-         "title": "Pedigrees and inheritance analysis",
-         "summary": "A pedigree traces a trait through a family and can reveal its mode of inheritance.",
-         "keywords": [
-          "pedigree",
-          "inheritance pattern"
-         ],
-         "prerequisites": [
-          "Sex-linked inheritance"
+          "Two Divisions Yield Four Haploid Cells"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Chromosomes and recombination",
-     "prerequisites": [
-      "Patterns of inheritance"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Beyond single genes",
+       "topic": "Meiosis and Genetic Diversity",
        "concepts": [
         {
-         "title": "Chromosomal inheritance",
-         "summary": "Genes are carried on chromosomes, so chromosome behaviour explains inheritance patterns.",
+         "title": "Independent Assortment",
+         "summary": "Homologues orient independently at metaphase I, so a human cell can produce 2^23 different chromosome combinations in its gametes before crossing over is counted.",
          "keywords": [
-          "chromosome",
-          "linkage"
+          "independent assortment",
+          "metaphase i",
+          "combinations"
          ]
         },
         {
-         "title": "Linked genes and recombination",
-         "summary": "Genes close together on a chromosome tend to be inherited together, and recombination frequency measures distance.",
+         "title": "Random Fertilisation",
+         "summary": "Any of a male 2^23 gamete types can fuse with any of a female 2^23 types, so fertilisation multiplies the variety meiosis generated instead of merely preserving it.",
          "keywords": [
-          "linked genes",
-          "recombination",
-          "map unit"
+          "random fertilisation",
+          "gamete",
+          "variation"
          ],
          "prerequisites": [
-          "Chromosomal inheritance"
+          "Independent Assortment"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Mendelian Genetics",
+       "concepts": [
+        {
+         "title": "Segregation and Complete Dominance",
+         "summary": "Each gamete receives one allele of a gene, and in complete dominance the heterozygote shows the dominant phenotype, so a cross between two heterozygotes gives a 3:1 phenotypic ratio.",
+         "keywords": [
+          "segregation",
+          "dominant allele",
+          "monohybrid cross"
          ]
         },
         {
-         "title": "Environmental effects on phenotype",
-         "summary": "The phenotype is the product of genotype and environment, so identical genotypes can differ.",
+         "title": "Dihybrid Crosses and Independent Assortment",
+         "summary": "A cross between two double heterozygotes at unlinked loci gives a 9:3:3:1 phenotypic ratio, and a significant departure from that ratio indicates linkage or epistasis.",
+         "keywords": [
+          "dihybrid cross",
+          "ratio",
+          "linkage"
+         ],
+         "prerequisites": [
+          "Segregation and Complete Dominance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Non-Mendelian Genetics",
+       "concepts": [
+        {
+         "title": "Incomplete Dominance and Codominance",
+         "summary": "In incomplete dominance the heterozygote shows an intermediate phenotype, whereas in codominance both alleles are fully expressed at once, as in AB blood type.",
+         "keywords": [
+          "incomplete dominance",
+          "codominance",
+          "heterozygote"
+         ]
+        },
+        {
+         "title": "Sex-Linked Inheritance",
+         "summary": "A recessive allele on the X chromosome appears far more often in males, because a male carries one X and therefore expresses whatever allele it holds.",
+         "keywords": [
+          "sex-linked",
+          "x chromosome",
+          "hemizygous"
+         ],
+         "prerequisites": [
+          "Incomplete Dominance and Codominance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Environmental Effects on Phenotype",
+       "concepts": [
+        {
+         "title": "Phenotype as Genotype Plus Environment",
+         "summary": "Phenotype results from genotype expressed in an environment, which is why genetically identical plants differ in height with light and hydrangeas change flower colour with soil pH.",
          "keywords": [
           "phenotype",
           "environment",
@@ -743,6 +752,9 @@
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Cell Communication and Cell Cycle"
      ]
     }
    ]
@@ -751,140 +763,171 @@
    "strand": "Gene Expression and Regulation",
    "units": [
     {
-     "unit": "From DNA to protein",
-     "prerequisites": [
-      "Chromosomes and recombination"
-     ],
+     "unit": "Gene Expression and Regulation",
      "topics": [
       {
-       "topic": "The central dogma",
+       "topic": "DNA and RNA Structure",
        "concepts": [
         {
-         "title": "DNA structure and replication",
-         "summary": "Complementary base pairing allows semi-conservative replication with proofreading.",
+         "title": "Antiparallel DNA Double Helix",
+         "summary": "The two DNA strands run in opposite directions with the sugar-phosphate backbones outside and the base pairs inside, so a purine always faces a pyrimidine and the helix keeps a constant diameter.",
          "keywords": [
-          "DNA replication",
-          "semiconservative",
-          "base pairing"
+          "double helix",
+          "antiparallel",
+          "purine"
          ]
         },
         {
-         "title": "Transcription",
-         "summary": "RNA polymerase makes an RNA copy of a gene, which is the first step of expression.",
+         "title": "RNA Structure and Catalytic Folding",
+         "summary": "RNA uses ribose and uracil in place of deoxyribose and thymine, and because it is usually single-stranded it folds into shapes that can recognise substrates, which is how a ribozyme catalyses a reaction.",
          "keywords": [
-          "transcription",
-          "RNA polymerase",
-          "mRNA"
+          "ribose",
+          "uracil",
+          "ribozyme"
          ],
          "prerequisites": [
-          "DNA structure and replication"
-         ]
-        },
-        {
-         "title": "RNA processing",
-         "summary": "Eukaryotic RNA is capped, spliced and tailed before it leaves the nucleus.",
-         "keywords": [
-          "RNA splicing",
-          "intron",
-          "exon"
-         ],
-         "prerequisites": [
-          "Transcription"
-         ]
-        },
-        {
-         "title": "Translation",
-         "summary": "Ribosomes read codons and assemble amino acids into a polypeptide.",
-         "keywords": [
-          "translation",
-          "ribosome",
-          "tRNA"
-         ],
-         "prerequisites": [
-          "RNA processing"
-         ]
-        },
-        {
-         "title": "The genetic code",
-         "summary": "Codons are redundant but unambiguous, which limits the effect of some mutations.",
-         "keywords": [
-          "genetic code",
-          "codon",
-          "redundancy"
-         ],
-         "prerequisites": [
-          "Translation"
+          "Antiparallel DNA Double Helix"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Regulation and biotechnology",
-     "prerequisites": [
-      "From DNA to protein"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Controlling expression",
+       "topic": "DNA Replication",
        "concepts": [
         {
-         "title": "Gene regulation in prokaryotes",
-         "summary": "Operons let bacteria switch whole pathways on and off in response to the environment.",
+         "title": "Semiconservative Replication",
+         "summary": "Each daughter molecule keeps one parental strand and one newly made strand, as the Meselson-Stahl density experiment showed, so replication copies a template rather than conserving the original duplex intact.",
+         "keywords": [
+          "semiconservative",
+          "meselson-stahl",
+          "template"
+         ]
+        },
+        {
+         "title": "Leading and Lagging Strand Synthesis",
+         "summary": "DNA polymerase extends only a free 3-prime end, so the leading strand is built continuously toward the replication fork while the lagging strand is built in Okazaki fragments that DNA ligase later joins.",
+         "keywords": [
+          "dna polymerase",
+          "okazaki fragments",
+          "ligase"
+         ],
+         "prerequisites": [
+          "Semiconservative Replication"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Transcription and RNA Processing",
+       "concepts": [
+        {
+         "title": "RNA Polymerase and the Promoter",
+         "summary": "RNA polymerase binds a promoter, unwinds the template and adds ribonucleotides in the 5-prime to 3-prime direction, so the transcript matches the coding strand except that uracil replaces thymine.",
+         "keywords": [
+          "rna polymerase",
+          "promoter",
+          "coding strand"
+         ]
+        },
+        {
+         "title": "Capping, Polyadenylation and Splicing",
+         "summary": "A eukaryotic transcript receives a 5-prime cap and a 3-prime poly-A tail and is spliced by the spliceosome to remove introns, so alternative splicing can produce several proteins from one gene.",
+         "keywords": [
+          "rna processing",
+          "spliceosome",
+          "intron"
+         ],
+         "prerequisites": [
+          "RNA Polymerase and the Promoter"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Translation",
+       "concepts": [
+        {
+         "title": "Codons, tRNA and the Ribosome",
+         "summary": "Triplet codons are read in the ribosome A, P and E sites while tRNA delivers the amino acid matched to each codon, and the code is redundant without being ambiguous.",
+         "keywords": [
+          "codon",
+          "trna",
+          "ribosome"
+         ]
+        },
+        {
+         "title": "Initiation, Elongation and Termination",
+         "summary": "Translation starts at the start codon, elongates as peptide bonds form between the P-site and A-site residues, and stops when a stop codon recruits a release factor that frees the polypeptide.",
+         "keywords": [
+          "start codon",
+          "elongation",
+          "release factor"
+         ],
+         "prerequisites": [
+          "Codons, tRNA and the Ribosome"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Regulation of Gene Expression",
+       "concepts": [
+        {
+         "title": "Operons and Eukaryotic Control Points",
+         "summary": "A prokaryotic operon puts several genes under one promoter so a single repressor can silence them together, whereas a eukaryote regulates the same gene separately at transcription, at RNA processing, at translation and after translation.",
          "keywords": [
           "operon",
-          "lac operon",
-          "repressor"
+          "repressor",
+          "control point"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Gene Expression and Cell Specialization",
+       "concepts": [
         {
-         "title": "Gene regulation in eukaryotes",
-         "summary": "Eukaryotes regulate at transcription, RNA processing, translation and after translation.",
+         "title": "Differential Expression Defines Cell Types",
+         "summary": "Every somatic cell of an organism carries the same genome, so tissues differ because different subsets of genes are expressed, not because they contain different genes.",
          "keywords": [
-          "eukaryotic regulation",
-          "transcription factor",
-          "chromatin"
-         ],
-         "prerequisites": [
-          "Gene regulation in prokaryotes"
+          "differential expression",
+          "cell type",
+          "genome"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Mutations",
+       "concepts": [
         {
-         "title": "Mutations",
-         "summary": "Substitutions, insertions and deletions change protein sequence, and frameshifts are usually more damaging.",
+         "title": "Point Mutations and Reading Frames",
+         "summary": "A silent substitution leaves the amino acid unchanged, a missense substitution changes one residue and a nonsense substitution creates a stop codon, while an insertion or deletion not divisible by three shifts the frame and garbles every later codon.",
          "keywords": [
-          "mutation",
-          "frameshift",
-          "substitution"
+          "point mutation",
+          "missense",
+          "frameshift"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Biotechnology",
+       "concepts": [
         {
-         "title": "Biotechnology and genetic engineering",
-         "summary": "Restriction enzymes, PCR, gel electrophoresis and sequencing let genes be read and manipulated.",
+         "title": "PCR and Gel Electrophoresis",
+         "summary": "PCR amplifies a target sequence through repeated denaturation, primer annealing and extension, and gel electrophoresis then separates the products by size because smaller fragments travel further through the matrix.",
          "keywords": [
-          "PCR",
+          "pcr",
           "gel electrophoresis",
-          "recombinant DNA"
-         ],
-         "prerequisites": [
-          "Gene regulation in eukaryotes"
-         ]
-        },
-        {
-         "title": "Genome evolution",
-         "summary": "Genomes change through duplication, rearrangement and horizontal transfer over long timescales.",
-         "keywords": [
-          "genome",
-          "gene duplication",
-          "horizontal transfer"
-         ],
-         "prerequisites": [
-          "Mutations"
+          "amplification"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Heredity"
      ]
     }
    ]
@@ -893,120 +936,203 @@
    "strand": "Natural Selection",
    "units": [
     {
-     "unit": "Evolution by natural selection",
-     "prerequisites": [
-      "Regulation and biotechnology"
-     ],
+     "unit": "Natural Selection",
      "topics": [
       {
-       "topic": "Mechanisms of change",
+       "topic": "Introduction to Natural Selection",
        "concepts": [
         {
-         "title": "Natural selection and adaptation",
-         "summary": "Heritable variation plus differential reproduction changes trait frequencies across generations.",
+         "title": "Conditions Required for Natural Selection",
+         "summary": "Natural selection acts only when a population varies, the variation is heritable and some variants leave more offspring, so fitness means relative reproductive success in the current environment rather than strength or longevity.",
          "keywords": [
-          "natural selection",
-          "adaptation",
-          "fitness"
+          "heritable variation",
+          "fitness",
+          "differential reproduction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Natural Selection",
+       "concepts": [
+        {
+         "title": "Directional, Stabilizing and Disruptive Selection",
+         "summary": "Directional selection shifts the mean phenotype, stabilizing selection narrows variation around an intermediate optimum, and disruptive selection favours both extremes and can split a population in two.",
+         "keywords": [
+          "directional selection",
+          "stabilizing selection",
+          "disruptive selection"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Artificial Selection",
+       "concepts": [
+        {
+         "title": "Human Choice as a Selective Pressure",
+         "summary": "Artificial selection uses the same mechanism as natural selection but lets humans decide which individuals breed, which is how one wild mustard gave cabbage, kale, broccoli and cauliflower.",
+         "keywords": [
+          "artificial selection",
+          "selective breeding",
+          "brassica"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Population Genetics",
+       "concepts": [
+        {
+         "title": "Allele Frequencies and the Forces That Change Them",
+         "summary": "Population genetics describes a population by allele frequencies in its gene pool, and evolution is any change in those frequencies caused by mutation, gene flow, genetic drift or selection.",
+         "keywords": [
+          "allele frequency",
+          "gene pool",
+          "genetic drift"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Hardy-Weinberg Equilibrium",
+       "concepts": [
+        {
+         "title": "Conditions for Hardy-Weinberg Equilibrium",
+         "summary": "Allele and genotype frequencies stay constant only in a large, randomly mating population with no mutation, no migration and no selection, so a measured change is evidence that one of those conditions fails.",
+         "keywords": [
+          "hardy-weinberg",
+          "equilibrium",
+          "assumptions"
          ]
         },
         {
-         "title": "Evidence for evolution",
-         "summary": "Fossils, biogeography, comparative anatomy and molecular data converge on common descent.",
+         "title": "Genotype Frequencies from Allele Frequencies",
+         "summary": "At equilibrium genotypes follow p-squared plus 2pq plus q-squared, so the carrier frequency 2pq stays appreciable even when a recessive allele q is rare.",
+         "keywords": [
+          "genotype frequency",
+          "carrier frequency",
+          "recessive allele"
+         ],
+         "prerequisites": [
+          "Conditions for Hardy-Weinberg Equilibrium"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Evidence of Evolution",
+       "concepts": [
+        {
+         "title": "Fossils, Homology and Biogeography",
+         "summary": "Fossil strata record sequential change, homologous structures reveal shared descent while analogous ones reveal convergence, and endemic island species record long isolation.",
          "keywords": [
           "fossil record",
           "homology",
           "biogeography"
-         ],
-         "prerequisites": [
-          "Natural selection and adaptation"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Common Ancestry",
+       "concepts": [
         {
-         "title": "Artificial selection",
-         "summary": "Selective breeding shows how quickly allele frequencies shift under strong selection.",
+         "title": "Conserved Molecular Evidence for Common Descent",
+         "summary": "A nearly universal genetic code, conserved ribosomal RNA sequences and similar Hox gene order across distant phyla indicate descent from one ancestor rather than repeated independent origins.",
          "keywords": [
-          "artificial selection",
-          "selective breeding"
-         ],
-         "prerequisites": [
-          "Natural selection and adaptation"
+          "common ancestor",
+          "conserved sequence",
+          "hox genes"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Continuing Evolution",
+       "concepts": [
         {
-         "title": "Population genetics and allele frequencies",
-         "summary": "Evolution is a change in allele frequency in a population over time.",
+         "title": "Evolution Observed Within Human Timescales",
+         "summary": "Evolution is directly observable whenever a selective pressure is strong, as when antibiotic use raises the frequency of resistant bacteria within a few generations.",
          "keywords": [
-          "allele frequency",
-          "gene pool",
-          "population genetics"
-         ],
-         "prerequisites": [
-          "Natural selection and adaptation"
+          "antibiotic resistance",
+          "observed evolution",
+          "selection pressure"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Phylogeny",
+       "concepts": [
         {
-         "title": "Hardy-Weinberg equilibrium",
-         "summary": "The null model predicts constant allele frequencies when no evolutionary force acts.",
+         "title": "Reading a Phylogenetic Tree",
+         "summary": "Branch points mark common ancestors and branch lengths can scale with time or genetic change, so two tips are closest relatives only when they share the most recent node.",
          "keywords": [
-          "Hardy-Weinberg",
-          "equilibrium",
-          "null model"
-         ],
-         "prerequisites": [
-          "Population genetics and allele frequencies"
+          "phylogenetic tree",
+          "node",
+          "clade"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Speciation",
+       "concepts": [
         {
-         "title": "Genetic drift and gene flow",
-         "summary": "Chance and migration change allele frequencies without any fitness advantage.",
+         "title": "Reproductive Isolation Defines a Species",
+         "summary": "Under the biological species concept a species is a group that interbreeds to produce viable fertile offspring, so speciation is complete once prezygotic or postzygotic barriers stop gene flow.",
          "keywords": [
-          "genetic drift",
-          "gene flow",
-          "bottleneck"
-         ],
-         "prerequisites": [
-          "Hardy-Weinberg equilibrium"
-         ]
-        },
-        {
-         "title": "Speciation",
-         "summary": "Reproductive isolation, often after geographic separation, produces new species.",
-         "keywords": [
-          "speciation",
           "reproductive isolation",
-          "allopatric"
-         ],
-         "prerequisites": [
-          "Genetic drift and gene flow"
+          "species concept",
+          "barrier"
          ]
         },
         {
-         "title": "Phylogeny and classification",
-         "summary": "Shared derived characters build a tree of relationships among lineages.",
+         "title": "Allopatric and Sympatric Speciation",
+         "summary": "Allopatric speciation follows geographic separation that interrupts gene flow, while sympatric speciation arises within one range through polyploidy, habitat shift or behavioural divergence.",
          "keywords": [
-          "phylogeny",
-          "cladistics",
-          "common ancestor"
+          "allopatric",
+          "sympatric",
+          "polyploidy"
          ],
          "prerequisites": [
-          "Evidence for evolution"
+          "Reproductive Isolation Defines a Species"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Variations in Populations",
+       "concepts": [
         {
-         "title": "Extinction and biodiversity",
-         "summary": "Background and mass extinctions shape the diversity of life, and current rates are unusually high.",
+         "title": "Maintaining Genetic Variation",
+         "summary": "Mutation and recombination generate variation while diploidy and sexual reproduction preserve it, which is why populations retain alleles that selection does not currently favour.",
          "keywords": [
-          "extinction",
-          "biodiversity",
-          "mass extinction"
-         ],
-         "prerequisites": [
-          "Speciation"
+          "variation",
+          "recombination",
+          "diploidy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Origins of Life on Earth",
+       "concepts": [
+        {
+         "title": "Abiotic Synthesis and the RNA World",
+         "summary": "Organic monomers form from inorganic gases when energy is supplied, and the RNA world hypothesis holds that self-replicating RNA preceded DNA and protein, which is why ribozymes are read as molecular fossils.",
+         "keywords": [
+          "rna world",
+          "abiotic synthesis",
+          "ribozyme"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Gene Expression and Regulation"
      ]
     }
    ]
@@ -1015,140 +1141,121 @@
    "strand": "Ecology",
    "units": [
     {
-     "unit": "Populations and communities",
-     "prerequisites": [
-      "Evolution by natural selection"
-     ],
+     "unit": "Ecology",
      "topics": [
       {
-       "topic": "How organisms interact",
+       "topic": "Responses to the Environment",
        "concepts": [
         {
-         "title": "Population ecology",
-         "summary": "Population size is set by births, deaths, immigration and emigration, and by density-dependent limits.",
+         "title": "Cues, Taxis and Photoperiodism",
+         "summary": "An organism answers an environmental cue with a directed movement or a timed physiological change, as when a plant flowers only after the critical night length has been reached.",
          "keywords": [
-          "population",
-          "carrying capacity",
-          "density dependence"
+          "taxis",
+          "photoperiod",
+          "critical night length"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Energy Flow Through Ecosystems",
+       "concepts": [
         {
-         "title": "Population growth models",
-         "summary": "Exponential growth assumes unlimited resources while logistic growth approaches a carrying capacity.",
+         "title": "Productivity and the Ten Percent Rule",
+         "summary": "Net primary productivity, the energy fixed by producers minus their own respiration, sets the energy available to consumers, and only about ten percent passes to the next trophic level because the rest is lost in respiration, which is why chains rarely exceed five links.",
+         "keywords": [
+          "net primary productivity",
+          "trophic level",
+          "energy transfer"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Population Ecology",
+       "concepts": [
+        {
+         "title": "Exponential and Logistic Growth",
+         "summary": "A population with unlimited resources grows exponentially, but a finite environment imposes a carrying capacity and growth then follows a logistic curve that levels off at that ceiling.",
          "keywords": [
           "exponential growth",
-          "logistic growth",
-          "carrying capacity"
-         ],
-         "prerequisites": [
-          "Population ecology"
-         ]
-        },
-        {
-         "title": "Species interactions",
-         "summary": "Competition, predation, mutualism and parasitism each change the fitness of the interacting species.",
-         "keywords": [
-          "competition",
-          "predation",
-          "mutualism"
-         ],
-         "prerequisites": [
-          "Population growth models"
-         ]
-        },
-        {
-         "title": "Community ecology",
-         "summary": "Species diversity and structure emerge from interactions and disturbance regimes.",
-         "keywords": [
-          "community",
-          "diversity",
-          "keystone species"
-         ],
-         "prerequisites": [
-          "Species interactions"
+          "carrying capacity",
+          "logistic growth"
          ]
         }
        ]
-      }
-     ]
-    },
-    {
-     "unit": "Ecosystems and the biosphere",
-     "prerequisites": [
-      "Populations and communities"
-     ],
-     "topics": [
+      },
       {
-       "topic": "Energy and matter in ecosystems",
+       "topic": "Effect of Density on Populations",
        "concepts": [
         {
-         "title": "Energy flow and trophic levels",
-         "summary": "Energy transfer between trophic levels is inefficient, which limits food chain length.",
+         "title": "Density-Dependent Regulation",
+         "summary": "As density rises, intraspecific competition and disease lower the per-capita birth rate and raise the death rate, which is the feedback that holds a logistic population near its carrying capacity.",
          "keywords": [
-          "trophic level",
-          "energy pyramid",
-          "ten per cent rule"
+          "density-dependent",
+          "intraspecific competition",
+          "per-capita rate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Community Ecology",
+       "concepts": [
+        {
+         "title": "Competition, Predation and Symbiosis",
+         "summary": "Species interactions run from mutualism, where both partners gain, through commensalism, to parasitism and competition, where at least one partner loses.",
+         "keywords": [
+          "mutualism",
+          "predation",
+          "symbiosis"
          ]
         },
         {
-         "title": "Biogeochemical cycles",
-         "summary": "Carbon, nitrogen, phosphorus and water cycle between organisms and the environment.",
+         "title": "Niche Differentiation and Keystone Species",
+         "summary": "Species coexist only if their niches differ enough to reduce competition, and a keystone species shapes the community far out of proportion to its abundance, so its removal reorganises the whole assemblage.",
          "keywords": [
-          "carbon cycle",
-          "nitrogen cycle",
-          "biogeochemical"
+          "niche",
+          "keystone species",
+          "competitive exclusion"
          ],
          "prerequisites": [
-          "Energy flow and trophic levels"
+          "Competition, Predation and Symbiosis"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Biodiversity",
+       "concepts": [
         {
-         "title": "Ecosystem dynamics and succession",
-         "summary": "Disturbance drives succession, and ecosystems differ in how quickly they recover.",
+         "title": "Richness and Evenness",
+         "summary": "Biodiversity combines species richness with evenness of abundance, so a community with the same number of species but one dominant species is less diverse than an evenly distributed one.",
          "keywords": [
-          "succession",
-          "resilience",
-          "disturbance"
-         ],
-         "prerequisites": [
-          "Biogeochemical cycles"
+          "species richness",
+          "evenness",
+          "diversity"
          ]
-        },
+        }
+       ]
+      },
+      {
+       "topic": "Disruptions in Ecosystems",
+       "concepts": [
         {
-         "title": "Biodiversity and conservation",
-         "summary": "Biodiversity has genetic, species and ecosystem components, each with its own threats.",
+         "title": "Habitat Loss, Invasive Species and Climate Change",
+         "summary": "Habitat fragmentation, introduced species and shifting climate each raise extinction risk by shrinking ranges and breaking the interactions a species depends on.",
          "keywords": [
-          "biodiversity",
-          "conservation",
-          "habitat loss"
-         ],
-         "prerequisites": [
-          "Ecosystem dynamics and succession"
-         ]
-        },
-        {
-         "title": "Human impact on ecosystems",
-         "summary": "Habitat loss, climate change, pollution and invasive species are the main drivers of biodiversity loss.",
-         "keywords": [
-          "climate change",
-          "pollution",
-          "invasive species"
-         ],
-         "prerequisites": [
-          "Biodiversity and conservation"
-         ]
-        },
-        {
-         "title": "Behavioural ecology",
-         "summary": "Foraging, mating and social behaviour can be analysed by their effect on fitness.",
-         "keywords": [
-          "behavioural ecology",
-          "optimal foraging",
-          "kin selection"
+          "habitat loss",
+          "invasive species",
+          "extinction risk"
          ]
         }
        ]
       }
+     ],
+     "prerequisites": [
+      "Natural Selection"
      ]
     }
    ]

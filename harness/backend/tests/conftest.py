@@ -22,6 +22,30 @@ def hermetic_harness_environment(monkeypatch):
         monkeypatch.delenv(name, raising=False)
 
 
+@pytest.fixture(autouse=True)
+def no_dotenv_loading(monkeypatch):
+    """Make ``Settings.from_env()`` ignore ``backend/.env`` for every test.
+
+    Scrubbing the environment above is not enough on its own. ``Settings.from_env()`` calls
+    ``config.load_dotenv()``, which *re-reads* ``backend/.env`` and re-injects
+    ``HARNESS_TUTOR_PROVIDER``/``_MODEL``/``_URL`` — precisely the variables a fixture just
+    deleted. A developer following the documented setup keeps a real provider in that file,
+    so every test asserting the *unconfigured* model state fails on their machine while
+    passing on CI, which checks out a clean tree. Sixteen tests were red on a developer
+    checkout and green in CI for this reason.
+
+    Worse than red: those tests reached the provider that the file names and made a real
+    outbound request, so "assert the refusal" could pass while a live model answered.
+
+    Neutralising the loader rather than the file keeps a test's own ``setenv`` working (the
+    fixture sets variables and ``from_env`` still reads them) while making the suite's result
+    independent of what a developer has on disk.
+    """
+    from app import config as config_module
+
+    monkeypatch.setattr(config_module, 'load_dotenv', lambda *args, **kwargs: {})
+
+
 @pytest.fixture(scope='session')
 def absent_video_seed(tmp_path_factory):
     """A path that does not exist, computed **once per session**.

@@ -18,7 +18,12 @@ argon2-cffi==25.1.0
 httpx==0.28.1
 pydantic==2.14.0
 numpy==2.5.3
-Pillow==12.3.0
+# Bumped from 12.3.0 by the shipping audit: `pip-audit` reported known vulnerabilities in
+# 12.3.0 with 13.0.0 as the fix. This is the image's only compiled dependency, so the bump
+# is also the one that could break the container build -- 13.0.0 ships
+# `manylinux_2_27_x86_64.manylinux_2_28_x86_64` wheels for cp312, and `python:3.12-slim`
+# is glibc 2.36, so it installs without a compiler.
+Pillow==13.0.0
 python-pptx==1.0.2
 # Live web search. The package was renamed from duckduckgo-search to ddgs; the
 # 8.1.1 duckduckgo-search line is a rename stub whose backend returns nothing,
@@ -29,5 +34,16 @@ python-pptx==1.0.2
 # that refuses DuckDuckGo's HTML endpoint still gets real results; ddgs remains
 # the fallback for the frozen desktop bundle, which excludes playwright.
 ddgs==9.16.0
-python-multipart==0.0.22
-pypdf>=6,<7
+# Bumped from 0.0.22 by the shipping audit: five advisories in 0.0.22, fixed across
+# 0.0.26-0.0.31. This parser is on the document-upload path, so the advisories are
+# reachable by any authenticated learner.
+python-multipart==0.0.31
+# Pinned, not ranged. ``app/course_builder.py`` imports ``PdfReader`` lazily, so a range
+# here is invisible at import time and only bites when a learner uploads a PDF: a new
+# pypdf minor could change the text-extraction output the builder's glyph repair is
+# written against. It also broke the release gate -- ``pip-audit -r requirements.txt``
+# refuses a requirement that is not pinned to an exact version, so the declared
+# vulnerability scan could not run at all.
+# 6.19.0 was the version the suite was green on; the audit's scan then reported advisories
+# against it with fixes through 6.21.4, so the pin moved to the fixed line.
+pypdf==6.21.4

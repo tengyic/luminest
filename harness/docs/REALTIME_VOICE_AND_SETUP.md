@@ -27,10 +27,13 @@ The client defaults to `http://127.0.0.1:8765` (`UserDefaults` key
 
 ---
 
-## 2. Tutor LLM key (backend, offline‑grounded tutor)
+## 2. Tutor LLM key (required, configured in the app)
 
-The tutor calls an external model through `HARNESS_TUTOR_*`. A working, cheap
-default is DeepSeek (aliased automatically from `DEEPSEEK_API_KEY`):
+A language model is required; there is no offline tutor mode. The customer-facing path is
+**Settings → Language model**: pick a preset, enter a model id and key, save, and it is
+live without a restart (`PUT /api/v1/settings/model-config`). For a headless instance the
+same values come from `HARNESS_TUTOR_*`. A working, cheap starting point is DeepSeek
+(aliased automatically from `DEEPSEEK_API_KEY`):
 
 ```bash
 # harness/backend/.env

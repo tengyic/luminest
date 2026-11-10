@@ -82,3 +82,49 @@ final class VoiceActivityDetectorTests: XCTestCase {
         XCTAssertTrue(detector.isVoiced(0.05))
     }
 }
+
+/// The voice picker resolves to two strings that ride on *every* speech request. These
+/// tests pin the client's built-in fallback against the backend's ``VOICE_PRESETS`` ids
+/// and the pure resolution rule, without booting an AppStore (which starts a timer and
+/// binds the shared API client).
+final class VoiceOptionTests: XCTestCase {
+    func testBuiltInMirrorsTheServerPresets() {
+        let ids = VoiceOption.builtIn.map(\.id)
+        XCTAssertEqual(ids, ["default", "warm_teacher", "clear_narrator",
+                             "friendly_tutor", "calm_explainer", "energetic_coach",
+                             "mandarin_teacher", "custom"])
+        XCTAssertEqual(Set(ids).count, ids.count, "a duplicate id makes the picker ambiguous")
+        for option in VoiceOption.builtIn {
+            XCTAssertFalse(option.label.isEmpty)
+        }
+    }
+
+    func testDefaultAndCustomCarryNoProfileOrTone() {
+        for id in ["default", "custom"] {
+            let resolved = VoiceOption.resolve(id: id, custom: "", options: VoiceOption.builtIn)
+            XCTAssertEqual(resolved.voice, "")
+            XCTAssertEqual(resolved.tone, "")
+        }
+    }
+
+    func testAPresetSendsItsToneAndNotAProfile() {
+        let resolved = VoiceOption.resolve(id: "warm_teacher", custom: "ignored",
+                                           options: VoiceOption.builtIn)
+        XCTAssertEqual(resolved.voice, "")
+        XCTAssertEqual(resolved.tone, "female, young adult, moderate pitch, british accent")
+    }
+
+    func testCustomSendsTheTrimmedProfileAndNoTone() {
+        let resolved = VoiceOption.resolve(id: "custom", custom: "  my-mentor  ",
+                                           options: VoiceOption.builtIn)
+        XCTAssertEqual(resolved.voice, "my-mentor")
+        XCTAssertEqual(resolved.tone, "")
+    }
+
+    func testAnUnknownSavedIdFallsBackToTheInstanceDefault() {
+        let resolved = VoiceOption.resolve(id: "retired_preset", custom: "my-mentor",
+                                           options: VoiceOption.builtIn)
+        XCTAssertEqual(resolved.voice, "", "a renamed preset must not send a stale profile")
+        XCTAssertEqual(resolved.tone, "", "nor a tone the operator did not choose")
+    }
+}

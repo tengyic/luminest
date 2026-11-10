@@ -1,11 +1,11 @@
 {
  "schema": 1,
  "name": "biology",
- "title": "biology",
+ "title": "Biology",
  "metadata": {
   "generated_by": "app.ingest.pipeline",
   "rules": {
-   "sequence_within": "topic",
+   "sequence_within": "unit",
    "keyword_edges": false,
    "min_stem_length": 6,
    "keyword_blocklist": [
@@ -41,1108 +41,404 @@
    "extension_fraction": 0.6,
    "unit_bridge": true
   },
-  "course": "Biology — Cells, Genetics, Evolution and Ecosystems",
+  "course": "Biology - Cells, Genetics, Evolution and Ecology",
   "licence": "cc0",
   "source_url": "",
   "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
   "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
-  "description": "An introductory biology course: the chemistry of life, cell structure and transport, bioenergetics, genetics and inheritance, evolution, and ecology."
+  "description": "A full-year introductory biology course: the process of science and the chemistry of life, cell structure and transport, photosynthesis and respiration, cell division and reproduction, molecular genetics and heredity, evolution and classification, homeostasis in body systems and plants, ecology, and human impact and sustainability.",
+  "id_namespace": {
+   "prefix": "biology_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "OpenStax Biology (1e, CC BY 4.0)",
+   "supplements": [],
+   "link_only_note": "OpenStax Biology 2e reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored, quoted or used as an anchor.",
+   "units": {
+    "Foundations of Biology": [
+     {
+      "book": "biology",
+      "page": "1-1-the-science-of-biology"
+     },
+     {
+      "book": "biology",
+      "page": "1-2-themes-and-concepts-of-biology"
+     },
+     {
+      "book": "biology",
+      "page": "4-1-studying-cells"
+     }
+    ],
+    "Chemistry of Life": [
+     {
+      "book": "biology",
+      "page": "2-2-water"
+     },
+     {
+      "book": "biology",
+      "page": "3-1-synthesis-of-biological-macromolecules"
+     },
+     {
+      "book": "biology",
+      "page": "3-4-proteins"
+     },
+     {
+      "book": "biology",
+      "page": "6-5-enzymes"
+     }
+    ],
+    "Cells & Cell Transport": [
+     {
+      "book": "biology",
+      "page": "4-1-studying-cells"
+     },
+     {
+      "book": "biology",
+      "page": "4-3-eukaryotic-cells"
+     },
+     {
+      "book": "biology",
+      "page": "5-1-components-and-structure"
+     },
+     {
+      "book": "biology",
+      "page": "5-2-passive-transport"
+     }
+    ],
+    "Cellular Energetics": [
+     {
+      "book": "biology",
+      "page": "6-4-atp-adenosine-triphosphate"
+     },
+     {
+      "book": "biology",
+      "page": "8-1-overview-of-photosynthesis"
+     },
+     {
+      "book": "biology",
+      "page": "7-4-oxidative-phosphorylation"
+     },
+     {
+      "book": "biology",
+      "page": "7-5-metabolism-without-oxygen"
+     }
+    ],
+    "Cell Division & Reproduction": [
+     {
+      "book": "biology",
+      "page": "10-2-the-cell-cycle"
+     },
+     {
+      "book": "biology",
+      "page": "10-3-control-of-the-cell-cycle"
+     },
+     {
+      "book": "biology",
+      "page": "11-1-the-process-of-meiosis"
+     },
+     {
+      "book": "biology",
+      "page": "11-2-sexual-reproduction"
+     }
+    ],
+    "Molecular Genetics": [
+     {
+      "book": "biology",
+      "page": "14-2-dna-structure-and-sequencing"
+     },
+     {
+      "book": "biology",
+      "page": "15-5-ribosomes-and-protein-synthesis"
+     },
+     {
+      "book": "biology",
+      "page": "16-1-regulation-of-gene-expression"
+     },
+     {
+      "book": "biology",
+      "page": "17-1-biotechnology"
+     }
+    ],
+    "Heredity": [
+     {
+      "book": "biology",
+      "page": "12-1-mendels-experiments-and-the-laws-of-probability"
+     },
+     {
+      "book": "biology",
+      "page": "12-3-laws-of-inheritance"
+     },
+     {
+      "book": "biology",
+      "page": "13-1-chromosomal-theory-and-genetic-linkage"
+     },
+     {
+      "book": "biology",
+      "page": "13-2-chromosomal-basis-of-inherited-disorders"
+     }
+    ],
+    "Evolution & Classification": [
+     {
+      "book": "biology",
+      "page": "18-1-understanding-evolution"
+     },
+     {
+      "book": "biology",
+      "page": "18-2-formation-of-new-species"
+     },
+     {
+      "book": "biology",
+      "page": "20-1-organizing-life-on-earth"
+     },
+     {
+      "book": "biology",
+      "page": "20-2-determining-evolutionary-relationships"
+     }
+    ],
+    "Body Systems & Homeostasis": [
+     {
+      "book": "biology",
+      "page": "33-3-homeostasis"
+     },
+     {
+      "book": "biology",
+      "page": "42-2-adaptive-immune-response"
+     },
+     {
+      "book": "biology",
+      "page": "37-3-regulation-of-body-processes"
+     },
+     {
+      "book": "biology",
+      "page": "30-5-transport-of-water-and-solutes-in-plants"
+     }
+    ],
+    "Ecology": [
+     {
+      "book": "biology",
+      "page": "46-2-energy-flow-through-ecosystems"
+     },
+     {
+      "book": "biology",
+      "page": "46-3-biogeochemical-cycles"
+     },
+     {
+      "book": "biology",
+      "page": "45-4-population-dynamics-and-regulation"
+     },
+     {
+      "book": "biology",
+      "page": "45-6-community-ecology"
+     }
+    ],
+    "Human Impact & Sustainability": [
+     {
+      "book": "biology",
+      "page": "47-1-the-biodiversity-crisis"
+     },
+     {
+      "book": "biology",
+      "page": "47-3-threats-to-biodiversity"
+     },
+     {
+      "book": "biology",
+      "page": "47-4-preserving-biodiversity"
+     },
+     {
+      "book": "biology",
+      "page": "44-5-climate-and-the-effects-of-global-climate-change"
+     }
+    ]
+   }
+  }
  },
  "taxonomy": {
   "strands": {
-   "Molecules of Life": {
-    "Biological molecules and enzymes": [
-     "The chemistry of living things",
-     "Enzymes"
+   "Foundations of Biology": {
+    "Foundations of Biology": [
+     "Scientific Method & Experimental Design",
+     "Data & Graph Interpretation",
+     "Characteristics of Life & Levels of Organization",
+     "Measurement & Microscopy"
     ]
    },
-   "Cells": {
-    "Cell structure and division": [
-     "Cell structure",
-     "Transport across membranes"
+   "Chemistry of Life": {
+    "Chemistry of Life": [
+     "Water, Bonds & pH",
+     "Macromolecules",
+     "Enzymes & Catalysis"
     ]
    },
-   "Bioenergetics": {
-    "Respiration and photosynthesis": [
-     "Cellular respiration",
-     "Photosynthesis"
+   "Cells & Cell Transport": {
+    "Cells & Cell Transport": [
+     "Cell Theory & Cell Types",
+     "Organelles & Cell Structure",
+     "Membrane Structure & Transport",
+     "Cell Specialization & Organization"
     ]
    },
-   "Genetics and Evolution": {
-    "Inheritance": [
-     "DNA and the genetic code",
-     "Patterns of inheritance"
-    ],
-    "Evolution and classification": [
-     "Evolution by natural selection"
+   "Cellular Energetics": {
+    "Cellular Energetics": [
+     "ATP & Energy Flow",
+     "Photosynthesis",
+     "Cellular Respiration & Fermentation",
+     "Comparing & Connecting the Pathways"
     ]
    },
-   "Ecology and Physiology": {
+   "Cell Division & Reproduction": {
+    "Cell Division & Reproduction": [
+     "Cell Cycle & Regulation",
+     "Mitosis",
+     "Meiosis & Genetic Variation",
+     "Sexual vs. Asexual Reproduction"
+    ]
+   },
+   "Molecular Genetics": {
+    "Molecular Genetics": [
+     "DNA Structure & Replication",
+     "Transcription & Translation",
+     "Mutations",
+     "Gene Regulation",
+     "Biotechnology & Genetic Engineering"
+    ]
+   },
+   "Heredity": {
+    "Heredity": [
+     "Mendelian Inheritance & Crosses",
+     "Probability & Punnett Squares",
+     "Non-Mendelian Inheritance",
+     "Sex Linkage & Pedigrees"
+    ]
+   },
+   "Evolution & Classification": {
+    "Evolution & Classification": [
+     "Natural Selection & Adaptation",
+     "Evidence for Evolution",
+     "Speciation & Common Ancestry",
+     "Phylogeny & Classification",
+     "Survey of Biological Diversity"
+    ]
+   },
+   "Body Systems & Homeostasis": {
+    "Body Systems & Homeostasis": [
+     "Homeostasis & Feedback",
+     "Immunity, Disease & Pathogens",
+     "Nervous & Endocrine Regulation",
+     "Transport & Exchange Systems",
+     "Plant Structure & Physiology"
+    ]
+   },
+   "Ecology": {
     "Ecology": [
-     "Organisms and their environment"
-    ],
-    "Physiology and control": [
-     "Transport and control in organisms"
+     "Energy Flow & Food Webs",
+     "Biogeochemical Cycles",
+     "Population Dynamics & Carrying Capacity",
+     "Community Interactions & Succession",
+     "Ecosystem Stability & Biodiversity"
+    ]
+   },
+   "Human Impact & Sustainability": {
+    "Human Impact & Sustainability": [
+     "Human Impact on Ecosystems",
+     "Biodiversity & Conservation",
+     "Climate Change & Sustainability"
     ]
    }
   },
   "order": [
    {
-    "strand": "Molecules of Life",
+    "strand": "Foundations of Biology",
     "units": [
-     "Biological molecules and enzymes"
+     "Foundations of Biology"
     ]
    },
    {
-    "strand": "Cells",
+    "strand": "Chemistry of Life",
     "units": [
-     "Cell structure and division"
+     "Chemistry of Life"
     ]
    },
    {
-    "strand": "Bioenergetics",
+    "strand": "Cells & Cell Transport",
     "units": [
-     "Respiration and photosynthesis"
+     "Cells & Cell Transport"
     ]
    },
    {
-    "strand": "Genetics and Evolution",
+    "strand": "Cellular Energetics",
     "units": [
-     "Inheritance",
-     "Evolution and classification"
+     "Cellular Energetics"
     ]
    },
    {
-    "strand": "Ecology and Physiology",
+    "strand": "Cell Division & Reproduction",
     "units": [
-     "Ecology",
-     "Physiology and control"
+     "Cell Division & Reproduction"
+    ]
+   },
+   {
+    "strand": "Molecular Genetics",
+    "units": [
+     "Molecular Genetics"
+    ]
+   },
+   {
+    "strand": "Heredity",
+    "units": [
+     "Heredity"
+    ]
+   },
+   {
+    "strand": "Evolution & Classification",
+    "units": [
+     "Evolution & Classification"
+    ]
+   },
+   {
+    "strand": "Body Systems & Homeostasis",
+    "units": [
+     "Body Systems & Homeostasis"
+    ]
+   },
+   {
+    "strand": "Ecology",
+    "units": [
+     "Ecology"
+    ]
+   },
+   {
+    "strand": "Human Impact & Sustainability",
+    "units": [
+     "Human Impact & Sustainability"
     ]
    }
   ]
  },
  "concepts": [
   {
-   "id": "active_transport",
-   "title": "Active transport",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
+   "id": "biology_active_transport_against_a_gradient",
+   "title": "Active Transport Against a Gradient",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Membrane Structure & Transport",
    "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "osmosis_and_water_potential"
+    "biology_diffusion_and_osmosis"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "ATP",
     "active transport",
-    "against gradient"
+    "electrochemical gradient",
+    "sodium-potassium pump"
    ],
-   "summary": "Moving a substance against its gradient costs energy, which is why it stops when respiration stops.",
+   "summary": "Active transport spends ATP to move solute against its gradient, as the sodium-potassium pump does by exporting three sodium ions for every two potassium ions it imports, and it stores the work as an electrochemical gradient.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 21
-   }
-  },
-  {
-   "id": "aerobic_respiration",
-   "title": "Aerobic respiration",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Cellular respiration",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [],
-   "keywords": [
-    "aerobic",
-    "glucose",
-    "oxidation"
-   ],
-   "summary": "Aerobic respiration oxidises glucose completely, releasing far more energy per molecule than the anaerobic route.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 24
-   }
-  },
-  {
-   "id": "alleles_genotype_and_phenotype",
-   "title": "Alleles, genotype and phenotype",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [
-    "mutations_and_their_consequences"
-   ],
-   "keywords": [
-    "allele",
-    "genotype",
-    "phenotype"
-   ],
-   "summary": "Genotype is the allele combination and phenotype is the observable result of it plus the environment.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 36
-   }
-  },
-  {
-   "id": "anaerobic_respiration",
-   "title": "Anaerobic respiration",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Cellular respiration",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "aerobic_respiration"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "anaerobic",
-    "fermentation",
-    "lactate"
-   ],
-   "summary": "Without oxygen, glucose is only partly broken down, which is why muscles fatigue and yeast ferments.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 25
-   }
-  },
-  {
-   "id": "antibiotic_resistance_as_observed_evolution",
-   "title": "Antibiotic resistance as observed evolution",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "natural_selection",
-    "speciation_and_isolation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "antibiotic resistance",
-    "observed",
-    "selection"
-   ],
-   "summary": "Resistance spreads because the survivors reproduce, which is selection visible on a human timescale.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 46
-   }
-  },
-  {
-   "id": "atp_as_the_energy_currency",
-   "title": "ATP as the energy currency",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Cellular respiration",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "aerobic_respiration",
-    "anaerobic_respiration"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "ATP",
-    "coupling",
-    "currency"
-   ],
-   "summary": "ATP couples energy-releasing reactions to energy-requiring ones so the cell does not rely on heat.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 26
-   }
-  },
-  {
-   "id": "biodiversity_and_conservation",
-   "title": "Biodiversity and conservation",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "population_dynamics"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "biodiversity",
-    "conservation",
-    "resilience"
-   ],
-   "summary": "Diverse ecosystems are more resilient, so conservation is about protecting interactions not just species.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 55
-   }
-  },
-  {
-   "id": "biotic_and_abiotic_factors",
-   "title": "Biotic and abiotic factors",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "levels_of_ecological_organisation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "abiotic",
-    "biotic",
-    "factor"
-   ],
-   "summary": "Living and non-living factors interact, and a change in one usually propagates through the other.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 50
-   }
-  },
-  {
-   "id": "blood_glucose_regulation",
-   "title": "Blood glucose regulation",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "homeostasis_and_negative_feedback",
-    "thermoregulation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "blood glucose",
-    "glucagon",
-    "insulin"
-   ],
-   "summary": "Insulin and glucagon act in opposition to keep blood glucose within a narrow range.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 62
-   }
-  },
-  {
-   "id": "blood_vessels_and_their_adaptation",
-   "title": "Blood, vessels and their adaptation",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "the_circulatory_system"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "artery",
-    "capillary",
-    "vein"
-   ],
-   "summary": "Arteries, veins and capillaries differ in wall structure according to the pressure and exchange each must handle.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 58
-   }
-  },
-  {
-   "id": "carbohydrates",
-   "title": "Carbohydrates",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "water_and_its_biological_properties"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "carbohydrate",
-    "starch",
-    "sugar"
-   ],
-   "summary": "Simple sugars join into polysaccharides that serve as immediate fuel or stored energy.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 2
-   }
-  },
-  {
-   "id": "carbon_and_nitrogen_cycles",
-   "title": "Carbon and nitrogen cycles",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "food_chains_webs_and_trophic_levels",
-    "energy_transfer_and_pyramids"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "carbon cycle",
-    "matter",
-    "nitrogen cycle"
-   ],
-   "summary": "Matter cycles while energy flows, which is why nutrients can be reused but energy cannot.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 53
-   }
-  },
-  {
-   "id": "cell_cycle_and_mitosis",
-   "title": "Cell cycle and mitosis",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "organelles_and_their_functions",
-    "microscopy_and_magnification"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "cell cycle",
-    "checkpoint",
-    "mitosis"
-   ],
-   "summary": "Mitosis produces genetically identical cells for growth and repair, with checkpoints that catch damage.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 15
-   }
-  },
-  {
-   "id": "cell_membrane_structure",
-   "title": "Cell membrane structure",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "lipids"
-   ],
-   "sequence_predecessors": [
-    "stem_cells"
-   ],
-   "keywords": [
-    "bilayer",
-    "fluid mosaic",
-    "permeability"
-   ],
-   "summary": "The fluid mosaic model explains selective permeability as proteins embedded in a moving lipid bilayer.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 18
-   }
-  },
-  {
-   "id": "cell_specialisation_and_differentiation",
-   "title": "Cell specialisation and differentiation",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "organelles_and_their_functions"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "differentiation",
-    "gene expression",
-    "specialisation"
-   ],
-   "summary": "All cells in an organism share the same DNA, and differentiation is about which genes are expressed.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 13
-   }
-  },
-  {
-   "id": "classification_and_phylogeny",
-   "title": "Classification and phylogeny",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "evidence_for_evolution",
-    "antibiotic_resistance_as_observed_evolution"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "classification",
-    "phylogeny",
-    "relatedness"
-   ],
-   "summary": "Modern classification aims to reflect evolutionary relatedness rather than superficial similarity.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 47
-   }
-  },
-  {
-   "id": "diffusion_and_factors_affecting_it",
-   "title": "Diffusion and factors affecting it",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "cell_membrane_structure"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "diffusion",
-    "gradient",
-    "surface area"
-   ],
-   "summary": "Net movement down a concentration gradient depends on gradient size, distance, temperature and surface area.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 19
-   }
-  },
-  {
-   "id": "dna_structure_and_replication",
-   "title": "DNA structure and replication",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "DNA and the genetic code",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [],
-   "keywords": [
-    "base pairing",
-    "double helix",
-    "replication"
-   ],
-   "summary": "Complementary base pairing lets a double helix copy itself accurately and explains mutation.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 32
-   }
-  },
-  {
-   "id": "dominant_recessive_and_codominant_alleles",
-   "title": "Dominant, recessive and codominant alleles",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "alleles_genotype_and_phenotype"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "codominance",
-    "dominant",
-    "recessive"
-   ],
-   "summary": "Codominance produces both phenotypes at once, which is why AB blood type is not a blend.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 37
-   }
-  },
-  {
-   "id": "energy_transfer_and_pyramids",
-   "title": "Energy transfer and pyramids",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "food_chains_webs_and_trophic_levels"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "biomass",
-    "energy transfer",
-    "pyramid"
-   ],
-   "summary": "A pyramid of biomass or energy quantifies the loss between trophic levels.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 52
-   }
-  },
-  {
-   "id": "enzyme_inhibition",
-   "title": "Enzyme inhibition",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "Enzymes",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "factors_affecting_enzyme_activity"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "competitive",
-    "inhibition",
-    "non-competitive"
-   ],
-   "summary": "Competitive and non-competitive inhibitors both slow a reaction but differ in whether more substrate helps.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 10
-   }
-  },
-  {
-   "id": "enzymes_as_biological_catalysts",
-   "title": "Enzymes as biological catalysts",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "Enzymes",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "proteins_and_their_structure_levels"
-   ],
-   "sequence_predecessors": [
-    "food_tests_and_biological_molecules_in_practice"
-   ],
-   "keywords": [
-    "activation energy",
-    "catalyst",
-    "enzyme"
-   ],
-   "summary": "Enzymes are proteins that lower activation energy and are unchanged by the reaction they speed up.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 7
-   }
-  },
-  {
-   "id": "eukaryotic_and_prokaryotic_cells",
-   "title": "Eukaryotic and prokaryotic cells",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "enzyme_inhibition"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "eukaryote",
-    "organelle",
-    "prokaryote"
-   ],
-   "summary": "Prokaryotes lack membrane-bound organelles, which is the deepest structural divide among cells.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 11
-   }
-  },
-  {
-   "id": "evidence_for_evolution",
-   "title": "Evidence for evolution",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "natural_selection"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "fossil",
-    "homology",
-    "molecular evidence"
-   ],
-   "summary": "Fossils, comparative anatomy, embryology and molecular sequences are independent lines that agree.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 44
-   }
-  },
-  {
-   "id": "exchange_surfaces_in_multicellular_organisms",
-   "title": "Exchange surfaces in multicellular organisms",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "surface_area_to_volume_ratio"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "alveolus",
-    "exchange surface",
-    "villi"
-   ],
-   "summary": "Villi, alveoli and gills all increase surface area and maintain a gradient, the same two requirements every time.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 23
-   }
-  },
-  {
-   "id": "extinction_and_biodiversity_loss",
-   "title": "Extinction and biodiversity loss",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "speciation_and_isolation",
-    "classification_and_phylogeny"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "adaptation",
-    "biodiversity",
-    "extinction"
-   ],
-   "summary": "A species becomes extinct when it cannot adapt fast enough to a change in its environment.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 48
-   }
-  },
-  {
-   "id": "factors_affecting_enzyme_activity",
-   "title": "Factors affecting enzyme activity",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "Enzymes",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "lock_and_key_and_induced_fit"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "denaturation",
-    "pH",
-    "temperature"
-   ],
-   "summary": "Temperature and pH change activity by changing shape, and beyond the optimum the enzyme denatures.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 9
-   }
-  },
-  {
-   "id": "food_chains_webs_and_trophic_levels",
-   "title": "Food chains, webs and trophic levels",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "levels_of_ecological_organisation",
-    "biotic_and_abiotic_factors"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "energy loss",
-    "food chain",
-    "trophic level"
-   ],
-   "summary": "Energy passes up a chain and most of it is lost at each step, which is why chains are short.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 51
-   }
-  },
-  {
-   "id": "food_tests_and_biological_molecules_in_practice",
-   "title": "Food tests and biological molecules in practice",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "carbohydrates",
-    "lipids",
-    "proteins_and_their_structure_levels",
-    "nucleic_acids"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Benedict",
-    "Biuret",
-    "food test"
-   ],
-   "summary": "Benedict's, iodine, Biuret and emulsion tests identify each class of molecule by a characteristic colour change.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 6
-   }
-  },
-  {
-   "id": "genes_and_the_genetic_code",
-   "title": "Genes and the genetic code",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "DNA and the genetic code",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "dna_structure_and_replication"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "code",
-    "gene",
-    "triplet"
-   ],
-   "summary": "A triplet of bases codes for one amino acid, so the code is degenerate but unambiguous.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 33
-   }
-  },
-  {
-   "id": "genetic_disorders_and_screening",
-   "title": "Genetic disorders and screening",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "pedigree_analysis"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "carrier",
-    "genetic disorder",
-    "screening"
-   ],
-   "summary": "Many disorders follow simple Mendelian patterns, which makes carrier testing possible.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 41
-   }
-  },
-  {
-   "id": "homeostasis_and_negative_feedback",
-   "title": "Homeostasis and negative feedback",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "the_respiratory_system"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "homeostasis",
-    "negative feedback",
-    "set point"
-   ],
-   "summary": "A receptor, a coordinator and an effector adjust conditions back toward a set point.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 60
-   }
-  },
-  {
-   "id": "hormones_and_the_endocrine_system",
-   "title": "Hormones and the endocrine system",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "core",
-   "difficulty": 4,
-   "prerequisites": [
-    "blood_glucose_regulation",
-    "nervous_coordination_and_reflexes"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "endocrine",
-    "hormone",
-    "target cell"
-   ],
-   "summary": "Hormones travel in blood and act on target cells that carry the matching receptor.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 64
-   }
-  },
-  {
-   "id": "human_impact_on_ecosystems",
-   "title": "Human impact on ecosystems",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "extension",
-   "difficulty": 5,
-   "prerequisites": [
-    "biodiversity_and_conservation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "habitat loss",
-    "human impact",
-    "pollution"
-   ],
-   "summary": "Pollution, habitat loss and introduced species each disrupt an ecosystem through a different mechanism.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 56
-   }
-  },
-  {
-   "id": "investigating_photosynthesis",
-   "title": "Investigating photosynthesis",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Photosynthesis",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "limiting_factors"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "biomass",
-    "bubble count",
-    "investigation"
-   ],
-   "summary": "Counting oxygen bubbles or measuring biomass gain turns an invisible process into a measurable rate.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1150,673 +446,202 @@
    }
   },
   {
-   "id": "investigating_respiration_rate",
-   "title": "Investigating respiration rate",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Cellular respiration",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "anaerobic_respiration",
-    "atp_as_the_energy_currency"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "proxy",
-    "rate",
-    "respirometer"
-   ],
-   "summary": "Respiration rate is measured indirectly through a proxy such as oxygen uptake or heat release.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 27
-   }
-  },
-  {
-   "id": "leaf_structure_and_gas_exchange",
-   "title": "Leaf structure and gas exchange",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Photosynthesis",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "photosynthesis_and_its_requirements",
-    "investigating_photosynthesis"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "gas exchange",
-    "leaf",
-    "stomata"
-   ],
-   "summary": "Stomata, air spaces and a large flat surface all exist to make gas exchange efficient while limiting water loss.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 31
-   }
-  },
-  {
-   "id": "levels_of_ecological_organisation",
-   "title": "Levels of ecological organisation",
-   "strand": "Ecology and Physiology",
-   "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "extinction_and_biodiversity_loss"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "community",
-    "ecosystem",
-    "population"
-   ],
-   "summary": "Organism, population, community and ecosystem are nested levels with different questions at each.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 49
-   }
-  },
-  {
-   "id": "limiting_factors",
-   "title": "Limiting factors",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Photosynthesis",
+   "id": "biology_adaptive_immunity_is_specific_and_remembers",
+   "title": "Adaptive Immunity Is Specific and Remembers",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Immunity, Disease & Pathogens",
    "tier": "foundation",
-   "difficulty": 1,
+   "difficulty": 2,
    "prerequisites": [
-    "photosynthesis_and_its_requirements"
+    "biology_innate_immunity_is_fast_and_non_specific"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "limiting factor",
-    "rate",
-    "supply"
+    "adaptive immunity",
+    "lymphocyte",
+    "memory cell"
    ],
-   "summary": "At any moment the rate is limited by whichever factor is in shortest supply.",
+   "summary": "B and T lymphocytes whose receptor matches an antigen are selected and clonally expanded, and the memory cells left behind make a second response faster and stronger, which is the basis of vaccination.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 29
+    "order": 99
    }
   },
   {
-   "id": "lipids",
-   "title": "Lipids",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
+   "id": "biology_allopatric_and_sympatric_speciation",
+   "title": "Allopatric and Sympatric Speciation",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Speciation & Common Ancestry",
    "tier": "foundation",
-   "difficulty": 1,
+   "difficulty": 2,
    "prerequisites": [
-    "water_and_its_biological_properties",
-    "carbohydrates"
+    "biology_species_concepts_and_reproductive_isolation"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "lipid",
-    "phospholipid",
-    "triglyceride"
+    "allopatric",
+    "polyploidy",
+    "sympatric"
    ],
-   "summary": "Triglycerides store energy densely and phospholipids form the membranes that compartmentalise cells.",
+   "summary": "Allopatric speciation begins when a geographic barrier divides populations, while sympatric speciation arises within one area, often through polyploidy or a shift in mating preference.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 3
+    "order": 88
    }
   },
   {
-   "id": "lock_and_key_and_induced_fit",
-   "title": "Lock and key and induced fit",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "Enzymes",
+   "id": "biology_animal_body_plans_and_vertebrate_groups",
+   "title": "Animal Body Plans and Vertebrate Groups",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Survey of Biological Diversity",
    "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "enzymes_as_biological_catalysts"
+    "biology_protists_fungi_and_plants"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "active site",
-    "induced fit",
-    "substrate"
+    "animal kingdom",
+    "body plan",
+    "vertebrate"
    ],
-   "summary": "A substrate fits an enzyme's active site, and the site adjusts slightly to grip it.",
+   "summary": "Animals are multicellular heterotrophs with tissues and, in most phyla, bilateral symmetry, and vertebrates divide into fishes, amphibians, reptiles, birds and mammals by their skeletal and reproductive features.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 8
+    "order": 94
    }
   },
   {
-   "id": "meiosis_and_gamete_formation",
-   "title": "Meiosis and gamete formation",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
+   "id": "biology_atp_hydrolysis_as_the_energy_currency",
+   "title": "ATP Hydrolysis as the Energy Currency",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "ATP & Energy Flow",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_tissues_organs_and_organ_systems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atp",
+    "coupled reaction",
+    "hydrolysis"
+   ],
+   "summary": "Hydrolysing ATP to ADP and phosphate releases usable energy because separating the negatively charged phosphate groups is exergonic, and coupling that step to an endergonic reaction is how the cell pays for work.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "biology_balancing_water_solutes_and_heat",
+   "title": "Balancing Water, Solutes and Heat",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Homeostasis & Feedback",
    "tier": "extension",
    "difficulty": 4,
    "prerequisites": [
-    "cell_cycle_and_mitosis"
+    "biology_positive_feedback_amplifies_change"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "haploid",
-    "meiosis",
-    "variation"
+    "osmoregulation",
+    "thermoregulation",
+    "water balance"
    ],
-   "summary": "Meiosis halves the chromosome number and reshuffles genes, which is what creates genetic variation.",
+   "summary": "Osmoregulation holds solute concentration by adjusting water gain and loss, and thermoregulation balances heat from metabolism and the environment against heat lost by evaporation and radiation.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 16
+    "order": 97
    }
   },
   {
-   "id": "microscopy_and_magnification",
-   "title": "Microscopy and magnification",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "eukaryotic_and_prokaryotic_cells",
-    "cell_specialisation_and_differentiation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "magnification",
-    "microscopy",
-    "resolution"
-   ],
-   "summary": "Magnification and resolution are different limits, and resolution is what actually restricts detail.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 14
-   }
-  },
-  {
-   "id": "monohybrid_crosses_and_punnett_squares",
-   "title": "Monohybrid crosses and Punnett squares",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "dominant_recessive_and_codominant_alleles"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Punnett square",
-    "monohybrid",
-    "ratio"
-   ],
-   "summary": "A Punnett square enumerates the possible offspring from the gametes each parent can produce.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 38
-   }
-  },
-  {
-   "id": "mutations_and_their_consequences",
-   "title": "Mutations and their consequences",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "DNA and the genetic code",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "protein_synthesis"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "mutation",
-    "sequence",
-    "shape"
-   ],
-   "summary": "A change in the base sequence may change the protein's shape, and whether it matters depends on where it lands.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 35
-   }
-  },
-  {
-   "id": "natural_selection",
-   "title": "Natural selection",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [],
-   "keywords": [
-    "natural selection",
-    "survival",
-    "variation"
-   ],
-   "summary": "Heritable variation plus differential survival changes the frequency of traits across generations.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 43
-   }
-  },
-  {
-   "id": "nervous_coordination_and_reflexes",
-   "title": "Nervous coordination and reflexes",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "homeostasis_and_negative_feedback",
-    "blood_glucose_regulation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "neurone",
-    "reflex arc",
-    "synapse"
-   ],
-   "summary": "A reflex arc bypasses conscious processing, which is why a reflex is faster than a decision.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 63
-   }
-  },
-  {
-   "id": "nucleic_acids",
-   "title": "Nucleic acids",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "proteins_and_their_structure_levels"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "DNA",
-    "RNA",
-    "nucleotide"
-   ],
-   "summary": "DNA stores information in a stable double strand while RNA carries and interprets it.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 5
-   }
-  },
-  {
-   "id": "organelles_and_their_functions",
-   "title": "Organelles and their functions",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "eukaryotic_and_prokaryotic_cells"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "mitochondrion",
-    "organelle",
-    "ribosome"
-   ],
-   "summary": "Each organelle specialises in one job, and the cell's capability follows from which organelles it has.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 12
-   }
-  },
-  {
-   "id": "osmosis_and_water_potential",
-   "title": "Osmosis and water potential",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "diffusion_and_factors_affecting_it"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "osmosis",
-    "turgor",
-    "water potential"
-   ],
-   "summary": "Water moves across a partially permeable membrane toward lower water potential, which is why cells shrink or burst.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 20
-   }
-  },
-  {
-   "id": "pedigree_analysis",
-   "title": "Pedigree analysis",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "monohybrid_crosses_and_punnett_squares",
-    "sex_determination_and_sex_linkage"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "family tree",
-    "pattern",
-    "pedigree"
-   ],
-   "summary": "A family tree lets the inheritance pattern be inferred from who is and is not affected.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 40
-   }
-  },
-  {
-   "id": "photosynthesis_and_its_requirements",
-   "title": "Photosynthesis and its requirements",
-   "strand": "Bioenergetics",
-   "unit": "Respiration and photosynthesis",
-   "topic": "Photosynthesis",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [
-    "investigating_respiration_rate"
-   ],
-   "keywords": [
-    "glucose",
-    "light",
-    "photosynthesis"
-   ],
-   "summary": "Light energy converts carbon dioxide and water into glucose and oxygen, storing energy in chemical bonds.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 28
-   }
-  },
-  {
-   "id": "population_dynamics",
-   "title": "Population dynamics",
-   "strand": "Ecology and Physiology",
+   "id": "biology_biodiversity_supports_ecosystem_function",
+   "title": "Biodiversity Supports Ecosystem Function",
+   "strand": "Ecology",
    "unit": "Ecology",
-   "topic": "Organisms and their environment",
-   "tier": "extension",
+   "topic": "Ecosystem Stability & Biodiversity",
+   "tier": "foundation",
    "difficulty": 3,
    "prerequisites": [
-    "biotic_and_abiotic_factors",
-    "carbon_and_nitrogen_cycles"
+    "biology_resistance_resilience_and_trophic_cascades"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "limiting factor",
-    "population",
-    "predator prey"
+    "biodiversity",
+    "ecosystem function",
+    "redundancy"
    ],
-   "summary": "Populations grow until a limiting factor caps them, and predator-prey numbers oscillate out of phase.",
+   "summary": "A community with more species usually keeps functioning when conditions change, because different species respond differently, so diversity works as insurance rather than decoration.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 54
+    "order": 120
    }
   },
   {
-   "id": "protein_synthesis",
-   "title": "Protein synthesis",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "DNA and the genetic code",
+   "id": "biology_carbohydrates_and_lipids_as_fuel_and_structure",
+   "title": "Carbohydrates and Lipids as Fuel and Structure",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Macromolecules",
    "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "genes_and_the_genetic_code"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "ribosome",
-    "transcription",
-    "translation"
-   ],
-   "summary": "Transcription copies DNA into mRNA and translation reads it at the ribosome to build a protein.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 34
-   }
-  },
-  {
-   "id": "proteins_and_their_structure_levels",
-   "title": "Proteins and their structure levels",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
-   "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "water_and_its_biological_properties",
-    "lipids"
+    "biology_dehydration_synthesis_and_hydrolysis"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "amino acid",
-    "folding",
-    "protein"
+    "carbohydrate",
+    "energy storage",
+    "lipid"
    ],
-   "summary": "A protein's function follows from its folded shape, which follows from its amino acid sequence.",
+   "summary": "Sugars and starch store readily mobilised energy while cellulose and chitin give rigid structure, and lipids store about twice the energy per gram because their hydrocarbon chains are more reduced.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 4
-   }
-  },
-  {
-   "id": "sex_determination_and_sex_linkage",
-   "title": "Sex determination and sex linkage",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "monohybrid_crosses_and_punnett_squares"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "chromosome",
-    "inheritance",
-    "sex linkage"
-   ],
-   "summary": "Genes carried on a sex chromosome are inherited differently because the two sexes have different chromosome sets.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 39
-   }
-  },
-  {
-   "id": "speciation_and_isolation",
-   "title": "Speciation and isolation",
-   "strand": "Genetics and Evolution",
-   "unit": "Evolution and classification",
-   "topic": "Evolution by natural selection",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "evidence_for_evolution"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "divergence",
-    "isolation",
-    "speciation"
-   ],
-   "summary": "Reproductive isolation lets two populations diverge until they can no longer interbreed.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 45
-   }
-  },
-  {
-   "id": "stem_cells",
-   "title": "Stem cells",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Cell structure",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "cell_specialisation_and_differentiation",
-    "meiosis_and_gamete_formation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "differentiation",
-    "potency",
-    "stem cell"
-   ],
-   "summary": "Stem cells can divide and become other cell types, which is why they are both promising and contested.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1824,115 +649,1824 @@
    }
   },
   {
-   "id": "surface_area_to_volume_ratio",
-   "title": "Surface area to volume ratio",
-   "strand": "Cells",
-   "unit": "Cell structure and division",
-   "topic": "Transport across membranes",
-   "tier": "core",
-   "difficulty": 3,
+   "id": "biology_carbon_and_energy_balance_between_the_pathways",
+   "title": "Carbon and Energy Balance Between the Pathways",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Comparing & Connecting the Pathways",
+   "tier": "foundation",
+   "difficulty": 2,
    "prerequisites": [
-    "diffusion_and_factors_affecting_it",
-    "active_transport"
+    "biology_the_shared_architecture_of_energy_pathways"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "ratio",
-    "surface area",
-    "volume"
+    "carbon cycle",
+    "energy transfer",
+    "photosynthesis and respiration"
    ],
-   "summary": "As a cell grows its surface area to volume ratio falls, which limits how large a cell can be.",
+   "summary": "Photosynthesis fixes inorganic carbon into sugar using light energy and respiration oxidises that sugar back to carbon dioxide and water, so the two pathways cycle carbon while energy passes one way through the ecosystem.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 22
+    "order": 43
    }
   },
   {
-   "id": "the_circulatory_system",
-   "title": "The circulatory system",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
+   "id": "biology_carbon_and_nitrogen_cycle_between_pools",
+   "title": "Carbon and Nitrogen Cycle Between Pools",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Biogeochemical Cycles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_productivity_and_why_it_limits_ecosystems"
+   ],
+   "keywords": [
+    "carbon cycle",
+    "nitrogen cycle",
+    "nitrogen fixation"
+   ],
+   "summary": "Carbon moves between the atmosphere, living matter and sediments through photosynthesis, respiration and combustion, while atmospheric nitrogen must be fixed by bacteria before most producers can use it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "biology_checkpoints_and_cyclin_control",
+   "title": "Checkpoints and Cyclin Control",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Cell Cycle & Regulation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_phases_of_the_cell_cycle"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cdk",
+    "checkpoint",
+    "cyclin"
+   ],
+   "summary": "The G1, G2 and spindle checkpoints block progress until their conditions are met, and they are enforced by cyclin-CDK complexes whose levels rise and fall with the cycle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "biology_circulation_moves_materials_between_surfaces",
+   "title": "Circulation Moves Materials Between Surfaces",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Transport & Exchange Systems",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_exchange_surfaces_and_the_surface_area_constraint"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "blood pressure",
+    "circulatory system",
+    "double circulation"
+   ],
+   "summary": "A circulatory system connects exchange surfaces to every cell, and a double circulation sends blood through the lungs at low pressure before the heart drives it around the body at high pressure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "biology_cladistics_and_shared_derived_characters",
+   "title": "Cladistics and Shared Derived Characters",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Phylogeny & Classification",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_reading_a_phylogenetic_tree"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "clade",
+    "cladistics",
+    "derived character"
+   ],
+   "summary": "Cladistics groups organisms by shared derived characters, so a valid group contains an ancestor and all of its descendants, which is why reptiles that exclude birds do not form a clade.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "biology_cohesion_adhesion_and_thermal_buffering",
+   "title": "Cohesion, Adhesion and Thermal Buffering",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Water, Bonds & pH",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_polar_covalent_bonds_in_water"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adhesion",
+    "cohesion",
+    "specific heat"
+   ],
+   "summary": "Hydrogen bonds make water cohesive, so a continuous column can be pulled up a xylem vessel, and give water a specific heat of 4.18 joules per gram kelvin that buffers temperature change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "biology_competition_predation_and_symbiosis",
+   "title": "Competition, Predation and Symbiosis",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Community Interactions & Succession",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_life_histories_and_age_structure"
+   ],
+   "keywords": [
+    "competition",
+    "predation",
+    "symbiosis"
+   ],
+   "summary": "Two species competing for one limiting resource cannot coexist indefinitely unless they divide it, while predation, mutualism, commensalism and parasitism each change the two populations in a different direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "biology_conservation_strategies",
+   "title": "Conservation Strategies",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Biodiversity & Conservation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_why_biodiversity_has_value"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "captive breeding",
+    "corridor",
+    "protected area"
+   ],
+   "summary": "A protected area works only if it is large, connected and enforced, and ex situ measures such as seed banks and captive breeding complement it for species that cannot persist in the wild.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 126
+   }
+  },
+  {
+   "id": "biology_control_groups_and_confounding_variables",
+   "title": "Control Groups and Confounding Variables",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Scientific Method & Experimental Design",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_independent_and_dependent_variables"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "confounding variable",
+    "constant",
+    "control group"
+   ],
+   "summary": "A control group holds every condition constant except the treatment, so a difference in outcome can be credited to the treatment rather than to a confounder such as temperature or age.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "biology_correlation_causation_and_uncertainty",
+   "title": "Correlation, Causation and Uncertainty",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Data & Graph Interpretation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_slope_and_rate_from_a_graph"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "causation",
+    "correlation",
+    "error bars"
+   ],
+   "summary": "A correlation shows that two variables change together but not that one causes the other, and overlapping error bars mean the difference between two means is not resolvable at that sample size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "biology_costs_and_benefits_of_asexual_reproduction",
+   "title": "Costs and Benefits of Asexual Reproduction",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Sexual vs. Asexual Reproduction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_independent_assortment_of_homologues"
+   ],
+   "keywords": [
+    "asexual reproduction",
+    "clone",
+    "uniformity"
+   ],
+   "summary": "Asexual reproduction copies the parent quickly and needs no mate, but it produces genetically uniform offspring, so one change in the environment can remove the whole clone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "biology_coupled_reactions_and_phosphorylation",
+   "title": "Coupled Reactions and Phosphorylation",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "ATP & Energy Flow",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_atp_hydrolysis_as_the_energy_currency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coupled reaction",
+    "energy coupling",
+    "phosphorylation"
+   ],
+   "summary": "A coupled reaction pairs an exergonic step with an endergonic one through a shared intermediate, and phosphorylation transfers a phosphate from ATP to a substrate so that the substrate can react.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "biology_crispr_and_gel_electrophoresis",
+   "title": "CRISPR and Gel Electrophoresis",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Biotechnology & Genetic Engineering",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_pcr_amplifies_dna_in_vitro"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "crispr",
+    "gel electrophoresis",
+    "gene editing"
+   ],
+   "summary": "CRISPR-Cas9 cuts a chosen sequence guided by a matching RNA, and gel electrophoresis then separates the resulting fragments by size because shorter fragments travel farther through the gel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "biology_crossing_over_in_prophase_i",
+   "title": "Crossing Over in Prophase I",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Meiosis & Genetic Variation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_meiosis_halves_the_chromosome_number"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chiasma",
+    "crossing over",
+    "recombination"
+   ],
+   "summary": "Homologous chromosomes exchange segments at chiasmata during prophase I, so a chromatid can carry alleles from both grandparents and the resulting gametes are recombinants.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "biology_cytokinesis_in_plants_and_animals",
+   "title": "Cytokinesis in Plants and Animals",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Mitosis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_spindle_and_chromosome_segregation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cell plate",
+    "cleavage furrow",
+    "cytokinesis"
+   ],
+   "summary": "An animal cell pinches off with a contractile ring of actin and myosin, whereas a plant cell builds a cell plate from vesicles because a rigid wall cannot be pinched.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "biology_dehydration_synthesis_and_hydrolysis",
+   "title": "Dehydration Synthesis and Hydrolysis",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Macromolecules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_the_ph_scale_and_biological_buffers"
+   ],
+   "keywords": [
+    "dehydration synthesis",
+    "hydrolysis",
+    "polymer"
+   ],
+   "summary": "Monomers join by dehydration synthesis, which removes a water molecule at each new bond, and polymers are split by hydrolysis, which adds water back at that bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "biology_differentiation_from_one_genome",
+   "title": "Differentiation from One Genome",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Cell Specialization & Organization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_active_transport_against_a_gradient"
+   ],
+   "keywords": [
+    "cell type",
+    "differentiation",
+    "gene expression"
+   ],
+   "summary": "Every cell of an organism carries the same genome, so differentiation into distinct types comes from expressing different gene sets rather than from losing genes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "biology_diffusion_and_osmosis",
+   "title": "Diffusion and Osmosis",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Membrane Structure & Transport",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_fluid_mosaic_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "diffusion",
+    "osmosis",
+    "tonicity"
+   ],
+   "summary": "A substance diffuses down its concentration gradient without energy input, and water crosses a selectively permeable membrane by osmosis toward the side with the higher solute concentration, so a cell in a hypertonic solution shrinks.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "biology_directional_stabilising_and_disruptive_selection",
+   "title": "Directional, Stabilising and Disruptive Selection",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Natural Selection & Adaptation",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "biology_fitness_and_differential_reproduction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "directional selection",
+    "disruptive selection",
+    "stabilizing selection"
+   ],
+   "summary": "Directional selection shifts a trait's mean, stabilising selection removes both extremes, and disruptive selection favours both extremes and can split one population into two phenotypic groups.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "biology_ecological_niches_and_resource_partitioning",
+   "title": "Ecological Niches and Resource Partitioning",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Community Interactions & Succession",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_competition_predation_and_symbiosis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "competitive exclusion",
+    "niche",
+    "resource partitioning"
+   ],
+   "summary": "A species' niche is the full set of conditions and resources it uses, and two species whose niches overlap heavily must partition those resources or one will exclude the other.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "biology_endomembrane_system_and_protein_traffic",
+   "title": "Endomembrane System and Protein Traffic",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Organelles & Cell Structure",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_the_nucleus_and_ribosomes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endomembrane system",
+    "golgi",
+    "vesicle"
+   ],
+   "summary": "Proteins made on the rough ER are folded and modified as they pass through the endomembrane system, then sorted by the Golgi apparatus into vesicles addressed to the membrane, a lysosome or the exterior.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "biology_epigenetic_and_post_transcriptional_control",
+   "title": "Epigenetic and Post-transcriptional Control",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Gene Regulation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_operon_as_a_prokaryotic_switch"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "epigenetics",
+    "methylation",
+    "microrna"
+   ],
+   "summary": "Methylation of DNA and modification of histones can silence a gene heritably without changing its sequence, and a microRNA can block translation or degrade a transcript after it is made.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "biology_exchange_surfaces_and_the_surface_area_constraint",
+   "title": "Exchange Surfaces and the Surface-Area Constraint",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Transport & Exchange Systems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_hormones_as_slower_broadcast_signals"
+   ],
+   "keywords": [
+    "diffusion distance",
+    "exchange surface",
+    "surface area"
+   ],
+   "summary": "An exchange surface works only when it is thin, moist and large relative to the body's volume, which is why lungs fold into alveoli and intestine into villi rather than relying on the skin.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "biology_exponential_growth_and_its_limits",
+   "title": "Exponential Growth and Its Limits",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Population Dynamics & Carrying Capacity",
    "tier": "foundation",
    "difficulty": 2,
    "prerequisites": [],
-   "sequence_predecessors": [],
-   "keywords": [
-    "circulation",
-    "double circuit",
-    "heart"
+   "sequence_predecessors": [
+    "biology_phosphorus_and_water_as_material_cycles"
    ],
-   "summary": "A double circulation keeps oxygenated and deoxygenated blood separate, which supports warm-blooded metabolism.",
+   "keywords": [
+    "exponential growth",
+    "limiting resource",
+    "population growth"
+   ],
+   "summary": "A population with unlimited resources grows at a rate proportional to its size and so rises exponentially, but resources, disease and predation eventually reduce that rate.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 57
+    "order": 113
    }
   },
   {
-   "id": "the_respiratory_system",
-   "title": "The respiratory system",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
-   "tier": "foundation",
-   "difficulty": 2,
-   "prerequisites": [
-    "the_circulatory_system",
-    "blood_vessels_and_their_adaptation"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "alveolus",
-    "gas exchange",
-    "surface area"
-   ],
-   "summary": "Alveoli maximise surface area and keep a gradient, the same two requirements as every exchange surface.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 59
-   }
-  },
-  {
-   "id": "thermoregulation",
-   "title": "Thermoregulation",
-   "strand": "Ecology and Physiology",
-   "unit": "Physiology and control",
-   "topic": "Transport and control in organisms",
+   "id": "biology_fermentation_regenerates_nad",
+   "title": "Fermentation Regenerates NAD+",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Cellular Respiration & Fermentation",
    "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "homeostasis_and_negative_feedback"
+    "biology_the_citric_acid_cycle_and_oxidative_phosphorylation"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "shivering",
-    "thermoregulation",
-    "vasodilation"
+    "anaerobic",
+    "fermentation",
+    "lactic acid"
    ],
-   "summary": "The body balances heat gain and loss through vasodilation, sweating, shivering and vasoconstriction.",
+   "summary": "Without oxygen the electron transport chain stalls, so fermentation reduces pyruvate to lactate or to ethanol and carbon dioxide purely to regenerate NAD+ and keep glycolysis running.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "biology_fitness_and_differential_reproduction",
+   "title": "Fitness and Differential Reproduction",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Natural Selection & Adaptation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_natural_selection_requires_heritable_variation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fitness",
+    "reproduction",
+    "selection"
+   ],
+   "summary": "Fitness is the relative contribution of a genotype to the next generation, so a trait that raises survival while lowering reproduction can still be selected against.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "biology_food_webs_and_keystone_species",
+   "title": "Food Webs and Keystone Species",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Energy Flow & Food Webs",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_trophic_levels_and_the_ten_percent_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "community",
+    "food web",
+    "keystone species"
+   ],
+   "summary": "A food web records the many feeding links in a community, and a keystone species holds that web together out of proportion to its abundance, so its removal reshapes the community.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "biology_fossils_and_transitional_forms",
+   "title": "Fossils and Transitional Forms",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Evidence for Evolution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_directional_stabilising_and_disruptive_selection"
+   ],
+   "keywords": [
+    "common ancestry",
+    "fossil record",
+    "transitional fossil"
+   ],
+   "summary": "The fossil record places organisms in a historical order, and a transitional fossil such as Tiktaalik combines features of two groups in the order that common ancestry predicts.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "biology_genotype_phenotype_and_dominance",
+   "title": "Genotype, Phenotype and Dominance",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Mendelian Inheritance & Crosses",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "biology_the_law_of_independent_assortment"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dominant allele",
+    "genotype",
+    "phenotype"
+   ],
+   "summary": "Genotype is the allele combination and phenotype the observable trait, so a heterozygote whose phenotype matches the homozygous dominant still carries a hidden recessive allele.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "biology_glycolysis_and_pyruvate_oxidation",
+   "title": "Glycolysis and Pyruvate Oxidation",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Cellular Respiration & Fermentation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_photorespiration_and_c4_or_cam_adaptations"
+   ],
+   "keywords": [
+    "acetyl coa",
+    "glycolysis",
+    "pyruvate"
+   ],
+   "summary": "Glycolysis splits glucose into two pyruvate molecules in the cytoplasm with a net gain of two ATP and two NADH, and each pyruvate is then decarboxylated to acetyl-CoA for the citric acid cycle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "biology_habitat_loss_and_fragmentation",
+   "title": "Habitat Loss and Fragmentation",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Human Impact on Ecosystems",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_biodiversity_supports_ecosystem_function"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fragmentation",
+    "habitat loss",
+    "migration"
+   ],
+   "summary": "Converting land to farmland, roads and cities removes habitat and cuts what remains into isolated patches, and small patches lose species faster because their populations are smaller and cannot exchange migrants.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 121
+   }
+  },
+  {
+   "id": "biology_homology_analogy_and_vestigial_structures",
+   "title": "Homology, Analogy and Vestigial Structures",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Evidence for Evolution",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_fossils_and_transitional_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "analogy",
+    "homology",
+    "vestigial structure"
+   ],
+   "summary": "Homologous structures share an underlying anatomy inherited from a common ancestor even when their functions differ, whereas analogous structures do the same job from different origins, so only homology indicates relatedness.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "biology_hormones_as_slower_broadcast_signals",
+   "title": "Hormones as Slower, Broadcast Signals",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Nervous & Endocrine Regulation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_synapses_and_neurotransmitters"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hormone",
+    "receptor",
+    "second messenger"
+   ],
+   "summary": "A hormone travels in blood to cells that carry its receptor, so a steroid hormone enters the cell and alters transcription while a peptide hormone binds a surface receptor and triggers a second messenger.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "biology_hypotheses_as_testable_explanations",
+   "title": "Hypotheses as Testable Explanations",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Scientific Method & Experimental Design",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "falsifiable",
+    "hypothesis",
+    "prediction"
+   ],
+   "summary": "A hypothesis is a proposed explanation stated so that a prediction follows from it, which is why \"the plant wilted because the soil dried out\" can be tested and \"the plant wilted for no reason\" cannot.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "biology_incomplete_dominance_and_codominance",
+   "title": "Incomplete Dominance and Codominance",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Non-Mendelian Inheritance",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_test_crosses_and_predicting_offspring"
+   ],
+   "keywords": [
+    "codominance",
+    "heterozygote",
+    "incomplete dominance"
+   ],
+   "summary": "In incomplete dominance the heterozygote shows an intermediate phenotype, as pink snapdragons do, while in codominance both alleles are expressed separately, as in AB blood type.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "biology_independent_and_dependent_variables",
+   "title": "Independent and Dependent Variables",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Scientific Method & Experimental Design",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_hypotheses_as_testable_explanations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dependent variable",
+    "experiment",
+    "independent variable"
+   ],
+   "summary": "The independent variable is the condition the experimenter sets and the dependent variable is the one measured, so a valid test changes only the independent variable between groups.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "biology_independent_assortment_of_homologues",
+   "title": "Independent Assortment of Homologues",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Meiosis & Genetic Variation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_crossing_over_in_prophase_i"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "genetic variation",
+    "independent assortment",
+    "metaphase i"
+   ],
+   "summary": "Each homologous pair orients independently at metaphase I, so a human gamete is one of about eight million combinations before crossing over adds more.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "biology_innate_immunity_is_fast_and_non_specific",
+   "title": "Innate Immunity Is Fast and Non-specific",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Immunity, Disease & Pathogens",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_balancing_water_solutes_and_heat"
+   ],
+   "keywords": [
+    "inflammation",
+    "innate immunity",
+    "phagocyte"
+   ],
+   "summary": "The innate response uses barriers, phagocytes and inflammation to answer any invader within hours and without memory, so it slows an infection but does not target one pathogen in particular.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "biology_levels_of_organization_from_molecule_to_biosphere",
+   "title": "Levels of Organization from Molecule to Biosphere",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Characteristics of Life & Levels of Organization",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_shared_features_of_living_systems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "emergent properties",
+    "hierarchy",
+    "levels of organization"
+   ],
+   "summary": "Biological organisation runs from organelle to cell, tissue, organ, organ system, organism, population, community, ecosystem and biosphere, and each level shows properties its parts do not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "biology_life_histories_and_age_structure",
+   "title": "Life Histories and Age Structure",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Population Dynamics & Carrying Capacity",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_logistic_growth_and_carrying_capacity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "age structure",
+    "life history",
+    "r-selected"
+   ],
+   "summary": "An r-selected species produces many offspring with little care while a K-selected species produces few with heavy care, and a population's age structure predicts whether it will grow or shrink next.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "biology_light_and_electron_microscopy",
+   "title": "Light and Electron Microscopy",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Measurement & Microscopy",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_si_units_and_biological_scale"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron microscope",
+    "light microscope",
+    "resolution"
+   ],
+   "summary": "A light microscope resolves about 200 nanometres and can view living cells, while an electron microscope resolves below one nanometre by using electron wavelengths but needs fixed, dehydrated specimens.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "biology_light_reactions_in_the_thylakoid",
+   "title": "Light Reactions in the Thylakoid",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Photosynthesis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_redox_carriers_nad_and_fad"
+   ],
+   "keywords": [
+    "light reactions",
+    "photosystem",
+    "proton gradient"
+   ],
+   "summary": "Photosystem II splits water to replace the electron it loses, and the resulting electron flow pumps protons into the thylakoid lumen, whose return through ATP synthase makes ATP while NADP+ is reduced to NADPH.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "biology_linkage_and_recombination_frequency",
+   "title": "Linkage and Recombination Frequency",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Sex Linkage & Pedigrees",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_reading_a_pedigree"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "genetic linkage",
+    "map distance",
+    "recombination frequency"
+   ],
+   "summary": "Genes on the same chromosome tend to be inherited together, and the farther apart they sit the more often crossing over separates them, so recombination frequency serves as a rough measure of map distance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "biology_logistic_growth_and_carrying_capacity",
+   "title": "Logistic Growth and Carrying Capacity",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Population Dynamics & Carrying Capacity",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_exponential_growth_and_its_limits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carrying capacity",
+    "competition",
+    "logistic growth"
+   ],
+   "summary": "Logistic growth slows as population size approaches the carrying capacity K, because per-capita growth falls as competition for limited resources intensifies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "biology_loss_of_control_and_cancer",
+   "title": "Loss of Control and Cancer",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Cell Cycle & Regulation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_checkpoints_and_cyclin_control"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cancer",
+    "oncogene",
+    "tumor suppressor"
+   ],
+   "summary": "Cancer begins when mutations disable checkpoint or repair genes so that cells divide without the usual signals, and a proto-oncogene becomes an oncogene when overactive while a tumour-suppressor gene must lose both copies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "biology_lowering_activation_energy",
+   "title": "Lowering Activation Energy",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Enzymes & Catalysis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_active_site_and_enzyme_specificity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "activation energy",
+    "catalysis",
+    "transition state"
+   ],
+   "summary": "An enzyme accelerates a reaction by stabilising the transition state and so lowering the activation energy, which raises the fraction of collisions that succeed without changing the equilibrium position.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "biology_magnification_resolution_and_scale_bars",
+   "title": "Magnification, Resolution and Scale Bars",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Measurement & Microscopy",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_light_and_electron_microscopy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "magnification",
+    "resolution",
+    "scale bar"
+   ],
+   "summary": "Magnification is image size divided by actual size, but resolution sets the finest detail visible, so a scale bar converts a measured image length back into a real length.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "biology_measuring_biodiversity_at_three_levels",
+   "title": "Measuring Biodiversity at Three Levels",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Biodiversity & Conservation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_pollution_and_eutrophication"
+   ],
+   "keywords": [
+    "biodiversity",
+    "genetic diversity",
+    "species richness"
+   ],
+   "summary": "Biodiversity is measured as genetic variation within a species, species richness within a community and the variety of ecosystems in a region, and each level can decline independently of the others.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 124
+   }
+  },
+  {
+   "id": "biology_meiosis_halves_the_chromosome_number",
+   "title": "Meiosis Halves the Chromosome Number",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Meiosis & Genetic Variation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_cytokinesis_in_plants_and_animals"
+   ],
+   "keywords": [
+    "haploid",
+    "homologous chromosomes",
+    "meiosis"
+   ],
+   "summary": "One replication followed by two divisions produces four haploid cells, so each gamete carries one chromosome of every homologous pair instead of two.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "biology_mendel_s_law_of_segregation",
+   "title": "Mendel's Law of Segregation",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Mendelian Inheritance & Crosses",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_crispr_and_gel_electrophoresis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "allele",
+    "monohybrid cross",
+    "segregation"
+   ],
+   "summary": "A diploid organism carries two alleles per gene and they separate during meiosis so each gamete receives one, which is why a monohybrid cross between heterozygotes gives a 3:1 phenotypic ratio.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "biology_mitochondria_and_chloroplasts_as_converters",
+   "title": "Mitochondria and Chloroplasts as Converters",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Organelles & Cell Structure",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_endomembrane_system_and_protein_traffic"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chloroplast",
+    "endosymbiosis",
+    "mitochondria"
+   ],
+   "summary": "Mitochondria oxidise pyruvate in their matrix and use the extracted electrons to pump protons across the inner membrane, chloroplasts trap light in thylakoids, and both organelles carry their own DNA as the endosymbiotic theory predicts.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "biology_molecular_and_biogeographic_evidence",
+   "title": "Molecular and Biogeographic Evidence",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Evidence for Evolution",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_homology_analogy_and_vestigial_structures"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "biogeography",
+    "molecular evidence",
+    "pseudogene"
+   ],
+   "summary": "Neutral gene sequences accumulate differences roughly in proportion to the time since two lineages diverged, and island species resemble the nearest mainland forms rather than distant species in a similar climate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "biology_multiple_alleles_and_polygenic_traits",
+   "title": "Multiple Alleles and Polygenic Traits",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Non-Mendelian Inheritance",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_incomplete_dominance_and_codominance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuous variation",
+    "multiple alleles",
+    "polygenic"
+   ],
+   "summary": "A gene with more than two alleles in the population, such as ABO with three, still gives each diploid person only two, and a polygenic trait such as height varies continuously because many genes add small effects.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "biology_natural_selection_requires_heritable_variation",
+   "title": "Natural Selection Requires Heritable Variation",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Natural Selection & Adaptation",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_linkage_and_recombination_frequency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fitness",
+    "heritable variation",
+    "natural selection"
+   ],
+   "summary": "Natural selection changes allele frequencies only when individuals differ in heritable traits that affect survival or reproduction, so a population with no such variation cannot evolve by selection.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "biology_neurons_signal_by_electrical_gradients",
+   "title": "Neurons Signal by Electrical Gradients",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Nervous & Endocrine Regulation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_pathogens_transmission_and_antibiotic_resistance"
+   ],
+   "keywords": [
+    "action potential",
+    "neuron",
+    "resting potential"
+   ],
+   "summary": "A neuron holds a resting potential near minus 70 millivolts by pumping sodium out and potassium in, and it fires an action potential once depolarisation reaches threshold.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "biology_overexploitation_and_invasive_species",
+   "title": "Overexploitation and Invasive Species",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Human Impact on Ecosystems",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_habitat_loss_and_fragmentation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "competition",
+    "invasive species",
+    "overexploitation"
+   ],
+   "summary": "Harvesting a population faster than it reproduces drives it down, and an introduced species released from its natural predators can outcompete natives because nothing in the new community limits it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 122
+   }
+  },
+  {
+   "id": "biology_pathogens_transmission_and_antibiotic_resistance",
+   "title": "Pathogens, Transmission and Antibiotic Resistance",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Immunity, Disease & Pathogens",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_adaptive_immunity_is_specific_and_remembers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antibiotic resistance",
+    "pathogen",
+    "transmission"
+   ],
+   "summary": "A pathogen causes disease by damaging tissue or releasing toxins, and bacteria survive an antibiotic only if they already carry resistance, so incomplete courses of treatment select for resistant strains.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "biology_pcr_amplifies_dna_in_vitro",
+   "title": "PCR Amplifies DNA In Vitro",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Biotechnology & Genetic Engineering",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_restriction_enzymes_and_plasmids"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplification",
+    "pcr",
+    "primer"
+   ],
+   "summary": "PCR cycles denaturation, primer annealing and extension so that each round doubles the target, which is why thirty cycles turn one molecule into about a billion copies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "biology_phases_of_the_cell_cycle",
+   "title": "Phases of the Cell Cycle",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Cell Cycle & Regulation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_carbon_and_energy_balance_between_the_pathways"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cell cycle",
+    "interphase",
+    "s phase"
+   ],
+   "summary": "Interphase occupies most of the cycle as G1, S and G2 with DNA replicated during S, and the mitotic phase then divides the nucleus and the cytoplasm.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "biology_phosphorus_and_water_as_material_cycles",
+   "title": "Phosphorus and Water as Material Cycles",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Biogeochemical Cycles",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_carbon_and_nitrogen_cycle_between_pools"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "phosphorus cycle",
+    "water cycle",
+    "weathering"
+   ],
+   "summary": "Phosphorus has no gaseous phase and moves from rock through soil and organisms by weathering and decomposition, while water cycles by evaporation, condensation and precipitation, so neither behaves like the carbon cycle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "biology_photorespiration_and_c4_or_cam_adaptations",
+   "title": "Photorespiration and C4 or CAM Adaptations",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Photosynthesis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_calvin_cycle_fixes_carbon"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "c4",
+    "cam",
+    "photorespiration"
+   ],
+   "summary": "RuBisCO also binds oxygen, so the hot dry conditions that close stomata drive photorespiration, and C4 plants separate initial fixation from the Calvin cycle in space while CAM plants separate it in time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "biology_pleiotropy_epistasis_and_environment",
+   "title": "Pleiotropy, Epistasis and Environment",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Non-Mendelian Inheritance",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_multiple_alleles_and_polygenic_traits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "environmental effect",
+    "epistasis",
+    "pleiotropy"
+   ],
+   "summary": "One gene can affect several traits, one gene can mask another, and the same genotype can yield different phenotypes in different environments, as hydrangea flower colour shifts with soil pH.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "biology_point_mutations_and_their_effects",
+   "title": "Point Mutations and Their Effects",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Mutations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_translation_on_the_ribosome"
+   ],
+   "keywords": [
+    "point mutation",
+    "reading frame",
+    "substitution"
+   ],
+   "summary": "A substitution changes one base and may be silent, missense or nonsense, while an insertion or deletion that is not a multiple of three shifts the reading frame and usually destroys the protein.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1940,29 +2474,1246 @@
    }
   },
   {
-   "id": "variation_and_its_sources",
-   "title": "Variation and its sources",
-   "strand": "Genetics and Evolution",
-   "unit": "Inheritance",
-   "topic": "Patterns of inheritance",
-   "tier": "core",
-   "difficulty": 2,
+   "id": "biology_polar_covalent_bonds_in_water",
+   "title": "Polar Covalent Bonds in Water",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Water, Bonds & pH",
+   "tier": "extension",
+   "difficulty": 3,
    "prerequisites": [
-    "alleles_genotype_and_phenotype",
-    "genetic_disorders_and_screening"
+    "biology_magnification_resolution_and_scale_bars"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "environmental",
-    "genetic",
-    "variation"
+    "electronegativity",
+    "hydrogen bond",
+    "polar covalent"
    ],
-   "summary": "Genetic variation comes from mutation and meiosis, while environmental variation comes from conditions.",
+   "summary": "Oxygen pulls the shared electrons of a water molecule toward itself, so the molecule carries partial charges and each molecule can hydrogen-bond with up to four neighbours.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "biology_pollution_and_eutrophication",
+   "title": "Pollution and Eutrophication",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Human Impact on Ecosystems",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_overexploitation_and_invasive_species"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dead zone",
+    "eutrophication",
+    "nutrient runoff"
+   ],
+   "summary": "Excess nitrogen and phosphorus run off farmland into water, where the algal growth they fuel is decomposed by bacteria that consume the dissolved oxygen and create a hypoxic dead zone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 123
+   }
+  },
+  {
+   "id": "biology_positive_feedback_amplifies_change",
+   "title": "Positive Feedback Amplifies Change",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Homeostasis & Feedback",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_set_points_and_negative_feedback"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amplification",
+    "labour",
+    "positive feedback"
+   ],
+   "summary": "Positive feedback reinforces a deviation instead of reversing it, so it drives a process to completion, as oxytocin release does during labour, and cannot hold a steady state on its own.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "biology_primary_and_secondary_succession",
+   "title": "Primary and Secondary Succession",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Community Interactions & Succession",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_ecological_niches_and_resource_partitioning"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "pioneer species",
+    "primary succession",
+    "secondary succession"
+   ],
+   "summary": "Primary succession starts on bare substrate with no soil and begins with pioneer species, while secondary succession follows a disturbance that leaves soil and seeds and therefore proceeds faster.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "biology_probability_rules_for_inheritance",
+   "title": "Probability Rules for Inheritance",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Probability & Punnett Squares",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_genotype_phenotype_and_dominance"
+   ],
+   "keywords": [
+    "independent events",
+    "probability",
+    "product rule"
+   ],
+   "summary": "The probability that two independent events both occur is the product of their probabilities, so a cross between two heterozygotes gives one quarter homozygous recessive offspring rather than one half.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "biology_productivity_and_why_it_limits_ecosystems",
+   "title": "Productivity and Why It Limits Ecosystems",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Energy Flow & Food Webs",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "biology_food_webs_and_keystone_species"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "biomass",
+    "carbon fixation",
+    "primary productivity"
+   ],
+   "summary": "Gross primary productivity is the total carbon fixed by producers and net primary productivity is what remains after their respiration, which is the energy budget available to every consumer.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "biology_prokaryotes_and_their_metabolic_range",
+   "title": "Prokaryotes and Their Metabolic Range",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Survey of Biological Diversity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_the_three_domains_and_binomial_naming"
+   ],
+   "keywords": [
+    "metabolism",
+    "nitrogen fixation",
+    "prokaryote"
+   ],
+   "summary": "Bacteria and archaea lack a nucleus but cover almost every metabolic strategy, including nitrogen fixation and methanogenesis, which is why they drive the biogeochemical cycles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "biology_prokaryotic_and_eukaryotic_cells",
+   "title": "Prokaryotic and Eukaryotic Cells",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Cell Theory & Cell Types",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_the_three_statements_of_cell_theory"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "eukaryote",
+    "nucleus",
+    "prokaryote"
+   ],
+   "summary": "A prokaryotic cell has no membrane-bound nucleus and keeps its DNA in a nucleoid, while a eukaryotic cell encloses its DNA in a nucleus and divides its labour among organelles.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "biology_proofreading_and_repair",
+   "title": "Proofreading and Repair",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "DNA Structure & Replication",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_semiconservative_replication"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dna repair",
+    "mismatch",
+    "proofreading"
+   ],
+   "summary": "DNA polymerase proofreads as it copies and mismatch, base-excision and nucleotide-excision repair remove damage afterwards, so a faulty repair gene such as BRCA1 leaves mutations uncorrected.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "biology_proteins_and_nucleic_acids_as_machinery_and_information",
+   "title": "Proteins and Nucleic Acids as Machinery and Information",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Macromolecules",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_carbohydrates_and_lipids_as_fuel_and_structure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "amino acid",
+    "nucleic acid",
+    "protein"
+   ],
+   "summary": "A protein's function follows its folded shape, which is fixed by its amino-acid sequence, while a nucleic acid stores that sequence as bases read three at a time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "biology_protists_fungi_and_plants",
+   "title": "Protists, Fungi and Plants",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Survey of Biological Diversity",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_prokaryotes_and_their_metabolic_range"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "fungi",
+    "plant",
+    "protist"
+   ],
+   "summary": "Protists are eukaryotes outside the fungi, plants and animals and form several independent lineages, fungi absorb nutrients through external hyphae, and plants are multicellular photosynthesizers with cellulose walls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "biology_reading_a_pedigree",
+   "title": "Reading a Pedigree",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Sex Linkage & Pedigrees",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_sex_chromosomes_and_sex_linked_traits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "carrier",
+    "inheritance pattern",
+    "pedigree"
+   ],
+   "summary": "A pedigree traces a trait through a family, and a trait present in every generation of both sexes suggests dominance while one that skips generations and affects mostly males suggests X-linked recessiveness.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "biology_reading_a_phylogenetic_tree",
+   "title": "Reading a Phylogenetic Tree",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Phylogeny & Classification",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_allopatric_and_sympatric_speciation"
+   ],
+   "keywords": [
+    "common ancestor",
+    "node",
+    "phylogenetic tree"
+   ],
+   "summary": "A phylogenetic tree records branching order rather than a ladder of progress, so two tips joined by a recent node are more closely related to each other than either is to a tip that branches earlier.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "biology_reading_a_punnett_square",
+   "title": "Reading a Punnett Square",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Probability & Punnett Squares",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_probability_rules_for_inheritance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "expected ratio",
+    "gamete",
+    "punnett square"
+   ],
+   "summary": "A Punnett square lists each parent's possible gametes along one axis and fills the boxes with their combinations, so the box counts give an expected ratio that only holds over many offspring.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "biology_redox_carriers_nad_and_fad",
+   "title": "Redox Carriers NAD+ and FAD",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "ATP & Energy Flow",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_coupled_reactions_and_phosphorylation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electron carrier",
+    "fad",
+    "nad+"
+   ],
+   "summary": "NAD+ and FAD accept electrons and hydrogen at oxidation steps and deliver them to the electron transport chain, so their reduced forms carry the energy that later pumps protons.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "biology_resistance_resilience_and_trophic_cascades",
+   "title": "Resistance, Resilience and Trophic Cascades",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Ecosystem Stability & Biodiversity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_primary_and_secondary_succession"
+   ],
+   "keywords": [
+    "resilience",
+    "resistance",
+    "trophic cascade"
+   ],
+   "summary": "A stable ecosystem resists change and recovers after it, and a trophic cascade shows that removing a top predator can change the abundance of every level beneath it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "biology_restriction_enzymes_and_plasmids",
+   "title": "Restriction Enzymes and Plasmids",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Biotechnology & Genetic Engineering",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_epigenetic_and_post_transcriptional_control"
+   ],
+   "keywords": [
+    "plasmid",
+    "recombinant dna",
+    "restriction enzyme"
+   ],
+   "summary": "A restriction enzyme cuts DNA at a specific recognition sequence, and a plasmid cut with the same enzyme can carry a foreign gene into a bacterium that then expresses it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "biology_semiconservative_replication",
+   "title": "Semiconservative Replication",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "DNA Structure & Replication",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_the_double_helix_and_base_pairing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dna polymerase",
+    "okazaki fragment",
+    "semiconservative"
+   ],
+   "summary": "Helicase unwinds the helix, DNA polymerase copies each strand only in the five-prime to three-prime direction, and the lagging strand is built as Okazaki fragments that ligase later joins.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "biology_set_points_and_negative_feedback",
+   "title": "Set Points and Negative Feedback",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Homeostasis & Feedback",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_animal_body_plans_and_vertebrate_groups"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative feedback",
+    "set point",
+    "thermoregulation"
+   ],
+   "summary": "A negative feedback loop compares a measured value with a set point and reverses any deviation, which is how core temperature is held near 37 degrees Celsius when the environment changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "biology_sex_chromosomes_and_sex_linked_traits",
+   "title": "Sex Chromosomes and Sex-Linked Traits",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Sex Linkage & Pedigrees",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_pleiotropy_epistasis_and_environment"
+   ],
+   "keywords": [
+    "hemizygous",
+    "sex chromosome",
+    "x-linked"
+   ],
+   "summary": "A human female is XX and a male XY, so a recessive allele on the X chromosome shows in a son who inherits that X, while a daughter must inherit two copies to be affected.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "biology_shared_features_of_living_systems",
+   "title": "Shared Features of Living Systems",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Characteristics of Life & Levels of Organization",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_correlation_causation_and_uncertainty"
+   ],
+   "keywords": [
+    "characteristics of life",
+    "metabolism",
+    "virus"
+   ],
+   "summary": "Living systems are organised, metabolise, respond to stimuli, maintain homeostasis, grow, reproduce and evolve, and a virus meets none of the metabolic criteria on its own, which is why its status as alive is debated.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "biology_si_units_and_biological_scale",
+   "title": "SI Units and Biological Scale",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Measurement & Microscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_structure_fits_function_at_every_scale"
+   ],
+   "keywords": [
+    "conversion",
+    "scale",
+    "si units"
+   ],
+   "summary": "Biology measures length in metres, mass in kilograms and volume in litres, and a cell 10 micrometres across is 10 to the minus five metres, so unit conversion is the first step in comparing structures.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "biology_slope_and_rate_from_a_graph",
+   "title": "Slope and Rate from a Graph",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Data & Graph Interpretation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_types_of_data_and_their_displays"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graph reading",
+    "rate",
+    "slope"
+   ],
+   "summary": "The slope of a line is the change in the y-variable per unit change in the x-variable, so a steeper line means the measured quantity changes faster, not that it reaches a larger value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "biology_sources_of_mutation_and_their_consequences",
+   "title": "Sources of Mutation and Their Consequences",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Mutations",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_point_mutations_and_their_effects"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "germ line",
+    "mutagen",
+    "somatic mutation"
+   ],
+   "summary": "Mutations arise from replication errors, radiation and chemical mutagens, and only a mutation in a germ-line cell is inherited, which is why a somatic mutation can cause cancer in one body without passing to offspring.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "biology_species_concepts_and_reproductive_isolation",
+   "title": "Species Concepts and Reproductive Isolation",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Speciation & Common Ancestry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_molecular_and_biogeographic_evidence"
+   ],
+   "keywords": [
+    "fertile offspring",
+    "reproductive isolation",
+    "species concept"
+   ],
+   "summary": "The biological species concept defines a species as a group that interbreeds and produces fertile offspring, so reproductive isolation rather than physical difference is what keeps two species apart.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "biology_stomata_guard_cells_and_water_loss",
+   "title": "Stomata, Guard Cells and Water Loss",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Plant Structure & Physiology",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_xylem_and_phloem_as_two_transport_tissues"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "guard cell",
+    "stomata",
+    "transpiration"
+   ],
+   "summary": "Guard cells open a stoma when they take up water and become turgid, which admits carbon dioxide for photosynthesis but also lets water vapour escape, so the plant trades carbon gain against water loss.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "biology_structure_fits_function_at_every_scale",
+   "title": "Structure Fits Function at Every Scale",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Characteristics of Life & Levels of Organization",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_levels_of_organization_from_molecule_to_biosphere"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adaptation",
+    "structure and function",
+    "surface area"
+   ],
+   "summary": "A structure's shape constrains what it can do, so the thin flattened wall of an alveolus and the branching of a root hair both increase the surface available for exchange.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "biology_sustainability_as_living_within_regeneration_rates",
+   "title": "Sustainability as Living Within Regeneration Rates",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Climate Change & Sustainability",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_greenhouse_effect_and_its_intensification"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "maximum sustainable yield",
+    "regeneration",
+    "sustainability"
+   ],
+   "summary": "A practice is sustainable only if it uses renewable resources no faster than they regenerate and releases wastes no faster than they are absorbed, so a fishery can be harvested indefinitely only up to its maximum sustainable yield.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 128
+   }
+  },
+  {
+   "id": "biology_synapses_and_neurotransmitters",
+   "title": "Synapses and Neurotransmitters",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Nervous & Endocrine Regulation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_neurons_signal_by_electrical_gradients"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "neurotransmitter",
+    "presynaptic",
+    "synapse"
+   ],
+   "summary": "An action potential releases neurotransmitter across a synapse, and the signal crosses in one direction only because vesicles sit on the presynaptic side and receptors on the postsynaptic side.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "biology_temperature_ph_and_inhibition",
+   "title": "Temperature, pH and Inhibition",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Enzymes & Catalysis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_lowering_activation_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "denaturation",
+    "inhibition",
+    "optimum ph"
+   ],
+   "summary": "Each enzyme works fastest in a narrow temperature and pH range because beyond it the bonds holding its tertiary structure break, and a competitive inhibitor occupies the active site while a noncompetitive one binds elsewhere and distorts it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "biology_test_crosses_and_predicting_offspring",
+   "title": "Test Crosses and Predicting Offspring",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Probability & Punnett Squares",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_reading_a_punnett_square"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "homozygous recessive",
+    "test cross",
+    "unknown genotype"
+   ],
+   "summary": "A test cross with a homozygous recessive partner reveals an unknown dominant genotype, because any recessive offspring prove the unknown parent carried a recessive allele.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "biology_the_active_site_and_enzyme_specificity",
+   "title": "The Active Site and Enzyme Specificity",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Enzymes & Catalysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_proteins_and_nucleic_acids_as_machinery_and_information"
+   ],
+   "keywords": [
+    "active site",
+    "specificity",
+    "substrate"
+   ],
+   "summary": "An enzyme binds its substrate in a pocket whose shape and charge match it, so a single amino-acid substitution in that pocket can abolish catalysis.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "biology_the_calvin_cycle_fixes_carbon",
+   "title": "The Calvin Cycle Fixes Carbon",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Photosynthesis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_light_reactions_in_the_thylakoid"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "calvin cycle",
+    "carbon fixation",
+    "rubisco"
+   ],
+   "summary": "RuBisCO attaches carbon dioxide to RuBP in the stroma, and ATP and NADPH from the light reactions reduce the product to G3P, of which five of every six molecules go to regenerate RuBP.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "biology_the_citric_acid_cycle_and_oxidative_phosphorylation",
+   "title": "The Citric Acid Cycle and Oxidative Phosphorylation",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Cellular Respiration & Fermentation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_glycolysis_and_pyruvate_oxidation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "atp synthase",
+    "citric acid cycle",
+    "electron transport chain"
+   ],
+   "summary": "The citric acid cycle completes the oxidation of acetyl groups and loads NADH and FADH2, whose electrons drive the proton pumps of the inner membrane so that ATP synthase makes most of the cell's ATP.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "biology_the_double_helix_and_base_pairing",
+   "title": "The Double Helix and Base Pairing",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "DNA Structure & Replication",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_why_sex_persists"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antiparallel",
+    "base pairing",
+    "double helix"
+   ],
+   "summary": "Two antiparallel strands pair adenine with thymine by two hydrogen bonds and guanine with cytosine by three, so the sequence of one strand specifies the sequence of the other.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "biology_the_fluid_mosaic_model",
+   "title": "The Fluid Mosaic Model",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Membrane Structure & Transport",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_mitochondria_and_chloroplasts_as_converters"
+   ],
+   "keywords": [
+    "fluid mosaic",
+    "membrane protein",
+    "phospholipid bilayer"
+   ],
+   "summary": "A membrane is a phospholipid bilayer with hydrophilic heads outward and hydrophobic tails inward, and its proteins, cholesterol and glycolipids move laterally within the sheet, which is what makes it fluid and mosaic.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "biology_the_genetic_code_is_redundant_and_non_overlapping",
+   "title": "The Genetic Code Is Redundant and Non-overlapping",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Transcription & Translation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_transcription_makes_an_rna_copy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "codon",
+    "frameshift",
+    "genetic code"
+   ],
+   "summary": "Codons are read three bases at a time from a fixed start, 61 specify amino acids and three stop translation, so several codons can name one amino acid but a frameshift alters every codon after it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "biology_the_greenhouse_effect_and_its_intensification",
+   "title": "The Greenhouse Effect and Its Intensification",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Climate Change & Sustainability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_conservation_strategies"
+   ],
+   "keywords": [
+    "carbon dioxide",
+    "greenhouse effect",
+    "radiative forcing"
+   ],
+   "summary": "Greenhouse gases absorb outgoing infrared radiation and re-emit part of it downward, and burning fossil fuel adds carbon dioxide that strengthens this absorption and warms the planet's energy budget.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 127
+   }
+  },
+  {
+   "id": "biology_the_law_of_independent_assortment",
+   "title": "The Law of Independent Assortment",
+   "strand": "Heredity",
+   "unit": "Heredity",
+   "topic": "Mendelian Inheritance & Crosses",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_mendel_s_law_of_segregation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dihybrid cross",
+    "independent assortment",
+    "linkage"
+   ],
+   "summary": "Genes on different chromosomes assort independently, so a dihybrid cross between heterozygotes gives the 9:3:3:1 ratio, but genes close together on one chromosome do not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "biology_the_nucleus_and_ribosomes",
+   "title": "The Nucleus and Ribosomes",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Organelles & Cell Structure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_why_small_cells_dominate"
+   ],
+   "keywords": [
+    "nucleolus",
+    "nucleus",
+    "ribosome"
+   ],
+   "summary": "The nucleus stores chromatin and assembles ribosomal subunits in its nucleolus, and the ribosomes it exports translate mRNA in the cytoplasm or on the rough endoplasmic reticulum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "biology_the_operon_as_a_prokaryotic_switch",
+   "title": "The Operon as a Prokaryotic Switch",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Gene Regulation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_why_regulation_matters"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "lac operon",
+    "operon",
+    "repressor"
+   ],
+   "summary": "In the lac operon a repressor blocks transcription when lactose is absent, and the genes are switched on only when lactose is present and glucose is low, so the cell builds the enzyme only when it pays.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "biology_the_ph_scale_and_biological_buffers",
+   "title": "The pH Scale and Biological Buffers",
+   "strand": "Chemistry of Life",
+   "unit": "Chemistry of Life",
+   "topic": "Water, Bonds & pH",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "biology_cohesion_adhesion_and_thermal_buffering"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "buffer",
+    "hydrogen ion",
+    "ph"
+   ],
+   "summary": "pH is the negative logarithm of hydrogen-ion concentration, so one unit lower means ten times more hydrogen ions, and a buffer pair such as carbonic acid and bicarbonate holds pH near its pKa.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "biology_the_shared_architecture_of_energy_pathways",
+   "title": "The Shared Architecture of Energy Pathways",
+   "strand": "Cellular Energetics",
+   "unit": "Cellular Energetics",
+   "topic": "Comparing & Connecting the Pathways",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_fermentation_regenerates_nad"
+   ],
+   "keywords": [
+    "chemiosmosis",
+    "electron transport",
+    "energy pathway"
+   ],
+   "summary": "Photosynthesis and respiration both run electron transport chains that pump protons across a membrane and both use the resulting gradient to make ATP, but they run in opposite directions from opposite electron sources.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1970,30 +3721,409 @@
    }
   },
   {
-   "id": "water_and_its_biological_properties",
-   "title": "Water and its biological properties",
-   "strand": "Molecules of Life",
-   "unit": "Biological molecules and enzymes",
-   "topic": "The chemistry of living things",
+   "id": "biology_the_spindle_and_chromosome_segregation",
+   "title": "The Spindle and Chromosome Segregation",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Mitosis",
    "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_stages_of_mitosis"
+   ],
    "sequence_predecessors": [],
    "keywords": [
-    "hydrogen bond",
-    "solvent",
-    "water"
+    "kinetochore",
+    "segregation",
+    "spindle fiber"
    ],
-   "summary": "Hydrogen bonding gives water its high specific heat and solvent power, which is why life depends on it.",
+   "summary": "Kinetochore microtubules attach each sister chromatid to the opposite pole, and tension from both attachments is what satisfies the spindle checkpoint before anaphase begins.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "Biology — Cells, Genetics, Evolution and Ecosystems",
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 1
+    "order": 48
+   }
+  },
+  {
+   "id": "biology_the_stages_of_mitosis",
+   "title": "The Stages of Mitosis",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Mitosis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_loss_of_control_and_cancer"
+   ],
+   "keywords": [
+    "chromosome",
+    "mitosis",
+    "spindle"
+   ],
+   "summary": "Prophase condenses the chromosomes and breaks down the nuclear envelope, metaphase aligns them on the spindle equator, anaphase separates sister chromatids, and telophase rebuilds two nuclei.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "biology_the_three_domains_and_binomial_naming",
+   "title": "The Three Domains and Binomial Naming",
+   "strand": "Evolution & Classification",
+   "unit": "Evolution & Classification",
+   "topic": "Phylogeny & Classification",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_cladistics_and_shared_derived_characters"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binomial nomenclature",
+    "taxonomy",
+    "three domains"
+   ],
+   "summary": "Life divides into Bacteria, Archaea and Eukarya, and each species carries a two-part Latin name of genus and specific epithet, so Homo sapiens names one species within the genus Homo.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "biology_the_three_statements_of_cell_theory",
+   "title": "The Three Statements of Cell Theory",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Cell Theory & Cell Types",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_temperature_ph_and_inhibition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "basic unit",
+    "cell theory",
+    "division"
+   ],
+   "summary": "Cell theory holds that every organism consists of one or more cells, that the cell is the basic unit of life, and that all cells come from pre-existing cells by division.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "biology_tissues_organs_and_organ_systems",
+   "title": "Tissues, Organs and Organ Systems",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Cell Specialization & Organization",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_differentiation_from_one_genome"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "organ",
+    "organ system",
+    "tissue"
+   ],
+   "summary": "Similar specialised cells group into a tissue, tissues into an organ and organs into a system, so a function such as absorption is carried by a coordinated structure rather than by one cell type.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "biology_transcription_makes_an_rna_copy",
+   "title": "Transcription Makes an RNA Copy",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Transcription & Translation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_proofreading_and_repair"
+   ],
+   "keywords": [
+    "promoter",
+    "rna polymerase",
+    "transcription"
+   ],
+   "summary": "RNA polymerase binds a promoter, reads the template strand and builds a complementary RNA, and a eukaryotic transcript is capped, polyadenylated and spliced before it leaves the nucleus.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "biology_translation_on_the_ribosome",
+   "title": "Translation on the Ribosome",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Transcription & Translation",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_the_genetic_code_is_redundant_and_non_overlapping"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "peptide bond",
+    "translation",
+    "trna"
+   ],
+   "summary": "The ribosome holds the mRNA and matches each codon with a tRNA at the A site, catalyses the peptide bond, then translocates so the growing chain leaves through the exit tunnel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "biology_trophic_levels_and_the_ten_percent_rule",
+   "title": "Trophic Levels and the Ten Percent Rule",
+   "strand": "Ecology",
+   "unit": "Ecology",
+   "topic": "Energy Flow & Food Webs",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_stomata_guard_cells_and_water_loss"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "food chain",
+    "ten percent rule",
+    "trophic level"
+   ],
+   "summary": "Energy passes from producers to consumers along a food chain, and only about ten percent of the energy at one level is stored as biomass at the next, so food chains rarely exceed four or five links.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "biology_types_of_data_and_their_displays",
+   "title": "Types of Data and Their Displays",
+   "strand": "Foundations of Biology",
+   "unit": "Foundations of Biology",
+   "topic": "Data & Graph Interpretation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_control_groups_and_confounding_variables"
+   ],
+   "keywords": [
+    "continuous data",
+    "discrete data",
+    "graph choice"
+   ],
+   "summary": "Counts and categories are discrete data drawn as a bar chart, whereas measurements on a continuous scale are plotted as a line or scatter graph so the shape of the relationship is visible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "biology_why_biodiversity_has_value",
+   "title": "Why Biodiversity Has Value",
+   "strand": "Human Impact & Sustainability",
+   "unit": "Human Impact & Sustainability",
+   "topic": "Biodiversity & Conservation",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "biology_measuring_biodiversity_at_three_levels"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ecosystem services",
+    "intrinsic value",
+    "pollination"
+   ],
+   "summary": "Biodiversity supplies ecosystem services such as pollination, water filtration and medicines, so its loss carries an economic cost as well as an ecological one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 125
+   }
+  },
+  {
+   "id": "biology_why_regulation_matters",
+   "title": "Why Regulation Matters",
+   "strand": "Molecular Genetics",
+   "unit": "Molecular Genetics",
+   "topic": "Gene Regulation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_sources_of_mutation_and_their_consequences"
+   ],
+   "keywords": [
+    "cell identity",
+    "gene regulation",
+    "transcription"
+   ],
+   "summary": "Every cell of an organism carries the same genes, so regulating when and where a gene is transcribed is what makes a liver cell different from a neuron.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "biology_why_sex_persists",
+   "title": "Why Sex Persists",
+   "strand": "Cell Division & Reproduction",
+   "unit": "Cell Division & Reproduction",
+   "topic": "Sexual vs. Asexual Reproduction",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "biology_costs_and_benefits_of_asexual_reproduction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "recombination",
+    "sexual reproduction",
+    "variation"
+   ],
+   "summary": "Sexual reproduction costs the search for a mate and halves each parent's genetic contribution, but recombination and independent assortment generate the variation that selection needs when conditions change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "biology_why_small_cells_dominate",
+   "title": "Why Small Cells Dominate",
+   "strand": "Cells & Cell Transport",
+   "unit": "Cells & Cell Transport",
+   "topic": "Cell Theory & Cell Types",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "biology_prokaryotic_and_eukaryotic_cells"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cell size",
+    "exchange",
+    "surface area to volume"
+   ],
+   "summary": "As a cell grows its volume rises with the cube of its length while its surface rises only with the square, so exchange across the membrane cannot keep pace and the cell must stay small or divide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "biology_xylem_and_phloem_as_two_transport_tissues",
+   "title": "Xylem and Phloem as Two Transport Tissues",
+   "strand": "Body Systems & Homeostasis",
+   "unit": "Body Systems & Homeostasis",
+   "topic": "Plant Structure & Physiology",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "biology_circulation_moves_materials_between_surfaces"
+   ],
+   "keywords": [
+    "phloem",
+    "transpiration",
+    "xylem"
+   ],
+   "summary": "Xylem carries water and minerals upward from the roots, pulled by transpiration from the leaves, while phloem carries sugars from sources to sinks under pressure flow.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Biology - Cells, Genetics, Evolution and Ecology",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
    }
   }
  ]

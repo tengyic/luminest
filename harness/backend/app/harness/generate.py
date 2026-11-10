@@ -84,7 +84,9 @@ class Artifact:
     blocks: list[dict[str, Any]]
     citations: list[dict[str, Any]] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
-    mode: str = 'grounded-offline'
+    #: ``model-required`` until a configured model actually improves the artefact. The
+    #: deterministic composition is a declared fallback, never a shipped product mode.
+    mode: str = 'model-required'
     review_required: bool = False
     metadata: dict[str, Any] = field(default_factory=dict)
 
@@ -850,8 +852,20 @@ def _enhance(ctx_tool, context: Context | None, artifact: Artifact,
              options: Mapping[str, Any]) -> Artifact:
     """Let a configured model improve the prose. Never let it invent the mathematics."""
     settings = getattr(ctx_tool, 'settings', None)
-    if not provider.available(settings) or options.get('no_model'):
-        artifact.notes.append('Composed deterministically; no language model was used.')
+    if not provider.available(settings):
+        # A model is required. The grounded composition below is still shown, but it is
+        # labelled as a degraded fallback with the exact next action - never as a second
+        # legitimate way to generate a lesson.
+        artifact.mode = 'model-required'
+        artifact.notes.append('No language model is configured, so no language model was '
+                              'used for this artefact. Add a provider, model and API key in '
+                              'Settings; this is grounded curriculum composition, not '
+                              'model-generated teaching.')
+        return artifact
+    if options.get('no_model'):
+        artifact.mode = 'model-required'
+        artifact.notes.append('This request explicitly asked for no model; the grounded '
+                              'composition was kept.')
         return artifact
     if artifact.kind not in {'explanation', 'slide_deck', 'worked_example'} or context is None:
         artifact.mode = provider.label(settings)
@@ -882,9 +896,9 @@ def _enhance(ctx_tool, context: Context | None, artifact: Artifact,
         artifact.notes.append('Prose clarified by the configured model; formulas, figures, '
                               'citations and item content were not modified.')
     else:
-        artifact.mode = 'grounded-offline'
+        artifact.mode = 'model-unavailable'
         artifact.notes.append('The configured model was unavailable or returned unusable output; '
-                              'the deterministic composition was kept.')
+                              'the grounded composition was kept and is labelled as a fallback.')
     return artifact
 
 

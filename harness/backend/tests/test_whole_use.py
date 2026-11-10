@@ -27,16 +27,16 @@ from test_course_builder import SOURCE  # the same document the intake tests use
 
 @pytest.fixture
 def wired(tmp_path, monkeypatch):
-    """The shipped default: the offline tutor, no network, no model configured.
+    """The unconfigured state: no model, no network, a declared grounded fallback.
 
-    The whole-use test deliberately runs the configuration a learner gets from the
-    packaged app rather than a mocked provider. If the offline path cannot carry the
-    session, the product does not work on first launch, which is the claim that
-    matters most.
+    The whole-use test deliberately runs the state a learner sees *before* configuring a
+    model in Settings, rather than a mocked provider. The product requirement is that the
+    instance says ``model-required`` and still refuses to invent a lesson; this proves the
+    grounded fallback stays honest while the operator is sent to configure one.
     """
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     from fastapi.testclient import TestClient
     from app.main import create_app
     with TestClient(create_app(Settings.from_env())) as test_client:
@@ -115,7 +115,7 @@ def test_a_learner_can_go_from_a_document_to_a_taught_course(wired):
     assert reply.status_code == 200, reply.text
     body = reply.json()
     assert body['content'].strip()
-    # The offline tutor refuses to invent a lesson; a course built from a document
+    # The grounded fallback refuses to invent a lesson; a course built from a document
     # has no hand-authored lesson blocks, and the answer must say so rather than
     # fabricate one.
     assert body['grounding'], 'an answer with no grounding is not grounded'

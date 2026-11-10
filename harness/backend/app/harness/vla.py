@@ -43,6 +43,7 @@ import re
 from dataclasses import dataclass
 from typing import Any, Mapping, Sequence
 
+from .. import model_config
 from . import provider
 
 # --------------------------------------------------------------------- model cards
@@ -152,17 +153,18 @@ def model_card(model_id: str | None) -> ModelCard | None:
 
 
 def card_for(settings) -> ModelCard | None:
-    return model_card(getattr(settings, 'provider_model', '') or '')
+    return model_card(model_config.effective(settings).provider_model or '')
 
 
 def vision_status(settings) -> tuple[bool, str]:
     """(ready, sentence) for image input. Never raises, never touches the network."""
+    cfg = model_config.effective(settings)
     if not provider.available(settings):
-        return False, ('No language model is configured (HARNESS_TUTOR_PROVIDER is '
-                       'offline), so no image can be read.')
-    if getattr(settings, 'provider', '') == 'ollama':
-        return False, ('The Ollama path is not wired for image content parts; point '
-                       'HARNESS_TUTOR_PROVIDER at an OpenAI-compatible vision endpoint.')
+        return False, ('No language model is configured, so no image can be read. Add a '
+                       'provider, model and API key in Settings.')
+    if cfg.provider == 'ollama':
+        return False, ('The Ollama path is not wired for image content parts; configure an '
+                       'OpenAI-compatible vision endpoint in Settings.')
     card = card_for(settings)
     if card is not None:
         if card.sees:
@@ -173,7 +175,7 @@ def vision_status(settings) -> tuple[bool, str]:
     if os.getenv(VISION_OVERRIDE_ENV, '') == '1':
         return True, ('The configured model is not in this build\'s card table; image input '
                       f'is assumed because {VISION_OVERRIDE_ENV}=1.')
-    return False, (f'The model {getattr(settings, "provider_model", "")!r} is not in this '
+    return False, (f'The model {cfg.provider_model!r} is not in this '
                    'build\'s card table, so image input is not assumed. Set '
                    f'{VISION_OVERRIDE_ENV}=1 to vouch for it.')
 
@@ -184,7 +186,7 @@ def vision_ready(settings) -> bool:
 
 def actions_ready(settings) -> bool:
     """Whether native tool calls are wired for this provider (the 'A' in VLA)."""
-    return provider.available(settings) and getattr(settings, 'provider', '') != 'ollama'
+    return provider.available(settings) and model_config.effective(settings).provider != 'ollama'
 
 
 def describe(settings) -> dict[str, Any]:
@@ -193,8 +195,8 @@ def describe(settings) -> dict[str, Any]:
     vision, vision_note = vision_status(settings)
     acts = actions_ready(settings)
     return {
-        'model': card.to_dict() if card else {'id': getattr(settings, 'provider_model', '') or '',
-                                              'known': False},
+        'model': card.to_dict() if card else {
+            'id': model_config.effective(settings).provider_model or '', 'known': False},
         'vision': {'ready': vision, 'note': vision_note},
         'action': {'ready': acts,
                    'note': ('Native tool calls are wired for the OpenAI-compatible path.'
@@ -368,7 +370,8 @@ def observe(settings, images: Sequence[str], question: str, *,
         return None
     card = card_for(settings)
     return {'text': text, 'images': len(digests), 'digests': digests,
-            'model': (card.display_name if card else getattr(settings, 'provider_model', '')),
+            'model': (card.display_name if card
+                      else model_config.effective(settings).provider_model),
             'usage': {key: (usage_out or {}).get(key, 0)
                       for key in ('prompt_tokens', 'completion_tokens', 'total_tokens')}}
 

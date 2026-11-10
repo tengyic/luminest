@@ -113,7 +113,7 @@ def build_client(monkeypatch, tmp_path, url: str) -> TestClient:
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.setenv('HARNESS_DATABASE_URL', url)
     monkeypatch.setenv('HARNESS_AUTO_CREATE', '1')
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
     return TestClient(create_app(Settings.from_env()))
 

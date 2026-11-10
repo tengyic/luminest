@@ -116,22 +116,6 @@
       ],
       "status": "available"
     },
-    "tikz": {
-      "defaultSize": [
-        520,
-        380
-      ],
-      "label": "TikZ diagrams",
-      "provider": "bundled",
-      "purpose": "illustrations, flowcharts, schematic diagrams",
-      "renderer": "TikZJax (TeX-in-WASM), vendored GPL-3.0/LPPL-1.3c assets",
-      "requirement": "Requires the vendored tex.wasm, core dump and 140 Bakoma fonts. If packaging omits them the host reports RENDERER_ASSETS_NOT_INSTALLED.",
-      "requires": "tikzAssets",
-      "specKeys": [
-        "source"
-      ],
-      "status": "available"
-    },
     "tex": {
       "defaultSize": [
         360,
@@ -146,6 +130,22 @@
       "specKeys": [
         "latex",
         "display"
+      ],
+      "status": "available"
+    },
+    "tikz": {
+      "defaultSize": [
+        520,
+        380
+      ],
+      "label": "TikZ diagrams",
+      "provider": "bundled",
+      "purpose": "illustrations, flowcharts, schematic diagrams",
+      "renderer": "TikZJax (TeX-in-WASM), vendored GPL-3.0/LPPL-1.3c assets",
+      "requirement": "Requires the vendored tex.wasm, core dump and 140 Bakoma fonts. If packaging omits them the host reports RENDERER_ASSETS_NOT_INSTALLED.",
+      "requires": "tikzAssets",
+      "specKeys": [
+        "source"
       ],
       "status": "available"
     }

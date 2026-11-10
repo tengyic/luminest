@@ -1,0 +1,21 @@
+{
+  "name": "luminest-visuals",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline vendored whiteboard visual renderers for Luminest (WKWebView host).",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "katex": "0.16.47",
+    "mafs": "0.21.0",
+    "mathbox": "2.3.2-rc1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.162.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

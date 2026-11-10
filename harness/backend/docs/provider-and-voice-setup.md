@@ -1,31 +1,44 @@
 # Tutor model and voice: final configuration procedures
 
-Operator-facing. This document is the **procedure** for switching the tutor from the
-default testing model to a production vision model, and the reference for the voice
-backend that ships today. Voice output is **already switched on** in the sense that
-matters: `text_to_speech` talks to a local [VoiceStudio](https://github.com/debpalash/VoiceStudio)
-backend, and the only thing an operator has to do is have that backend running. Sections
-1–2 are still procedures; section 3 is now configuration, not a plan.
+Operator-facing. This document is the **procedure** for configuring the required tutor
+model and the reference for the voice backend that ships today. Voice output is **already
+switched on** in the sense that matters: `text_to_speech` talks to a local
+[VoiceStudio](https://github.com/debpalash/VoiceStudio) backend, and the only thing an
+operator has to do is have that backend running.
 
-Everything is an environment variable read once by `Settings.from_env()`
-(`app/config.py`), so a change needs an API restart and no code change. Two settings
-are the whole model surface:
+**The product requires a language model.** There is no `offline` provider: `Settings.from_env()`
+rejects `HARNESS_TUTOR_PROVIDER=offline`, and a hosted production instance refuses to boot
+without a model. An unconfigured desktop/local instance still boots so the user can open
+Settings, but it reports `model-required` everywhere and generative work returns a declared
+grounded fallback with a reason — never a silent rules-engine lesson.
+
+Two ways to configure it:
+
+1. **In the app (recommended for desktop/customers).** Settings → Language model. Choose a
+   preset, enter a model id and API key, save. `PUT /api/v1/settings/model-config` writes
+   `<data_dir>/model_config.json` (owner-only permissions) and it takes effect on the next
+   call — no restart. `GET` reports the state without ever returning the key;
+   `DELETE` reverts to the environment; `POST .../test` runs one tiny completion to verify.
+2. **In the environment.** `Settings.from_env()` (`app/config.py`) reads the variables below
+   once at startup, with a key optionally coming from `backend/.env` or `tutor.env`.
 
 | Setting | Env var | Meaning |
 |---|---|---|
-| Provider kind | `HARNESS_TUTOR_PROVIDER` | `offline` (default), `ollama`, or `openai` (any OpenAI-compatible endpoint, including DeepSeek). |
-| Endpoint | `HARNESS_TUTOR_URL` | Base URL. The provider appends `/chat/completions`. Must be a valid `https://` URL. |
-| Model | `HARNESS_TUTOR_MODEL` | Required whenever the provider is not `offline`. |
+| Provider kind | `HARNESS_TUTOR_PROVIDER` | `openai` (any OpenAI-compatible endpoint, including DeepSeek) or `ollama`. Required; `offline` is rejected. |
+| Endpoint | `HARNESS_TUTOR_URL` | Base URL. The provider appends `/chat/completions`. Must be a valid `http(s)://` URL. |
+| Model | `HARNESS_TUTOR_MODEL` | Required model id. |
 | Key | `HARNESS_TUTOR_KEY` | Bearer token. May instead be supplied as `DEEPSEEK_API_KEY` in `backend/.env`. |
 | Timeout | `HARNESS_TUTOR_TIMEOUT_SECONDS` | Default `12`. Raise to `300` for long agentic generations. |
 
+A runtime override wins over the environment. An instance with neither is `unconfigured`.
+
 ---
 
-## 1. The current default: DeepSeek-V4.1-Flash (testing)
+## 1. Recommended starting point: DeepSeek-V4.1-Flash (testing)
 
-The harness ships pointed at `offline` — a fully deterministic local content generator,
-which is a complete product, not a degraded placeholder. For **testing**, the intended
-override is DeepSeek-V4.1-Flash, whose model id on the wire is `deepseek-flash`:
+No model ships preconfigured. For **testing**, the intended first configuration is
+DeepSeek-V4.1-Flash, whose model id on the wire is `deepseek-flash`. In Settings choose
+the `deepseek` preset, enter `deepseek-flash` and your key; or, for a headless instance:
 
 ```dotenv
 # backend/.env  (real environment variables always win over this file)
@@ -75,10 +88,12 @@ That was a billing state, not a configuration error, and it is **no longer true*
 PNG, answered "Black") and for a tool-calling completion (`tool_calls: [speak]`). The
 harness had been designed so that nothing depended on the model being reachable:
 `provider.chat` and `provider.chat_tools` never raise, they return `None` on any failure,
-and every caller already has an offline path. That design is still the contract — the
-account is funded today, and a lapsed key must degrade to the deterministic content
-rather than break a lesson. To re-check a key, run the live smoke test above and expect a
-typed tool call plus `total_tokens > 0`.
+and every caller has a declared grounded fallback. That design is still the contract for a
+*transient* failure of a configured model — a lapsed key degrades one turn rather than
+breaking a lesson. It is not a product mode: with no model configured at all the instance
+reports `model-required` and points at Settings. To re-check a key, run the live smoke test
+above (or `POST /api/v1/settings/model-config/test`) and expect a typed tool call plus
+`total_tokens > 0`.
 
 ---
 
@@ -97,7 +112,7 @@ The steps, in order:
    and the harness refuses to send it a picture rather than accept an invention.
 
 2. **Point the settings at it.** Either keep `deepseek-flash` (already image-capable) or
-   change the two variables:
+   change the model in Settings (or the environment variables):
 
    ```dotenv
    HARNESS_TUTOR_PROVIDER=openai
@@ -142,8 +157,9 @@ The steps, in order:
 ### Invariants that must not be weakened when the model changes
 
 - **Never-raise fallback.** Every provider call returns `None` on failure and the caller
-  degrades to deterministic offline content. Do not add a code path that assumes the
-  model answered.
+  degrades to a *declared*, labelled grounded fallback for that one turn. Do not add a code
+  path that assumes the model answered, and do not advertise the fallback as a generation
+  mode. A model is required; the missing-model state must stay visible (`model-required`).
 - **Licence gate.** A stronger model does not widen what may be ingested. Khan Academy
   stays link/embed-only; OpenStax stays LINK_ONLY; the policy gate in
   `app/ingest/policy.py` is evaluated at call time, not by memory.
@@ -362,4 +378,6 @@ dialogue of an audio overview). A new voice provider must keep that single-voice
   new module beside `voice.py` with its own contract, not a branch inside it — and it has
   to answer the same question the swap to VoiceStudio answered: does learner text leave
   the host to be spoken?
-- The tutor provider stays `offline` until an operator sets the variables above.
+- There is no offline tutor provider and no default model. The app ships *unconfigured*
+  and must say so; configuration is a user action in Settings or an operator action in the
+  environment. A hosted production instance refuses to boot without it.

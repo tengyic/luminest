@@ -1,0 +1,1367 @@
+{
+ "course": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A college-level calculus course organised around the AP Calculus AB framework: limits and continuity at a point and over an interval; the derivative as a limit, the power, product and quotient rules, and the derivatives of the elementary functions; the chain rule, implicit differentiation and inverse functions; interpretation of the derivative in motion and related-rate contexts, linearization and L'Hopital's rule; the mean value theorem, monotonicity, concavity, curve sketching and optimization; Riemann sums, the fundamental theorem and techniques of antidifferentiation; slope fields, separation of variables and exponential models; and average value, displacement, area between curves and volumes of revolution.",
+ "expected_weeks": 34,
+ "strands": [
+  {
+   "strand": "Limits and Continuity",
+   "units": [
+    {
+     "unit": "Limits and Continuity",
+     "topics": [
+      {
+       "topic": "Can Change Occur at an Instant?",
+       "concepts": [
+        {
+         "title": "Instantaneous Rate as a Limit of Average Rates",
+         "summary": "The average rate of change of f over [a, a+h] is (f(a+h) - f(a))/h, and the instantaneous rate at a is the limit of that quotient as h approaches zero, so the instantaneous rate exists only when that two-sided limit exists and is finite.",
+         "keywords": [
+          "average rate",
+          "difference quotient",
+          "instantaneous rate"
+         ]
+        },
+        {
+         "title": "Secant Slopes Approaching a Tangent Slope",
+         "summary": "As the second point of a secant line slides towards the fixed point, the secant slopes approach the slope of the tangent at that point, which is what makes the tangent slope a limit rather than a ratio of two points.",
+         "keywords": [
+          "secant line",
+          "tangent line",
+          "limit of slopes"
+         ],
+         "prerequisites": [
+          "Instantaneous Rate as a Limit of Average Rates"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Defining Limits and Limit Notation",
+       "concepts": [
+        {
+         "title": "The Two-Sided Limit Definition",
+         "summary": "lim_{x->a} f(x) = L means the values of f can be made arbitrarily close to L by taking x close enough to a but distinct from a, so f need not be defined at a and its value there, if any, does not affect the limit.",
+         "keywords": [
+          "limit",
+          "two-sided",
+          "punctured neighbourhood"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Estimating Limits from Graphs",
+       "concepts": [
+        {
+         "title": "Reading a Limit from a Graph",
+         "summary": "A graph supports lim_{x->a} f(x) = L when both branches approach height L as x approaches a from either side, so an open circle, a filled point or a mismatched point height at x = a is irrelevant to the limit itself.",
+         "keywords": [
+          "graph",
+          "one-sided approach",
+          "hole"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Estimating Limits from Tables",
+       "concepts": [
+        {
+         "title": "Limits from Tables on Both Sides",
+         "summary": "A table estimates a limit only when the inputs approach a from below and from above and both output columns settle on the same value; a table is evidence for a limit and never a proof of one.",
+         "keywords": [
+          "table",
+          "numerical estimate",
+          "two-sided"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Limits Using Algebraic Properties",
+       "concepts": [
+        {
+         "title": "Limit Laws for Sums, Products and Quotients",
+         "summary": "If lim f and lim g both exist at a, then the limit of a sum, difference, constant multiple or product is the matching combination of the two limits, and the quotient law holds as well provided lim g is nonzero.",
+         "keywords": [
+          "limit laws",
+          "sum rule",
+          "quotient law"
+         ]
+        },
+        {
+         "title": "Direct Substitution for Continuous Forms",
+         "summary": "Direct substitution gives the limit whenever f is a polynomial, or a rational or trigonometric function at a point of its domain, because those functions are continuous there and a continuous function has limit equal to its value.",
+         "keywords": [
+          "direct substitution",
+          "polynomial",
+          "continuous function"
+         ],
+         "prerequisites": [
+          "Limit Laws for Sums, Products and Quotients"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Limits Using Algebraic Manipulation",
+       "concepts": [
+        {
+         "title": "Cancelling a Common Factor",
+         "summary": "When substitution produces the indeterminate form 0/0, factoring numerator and denominator and cancelling the common factor gives a function that agrees with f for x near a but not equal to a, so the limit equals the value of the simplified expression at a.",
+         "keywords": [
+          "indeterminate form",
+          "factoring",
+          "cancellation"
+         ]
+        },
+        {
+         "title": "Rationalising a Radical Expression",
+         "summary": "For a quotient whose numerator or denominator contains a radical difference and whose denominator vanishes at a, multiplying both parts by the conjugate creates a factor that cancels the source of the zero.",
+         "keywords": [
+          "conjugate",
+          "rationalise",
+          "radical"
+         ],
+         "prerequisites": [
+          "Cancelling a Common Factor"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Selecting Procedures for Determining Limits",
+       "concepts": [
+        {
+         "title": "A Decision Order for Evaluating Limits",
+         "summary": "Substitute first; if the result is 0/0, try factoring, rationalising or a common denominator; if the result is a nonzero number over zero, compare the one-sided behaviours, so the form the substitution produces selects the method.",
+         "keywords": [
+          "strategy",
+          "indeterminate form",
+          "method choice"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Squeeze Theorem",
+       "concepts": [
+        {
+         "title": "The Squeeze Theorem",
+         "summary": "If g(x) <= f(x) <= h(x) on a punctured interval around a and lim g = lim h = L, then lim f = L, which is how sin(x)/x is evaluated at zero without dividing by zero.",
+         "keywords": [
+          "squeeze theorem",
+          "bounds",
+          "pinching"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Connecting Multiple Representations",
+       "concepts": [
+        {
+         "title": "Agreement Across Graph, Table and Algebra",
+         "summary": "A limit claim is supported only when the graph, the table and the algebra agree on one value, and a disagreement means that at least one representation has been read outside the range where it is informative.",
+         "keywords": [
+          "representations",
+          "consistency",
+          "evidence"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Types of Discontinuities",
+       "concepts": [
+        {
+         "title": "Removable, Jump and Infinite Discontinuities",
+         "summary": "A discontinuity at a is removable when the two-sided limit exists but f(a) is undefined or different, jump when both one-sided limits exist and are unequal, and infinite when at least one one-sided limit is unbounded.",
+         "keywords": [
+          "removable",
+          "jump",
+          "infinite discontinuity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Defining Continuity at a Point",
+       "concepts": [
+        {
+         "title": "The Three-Part Continuity Condition",
+         "summary": "f is continuous at a exactly when f(a) is defined, lim_{x->a} f(x) exists, and the limit equals f(a), so continuity is a limit statement plus a value statement and fails if either part fails.",
+         "keywords": [
+          "continuity",
+          "three conditions",
+          "point"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Confirming Continuity over an Interval",
+       "concepts": [
+        {
+         "title": "Continuity on Open and Closed Intervals",
+         "summary": "f is continuous on an open interval when it is continuous at every point of it, and on a closed interval [a, b] when it is also right-continuous at a and left-continuous at b, since only one side exists at each endpoint.",
+         "keywords": [
+          "interval continuity",
+          "one-sided continuity",
+          "endpoint"
+         ]
+        },
+        {
+         "title": "Continuity of Combinations",
+         "summary": "Sums, differences, products, quotients with a nonzero denominator and compositions of continuous functions are continuous, so polynomials, rationals on their domains, and sin x, cos x, e^x and ln x are continuous wherever they are defined.",
+         "keywords": [
+          "combinations",
+          "composition",
+          "elementary functions"
+         ],
+         "prerequisites": [
+          "Continuity on Open and Closed Intervals"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Removing Discontinuities",
+       "concepts": [
+        {
+         "title": "Filling a Removable Discontinuity",
+         "summary": "A discontinuity at a is removed by defining f(a) to be lim_{x->a} f(x), which is possible exactly when that two-sided limit exists and is finite, so a jump or infinite discontinuity cannot be repaired by one value.",
+         "keywords": [
+          "removable discontinuity",
+          "redefinition",
+          "finite limit"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Infinite Limits and Vertical Asymptotes",
+       "concepts": [
+        {
+         "title": "Infinite Limits and Vertical Asymptotes",
+         "summary": "If f(x) grows without bound as x approaches a from one side, the line x = a is a vertical asymptote, and the two one-sided behaviours are reported separately because they may diverge with the same sign or with opposite signs.",
+         "keywords": [
+          "infinite limit",
+          "vertical asymptote",
+          "unbounded"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Limits at Infinity and Horizontal Asymptotes",
+       "concepts": [
+        {
+         "title": "Limits at Infinity by Comparing Degrees",
+         "summary": "For a rational function, the limit at plus or minus infinity is decided by the leading terms: equal degrees give the ratio of leading coefficients, a higher denominator degree gives zero, and a higher numerator degree gives no finite limit.",
+         "keywords": [
+          "limits at infinity",
+          "horizontal asymptote",
+          "degree comparison"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Intermediate Value Theorem",
+       "concepts": [
+        {
+         "title": "The Intermediate Value Theorem",
+         "summary": "If f is continuous on [a, b] and k lies between f(a) and f(b), then f(c) = k for some c in (a, b), which guarantees a root whenever the endpoint values have opposite signs but guarantees nothing when f is discontinuous.",
+         "keywords": [
+          "intermediate value",
+          "continuity",
+          "root existence"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "units": [
+    {
+     "unit": "Differentiation: Definition and Fundamental Properties",
+     "topics": [
+      {
+       "topic": "Average and Instantaneous Rates of Change",
+       "concepts": [
+        {
+         "title": "The Difference Quotient and Its Limit",
+         "summary": "The average rate of change over [a, a+h] is (f(a+h) - f(a))/h, and the instantaneous rate at a is the limit of this quotient as h approaches zero, so the derivative is a limit of secant slopes rather than a quotient at a single point.",
+         "keywords": [
+          "difference quotient",
+          "average rate",
+          "instantaneous rate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Defining the Derivative and Its Notation",
+       "concepts": [
+        {
+         "title": "The Derivative as a Limit at a Point",
+         "summary": "f'(a) = lim_{h->0} (f(a+h) - f(a))/h, equivalently lim_{x->a} (f(x) - f(a))/(x - a), exists exactly when both forms give the same finite value, and the two notations dy/dx, f'(x) name that value at x.",
+         "keywords": [
+          "derivative definition",
+          "notation",
+          "two forms"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Estimating Derivatives at a Point",
+       "concepts": [
+        {
+         "title": "Estimating a Derivative from Values or a Graph",
+         "summary": "A derivative is estimated by a symmetric difference quotient (f(a+h) - f(a-h))/(2h) for a small h, or by the slope of the tangent drawn at the point, and either estimate is trustworthy only where the function is locally linear to the precision wanted.",
+         "keywords": [
+          "numerical derivative",
+          "symmetric difference",
+          "tangent slope"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Differentiability and Continuity",
+       "concepts": [
+        {
+         "title": "Differentiability Implies Continuity",
+         "summary": "Differentiability implies continuity but not the converse: |x| is continuous at 0 yet has no derivative there because the one-sided difference quotients disagree, so continuity is necessary but not sufficient for differentiability.",
+         "keywords": [
+          "differentiability",
+          "continuity",
+          "corner"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Power Rule",
+       "concepts": [
+        {
+         "title": "The Power Rule for Constant Exponents",
+         "summary": "d/dx x^n = n x^(n-1) for every constant real exponent n, including negative and fractional ones, on any interval where x^n is defined, with the derivative failing to exist at points where the power itself is undefined.",
+         "keywords": [
+          "power rule",
+          "exponent",
+          "derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Constant, Sum, Difference and Constant Multiple Rules",
+       "concepts": [
+        {
+         "title": "Linearity of the Derivative",
+         "summary": "The derivative of a constant is zero and differentiation is linear, so (c f + g)' = c f' + g' at every point where both f' and g' exist, which lets a polynomial be differentiated term by term.",
+         "keywords": [
+          "constant rule",
+          "sum rule",
+          "linearity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Derivatives of cos x, sin x, e^x and ln x",
+       "concepts": [
+        {
+         "title": "Derivatives of the Four Elementary Functions",
+         "summary": "d/dx sin x = cos x and d/dx cos x = -sin x for all real x, d/dx e^x = e^x for all real x, and d/dx ln x = 1/x for x > 0, the last restricted because ln x is defined only on the positive reals.",
+         "keywords": [
+          "sine",
+          "cosine",
+          "exponential",
+          "logarithm"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Product Rule",
+       "concepts": [
+        {
+         "title": "The Product Rule",
+         "summary": "(f g)' = f' g + f g' at every point where both f and g are differentiable, and the rule needs both terms because each factor is differentiated once while the other is held fixed.",
+         "keywords": [
+          "product rule",
+          "differentiable",
+          "factors"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Quotient Rule",
+       "concepts": [
+        {
+         "title": "The Quotient Rule",
+         "summary": "(f/g)' = (f' g - f g')/g^2 wherever f and g are differentiable and g is nonzero, and the order of the numerator matters because a reversed order changes the sign of the result.",
+         "keywords": [
+          "quotient rule",
+          "nonzero denominator",
+          "derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Derivatives of Tangent, Cotangent, Secant and Cosecant",
+       "concepts": [
+        {
+         "title": "Derivatives of tan, cot, sec and csc",
+         "summary": "d/dx tan x = sec^2 x, d/dx cot x = -csc^2 x, d/dx sec x = sec x tan x and d/dx csc x = -csc x cot x, each on the domain where the original function is defined, so the derivative is undefined at the vertical asymptotes.",
+         "keywords": [
+          "tangent",
+          "secant",
+          "trigonometric derivatives"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Limits and Continuity"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "units": [
+    {
+     "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+     "topics": [
+      {
+       "topic": "The Chain Rule",
+       "concepts": [
+        {
+         "title": "The Chain Rule for Composites",
+         "summary": "If g is differentiable at a and f is differentiable at g(a), then (f o g)'(a) = f'(g(a)) g'(a), so the outer derivative is evaluated at the inner value and multiplied by the inner derivative, and neglecting the last factor is the standard error.",
+         "keywords": [
+          "chain rule",
+          "composite",
+          "outer derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Implicit Differentiation",
+       "concepts": [
+        {
+         "title": "Differentiating an Implicit Relation",
+         "summary": "Differentiating both sides of F(x, y) = 0 with respect to x while treating y as a differentiable function of x produces an equation solved for dy/dx, which gives the slope wherever F_y is nonzero without solving for y explicitly.",
+         "keywords": [
+          "implicit differentiation",
+          "dy/dx",
+          "relation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Differentiating Inverse Functions",
+       "concepts": [
+        {
+         "title": "The Inverse Function Derivative Rule",
+         "summary": "If f is differentiable at a with f'(a) nonzero and f has an inverse defined near f(a), then (f^-1)'(f(a)) = 1/f'(a), because the tangent slopes of a function and its inverse are reciprocals and a zero slope would give a vertical tangent.",
+         "keywords": [
+          "inverse function",
+          "reciprocal slope",
+          "nonzero derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Differentiating Inverse Trigonometric Functions",
+       "concepts": [
+        {
+         "title": "Derivatives of arcsin, arccos and arctan",
+         "summary": "d/dx arcsin x = 1/sqrt(1 - x^2) and d/dx arccos x = -1/sqrt(1 - x^2) for |x| < 1, while d/dx arctan x = 1/(1 + x^2) for all real x, the restricted domains matching the range on which each inverse is defined.",
+         "keywords": [
+          "arcsine",
+          "arctangent",
+          "inverse trig"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Selecting Procedures for Calculating Derivatives",
+       "concepts": [
+        {
+         "title": "Choosing a Differentiation Procedure",
+         "summary": "Read the outermost structure first: a sum differentiates termwise, a product needs the product rule, a quotient the quotient rule, and a composition the chain rule, with inner structure handled recursively so that each rule is applied exactly where it belongs.",
+         "keywords": [
+          "procedure choice",
+          "structure",
+          "recursion"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Higher-Order Derivatives",
+       "concepts": [
+        {
+         "title": "Second and Higher Derivatives",
+         "summary": "The second derivative is the derivative of f', written f'' or d^2y/dx^2, and it exists at a only where f' is itself differentiable there, so the existence of each higher derivative is a separate condition.",
+         "keywords": [
+          "second derivative",
+          "higher order",
+          "notation"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Differentiation: Definition and Fundamental Properties"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Contextual Applications of Differentiation",
+   "units": [
+    {
+     "unit": "Contextual Applications of Differentiation",
+     "topics": [
+      {
+       "topic": "Interpreting the Derivative in Context",
+       "concepts": [
+        {
+         "title": "Units and Meaning of a Derivative",
+         "summary": "In an applied model f'(a) is the instantaneous rate of change of the output with respect to the input at a, carrying output units per input unit, and its sign states whether the quantity is increasing or decreasing at that instant.",
+         "keywords": [
+          "units",
+          "interpretation",
+          "rate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Straight-Line Motion",
+       "concepts": [
+        {
+         "title": "Position, Velocity and Acceleration",
+         "summary": "For a particle on a line with position s(t), velocity is v(t) = s'(t) and acceleration is a(t) = v'(t), so the particle moves forward where v > 0, backward where v < 0, and reverses direction exactly where v changes sign.",
+         "keywords": [
+          "velocity",
+          "acceleration",
+          "direction"
+         ]
+        },
+        {
+         "title": "Speed and the Sign Test for Speeding Up",
+         "summary": "Speed is |v(t)|, so the particle speeds up exactly where velocity and acceleration have the same sign and slows down where they have opposite signs, which is a statement about signs and not about the sign of v alone.",
+         "keywords": [
+          "speed",
+          "speeding up",
+          "sign test"
+         ],
+         "prerequisites": [
+          "Position, Velocity and Acceleration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rates of Change in Other Applied Contexts",
+       "concepts": [
+        {
+         "title": "Marginal Rate and Accumulated Total",
+         "summary": "A derivative quoted as a marginal quantity is the change in the total per one additional unit, so marginal cost is C'(q) and it approximates the cost of the next item only while the step of one unit stays small relative to the scale of q.",
+         "keywords": [
+          "marginal",
+          "applied rate",
+          "per unit"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Related Rates",
+       "concepts": [
+        {
+         "title": "Relating Rates Through a Constraint",
+         "summary": "When two changing quantities satisfy an equation, differentiating that equation with respect to time relates their rates, so one rate is found from the other through the relation and neither can be obtained from its own value alone.",
+         "keywords": [
+          "related rates",
+          "time derivative",
+          "constraint"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solving Related Rates Problems",
+       "concepts": [
+        {
+         "title": "The Related-Rates Procedure",
+         "summary": "Name the variables and the instant, write the relation that holds for all time, differentiate both sides with respect to t, then substitute the values at the instant and solve for the unknown rate with its units attached.",
+         "keywords": [
+          "procedure",
+          "differentiate in time",
+          "substitution"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Local Linearity and Linearization",
+       "concepts": [
+        {
+         "title": "The Tangent-Line Approximation",
+         "summary": "Near a, f(x) is approximately f(a) + f'(a)(x - a), and the approximation error is small only while x stays close to a and the second derivative stays bounded there, so linearization is a local and not a global claim.",
+         "keywords": [
+          "linearization",
+          "tangent line",
+          "local approximation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "L'Hopital's Rule for Indeterminate Forms",
+       "concepts": [
+        {
+         "title": "L'Hopital's Rule for Quotient Indeterminate Forms",
+         "summary": "If f and g are differentiable near a with g' nonzero there and the quotient has the indeterminate form 0/0 or infinity over infinity, then lim f/g = lim f'/g', provided the limit of the derivative quotient exists or is infinite, so the rule replaces one limit by another rather than computing a value by substitution.",
+         "keywords": [
+          "l'hopital",
+          "indeterminate form",
+          "quotient limit"
+         ]
+        },
+        {
+         "title": "Rewriting the Other Indeterminate Forms",
+         "summary": "Forms such as 0 times infinity, infinity minus infinity, 1 to the infinity, 0 to the zero and infinity to the zero are first rewritten as a ratio or as an exponential of a logarithm, because the rule itself applies only to the two quotient forms.",
+         "keywords": [
+          "indeterminate product",
+          "logarithm",
+          "rewrite"
+         ],
+         "prerequisites": [
+          "L'Hopital's Rule for Quotient Indeterminate Forms"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Differentiation: Composite, Implicit, and Inverse Functions"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Analytical Applications of Differentiation",
+   "units": [
+    {
+     "unit": "Analytical Applications of Differentiation",
+     "topics": [
+      {
+       "topic": "The Mean Value Theorem",
+       "concepts": [
+        {
+         "title": "The Mean Value Theorem",
+         "summary": "If f is continuous on [a, b] and differentiable on (a, b), then some c in (a, b) satisfies f'(c) = (f(b) - f(a))/(b - a), so at least one tangent is parallel to the secant, and dropping either hypothesis can destroy the conclusion.",
+         "keywords": [
+          "mean value theorem",
+          "secant slope",
+          "interior point"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Extreme Value Theorem, Extrema and Critical Points",
+       "concepts": [
+        {
+         "title": "The Extreme Value Theorem",
+         "summary": "A function continuous on a closed interval [a, b] attains an absolute maximum and an absolute minimum somewhere in that interval, whereas on an open interval it may approach an extreme without ever reaching it.",
+         "keywords": [
+          "extreme value",
+          "closed interval",
+          "absolute extrema"
+         ]
+        },
+        {
+         "title": "Critical Points as Extremum Candidates",
+         "summary": "An interior extremum of a differentiable function occurs only where f'(c) = 0, so candidates for extrema are the critical points, where f' is zero or fails to exist, together with the endpoints of a closed interval.",
+         "keywords": [
+          "critical point",
+          "fermat condition",
+          "candidates"
+         ],
+         "prerequisites": [
+          "The Extreme Value Theorem"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Intervals of Increase and Decrease",
+       "concepts": [
+        {
+         "title": "Sign of the Derivative and Monotonicity",
+         "summary": "On an interval where f' > 0 throughout, f is strictly increasing, and where f' < 0 throughout it is strictly decreasing, the conclusion requiring continuity on the closed interval and differentiability inside it.",
+         "keywords": [
+          "increasing",
+          "decreasing",
+          "sign of derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The First Derivative Test",
+       "concepts": [
+        {
+         "title": "The First Derivative Test",
+         "summary": "At a critical point c, f' changing from positive to negative gives a local maximum, changing from negative to positive gives a local minimum, and no change of sign gives neither.",
+         "keywords": [
+          "first derivative test",
+          "local maximum",
+          "sign change"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Candidates Test for Absolute Extrema",
+       "concepts": [
+        {
+         "title": "The Candidates Test",
+         "summary": "On a closed interval the absolute extrema occur among the critical points and the endpoints, so evaluating f at every candidate and comparing those values decides both absolute extrema without any sign analysis.",
+         "keywords": [
+          "candidates test",
+          "closed interval",
+          "absolute extremum"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Concavity over a Domain",
+       "concepts": [
+        {
+         "title": "Concavity and the Sign of the Second Derivative",
+         "summary": "f is concave up on an interval where f'' > 0 throughout and concave down where f'' < 0 throughout, and an inflection point is a point where the concavity changes, which requires f'' to change sign there.",
+         "keywords": [
+          "concavity",
+          "inflection point",
+          "second derivative"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Second Derivative Test",
+       "concepts": [
+        {
+         "title": "The Second Derivative Test",
+         "summary": "At a critical point c with f'(c) = 0, f''(c) > 0 gives a local minimum and f''(c) < 0 a local maximum, while f''(c) = 0 leaves the test inconclusive and sends the question back to the first derivative test.",
+         "keywords": [
+          "second derivative test",
+          "local extremum",
+          "inconclusive"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sketching Graphs of Functions and Their Derivatives",
+       "concepts": [
+        {
+         "title": "Reading Shape from a Derivative Graph",
+         "summary": "A derivative graph is read by where it crosses zero, where it is positive or negative, and where it is increasing or decreasing, which respectively report the extrema and the concavity of the original function.",
+         "keywords": [
+          "derivative graph",
+          "shape",
+          "reading"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Connecting a Function, Its First and Second Derivative",
+       "concepts": [
+        {
+         "title": "Translating Between f, f' and f''",
+         "summary": "The three graphs describe one function at successive levels: f' gives the slope of f and f'' gives the slope of f', so a zero of f' is a horizontal tangent of f and an extremum of f' is an inflection point of the concavity of f.",
+         "keywords": [
+          "relationship",
+          "slope",
+          "correspondence"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Optimization",
+       "concepts": [
+        {
+         "title": "Setting Up an Optimization Problem",
+         "summary": "An optimization problem names the quantity to be optimized, uses the constraint to write that quantity as a function of a single variable, and states the interval the context allows before any derivative is taken.",
+         "keywords": [
+          "optimization",
+          "objective",
+          "constraint"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solving Optimization Problems",
+       "concepts": [
+        {
+         "title": "Confirming a Global Optimum",
+         "summary": "After solving the objective's critical points, the global optimum is confirmed by the candidates test on the closed feasible interval or by a sign analysis of the derivative that also accounts for the endpoint behaviour.",
+         "keywords": [
+          "global optimum",
+          "candidates",
+          "feasible interval"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Behaviours of Implicit Relations",
+       "concepts": [
+        {
+         "title": "Slopes and Tangents of an Implicit Curve",
+         "summary": "On a curve F(x, y) = 0 the derivative dy/dx = -F_x/F_y gives the slope wherever F_y is nonzero, a vertical tangent occurs where F_y = 0 with F_x nonzero, and a horizontal tangent requires F_x = 0 with F_y nonzero.",
+         "keywords": [
+          "implicit curve",
+          "tangent",
+          "partial derivatives"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Contextual Applications of Differentiation"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Integration and Accumulation of Change",
+   "units": [
+    {
+     "unit": "Integration and Accumulation of Change",
+     "topics": [
+      {
+       "topic": "Exploring Accumulation of Change",
+       "concepts": [
+        {
+         "title": "Accumulation as Signed Area",
+         "summary": "The accumulated change of a rate over an interval is the signed area between its graph and the horizontal axis, so area below the axis counts negatively and the accumulation can be smaller than the geometric area.",
+         "keywords": [
+          "accumulation",
+          "signed area",
+          "rate"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Approximating Areas with Riemann Sums",
+       "concepts": [
+        {
+         "title": "Left, Right and Midpoint Riemann Sums",
+         "summary": "A Riemann sum approximates accumulation by rectangles whose heights are sampled at the left endpoint, the right endpoint or the midpoint of each subinterval, and the left and right sums bracket the true value only when the function is monotone on the interval.",
+         "keywords": [
+          "riemann sum",
+          "rectangle",
+          "sample point"
+         ]
+        },
+        {
+         "title": "The Trapezoidal Approximation",
+         "summary": "The trapezoidal rule averages the left and right sums, which is exact for linear functions and normally closer than either sum for a smooth curve, because each slice is a trapezoid rather than a rectangle.",
+         "keywords": [
+          "trapezoid",
+          "average of sums",
+          "approximation"
+         ],
+         "prerequisites": [
+          "Left, Right and Midpoint Riemann Sums"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Riemann Sums, Summation Notation and Definite Integral Notation",
+       "concepts": [
+        {
+         "title": "The Definite Integral as a Limit of Sums",
+         "summary": "The definite integral of f from a to b is the limit of its Riemann sums as the number of subintervals grows and every width shrinks to zero, and that limit exists whenever f is continuous on [a, b], in which case its value does not depend on where the sample points are chosen.",
+         "keywords": [
+          "definite integral",
+          "limit of sums",
+          "integrable"
+         ]
+        },
+        {
+         "title": "Summation Notation and Its Rules",
+         "summary": "Sigma notation compresses a sum and is manipulated by splitting at a boundary, factoring out constants and applying the standard formulas for the sum of k and of k^2, which is how a Riemann sum is evaluated in closed form before the limit is taken.",
+         "keywords": [
+          "sigma notation",
+          "sum formulas",
+          "closed form"
+         ],
+         "prerequisites": [
+          "The Definite Integral as a Limit of Sums"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Fundamental Theorem of Calculus and Accumulation Functions",
+       "concepts": [
+        {
+         "title": "The First Fundamental Theorem",
+         "summary": "If f is continuous on an interval containing a, then the accumulation function A(x) = integral from a to x of f(t) dt is differentiable inside that interval with A'(x) = f(x), so differentiating an accumulation function returns the integrand evaluated at the upper limit.",
+         "keywords": [
+          "fundamental theorem",
+          "accumulation function",
+          "continuous integrand"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Interpreting Accumulation Functions Involving Area",
+       "concepts": [
+        {
+         "title": "Reading an Accumulation Function from a Graph",
+         "summary": "An accumulation function's value is the net area gathered from a to x, its derivative is the height of the graph at x, and its concavity follows the sign of the slope of that height, so the area graph can be analysed without an antiderivative.",
+         "keywords": [
+          "accumulation graph",
+          "net area",
+          "derivative of integral"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Definite Integrals",
+       "concepts": [
+        {
+         "title": "Linearity and Interval Properties",
+         "summary": "The integral of a sum is the sum of the integrals and a constant factor moves outside, an integral over a single point is zero, reversing the limits changes the sign, and splitting at an interior point adds, each property holding whenever the integrals involved exist.",
+         "keywords": [
+          "integral properties",
+          "additivity",
+          "orientation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Fundamental Theorem of Calculus and Definite Integrals",
+       "concepts": [
+        {
+         "title": "The Second Fundamental Theorem",
+         "summary": "If f is continuous on [a, b] and F is any antiderivative of f there, then the integral of f from a to b equals F(b) - F(a), so a definite integral is evaluated by one antiderivative at the two endpoints rather than by a limit of sums.",
+         "keywords": [
+          "evaluation theorem",
+          "antiderivative",
+          "endpoints"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Antiderivatives and Indefinite Integrals",
+       "concepts": [
+        {
+         "title": "The Indefinite Integral and Its Constant",
+         "summary": "The indefinite integral of f is F(x) + C for any antiderivative F, because two antiderivatives of a function on an interval differ by a constant, and that constant must be determined by an initial condition rather than guessed.",
+         "keywords": [
+          "antiderivative",
+          "constant of integration",
+          "indefinite integral"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Integration by Substitution",
+       "concepts": [
+        {
+         "title": "Integration by Substitution",
+         "summary": "Setting u = g(x) turns the integral of f(g(x)) g'(x) dx into the integral of f(u) du, and the method applies only when the integrand contains the inner derivative as a factor, which is what makes the change of variable exact rather than approximate.",
+         "keywords": [
+          "substitution",
+          "u-substitution",
+          "inner derivative"
+         ]
+        },
+        {
+         "title": "Changing Limits in a Definite Substitution",
+         "summary": "In a definite integral the limits must be converted to values of u when substituting, because carrying the x-limits into a u-integral evaluates the antiderivative on the wrong interval.",
+         "keywords": [
+          "limits of integration",
+          "definite substitution",
+          "conversion"
+         ],
+         "prerequisites": [
+          "Integration by Substitution"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Integration Using Long Division and Completing the Square",
+       "concepts": [
+        {
+         "title": "Rewriting an Integrand Before Integrating",
+         "summary": "When the integrand is a rational function with numerator degree at least the denominator's, polynomial long division separates a polynomial from a proper remainder, and completing the square turns a quadratic denominator into a shifted square that matches a standard antiderivative form.",
+         "keywords": [
+          "long division",
+          "completing the square",
+          "rational integrand"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Selecting Techniques for Antidifferentiation",
+       "concepts": [
+        {
+         "title": "A Decision Order for Antidifferentiation",
+         "summary": "Check for a standard form first, then for a substitution whose inner derivative is present, then for algebraic rewriting such as division or completing the square, and always verify the result by differentiating it.",
+         "keywords": [
+          "technique choice",
+          "standard forms",
+          "verify"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Analytical Applications of Differentiation"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Differential Equations",
+   "units": [
+    {
+     "unit": "Differential Equations",
+     "topics": [
+      {
+       "topic": "Modeling with Differential Equations",
+       "concepts": [
+        {
+         "title": "A Differential Equation as a Rate Law",
+         "summary": "A differential equation states how a quantity's rate of change depends on the quantity and on the independent variable, so dy/dt = ky models change proportional to the amount present while dy/dt = k(M - y) models change bounded by a capacity M.",
+         "keywords": [
+          "differential equation",
+          "rate law",
+          "model"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Verifying Solutions",
+       "concepts": [
+        {
+         "title": "Verifying a Solution by Substitution",
+         "summary": "A function is a solution of a differential equation on an interval exactly when substituting it and its derivatives makes the two sides identical at every point of that interval, so verification is an identity check and not a single-point test.",
+         "keywords": [
+          "verify solution",
+          "substitution",
+          "interval"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sketching Slope Fields",
+       "concepts": [
+        {
+         "title": "Constructing a Slope Field",
+         "summary": "A slope field draws at each grid point a short segment whose slope is the value the equation assigns there, so the field displays the direction of every solution without the equation being solved.",
+         "keywords": [
+          "slope field",
+          "direction segment",
+          "grid"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Reasoning Using Slope Fields",
+       "concepts": [
+        {
+         "title": "Reading Solution Curves from a Slope Field",
+         "summary": "A solution curve follows the drawn segments tangentially, its inflection points occur where the field gives a locally extreme slope, and a row of constant segments along a horizontal line signals an equilibrium solution.",
+         "keywords": [
+          "solution curve",
+          "equilibrium",
+          "inflection"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "General Solutions by Separation of Variables",
+       "concepts": [
+        {
+         "title": "Separation of Variables",
+         "summary": "When dy/dx can be written as g(x) h(y) with h(y) nonzero, separating the variables and integrating both sides gives the general solution as an equation in y and x, with the division by h(y) excluding the constant solutions h(y) = 0 from that family.",
+         "keywords": [
+          "separation",
+          "general solution",
+          "implicit form"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Particular Solutions with Initial Conditions",
+       "concepts": [
+        {
+         "title": "Applying an Initial Condition",
+         "summary": "Substituting the initial condition into the general solution fixes the arbitrary constant and yields the particular solution, which is valid on an interval containing the initial point where the solution stays differentiable.",
+         "keywords": [
+          "initial condition",
+          "particular solution",
+          "constant"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Exponential Models with Differential Equations",
+       "concepts": [
+        {
+         "title": "Solutions of dy/dt = ky",
+         "summary": "The solutions of dy/dt = ky are y = C e^(kt), growing for k > 0 and decaying for k < 0, with doubling time or half-life equal to ln 2 divided by the absolute value of k, which makes that one time determine the whole model.",
+         "keywords": [
+          "exponential model",
+          "growth constant",
+          "half-life"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Integration and Accumulation of Change"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Applications of Integration",
+   "units": [
+    {
+     "unit": "Applications of Integration",
+     "topics": [
+      {
+       "topic": "Average Value of a Function",
+       "concepts": [
+        {
+         "title": "The Average Value of a Continuous Function",
+         "summary": "The average value of f on [a, b] is the integral of f over [a, b] divided by b - a, and for continuous f the mean value theorem for integrals guarantees some c in [a, b] where f(c) equals that average.",
+         "keywords": [
+          "average value",
+          "integral mean",
+          "continuous"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Position, Velocity and Acceleration Using Integrals",
+       "concepts": [
+        {
+         "title": "Displacement and Distance from Velocity",
+         "summary": "The integral of v(t) from a to b gives displacement, the net change in position, while the integral of |v(t)| gives total distance travelled, so the two agree only when the velocity never changes sign on the interval.",
+         "keywords": [
+          "displacement",
+          "total distance",
+          "velocity integral"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Accumulation Functions in Applied Contexts",
+       "concepts": [
+        {
+         "title": "Net Change from a Rate",
+         "summary": "When r(t) is a rate of change, the integral of r from a to b is the net change in the quantity over that interval, and adding the amount present at a gives the quantity's value at b.",
+         "keywords": [
+          "net change",
+          "rate",
+          "initial amount"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Area Between Curves as Functions of x",
+       "concepts": [
+        {
+         "title": "Area Between Curves in x",
+         "summary": "For continuous curves with f(x) at least g(x) on [a, b], the area between them is the integral of f - g over [a, b], and the upper curve must be identified before integrating because a reversed difference gives the negative area.",
+         "keywords": [
+          "area between curves",
+          "upper minus lower",
+          "x-integration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Area Between Curves as Functions of y",
+       "concepts": [
+        {
+         "title": "Area Between Curves in y",
+         "summary": "Integrating with respect to y computes the integral of right(y) - left(y) over the y-interval, which is the practical choice when the boundary curves are more naturally described as x as a function of y.",
+         "keywords": [
+          "y-integration",
+          "right minus left",
+          "horizontal strips"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Area Between Curves with More Than Two Intersections",
+       "concepts": [
+        {
+         "title": "Splitting at Every Intersection",
+         "summary": "When the curves cross inside the interval, the region must be split at each interior intersection and integrated piece by piece, because the identity of the upper curve changes at every crossing.",
+         "keywords": [
+          "intersection points",
+          "split interval",
+          "upper curve"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Volumes with Cross Sections: Squares and Rectangles",
+       "concepts": [
+        {
+         "title": "Volumes with Square Cross Sections",
+         "summary": "If a solid has cross sections perpendicular to an axis that are squares of side s(x), its volume is the integral of s(x)^2 over the axis interval, so the geometry of the section alone fixes the integrand.",
+         "keywords": [
+          "cross section",
+          "square section",
+          "volume integral"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Volumes with Cross Sections: Triangles and Semicircles",
+       "concepts": [
+        {
+         "title": "Volumes with Triangular and Semicircular Sections",
+         "summary": "An equilateral triangle on base b has area (sqrt 3 / 4) b^2 and a semicircle on diameter b has area (pi / 8) b^2, so each section type contributes its own constant factor to the integrated area.",
+         "keywords": [
+          "equilateral triangle",
+          "semicircle",
+          "section area"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Disc Method Around x- or y-Axis",
+       "concepts": [
+        {
+         "title": "The Disc Method",
+         "summary": "Revolving the region between y = f(x) and the x-axis about the x-axis gives a volume equal to pi times the integral of f(x)^2, because each slice perpendicular to the axis is a disc whose radius is the height f(x).",
+         "keywords": [
+          "disc method",
+          "revolution",
+          "radius"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Disc Method Around Other Axes",
+       "concepts": [
+        {
+         "title": "Discs About a Shifted Axis",
+         "summary": "Revolving about a horizontal line y = k makes the radius |f(x) - k|, so the integrand becomes pi times (f(x) - k)^2 and it is the distance to the axis, not the function value, that is squared.",
+         "keywords": [
+          "shifted axis",
+          "radius",
+          "revolution"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Washer Method Around x- or y-Axis",
+       "concepts": [
+        {
+         "title": "The Washer Method",
+         "summary": "When the region between two curves is revolved, each slice is a washer with volume pi (R^2 - r^2) dx, where R is the outer radius and r the inner radius, and the inner radius must be subtracted because the hole removes volume.",
+         "keywords": [
+          "washer method",
+          "outer radius",
+          "inner radius"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Washer Method Around Other Axes",
+       "concepts": [
+        {
+         "title": "Washers About a Line Other Than an Axis",
+         "summary": "Revolving about y = k gives pi times the integral of (R(x) - k)^2 - (r(x) - k)^2, with both radii measured from the same line, and the larger distance is always the outer radius regardless of the signs involved.",
+         "keywords": [
+          "shifted washer",
+          "outer minus inner",
+          "axis offset"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Differential Equations"
+     ]
+    }
+   ]
+  }
+ ]
+}

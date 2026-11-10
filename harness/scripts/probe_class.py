@@ -118,6 +118,11 @@ def read_tutor_env(path: Path) -> dict[str, str]:
     for source, target in TUTOR_ENV_ALIASES:
         if loaded.get(source) and not resolved.get(target):
             resolved[target] = loaded[source]
+    # A legacy tutor.env can still name the removed offline provider. BackendLauncher
+    # treats that as unconfigured; so must this probe, or the backend refuses to boot
+    # before any question is asked.
+    if resolved.get('HARNESS_TUTOR_PROVIDER') == 'offline':
+        resolved.pop('HARNESS_TUTOR_PROVIDER', None)
     return resolved
 
 

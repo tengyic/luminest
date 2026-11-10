@@ -357,7 +357,9 @@ struct StageView: View {
                 Image(systemName: voice.speaking ? "speaker.wave.3" : "speaker.wave.2")
             }.buttonStyle(LuminfestButtonStyle(primary: false))
                 .disabled(store.messages.isEmpty)
-                .help("Read the tutor's latest reply aloud in the tutor's voice")
+                // Name the current selection: a button that says "the tutor's voice" hides
+                // which of the presets is active, which is exactly what the picker changed.
+                .help("Read the tutor's latest reply aloud in the \(store.selectedVoiceLabel) voice")
             // ASR: push-to-talk → transcript goes straight into the tutor chat.
             Button {
                 store.recordInteraction("voice.dictate")

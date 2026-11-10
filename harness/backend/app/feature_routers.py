@@ -42,6 +42,10 @@ FEATURE_ROUTERS = (
     # the tutor's teacher-gated whiteboard_* tools keep the lesson canvas, while this
     # one owns region=scratch. See app/harness/whiteboard_agent.py.
     'routes_whiteboard_agent',
+    # Runtime model configuration. The product requires a language model; this is the
+    # surface that lets an operator supply one without editing the environment and
+    # restarting. See app/model_config.py and app/routes_model_config.py.
+    'routes_model_config',
 )
 
 __all__ = ['FEATURE_ROUTERS']

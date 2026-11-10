@@ -62,3 +62,14 @@ ui-tests/test-state/
 /model/tmp*/
 backend/.stash/
 backend/.probe_policy.py
+
+# Generated evidence, not source. These are the default output directories of
+# scripts/course_pipeline.py, scripts/course_e2e_run.py, scripts/course_build_report.py
+# and scripts/package.py's staging area. Every file in them carries a wall-clock
+# generated_at, so committing them produces a diff on every run while proving nothing
+# that the committed scripts cannot regenerate. Re-run the script to get the numbers.
+/outputs/
+web-visuals/out/
+# Written by web-visuals/build.mjs step 1 (export_visual_catalog.py) from the backend's
+# own catalog; the copy that ships is native/.../Visuals/catalog.json, which IS tracked.
+web-visuals/src/catalog.generated.json

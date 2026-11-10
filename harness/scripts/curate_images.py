@@ -156,7 +156,6 @@ def main() -> int:
         'HARNESS_ENV': 'development',
         'HARNESS_MEDIA_ENABLED': '1',      # the whole point: the network is available *here*
         'HARNESS_DATA_DIR': str(state),
-        'HARNESS_TUTOR_PROVIDER': 'offline',
         'HARNESS_ALLOWED_HOSTS': 'localhost,127.0.0.1',
     })
 

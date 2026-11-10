@@ -78,7 +78,12 @@ def _production_env(tmp_path, legal_dir_path):
         'HARNESS_SECRET': 'luminfest-production-secret-0123456789-abcdef',
         'HARNESS_ALLOWED_HOSTS': 'api.example.test',
         'HARNESS_LEGAL_DIR': str(legal_dir_path),
-        'HARNESS_TUTOR_PROVIDER': 'offline',
+        # Production refuses to boot without a language model; the legal gate is
+        # exercised with a valid one so a provider error cannot mask a legal failure.
+        'HARNESS_TUTOR_PROVIDER': 'openai',
+        'HARNESS_TUTOR_URL': 'https://api.example.test/v1',
+        'HARNESS_TUTOR_MODEL': 'test-model',
+        'HARNESS_TUTOR_KEY': 'test-key',
     }
 
 

@@ -190,7 +190,7 @@ final text. The request body matches `AgentTurnInput`:
 history is deliberately not replayed; the harness memory tools own that.
 
 Remaining assumption: a live provider turn (DeepSeek) was not exercised from
-this client to save the team's tokens; the offline-provider path
+this client to save the team's tokens; the unconfigured (`model-required`) path
 (`error` + `turn_end reason=unavailable`) renders correctly in the transcript.
 Sim-version bump detection polls metadata once after `turn_end` rather than
 listening to a push event.

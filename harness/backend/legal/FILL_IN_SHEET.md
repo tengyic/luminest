@@ -32,8 +32,8 @@ deployment is worse than an obvious template.
 | Exclusive venue | Courts of the Hong Kong Special Administrative Region | Paired with an express preservation of local consumer-law rights, which no choice-of-court clause can override in the EU or UK. |
 | Contact channel | In-app *Settings → Report a problem* | No mailbox is staffed. An address nobody reads is a worse disclosure than none, and the in-app route attaches version, platform and log context. |
 | Sub-processors | None for learner data | Verified against the code: no error-reporting SDK, no hosted database path on the desktop profile (`HARNESS_ENV=desktop` keeps SQLite), and the mailer's transport defaults to `offline` — it queues in memory and sends nothing. SMTP exists but is reachable only when an operator sets `HARNESS_SMTP_HOST`, which the bundle does not. |
-| Optional LLM provider | User-supplied, user's own key, user's own contract | The offline tutor is the default. A model is used only if `tutor.env` names one. |
-| Optional image providers | Disclosed, and off by default in this build | `media_enabled` defaults to `0` on the desktop profile, so the shipped app makes none of these calls; the disclosure stays because a user can turn it on. |
+| Required LLM provider | User-supplied, user's own key, user's own contract | No model is shipped or defaulted. The app boots in a declared *model-required* state until the user enters a provider/model/key in Settings, or an operator sets `HARNESS_TUTOR_*` / `tutor.env`. Requests then go only to that provider. |
+| Optional image providers | Disclosed, and **on** by default in the shipped desktop build; off in a hosted production instance unless its operator opts in | `media_enabled` evaluates to `1` for `HARNESS_ENV=desktop` (`app/config.py`, `media_default`), so the shipped app *does* make these calls, and `privacy.md` §4 discloses exactly that. This row previously claimed the desktop default was `0`; that contradicted both the code and the published notice, and it is corrected here rather than by changing the behaviour, because the notice is the statement users are shown. Whether the desktop build *should* default outbound media on is an open product/legal decision — see *Open decisions* below. |
 | Telemetry retention | Not applicable — nothing is transmitted | Interaction events are rows in the local database, not outbound telemetry. |
 | Account deletion | Immediate deletion of the account row, every cascading row, the account's sandbox folder, its decks and boards, and its image-library entries | Self-service in *Settings*. The database is the only index for those files, so leaving them would be a deletion that did not delete. |
 | What the `SET NULL` tables keep | Feedback the learner wrote is deleted; their waitlist entry is deleted; the address on an invite addressed to them is blanked; `feedback_events` cascade away with their feedback row; `usage_ledger` and `admin_audit_log` hold no learner content; `users.referred_by` is a pointer in another account's row. `rate_buckets` is not linked by a foreign key at all and held `sha256('auth:email:' + address)`; the sign-in counter is deleted too | Deleting the account nulls seven references rather than removing seven rows, so each of the seven was checked for surviving content rather than assumed clean. `rate_buckets` was the one table no foreign key reached: an unsalted digest of the address, kept for no reason once the account is gone. `admin_audit_log` and `feedback_events` currently have no writer in `app/`, so the surviving-note question is theoretical until one is added — a new writer must be reviewed against this row. |
@@ -43,6 +43,21 @@ deployment is worse than an obvious template.
 | Erasure ledger contents | Account UUID, timestamp, counts, retention window — no email, no name, nothing written by the learner | It must outlive the account to do its job, so it must be disclosable without keeping personal data. |
 | Liability cap | Amount paid in the prior twelve months (zero, the Service being free), or the statutory minimum where local law forbids exclusion | No round figure is named. Naming one would imply an insurance policy this project does not have. |
 | Accessibility response SLA | Ten business days | Matches the statement in `accessibility.md`. |
+
+## Open decisions
+
+Decisions the code and the published documents are consistent about, but which a human has
+to ratify. Nothing here is blocked on engineering; each is a product/policy call that must
+not be settled by an agent editing a document.
+
+1. **Desktop outbound media default.** The shipped desktop build currently fetches from
+   Openverse, the Metropolitan Museum, Wikimedia, NASA and YouTube by default
+   (`media_enabled = 1` for `HARNESS_ENV=desktop`), and `privacy.md` §4 discloses that.
+   Keeping it is defensible — the learner asked for live image and video search — but it is
+   the one outbound network path the app takes on a learner's behalf without an explicit
+   per-session action, so it needs a named owner's sign-off. If the decision is instead to
+   default it off, the change is `config.py::media_default` plus `privacy.md` §4 plus this
+   record, and `tests/test_desktop_environment.py` must move with them.
 
 ## What still requires a lawyer
 

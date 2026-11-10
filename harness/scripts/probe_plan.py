@@ -50,8 +50,7 @@ def main():
         'HARNESS_ENV': 'test', 'HARNESS_DATA_DIR': str(state),
         'HARNESS_DATABASE_URL': 'sqlite:///' + str(state / 'h.sqlite3'),
         'HARNESS_AUTO_CREATE': '1', 'HARNESS_PORT': str(port),
-        'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_TUTOR_PROVIDER': 'offline',
-        'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost',
+        'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost',
     })
     server = subprocess.Popen(
         [str(PYTHON), '-m', 'uvicorn', 'app.main:create_app', '--factory',

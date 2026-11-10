@@ -1,51 +1,118 @@
 {
- "course": "Physics — Mechanics, Waves, Electricity and Modern Physics",
+ "course": "Physics - Mechanics, Waves, Electromagnetism and Modern Physics",
  "licence": "cc0",
  "source_url": "",
  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
- "description": "An introductory algebra-based physics course: measurement and modelling, mechanics, waves and optics, electricity and magnetism, thermodynamics, and modern physics.",
+ "description": "An algebra-based introduction to physics: measurement, motion and forces, energy and momentum, rotation and gravitation, oscillations and waves, fluids and thermodynamics, electricity and magnetism, optics, and the relativistic and quantum ideas that close the course.",
  "expected_weeks": 36,
  "strands": [
   {
-   "strand": "Measurement and Modelling",
+   "strand": "Foundations & Measurement",
    "units": [
     {
-     "unit": "Physical quantities and reasoning",
+     "unit": "Foundations & Measurement",
      "topics": [
       {
-       "topic": "Quantities, units and uncertainty",
+       "topic": "Units, Dimensions & Precision",
        "concepts": [
-        {"title": "Physical quantities and SI units", "summary": "Every physical quantity is a number together with a unit, and the unit is what makes the number meaningful.", "keywords": ["SI units", "dimension", "measurement"]},
-        {"title": "Dimensional analysis", "summary": "Checking that both sides of an equation carry the same dimensions catches most algebra errors before any numbers are substituted.", "keywords": ["dimension", "consistency", "unit check"], "prerequisites": ["Physical quantities and SI units"]},
-        {"title": "Significant figures and precision", "summary": "A measurement's written precision should reflect the instrument, not the display of the calculator.", "keywords": ["precision", "significant figures", "rounding"], "prerequisites": ["Physical quantities and SI units"]},
-        {"title": "Measurement uncertainty and error", "summary": "Random and systematic errors behave differently, and only one of them improves by averaging.", "keywords": ["uncertainty", "random error", "systematic error"], "prerequisites": ["Significant figures and precision"]},
-        {"title": "Graphing and linearising relationships", "summary": "Plotting the right combination of variables turns a power law into a straight line whose slope carries the constant.", "keywords": ["linearisation", "slope", "graph"], "prerequisites": ["Dimensional analysis"]},
-        {"title": "Order-of-magnitude estimation", "summary": "A rough estimate that is right to a factor of ten is often enough to reject a wrong answer.", "keywords": ["estimation", "Fermi", "scale"], "prerequisites": ["Dimensional analysis"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Vectors and kinematics in one dimension",
-     "prerequisites": ["Physical quantities and reasoning"],
-     "topics": [
-      {
-       "topic": "Scalars, vectors and motion language",
-       "concepts": [
-        {"title": "Scalars and vectors", "summary": "A scalar has magnitude only; a vector has magnitude and direction, and direction is what makes it a different kind of object.", "keywords": ["scalar", "vector", "magnitude"]},
-        {"title": "Position, displacement and distance", "summary": "Displacement is a vector change in position; distance is the scalar path length and they differ whenever the path bends.", "keywords": ["displacement", "distance", "position"], "prerequisites": ["Scalars and vectors"]},
-        {"title": "Speed and velocity", "summary": "Velocity is the rate of change of displacement, so its sign carries direction while speed does not.", "keywords": ["velocity", "speed", "rate"], "prerequisites": ["Position, displacement and distance"]},
-        {"title": "Acceleration", "summary": "Acceleration is the rate of change of velocity, so an object turns even at constant speed when its direction changes.", "keywords": ["acceleration", "rate of change"], "prerequisites": ["Speed and velocity"]}
+        {
+         "title": "SI Base Units and Derived Units",
+         "summary": "Every mechanical quantity reduces to powers of the seven SI base units, so the newton is kg·m/s² and carries the dimensions of force rather than a new base unit.",
+         "keywords": [
+          "si units",
+          "derived units",
+          "dimensions"
+         ]
+        },
+        {
+         "title": "Dimensional Consistency",
+         "summary": "An equation is dimensionally consistent only when both sides carry the same base-unit powers; a mismatch proves the equation wrong, while a match does not prove it right.",
+         "keywords": [
+          "dimensional analysis",
+          "units",
+          "consistency"
+         ],
+         "prerequisites": [
+          "SI Base Units and Derived Units"
+         ]
+        },
+        {
+         "title": "Significant Figures in Measurement",
+         "summary": "The significant figures of a measurement record the digits the instrument actually resolves, so quoting 12.30 cm claims a precision that 12.3 cm does not, and a product keeps the fewest figures of its inputs.",
+         "keywords": [
+          "significant figures",
+          "precision",
+          "rounding"
+         ],
+         "prerequisites": [
+          "Dimensional Consistency"
+         ]
+        }
        ]
       },
       {
-       "topic": "Constant-acceleration motion",
+       "topic": "Vectors & Scalars",
        "concepts": [
-        {"title": "Motion graphs", "summary": "The slope of a position-time graph is velocity and the slope of a velocity-time graph is acceleration.", "keywords": ["motion graph", "slope", "area"], "prerequisites": ["Acceleration"]},
-        {"title": "Kinematic equations for constant acceleration", "summary": "The four kinematic equations are the same relationship rearranged, each omitting a different variable.", "keywords": ["kinematic equations", "constant acceleration"], "prerequisites": ["Motion graphs"]},
-        {"title": "Free fall", "summary": "Near the surface of the Earth all objects fall with the same downward acceleration when air resistance is negligible.", "keywords": ["free fall", "gravity", "g"], "prerequisites": ["Kinematic equations for constant acceleration"]},
-        {"title": "Relative motion in one dimension", "summary": "Velocities add as vectors, so a description of motion depends on the frame it is measured in.", "keywords": ["reference frame", "relative velocity"], "prerequisites": ["Kinematic equations for constant acceleration"]}
+        {
+         "title": "Scalar and Vector Quantities",
+         "summary": "A scalar is fixed by magnitude alone while a vector needs magnitude and direction, which is why 5 m of distance and 5 m east of displacement describe different states.",
+         "keywords": [
+          "scalar",
+          "vector",
+          "displacement"
+         ]
+        },
+        {
+         "title": "Vector Components",
+         "summary": "Any vector splits into perpendicular components of magnitude V cos θ and V sin θ, and those components add independently, so one two-dimensional problem becomes two one-dimensional problems.",
+         "keywords": [
+          "components",
+          "resolution",
+          "projection"
+         ],
+         "prerequisites": [
+          "Scalar and Vector Quantities"
+         ]
+        },
+        {
+         "title": "Adding Vectors Tip to Tail",
+         "summary": "Vectors add by placing them tip to tail, and the Pythagorean result applies only to perpendicular components; at any other angle the law of cosines gives the resultant.",
+         "keywords": [
+          "vector addition",
+          "resultant",
+          "parallelogram"
+         ],
+         "prerequisites": [
+          "Vector Components"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Estimation & Measurement Reasoning",
+       "concepts": [
+        {
+         "title": "Order-of-Magnitude Estimation",
+         "summary": "A Fermi estimate multiplies rounded factors so their powers of ten add, which fixes a quantity to its nearest order of magnitude even when each factor is uncertain by a factor of a few.",
+         "keywords": [
+          "estimation",
+          "order of magnitude",
+          "fermi"
+         ]
+        },
+        {
+         "title": "Random and Systematic Uncertainty",
+         "summary": "Averaging N independent readings shrinks random uncertainty as 1/√N, while systematic uncertainty survives averaging because it shifts every reading the same way.",
+         "keywords": [
+          "uncertainty",
+          "random error",
+          "systematic error"
+         ],
+         "prerequisites": [
+          "Order-of-Magnitude Estimation"
+         ]
+        }
        ]
       }
      ]
@@ -53,255 +120,1965 @@
    ]
   },
   {
-   "strand": "Mechanics",
+   "strand": "Kinematics",
    "units": [
     {
-     "unit": "Forces and Newton's laws",
-     "prerequisites": ["Vectors and kinematics in one dimension"],
+     "unit": "Kinematics",
      "topics": [
       {
-       "topic": "Force and equilibrium",
+       "topic": "Motion in One Dimension",
        "concepts": [
-        {"title": "Forces as interactions", "summary": "A force is one object acting on another; every force has an agent and a recipient.", "keywords": ["force", "interaction", "agent"]},
-        {"title": "Free-body diagrams", "summary": "Drawing every force on a single object, with no forces belonging to other objects, is the step most errors skip.", "keywords": ["free-body diagram", "forces"], "prerequisites": ["Forces as interactions"]},
-        {"title": "Newton's first law and inertia", "summary": "An object's velocity changes only when the net force is nonzero, which is why motion needs no cause but change does.", "keywords": ["Newton first law", "inertia", "net force"], "prerequisites": ["Free-body diagrams"]},
-        {"title": "Newton's second law", "summary": "Net force equals mass times acceleration, so the same force accelerates a larger mass less.", "keywords": ["Newton second law", "mass", "acceleration"], "prerequisites": ["Newton's first law and inertia"]},
-        {"title": "Newton's third law and interaction pairs", "summary": "Forces come in equal and opposite pairs acting on two different objects, which is why they never cancel on one body.", "keywords": ["Newton third law", "interaction pair"], "prerequisites": ["Newton's second law"]},
-        {"title": "Mass and weight", "summary": "Mass measures inertia; weight is the gravitational force on that mass and changes with location.", "keywords": ["mass", "weight", "gravitational force"], "prerequisites": ["Newton's second law"]}
+        {
+         "title": "Position, Displacement and Distance",
+         "summary": "Displacement is the change in position and is zero over a closed path, while distance travelled is the path length and never decreases.",
+         "keywords": [
+          "displacement",
+          "distance",
+          "position"
+         ]
+        },
+        {
+         "title": "Average and Instantaneous Velocity",
+         "summary": "Average velocity is displacement divided by elapsed time, while instantaneous velocity is the limit of that ratio as the interval shrinks and equals the slope of the tangent on a position graph.",
+         "keywords": [
+          "velocity",
+          "average velocity",
+          "instantaneous"
+         ],
+         "prerequisites": [
+          "Position, Displacement and Distance"
+         ]
+        },
+        {
+         "title": "Acceleration as the Rate of Change of Velocity",
+         "summary": "Acceleration is the change of velocity per unit time, so a body accelerates whenever its velocity changes, including when only its direction changes at constant speed.",
+         "keywords": [
+          "acceleration",
+          "rate of change",
+          "direction"
+         ],
+         "prerequisites": [
+          "Average and Instantaneous Velocity"
+         ]
+        }
        ]
       },
       {
-       "topic": "Common forces",
+       "topic": "Motion Graphs",
        "concepts": [
-        {"title": "Normal force", "summary": "The normal force is a contact push perpendicular to a surface and adjusts to whatever the situation requires.", "keywords": ["normal force", "contact force"], "prerequisites": ["Free-body diagrams"]},
-        {"title": "Friction", "summary": "Static friction matches the applied force up to a maximum; kinetic friction opposes sliding at a roughly fixed value.", "keywords": ["friction", "static", "kinetic"], "prerequisites": ["Normal force"]},
-        {"title": "Tension in strings and ropes", "summary": "In an ideal massless string the tension is the same everywhere, which is what makes pulley problems tractable.", "keywords": ["tension", "string", "pulley"], "prerequisites": ["Newton's third law and interaction pairs"]},
-        {"title": "Spring force and Hooke's law", "summary": "A spring's restoring force is proportional to its extension, so it pulls harder the further it is stretched.", "keywords": ["Hooke's law", "spring", "restoring force"], "prerequisites": ["Normal force"]},
-        {"title": "Inclined planes", "summary": "Resolving weight into components along and perpendicular to a slope turns a two-dimensional problem into two one-dimensional ones.", "keywords": ["incline", "components", "resolution"], "prerequisites": ["Friction", "Newton's second law"]}
+        {
+         "title": "Reading a Position-Time Graph",
+         "summary": "On a position-time graph the slope at a point is the instantaneous velocity, so a horizontal segment means rest and a curl means changing velocity.",
+         "keywords": [
+          "position graph",
+          "slope",
+          "velocity"
+         ]
+        },
+        {
+         "title": "Reading a Velocity-Time Graph",
+         "summary": "On a velocity-time graph the slope gives acceleration and the area between the curve and the time axis gives displacement, with area below the axis counted as negative.",
+         "keywords": [
+          "velocity graph",
+          "area",
+          "displacement"
+         ],
+         "prerequisites": [
+          "Reading a Position-Time Graph"
+         ]
+        },
+        {
+         "title": "Constant-Acceleration Kinematics",
+         "summary": "For constant acceleration v = v₀ + at and Δx = v₀t + ½at² follow from the definitions of velocity and acceleration, and both fail once the acceleration itself varies.",
+         "keywords": [
+          "kinematic equations",
+          "constant acceleration",
+          "displacement"
+         ],
+         "prerequisites": [
+          "Reading a Velocity-Time Graph"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Free Fall",
+       "concepts": [
+        {
+         "title": "Free Fall Under Gravity",
+         "summary": "Near Earth's surface a body in free fall accelerates downward at about 9.8 m/s² when air resistance is negligible, whatever its mass.",
+         "keywords": [
+          "free fall",
+          "gravity",
+          "acceleration"
+         ]
+        },
+        {
+         "title": "Terminal Velocity",
+         "summary": "A falling body reaches terminal velocity when the upward drag equals its weight, after which its acceleration is zero and its speed stops increasing.",
+         "keywords": [
+          "terminal velocity",
+          "drag",
+          "equilibrium"
+         ],
+         "prerequisites": [
+          "Free Fall Under Gravity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Projectile & 2D Motion",
+       "concepts": [
+        {
+         "title": "Projectile Motion as Two Independent Motions",
+         "summary": "A projectile's horizontal velocity stays constant while its vertical motion accelerates at g, so the trajectory is a parabola and the flight time is set by the vertical component alone.",
+         "keywords": [
+          "projectile",
+          "parabola",
+          "independence"
+         ]
+        },
+        {
+         "title": "Range and Launch Angle",
+         "summary": "For a fixed launch speed over level ground the range is greatest at 45°, and complementary angles such as 30° and 60° give the same range.",
+         "keywords": [
+          "range",
+          "launch angle",
+          "trajectory"
+         ],
+         "prerequisites": [
+          "Projectile Motion as Two Independent Motions"
+         ]
+        },
+        {
+         "title": "Relative Velocity in Two Dimensions",
+         "summary": "Velocities combine as vectors between frames, so a boat crossing a current must aim upstream of its intended path and its ground speed is the vector sum of boat and current.",
+         "keywords": [
+          "relative velocity",
+          "frame of reference",
+          "current"
+         ],
+         "prerequisites": [
+          "Range and Launch Angle"
+         ]
+        }
        ]
       }
-     ]
-    },
-    {
-     "unit": "Energy, momentum and rotation",
-     "prerequisites": ["Forces and Newton's laws"],
-     "topics": [
-      {
-       "topic": "Work and energy",
-       "concepts": [
-        {"title": "Work done by a force", "summary": "Work is force times displacement along the force, so a force perpendicular to motion does no work.", "keywords": ["work", "displacement", "dot product"]},
-        {"title": "Kinetic energy", "summary": "Kinetic energy grows with the square of speed, which is why stopping distance grows so quickly.", "keywords": ["kinetic energy", "speed squared"], "prerequisites": ["Work done by a force"]},
-        {"title": "Gravitational potential energy", "summary": "Near the Earth's surface gravitational potential energy depends only on height change, not on the path taken.", "keywords": ["potential energy", "height", "conservative"], "prerequisites": ["Work done by a force"]},
-        {"title": "Elastic potential energy", "summary": "A stretched spring stores energy proportional to the square of its extension.", "keywords": ["elastic energy", "spring", "extension"], "prerequisites": ["Work done by a force"]},
-        {"title": "Conservation of mechanical energy", "summary": "When only conservative forces act, the total of kinetic and potential energy stays fixed.", "keywords": ["conservation", "mechanical energy"], "prerequisites": ["Kinetic energy", "Gravitational potential energy"]},
-        {"title": "Work done by non-conservative forces", "summary": "Friction and drag convert mechanical energy into internal energy, so mechanical energy is not conserved when they act.", "keywords": ["non-conservative", "dissipation", "friction"], "prerequisites": ["Conservation of mechanical energy"]},
-        {"title": "Power", "summary": "Power is the rate of energy transfer, so the same work done faster requires more power.", "keywords": ["power", "rate", "watt"], "prerequisites": ["Work done by a force"]},
-        {"title": "Efficiency", "summary": "Efficiency is useful output over total input and is always below one for a real machine.", "keywords": ["efficiency", "useful output", "losses"], "prerequisites": ["Power"]}
-       ]
-      },
-      {
-       "topic": "Momentum and collisions",
-       "concepts": [
-        {"title": "Linear momentum", "summary": "Momentum is mass times velocity, and it is a vector because velocity is.", "keywords": ["momentum", "vector", "mass"]},
-        {"title": "Impulse and momentum change", "summary": "A given change in momentum can come from a large force briefly or a small force for longer, which is what safety features exploit.", "keywords": ["impulse", "force time", "cushioning"], "prerequisites": ["Linear momentum"]},
-        {"title": "Conservation of momentum", "summary": "In the absence of external forces the total momentum of a system does not change, even during a collision.", "keywords": ["conservation", "system", "external force"], "prerequisites": ["Impulse and momentum change"]},
-        {"title": "Elastic and inelastic collisions", "summary": "Momentum is conserved in both kinds of collision, but kinetic energy only in the elastic ones.", "keywords": ["elastic", "inelastic", "kinetic energy"], "prerequisites": ["Conservation of momentum"]},
-        {"title": "Centre of mass", "summary": "A system moves as though all its mass sat at the centre of mass and all external forces acted there.", "keywords": ["centre of mass", "system motion"], "prerequisites": ["Conservation of momentum"]}
-       ]
-      },
-      {
-       "topic": "Circular and rotational motion",
-       "concepts": [
-        {"title": "Uniform circular motion", "summary": "Constant speed in a circle still means acceleration, because the direction of velocity keeps changing.", "keywords": ["circular motion", "centripetal", "direction"], "prerequisites": ["Acceleration"]},
-        {"title": "Centripetal acceleration and force", "summary": "The net force in circular motion points toward the centre, and something real must supply it.", "keywords": ["centripetal acceleration", "net force"], "prerequisites": ["Uniform circular motion", "Newton's second law"]},
-        {"title": "Angular quantities", "summary": "Angular position, velocity and acceleration mirror their linear counterparts with angle in place of distance.", "keywords": ["angular velocity", "radian", "rotation"], "prerequisites": ["Uniform circular motion"]},
-        {"title": "Torque and rotational equilibrium", "summary": "Torque depends on both the force and how far from the pivot it acts, which is why a long lever helps.", "keywords": ["torque", "lever arm", "equilibrium"], "prerequisites": ["Angular quantities"]},
-        {"title": "Moment of inertia and rotational dynamics", "summary": "How mass is distributed about the axis matters as much as how much mass there is.", "keywords": ["moment of inertia", "rotational inertia"], "prerequisites": ["Torque and rotational equilibrium"]},
-        {"title": "Angular momentum", "summary": "In the absence of external torque angular momentum is conserved, so a spinning body speeds up as it pulls its mass inward.", "keywords": ["angular momentum", "conservation", "spin"], "prerequisites": ["Moment of inertia and rotational dynamics"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Gravitation and oscillations",
-     "prerequisites": ["Energy, momentum and rotation"],
-     "topics": [
-      {
-       "topic": "Universal gravitation",
-       "concepts": [
-        {"title": "Newton's law of universal gravitation", "summary": "Every mass attracts every other mass with a force proportional to both masses and falling off as the square of the distance.", "keywords": ["gravitation", "inverse square", "mass"]},
-        {"title": "Gravitational field and field strength", "summary": "A field describes the force per unit mass a test object would feel at a point in space.", "keywords": ["field", "field strength", "g"], "prerequisites": ["Newton's law of universal gravitation"]},
-        {"title": "Orbital motion and Kepler's laws", "summary": "An orbit is continuous free fall, and Kepler's laws follow from the inverse-square force.", "keywords": ["orbit", "Kepler", "satellite"], "prerequisites": ["Gravitational field and field strength", "Centripetal acceleration and force"]},
-        {"title": "Gravitational potential energy in a field", "summary": "Far from a planet the simple mgh formula fails and potential energy must be measured from infinity.", "keywords": ["potential", "escape", "infinity"], "prerequisites": ["Orbital motion and Kepler's laws"]},
-        {"title": "Escape velocity", "summary": "Escape velocity is the speed at which an object's kinetic energy just pays for climbing out of a gravity well.", "keywords": ["escape velocity", "energy", "well"], "prerequisites": ["Gravitational potential energy in a field"]}
-       ]
-      },
-      {
-       "topic": "Simple harmonic motion",
-       "concepts": [
-        {"title": "Restoring force and oscillation", "summary": "An oscillation needs a restoring force that always points back toward equilibrium.", "keywords": ["oscillation", "restoring force", "equilibrium"], "prerequisites": ["Spring force and Hooke's law"]},
-        {"title": "Simple harmonic motion", "summary": "When the restoring force is proportional to displacement the motion is sinusoidal and its period is independent of amplitude.", "keywords": ["simple harmonic", "sinusoidal", "period"], "prerequisites": ["Restoring force and oscillation"]},
-        {"title": "Period and frequency of a spring-mass system", "summary": "A stiffer spring oscillates faster and a heavier mass oscillates slower, and neither changes the amplitude.", "keywords": ["period", "frequency", "spring mass"], "prerequisites": ["Simple harmonic motion"]},
-        {"title": "The simple pendulum", "summary": "For small swings a pendulum's period depends only on its length and the local gravitational field.", "keywords": ["pendulum", "length", "small angle"], "prerequisites": ["Simple harmonic motion"]},
-        {"title": "Energy in simple harmonic motion", "summary": "Energy trades continuously between kinetic and potential while the total stays fixed in an ideal oscillator.", "keywords": ["energy", "exchange", "amplitude"], "prerequisites": ["Simple harmonic motion", "Conservation of mechanical energy"]},
-        {"title": "Damping and resonance", "summary": "Damping removes energy and lowers the amplitude, while driving at the natural frequency makes it grow.", "keywords": ["damping", "resonance", "driving frequency"], "prerequisites": ["Energy in simple harmonic motion"]}
-       ]
-      }
+     ],
+     "prerequisites": [
+      "Foundations & Measurement"
      ]
     }
    ]
   },
   {
-   "strand": "Waves and Optics",
+   "strand": "Forces & Newton's Laws",
    "units": [
     {
-     "unit": "Wave behaviour",
-     "prerequisites": ["Simple harmonic motion"],
+     "unit": "Forces & Newton's Laws",
      "topics": [
       {
-       "topic": "Describing waves",
+       "topic": "Newton's Laws & Free-Body Diagrams",
        "concepts": [
-        {"title": "Transverse and longitudinal waves", "summary": "The distinction is whether the medium moves perpendicular to the wave's travel or along it.", "keywords": ["transverse", "longitudinal", "medium"]},
-        {"title": "Wavelength, frequency and wave speed", "summary": "Wave speed is frequency times wavelength, and changing medium changes speed and wavelength but not frequency.", "keywords": ["wavelength", "frequency", "wave speed"], "prerequisites": ["Transverse and longitudinal waves"]},
-        {"title": "Amplitude and energy in waves", "summary": "A wave's energy depends on the square of its amplitude, so doubling amplitude quadruples the energy carried.", "keywords": ["amplitude", "energy", "intensity"], "prerequisites": ["Wavelength, frequency and wave speed"]},
-        {"title": "Wavefronts and rays", "summary": "Wavefronts and rays are two views of the same wave, useful for interference and for geometric optics respectively.", "keywords": ["wavefront", "ray", "representation"], "prerequisites": ["Wavelength, frequency and wave speed"]}
+        {
+         "title": "Newton's First Law and Inertia",
+         "summary": "A body keeps its velocity unless a net external force acts on it, so rest and constant velocity are the same dynamical state and no force is needed to sustain motion.",
+         "keywords": [
+          "inertia",
+          "first law",
+          "net force"
+         ]
+        },
+        {
+         "title": "Newton's Second Law for a Single Body",
+         "summary": "The vector sum of the external forces equals mass times acceleration, so a body accelerates along the net force and not at all perpendicular to it.",
+         "keywords": [
+          "second law",
+          "net force",
+          "acceleration"
+         ],
+         "prerequisites": [
+          "Newton's First Law and Inertia"
+         ]
+        },
+        {
+         "title": "Free-Body Diagrams and Their Conventions",
+         "summary": "A free-body diagram draws only the forces acting on one chosen body, with weight always vertical and a normal force always perpendicular to the contact surface.",
+         "keywords": [
+          "free-body diagram",
+          "normal force",
+          "conventions"
+         ],
+         "prerequisites": [
+          "Newton's Second Law for a Single Body"
+         ]
+        }
        ]
       },
       {
-       "topic": "Superposition and interference",
+       "topic": "Common Forces",
        "concepts": [
-        {"title": "The principle of superposition", "summary": "Where waves overlap their displacements add, which is the whole basis of interference.", "keywords": ["superposition", "addition", "overlap"]},
-        {"title": "Constructive and destructive interference", "summary": "Path difference in whole wavelengths reinforces and half wavelengths cancels.", "keywords": ["interference", "path difference", "phase"], "prerequisites": ["The principle of superposition"]},
-        {"title": "Standing waves and nodes", "summary": "Two counter-propagating waves form fixed nodes and antinodes, and the allowed patterns are quantised by the boundary.", "keywords": ["standing wave", "node", "antinode"], "prerequisites": ["Constructive and destructive interference"]},
-        {"title": "Diffraction and the double slit", "summary": "Waves spread around obstacles, and two slits produce a pattern of bright and dark fringes from path difference.", "keywords": ["diffraction", "double slit", "fringe"], "prerequisites": ["Constructive and destructive interference"]},
-        {"title": "Diffraction gratings", "summary": "Many slits sharpen the maxima, which is what makes a grating a precision wavelength-measuring device.", "keywords": ["grating", "order", "resolution"], "prerequisites": ["Diffraction and the double slit"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Sound and geometric optics",
-     "prerequisites": ["Wave behaviour"],
-     "topics": [
-      {
-       "topic": "Sound",
-       "concepts": [
-        {"title": "Sound as a pressure wave", "summary": "Sound is a longitudinal compression wave that needs a medium, which is why it cannot cross a vacuum.", "keywords": ["sound", "pressure", "medium"]},
-        {"title": "Speed of sound and the Doppler effect", "summary": "Relative motion between source and observer changes the observed frequency even though the source is unchanged.", "keywords": ["Doppler", "frequency shift", "motion"], "prerequisites": ["Sound as a pressure wave"]},
-        {"title": "Intensity, loudness and the decibel scale", "summary": "The decibel scale is logarithmic because human loudness perception is roughly logarithmic too.", "keywords": ["decibel", "intensity", "logarithmic"], "prerequisites": ["Amplitude and energy in waves"]},
-        {"title": "Resonance in pipes and strings", "summary": "Boundary conditions fix which standing waves fit, which is why instruments have characteristic harmonic series.", "keywords": ["harmonic", "resonance", "boundary"], "prerequisites": ["Standing waves and nodes"]},
-        {"title": "Beats", "summary": "Two close frequencies produce a slow loudness pulse at the difference frequency.", "keywords": ["beats", "difference frequency"], "prerequisites": ["Constructive and destructive interference"]}
+        {
+         "title": "Weight versus Mass",
+         "summary": "Weight is the gravitational force mg and changes with the local field, while mass measures the quantity of matter and is the same everywhere.",
+         "keywords": [
+          "weight",
+          "mass",
+          "gravity"
+         ]
+        },
+        {
+         "title": "Normal Force",
+         "summary": "The normal force takes whatever magnitude prevents interpenetration, so it equals mg only on level ground with no other vertical force acting.",
+         "keywords": [
+          "normal force",
+          "contact force",
+          "surface"
+         ],
+         "prerequisites": [
+          "Weight versus Mass"
+         ]
+        },
+        {
+         "title": "Static and Kinetic Friction",
+         "summary": "Kinetic friction has magnitude μ_k N and opposes sliding, while static friction adjusts up to μ_s N, so a block stays put until the applied force exceeds that limit.",
+         "keywords": [
+          "friction",
+          "static",
+          "kinetic"
+         ],
+         "prerequisites": [
+          "Normal Force"
+         ]
+        }
        ]
       },
       {
-       "topic": "Light and reflection",
+       "topic": "Applying Newton's Laws",
        "concepts": [
-        {"title": "The electromagnetic spectrum", "summary": "Visible light is one narrow band of a continuous spectrum that all travels at the same speed in vacuum.", "keywords": ["spectrum", "electromagnetic", "visible"]},
-        {"title": "Reflection and plane mirrors", "summary": "The angle of reflection equals the angle of incidence, measured from the normal.", "keywords": ["reflection", "normal", "mirror"], "prerequisites": ["The electromagnetic spectrum"]},
-        {"title": "Refraction and Snell's law", "summary": "Light bends when its speed changes between media, and the bending follows the ratio of the speeds.", "keywords": ["refraction", "Snell", "refractive index"], "prerequisites": ["The electromagnetic spectrum"]},
-        {"title": "Total internal reflection", "summary": "Beyond the critical angle light cannot escape a dense medium, which is how optical fibres guide signals.", "keywords": ["total internal reflection", "critical angle", "fibre"], "prerequisites": ["Refraction and Snell's law"]},
-        {"title": "Lenses and image formation", "summary": "A thin lens forms a real or virtual image whose position follows from the object distance and focal length.", "keywords": ["lens", "focal length", "image"], "prerequisites": ["Refraction and Snell's law"]},
-        {"title": "Dispersion and colour", "summary": "A refractive index that varies with wavelength separates white light into its components.", "keywords": ["dispersion", "prism", "colour"], "prerequisites": ["Refraction and Snell's law"]}
+        {
+         "title": "Equilibrium and Zero Net Force",
+         "summary": "A body in equilibrium has zero net force, so the force components along any two perpendicular axes each sum to zero.",
+         "keywords": [
+          "equilibrium",
+          "net force",
+          "components"
+         ]
+        },
+        {
+         "title": "Forces on an Inclined Plane",
+         "summary": "On a frictionless incline of angle θ the weight component along the slope is mg sin θ and the normal force is mg cos θ, so the acceleration down the slope is g sin θ.",
+         "keywords": [
+          "inclined plane",
+          "components",
+          "acceleration"
+         ],
+         "prerequisites": [
+          "Equilibrium and Zero Net Force"
+         ]
+        },
+        {
+         "title": "Connected Bodies and Tension",
+         "summary": "Bodies joined by a taut string share one acceleration, and a massless string over a frictionless pulley transmits the same tension at both ends.",
+         "keywords": [
+          "tension",
+          "connected bodies",
+          "pulley"
+         ],
+         "prerequisites": [
+          "Forces on an Inclined Plane"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Circular Motion Dynamics",
+       "concepts": [
+        {
+         "title": "Centripetal Acceleration",
+         "summary": "A body moving on a circle of radius r at speed v accelerates toward the centre with magnitude v²/r even when its speed is constant.",
+         "keywords": [
+          "centripetal",
+          "circular motion",
+          "acceleration"
+         ]
+        },
+        {
+         "title": "Centripetal Force Is a Net Force",
+         "summary": "The centripetal force is not an extra interaction but the radial part of the net force, supplied by tension, gravity, friction or a normal force depending on the situation.",
+         "keywords": [
+          "centripetal force",
+          "net force",
+          "radial"
+         ],
+         "prerequisites": [
+          "Centripetal Acceleration"
+         ]
+        },
+        {
+         "title": "Minimum Speed at the Top of a Loop",
+         "summary": "At the top of a vertical loop the normal force vanishes at the minimum speed v = √(gr), so gravity alone supplies the centripetal force and any slower body leaves the track.",
+         "keywords": [
+          "vertical circle",
+          "minimum speed",
+          "normal force"
+         ],
+         "prerequisites": [
+          "Centripetal Force Is a Net Force"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Kinematics"
      ]
     }
    ]
   },
   {
-   "strand": "Electricity and Magnetism",
+   "strand": "Work & Energy",
    "units": [
     {
-     "unit": "Electric charge and fields",
-     "prerequisites": ["Forces and Newton's laws"],
+     "unit": "Work & Energy",
      "topics": [
       {
-       "topic": "Electrostatics",
+       "topic": "Work & Power",
        "concepts": [
-        {"title": "Electric charge and conservation", "summary": "Charge comes in two kinds, is quantised in units of the electron charge, and is conserved in every interaction.", "keywords": ["charge", "quantised", "conservation"]},
-        {"title": "Coulomb's law", "summary": "The force between two point charges follows an inverse-square law and is attractive or repulsive by sign.", "keywords": ["Coulomb", "inverse square", "force"], "prerequisites": ["Electric charge and conservation"]},
-        {"title": "Electric field and field lines", "summary": "An electric field gives the force per unit positive charge, and field lines never cross.", "keywords": ["electric field", "field line", "test charge"], "prerequisites": ["Coulomb's law"]},
-        {"title": "Electric potential and potential difference", "summary": "Potential is energy per unit charge, and only differences in it are physically meaningful.", "keywords": ["potential", "voltage", "energy per charge"], "prerequisites": ["Electric field and field lines"]},
-        {"title": "Uniform fields and capacitors", "summary": "Two parallel plates give a uniform field, and a capacitor stores charge proportional to the applied voltage.", "keywords": ["capacitor", "parallel plate", "capacitance"], "prerequisites": ["Electric potential and potential difference"]},
-        {"title": "Energy stored in a capacitor", "summary": "A capacitor stores energy proportional to the square of the voltage across it.", "keywords": ["stored energy", "capacitor", "voltage"], "prerequisites": ["Uniform fields and capacitors"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Circuits",
-     "prerequisites": ["Electric charge and fields"],
-     "topics": [
-      {
-       "topic": "Direct current circuits",
-       "concepts": [
-        {"title": "Electric current and charge flow", "summary": "Current is the rate of charge flow, and conventional current runs opposite to electron drift.", "keywords": ["current", "charge flow", "conventional"]},
-        {"title": "Resistance and Ohm's law", "summary": "For an ohmic conductor current is proportional to voltage, and the constant of proportionality is the resistance.", "keywords": ["resistance", "Ohm", "voltage"], "prerequisites": ["Electric current and charge flow"]},
-        {"title": "Resistivity and temperature", "summary": "Resistance depends on material, length and cross-section, and for metals it rises with temperature.", "keywords": ["resistivity", "temperature", "material"], "prerequisites": ["Resistance and Ohm's law"]},
-        {"title": "Series and parallel circuits", "summary": "Series elements share the current and parallel elements share the voltage, which is why household wiring is parallel.", "keywords": ["series", "parallel", "current voltage"], "prerequisites": ["Resistance and Ohm's law"]},
-        {"title": "Kirchhoff's circuit laws", "summary": "Charge conservation at a junction and energy conservation around a loop give two rules that solve any network.", "keywords": ["Kirchhoff", "junction", "loop"], "prerequisites": ["Series and parallel circuits"]},
-        {"title": "Electrical power and energy transfer", "summary": "Power dissipated in a component is current times voltage, which is why high-voltage transmission wastes less.", "keywords": ["power", "dissipation", "transmission"], "prerequisites": ["Series and parallel circuits"]},
-        {"title": "Electromotive force and internal resistance", "summary": "A real source has internal resistance, so the terminal voltage falls as the current drawn rises.", "keywords": ["emf", "internal resistance", "terminal voltage"], "prerequisites": ["Kirchhoff's circuit laws"]},
-        {"title": "Potential dividers and sensing circuits", "summary": "Two resistors in series split a supply voltage in proportion to their resistance, which is the basis of many sensors.", "keywords": ["potential divider", "sensor", "proportion"], "prerequisites": ["Series and parallel circuits"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Magnetism and induction",
-     "prerequisites": ["Circuits"],
-     "topics": [
-      {
-       "topic": "Magnetic fields and forces",
-       "concepts": [
-        {"title": "Magnetic fields and poles", "summary": "Magnetic field lines run from north to south outside a magnet and form closed loops.", "keywords": ["magnetic field", "pole", "field line"]},
-        {"title": "Force on a moving charge", "summary": "A charge moving in a magnetic field feels a force perpendicular to both its velocity and the field.", "keywords": ["Lorentz force", "perpendicular", "charge"], "prerequisites": ["Magnetic fields and poles"]},
-        {"title": "Force on a current-carrying conductor", "summary": "A current in a field feels a force, which is how an electric motor produces torque.", "keywords": ["motor effect", "conductor", "torque"], "prerequisites": ["Force on a moving charge"]},
-        {"title": "Magnetic field of a current", "summary": "A current produces a circular magnetic field around it, unifying electricity and magnetism.", "keywords": ["Ampere", "solenoid", "field around wire"], "prerequisites": ["Magnetic fields and poles"]}
+        {
+         "title": "Work Done by a Constant Force",
+         "summary": "Work equals F d cos θ, so a force perpendicular to the displacement, such as the normal force on level ground, does zero work.",
+         "keywords": [
+          "work",
+          "dot product",
+          "force"
+         ]
+        },
+        {
+         "title": "Power as the Rate of Energy Transfer",
+         "summary": "Power is work per unit time, equal to F v cos θ, so a given power lifts a doubled load at half the speed.",
+         "keywords": [
+          "power",
+          "rate",
+          "watt"
+         ],
+         "prerequisites": [
+          "Work Done by a Constant Force"
+         ]
+        },
+        {
+         "title": "The Work-Energy Theorem",
+         "summary": "The net work done on a body equals its change in kinetic energy, and the statement holds even when the force varies along the path.",
+         "keywords": [
+          "work-energy theorem",
+          "kinetic energy",
+          "net work"
+         ],
+         "prerequisites": [
+          "Power as the Rate of Energy Transfer"
+         ]
+        }
        ]
       },
       {
-       "topic": "Electromagnetic induction",
+       "topic": "Kinetic & Potential Energy",
        "concepts": [
-        {"title": "Magnetic flux", "summary": "Flux measures how much field passes through a surface, so angle and area both matter.", "keywords": ["flux", "area", "angle"]},
-        {"title": "Faraday's law of induction", "summary": "A changing flux induces an emf, and the faster the change the larger the emf.", "keywords": ["Faraday", "induced emf", "rate of change"], "prerequisites": ["Magnetic flux"]},
-        {"title": "Lenz's law", "summary": "An induced current opposes the change that produced it, which is energy conservation in disguise.", "keywords": ["Lenz", "opposition", "conservation"], "prerequisites": ["Faraday's law of induction"]},
-        {"title": "Transformers and power transmission", "summary": "A changing flux links two coils so voltage steps up or down while power is roughly preserved.", "keywords": ["transformer", "turns ratio", "transmission"], "prerequisites": ["Faraday's law of induction"]},
-        {"title": "Electromagnetic waves", "summary": "An accelerating charge radiates self-sustaining electric and magnetic fields that travel at the speed of light.", "keywords": ["electromagnetic wave", "radiation", "speed of light"], "prerequisites": ["Faraday's law of induction"]}
+        {
+         "title": "Kinetic Energy",
+         "summary": "Kinetic energy is ½mv², so doubling the speed quadruples it and the same braking force then needs four times the distance to stop.",
+         "keywords": [
+          "kinetic energy",
+          "speed",
+          "stopping distance"
+         ]
+        },
+        {
+         "title": "Gravitational Potential Energy Near Earth",
+         "summary": "Near the surface the gravitational potential energy of a mass is mgh measured from a chosen reference height, and only its change is physically meaningful.",
+         "keywords": [
+          "potential energy",
+          "height",
+          "reference"
+         ],
+         "prerequisites": [
+          "Kinetic Energy"
+         ]
+        },
+        {
+         "title": "Elastic Potential Energy",
+         "summary": "A spring deformed by x stores ½kx², so the stored energy grows with the square of the deformation and is the same for stretch and compression.",
+         "keywords": [
+          "spring",
+          "elastic",
+          "hooke"
+         ],
+         "prerequisites": [
+          "Gravitational Potential Energy Near Earth"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Conservation of Energy",
+       "concepts": [
+        {
+         "title": "Conservation of Mechanical Energy",
+         "summary": "When only conservative forces do work the sum of kinetic and potential energy stays constant, so a falling body converts mgh into ½mv² exactly.",
+         "keywords": [
+          "conservation",
+          "mechanical energy",
+          "conservative"
+         ]
+        },
+        {
+         "title": "Work by Nonconservative Forces",
+         "summary": "Friction and drag change the mechanical energy by exactly the negative of the work they do, and the difference appears as thermal energy rather than disappearing.",
+         "keywords": [
+          "friction",
+          "dissipation",
+          "thermal energy"
+         ],
+         "prerequisites": [
+          "Conservation of Mechanical Energy"
+         ]
+        },
+        {
+         "title": "System Boundaries in Energy Accounting",
+         "summary": "The chosen system boundary decides which energies count as internal and conserved and which appear as external work, so one process can be booked either way.",
+         "keywords": [
+          "system boundary",
+          "energy accounting",
+          "internal energy"
+         ],
+         "prerequisites": [
+          "Work by Nonconservative Forces"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Forces & Newton's Laws"
      ]
     }
    ]
   },
   {
-   "strand": "Thermal Physics",
+   "strand": "Momentum & Collisions",
    "units": [
     {
-     "unit": "Heat, temperature and gases",
-     "prerequisites": ["Energy, momentum and rotation"],
+     "unit": "Momentum & Collisions",
      "topics": [
       {
-       "topic": "Thermal energy",
+       "topic": "Impulse & Momentum",
        "concepts": [
-        {"title": "Temperature and the kinetic model", "summary": "Temperature measures the average random kinetic energy of particles, not the total energy stored.", "keywords": ["temperature", "kinetic model", "average energy"]},
-        {"title": "Internal energy and thermal equilibrium", "summary": "Heat flows spontaneously from hotter to colder until temperatures equalise and net flow stops.", "keywords": ["internal energy", "equilibrium", "heat flow"], "prerequisites": ["Temperature and the kinetic model"]},
-        {"title": "Specific heat capacity", "summary": "The energy needed to raise a temperature depends on the material's specific heat capacity as well as the mass.", "keywords": ["specific heat", "energy", "temperature rise"], "prerequisites": ["Internal energy and thermal equilibrium"]},
-        {"title": "Latent heat and changes of state", "summary": "During a phase change energy goes into breaking bonds, so temperature stays constant.", "keywords": ["latent heat", "phase change", "plateau"], "prerequisites": ["Specific heat capacity"]},
-        {"title": "Heat transfer by conduction, convection and radiation", "summary": "The three mechanisms differ in whether they need a medium and in whether they carry matter.", "keywords": ["conduction", "convection", "radiation"], "prerequisites": ["Internal energy and thermal equilibrium"]}
+        {
+         "title": "Linear Momentum",
+         "summary": "Momentum is mv, a vector, so a light body moving fast can carry the same momentum as a heavy slow one.",
+         "keywords": [
+          "momentum",
+          "mass",
+          "velocity"
+         ]
+        },
+        {
+         "title": "The Impulse-Momentum Theorem",
+         "summary": "Impulse equals the change in momentum, so stretching the contact time for a fixed impulse lowers the average force, which is how airbags and crumple zones protect occupants.",
+         "keywords": [
+          "impulse",
+          "force",
+          "contact time"
+         ],
+         "prerequisites": [
+          "Linear Momentum"
+         ]
+        }
        ]
       },
       {
-       "topic": "Gas laws and thermodynamics",
+       "topic": "Conservation of Momentum & Collisions",
        "concepts": [
-        {"title": "The ideal gas law", "summary": "Pressure, volume and temperature of a dilute gas are linked by a single equation of state.", "keywords": ["ideal gas", "pressure", "equation of state"]},
-        {"title": "Kinetic theory of gases", "summary": "Gas pressure comes from countless particle collisions, which explains the gas laws from mechanics.", "keywords": ["kinetic theory", "collision", "pressure"], "prerequisites": ["The ideal gas law", "Temperature and the kinetic model"]},
-        {"title": "The first law of thermodynamics", "summary": "Energy added as heat either raises internal energy or does work, and never disappears.", "keywords": ["first law", "internal energy", "work"], "prerequisites": ["Internal energy and thermal equilibrium"]},
-        {"title": "Thermodynamic processes", "summary": "Isothermal, adiabatic, isobaric and isochoric processes each hold one variable fixed and give different work.", "keywords": ["isothermal", "adiabatic", "process"], "prerequisites": ["The first law of thermodynamics"]},
-        {"title": "The second law and entropy", "summary": "Entropy of an isolated system never decreases, which is what gives time a direction in thermodynamics.", "keywords": ["second law", "entropy", "irreversibility"], "prerequisites": ["Thermodynamic processes"]},
-        {"title": "Heat engines and efficiency", "summary": "No engine converting heat to work can exceed the Carnot limit set by the two reservoir temperatures.", "keywords": ["heat engine", "Carnot", "efficiency"], "prerequisites": ["The second law and entropy"]}
+        {
+         "title": "Conservation of Linear Momentum",
+         "summary": "When the net external force on a system is zero its total momentum is constant, because the internal forces of an interaction cancel in pairs.",
+         "keywords": [
+          "conservation",
+          "momentum",
+          "isolated system"
+         ]
+        },
+        {
+         "title": "Elastic versus Inelastic Collisions",
+         "summary": "Kinetic energy is conserved only in an elastic collision; in a perfectly inelastic one the bodies move together afterwards and the largest energy compatible with momentum conservation is lost.",
+         "keywords": [
+          "elastic",
+          "inelastic",
+          "kinetic energy"
+         ],
+         "prerequisites": [
+          "Conservation of Linear Momentum"
+         ]
+        },
+        {
+         "title": "Two-Dimensional Collisions",
+         "summary": "Momentum conservation applies to each component separately, so a two-dimensional collision gives two equations for one event.",
+         "keywords": [
+          "two-dimensional",
+          "components",
+          "collision"
+         ],
+         "prerequisites": [
+          "Elastic versus Inelastic Collisions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Center of Mass",
+       "concepts": [
+        {
+         "title": "Center of Mass of a System",
+         "summary": "The centre of mass is the mass-weighted mean position, so a system's translational motion obeys Newton's second law as if its total mass were concentrated there.",
+         "keywords": [
+          "center of mass",
+          "weighted average",
+          "system"
+         ]
+        },
+        {
+         "title": "Motion of the Center of Mass",
+         "summary": "Internal forces cannot move the centre of mass, so after an explosion the fragments' centre of mass continues on the original trajectory.",
+         "keywords": [
+          "center of mass",
+          "internal forces",
+          "trajectory"
+         ],
+         "prerequisites": [
+          "Center of Mass of a System"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Work & Energy"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Rotational Motion",
+   "units": [
+    {
+     "unit": "Rotational Motion",
+     "topics": [
+      {
+       "topic": "Rotational Kinematics",
+       "concepts": [
+        {
+         "title": "Angular Displacement, Velocity and Acceleration",
+         "summary": "Angular quantities obey the same kinematic equations as linear ones with θ, ω and α in place of x, v and a, and arc length is linked to angle by s = rθ.",
+         "keywords": [
+          "angular velocity",
+          "radian",
+          "kinematics"
+         ]
+        },
+        {
+         "title": "Rolling Without Slipping",
+         "summary": "A wheel rolling without slipping has v = ωr at its centre, travels 2πr per full turn, and its contact point is instantaneously at rest.",
+         "keywords": [
+          "rolling",
+          "no slip",
+          "omega r"
+         ],
+         "prerequisites": [
+          "Angular Displacement, Velocity and Acceleration"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Torque & Moment of Inertia",
+       "concepts": [
+        {
+         "title": "Torque about a Pivot",
+         "summary": "Torque is r F sin θ about a chosen pivot, so the same force gives more torque at a longer lever arm and none when it points straight at the pivot.",
+         "keywords": [
+          "torque",
+          "lever arm",
+          "pivot"
+         ]
+        },
+        {
+         "title": "Moment of Inertia",
+         "summary": "Moment of inertia is Σmr², so it depends on how far the mass sits from the axis: a ring resists spinning more than a solid disc of the same mass.",
+         "keywords": [
+          "moment of inertia",
+          "mass distribution",
+          "axis"
+         ],
+         "prerequisites": [
+          "Torque about a Pivot"
+         ]
+        },
+        {
+         "title": "The Parallel-Axis Theorem",
+         "summary": "Moving the axis a distance d from the centre of mass adds md² to the moment of inertia, so rotation about an off-centre axis is always harder.",
+         "keywords": [
+          "parallel axis",
+          "theorem",
+          "axis shift"
+         ],
+         "prerequisites": [
+          "Moment of Inertia"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rotational Dynamics & Energy",
+       "concepts": [
+        {
+         "title": "Rotational Form of Newton's Second Law",
+         "summary": "Net torque equals moment of inertia times angular acceleration, so for a fixed torque a doubled moment of inertia halves the angular acceleration.",
+         "keywords": [
+          "torque",
+          "angular acceleration",
+          "second law"
+         ]
+        },
+        {
+         "title": "Rotational Kinetic Energy",
+         "summary": "A spinning body has ½Iω² of kinetic energy, so a rolling body splits its energy between translation ½mv² and rotation ½Iω².",
+         "keywords": [
+          "rotational energy",
+          "rolling",
+          "kinetic energy"
+         ],
+         "prerequisites": [
+          "Rotational Form of Newton's Second Law"
+         ]
+        },
+        {
+         "title": "Static Equilibrium of Extended Bodies",
+         "summary": "An extended body is in equilibrium only when the net force is zero and the net torque about one pivot is zero, which is two conditions rather than one.",
+         "keywords": [
+          "static equilibrium",
+          "torque",
+          "balance"
+         ],
+         "prerequisites": [
+          "Rotational Kinetic Energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Angular Momentum",
+       "concepts": [
+        {
+         "title": "Angular Momentum",
+         "summary": "Angular momentum is L = Iω for a rigid body and mvr sin θ for a particle, so the same particle has different angular momentum about different origins.",
+         "keywords": [
+          "angular momentum",
+          "moment of inertia",
+          "origin"
+         ]
+        },
+        {
+         "title": "Conservation of Angular Momentum",
+         "summary": "With zero net external torque the total angular momentum stays constant, so a skater who halves her moment of inertia doubles her spin rate.",
+         "keywords": [
+          "conservation",
+          "angular momentum",
+          "spin"
+         ],
+         "prerequisites": [
+          "Angular Momentum"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Momentum & Collisions"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Gravitation",
+   "units": [
+    {
+     "unit": "Gravitation",
+     "topics": [
+      {
+       "topic": "Universal Gravitation",
+       "concepts": [
+        {
+         "title": "Newton's Law of Universal Gravitation",
+         "summary": "Every pair of masses attracts with force G m₁m₂/r², so doubling the separation cuts the force to a quarter and the force on each body is equal.",
+         "keywords": [
+          "gravitation",
+          "inverse square",
+          "newton"
+         ]
+        },
+        {
+         "title": "Gravitational Field Strength",
+         "summary": "The gravitational field g = GM/r² is the force per unit mass, so it falls with altitude and differs between Earth, the Moon and Mars.",
+         "keywords": [
+          "gravitational field",
+          "field strength",
+          "altitude"
+         ],
+         "prerequisites": [
+          "Newton's Law of Universal Gravitation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Gravitational Potential Energy",
+       "concepts": [
+        {
+         "title": "Potential Energy at Large Separations",
+         "summary": "Far from a planet the potential energy is −GMm/r with zero taken at infinity, so it is negative everywhere and rises toward zero as r grows.",
+         "keywords": [
+          "gravitational potential energy",
+          "infinity",
+          "negative"
+         ]
+        },
+        {
+         "title": "Escape Velocity",
+         "summary": "The escape speed √(2GM/r) is the launch speed that makes total mechanical energy zero, so it depends on the planet's mass and radius but not on the projectile's mass.",
+         "keywords": [
+          "escape velocity",
+          "mechanical energy",
+          "launch"
+         ],
+         "prerequisites": [
+          "Potential Energy at Large Separations"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Orbits & Kepler's Laws",
+       "concepts": [
+        {
+         "title": "Speed and Period of a Circular Orbit",
+         "summary": "A satellite in a circular orbit of radius r moves at √(GM/r), so a higher orbit is slower and takes longer despite covering a longer path.",
+         "keywords": [
+          "orbit",
+          "satellite",
+          "period"
+         ]
+        },
+        {
+         "title": "Kepler's Laws of Planetary Motion",
+         "summary": "A planet sweeps equal areas in equal times because its angular momentum about the Sun is conserved, and its period squared is proportional to the semi-major axis cubed.",
+         "keywords": [
+          "kepler",
+          "equal areas",
+          "period"
+         ],
+         "prerequisites": [
+          "Speed and Period of a Circular Orbit"
+         ]
+        },
+        {
+         "title": "Weightlessness in Orbit",
+         "summary": "An astronaut and spacecraft in orbit fall together at g, so the normal force vanishes; apparent weightlessness is free fall, not the absence of gravity.",
+         "keywords": [
+          "orbit",
+          "weightlessness",
+          "free fall"
+         ],
+         "prerequisites": [
+          "Kepler's Laws of Planetary Motion"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Rotational Motion"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Oscillations",
+   "units": [
+    {
+     "unit": "Oscillations",
+     "topics": [
+      {
+       "topic": "Simple Harmonic Motion",
+       "concepts": [
+        {
+         "title": "Restoring Force and Simple Harmonic Motion",
+         "summary": "Motion is simple harmonic exactly when the restoring force is proportional and opposite to the displacement, F = −kx, which makes displacement a sine or cosine of time.",
+         "keywords": [
+          "restoring force",
+          "harmonic",
+          "hooke"
+         ]
+        },
+        {
+         "title": "Amplitude, Period and Frequency",
+         "summary": "Amplitude is the maximum displacement and, for SHM, does not affect the period; period is the time for one full cycle and frequency is its reciprocal.",
+         "keywords": [
+          "amplitude",
+          "period",
+          "frequency"
+         ],
+         "prerequisites": [
+          "Restoring Force and Simple Harmonic Motion"
+         ]
+        },
+        {
+         "title": "Describing SHM by Phase",
+         "summary": "The displacement x = A cos(2πt/T) is fixed by amplitude and period alone, so a phase angle states where in the cycle the oscillator sits.",
+         "keywords": [
+          "phase",
+          "cosine",
+          "cycle"
+         ],
+         "prerequisites": [
+          "Amplitude, Period and Frequency"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Springs & Pendulums",
+       "concepts": [
+        {
+         "title": "Period of a Mass on a Spring",
+         "summary": "A mass on a spring oscillates with T = 2π√(m/k), so a stiffer spring shortens the period while a larger mass lengthens it.",
+         "keywords": [
+          "spring",
+          "period",
+          "stiffness"
+         ]
+        },
+        {
+         "title": "The Simple Pendulum",
+         "summary": "For small angles a pendulum's period is 2π√(L/g), independent of its bob mass and only approximately independent of amplitude.",
+         "keywords": [
+          "pendulum",
+          "small angle",
+          "period"
+         ],
+         "prerequisites": [
+          "Period of a Mass on a Spring"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Energy, Damping & Resonance in SHM",
+       "concepts": [
+        {
+         "title": "Energy Exchange in SHM",
+         "summary": "An oscillator trades ½kx² of potential energy against ½mv² of kinetic energy, and the total ½kA² stays constant while no damping acts.",
+         "keywords": [
+          "energy",
+          "oscillator",
+          "amplitude"
+         ]
+        },
+        {
+         "title": "Damped Oscillations",
+         "summary": "Damping removes energy each cycle so the amplitude decays, and for a drag force proportional to velocity that decay is exponential in time.",
+         "keywords": [
+          "damping",
+          "decay",
+          "amplitude"
+         ],
+         "prerequisites": [
+          "Energy Exchange in SHM"
+         ]
+        },
+        {
+         "title": "Resonance",
+         "summary": "A driven oscillator reaches maximum amplitude when the driving frequency matches its natural frequency, and weaker damping gives a taller and narrower peak.",
+         "keywords": [
+          "resonance",
+          "natural frequency",
+          "driving"
+         ],
+         "prerequisites": [
+          "Damped Oscillations"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Gravitation"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Waves & Sound",
+   "units": [
+    {
+     "unit": "Waves & Sound",
+     "topics": [
+      {
+       "topic": "Wave Properties & the Wave Equation",
+       "concepts": [
+        {
+         "title": "Transverse and Longitudinal Waves",
+         "summary": "In a transverse wave the displacement is perpendicular to the propagation and in a longitudinal wave it is parallel, which is why sound is a pressure wave and a wave on a string is not.",
+         "keywords": [
+          "transverse",
+          "longitudinal",
+          "polarisation"
+         ]
+        },
+        {
+         "title": "The Wave Equation v = fλ",
+         "summary": "Wave speed equals frequency times wavelength, so in a fixed medium a higher frequency means a shorter wavelength because the speed is set by the medium.",
+         "keywords": [
+          "wavelength",
+          "frequency",
+          "wave speed"
+         ],
+         "prerequisites": [
+          "Transverse and Longitudinal Waves"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Wave Behavior at Boundaries",
+       "concepts": [
+        {
+         "title": "Reflection and Transmission at a Boundary",
+         "summary": "At a boundary between media part of a wave reflects and part transmits, and a fixed end inverts the reflected pulse while a free end returns it upright.",
+         "keywords": [
+          "reflection",
+          "transmission",
+          "boundary"
+         ]
+        },
+        {
+         "title": "Refraction and the Change of Speed",
+         "summary": "A wave entering a slower medium bends toward the normal because its frequency is fixed by the source while its speed and wavelength both fall.",
+         "keywords": [
+          "refraction",
+          "snell",
+          "speed change"
+         ],
+         "prerequisites": [
+          "Reflection and Transmission at a Boundary"
+         ]
+        },
+        {
+         "title": "Diffraction Around Obstacles",
+         "summary": "A wave bends around an obstacle and spreads after an aperture, and the spreading is pronounced only when the aperture is comparable to the wavelength.",
+         "keywords": [
+          "diffraction",
+          "aperture",
+          "wavelength"
+         ],
+         "prerequisites": [
+          "Refraction and the Change of Speed"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Superposition, Interference & Standing Waves",
+       "concepts": [
+        {
+         "title": "The Principle of Superposition",
+         "summary": "The displacements of overlapping waves add algebraically at every point, so two crests give a doubled crest and a crest meeting a trough can cancel.",
+         "keywords": [
+          "superposition",
+          "interference",
+          "displacement"
+         ]
+        },
+        {
+         "title": "Constructive and Destructive Interference",
+         "summary": "Two waves interfere constructively when their path difference is a whole number of wavelengths and destructively when it is an odd number of half wavelengths.",
+         "keywords": [
+          "constructive",
+          "destructive",
+          "path difference"
+         ],
+         "prerequisites": [
+          "The Principle of Superposition"
+         ]
+        },
+        {
+         "title": "Standing Waves and Harmonics",
+         "summary": "A standing wave forms where two identical waves travel in opposite directions, and a string fixed at both ends supports only wavelengths 2L/n.",
+         "keywords": [
+          "standing wave",
+          "nodes",
+          "harmonics"
+         ],
+         "prerequisites": [
+          "Constructive and Destructive Interference"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sound, Intensity & the Doppler Effect",
+       "concepts": [
+        {
+         "title": "Sound as a Pressure Wave",
+         "summary": "Sound is a longitudinal pressure wave travelling at about 343 m/s in air at 20 °C, and its speed rises with temperature because molecules collide more often.",
+         "keywords": [
+          "sound",
+          "pressure wave",
+          "speed of sound"
+         ]
+        },
+        {
+         "title": "Sound Intensity Level in Decibels",
+         "summary": "Sound level is 10 log₁₀(I/I₀) decibels, so a tenfold rise in intensity adds 10 dB and a hundredfold rise adds 20 dB.",
+         "keywords": [
+          "decibel",
+          "intensity",
+          "logarithm"
+         ],
+         "prerequisites": [
+          "Sound as a Pressure Wave"
+         ]
+        },
+        {
+         "title": "The Doppler Effect",
+         "summary": "An observer hears a higher frequency when source and observer approach and a lower one when they recede, and the shift grows with their relative speed compared with the wave speed.",
+         "keywords": [
+          "doppler",
+          "frequency shift",
+          "relative motion"
+         ],
+         "prerequisites": [
+          "Sound Intensity Level in Decibels"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Oscillations"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Fluids",
+   "units": [
+    {
+     "unit": "Fluids",
+     "topics": [
+      {
+       "topic": "Density & Pressure",
+       "concepts": [
+        {
+         "title": "Density and Specific Gravity",
+         "summary": "Density is mass per unit volume and specific gravity compares it with water, so a body whose specific gravity is below 1 floats in water.",
+         "keywords": [
+          "density",
+          "specific gravity",
+          "volume"
+         ]
+        },
+        {
+         "title": "Pressure in a Fluid",
+         "summary": "Pressure is force per unit area acting perpendicular to a surface, and at a point in a static fluid it has the same value in every direction.",
+         "keywords": [
+          "pressure",
+          "force per area",
+          "isotropic"
+         ],
+         "prerequisites": [
+          "Density and Specific Gravity"
+         ]
+        },
+        {
+         "title": "Pressure Variation with Depth",
+         "summary": "In a static fluid the pressure at depth h is p₀ + ρgh, so about 10 m of water adds one atmosphere of gauge pressure.",
+         "keywords": [
+          "depth",
+          "gauge pressure",
+          "atmosphere"
+         ],
+         "prerequisites": [
+          "Pressure in a Fluid"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Buoyancy & Archimedes' Principle",
+       "concepts": [
+        {
+         "title": "Archimedes' Principle",
+         "summary": "A submerged or floating body feels an upward buoyant force equal to the weight of the fluid it displaces.",
+         "keywords": [
+          "buoyancy",
+          "displaced fluid",
+          "archimedes"
+         ]
+        },
+        {
+         "title": "Floating and Sinking Conditions",
+         "summary": "A body floats when its average density is below the fluid's, and it then displaces exactly its own weight, so the submerged fraction equals the density ratio.",
+         "keywords": [
+          "floating",
+          "sinking",
+          "density ratio"
+         ],
+         "prerequisites": [
+          "Archimedes' Principle"
+         ]
+        },
+        {
+         "title": "Pascal's Principle",
+         "summary": "A pressure change applied to an enclosed fluid is transmitted undiminished, so a hydraulic press multiplies force by the ratio of piston areas while the pistons move inversely.",
+         "keywords": [
+          "pascal",
+          "hydraulic",
+          "pressure transmission"
+         ],
+         "prerequisites": [
+          "Floating and Sinking Conditions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Fluid Dynamics",
+       "concepts": [
+        {
+         "title": "The Continuity Equation",
+         "summary": "For an incompressible fluid the volume flow rate A v is constant along a pipe, so narrowing the pipe speeds the fluid up.",
+         "keywords": [
+          "continuity",
+          "flow rate",
+          "incompressible"
+         ]
+        },
+        {
+         "title": "Bernoulli's Equation",
+         "summary": "Along a streamline of steady, non-viscous, incompressible flow p + ½ρv² + ρgh is constant, so faster flow at the same height means lower pressure.",
+         "keywords": [
+          "bernoulli",
+          "streamline",
+          "pressure"
+         ],
+         "prerequisites": [
+          "The Continuity Equation"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Waves & Sound"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Thermodynamics",
+   "units": [
+    {
+     "unit": "Thermodynamics",
+     "topics": [
+      {
+       "topic": "Temperature, Heat & Thermal Expansion",
+       "concepts": [
+        {
+         "title": "Temperature and Thermal Equilibrium",
+         "summary": "Temperature is the quantity that decides the direction of heat flow, and two bodies in contact exchange no net energy only when their temperatures match.",
+         "keywords": [
+          "temperature",
+          "equilibrium",
+          "zeroth law"
+         ]
+        },
+        {
+         "title": "Heat versus Internal Energy",
+         "summary": "Heat is energy in transit because of a temperature difference, so a large cool body can hold more internal energy than a small hot one.",
+         "keywords": [
+          "heat",
+          "internal energy",
+          "temperature difference"
+         ],
+         "prerequisites": [
+          "Temperature and Thermal Equilibrium"
+         ]
+        },
+        {
+         "title": "Thermal Expansion of Solids and Liquids",
+         "summary": "A solid changes length by αL₀ΔT and volume by βV₀ΔT, so expansion scales with the original dimension and matters most in long structures.",
+         "keywords": [
+          "thermal expansion",
+          "coefficient",
+          "length"
+         ],
+         "prerequisites": [
+          "Heat versus Internal Energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Specific Heat & Phase Change",
+       "concepts": [
+        {
+         "title": "Specific Heat Capacity",
+         "summary": "The energy needed to change a temperature is mcΔT, so water's 4186 J/kg·K makes it a slow-warming coolant and a stable heat reservoir.",
+         "keywords": [
+          "specific heat",
+          "calorimetry",
+          "energy"
+         ]
+        },
+        {
+         "title": "Latent Heat of Fusion and Vaporisation",
+         "summary": "A phase change happens at constant temperature and absorbs Q = mL, so melting ice at 0 °C takes energy without raising its temperature at all.",
+         "keywords": [
+          "latent heat",
+          "phase change",
+          "melting"
+         ],
+         "prerequisites": [
+          "Specific Heat Capacity"
+         ]
+        },
+        {
+         "title": "Calorimetry and Heat Balance",
+         "summary": "In a thermally isolated system the heat lost by the hot bodies equals the heat gained by the cold ones, and that balance fixes the final common temperature.",
+         "keywords": [
+          "calorimetry",
+          "heat balance",
+          "isolated"
+         ],
+         "prerequisites": [
+          "Latent Heat of Fusion and Vaporisation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Kinetic Theory & Gas Laws",
+       "concepts": [
+        {
+         "title": "The Ideal Gas Law",
+         "summary": "For an ideal gas pV = nRT links pressure, volume and absolute temperature, so at fixed volume the pressure is proportional to the kelvin temperature.",
+         "keywords": [
+          "ideal gas",
+          "kelvin",
+          "pressure"
+         ]
+        },
+        {
+         "title": "Kinetic Theory of Gases",
+         "summary": "Pressure comes from molecular momentum transfer to the walls, and the mean translational kinetic energy 3/2 kT depends only on absolute temperature.",
+         "keywords": [
+          "kinetic theory",
+          "rms speed",
+          "temperature"
+         ],
+         "prerequisites": [
+          "The Ideal Gas Law"
+         ]
+        },
+        {
+         "title": "Molecular Speeds and Effusion",
+         "summary": "Root-mean-square speed grows as √(T/M), so at one temperature a light gas moves faster and effuses faster than a heavy one.",
+         "keywords": [
+          "molecular speed",
+          "effusion",
+          "molar mass"
+         ],
+         "prerequisites": [
+          "Kinetic Theory of Gases"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Laws of Thermodynamics",
+       "concepts": [
+        {
+         "title": "The First Law of Thermodynamics",
+         "summary": "The first law states ΔU = Q − W, so energy entering as heat either raises internal energy or leaves as work done by the system.",
+         "keywords": [
+          "first law",
+          "internal energy",
+          "work"
+         ]
+        },
+        {
+         "title": "The Second Law and Entropy",
+         "summary": "The second law states that the entropy of an isolated system never decreases, so heat flows spontaneously from hot to cold and no cyclic engine converts all its heat input into work.",
+         "keywords": [
+          "second law",
+          "entropy",
+          "irreversibility"
+         ],
+         "prerequisites": [
+          "The First Law of Thermodynamics"
+         ]
+        },
+        {
+         "title": "Heat Engine Efficiency and the Carnot Limit",
+         "summary": "A heat engine's efficiency is W/Q_H and cannot exceed 1 − T_C/T_H, the Carnot bound set by the absolute temperatures of its two reservoirs.",
+         "keywords": [
+          "efficiency",
+          "carnot",
+          "heat engine"
+         ],
+         "prerequisites": [
+          "The Second Law and Entropy"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Fluids"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Electrostatics",
+   "units": [
+    {
+     "unit": "Electrostatics",
+     "topics": [
+      {
+       "topic": "Charge & Coulomb's Law",
+       "concepts": [
+        {
+         "title": "Electric Charge and Its Conservation",
+         "summary": "Charge comes in two signs, is conserved in every process, and is quantised in units of 1.6×10⁻¹⁹ C.",
+         "keywords": [
+          "charge",
+          "quantisation",
+          "conservation"
+         ]
+        },
+        {
+         "title": "Coulomb's Law",
+         "summary": "Two point charges repel or attract with force k q₁q₂/r², so tripling their separation reduces the force to one ninth.",
+         "keywords": [
+          "coulomb",
+          "inverse square",
+          "point charge"
+         ],
+         "prerequisites": [
+          "Electric Charge and Its Conservation"
+         ]
+        },
+        {
+         "title": "Charging by Conduction and Induction",
+         "summary": "Conduction transfers charge by contact while induction redistributes it without contact, so a grounded object can be left with the opposite charge.",
+         "keywords": [
+          "induction",
+          "conduction",
+          "grounding"
+         ],
+         "prerequisites": [
+          "Coulomb's Law"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Electric Field",
+       "concepts": [
+        {
+         "title": "Electric Field of a Point Charge",
+         "summary": "The field of a point charge is kq/r² directed away from positive charge and toward negative charge, defined as force per unit positive test charge.",
+         "keywords": [
+          "electric field",
+          "point charge",
+          "test charge"
+         ]
+        },
+        {
+         "title": "Field Lines and Superposition",
+         "summary": "Field lines begin on positive charge and end on negative, never cross, and the fields of several charges add as vectors at each point.",
+         "keywords": [
+          "field lines",
+          "superposition",
+          "vector sum"
+         ],
+         "prerequisites": [
+          "Electric Field of a Point Charge"
+         ]
+        },
+        {
+         "title": "Deflection of Charges in a Uniform Field",
+         "summary": "A charge launched across a uniform field follows a parabola, because a constant electric force plays the role gravity plays for a projectile.",
+         "keywords": [
+          "uniform field",
+          "deflection",
+          "parabola"
+         ],
+         "prerequisites": [
+          "Field Lines and Superposition"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Electric Potential & Potential Energy",
+       "concepts": [
+        {
+         "title": "Electric Potential Energy of Two Charges",
+         "summary": "The potential energy of two charges is k q₁q₂/r, so like charges pushed together store positive energy and unlike charges store negative energy.",
+         "keywords": [
+          "potential energy",
+          "pair of charges",
+          "sign"
+         ]
+        },
+        {
+         "title": "Electric Potential and Voltage",
+         "summary": "Electric potential is potential energy per unit charge, kq/r for a point charge, and only potential differences are measured by a voltmeter.",
+         "keywords": [
+          "electric potential",
+          "voltage",
+          "difference"
+         ],
+         "prerequisites": [
+          "Electric Potential Energy of Two Charges"
+         ]
+        },
+        {
+         "title": "Equipotentials and Field Direction",
+         "summary": "Equipotential surfaces are everywhere perpendicular to field lines, so moving a charge along one at constant speed requires no work.",
+         "keywords": [
+          "equipotential",
+          "perpendicular",
+          "work"
+         ],
+         "prerequisites": [
+          "Electric Potential and Voltage"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Conductors, Insulators & Capacitance",
+       "concepts": [
+        {
+         "title": "Conductors and Insulators",
+         "summary": "Charge moves freely in a conductor, so in electrostatic equilibrium the field inside it is zero and excess charge sits on its surface, while an insulator holds charge in place.",
+         "keywords": [
+          "conductor",
+          "insulator",
+          "electrostatic equilibrium"
+         ]
+        },
+        {
+         "title": "Capacitance",
+         "summary": "A capacitor stores charge Q = CV at a given potential difference, and a parallel-plate capacitor has C = ε₀A/d, so closer plates store more charge.",
+         "keywords": [
+          "capacitance",
+          "parallel plate",
+          "dielectric"
+         ],
+         "prerequisites": [
+          "Conductors and Insulators"
+         ]
+        },
+        {
+         "title": "Energy Stored in a Capacitor",
+         "summary": "A charged capacitor stores ½CV² of energy, and inserting a dielectric of constant κ raises its capacitance by the factor κ at the same voltage.",
+         "keywords": [
+          "energy stored",
+          "capacitor",
+          "dielectric"
+         ],
+         "prerequisites": [
+          "Capacitance"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Thermodynamics"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Electric Circuits",
+   "units": [
+    {
+     "unit": "Electric Circuits",
+     "topics": [
+      {
+       "topic": "Current, Resistance & Ohm's Law",
+       "concepts": [
+        {
+         "title": "Electric Current",
+         "summary": "Current is the rate of charge flow, I = ΔQ/Δt, measured in amperes, and conventional current points opposite to the drift of electrons.",
+         "keywords": [
+          "current",
+          "ampere",
+          "conventional current"
+         ]
+        },
+        {
+         "title": "Resistance and Resistivity",
+         "summary": "Resistance is V/I, and for a uniform wire R = ρL/A, so doubling the length doubles it while doubling the cross-section halves it.",
+         "keywords": [
+          "resistance",
+          "resistivity",
+          "ohm"
+         ],
+         "prerequisites": [
+          "Electric Current"
+         ]
+        },
+        {
+         "title": "Ohmic and Non-ohmic Conductors",
+         "summary": "A conductor is ohmic only when its resistance is independent of the applied voltage, which is why a filament lamp gives a curved current-voltage graph rather than a straight line.",
+         "keywords": [
+          "ohmic",
+          "non-ohmic",
+          "graph"
+         ],
+         "prerequisites": [
+          "Resistance and Resistivity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Series & Parallel Circuits",
+       "concepts": [
+        {
+         "title": "Series Circuits",
+         "summary": "In a series circuit the current is the same through every element and the voltages add, so the total resistance is the sum of the parts.",
+         "keywords": [
+          "series",
+          "current",
+          "voltage divider"
+         ]
+        },
+        {
+         "title": "Parallel Circuits",
+         "summary": "In a parallel circuit the voltage is the same across every branch and the currents add, so the total resistance is smaller than any single branch.",
+         "keywords": [
+          "parallel",
+          "voltage",
+          "branch"
+         ],
+         "prerequisites": [
+          "Series Circuits"
+         ]
+        },
+        {
+         "title": "Equivalent Resistance of Networks",
+         "summary": "Series and parallel rules reduce any resistor network to one equivalent resistance, which then fixes the total current drawn from the source.",
+         "keywords": [
+          "equivalent resistance",
+          "network",
+          "reduction"
+         ],
+         "prerequisites": [
+          "Parallel Circuits"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Electrical Power & Energy",
+       "concepts": [
+        {
+         "title": "Electric Power Dissipation",
+         "summary": "A resistor converts P = IV = I²R = V²/R into thermal energy, so transmission losses fall with the square of the current when the same power is delivered at higher voltage.",
+         "keywords": [
+          "power",
+          "joule heating",
+          "i squared r"
+         ]
+        },
+        {
+         "title": "Energy Consumption and the Kilowatt-hour",
+         "summary": "Electrical energy is power multiplied by time, and one kilowatt-hour equals 3.6 MJ, which is the unit a domestic meter bills.",
+         "keywords": [
+          "kilowatt hour",
+          "energy",
+          "billing"
+         ],
+         "prerequisites": [
+          "Electric Power Dissipation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Kirchhoff's Rules & Capacitors in Circuits",
+       "concepts": [
+        {
+         "title": "Kirchhoff's Junction and Loop Rules",
+         "summary": "Charge conservation at a junction gives the current rule and energy conservation around a loop gives the voltage rule, which together solve networks that series-parallel reduction cannot.",
+         "keywords": [
+          "kirchhoff",
+          "junction",
+          "loop"
+         ]
+        },
+        {
+         "title": "Capacitors in Series and Parallel",
+         "summary": "Capacitors combine oppositely to resistors: in parallel their capacitances add and in series their reciprocals add, because they share voltage or charge respectively.",
+         "keywords": [
+          "capacitors",
+          "series",
+          "parallel"
+         ],
+         "prerequisites": [
+          "Kirchhoff's Junction and Loop Rules"
+         ]
+        },
+        {
+         "title": "RC Charging and the Time Constant",
+         "summary": "A capacitor charging through a resistor reaches 63% of its final voltage after one time constant τ = RC, and is treated as fully charged after about five.",
+         "keywords": [
+          "rc circuit",
+          "time constant",
+          "charging"
+         ],
+         "prerequisites": [
+          "Capacitors in Series and Parallel"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Electrostatics"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Magnetism & Electromagnetic Induction",
+   "units": [
+    {
+     "unit": "Magnetism & Electromagnetic Induction",
+     "topics": [
+      {
+       "topic": "Magnetic Fields & Forces",
+       "concepts": [
+        {
+         "title": "Magnetic Field Lines and Poles",
+         "summary": "Magnetic field lines run from north to south outside a magnet, close on themselves, never cross, and no isolated magnetic pole has been observed.",
+         "keywords": [
+          "magnetic field",
+          "poles",
+          "field lines"
+         ]
+        },
+        {
+         "title": "Magnetic Force on a Moving Charge",
+         "summary": "A charge moving in a magnetic field feels F = qvB sin θ perpendicular to both v and B, so the force does no work and only bends the path.",
+         "keywords": [
+          "lorentz force",
+          "moving charge",
+          "perpendicular"
+         ],
+         "prerequisites": [
+          "Magnetic Field Lines and Poles"
+         ]
+        },
+        {
+         "title": "Magnetic Force on a Current-Carrying Wire",
+         "summary": "A straight wire carrying current I in a field B feels F = BIL sin θ, which is the principle behind motors and loudspeakers.",
+         "keywords": [
+          "current",
+          "wire",
+          "force"
+         ],
+         "prerequisites": [
+          "Magnetic Force on a Moving Charge"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sources of the Magnetic Field",
+       "concepts": [
+        {
+         "title": "Field of a Long Straight Wire",
+         "summary": "A long straight wire produces B = μ₀I/(2πr) circling it, so the field halves at twice the distance while the current sets its strength.",
+         "keywords": [
+          "ampere",
+          "straight wire",
+          "permeability"
+         ]
+        },
+        {
+         "title": "Solenoids and Electromagnets",
+         "summary": "Inside a solenoid the field is B = μ₀nI and nearly uniform, so more turns per metre or more current strengthens an electromagnet in proportion.",
+         "keywords": [
+          "solenoid",
+          "electromagnet",
+          "turns"
+         ],
+         "prerequisites": [
+          "Field of a Long Straight Wire"
+         ]
+        },
+        {
+         "title": "Torque on a Current Loop",
+         "summary": "A current loop in a magnetic field feels torque τ = NIAB sin θ, which turns its normal into alignment with the field, as in a motor or an analogue meter.",
+         "keywords": [
+          "torque",
+          "current loop",
+          "motor"
+         ],
+         "prerequisites": [
+          "Solenoids and Electromagnets"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Electromagnetic Induction",
+       "concepts": [
+        {
+         "title": "Magnetic Flux",
+         "summary": "Magnetic flux Φ = BA cos θ counts the field lines through an area, so tilting a loop reduces the flux and at 90° it is zero.",
+         "keywords": [
+          "flux",
+          "area",
+          "angle"
+         ]
+        },
+        {
+         "title": "Faraday's Law of Induction",
+         "summary": "The induced emf equals the negative rate of change of magnetic flux, so a faster flux change or more turns in the coil gives a larger emf.",
+         "keywords": [
+          "faraday",
+          "induced emf",
+          "flux change"
+         ],
+         "prerequisites": [
+          "Magnetic Flux"
+         ]
+        },
+        {
+         "title": "Lenz's Law",
+         "summary": "An induced current flows in the direction whose own field opposes the change that produced it, which is why a magnet falling through a copper tube drops slowly.",
+         "keywords": [
+          "lenz",
+          "opposition",
+          "direction"
+         ],
+         "prerequisites": [
+          "Faraday's Law of Induction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Electromagnetic Waves",
+       "concepts": [
+        {
+         "title": "Maxwell's Prediction of EM Waves",
+         "summary": "A changing electric field induces a magnetic field and a changing magnetic field induces an electric one, so the pair sustains a wave travelling at c = 1/√(μ₀ε₀).",
+         "keywords": [
+          "maxwell",
+          "electromagnetic wave",
+          "speed of light"
+         ]
+        },
+        {
+         "title": "The Electromagnetic Spectrum",
+         "summary": "Radio, microwave, infrared, visible, ultraviolet, X-ray and gamma radiation differ only in frequency and wavelength, and all travel at c in vacuum.",
+         "keywords": [
+          "spectrum",
+          "frequency",
+          "vacuum"
+         ],
+         "prerequisites": [
+          "Maxwell's Prediction of EM Waves"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Electric Circuits"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Optics",
+   "units": [
+    {
+     "unit": "Optics",
+     "topics": [
+      {
+       "topic": "Light & the EM Spectrum",
+       "concepts": [
+        {
+         "title": "The Speed of Light and the Index of Refraction",
+         "summary": "Light travels at c in vacuum and at c/n in a medium of index n, so a larger index means a slower wave and a proportionally shorter wavelength.",
+         "keywords": [
+          "speed of light",
+          "index",
+          "medium"
+         ]
+        },
+        {
+         "title": "Visible Light and Colour",
+         "summary": "Visible light spans roughly 400 to 700 nm, and colour is set by frequency, so light keeps its colour on entering glass even though its wavelength and speed change.",
+         "keywords": [
+          "visible",
+          "wavelength",
+          "colour"
+         ],
+         "prerequisites": [
+          "The Speed of Light and the Index of Refraction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Reflection & Refraction",
+       "concepts": [
+        {
+         "title": "The Law of Reflection",
+         "summary": "The angle of incidence equals the angle of reflection, both measured from the normal, so a plane mirror places the image as far behind the mirror as the object is in front.",
+         "keywords": [
+          "reflection",
+          "normal",
+          "mirror"
+         ]
+        },
+        {
+         "title": "Snell's Law",
+         "summary": "n₁ sin θ₁ = n₂ sin θ₂ fixes the bending at an interface, so light entering an optically denser medium bends toward the normal.",
+         "keywords": [
+          "snell",
+          "refraction",
+          "index"
+         ],
+         "prerequisites": [
+          "The Law of Reflection"
+         ]
+        },
+        {
+         "title": "Total Internal Reflection",
+         "summary": "Total internal reflection needs light going from a denser to a less dense medium at an incidence angle above the critical angle sin θ_c = n₂/n₁, which is how optical fibres guide light.",
+         "keywords": [
+          "total internal reflection",
+          "critical angle",
+          "fibre optics"
+         ],
+         "prerequisites": [
+          "Snell's Law"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Mirrors & Lenses",
+       "concepts": [
+        {
+         "title": "The Thin Lens and Mirror Equation",
+         "summary": "The equation 1/f = 1/d_o + 1/d_i locates an image, and a positive image distance means a real image that can be caught on a screen.",
+         "keywords": [
+          "thin lens",
+          "image distance",
+          "focal length"
+         ]
+        },
+        {
+         "title": "Magnification",
+         "summary": "Magnification is m = −d_i/d_o, so a negative value means an inverted image and a magnitude above one means an enlarged one.",
+         "keywords": [
+          "magnification",
+          "inverted",
+          "image size"
+         ],
+         "prerequisites": [
+          "The Thin Lens and Mirror Equation"
+         ]
+        },
+        {
+         "title": "Converging and Diverging Elements",
+         "summary": "A converging lens or concave mirror has positive focal length and can form real images, while a diverging element has negative focal length and forms only virtual, upright, reduced images.",
+         "keywords": [
+          "converging",
+          "diverging",
+          "focal point"
+         ],
+         "prerequisites": [
+          "Magnification"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Wave Optics",
+       "concepts": [
+        {
+         "title": "Young's Double-Slit Interference",
+         "summary": "Two slits separated by d give bright fringes where d sin θ = mλ, so the fringe spacing grows with wavelength and with the distance to the screen.",
+         "keywords": [
+          "double slit",
+          "fringes",
+          "path difference"
+         ]
+        },
+        {
+         "title": "Single-Slit Diffraction",
+         "summary": "A slit of width a gives minima at a sin θ = mλ, and its central maximum is twice as wide as each side maximum.",
+         "keywords": [
+          "single slit",
+          "diffraction",
+          "minima"
+         ],
+         "prerequisites": [
+          "Young's Double-Slit Interference"
+         ]
+        },
+        {
+         "title": "Thin-Film Interference",
+         "summary": "A thin film shows constructive or destructive interference according to the path difference 2nt, together with any half-wavelength phase shift at the boundary.",
+         "keywords": [
+          "thin film",
+          "path difference",
+          "phase shift"
+         ],
+         "prerequisites": [
+          "Single-Slit Diffraction"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Magnetism & Electromagnetic Induction"
      ]
     }
    ]
@@ -310,30 +2087,151 @@
    "strand": "Modern Physics",
    "units": [
     {
-     "unit": "Quantum and nuclear physics",
-     "prerequisites": ["Waves and Optics", "Thermal Physics"],
+     "unit": "Modern Physics",
      "topics": [
       {
-       "topic": "Quantum foundations",
+       "topic": "Special Relativity (Intro)",
        "concepts": [
-        {"title": "The photon model of light", "summary": "Light arrives in discrete packets whose energy depends only on frequency, which explains the photoelectric effect.", "keywords": ["photon", "quantum", "photoelectric"], "prerequisites": ["The electromagnetic spectrum"]},
-        {"title": "The photoelectric effect", "summary": "Electrons are emitted only above a threshold frequency, which wave theory cannot explain.", "keywords": ["photoelectric", "threshold", "work function"], "prerequisites": ["The photon model of light"]},
-        {"title": "Wave-particle duality", "summary": "Electrons diffract and light carries momentum, so neither model alone describes nature.", "keywords": ["duality", "de Broglie", "diffraction"], "prerequisites": ["The photoelectric effect"]},
-        {"title": "Atomic energy levels and spectra", "summary": "Atoms absorb and emit only specific photon energies, which is why line spectra are a fingerprint.", "keywords": ["energy level", "line spectrum", "quantised"], "prerequisites": ["The photon model of light"]},
-        {"title": "The Bohr model and its limits", "summary": "Quantised orbits predict hydrogen's spectrum but fail for anything with more than one electron.", "keywords": ["Bohr", "orbit", "hydrogen"], "prerequisites": ["Atomic energy levels and spectra"]}
+        {
+         "title": "The Postulates of Special Relativity",
+         "summary": "Physics is the same in every inertial frame and light's vacuum speed is the same for every observer, which forces space and time intervals to depend on the frame.",
+         "keywords": [
+          "relativity",
+          "postulates",
+          "inertial frame"
+         ]
+        },
+        {
+         "title": "Time Dilation and Length Contraction",
+         "summary": "A clock moving relative to an observer runs slow by the factor γ = 1/√(1 − v²/c²), and a moving object is measured shorter along its motion by the same factor.",
+         "keywords": [
+          "time dilation",
+          "length contraction",
+          "lorentz factor"
+         ],
+         "prerequisites": [
+          "The Postulates of Special Relativity"
+         ]
+        }
        ]
       },
       {
-       "topic": "Nuclear physics",
+       "topic": "Quantum Nature of Light",
        "concepts": [
-        {"title": "Atomic structure and the nucleus", "summary": "Protons and neutrons make up a nucleus whose size is set by the strong force, not by electron orbits.", "keywords": ["nucleus", "proton", "neutron"]},
-        {"title": "Isotopes and nuclear stability", "summary": "Isotopes of an element differ only in neutron number, and the neutron-to-proton ratio decides stability.", "keywords": ["isotope", "stability", "neutron ratio"], "prerequisites": ["Atomic structure and the nucleus"]},
-        {"title": "Radioactive decay", "summary": "Alpha, beta and gamma decay each change the nucleus differently and have different penetrating power.", "keywords": ["radioactive", "alpha", "beta"], "prerequisites": ["Isotopes and nuclear stability"]},
-        {"title": "Half-life and decay rates", "summary": "Half-life is the time for half of any sample to decay, so activity falls exponentially.", "keywords": ["half-life", "exponential", "activity"], "prerequisites": ["Radioactive decay"]},
-        {"title": "Mass-energy equivalence", "summary": "Mass and energy are interconvertible, and the mass defect of a nucleus appears as binding energy.", "keywords": ["mass-energy", "binding energy", "defect"], "prerequisites": ["Isotopes and nuclear stability"]},
-        {"title": "Fission, fusion and energy release", "summary": "Both fission and fusion release energy because the products are more tightly bound than the reactants.", "keywords": ["fission", "fusion", "binding energy"], "prerequisites": ["Mass-energy equivalence"]}
+        {
+         "title": "The Photon and Quantised Energy",
+         "summary": "Light exchanges energy in photons of energy hf, so an ultraviolet photon carries more energy than an infrared one whatever the beam intensity.",
+         "keywords": [
+          "photon",
+          "planck",
+          "quantum"
+         ]
+        },
+        {
+         "title": "The Photoelectric Effect",
+         "summary": "Electrons are ejected only when the photon energy exceeds the work function, and the maximum kinetic energy is hf − φ, independent of intensity.",
+         "keywords": [
+          "photoelectric",
+          "work function",
+          "threshold"
+         ],
+         "prerequisites": [
+          "The Photon and Quantised Energy"
+         ]
+        },
+        {
+         "title": "Wave-Particle Duality and the de Broglie Wavelength",
+         "summary": "Every particle has wavelength λ = h/p, which is measurable for electrons but negligible for a thrown ball.",
+         "keywords": [
+          "de broglie",
+          "duality",
+          "matter wave"
+         ],
+         "prerequisites": [
+          "The Photoelectric Effect"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Atomic Models & Spectra",
+       "concepts": [
+        {
+         "title": "The Bohr Model of the Atom",
+         "summary": "Electrons occupy discrete levels, and a photon carries exactly the level difference when an electron drops, which reproduces the hydrogen line spectrum.",
+         "keywords": [
+          "bohr",
+          "energy levels",
+          "hydrogen"
+         ]
+        },
+        {
+         "title": "Atomic Spectra and Element Identification",
+         "summary": "Each element emits a unique set of lines because its level spacings are unique, which is how spectroscopy reads the composition of distant stars.",
+         "keywords": [
+          "emission spectrum",
+          "absorption",
+          "element"
+         ],
+         "prerequisites": [
+          "The Bohr Model of the Atom"
+         ]
+        },
+        {
+         "title": "Heisenberg's Uncertainty Principle",
+         "summary": "Position and momentum cannot both be sharp, because Δx Δp ≥ ħ/2 bounds the product of their uncertainties from below.",
+         "keywords": [
+          "uncertainty principle",
+          "heisenberg",
+          "bound"
+         ],
+         "prerequisites": [
+          "Atomic Spectra and Element Identification"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Nuclear Physics & Radioactivity",
+       "concepts": [
+        {
+         "title": "Nuclear Structure and the Strong Force",
+         "summary": "A nucleus of Z protons and N neutrons is bound by the short-ranged strong force, which must beat the Coulomb repulsion that grows with Z.",
+         "keywords": [
+          "nucleus",
+          "strong force",
+          "nucleon"
+         ]
+        },
+        {
+         "title": "Alpha, Beta and Gamma Decay",
+         "summary": "Alpha decay removes two protons and two neutrons, beta decay turns a neutron into a proton, and gamma emission carries away energy without changing Z or A.",
+         "keywords": [
+          "alpha decay",
+          "beta decay",
+          "gamma"
+         ],
+         "prerequisites": [
+          "Nuclear Structure and the Strong Force"
+         ]
+        },
+        {
+         "title": "Half-Life and Activity",
+         "summary": "Half-life is the time for half the nuclei to decay, so after n half-lives the fraction remaining is 2⁻ⁿ and the activity has fallen by the same factor.",
+         "keywords": [
+          "half-life",
+          "decay",
+          "activity"
+         ],
+         "prerequisites": [
+          "Alpha, Beta and Gamma Decay"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Optics"
      ]
     }
    ]

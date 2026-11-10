@@ -136,6 +136,25 @@ class PreferencePatch(Input):
         return value
 
 
+class ModelConfigInput(Input):
+    """The runtime language-model setting written by the Settings screen.
+
+    A language model is required, so every write is a *complete* configuration: either a
+    curated ``preset`` (which supplies the wire provider and a default base URL) or an
+    explicit ``provider`` plus ``base_url``. ``api_key`` is optional on write on purpose -
+    the GET never returns one, so a UI saving an unchanged key must be able to omit it.
+    ``clear_key`` is the explicit way to drop a stored key (a keyless local Ollama).
+    """
+
+    preset: str = Field(default='', max_length=64)
+    provider: str = Field(default='', max_length=32)
+    base_url: str = Field(default='', max_length=512)
+    model: str = Field(default='', max_length=128)
+    api_key: str = Field(default='', max_length=2048)
+    clear_key: bool = False
+    timeout: float = Field(default=30.0, ge=1, le=300)
+
+
 class Profile(Input):
     goal: str | None = Field(default=None, min_length=1, max_length=500)
     daily_minutes: int | None = Field(default=None, ge=1, le=240)

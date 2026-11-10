@@ -1,6 +1,6 @@
 {
   "generated_by": "scripts/api_surface.py --expect",
-  "route_count": 234,
+  "route_count": 244,
   "routes": [
     "DELETE /api/v1/admin/invites/{invite_id}",
     "DELETE /api/v1/auth/sessions/{session_id}",
@@ -19,6 +19,7 @@
     "DELETE /api/v1/me",
     "DELETE /api/v1/my-courses/{course_id}",
     "DELETE /api/v1/perspectives/reviews/{review_id}",
+    "DELETE /api/v1/settings/model-config",
     "GET /",
     "GET /api/v1/ability",
     "GET /api/v1/admin/cohorts",
@@ -116,6 +117,8 @@
     "GET /api/v1/rewards/events",
     "GET /api/v1/role",
     "GET /api/v1/self-explanations",
+    "GET /api/v1/settings/model-config",
+    "GET /api/v1/settings/model-config/catalog",
     "GET /api/v1/share/{token}",
     "GET /api/v1/sims",
     "GET /api/v1/sims/{sim_id}",
@@ -129,8 +132,12 @@
     "GET /api/v1/supervision",
     "GET /api/v1/ta/results",
     "GET /api/v1/ta/status",
+    "GET /api/v1/textbooks/catalogue",
     "GET /api/v1/training/status",
     "GET /api/v1/usage",
+    "GET /api/v1/voice/voices",
+    "GET /api/v1/whiteboard-agent/boards",
+    "GET /api/v1/whiteboard-agent/catalog",
     "GET /api/v1/whiteboards/{board_id}",
     "GET /app",
     "GET /health",
@@ -217,6 +224,7 @@
     "POST /api/v1/procedure/runs/{run_id}/advance",
     "POST /api/v1/procedure/{concept_id}/start",
     "POST /api/v1/projects/{project_id}/submit",
+    "POST /api/v1/settings/model-config/test",
     "POST /api/v1/sims",
     "POST /api/v1/sims/{sim_id}/frame-token",
     "POST /api/v1/sims/{sim_id}/requests",
@@ -232,9 +240,11 @@
     "POST /api/v1/voice/speak",
     "POST /api/v1/waitlist",
     "POST /api/v1/waitlist/confirm",
+    "POST /api/v1/whiteboard-agent/draw",
     "POST /api/v1/whiteboards/{board_id}/ack",
     "POST /api/v1/whiteboards/{board_id}/ink",
     "PUT /api/v1/deck/{deck_id}",
-    "PUT /api/v1/procedure/{concept_id}/deck-cursor"
+    "PUT /api/v1/procedure/{concept_id}/deck-cursor",
+    "PUT /api/v1/settings/model-config"
   ]
 }

@@ -97,6 +97,9 @@ class Settings:
     #: Whether this instance may fetch media from the open image and video APIs. Off in
     #: production unless an operator turns it on, because it is the only outbound network
     #: call the application makes on a learner's behalf and it should be a decision.
+    #: **On in the shipped desktop build** (``HARNESS_ENV=desktop``), which is what
+    #: ``legal/privacy.md`` discloses to the user and what ``legal/FILL_IN_SHEET.md``
+    #: records. The dataclass default below is the fail-closed value; ``from_env`` decides.
     media_enabled: bool = False
     #: Timeout for a media search or download. Short on purpose: a slow image API must not
     #: hold a lesson.
@@ -172,8 +175,8 @@ class Settings:
     #: Whether this instance may produce speech at all. Deliberately *not* ``media_enabled``.
     #:
     #: Speech was gated on ``media_enabled``, on the theory that both are "audio/media". That
-    #: made the shipped desktop app mute: ``desktop`` turns ``media_enabled`` off so the privacy
-    #: policy's "no outbound media" line stays true, and the tutor's voice went off with it --
+    #: made the shipped desktop app mute: the two were treated as one switch, so whatever the
+    #: desktop profile did to media took the tutor's voice with it --
     #: ``speech.plan`` answered ``unavailable`` for every reply, so the speaker button did
     #: nothing and the reason was only visible if a learner went looking for it.
     #:
@@ -249,18 +252,31 @@ class Settings:
             if os.getenv('HARNESS_LEGAL_TEMPLATE_OK', '') != '1':
                 from .legal_guard import assert_shippable
                 assert_shippable(legal_dir())
-        provider = os.getenv('HARNESS_TUTOR_PROVIDER', 'offline')
-        if provider not in {'offline', 'ollama', 'openai'}:
-            raise ValueError('Unsupported tutor provider')
-        provider_url = os.getenv('HARNESS_TUTOR_URL', '')
-        if provider != 'offline':
+        # The product requires a language model. The old 'offline' (deterministic
+        # rules-engine) mode is removed: it is rejected outright, because a formal product
+        # must not let customers slip into the degraded no-model experience. An *unconfigured*
+        # instance (no provider set) boots degraded and refuses generative work until an
+        # operator configures one through HARNESS_TUTOR_* or the runtime settings API.
+        # Production refuses to boot without a provider; dev/test/desktop boot and surface
+        # the unconfigured state so it can be filled in.
+        provider = os.getenv('HARNESS_TUTOR_PROVIDER', '').strip()
+        if provider == 'offline':
+            raise ValueError('HARNESS_TUTOR_PROVIDER=offline is no longer supported; '
+                             'configure a language model (openai or ollama) instead.')
+        if provider and provider not in {'ollama', 'openai'}:
+            raise ValueError('Unsupported tutor provider; must be openai or ollama.')
+        provider_url = os.getenv('HARNESS_TUTOR_URL', '').strip()
+        if provider:
             parsed = urlparse(provider_url)
             if parsed.scheme not in {'http', 'https'} or not parsed.hostname or parsed.username:
                 raise ValueError('External tutor requires a valid administrator-configured HARNESS_TUTOR_URL')
             if environment == 'production' and parsed.scheme != 'https' and parsed.hostname not in {'localhost', '127.0.0.1', '::1', 'ollama'}:
                 raise ValueError('Remote production tutor requires HTTPS')
-        if provider != 'offline' and not os.getenv('HARNESS_TUTOR_MODEL', '').strip():
-            raise ValueError('External tutor requires HARNESS_TUTOR_MODEL')
+            if not os.getenv('HARNESS_TUTOR_MODEL', '').strip():
+                raise ValueError('External tutor requires HARNESS_TUTOR_MODEL')
+        elif environment == 'production':
+            raise ValueError('Production requires a configured language model '
+                             '(set HARNESS_TUTOR_PROVIDER to openai or ollama).')
         token_ttl = int(os.getenv('HARNESS_TOKEN_TTL_SECONDS', '604800'))
         receipt_ttl = int(os.getenv('HARNESS_RECEIPT_TTL_SECONDS', '3600'))
         timeout = float(os.getenv('HARNESS_TUTOR_TIMEOUT_SECONDS', '12'))
@@ -322,8 +338,8 @@ class Settings:
         # outbound media search is on.
         attention_default = '1' if environment in {'development', 'test'} else '0'
         # Speech is a separate switch with a separate default, because it is a separate
-        # promise. ``media_enabled`` is about third-party network fetches, which is why the
-        # desktop bundle leaves it off; synthesis is loopback to the learner's own VoiceStudio
+        # promise. ``media_enabled`` is about third-party network fetches, on in the desktop
+        # build and off in production; synthesis is loopback to the learner's own VoiceStudio
         # and carries no learner text off the machine, so the desktop bundle turns it *on*.
         # Production stays off: a hosted instance that silently assumed a local engine would
         # be advertising a capability it does not have.
@@ -369,9 +385,9 @@ class Settings:
                    # to it, so there is no environment in which it defaults on.
                    os.getenv('HARNESS_STREAM_ENABLED', '0') == '1',
                    # Both default on for a running instance. They are gated again on
-                   # ``media_enabled`` (off in production/desktop) at the call site, so
-                   # an instance that promises no outbound media never launches a
-                   # browser. Set either to 0 to disable explicitly.
+                   # ``media_enabled`` (off in production, on in the desktop build) at the
+                   # call site, so an instance that promises no outbound media never
+                   # launches a browser. Set either to 0 to disable explicitly.
                    os.getenv('HARNESS_CHROMIUM_SEARCH', '1') == '1',
                    os.getenv('HARNESS_VIDEO_AUTO_CURATE', '1') == '1')
 

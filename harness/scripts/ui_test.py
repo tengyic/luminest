@@ -65,8 +65,7 @@ def main():
     environment.update({'HARNESS_ENV': 'test', 'HARNESS_DATA_DIR': str(state),
                         'HARNESS_DATABASE_URL': f'sqlite:///{state / "harness.sqlite3"}',
                         'HARNESS_AUTO_CREATE': '1', 'HARNESS_PORT': str(args.port),
-                        'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_TUTOR_PROVIDER': 'offline',
-                        'HARNESS_UI_OUTPUT': str(OUTPUT), 'HARNESS_UI_ENDPOINT': f'http://127.0.0.1:{args.port}',
+                        'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_UI_OUTPUT': str(OUTPUT), 'HARNESS_UI_ENDPOINT': f'http://127.0.0.1:{args.port}',
                         'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost', 'PYTHONDONTWRITEBYTECODE': '1'})
     result = OUTPUT / 'NativeWorkflow.xcresult'
     if result.exists():

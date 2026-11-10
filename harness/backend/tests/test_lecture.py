@@ -15,7 +15,7 @@ def lecture_client(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     # The storyboard and the board are the contract here. Media is exercised as a refusal
     # path: no network, no downloaded file, but the lecture still returns a reference card.
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '0')

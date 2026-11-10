@@ -695,11 +695,17 @@ def vectorize_image(image_bytes: bytes, *, anchor_x: float, anchor_y: float,
 
 
 def _diagram_settings(settings):
-    """Build an isolated OpenAI-compatible DeepSeek client without changing tutor chat."""
+    """Build an isolated OpenAI-compatible client without changing tutor chat.
+
+    The fallback endpoint/key is the *effective* model configuration, so a model entered
+    through Settings is picked up here too rather than only the process environment.
+    """
+    from .. import model_config
+    active = model_config.effective(settings)
     url = (os.getenv('HARNESS_DIAGRAM_URL') or os.getenv('DEEPSEEK_BASE_URL')
-           or getattr(settings, 'provider_url', '') or '').strip().rstrip('/')
+           or active.provider_url or '').strip().rstrip('/')
     key = (os.getenv('HARNESS_DIAGRAM_KEY') or os.getenv('DEEPSEEK_API_KEY')
-           or getattr(settings, 'provider_key', '') or '').strip()
+           or active.provider_key or '').strip()
     model = os.getenv('HARNESS_DIAGRAM_MODEL', MODEL).strip() or MODEL
     try:
         timeout = float(os.getenv('HARNESS_DIAGRAM_TIMEOUT_SECONDS', '90'))

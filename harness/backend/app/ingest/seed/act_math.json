@@ -1,0 +1,1405 @@
+{
+ "course": "ACT Math - Number, Algebra, Functions, Geometry and Data",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A complete ACT Mathematics course: rational and irrational numbers, exponent properties, vectors, matrices and complex numbers, linear, quadratic, polynomial, rational and radical algebra with systems and inequalities, functions and their transformations, sequences, trigonometry, exponential and logarithmic functions, geometry from transformations and similarity through coordinate geometry, conics and circles, univariate and bivariate statistics with inference and probability, the integrating essential skills the test assumes, and modelling as a practice rather than a topic.",
+ "expected_weeks": 18,
+ "strands": [
+  {
+   "strand": "Number and Quantity",
+   "units": [
+    {
+     "unit": "Number and Quantity",
+     "topics": [
+      {
+       "topic": "Rational and Irrational Numbers",
+       "concepts": [
+        {
+         "title": "Rational Numbers as Ratios",
+         "summary": "A number is rational exactly when it equals a ratio of two integers, and its decimal expansion then terminates or repeats a fixed block.",
+         "keywords": [
+          "rational number",
+          "ratio",
+          "terminating decimal"
+         ]
+        },
+        {
+         "title": "Recognising Irrational Numbers",
+         "summary": "A number is irrational when no ratio of integers equals it, so its decimal neither terminates nor repeats, as with the square root of 2.",
+         "keywords": [
+          "irrational number",
+          "non-repeating",
+          "square root"
+         ],
+         "prerequisites": [
+          "Rational Numbers as Ratios"
+         ]
+        },
+        {
+         "title": "Density and Ordering on the Number Line",
+         "summary": "Between any two distinct real numbers lies both a rational and an irrational number, so there is no smallest positive real number.",
+         "keywords": [
+          "density",
+          "number line",
+          "ordering"
+         ],
+         "prerequisites": [
+          "Recognising Irrational Numbers"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Exponents",
+       "concepts": [
+        {
+         "title": "Product and Quotient Rules",
+         "summary": "For a nonzero base a, a^m times a^n is a^(m+n) and a^m divided by a^n is a^(m-n), because multiplying counts factors and dividing cancels them.",
+         "keywords": [
+          "product rule",
+          "quotient rule",
+          "base"
+         ]
+        },
+        {
+         "title": "Zero, Negative, and Fractional Exponents",
+         "summary": "For nonzero a, a^0 is 1 and a^(-n) is 1/a^n, while a^(m/n) is the nth root of a^m whenever that root is a real number.",
+         "keywords": [
+          "zero exponent",
+          "negative exponent",
+          "rational exponent"
+         ],
+         "prerequisites": [
+          "Product and Quotient Rules"
+         ]
+        },
+        {
+         "title": "Power of a Product and Power of a Power",
+         "summary": "(ab)^n equals a^n b^n and (a^m)^n equals a^(mn), but (a+b)^n is not a^n + b^n because an exponent does not distribute over a sum.",
+         "keywords": [
+          "power rule",
+          "distribute",
+          "common error"
+         ],
+         "prerequisites": [
+          "Zero, Negative, and Fractional Exponents"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Vectors and Matrices",
+       "concepts": [
+        {
+         "title": "Vector Components and Magnitude",
+         "summary": "A plane vector is an ordered pair of components, and its magnitude is the square root of the sum of their squares, which is a distance in the plane.",
+         "keywords": [
+          "vector",
+          "components",
+          "magnitude"
+         ]
+        },
+        {
+         "title": "Vector Addition and Scalar Multiplication",
+         "summary": "Vectors add component by component and scale by multiplying each component, so a negative scalar reverses direction without changing the line of action.",
+         "keywords": [
+          "vector addition",
+          "scalar",
+          "direction"
+         ],
+         "prerequisites": [
+          "Vector Components and Magnitude"
+         ]
+        },
+        {
+         "title": "Matrix Dimensions and Products",
+         "summary": "A product AB exists only when the column count of A equals the row count of B, and matrix multiplication is not commutative in general.",
+         "keywords": [
+          "matrix",
+          "dimension",
+          "product"
+         ],
+         "prerequisites": [
+          "Vector Addition and Scalar Multiplication"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Complex Numbers",
+       "concepts": [
+        {
+         "title": "The Imaginary Unit",
+         "summary": "The imaginary unit i satisfies i^2 = -1, which makes x^2 + 1 = 0 solvable and gives every negative real number two square roots.",
+         "keywords": [
+          "imaginary unit",
+          "complex number",
+          "square root"
+         ]
+        },
+        {
+         "title": "Arithmetic with Complex Numbers",
+         "summary": "Complex numbers add part by part and multiply by distributing with i^2 = -1, so the sum and product of complex numbers stay complex.",
+         "keywords": [
+          "complex arithmetic",
+          "distribute",
+          "i squared"
+         ],
+         "prerequisites": [
+          "The Imaginary Unit"
+         ]
+        },
+        {
+         "title": "The Complex Conjugate",
+         "summary": "Multiplying a + bi by its conjugate a - bi gives the real number a^2 + b^2, which is how a complex denominator is cleared.",
+         "keywords": [
+          "conjugate",
+          "complex division",
+          "real number"
+         ],
+         "prerequisites": [
+          "Arithmetic with Complex Numbers"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Quantities and Units",
+       "concepts": [
+        {
+         "title": "Units as Part of the Quantity",
+         "summary": "A measurement is a number together with a unit, so an answer that lacks the unit the question asked for has not answered the question.",
+         "keywords": [
+          "measurement",
+          "units",
+          "quantity"
+         ]
+        },
+        {
+         "title": "Dimensional Analysis",
+         "summary": "Multiplying by a conversion factor equal to one changes the unit without changing the value, and the unwanted units must cancel completely.",
+         "keywords": [
+          "conversion factor",
+          "cancel units",
+          "rate"
+         ],
+         "prerequisites": [
+          "Units as Part of the Quantity"
+         ]
+        },
+        {
+         "title": "Precision and Significant Figures",
+         "summary": "A computed result carries no more precision than its least precise input, so a calculator display is rounded to that precision rather than quoted whole.",
+         "keywords": [
+          "precision",
+          "significant figures",
+          "rounding"
+         ],
+         "prerequisites": [
+          "Dimensional Analysis"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Algebra",
+   "units": [
+    {
+     "unit": "Algebra",
+     "topics": [
+      {
+       "topic": "Linear Expressions, Equations, and Inequalities",
+       "concepts": [
+        {
+         "title": "Solving Linear Equations",
+         "summary": "A linear equation is solved by applying the same operation to both sides until the variable stands alone, which preserves the solution set at every step.",
+         "keywords": [
+          "linear equation",
+          "inverse operation",
+          "balance"
+         ]
+        },
+        {
+         "title": "Reversing an Inequality",
+         "summary": "Multiplying or dividing both sides of an inequality by a negative number reverses the symbol, because that operation reflects the number line.",
+         "keywords": [
+          "inequality",
+          "negative factor",
+          "reverse symbol"
+         ],
+         "prerequisites": [
+          "Solving Linear Equations"
+         ]
+        },
+        {
+         "title": "Solving a Formula for a Variable",
+         "summary": "Rearranging a formula for a named variable treats every other variable as a constant, so the inverse operations are applied in reverse order.",
+         "keywords": [
+          "literal equation",
+          "rearrange",
+          "formula"
+         ],
+         "prerequisites": [
+          "Reversing an Inequality"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Quadratic Expressions, Equations, and Inequalities",
+       "concepts": [
+        {
+         "title": "Factoring and the Zero Product Property",
+         "summary": "If a product equals zero then at least one factor equals zero, so a factored quadratic equation splits into two linear equations.",
+         "keywords": [
+          "zero product property",
+          "factor",
+          "solve"
+         ]
+        },
+        {
+         "title": "The Quadratic Formula and Discriminant",
+         "summary": "For ax^2 + bx + c = 0 with a not zero, x = (-b +/- sqrt(b^2 - 4ac))/(2a), and the sign of b^2 - 4ac gives two, one, or no real solutions.",
+         "keywords": [
+          "quadratic formula",
+          "discriminant",
+          "real solutions"
+         ],
+         "prerequisites": [
+          "Factoring and the Zero Product Property"
+         ]
+        },
+        {
+         "title": "Sign Analysis of a Quadratic Inequality",
+         "summary": "A quadratic inequality is solved from its zeros and the sign of the leading coefficient: an upward parabola is positive outside its roots and negative between them.",
+         "keywords": [
+          "quadratic inequality",
+          "sign chart",
+          "roots"
+         ],
+         "prerequisites": [
+          "The Quadratic Formula and Discriminant"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rational and Radical Expressions and Equations",
+       "concepts": [
+        {
+         "title": "Restricted Domains of Rational Expressions",
+         "summary": "A rational expression is undefined where its denominator is zero, so those values are excluded before a common factor is cancelled.",
+         "keywords": [
+          "rational expression",
+          "domain",
+          "undefined"
+         ]
+        },
+        {
+         "title": "Common Denominators for Rational Expressions",
+         "summary": "Rational expressions are added by rewriting each over a common denominator, and multiplying numerator and denominator by the same nonzero factor changes nothing.",
+         "keywords": [
+          "common denominator",
+          "equivalent fractions",
+          "simplify"
+         ],
+         "prerequisites": [
+          "Restricted Domains of Rational Expressions"
+         ]
+        },
+        {
+         "title": "Extraneous Solutions from Squaring",
+         "summary": "A radical equation can produce extraneous solutions because squaring both sides is not reversible, so every candidate is checked in the original equation.",
+         "keywords": [
+          "radical equation",
+          "extraneous solution",
+          "check"
+         ],
+         "prerequisites": [
+          "Common Denominators for Rational Expressions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Polynomial Expressions and Equations",
+       "concepts": [
+        {
+         "title": "Degree, Zeros, and End Behaviour",
+         "summary": "A polynomial of degree n has at most n real zeros and at most n - 1 turning points, and its end behaviour follows the sign of its leading coefficient.",
+         "keywords": [
+          "degree",
+          "zeros",
+          "end behaviour"
+         ]
+        },
+        {
+         "title": "Remainder and Factor Theorems",
+         "summary": "Dividing p(x) by x - c leaves remainder p(c), so c is a zero of p exactly when x - c is a factor of p.",
+         "keywords": [
+          "remainder theorem",
+          "factor theorem",
+          "zero"
+         ],
+         "prerequisites": [
+          "Degree, Zeros, and End Behaviour"
+         ]
+        },
+        {
+         "title": "Multiplying and Dividing Polynomials",
+         "summary": "Every term of one polynomial multiplies every term of the other, and division by a monomial distributes over the terms while division by a binomial needs long division.",
+         "keywords": [
+          "polynomial product",
+          "long division",
+          "monomial"
+         ],
+         "prerequisites": [
+          "Remainder and Factor Theorems"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Systems of Equations and Inequalities",
+       "concepts": [
+        {
+         "title": "Substitution and Elimination",
+         "summary": "Substitution or elimination reduces a system of two linear equations to one equation in one variable, and the second variable follows by back substitution.",
+         "keywords": [
+          "system",
+          "substitution",
+          "elimination"
+         ]
+        },
+        {
+         "title": "The Three Solution Cases",
+         "summary": "Two lines in a plane meet once, never, or at every point, so a linear system has exactly one solution, none, or infinitely many.",
+         "keywords": [
+          "consistent",
+          "inconsistent",
+          "dependent"
+         ],
+         "prerequisites": [
+          "Substitution and Elimination"
+         ]
+        },
+        {
+         "title": "Half-Planes from Two-Variable Inequalities",
+         "summary": "The solution set of a linear inequality in two variables is a half-plane, and one test point decides which side of the boundary satisfies it.",
+         "keywords": [
+          "half-plane",
+          "boundary line",
+          "test point"
+         ],
+         "prerequisites": [
+          "The Three Solution Cases"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Representation of Expressions and Equations",
+       "concepts": [
+        {
+         "title": "Equivalent Forms of One Relationship",
+         "summary": "Factored, standard, and vertex forms describe the same quadratic, so the form is chosen for what it displays: zeros, y-intercept, or turning point.",
+         "keywords": [
+          "equivalent forms",
+          "standard form",
+          "vertex form"
+         ]
+        },
+        {
+         "title": "Interpreting Parameters in Context",
+         "summary": "In y = mx + b the slope is the change per input unit and b is the starting value, and each parameter carries the units of the quantity it describes.",
+         "keywords": [
+          "parameter",
+          "slope",
+          "initial value"
+         ],
+         "prerequisites": [
+          "Equivalent Forms of One Relationship"
+         ]
+        },
+        {
+         "title": "Agreement of Equation, Table, and Graph",
+         "summary": "An equation, its table, and its graph describe the same relationship, so a disagreement between any two of them exposes an algebra or scale error.",
+         "keywords": [
+          "multiple representations",
+          "check",
+          "scale"
+         ],
+         "prerequisites": [
+          "Interpreting Parameters in Context"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Number and Quantity"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Functions",
+   "units": [
+    {
+     "unit": "Functions",
+     "topics": [
+      {
+       "topic": "Properties of Functions",
+       "concepts": [
+        {
+         "title": "Function Definition and Vertical Line Test",
+         "summary": "A function assigns exactly one output to each input, so a graph is a function exactly when no vertical line meets it more than once.",
+         "keywords": [
+          "function",
+          "vertical line test",
+          "input"
+         ]
+        },
+        {
+         "title": "Domain and Range",
+         "summary": "The domain is the set of inputs the rule accepts, limited by division by zero and even roots of negatives, and the range is the set of outputs actually produced.",
+         "keywords": [
+          "domain",
+          "range",
+          "restriction"
+         ],
+         "prerequisites": [
+          "Function Definition and Vertical Line Test"
+         ]
+        },
+        {
+         "title": "Average Rate of Change",
+         "summary": "The average rate of change between two inputs is the change in output divided by the change in input, which is the slope of the secant line.",
+         "keywords": [
+          "average rate of change",
+          "secant",
+          "interval"
+         ],
+         "prerequisites": [
+          "Domain and Range"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Composition, Transformation, and Inverse Functions",
+       "concepts": [
+        {
+         "title": "Composition of Functions",
+         "summary": "The composition f(g(x)) applies g first and f second, so its domain excludes inputs that g rejects and inputs whose g(x) f cannot evaluate.",
+         "keywords": [
+          "composition",
+          "order of operations",
+          "domain"
+         ]
+        },
+        {
+         "title": "Transformations of Graphs",
+         "summary": "Adding a constant to the output shifts a graph vertically, adding inside the input shifts it horizontally in the opposite direction, and a factor stretches or reflects it.",
+         "keywords": [
+          "translation",
+          "stretch",
+          "reflection"
+         ],
+         "prerequisites": [
+          "Composition of Functions"
+         ]
+        },
+        {
+         "title": "Inverse Functions",
+         "summary": "An inverse swaps the roles of input and output and undoes the original, and it is a function only where the original is one-to-one.",
+         "keywords": [
+          "inverse",
+          "one-to-one",
+          "swap"
+         ],
+         "prerequisites": [
+          "Transformations of Graphs"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sequences and Series",
+       "concepts": [
+        {
+         "title": "Arithmetic Sequences and Their Sums",
+         "summary": "An arithmetic sequence adds a constant difference, so a_n = a_1 + (n - 1)d and the first n terms sum to n(a_1 + a_n)/2.",
+         "keywords": [
+          "arithmetic sequence",
+          "common difference",
+          "series"
+         ]
+        },
+        {
+         "title": "Geometric Sequences and Their Sums",
+         "summary": "A geometric sequence multiplies by a constant ratio, so a_n = a_1 r^(n-1) and a finite sum is a_1(1 - r^n)/(1 - r) when r is not 1.",
+         "keywords": [
+          "geometric sequence",
+          "common ratio",
+          "finite sum"
+         ],
+         "prerequisites": [
+          "Arithmetic Sequences and Their Sums"
+         ]
+        },
+        {
+         "title": "Recursive versus Explicit Rules",
+         "summary": "A recursive rule needs a starting term and the previous term, while an explicit rule gives any term from its position alone, which is what makes a distant term computable.",
+         "keywords": [
+          "recursive rule",
+          "explicit rule",
+          "nth term"
+         ],
+         "prerequisites": [
+          "Geometric Sequences and Their Sums"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Trigonometric Functions",
+       "concepts": [
+        {
+         "title": "Right-Triangle Ratios",
+         "summary": "In a right triangle sine, cosine, and tangent are fixed ratios of two sides, so one acute angle and one side determine the remaining sides.",
+         "keywords": [
+          "sine",
+          "cosine",
+          "tangent"
+         ]
+        },
+        {
+         "title": "Unit Circle and Radian Measure",
+         "summary": "On the unit circle the cosine and sine of an angle are the coordinates of the point it reaches, and pi radians equal 180 degrees.",
+         "keywords": [
+          "unit circle",
+          "radian",
+          "coordinates"
+         ],
+         "prerequisites": [
+          "Right-Triangle Ratios"
+         ]
+        },
+        {
+         "title": "Period, Amplitude, and Midline",
+         "summary": "For y = A sin(Bx + C) + D the amplitude is |A|, the period is 2pi/|B|, and the midline is y = D, so each parameter changes one visible feature.",
+         "keywords": [
+          "amplitude",
+          "period",
+          "midline"
+         ],
+         "prerequisites": [
+          "Unit Circle and Radian Measure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Exponential and Logarithmic Functions",
+       "concepts": [
+        {
+         "title": "Exponential Growth and Decay",
+         "summary": "In f(x) = a b^x the base b is the factor per unit step, so b > 1 grows, 0 < b < 1 decays, and the percent change per step is b - 1.",
+         "keywords": [
+          "exponential function",
+          "growth factor",
+          "decay"
+         ]
+        },
+        {
+         "title": "Logarithms as Inverses",
+         "summary": "log_b x is the exponent that turns b into x, so it inverts b^x and accepts only positive inputs because no power of b is zero or negative.",
+         "keywords": [
+          "logarithm",
+          "inverse",
+          "domain"
+         ],
+         "prerequisites": [
+          "Exponential Growth and Decay"
+         ]
+        },
+        {
+         "title": "Solving Exponential and Logarithmic Equations",
+         "summary": "An exponential equation yields to a logarithm of both sides and a logarithmic equation to rewriting it in exponential form, with every candidate checked against the domain.",
+         "keywords": [
+          "exponential equation",
+          "logarithmic equation",
+          "check domain"
+         ],
+         "prerequisites": [
+          "Logarithms as Inverses"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Algebra"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Geometry",
+   "units": [
+    {
+     "unit": "Geometry",
+     "topics": [
+      {
+       "topic": "Transformations, Proof, Reasoning, and Constructions",
+       "concepts": [
+        {
+         "title": "Rigid Motions Preserve Congruence",
+         "summary": "Translations, rotations, and reflections preserve every length and angle, so a figure and its image under a rigid motion are congruent.",
+         "keywords": [
+          "rigid motion",
+          "congruence",
+          "isometry"
+         ]
+        },
+        {
+         "title": "Dilations and Scale Factor",
+         "summary": "A dilation multiplies every length by its scale factor and preserves angle measures, so it changes size while keeping the shape.",
+         "keywords": [
+          "dilation",
+          "scale factor",
+          "similarity"
+         ],
+         "prerequisites": [
+          "Rigid Motions Preserve Congruence"
+         ]
+        },
+        {
+         "title": "Deductive Reasoning and Counterexamples",
+         "summary": "A proof derives each statement from givens and established results, and a single counterexample is enough to refute a universal claim.",
+         "keywords": [
+          "proof",
+          "counterexample",
+          "conditional"
+         ],
+         "prerequisites": [
+          "Dilations and Scale Factor"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Similarity, Right Triangles, and Trigonometry",
+       "concepts": [
+        {
+         "title": "Similar Triangles and Proportional Sides",
+         "summary": "Two triangles are similar when two pairs of corresponding angles agree, and then every pair of corresponding sides shares one ratio.",
+         "keywords": [
+          "similar triangles",
+          "proportion",
+          "corresponding sides"
+         ]
+        },
+        {
+         "title": "Pythagorean Theorem and Its Converse",
+         "summary": "In a right triangle the square of the hypotenuse equals the sum of the squares of the legs, and the converse guarantees a triangle satisfying it is right.",
+         "keywords": [
+          "pythagorean theorem",
+          "hypotenuse",
+          "converse"
+         ],
+         "prerequisites": [
+          "Similar Triangles and Proportional Sides"
+         ]
+        },
+        {
+         "title": "Law of Sines and Law of Cosines",
+         "summary": "The law of sines relates each side to the sine of its opposite angle, and the law of cosines extends the Pythagorean theorem to triangles without a right angle.",
+         "keywords": [
+          "law of sines",
+          "law of cosines",
+          "oblique triangle"
+         ],
+         "prerequisites": [
+          "Pythagorean Theorem and Its Converse"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Coordinate Geometry",
+       "concepts": [
+        {
+         "title": "Distance and Midpoint",
+         "summary": "The distance between two points is the hypotenuse of a right triangle whose legs are the coordinate differences, and the midpoint averages the coordinates.",
+         "keywords": [
+          "distance formula",
+          "midpoint",
+          "coordinates"
+         ]
+        },
+        {
+         "title": "Slope Criteria for Parallel and Perpendicular Lines",
+         "summary": "Two nonvertical lines are parallel exactly when their slopes are equal and perpendicular exactly when their slopes have product -1.",
+         "keywords": [
+          "slope",
+          "parallel",
+          "perpendicular"
+         ],
+         "prerequisites": [
+          "Distance and Midpoint"
+         ]
+        },
+        {
+         "title": "Equations of Circles in the Plane",
+         "summary": "A circle with centre (h, k) and radius r satisfies (x - h)^2 + (y - k)^2 = r^2, and completing the square recovers the centre and radius from a general equation.",
+         "keywords": [
+          "circle equation",
+          "centre",
+          "completing the square"
+         ],
+         "prerequisites": [
+          "Slope Criteria for Parallel and Perpendicular Lines"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Conic Sections",
+       "concepts": [
+        {
+         "title": "Standard Forms of the Conics",
+         "summary": "Each conic has a standard form whose parameters display its centre or vertex, its axis, and its size, so a shape is identified from its equation.",
+         "keywords": [
+          "conic",
+          "standard form",
+          "axis"
+         ]
+        },
+        {
+         "title": "Completing the Square to Classify",
+         "summary": "Completing the square in x and y turns a general second-degree equation into standard form, which shows which conic it is and whether it is degenerate.",
+         "keywords": [
+          "complete the square",
+          "classify",
+          "second degree"
+         ],
+         "prerequisites": [
+          "Standard Forms of the Conics"
+         ]
+        },
+        {
+         "title": "Foci and Eccentricity",
+         "summary": "An ellipse is the set of points whose distances to two foci have a constant sum, and its eccentricity measures how far it departs from a circle.",
+         "keywords": [
+          "ellipse",
+          "focus",
+          "eccentricity"
+         ],
+         "prerequisites": [
+          "Completing the Square to Classify"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Circles",
+       "concepts": [
+        {
+         "title": "Central Angles and Arcs",
+         "summary": "A central angle has the same measure as its intercepted arc, so an arc length is that fraction of the circumference.",
+         "keywords": [
+          "central angle",
+          "arc",
+          "circumference"
+         ]
+        },
+        {
+         "title": "Inscribed Angles",
+         "summary": "An inscribed angle measures half of its intercepted arc, which is why an angle inscribed in a semicircle is a right angle.",
+         "keywords": [
+          "inscribed angle",
+          "intercepted arc",
+          "semicircle"
+         ],
+         "prerequisites": [
+          "Central Angles and Arcs"
+         ]
+        },
+        {
+         "title": "Chords, Tangents, and Secants",
+         "summary": "A tangent line is perpendicular to the radius at the point of contact, and a radius that bisects a chord is perpendicular to that chord.",
+         "keywords": [
+          "tangent",
+          "chord",
+          "radius"
+         ],
+         "prerequisites": [
+          "Inscribed Angles"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Geometric Measurement and Modeling",
+       "concepts": [
+        {
+         "title": "Perimeter, Circumference, and Area",
+         "summary": "Area scales as the square of a length scale factor, so doubling every dimension of a figure multiplies its area by four.",
+         "keywords": [
+          "area",
+          "perimeter",
+          "scale factor"
+         ]
+        },
+        {
+         "title": "Surface Area and Volume",
+         "summary": "Volume scales as the cube of a length scale factor while surface area scales as its square, so doubling a solid multiplies volume by eight and surface area by four.",
+         "keywords": [
+          "volume",
+          "surface area",
+          "similar solids"
+         ],
+         "prerequisites": [
+          "Perimeter, Circumference, and Area"
+         ]
+        },
+        {
+         "title": "Density and Geometric Modelling",
+         "summary": "A geometric model answers a real question only when the units agree: volume times density gives mass, and area times a coverage rate gives a total amount.",
+         "keywords": [
+          "density",
+          "rate",
+          "units"
+         ],
+         "prerequisites": [
+          "Surface Area and Volume"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Functions"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Statistics and Probability",
+   "units": [
+    {
+     "unit": "Statistics and Probability",
+     "topics": [
+      {
+       "topic": "Univariate Data Analysis",
+       "concepts": [
+        {
+         "title": "Measures of Center",
+         "summary": "The mean is pulled toward a skew or an outlier while the median is not, so the median better describes a typical value in a skewed distribution.",
+         "keywords": [
+          "mean",
+          "median",
+          "skew"
+         ]
+        },
+        {
+         "title": "Measures of Spread",
+         "summary": "Range, interquartile range, and standard deviation all measure spread, and the interquartile range resists outliers as the median does.",
+         "keywords": [
+          "range",
+          "interquartile range",
+          "standard deviation"
+         ],
+         "prerequisites": [
+          "Measures of Center"
+         ]
+        },
+        {
+         "title": "Shape from Displays",
+         "summary": "A histogram or box plot shows shape, centre, spread, and outliers together, and no single summary statistic can reveal a second peak.",
+         "keywords": [
+          "histogram",
+          "box plot",
+          "distribution shape"
+         ],
+         "prerequisites": [
+          "Measures of Spread"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Bivariate Data Analysis",
+       "concepts": [
+        {
+         "title": "Scatterplots and Association",
+         "summary": "A scatterplot displays the direction, form, and strength of an association between two quantitative variables, which a correlation alone cannot show.",
+         "keywords": [
+          "scatterplot",
+          "association",
+          "direction"
+         ]
+        },
+        {
+         "title": "The Least-Squares Regression Line",
+         "summary": "The least-squares line minimises the sum of squared residuals, so it balances prediction errors rather than passing through the most data points.",
+         "keywords": [
+          "regression line",
+          "residual",
+          "least squares"
+         ],
+         "prerequisites": [
+          "Scatterplots and Association"
+         ]
+        },
+        {
+         "title": "Correlation and Prediction",
+         "summary": "The correlation coefficient measures only the strength and direction of a linear association, so a strong correlation never by itself establishes causation.",
+         "keywords": [
+          "correlation",
+          "causation",
+          "prediction"
+         ],
+         "prerequisites": [
+          "The Least-Squares Regression Line"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Introduction to Formal Inferential Statistics",
+       "concepts": [
+        {
+         "title": "Samples and Populations",
+         "summary": "A statistic computed from a random sample estimates a population parameter, and the sampling method decides whether that estimate can be trusted.",
+         "keywords": [
+          "sample",
+          "population",
+          "random sampling"
+         ]
+        },
+        {
+         "title": "The Central Limit Theorem",
+         "summary": "For a large random sample the sample mean is approximately normal with mean mu and standard deviation sigma over the square root of n, whatever the population shape.",
+         "keywords": [
+          "central limit theorem",
+          "standard error",
+          "sample mean"
+         ],
+         "prerequisites": [
+          "Samples and Populations"
+         ]
+        },
+        {
+         "title": "Null Hypotheses and p-Values",
+         "summary": "A hypothesis test compares the observed statistic with what the null hypothesis predicts, and a small p-value means the observation is unlikely under that null.",
+         "keywords": [
+          "null hypothesis",
+          "p-value",
+          "significance"
+         ],
+         "prerequisites": [
+          "The Central Limit Theorem"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rules of Probability",
+       "concepts": [
+        {
+         "title": "Probability as a Long-Run Proportion",
+         "summary": "A probability lies between 0 and 1 and equals the proportion of trials in which the event occurs as the number of trials grows without bound.",
+         "keywords": [
+          "probability",
+          "long run",
+          "event"
+         ]
+        },
+        {
+         "title": "Addition Rule and Mutually Exclusive Events",
+         "summary": "P(A or B) = P(A) + P(B) - P(A and B), and the subtracted term vanishes only when A and B cannot occur together.",
+         "keywords": [
+          "addition rule",
+          "mutually exclusive",
+          "overlap"
+         ],
+         "prerequisites": [
+          "Probability as a Long-Run Proportion"
+         ]
+        },
+        {
+         "title": "Conditional Probability and Independence",
+         "summary": "P(A given B) = P(A and B)/P(B), and A and B are independent exactly when that conditional probability equals P(A).",
+         "keywords": [
+          "conditional probability",
+          "independence",
+          "given"
+         ],
+         "prerequisites": [
+          "Addition Rule and Mutually Exclusive Events"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Counting, Permutations, and Combinations",
+       "concepts": [
+        {
+         "title": "The Multiplication Principle",
+         "summary": "If one stage can be done in m ways and the next in n ways, the two stages together can be done in mn ways, which multiplies through any number of stages.",
+         "keywords": [
+          "counting principle",
+          "stages",
+          "outcomes"
+         ]
+        },
+        {
+         "title": "Permutations Count Ordered Arrangements",
+         "summary": "The number of ordered arrangements of r items chosen from n distinct items is n!/(n - r)!, because a different order is a different arrangement.",
+         "keywords": [
+          "permutation",
+          "factorial",
+          "order"
+         ],
+         "prerequisites": [
+          "The Multiplication Principle"
+         ]
+        },
+        {
+         "title": "Combinations Count Unordered Selections",
+         "summary": "The number of unordered selections of r items from n is n!/(r!(n - r)!), which is the permutation count divided by the r! orders of one set.",
+         "keywords": [
+          "combination",
+          "subset",
+          "factorial"
+         ],
+         "prerequisites": [
+          "Permutations Count Ordered Arrangements"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Geometry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Integrating Essential Skills",
+   "units": [
+    {
+     "unit": "Integrating Essential Skills",
+     "topics": [
+      {
+       "topic": "Properties of Real Numbers",
+       "concepts": [
+        {
+         "title": "Field Properties of Real Numbers",
+         "summary": "Real numbers are closed under addition and multiplication, both operations commute and associate, and multiplication distributes over addition, which is what licenses every rearrangement.",
+         "keywords": [
+          "field properties",
+          "distributive",
+          "closure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Computation and Problem Solving with Real Numbers",
+       "concepts": [
+        {
+         "title": "Signed Arithmetic and Order of Operations",
+         "summary": "Grouping and exponents are evaluated first, then multiplication and division left to right, then addition and subtraction, with sign rules applied at each step.",
+         "keywords": [
+          "order of operations",
+          "signed numbers",
+          "precedence"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Ratio, Proportion, and Percent",
+       "concepts": [
+        {
+         "title": "Setting Up and Solving a Proportion",
+         "summary": "A proportion states two equal ratios, and cross multiplication clears the denominators, which is the same step as multiplying both sides by their product.",
+         "keywords": [
+          "proportion",
+          "cross multiply",
+          "percent"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Writing Algebraic Expressions",
+       "concepts": [
+        {
+         "title": "Translating Words into Symbols",
+         "summary": "Each operation word maps to one symbol and order words such as twice the sum fix the grouping, so a phrase is translated one operation at a time.",
+         "keywords": [
+          "translate",
+          "expression",
+          "grouping"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Writing and Solving Simple Equations and Inequalities",
+       "concepts": [
+        {
+         "title": "Isolating the Unknown",
+         "summary": "An equation or inequality is solved by undoing operations in reverse order on both sides, and multiplying or dividing by a negative reverses an inequality.",
+         "keywords": [
+          "isolate",
+          "inverse operation",
+          "inequality"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Measurement Units and Unit Conversion",
+       "concepts": [
+        {
+         "title": "Conversion Factors in One Step",
+         "summary": "A conversion factor is a ratio of two equal quantities, so multiplying by it changes only the unit and the unit being replaced must cancel.",
+         "keywords": [
+          "unit conversion",
+          "conversion factor",
+          "cancel"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Properties of Lines, Angles, and Shapes",
+       "concepts": [
+        {
+         "title": "Angle Relationships in Figures",
+         "summary": "Vertical angles are equal, angles on a straight line sum to 180 degrees, and the angles of a triangle sum to 180 degrees, which fixes a missing angle.",
+         "keywords": [
+          "vertical angles",
+          "supplementary",
+          "triangle angle sum"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Perimeter, Circumference, and Area",
+       "concepts": [
+        {
+         "title": "Area of Composite Figures",
+         "summary": "A composite figure is measured by adding or subtracting the areas of the shapes it decomposes into, with every length first converted to one unit.",
+         "keywords": [
+          "composite area",
+          "decomposition",
+          "perimeter"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Surface Area and Volume",
+       "concepts": [
+        {
+         "title": "Volume and Surface Area Formulas",
+         "summary": "A prism or cylinder has volume equal to base area times height, a pyramid or cone has one third of that, and surface area sums the exposed faces.",
+         "keywords": [
+          "volume",
+          "surface area",
+          "solid"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Coordinate Plane",
+       "concepts": [
+        {
+         "title": "Slope, Midpoint, and Distance from Coordinates",
+         "summary": "Between two points the slope is the ratio of the coordinate differences, the midpoint averages the coordinates, and the distance is the hypotenuse of those differences.",
+         "keywords": [
+          "slope",
+          "midpoint",
+          "distance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Pythagorean Theorem",
+       "concepts": [
+        {
+         "title": "Right Triangles and the Distance Formula",
+         "summary": "In a right triangle the hypotenuse squared equals the sum of the legs squared, and the coordinate distance formula is that theorem applied to the two coordinate differences.",
+         "keywords": [
+          "pythagorean theorem",
+          "hypotenuse",
+          "distance formula"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Scatterplots",
+       "concepts": [
+        {
+         "title": "Reading a Scatterplot",
+         "summary": "A scatterplot is read for direction, strength, and form of association, and a point far off the pattern is an outlier that can dominate a fitted line.",
+         "keywords": [
+          "scatterplot",
+          "outlier",
+          "trend"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Data Summaries and Displays",
+       "concepts": [
+        {
+         "title": "Choosing a Summary Statistic",
+         "summary": "The mean and standard deviation describe symmetric data, while the median and interquartile range describe skewed data or data carrying outliers.",
+         "keywords": [
+          "mean",
+          "median",
+          "skewed data"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Informal Inferential Statistics",
+       "concepts": [
+        {
+         "title": "Inference from a Sample",
+         "summary": "A conclusion about a population drawn from a sample is only as sound as the sample is random, so a biased sample supports no inference however large it is.",
+         "keywords": [
+          "inference",
+          "random sample",
+          "bias"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Basic Probability",
+       "concepts": [
+        {
+         "title": "Probability from Equally Likely Outcomes",
+         "summary": "When outcomes are equally likely the probability of an event is the number of favourable outcomes divided by the total number of outcomes.",
+         "keywords": [
+          "favorable outcomes",
+          "sample space",
+          "equally likely"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Statistics and Probability"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Modeling",
+   "units": [
+    {
+     "unit": "Modeling",
+     "topics": [
+      {
+       "topic": "Producing",
+       "concepts": [
+        {
+         "title": "Building a Model from a Context",
+         "summary": "Producing a model means naming the input and output with their units, choosing a family that matches how the data change, and fitting its parameters to the given values.",
+         "keywords": [
+          "model",
+          "parameter",
+          "function family"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Interpreting",
+       "concepts": [
+        {
+         "title": "Reading Parameters and Outputs in Context",
+         "summary": "Interpreting a model means stating what each parameter and each predicted output means in the situation, including its units and the interval where it applies.",
+         "keywords": [
+          "interpret",
+          "units",
+          "prediction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Understanding",
+       "concepts": [
+        {
+         "title": "Assumptions and Limits of a Model",
+         "summary": "Every model rests on assumptions such as a constant rate or unlimited growth, and understanding it means knowing which assumption a conclusion depends on.",
+         "keywords": [
+          "assumption",
+          "limitation",
+          "domain"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Evaluating",
+       "concepts": [
+        {
+         "title": "Judging a Model Against Data",
+         "summary": "A model is evaluated by comparing its predictions with observed values, and a pattern in the residuals shows the family is wrong rather than merely imprecise.",
+         "keywords": [
+          "evaluate",
+          "residual",
+          "fit"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Improving",
+       "concepts": [
+        {
+         "title": "Revising a Model",
+         "summary": "Improving a model means changing the family, the interval, or the measurements in response to the residual pattern and then re-checking the new predictions.",
+         "keywords": [
+          "revise",
+          "refit",
+          "iteration"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Integrating Essential Skills"
+     ]
+    }
+   ]
+  }
+ ]
+}

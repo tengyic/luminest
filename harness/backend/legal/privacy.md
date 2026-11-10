@@ -68,12 +68,16 @@ uploads it. If you report a problem through *Report a problem*, you choose what 
 
 ## 4. The one outbound path, and how to turn it off
 
-By default, **nothing leaves your Mac.** The tutor is a deterministic offline tutor: it reads
-the curriculum, your own answer history and the course graph, and answers with citations. It
-needs no network connection.
+Until you configure a language model, **nothing leaves your Mac.** No key is shipped with the
+app. In that state the tutor is explicitly degraded: it reports *model required*, and can
+show grounded curriculum material with a notice that no model answered. It is not an offline
+tutor product and we do not present it as one.
 
-If you want a language-model tutor, you supply your own provider URL, model name and API key
-in:
+**A language model is required for the product to work as intended.** You supply your own
+provider, model name and API key in **Settings → Language model**. The key is saved in the
+app's data directory in a file readable only by your account, is never displayed again, and
+is never sent anywhere except as the credential for requests to the provider you chose. An
+operator may instead set the `HARNESS_TUTOR_*` variables, or place them in:
 
 ```
 ~/Library/Application Support/Luminfest Learning Harness/tutor.env
@@ -82,8 +86,10 @@ in:
 From that point on, the text of your messages and the lesson context needed to answer them
 are sent to **the provider you chose**, under **your** account with that provider. Luminfest
 does not operate that service, does not receive a copy of the exchange, and holds no key of
-its own. Delete the file to stop it. The provider's own privacy terms govern what it does
-with those requests — read them, because we cannot make promises on their behalf.
+its own. To stop it, remove the configuration in Settings if you entered it there, or
+delete `tutor.env` if an operator supplied it. The provider's own privacy terms govern
+what it does with those requests — read them, because we cannot make promises on their
+behalf.
 
 Two further outbound paths exist. **Image and video search are on in the desktop build**
 and off in a hosted production instance unless its operator enables them:

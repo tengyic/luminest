@@ -1,112 +1,182 @@
 {
- "course": "Earth and Space Science — Systems, Climate and the Cosmos",
+ "course": "Earth and Space Science - Systems, Cycles and Evidence",
  "licence": "cc0",
  "source_url": "",
  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
- "description": "An introductory Earth and space science course: Earth's place in the universe, plate tectonics and Earth's structure, weather and climate, and Earth's resources and human impact.",
+ "description": "A full-year Earth Science course: the practices and reference tools of the discipline, Earth's interior and plate tectonics, minerals, rocks and the rock cycle, volcanoes, earthquakes and crustal deformation, geologic time and Earth history, weathering, streams and groundwater, oceans, coasts and glaciers, the atmosphere, weather and climate, resources, hazards and sustainability, and Earth's place in the solar system.",
  "expected_weeks": 36,
  "strands": [
   {
-   "strand": "Earth in the Universe",
+   "strand": "Earth Science Practices and Reference Tools",
    "units": [
     {
-     "unit": "Space systems",
+     "unit": "Earth Science Practices and Reference Tools",
      "topics": [
       {
-       "topic": "The solar system and beyond",
+       "topic": "Science Practices and Evidence",
        "concepts": [
-        {"title": "The scale of the universe", "summary": "Astronomical distances are so large that a scaled model almost always misleads unless it is built carefully.", "keywords": ["scale", "light year", "astronomical unit"]},
-        {"title": "Formation of the solar system", "summary": "A collapsing cloud of gas and dust flattened into a disc, and the Sun ignited at its centre.", "keywords": ["solar system", "accretion", "nebula"], "prerequisites": ["The scale of the universe"]},
-        {"title": "Terrestrial and gas giant planets", "summary": "Distance from the Sun during formation decided whether a planet kept a thick volatile envelope or not.", "keywords": ["terrestrial", "gas giant", "formation"], "prerequisites": ["Formation of the solar system"]},
-        {"title": "The Sun and stellar processes", "summary": "Stars fuse light nuclei into heavier ones, releasing the energy that drives everything around them.", "keywords": ["star", "fusion", "energy"], "prerequisites": ["Formation of the solar system"]},
-        {"title": "The life cycle of stars", "summary": "A star's mass decides its whole history, including whether it ends as a white dwarf, neutron star or black hole.", "keywords": ["stellar evolution", "supernova", "mass"], "prerequisites": ["The Sun and stellar processes"]},
-        {"title": "Galaxies and the expanding universe", "summary": "Distant galaxies recede faster, which is the observation that the universe is expanding.", "keywords": ["galaxy", "redshift", "expansion"], "prerequisites": ["The life cycle of stars"]},
-        {"title": "Orbital motion and seasons", "summary": "Seasons come from the tilt of Earth's axis, not from its changing distance from the Sun.", "keywords": ["season", "axial tilt", "orbit"], "prerequisites": ["The scale of the universe"]},
-        {"title": "Moon phases, eclipses and tides", "summary": "Phases, eclipses and tides are all consequences of relative position and gravity, not of the Moon changing shape.", "keywords": ["phase", "eclipse", "tide"], "prerequisites": ["Orbital motion and seasons"]}
-       ]
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "strand": "Solid Earth",
-   "units": [
-    {
-     "unit": "Earth's structure and plate tectonics",
-     "prerequisites": ["Earth in the Universe"],
-     "topics": [
-      {
-       "topic": "Inside the Earth",
-       "concepts": [
-        {"title": "Layers of the Earth", "summary": "Crust, mantle, outer core and inner core are distinguished by composition and by mechanical behaviour.", "keywords": ["crust", "mantle", "core"]},
-        {"title": "Evidence from seismic waves", "summary": "Seismic waves bend and stop at boundaries, which is how the interior was mapped without ever seeing it.", "keywords": ["seismic wave", "refraction", "shadow zone"], "prerequisites": ["Layers of the Earth"]},
-        {"title": "The rock cycle", "summary": "Igneous, sedimentary and metamorphic rocks are three states of the same material under different conditions.", "keywords": ["rock cycle", "igneous", "metamorphic"], "prerequisites": ["Layers of the Earth"]},
-        {"title": "Minerals and their identification", "summary": "Hardness, cleavage, lustre and streak identify a mineral more reliably than colour.", "keywords": ["mineral", "hardness", "cleavage"], "prerequisites": ["The rock cycle"]},
-        {"title": "Relative and absolute dating", "summary": "Superposition gives order while radiometric decay gives age, and together they give a timeline.", "keywords": ["dating", "superposition", "radiometric"], "prerequisites": ["The rock cycle"]},
-        {"title": "The fossil record and geological time", "summary": "The geological timescale was assembled from fossil succession before any radiometric date existed.", "keywords": ["fossil", "timescale", "succession"], "prerequisites": ["Relative and absolute dating"]}
+        {
+         "title": "Observation, Inference, and Explanation",
+         "summary": "An observation is what an instrument or a sense directly detects while an inference is an explanation built from it, so a statement about why a layer formed is an inference and must be checked against evidence other than the layer itself.",
+         "keywords": [
+          "observation",
+          "inference",
+          "evidence"
+         ]
+        },
+        {
+         "title": "Hypotheses, Models, and Testable Predictions",
+         "summary": "A hypothesis is an explanation phrased so that a prediction follows from it, and because most Earth processes cannot be run as a laboratory experiment the hypothesis is tested by comparing a model's prediction with field data such as measured plate motion.",
+         "keywords": [
+          "hypothesis",
+          "model",
+          "prediction"
+         ],
+         "prerequisites": [
+          "Observation, Inference, and Explanation"
+         ]
+        },
+        {
+         "title": "Uncertainty, Replication, and Peer Review",
+         "summary": "Every measurement carries a stated uncertainty range, so a conclusion is accepted only when independent measurements agree within those ranges and another worker can reproduce the result.",
+         "keywords": [
+          "uncertainty",
+          "replication",
+          "peer review"
+         ],
+         "prerequisites": [
+          "Hypotheses, Models, and Testable Predictions"
+         ]
+        }
        ]
       },
       {
-       "topic": "Plate tectonics",
+       "topic": "Earth Systems, Scale, and Interaction",
        "concepts": [
-        {"title": "Continental drift and the evidence for it", "summary": "Matching coastlines, fossils and rock sequences were explained only once the continents were allowed to move.", "keywords": ["continental drift", "Wegener", "evidence"]},
-        {"title": "Seafloor spreading", "summary": "Magnetic stripes recorded symmetrically either side of a ridge are direct evidence that new crust forms there.", "keywords": ["seafloor spreading", "magnetic stripe", "ridge"], "prerequisites": ["Continental drift and the evidence for it"]},
-        {"title": "Plate boundaries and their hazards", "summary": "Divergent, convergent and transform boundaries each produce a characteristic set of hazards.", "keywords": ["plate boundary", "convergent", "transform"], "prerequisites": ["Seafloor spreading"]},
-        {"title": "Earthquakes and their measurement", "summary": "Magnitude measures energy released while intensity measures the effect at a place, so they differ for one event.", "keywords": ["earthquake", "magnitude", "intensity"], "prerequisites": ["Plate boundaries and their hazards"]},
-        {"title": "Volcanoes and magma", "summary": "Magma viscosity, set by silica content, decides whether an eruption is gentle or explosive.", "keywords": ["volcano", "magma", "viscosity"], "prerequisites": ["Plate boundaries and their hazards"]},
-        {"title": "Mountain building and deformation", "summary": "Folding and faulting are the visible result of crustal stress exceeding what rock can bear.", "keywords": ["folding", "faulting", "orogeny"], "prerequisites": ["Plate boundaries and their hazards"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Surface processes",
-     "prerequisites": ["Earth's structure and plate tectonics"],
-     "topics": [
-      {
-       "topic": "Weathering, erosion and landforms",
-       "concepts": [
-        {"title": "Weathering and erosion", "summary": "Weathering breaks rock in place while erosion transports the pieces, and they are different processes.", "keywords": ["weathering", "erosion", "transport"]},
-        {"title": "The water cycle", "summary": "Water moves between ocean, atmosphere and land, and the cycle is powered by the Sun.", "keywords": ["water cycle", "evaporation", "precipitation"], "prerequisites": ["Weathering and erosion"]},
-        {"title": "River processes and landforms", "summary": "A river erodes, transports and deposits along its course, building different landforms at each stage.", "keywords": ["river", "deposition", "meander"], "prerequisites": ["The water cycle"]},
-        {"title": "Groundwater and aquifers", "summary": "Water stored in permeable rock moves slowly, and withdrawing it faster than recharge lowers the water table.", "keywords": ["aquifer", "water table", "permeability"], "prerequisites": ["The water cycle"]},
-        {"title": "Glaciers and glacial landforms", "summary": "Ice erodes differently from water, leaving characteristic U-shaped valleys and deposited moraine.", "keywords": ["glacier", "moraine", "U-shaped valley"], "prerequisites": ["Weathering and erosion"]},
-        {"title": "Soil formation and conservation", "summary": "Soil forms over long periods from parent rock and organic matter, and erodes far faster than it forms.", "keywords": ["soil", "horizon", "erosion"], "prerequisites": ["Weathering and erosion"]}
-       ]
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "strand": "Atmosphere and Climate",
-   "units": [
-    {
-     "unit": "Weather and climate systems",
-     "prerequisites": ["Surface processes"],
-     "topics": [
-      {
-       "topic": "Atmosphere and weather",
-       "concepts": [
-        {"title": "Structure and composition of the atmosphere", "summary": "Temperature changes direction at layer boundaries, and each layer has a different role.", "keywords": ["atmosphere", "troposphere", "stratosphere"]},
-        {"title": "Energy balance and the greenhouse effect", "summary": "Incoming solar radiation must be balanced by outgoing radiation, and greenhouse gases shift where that balance sits.", "keywords": ["energy balance", "greenhouse", "radiation"], "prerequisites": ["Structure and composition of the atmosphere"]},
-        {"title": "Air pressure, wind and global circulation", "summary": "Uneven heating creates pressure differences, and rotation deflects the resulting flow.", "keywords": ["pressure", "wind", "Coriolis"], "prerequisites": ["Energy balance and the greenhouse effect"]},
-        {"title": "Clouds, humidity and precipitation", "summary": "Air cools as it rises, water vapour condenses onto nuclei, and droplets grow until they fall.", "keywords": ["humidity", "condensation", "precipitation"], "prerequisites": ["Air pressure, wind and global circulation"]},
-        {"title": "Air masses and fronts", "summary": "Weather changes sharply at a front because two air masses with different properties meet.", "keywords": ["air mass", "front", "weather change"], "prerequisites": ["Clouds, humidity and precipitation"]},
-        {"title": "Weather prediction and forecasting", "summary": "Forecasts come from numerical models, and their skill decays with lead time in a way that can be estimated.", "keywords": ["forecast", "model", "uncertainty"], "prerequisites": ["Air masses and fronts"]}
+        {
+         "title": "The Four Spheres and Their Exchange at Boundaries",
+         "summary": "The geosphere, hydrosphere, atmosphere and biosphere exchange matter and energy across their boundaries, so a volcanic eruption moves gases and ash from the geosphere into the atmosphere and can cool climate for a year or more.",
+         "keywords": [
+          "earth systems",
+          "sphere",
+          "exchange"
+         ]
+        },
+        {
+         "title": "Two Energy Engines: Sun and Interior",
+         "summary": "Solar radiation drives the atmosphere, ocean and water cycle from outside while radioactive decay and residual heat of accretion drive tectonics from inside, so a landscape records both surface and interior processes at once.",
+         "keywords": [
+          "energy budget",
+          "solar radiation",
+          "internal heat"
+         ],
+         "prerequisites": [
+          "The Four Spheres and Their Exchange at Boundaries"
+         ]
+        },
+        {
+         "title": "Scale, Rate, and the Geologic Record",
+         "summary": "Earth processes run at rates from millimetres per year to minutes, so a canyon cut over millions of years and a flood that moves its sediment in a day are successive chapters of one landscape history rather than opposites.",
+         "keywords": [
+          "scale",
+          "rate",
+          "geologic time"
+         ],
+         "prerequisites": [
+          "Two Energy Engines: Sun and Interior"
+         ]
+        }
        ]
       },
       {
-       "topic": "Climate and change",
+       "topic": "Reference Tables, Units, and Formula Tools",
        "concepts": [
-        {"title": "Climate versus weather", "summary": "Weather is the state of the atmosphere now; climate is the statistics of that state over decades.", "keywords": ["climate", "weather", "timescale"]},
-        {"title": "Natural climate drivers", "summary": "Orbital cycles, volcanic activity and solar variation all changed climate before human influence.", "keywords": ["orbital cycle", "volcanic", "solar"], "prerequisites": ["Climate versus weather"]},
-        {"title": "Evidence for recent climate change", "summary": "Temperature records, ice cores, sea level and phenology are independent lines that agree.", "keywords": ["ice core", "temperature record", "sea level"], "prerequisites": ["Natural climate drivers"]},
-        {"title": "Feedback loops in the climate system", "summary": "Positive feedbacks amplify a change and negative feedbacks damp it, and ice albedo is a strong positive one.", "keywords": ["feedback", "albedo", "amplification"], "prerequisites": ["Evidence for recent climate change"]},
-        {"title": "Impacts and adaptation", "summary": "Impacts differ by region and by capacity to adapt, so the same warming is not the same experience.", "keywords": ["impact", "adaptation", "vulnerability"], "prerequisites": ["Feedback loops in the climate system"]},
-        {"title": "Mitigation and energy transition", "summary": "Mitigation reduces the cause rather than managing the effect, and it requires replacing the energy source.", "keywords": ["mitigation", "energy transition", "emissions"], "prerequisites": ["Impacts and adaptation"]}
+        {
+         "title": "Reading the Earth Science Reference Tables",
+         "summary": "The reference tables collect the constants, mineral and rock properties and chart scales used throughout the course, so a value must be taken from the correct row and kept with its stated unit, because density for example is listed in grams per cubic centimetre.",
+         "keywords": [
+          "reference tables",
+          "data table",
+          "chart"
+         ]
+        },
+        {
+         "title": "Unit Conversion and Scientific Notation",
+         "summary": "A unit is converted by multiplying by a ratio equal to one, as one kilometre over one thousand metres does, so 3,500 metres becomes 3.5 kilometres, and very large or small quantities are written as powers of ten.",
+         "keywords": [
+          "unit conversion",
+          "scientific notation",
+          "si units"
+         ],
+         "prerequisites": [
+          "Reading the Earth Science Reference Tables"
+         ]
+        },
+        {
+         "title": "Gradient, Rate of Change, and Density",
+         "summary": "Gradient is the change in a field value divided by distance, rate of change is change divided by time and density is mass divided by volume, so each result carries combined units such as metres per kilometre or grams per cubic centimetre rather than a bare number.",
+         "keywords": [
+          "gradient",
+          "rate of change",
+          "density"
+         ],
+         "prerequisites": [
+          "Unit Conversion and Scientific Notation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Maps, Coordinates, and Profiles",
+       "concepts": [
+        {
+         "title": "Latitude, Longitude, and Map Position",
+         "summary": "Latitude is measured north or south of the equator from 0 to 90 degrees and longitude east or west of the prime meridian from 0 to 180, and because meridians converge at the poles a degree of longitude narrows from about 111 kilometres at the equator to zero at the poles.",
+         "keywords": [
+          "latitude",
+          "longitude",
+          "coordinates"
+         ]
+        },
+        {
+         "title": "Contour Lines, Relief, and Profiles",
+         "summary": "Contour lines join points of equal elevation, so closely spaced lines mark a steep slope, hachured contours mark a depression, and a contour bending upstream marks a valley floor.",
+         "keywords": [
+          "contour line",
+          "topographic map",
+          "elevation"
+         ],
+         "prerequisites": [
+          "Latitude, Longitude, and Map Position"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Data Displays, Trends, and Reliability",
+       "concepts": [
+        {
+         "title": "Choosing a Display for Earth Data",
+         "summary": "Categories are compared with a bar chart, a quantity tracked through time is plotted as a line, and two measured variables are plotted against each other as a scatter, so a mismatched display hides the pattern the data actually contain.",
+         "keywords": [
+          "data display",
+          "graph",
+          "scatter plot"
+         ]
+        },
+        {
+         "title": "Cycles, Trends, and Data Reliability",
+         "summary": "Many Earth records cycle on daily, seasonal or tidal periods, so a trend can be read only after averaging across at least one full cycle, and a conclusion drawn from a few scattered measurements stays provisional until more samples agree.",
+         "keywords": [
+          "cycle",
+          "trend",
+          "sample size"
+         ],
+         "prerequisites": [
+          "Choosing a Display for Earth Data"
+         ]
+        }
        ]
       }
      ]
@@ -114,23 +184,1636 @@
    ]
   },
   {
-   "strand": "Resources and Human Impact",
+   "strand": "Plate Tectonics and Earth's Interior",
    "units": [
     {
-     "unit": "Resources and sustainability",
-     "prerequisites": ["Weather and climate systems"],
+     "unit": "Plate Tectonics and Earth's Interior",
      "topics": [
       {
-       "topic": "Resources",
+       "topic": "Interior Evidence and Layers",
        "concepts": [
-        {"title": "Renewable and non-renewable resources", "summary": "The distinction is about the rate of replenishment relative to the rate of use.", "keywords": ["renewable", "non-renewable", "replenishment"]},
-        {"title": "Energy resources and their trade-offs", "summary": "Every generation source has a different mix of cost, reliability, land use and emissions.", "keywords": ["energy resource", "reliability", "trade-off"], "prerequisites": ["Renewable and non-renewable resources"]},
-        {"title": "Mineral and water resource distribution", "summary": "Resources are unevenly distributed, which makes supply a geopolitical as well as a geological question.", "keywords": ["distribution", "supply", "geopolitics"], "prerequisites": ["Renewable and non-renewable resources"]},
-        {"title": "Sustainable use and carrying capacity", "summary": "Use is sustainable only while it stays within the rate at which the system can renew itself.", "keywords": ["sustainability", "carrying capacity", "renewal"], "prerequisites": ["Mineral and water resource distribution"]},
-        {"title": "Waste, recycling and circular economy", "summary": "Designing for reuse changes the material flow at the design stage rather than after disposal.", "keywords": ["waste", "recycling", "circular"], "prerequisites": ["Sustainable use and carrying capacity"]},
-        {"title": "Natural hazards and risk reduction", "summary": "Risk combines hazard, exposure and vulnerability, so reducing any one of the three reduces risk.", "keywords": ["hazard", "exposure", "vulnerability"], "prerequisites": ["Sustainable use and carrying capacity"]}
+        {
+         "title": "Seismic Waves as Probes of the Interior",
+         "summary": "P waves travel through solids, liquids and gases while S waves travel only through solids, so the S-wave shadow zone beyond about 103 degrees from an epicenter shows that the outer core is liquid.",
+         "keywords": [
+          "seismic wave",
+          "shadow zone",
+          "outer core"
+         ]
+        },
+        {
+         "title": "Compositional Layers and the Lithosphere",
+         "summary": "Earth is divided by composition into crust, mantle and core and by strength into a rigid lithosphere over a weak asthenosphere, so the lithosphere is crust plus uppermost mantle rather than crust alone, and it is the layer that moves as a plate.",
+         "keywords": [
+          "crust",
+          "mantle",
+          "lithosphere"
+         ],
+         "prerequisites": [
+          "Seismic Waves as Probes of the Interior"
+         ]
+        },
+        {
+         "title": "Heat Flow, Gravity, and the Geodynamo",
+         "summary": "Heat flow is highest at mid-ocean ridges and lowest over old continental interiors, and the magnetic field is generated by convection in the liquid outer core, so heat flow, gravity and magnetism together constrain any model of the interior.",
+         "keywords": [
+          "heat flow",
+          "geomagnetic field",
+          "convection"
+         ],
+         "prerequisites": [
+          "Compositional Layers and the Lithosphere"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Evidence for Plate Tectonics",
+       "concepts": [
+        {
+         "title": "Continental Drift and the Missing Mechanism",
+         "summary": "Wegener matched coastlines, fossils and rock sequences across the Atlantic but could name no force able to move a continent, so the idea waited until seafloor spreading supplied a mechanism, which shows that a correct pattern still needs a physical process before it is accepted.",
+         "keywords": [
+          "continental drift",
+          "wegener",
+          "pangaea"
+         ]
+        },
+        {
+         "title": "Seafloor Spreading and Magnetic Stripes",
+         "summary": "New oceanic crust forms at a ridge and records the field polarity as it cools, so the symmetrical stripes of alternating polarity on either side of the ridge record reversals and show that the ocean floor grows outward from the axis.",
+         "keywords": [
+          "seafloor spreading",
+          "magnetic reversal",
+          "mid-ocean ridge"
+         ],
+         "prerequisites": [
+          "Continental Drift and the Missing Mechanism"
+         ]
+        },
+        {
+         "title": "GPS, Earthquake Belts, and Paleoclimate Clues",
+         "summary": "Satellite geodesy measures plate motion directly at a few centimetres per year, earthquakes concentrate in narrow belts rather than at random, and glacial deposits now in tropical latitudes mark continents that have drifted.",
+         "keywords": [
+          "gps",
+          "earthquake belt",
+          "paleoclimate"
+         ],
+         "prerequisites": [
+          "Seafloor Spreading and Magnetic Stripes"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Plate Boundaries and Map Patterns",
+       "concepts": [
+        {
+         "title": "Divergent Boundaries and Rift Valleys",
+         "summary": "Where plates move apart, magma rises to build a mid-ocean ridge with shallow earthquakes and basaltic lava, and the same process inside a continent splits it into a rift valley such as the East African Rift.",
+         "keywords": [
+          "divergent boundary",
+          "rift valley",
+          "mid-ocean ridge"
+         ]
+        },
+        {
+         "title": "Convergent Boundaries: Subduction and Collision",
+         "summary": "Where an oceanic plate meets another plate it subducts and produces a trench with a volcanic arc behind it, while where two continents collide neither subducts and the crust thickens into fold mountains such as the Himalaya.",
+         "keywords": [
+          "convergent boundary",
+          "subduction",
+          "continental collision"
+         ],
+         "prerequisites": [
+          "Divergent Boundaries and Rift Valleys"
+         ]
+        },
+        {
+         "title": "Transform Boundaries and Lateral Faulting",
+         "summary": "Plates sliding past each other produce shallow earthquakes along a transform fault and no volcanism, because no lithosphere is created or destroyed at that boundary.",
+         "keywords": [
+          "transform boundary",
+          "strike-slip fault",
+          "san andreas"
+         ],
+         "prerequisites": [
+          "Convergent Boundaries: Subduction and Collision"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Plate Motion Mechanisms",
+       "concepts": [
+        {
+         "title": "Mantle Convection and Slab Pull",
+         "summary": "Convection in the mantle supplies the motion, but the dominant force is slab pull, in which cold dense subducting lithosphere sinks and drags the rest of the plate with it, with ridge push a smaller contribution.",
+         "keywords": [
+          "mantle convection",
+          "slab pull",
+          "ridge push"
+         ]
+        },
+        {
+         "title": "Why Plates Move at Different Speeds",
+         "summary": "A plate's speed reflects the balance between its driving forces and the resistance it meets, so a plate with long subducting margins such as the Pacific moves several times faster than one bordered largely by continental collision.",
+         "keywords": [
+          "plate velocity",
+          "driving force",
+          "resistance"
+         ],
+         "prerequisites": [
+          "Mantle Convection and Slab Pull"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Tectonic Features and Long-Term Change",
+       "concepts": [
+        {
+         "title": "Hot Spots and Plate Motion Records",
+         "summary": "A mantle plume stays roughly fixed while the plate rides over it, so the plume builds a chain of progressively older volcanoes, and the bend in the Hawaiian-Emperor chain records a change in the direction of Pacific motion.",
+         "keywords": [
+          "hot spot",
+          "mantle plume",
+          "hawaii"
+         ]
+        },
+        {
+         "title": "Tectonics Controls Topography and Climate",
+         "summary": "Uplift builds mountains that cast a rain shadow and expose fresh silicate rock to weathering, and silicate weathering consumes carbon dioxide, so tectonic uplift can cool global climate over millions of years.",
+         "keywords": [
+          "orogeny",
+          "rain shadow",
+          "silicate weathering"
+         ],
+         "prerequisites": [
+          "Hot Spots and Plate Motion Records"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Earth Science Practices and Reference Tools"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Minerals, Rocks, and the Rock Cycle",
+   "units": [
+    {
+     "unit": "Minerals, Rocks, and the Rock Cycle",
+     "topics": [
+      {
+       "topic": "Minerals",
+       "concepts": [
+        {
+         "title": "What Makes a Mineral",
+         "summary": "A mineral is naturally occurring, inorganic, solid, has a definite chemical composition and an ordered crystal structure, which is why glass lacks the structure and coal lacks both the composition and the inorganic origin.",
+         "keywords": [
+          "mineral",
+          "crystal structure",
+          "inorganic"
+         ]
+        },
+        {
+         "title": "Silicate Structure Sets Hardness and Cleavage",
+         "summary": "Every silicate is built from SiO4 tetrahedra, and the way those tetrahedra link decides cleavage, so isolated tetrahedra in olivine give no cleavage while sheets in mica split into thin flat flakes.",
+         "keywords": [
+          "silicate",
+          "tetrahedron",
+          "cleavage"
+         ],
+         "prerequisites": [
+          "What Makes a Mineral"
+         ]
+        },
+        {
+         "title": "Diagnostic Properties and Mineral Formation",
+         "summary": "Hardness, cleavage, streak and luster identify a mineral because each reflects its composition and structure, and a mineral forms by crystallising from melt, precipitating from solution or recrystallising under heat and pressure.",
+         "keywords": [
+          "hardness",
+          "streak",
+          "crystallization"
+         ],
+         "prerequisites": [
+          "Silicate Structure Sets Hardness and Cleavage"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Igneous Processes and Rocks",
+       "concepts": [
+        {
+         "title": "Magma Composition Sets Eruption Style",
+         "summary": "High-silica magma is viscous and traps gas so it erupts explosively, while low-silica basaltic magma flows easily and erupts quietly, so silica content rather than temperature decides the style of an eruption.",
+         "keywords": [
+          "silica",
+          "viscosity",
+          "magma"
+         ]
+        },
+        {
+         "title": "Cooling Rate Sets Texture",
+         "summary": "Slow cooling at depth grows large interlocking crystals in an intrusive rock while rapid cooling at the surface gives fine grains or glass, so texture records the cooling history of a rock rather than its composition.",
+         "keywords": [
+          "intrusive",
+          "extrusive",
+          "texture"
+         ],
+         "prerequisites": [
+          "Magma Composition Sets Eruption Style"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sediments and Sedimentary Rocks",
+       "concepts": [
+        {
+         "title": "From Weathering to Lithification",
+         "summary": "A clastic rock forms by weathering, transport, deposition and then compaction and cementation, so grain rounding and sorting record how far the sediment travelled and by which agent rather than how old it is.",
+         "keywords": [
+          "clastic",
+          "lithification",
+          "sorting"
+         ]
+        },
+        {
+         "title": "Chemical and Biochemical Sedimentary Rocks",
+         "summary": "Evaporites such as halite and gypsum form where dissolved ions concentrate as water evaporates, while limestone forms from calcium carbonate shells or by direct precipitation, so each records a water chemistry rather than a current.",
+         "keywords": [
+          "evaporite",
+          "limestone",
+          "precipitation"
+         ],
+         "prerequisites": [
+          "From Weathering to Lithification"
+         ]
+        },
+        {
+         "title": "Sedimentary Structures Record Environments",
+         "summary": "Cross-beds record migrating ripples, mudcracks record wetting and drying of exposed mud and a graded bed records a waning current, so structures identify the setting where grain size alone cannot.",
+         "keywords": [
+          "cross-bedding",
+          "mudcrack",
+          "graded bed"
+         ],
+         "prerequisites": [
+          "Chemical and Biochemical Sedimentary Rocks"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Metamorphic Processes and Rocks",
+       "concepts": [
+        {
+         "title": "Heat, Pressure, and Foliation",
+         "summary": "Directed pressure at depth aligns platy minerals perpendicular to the stress, so increasing metamorphic grade turns shale into slate, phyllite, schist and gneiss, and the foliation records the direction of that pressure.",
+         "keywords": [
+          "foliation",
+          "metamorphic grade",
+          "directed pressure"
+         ]
+        },
+        {
+         "title": "Contact and Regional Metamorphism",
+         "summary": "Heat from an intrusion bakes a narrow aureole of non-foliated rock such as hornfels, whereas directed pressure across a convergent margin produces foliated rock over a belt hundreds of kilometres wide.",
+         "keywords": [
+          "contact metamorphism",
+          "regional metamorphism",
+          "hornfels"
+         ],
+         "prerequisites": [
+          "Heat, Pressure, and Foliation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rock Cycle and Earth Materials Synthesis",
+       "concepts": [
+        {
+         "title": "Tectonics and Water Drive the Rock Cycle",
+         "summary": "Melting, metamorphism and uplift are supplied by plate tectonics while weathering and erosion are supplied by the water cycle, so a rock converts into another type only through one of those processes acting on it.",
+         "keywords": [
+          "rock cycle",
+          "plate tectonics",
+          "weathering"
+         ]
+        },
+        {
+         "title": "The Rock Record Is Incomplete",
+         "summary": "Because recycling destroys rock, a missing rock type at an outcrop means only that it is absent there, and the oldest surviving rocks are found in stable continental interiors where burial and erosion have been least.",
+         "keywords": [
+          "recycling",
+          "outcrop",
+          "unconformity"
+         ],
+         "prerequisites": [
+          "Tectonics and Water Drive the Rock Cycle"
+         ]
+        },
+        {
+         "title": "Rock Assemblage Indicates a Past Setting",
+         "summary": "A limestone with marine shells records a warm shallow sea, a basalt flow records volcanism and a conglomerate of rounded pebbles records a nearby highland, so several rock types read together reconstruct a setting.",
+         "keywords": [
+          "rock assemblage",
+          "depositional environment",
+          "indicator"
+         ],
+         "prerequisites": [
+          "The Rock Record Is Incomplete"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Plate Tectonics and Earth's Interior"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Volcanoes, Earthquakes, and Crustal Deformation",
+   "units": [
+    {
+     "unit": "Volcanoes, Earthquakes, and Crustal Deformation",
+     "topics": [
+      {
+       "topic": "Volcanoes",
+       "concepts": [
+        {
+         "title": "Shield, Cinder Cone, and Composite Volcanoes",
+         "summary": "Low-viscosity basalt builds a broad shield, short gas-rich bursts build a steep cinder cone, and alternating ash and viscous lava above a subduction zone build a composite cone, so shape records the magma and the setting.",
+         "keywords": [
+          "shield volcano",
+          "composite volcano",
+          "cinder cone"
+         ]
+        },
+        {
+         "title": "Pyroclastic Flows, Ash, and Lahar Hazards",
+         "summary": "A pyroclastic flow of hot gas and ash can outrun a car while falling ash collapses roofs and shuts airspace, so most volcanic deaths come from flows, blasts and lahars rather than from lava.",
+         "keywords": [
+          "pyroclastic flow",
+          "ash fall",
+          "lahar"
+         ],
+         "prerequisites": [
+          "Shield, Cinder Cone, and Composite Volcanoes"
+         ]
+        },
+        {
+         "title": "Monitoring Gives Warning, Not Certainty",
+         "summary": "Rising seismicity, ground deformation and gas emission precede most eruptions, so a monitored volcano can be warned on a scale of days to weeks even though the exact onset cannot be predicted.",
+         "keywords": [
+          "volcano monitoring",
+          "deformation",
+          "gas emission"
+         ],
+         "prerequisites": [
+          "Pyroclastic Flows, Ash, and Lahar Hazards"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Earthquakes and Seismic Waves",
+       "concepts": [
+        {
+         "title": "Focus, Epicenter, and Wave Order",
+         "summary": "The focus is where rupture begins underground and the epicenter is the point on the surface above it, and because P waves are fastest and surface waves slowest a station records P before S before the surface waves that do most of the damage.",
+         "keywords": [
+          "focus",
+          "epicenter",
+          "p wave"
+         ]
+        },
+        {
+         "title": "Triangulation Locates an Epicenter",
+         "summary": "The P-to-S arrival gap grows with distance from the focus, so converting that gap to a distance at three stations and drawing three circles fixes the epicenter at their single intersection.",
+         "keywords": [
+          "triangulation",
+          "s-p time",
+          "seismograph"
+         ],
+         "prerequisites": [
+          "Focus, Epicenter, and Wave Order"
+         ]
+        },
+        {
+         "title": "Magnitude, Intensity, and Site Effects",
+         "summary": "Magnitude measures energy released on a logarithmic scale where one unit is about 32 times more energy while intensity measures shaking and damage at a place, and soft saturated sediment amplifies shaking and can liquefy.",
+         "keywords": [
+          "magnitude",
+          "intensity",
+          "liquefaction"
+         ],
+         "prerequisites": [
+          "Triangulation Locates an Epicenter"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Crustal Deformation and Mountains",
+       "concepts": [
+        {
+         "title": "Stress, Strain, and Brittle or Ductile Response",
+         "summary": "Compression shortens rock, tension stretches it and shear twists it, and the same rock fractures under shallow cold conditions but folds under deep hot ones, so a structure records depth as well as force.",
+         "keywords": [
+          "stress",
+          "strain",
+          "ductile"
+         ]
+        },
+        {
+         "title": "Reading Folds and Faults",
+         "summary": "An anticline arches with the oldest beds in its core and a syncline troughs with the youngest in its core, while a normal fault drops its hanging wall under tension and a reverse fault raises it under compression.",
+         "keywords": [
+          "anticline",
+          "normal fault",
+          "reverse fault"
+         ],
+         "prerequisites": [
+          "Stress, Strain, and Brittle or Ductile Response"
+         ]
+        },
+        {
+         "title": "Mountain Belts, Isostasy, and Rebound",
+         "summary": "Collision thickens the crust so that it floats higher on the mantle, and because the crust stays in isostatic balance, removing mass by erosion lets the remaining rock rise.",
+         "keywords": [
+          "isostasy",
+          "crustal thickening",
+          "rebound"
+         ],
+         "prerequisites": [
+          "Reading Folds and Faults"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Dynamic-Crust Hazard Synthesis",
+       "concepts": [
+        {
+         "title": "Hazard Maps Follow Plate Boundaries",
+         "summary": "Subduction zones concentrate the largest earthquakes, tsunamis and explosive volcanoes, transform boundaries concentrate shallow earthquakes, and stable interiors produce few of either, so a hazard map is drawn along the boundaries.",
+         "keywords": [
+          "hazard map",
+          "subduction zone",
+          "risk"
+         ]
+        },
+        {
+         "title": "Tsunamis and Their Warning",
+         "summary": "A megathrust rupture or submarine landslide displaces the water column, and the resulting wave is low and fast in open ocean but slows and steepens in shallow water, so warning depends on fast seismic detection and deep-ocean pressure buoys.",
+         "keywords": [
+          "tsunami",
+          "megathrust",
+          "run-up"
+         ],
+         "prerequisites": [
+          "Hazard Maps Follow Plate Boundaries"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Minerals, Rocks, and the Rock Cycle"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Geologic Time, Earth History, and Life",
+   "units": [
+    {
+     "unit": "Geologic Time, Earth History, and Life",
+     "topics": [
+      {
+       "topic": "Relative Dating Principles",
+       "concepts": [
+        {
+         "title": "Superposition and Original Horizontality",
+         "summary": "In an undisturbed sequence each layer is older than the one above it, and because sediment settles horizontally, tilted or folded layers must have been disturbed after they were deposited.",
+         "keywords": [
+          "superposition",
+          "original horizontality",
+          "strata"
+         ]
+        },
+        {
+         "title": "Cross-Cutting Relationships and Inclusions",
+         "summary": "A fault, intrusion or erosion surface is younger than the rock it cuts, and a fragment enclosed in another rock is older than its host, so these relations order events without any date at all.",
+         "keywords": [
+          "cross-cutting",
+          "inclusion",
+          "relative age"
+         ],
+         "prerequisites": [
+          "Superposition and Original Horizontality"
+         ]
+        },
+        {
+         "title": "Unconformities Record Missing Time",
+         "summary": "An angular unconformity is a tilted eroded sequence buried by flat layers, a disconformity is an erosion surface between parallel beds and a nonconformity is one cut into igneous or metamorphic rock, so each marks a gap rather than continuous deposition.",
+         "keywords": [
+          "unconformity",
+          "erosion surface",
+          "gap"
+         ],
+         "prerequisites": [
+          "Cross-Cutting Relationships and Inclusions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Correlation and Fossil Evidence",
+       "concepts": [
+        {
+         "title": "Lateral Continuity and Correlation",
+         "summary": "A layer extends sideways until its environment ends, so separated outcrops are correlated by matching rock type, stacking order and fossil content rather than by distance alone.",
+         "keywords": [
+          "lateral continuity",
+          "correlation",
+          "outcrop"
+         ]
+        },
+        {
+         "title": "Index Fossils Date a Bed",
+         "summary": "A useful index fossil had a wide geographic range, a short time span and a recognisable form, so its presence pins a bed to a narrow interval while a long-ranging fossil such as a shark tooth cannot.",
+         "keywords": [
+          "index fossil",
+          "fossil range",
+          "biozone"
+         ],
+         "prerequisites": [
+          "Lateral Continuity and Correlation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Numerical Dating and Time Scale",
+       "concepts": [
+        {
+         "title": "Radioactive Decay and Half-Life",
+         "summary": "A radioactive parent decays at a fixed rate, so after one half-life half the parent remains and after two a quarter, and the parent-to-daughter ratio dates a sample only if the system stayed closed to gain or loss.",
+         "keywords": [
+          "half-life",
+          "radioactive decay",
+          "parent isotope"
+         ]
+        },
+        {
+         "title": "Matching the Isotope to the Material",
+         "summary": "Carbon-14 with a 5,730-year half-life dates organic material only to about 50,000 years while potassium-argon and uranium-lead date volcanic and crystalline rock over millions to billions of years, so the wrong isotope gives no usable age.",
+         "keywords": [
+          "carbon-14",
+          "potassium-argon",
+          "radiometric dating"
+         ],
+         "prerequisites": [
+          "Radioactive Decay and Half-Life"
+         ]
+        },
+        {
+         "title": "The Geologic Time Scale",
+         "summary": "Eons, eras, periods and epochs are defined by major changes in the fossil record, and the Precambrian covers roughly seven-eighths of Earth history, so the scale divides time by events rather than into equal parts.",
+         "keywords": [
+          "geologic time scale",
+          "period",
+          "precambrian"
+         ],
+         "prerequisites": [
+          "Matching the Isotope to the Material"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Earth History, Life, and System Change",
+       "concepts": [
+        {
+         "title": "Outgassing, Oceans, and the Rise of Oxygen",
+         "summary": "Volcanic outgassing supplied the early atmosphere and condensing water vapour formed the oceans, and photosynthesis later raised oxygen enough to oxidise iron, which is why banded iron formations lie beneath the red beds.",
+         "keywords": [
+          "outgassing",
+          "great oxidation",
+          "banded iron"
+         ]
+        },
+        {
+         "title": "Mass Extinctions and Their Drivers",
+         "summary": "The end-Permian extinction removed about 90 percent of marine species alongside the Siberian Traps eruptions and the end-Cretaceous extinction coincides with an iridium layer and the Chicxulub impact, so each extinction pairs a kill mechanism with a dated cause.",
+         "keywords": [
+          "mass extinction",
+          "siberian traps",
+          "chicxulub"
+         ],
+         "prerequisites": [
+          "Outgassing, Oceans, and the Rise of Oxygen"
+         ]
+        },
+        {
+         "title": "Life Alters the Earth System",
+         "summary": "Organisms build reefs and shells, bury carbon and release oxygen, so the biosphere has changed the atmosphere and the rock record and the two have co-evolved rather than life merely adapting to a fixed planet.",
+         "keywords": [
+          "coevolution",
+          "biosphere",
+          "carbon burial"
+         ],
+         "prerequisites": [
+          "Mass Extinctions and Their Drivers"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "New York and Regional Geologic History",
+       "concepts": [
+        {
+         "title": "New York's Bedrock Records Three Orogenies",
+         "summary": "Grenville metamorphism about 1.1 billion years ago built the Adirondack basement, and the Taconic, Acadian and Alleghenian collisions then deformed the eastern bedrock of the state in succession.",
+         "keywords": [
+          "adirondacks",
+          "taconic orogeny",
+          "alleghenian"
+         ]
+        },
+        {
+         "title": "Paleozoic Seas and the Catskill Delta",
+         "summary": "Shallow Paleozoic seas across New York deposited limestone and shale with marine fossils, and erosion of the Acadian mountains built the Catskill delta, so the state's strata record a shoreline that shifted back and forth.",
+         "keywords": [
+          "paleozoic",
+          "devonian",
+          "catskill delta"
+         ],
+         "prerequisites": [
+          "New York's Bedrock Records Three Orogenies"
+         ]
+        },
+        {
+         "title": "Pleistocene Ice Shaped the Present Surface",
+         "summary": "The Laurentide ice sheet retreated about 20,000 years ago leaving drumlins, moraines, erratics and the over-deepened Finger Lakes, so most New York landforms are far younger than the bedrock beneath them.",
+         "keywords": [
+          "laurentide",
+          "drumlin",
+          "moraine"
+         ],
+         "prerequisites": [
+          "Paleozoic Seas and the Catskill Delta"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Volcanoes, Earthquakes, and Crustal Deformation"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Weathering, Water, and Landscapes",
+   "units": [
+    {
+     "unit": "Weathering, Water, and Landscapes",
+     "topics": [
+      {
+       "topic": "Weathering, Erosion, and Soil",
+       "concepts": [
+        {
+         "title": "Mechanical and Chemical Weathering",
+         "summary": "Mechanical weathering breaks rock without altering its minerals through frost wedging, unloading and abrasion, while chemical weathering alters them by hydrolysis, oxidation and carbonation, and each exposes fresh surface that speeds the other.",
+         "keywords": [
+          "mechanical weathering",
+          "chemical weathering",
+          "frost wedging"
+         ]
+        },
+        {
+         "title": "Climate Decides Which Weathering Dominates",
+         "summary": "Warm wet climates favour chemical weathering and produce clay-rich soil on rounded slopes, while cold or dry climates favour mechanical breakdown and leave angular debris under thin soil.",
+         "keywords": [
+          "climate",
+          "hydrolysis",
+          "weathering rate"
+         ],
+         "prerequisites": [
+          "Mechanical and Chemical Weathering"
+         ]
+        },
+        {
+         "title": "Soil Horizons and Formation",
+         "summary": "Soil is weathered mineral matter mixed with organic matter, water and air and developed into O, A, B and C horizons, and its depth and fertility depend on climate, parent material, slope and the time it has had to form.",
+         "keywords": [
+          "soil",
+          "horizon",
+          "parent material"
+         ],
+         "prerequisites": [
+          "Climate Decides Which Weathering Dominates"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Mass Wasting",
+       "concepts": [
+        {
+         "title": "When Slopes Fail",
+         "summary": "Water adds weight and raises pore pressure while undercutting a slope removes its toe support, so a slope fails when the driving stress exceeds the shear strength of its material.",
+         "keywords": [
+          "mass wasting",
+          "pore pressure",
+          "slope stability"
+         ]
+        },
+        {
+         "title": "Types and Triggers of Mass Movement",
+         "summary": "Creep is slow, a slump rotates, a debris flow is fast and water-rich and a rockfall is free fall, and heavy rain, earthquakes and vegetation removal trigger them by raising load or lowering strength.",
+         "keywords": [
+          "creep",
+          "debris flow",
+          "trigger"
+         ],
+         "prerequisites": [
+          "When Slopes Fail"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Streams, Rivers, and Floods",
+       "concepts": [
+        {
+         "title": "Stream Work along a Profile",
+         "summary": "A stream erodes where it is steep and fast, carries its load and deposits where velocity falls, so a graded stream adjusts its slope until erosion and deposition balance toward base level.",
+         "keywords": [
+          "stream",
+          "base level",
+          "sediment load"
+         ]
+        },
+        {
+         "title": "Meanders, Floodplains, and Deltas",
+         "summary": "A stream erodes the outer bank of a bend and deposits a point bar on the inner bank, so meanders migrate and may be cut off as oxbows, while a delta builds where the stream enters standing water and drops its load.",
+         "keywords": [
+          "meander",
+          "point bar",
+          "delta"
+         ],
+         "prerequisites": [
+          "Stream Work along a Profile"
+         ]
+        },
+        {
+         "title": "Flood Frequency and Land-Use Effects",
+         "summary": "A 100-year flood has a one percent chance in any year rather than arriving once a century, and paving a watershed raises peak discharge because rain runs off instead of soaking in.",
+         "keywords": [
+          "flood",
+          "recurrence interval",
+          "runoff"
+         ],
+         "prerequisites": [
+          "Meanders, Floodplains, and Deltas"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Hydrologic Cycle and Water Budgets",
+       "concepts": [
+        {
+         "title": "The Water Budget Equation",
+         "summary": "For a watershed, precipitation equals evapotranspiration plus runoff plus the change in storage, so a persistent deficit lowers the water table while a surplus raises streamflow and recharge.",
+         "keywords": [
+          "water budget",
+          "evapotranspiration",
+          "storage"
+         ]
+        },
+        {
+         "title": "Runoff, Infiltration, and Watershed Response",
+         "summary": "Infiltration depends on soil texture, vegetation, slope and rainfall intensity, so a compacted or saturated surface turns rain into flash runoff that a porous forest soil would have absorbed.",
+         "keywords": [
+          "infiltration",
+          "runoff",
+          "watershed"
+         ],
+         "prerequisites": [
+          "The Water Budget Equation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Groundwater and Karst",
+       "concepts": [
+        {
+         "title": "Porosity, Permeability, and the Water Table",
+         "summary": "Porosity is the fraction of void space while permeability is how well those voids connect, so clay can be porous yet hold water instead of yielding it, and the water table is the top of the saturated zone.",
+         "keywords": [
+          "porosity",
+          "permeability",
+          "water table"
+         ]
+        },
+        {
+         "title": "Aquifers, Wells, and Overdraft",
+         "summary": "A pumped well draws down a cone of depression whose shape depends on permeability, and pumping faster than recharge lowers the regional water table, dries shallow wells and can draw salt water inland at a coast.",
+         "keywords": [
+          "aquifer",
+          "cone of depression",
+          "overdraft"
+         ],
+         "prerequisites": [
+          "Porosity, Permeability, and the Water Table"
+         ]
+        },
+        {
+         "title": "Karst, Caves, and Sinkholes",
+         "summary": "Carbonic acid dissolves limestone along joints into caves, sinkholes and streams that vanish underground, so a falling water table can leave a cave roof unsupported beneath a road.",
+         "keywords": [
+          "karst",
+          "sinkhole",
+          "limestone dissolution"
+         ],
+         "prerequisites": [
+          "Aquifers, Wells, and Overdraft"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Landscapes, Wind, and Deserts",
+       "concepts": [
+        {
+         "title": "Climate Shapes the Landscape",
+         "summary": "Humid landscapes are rounded with thick soil and an integrated drainage network, while arid landscapes are angular with thin regolith and internal drainage, so climate can be read from the shape of the land.",
+         "keywords": [
+          "landscape",
+          "humid climate",
+          "arid climate"
+         ]
+        },
+        {
+         "title": "Wind Erosion and Deposition",
+         "summary": "Wind sorts fine material and abrades rock, building dunes whose cross-beds dip downwind and blanketing distant ground with loess, so wind deposits are well sorted and fine grained.",
+         "keywords": [
+          "deflation",
+          "sand dune",
+          "loess"
+         ],
+         "prerequisites": [
+          "Climate Shapes the Landscape"
+         ]
+        },
+        {
+         "title": "Deserts, Alluvial Fans, and Playas",
+         "summary": "An arid basin collects coarse sediment in an alluvial fan at the mountain front and dissolved salts in a playa at its centre, so internal drainage concentrates minerals instead of carrying them to the sea.",
+         "keywords": [
+          "alluvial fan",
+          "playa",
+          "internal drainage"
+         ],
+         "prerequisites": [
+          "Wind Erosion and Deposition"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Geologic Time, Earth History, and Life"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Oceans, Coasts, and Ice",
+   "units": [
+    {
+     "unit": "Oceans, Coasts, and Ice",
+     "topics": [
+      {
+       "topic": "Ocean Basins and Ocean Water",
+       "concepts": [
+        {
+         "title": "Seafloor Provinces",
+         "summary": "A continental margin runs from shelf through slope and rise to the abyssal plain, and a passive margin carries a wide shelf while an active margin has a narrow shelf and a trench, so basin shape records the plate setting.",
+         "keywords": [
+          "continental shelf",
+          "abyssal plain",
+          "continental margin"
+         ]
+        },
+        {
+         "title": "Salinity and Density Structure",
+         "summary": "Seawater averages about 35 parts per thousand of dissolved salt and grows denser as it becomes colder or saltier, so cold polar water sinks beneath warmer water and the ocean stratifies by density.",
+         "keywords": [
+          "salinity",
+          "density",
+          "thermocline"
+         ],
+         "prerequisites": [
+          "Seafloor Provinces"
+         ]
+        },
+        {
+         "title": "The Ocean's Salt Budget",
+         "summary": "Rivers deliver dissolved ions from weathering while evaporation removes water and hydrothermal circulation and sediment trap ions, so ocean salinity has held near its present value over long spans of time.",
+         "keywords": [
+          "salt budget",
+          "weathering",
+          "evaporation"
+         ],
+         "prerequisites": [
+          "Salinity and Density Structure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Ocean Motion and Circulation",
+       "concepts": [
+        {
+         "title": "Surface Currents and Gyres",
+         "summary": "Prevailing winds plus the Coriolis effect drive large circular gyres with narrow fast western boundary currents such as the Gulf Stream and broad slow eastern currents, so surface circulation carries heat poleward.",
+         "keywords": [
+          "gyre",
+          "coriolis effect",
+          "gulf stream"
+         ]
+        },
+        {
+         "title": "Upwelling and Coastal Productivity",
+         "summary": "Wind blowing along a coast moves surface water offshore so deeper nutrient-rich water rises to replace it, which is why coastal upwelling zones support the most productive fisheries.",
+         "keywords": [
+          "upwelling",
+          "nutrient",
+          "productivity"
+         ],
+         "prerequisites": [
+          "Surface Currents and Gyres"
+         ]
+        },
+        {
+         "title": "Thermohaline Circulation and Climate",
+         "summary": "Cold salty water sinking in the North Atlantic drives a slow overturning circulation with a timescale near a thousand years, so a large freshwater input that freshens the surface can weaken it.",
+         "keywords": [
+          "thermohaline circulation",
+          "deep water",
+          "overturning"
+         ],
+         "prerequisites": [
+          "Upwelling and Coastal Productivity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Coasts and Sea-Level Change",
+       "concepts": [
+        {
+         "title": "Wave Refraction and Longshore Drift",
+         "summary": "Waves refract until they meet the shore nearly head-on and the resulting longshore current carries sand along the beach, so a groin traps sand on its updrift side and starves the beach downdrift.",
+         "keywords": [
+          "wave refraction",
+          "longshore drift",
+          "groin"
+         ]
+        },
+        {
+         "title": "Sea Level Change and Coastal Response",
+         "summary": "Eustatic sea level rises with melting land ice and warming water while isostatic change moves the land itself, so a subsiding coast drowns its river valleys while a rebounding coast exposes raised beaches.",
+         "keywords": [
+          "eustatic",
+          "isostatic",
+          "submergent coast"
+         ],
+         "prerequisites": [
+          "Wave Refraction and Longshore Drift"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Glaciers and Glacial Landforms",
+       "concepts": [
+        {
+         "title": "Glacier Mass Balance and Flow",
+         "summary": "A glacier advances when accumulation exceeds ablation and retreats when ablation exceeds accumulation, and it flows by internal deformation plus basal sliding, so terminus position records mass balance rather than temperature alone.",
+         "keywords": [
+          "mass balance",
+          "ablation",
+          "glacier flow"
+         ]
+        },
+        {
+         "title": "Erosional Glacial Landforms",
+         "summary": "Ice widens a stream-cut V into a U-shaped valley, scoops cirques and horns at its head and scratches the bedrock beneath it, so striations and their orientation record the path the ice followed.",
+         "keywords": [
+          "u-shaped valley",
+          "cirque",
+          "striation"
+         ],
+         "prerequisites": [
+          "Glacier Mass Balance and Flow"
+         ]
+        },
+        {
+         "title": "Depositional Glacial Landforms",
+         "summary": "Ice drops unsorted till as moraines and drumlins while meltwater carries sorted sand and gravel into outwash and eskers, so sorting separates ice-laid from water-laid sediment.",
+         "keywords": [
+          "till",
+          "moraine",
+          "outwash"
+         ],
+         "prerequisites": [
+          "Erosional Glacial Landforms"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Ice, Oceans, and Cryosphere Feedbacks",
+       "concepts": [
+        {
+         "title": "Ice-Albedo Feedback",
+         "summary": "Snow and ice reflect most incoming sunlight while open ocean absorbs most of it, so melting ice exposes a darker surface that absorbs more energy and drives further warming.",
+         "keywords": [
+          "albedo",
+          "ice-albedo feedback",
+          "melting"
+         ]
+        },
+        {
+         "title": "Which Ice Raises Sea Level",
+         "summary": "Floating sea ice already displaces its own weight so melting it leaves sea level unchanged, whereas loss from a land-based ice sheet adds new water to the ocean, so Greenland and Antarctica set the rate of sea-level rise.",
+         "keywords": [
+          "sea ice",
+          "ice sheet",
+          "sea level"
+         ],
+         "prerequisites": [
+          "Ice-Albedo Feedback"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Weathering, Water, and Landscapes"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Atmosphere, Weather, and Climate",
+   "units": [
+    {
+     "unit": "Atmosphere, Weather, and Climate",
+     "topics": [
+      {
+       "topic": "Atmospheric Structure and Energy",
+       "concepts": [
+        {
+         "title": "Layers and the Temperature Profile",
+         "summary": "Temperature falls with height through the troposphere because that layer is heated from below, and rises through the stratosphere because ozone absorbs ultraviolet light, and that inversion traps weather in the lower layer.",
+         "keywords": [
+          "troposphere",
+          "stratosphere",
+          "ozone"
+         ]
+        },
+        {
+         "title": "Latitudinal Energy Imbalance",
+         "summary": "The tropics absorb more solar energy than they emit while the poles emit more than they absorb, and winds and currents carry the surplus poleward, so the imbalance rather than the global average drives circulation.",
+         "keywords": [
+          "insolation",
+          "energy imbalance",
+          "albedo"
+         ],
+         "prerequisites": [
+          "Layers and the Temperature Profile"
+         ]
+        },
+        {
+         "title": "The Greenhouse Effect",
+         "summary": "Greenhouse gases absorb outgoing infrared radiation and re-emit part of it downward, so without them the surface would average about 18 degrees below zero Celsius instead of its present value.",
+         "keywords": [
+          "greenhouse effect",
+          "infrared",
+          "radiative balance"
+         ],
+         "prerequisites": [
+          "Latitudinal Energy Imbalance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Weather Variables, Instruments, and Maps",
+       "concepts": [
+        {
+         "title": "Measuring Temperature, Pressure, and Humidity",
+         "summary": "A barometer measures pressure, a psychrometer compares wet and dry bulb readings to give relative humidity and dew point, and an anemometer measures wind speed, and a station model packs all of them into one symbol.",
+         "keywords": [
+          "barometer",
+          "psychrometer",
+          "station model"
+         ]
+        },
+        {
+         "title": "Dew Point, Humidity, and Cloud Formation",
+         "summary": "Relative humidity compares the vapour present with the maximum the air can hold at that temperature, so rising air cools to its dew point and condenses cloud at the lifting condensation level.",
+         "keywords": [
+          "dew point",
+          "relative humidity",
+          "condensation"
+         ],
+         "prerequisites": [
+          "Measuring Temperature, Pressure, and Humidity"
+         ]
+        },
+        {
+         "title": "Pressure Gradients and Wind",
+         "summary": "Air accelerates from high toward low pressure, is deflected to the right in the Northern Hemisphere by the Coriolis effect, and crosses isobars at an angle near the surface because friction slows it.",
+         "keywords": [
+          "pressure gradient",
+          "coriolis effect",
+          "isobar"
+         ],
+         "prerequisites": [
+          "Dew Point, Humidity, and Cloud Formation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Air Masses, Fronts, and Forecasting",
+       "concepts": [
+        {
+         "title": "Air Masses and Their Source Regions",
+         "summary": "An air mass takes the temperature and moisture of the surface it forms over, so a continental polar mass brings cold dry air and a maritime tropical mass brings warm humid air, and its two-letter name records both qualities.",
+         "keywords": [
+          "air mass",
+          "source region",
+          "maritime tropical"
+         ]
+        },
+        {
+         "title": "Fronts, Cyclones, and Forecast Confidence",
+         "summary": "A cold front advances steeply and produces a short band of heavy rain followed by clearing, a warm front slopes gently and produces long light precipitation, and forecast confidence falls with lead time as model solutions diverge.",
+         "keywords": [
+          "cold front",
+          "warm front",
+          "forecast"
+         ],
+         "prerequisites": [
+          "Air Masses and Their Source Regions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Severe Weather",
+       "concepts": [
+        {
+         "title": "Thunderstorms and Tornadoes",
+         "summary": "A thunderstorm needs moisture, instability and lift, and when wind shear tilts the updraft it begins to rotate as a mesocyclone from which a tornado can descend.",
+         "keywords": [
+          "thunderstorm",
+          "wind shear",
+          "mesocyclone"
+         ]
+        },
+        {
+         "title": "Tropical Cyclones: Requirements and Hazards",
+         "summary": "A tropical cyclone needs ocean water warmer than about 26 degrees Celsius, low wind shear and enough Coriolis effect to organise, which is why none forms at the equator, and it weakens once it moves over land.",
+         "keywords": [
+          "tropical cyclone",
+          "storm surge",
+          "coriolis"
+         ],
+         "prerequisites": [
+          "Thunderstorms and Tornadoes"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Climate Systems and Change",
+       "concepts": [
+        {
+         "title": "Climate Controls and Regional Differences",
+         "summary": "Climate is the long-term statistics of weather and its controls are latitude, altitude, distance from water, ocean currents, prevailing wind and topography, so two places at the same latitude can have different climates.",
+         "keywords": [
+          "climate",
+          "climate controls",
+          "continentality"
+         ]
+        },
+        {
+         "title": "Natural and Human Forcing",
+         "summary": "Solar variation, volcanic aerosols and orbital cycles are natural forcings while greenhouse gases, aerosols and land use are human ones, and a human cause is confirmed when the observed pattern, such as stratospheric cooling with surface warming, matches its signature.",
+         "keywords": [
+          "radiative forcing",
+          "attribution",
+          "aerosol"
+         ],
+         "prerequisites": [
+          "Climate Controls and Regional Differences"
+         ]
+        },
+        {
+         "title": "Proxies Extend the Climate Record",
+         "summary": "Ice cores preserve trapped air and oxygen isotopes, tree rings record growth year by year and sediments preserve microfossils, so proxies reach beyond the instrumental record although each has its own dating limits.",
+         "keywords": [
+          "proxy",
+          "ice core",
+          "paleoclimate"
+         ],
+         "prerequisites": [
+          "Natural and Human Forcing"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Oceans, Coasts, and Ice"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Resources, Hazards, and Human Sustainability",
+   "units": [
+    {
+     "unit": "Resources, Hazards, and Human Sustainability",
+     "topics": [
+      {
+       "topic": "Natural Resources and Energy",
+       "concepts": [
+        {
+         "title": "Renewable, Nonrenewable, and Reserves",
+         "summary": "A renewable resource regenerates within a human lifetime and a nonrenewable one does not, while a reserve is the part of a resource that is known and economically recoverable, so a reserve can grow with price or technology and no new discovery.",
+         "keywords": [
+          "renewable resource",
+          "reserve",
+          "resource"
+         ]
+        },
+        {
+         "title": "Fossil Fuel Formation and Trapping",
+         "summary": "Coal forms from compressed swamp vegetation while oil and gas form from marine organic matter buried in a source rock, then migrate into a porous reservoir sealed by a trap, so a field needs all three elements present.",
+         "keywords": [
+          "fossil fuel",
+          "source rock",
+          "petroleum trap"
+         ],
+         "prerequisites": [
+          "Renewable, Nonrenewable, and Reserves"
+         ]
+        },
+        {
+         "title": "Energy Density, Capacity Factor, and the Grid",
+         "summary": "A fuel stores far more energy per kilogram than a battery and a wind or solar plant produces at a low capacity factor, so replacing firm generation needs storage or backup rather than nameplate capacity alone.",
+         "keywords": [
+          "energy density",
+          "capacity factor",
+          "grid"
+         ],
+         "prerequisites": [
+          "Fossil Fuel Formation and Trapping"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Human Impacts on Earth Systems",
+       "concepts": [
+        {
+         "title": "Impervious Surfaces and the Urban Water Cycle",
+         "summary": "Paving and compaction replace infiltration with runoff, so a city sends a larger and faster flood peak into its streams, recharges less groundwater and runs warmer than the surrounding countryside.",
+         "keywords": [
+          "urbanization",
+          "impervious surface",
+          "urban heat island"
+         ]
+        },
+        {
+         "title": "Air and Water Pollution Chemistry",
+         "summary": "Ground-level ozone forms when sunlight acts on nitrogen oxides and hydrocarbons, acid deposition forms when sulphur dioxide and nitrogen oxides dissolve in precipitation, and nutrient runoff fuels blooms that consume oxygen, so each problem has its own chemistry and its own remedy.",
+         "keywords": [
+          "ozone",
+          "acid deposition",
+          "eutrophication"
+         ],
+         "prerequisites": [
+          "Impervious Surfaces and the Urban Water Cycle"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Natural Hazards and Risk",
+       "concepts": [
+        {
+         "title": "Risk Is Not the Same as Hazard",
+         "summary": "Risk combines the probability of a hazard with the exposure and vulnerability of what lies in its path, so an earthquake of one magnitude carries far greater risk where buildings are unreinforced.",
+         "keywords": [
+          "hazard",
+          "exposure",
+          "vulnerability"
+         ]
+        },
+        {
+         "title": "Structural and Nonstructural Mitigation",
+         "summary": "A levee, retaining wall or seismic brace reduces damage directly while zoning, insurance and evacuation reduce exposure, and a levee can raise risk when it encourages building behind it and then fails.",
+         "keywords": [
+          "mitigation",
+          "zoning",
+          "levee"
+         ],
+         "prerequisites": [
+          "Risk Is Not the Same as Hazard"
+         ]
+        },
+        {
+         "title": "Recurrence Intervals and Probability",
+         "summary": "A recurrence interval is the average interval between events of a given size, so a 50-year flood has a two percent chance in any year and two of them can still occur in consecutive years.",
+         "keywords": [
+          "recurrence interval",
+          "probability",
+          "return period"
+         ],
+         "prerequisites": [
+          "Structural and Nonstructural Mitigation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Engineering Solutions and Tradeoffs",
+       "concepts": [
+        {
+         "title": "Criteria and Constraints in Earth Engineering",
+         "summary": "A design is judged against criteria such as safety and cost while constrained by budget, materials, regulation and site conditions, so a solution is optimal only for the constraints it was designed under.",
+         "keywords": [
+          "design criteria",
+          "constraint",
+          "tradeoff"
+         ]
+        },
+        {
+         "title": "Unintended Consequences and Adaptive Management",
+         "summary": "A dam that traps sediment starves the delta downstream and accelerates coastal retreat, so a large Earth work needs monitoring and adjustment rather than a one-time approval.",
+         "keywords": [
+          "dam",
+          "sediment starvation",
+          "monitoring"
+         ],
+         "prerequisites": [
+          "Criteria and Constraints in Earth Engineering"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sustainability and Global Change Synthesis",
+       "concepts": [
+        {
+         "title": "Sustainability as Living Within Regeneration Rates",
+         "summary": "A use is sustainable only if renewable resources are consumed no faster than they regenerate and wastes are released no faster than they are absorbed, so a fishery can last only up to its maximum sustainable yield.",
+         "keywords": [
+          "sustainability",
+          "regeneration",
+          "maximum sustainable yield"
+         ]
+        },
+        {
+         "title": "Earth System Feedbacks Amplify or Damp Change",
+         "summary": "Melting ice lowering albedo, thawing permafrost releasing carbon and warmer air holding more water vapour are positive feedbacks, while increased weathering and ocean uptake are negative ones, so the net response depends on which balance wins and over what timescale.",
+         "keywords": [
+          "feedback",
+          "permafrost",
+          "carbon cycle"
+         ],
+         "prerequisites": [
+          "Sustainability as Living Within Regeneration Rates"
+         ]
+        },
+        {
+         "title": "Mitigation, Adaptation, and Decisions under Uncertainty",
+         "summary": "Mitigation reduces the forcing while adaptation reduces vulnerability to the change already committed, and because projections are scenarios rather than forecasts, planning weighs outcomes across a range of them.",
+         "keywords": [
+          "mitigation",
+          "adaptation",
+          "scenario"
+         ],
+         "prerequisites": [
+          "Earth System Feedbacks Amplify or Damp Change"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Atmosphere, Weather, and Climate"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Space Systems and Planet Earth",
+   "units": [
+    {
+     "unit": "Space Systems and Planet Earth",
+     "topics": [
+      {
+       "topic": "Universe Evidence",
+       "concepts": [
+        {
+         "title": "Evidence for an Expanding Universe",
+         "summary": "Distant galaxies show redshifts proportional to their distance, the cosmic microwave background is a relic of a hot dense early state and the measured hydrogen and helium abundances match prediction, so the three together support a hot Big Bang.",
+         "keywords": [
+          "big bang",
+          "redshift",
+          "cosmic microwave background"
+         ]
+        },
+        {
+         "title": "Redshift Is Expansion, Not Motion",
+         "summary": "Cosmological redshift grows with distance because space stretches the wavelength in transit, so a distant galaxy is not travelling through space at the speed its redshift implies but is carried by the expansion between it and us.",
+         "keywords": [
+          "hubble law",
+          "expansion",
+          "wavelength"
+         ],
+         "prerequisites": [
+          "Evidence for an Expanding Universe"
+         ]
+        },
+        {
+         "title": "Galaxies and the Scale of the Universe",
+         "summary": "A galaxy is a gravitationally bound system of stars, gas and dark matter, and because the Milky Way is about 100,000 light years across while Andromeda lies 2.5 million light years away, the spacing between galaxies far exceeds their size.",
+         "keywords": [
+          "galaxy",
+          "light year",
+          "milky way"
+         ],
+         "prerequisites": [
+          "Redshift Is Expansion, Not Motion"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Stars",
+       "concepts": [
+        {
+         "title": "Star Formation and the Main Sequence",
+         "summary": "A collapsing cloud of gas and dust heats until hydrogen fusion begins and outward pressure balances gravity, and because a more massive star fuses far faster it is brighter but lives a shorter life.",
+         "keywords": [
+          "star formation",
+          "main sequence",
+          "hydrostatic equilibrium"
+         ]
+        },
+        {
+         "title": "Stellar Evolution and Element Synthesis",
+         "summary": "A low-mass star ends as a white dwarf after shedding a planetary nebula while a high-mass star ends in a supernova that leaves a neutron star or black hole, and the heavy elements of Earth were forged in such stars and dispersed by supernovae.",
+         "keywords": [
+          "stellar evolution",
+          "supernova",
+          "nucleosynthesis"
+         ],
+         "prerequisites": [
+          "Star Formation and the Main Sequence"
+         ]
+        },
+        {
+         "title": "The Hertzsprung-Russell Diagram",
+         "summary": "The H-R diagram plots luminosity against surface temperature, and its main sequence, giants and white dwarfs occupy separate regions, so a star's position identifies its stage and relative size.",
+         "keywords": [
+          "hr diagram",
+          "luminosity",
+          "stellar classification"
+         ],
+         "prerequisites": [
+          "Stellar Evolution and Element Synthesis"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solar System Motions and Objects",
+       "concepts": [
+        {
+         "title": "Formation and Differentiation of the Solar System",
+         "summary": "The solar nebula flattened into a disk in which dust accreted into planetesimals that separated by density, so rocky planets formed where the disk was hot and ice-rich giant planets formed beyond the frost line.",
+         "keywords": [
+          "solar nebula",
+          "accretion",
+          "frost line"
+         ]
+        },
+        {
+         "title": "Kepler's Laws and Orbital Speed",
+         "summary": "Each planet follows an ellipse with the Sun at one focus and sweeps equal areas in equal times, so it moves fastest at perihelion, and the square of its orbital period is proportional to the cube of its semi-major axis.",
+         "keywords": [
+          "kepler law",
+          "ellipse",
+          "orbital period"
+         ],
+         "prerequisites": [
+          "Formation and Differentiation of the Solar System"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Earth-Sun Cycles",
+       "concepts": [
+        {
+         "title": "Tilt, Not Distance, Causes the Seasons",
+         "summary": "Earth's axis is tilted about 23.5 degrees, so each hemisphere receives more direct sunlight over longer days for half the year, which is why the two hemispheres have opposite seasons even though Earth is nearest the Sun in January.",
+         "keywords": [
+          "axial tilt",
+          "season",
+          "solstice"
+         ]
+        },
+        {
+         "title": "Angle of Insolation and Day Length",
+         "summary": "Insolation intensity varies with the sine of the Sun's angle above the horizon, so a low winter Sun spreads the same energy over a longer path and a larger area, and beyond the polar circles the day length reaches 24 hours or zero.",
+         "keywords": [
+          "insolation",
+          "angle of incidence",
+          "day length"
+         ],
+         "prerequisites": [
+          "Tilt, Not Distance, Causes the Seasons"
+         ]
+        },
+        {
+         "title": "Milankovitch Cycles and Ice Ages",
+         "summary": "Variations in orbital eccentricity over about 100,000 years, axial tilt over 41,000 and precession over 23,000 change how sunlight is distributed by season at high northern latitudes, which paces glacial and interglacial cycles.",
+         "keywords": [
+          "milankovitch",
+          "eccentricity",
+          "precession"
+         ],
+         "prerequisites": [
+          "Angle of Insolation and Day Length"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Moon, Eclipses, and Tides",
+       "concepts": [
+        {
+         "title": "Phases and Eclipses from Orbital Geometry",
+         "summary": "The Moon's phase depends on how much of its sunlit half faces Earth over a cycle of about 29.5 days, and a solar eclipse occurs only at new moon and a lunar eclipse only at full moon when the tilted orbit crosses the ecliptic.",
+         "keywords": [
+          "moon phase",
+          "eclipse",
+          "orbital plane"
+         ]
+        },
+        {
+         "title": "Tides from Differential Gravity",
+         "summary": "The Moon pulls hardest on the near side of Earth and least on the far side, producing two tidal bulges, and the Sun's alignment adds to them at new and full moon for spring tides and subtracts at the quarter phases for neap tides.",
+         "keywords": [
+          "tide",
+          "spring tide",
+          "neap tide"
+         ],
+         "prerequisites": [
+          "Phases and Eclipses from Orbital Geometry"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Resources, Hazards, and Human Sustainability"
      ]
     }
    ]

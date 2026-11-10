@@ -486,16 +486,20 @@ OPENSTAX_INTRODUCTORY_STATISTICS = SourcePolicy(
     scope='External link only pending exact-version clearance.',
     evidence_id='openstax_license_transition',
 )
-#: The exception the licence transition left behind. OpenStax's own book API reports the
-#: *first* edition of Algebra and Trigonometry as Creative Commons Attribution 4.0 (BY only:
-#: no NC, no ND), while every current 2e edition reports CC BY-NC-SA 4.0 -- see
-#: ``openstax_license_transition`` and ``openstax_elementary_algebra_current_rights`` for the
-#: transition and the current NC position. CC BY is an ingestible class, so section text from
-#: *this edition* may be fetched, stored with provenance, and quoted with attribution. The
-#: fetcher (``app.ingest.sources.openstax``) re-classifies the licence from the publisher's
-#: own API at fetch time and refuses to store text whenever the live data stops matching this
-#: audited entry, so a rights change on OpenStax's side fails closed rather than sailing
-#: through on a stale audit.
+#: A hand-verified CC BY edition. OpenStax's own book API reports the *first* edition of
+#: Algebra and Trigonometry as Creative Commons Attribution 4.0 (BY only: no NC, no ND),
+#: while current 2e editions report CC BY-NC-SA 4.0 -- see ``openstax_license_transition``
+#: and ``openstax_elementary_algebra_current_rights`` for the transition and the current NC
+#: position. CC BY is an ingestible class, so section text from *this edition* may be
+#: fetched, stored with provenance, and quoted with attribution. The 2026-11-10 catalogue
+#: audit (``openstax_full_catalogue_2026_11_10``) found 37 more publisher-reported CC BY
+#: books -- mostly retired first editions plus Physics, Statistics and a handful of live
+#: titles -- and they are registered below from the snapshot, each still re-verified against
+#: the live API at fetch time. This entry remains the hand-audited exemplar: the fetcher
+#: (``app.ingest.sources.openstax``) re-classifies the licence from the publisher's own API
+#: at fetch time and refuses to store text whenever the live data stops matching the audited
+#: entry, so a rights change on OpenStax's side fails closed rather than sailing through on
+#: a stale audit.
 OPENSTAX_ALGEBRA_TRIG = SourcePolicy(
     name='OpenStax Algebra and Trigonometry (1e)',
     url='https://openstax.org/details/books/algebra-and-trigonometry',
@@ -526,6 +530,30 @@ OPENSTAX_ALGEBRA_TRIG_2E = SourcePolicy(
     licence_class=LicenceClass.LINK_ONLY,
     scope='External link only. No text, exercises, figures or embeddings are copied or ingested.',
     evidence_id='openstax_license_transition',
+)
+#: The Algebra 1 spine. ``algebra-1`` exists in the publisher's catalogue but reports
+#: CC BY-NC-SA 4.0, so it cannot be quoted; the first edition of *Elementary Algebra* is
+#: the CC BY 4.0 book that actually teaches the Algebra 1 sequence, and it is the text
+#: anchor for every unit of the ``algebra_1`` course. Verified 2026-11-10 against the live
+#: CMS API (license_name "Creative Commons Attribution License", license_version 4.0) and
+#: by fetching the sections the course cites: all 66 resolved with HTTP 200.
+OPENSTAX_ELEMENTARY_ALGEBRA_1E = SourcePolicy(
+    name='OpenStax Elementary Algebra (1e)',
+    url='https://openstax.org/details/books/elementary-algebra',
+    licence='Creative Commons Attribution 4.0, as reported by OpenStax\'s book API '
+            '(license_name "Creative Commons Attribution License", license_version 4.0). '
+            'Verified against the live API on 2026-11-10.',
+    licence_class=LicenceClass.CC_BY,
+    scope='Section text may be fetched, stored with provenance and quoted with attribution. '
+          'The 2e successor (elementary-algebra-2e) is CC BY-NC-SA 4.0 and remains link-only. '
+          'OpenStax\'s own notices prohibit ingesting its content into LLMs or generative-AI '
+          'offerings, so a stored section is never sent to a model: the quote is composed '
+          'deterministically into a block type the prose-rewriting pass never reads, and '
+          'agent-loop tool results pass through generate.redact_textbook_quotes, which '
+          'withholds the verbatim text while keeping the citation.',
+    attribution='OpenStax Elementary Algebra 1e, Lynn Marecek et al., CC BY 4.0. '
+                'Section URL and retrieval date are stored and displayed with every quote.',
+    evidence_id='openstax_elementary_algebra_1e_cc_by',
 )
 KHAN_ACADEMY_TERMS = SourcePolicy(
     name='Khan Academy',
@@ -617,6 +645,35 @@ KHAN_ALGEBRA_2 = _external_reference(
     'No reuse or AI-training permission claimed; current guidance prohibits scraping and AI/ML extraction',
     'External link only. No lessons, transcripts, exercises, embeddings, logos or training content.',
     'khan_academy_link_only')
+KHAN_ALGEBRA_1 = _external_reference(
+    'Khan Academy — Algebra 1', 'https://www.khanacademy.org/math/algebra',
+    'No reuse or AI-training permission claimed; current guidance prohibits scraping and AI/ML extraction',
+    'External link only. No lessons, transcripts, exercises, embeddings, logos or training content.',
+    'khan_academy_link_only')
+#: ACT English's study reference. OpenStax's Writing Guide with Handbook is CC BY-NC-SA, so
+#: it is a link-only reference and never a text anchor; a course with no reference at all
+#: would tell a learner nothing about where to read more.
+OPENSTAX_WRITING_GUIDE = _external_reference(
+    'OpenStax Writing Guide with Handbook',
+    'https://openstax.org/details/books/writing-guide',
+    'Current web notice: CC BY-NC-SA 4.0; AI ingestion/training requires prior written permission',
+    'External link only. No text, exercises or embeddings are copied or ingested.',
+    'openstax_writing_guide_current_rights')
+OPENSTAX_ORGANIC_CHEMISTRY = _external_reference(
+    'OpenStax Organic Chemistry: A Tenth Edition',
+    'https://openstax.org/details/books/organic-chemistry',
+    'Current web notice: CC BY-NC-SA 4.0; AI ingestion/training requires prior written permission',
+    'External link only. No text, mechanisms or exercises are copied or ingested.',
+    'openstax_organic_chemistry_current_rights')
+#: Linear algebra has no OpenStax book at all, so its reading reference is MIT's own
+#: course page (18.06 Linear Algebra), linked and never copied. A learner needs somewhere
+#: real to read more; a course with no reference tells them nothing.
+MIT_OCW_LINEAR_ALGEBRA = _external_reference(
+    'MIT OpenCourseWare 18.06 Linear Algebra',
+    'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/',
+    '© MIT OpenCourseWare; content offered under CC BY-NC-SA 4.0 per the OCW terms',
+    'External link only. No lecture notes, videos, exercises or problem sets are copied.',
+    'mit_ocw_18_06_link_only')
 KHAN_CALCULUS = _external_reference(
     'Khan Academy — Calculus', 'https://www.khanacademy.org/math/calculus-1',
     'No reuse or AI-training permission claimed; current guidance prohibits scraping and AI/ML extraction',
@@ -695,6 +752,20 @@ COURSE_REFERENCES = {
     'ap_chemistry': (OPENSTAX_CHEMISTRY, KHAN_SCIENCE),
     'algebra_2': (OPENSTAX_ALGEBRA_TRIG_2E, KHAN_ALGEBRA_2),
     'ap_calculus': (OPENSTAX_CALCULUS, KHAN_CALCULUS),
+    # Algebra 1 anchors on the CC BY first edition of Elementary Algebra, which is the
+    # book that actually teaches the sequence; the CC BY-NC-SA ``algebra-1`` title is
+    # named in the pack's alignment metadata but is never quoted.
+    'algebra_1': (OPENSTAX_ELEMENTARY_ALGEBRA, KHAN_ALGEBRA_1),
+    # The 2026-11-10 build. Courses with no CC BY book are deliberately absent rather than
+    # pointed at a near-miss title: organic chemistry, linear algebra and ACT English have
+    # no eligible OpenStax book, and citing one would be a fabricated reference.
+    'astrophysics': (OPENSTAX_ASTRONOMY, KHAN_SCIENCE),
+    'act_math': (OPENSTAX_ALGEBRA_TRIG_2E, KHAN_ALGEBRA_1),
+    'ap_calculus_ab': (OPENSTAX_CALCULUS, KHAN_CALCULUS),
+    'ap_calculus_bc': (OPENSTAX_CALCULUS, KHAN_CALCULUS),
+    'act_english': (OPENSTAX_WRITING_GUIDE,),
+    'organic_chemistry': (OPENSTAX_ORGANIC_CHEMISTRY,),
+    'linear_algebra': (MIT_OCW_LINEAR_ALGEBRA,),
 }
 
 # ------------------------------------------------------------------- media sources
@@ -884,7 +955,17 @@ COURSE_VIDEO_HUBS = {
     'ap_chemistry': (KHAN_ACADEMY_VIDEO,),
     'ap_psychology': (KHAN_ACADEMY_VIDEO,),
     'algebra_2': (KHAN_ACADEMY_VIDEO,),
+    'algebra_1': (KHAN_ACADEMY_VIDEO,),
     'ap_calculus': (KHAN_ACADEMY_VIDEO, THREE_BLUE_ONE_BROWN),
+    'astrophysics': (KHAN_ACADEMY_VIDEO,),
+    'organic_chemistry': (KHAN_ACADEMY_VIDEO,),
+    # 3Blue1Brown's linear-algebra series is the strongest free video resource for the
+    # visual side of the subject and is embedded through YouTube's own player.
+    'linear_algebra': (KHAN_ACADEMY_VIDEO, THREE_BLUE_ONE_BROWN),
+    'act_math': (KHAN_ACADEMY_VIDEO,),
+    'act_english': (KHAN_ACADEMY_VIDEO,),
+    'ap_calculus_ab': (KHAN_ACADEMY_VIDEO, THREE_BLUE_ONE_BROWN),
+    'ap_calculus_bc': (KHAN_ACADEMY_VIDEO, THREE_BLUE_ONE_BROWN),
 }
 
 #: Which simulation provider to try first for a course, in order.
@@ -912,7 +993,11 @@ COURSE_SIMULATION_PROVIDERS = {
     'ap_biology': ('phet',),
     'ap_chemistry': ('phet',),
     'algebra_2': ('phet',),
+    'algebra_1': ('phet',),
     'ap_calculus': ('phet',),
+    'astrophysics': ('phet',),
+    'ap_calculus_ab': ('phet',),
+    'ap_calculus_bc': ('phet',),
 }
 
 #: Courses that legitimately have no interactive simulation provider, with the reason.
@@ -926,25 +1011,198 @@ COURSE_SIMULATION_PROVIDERS = {
 COURSES_WITHOUT_SIMULATIONS = {
     'ap_psychology': 'PhET and Gizmos carry no psychology catalogue; the concept map and the '
                      'authored items are the practice surface for this course.',
+    # Organic chemistry is a mechanism subject: a PhET simulation of a slider or a pendulum
+    # would not teach SN1 versus SN2. Declaring the absence is honest; naming a provider
+    # that contributes nothing would not be.
+    'organic_chemistry': 'PhET and Gizmos carry no organic-chemistry mechanism catalogue; the '
+                         'concept map, the mechanism descriptions and the practice items are '
+                         'the practice surface.',
+    'linear_algebra': 'Neither PhET nor Gizmos carries a linear-algebra catalogue; the '
+                      'concept map and the generated practice items are the practice surface.',
+    'act_english': 'Neither PhET nor Gizmos carries a language or composition catalogue; the '
+                   'concept map and the usage items are the practice surface.',
 }
+
+# ----------------------------------------------------------------- OpenStax catalogue
+#
+# The complete OpenStax book catalogue as **publisher-reported data**, snapshotted from the
+# same CMS API the runtime fetcher re-reads at fetch time (``scripts/refresh_openstax_catalogue.py``
+# is the only sanctioned way the bundled snapshot changes). Every book gets an audited
+# :class:`SourcePolicy` derived from the licence the publisher itself reports, classified
+# through :func:`classify_licence` -- the same fail-close classifier every other source
+# passes. Nothing here assumes "OpenStax is open": 80 of the books report CC BY-NC-SA 4.0
+# and 11 report *no licence at all*, and each gets the position its own data supports.
+# The snapshot stores raw publisher fields only, so editing the JSON cannot widen a book's
+# rights -- only re-fetching it from the publisher can.
+
+_OPENSTAX_CATALOGUE_FILE = Path(__file__).parent / 'sources' / 'openstax_catalogue.json'
+
+#: Slugs that already carry a hand-authored, evidence-backed policy above, each tied to its
+#: own evidence entry. The generated catalogue defers to them: duplicating a book under a
+#: second name would put two different rights positions for the same work into one registry.
+_OPENSTAX_HAND_AUDITED: dict[str, SourcePolicy] = {
+    'algebra-and-trigonometry': OPENSTAX_ALGEBRA_TRIG,
+    'algebra-and-trigonometry-2e': OPENSTAX_ALGEBRA_TRIG_2E,
+    'elementary-algebra': OPENSTAX_ELEMENTARY_ALGEBRA_1E,
+    'elementary-algebra-2e': OPENSTAX_ELEMENTARY_ALGEBRA,
+    'introductory-statistics-2e': OPENSTAX_INTRODUCTORY_STATISTICS,
+    'college-physics-2e': OPENSTAX_COLLEGE_PHYSICS,
+    'chemistry-2e': OPENSTAX_CHEMISTRY,
+    'biology-2e': OPENSTAX_BIOLOGY,
+    'astronomy-2e': OPENSTAX_ASTRONOMY,
+    'psychology-2e': OPENSTAX_PSYCHOLOGY,
+    'calculus-volume-1': OPENSTAX_CALCULUS,
+    'principles-economics-3e': OPENSTAX_PRINCIPLES_ECONOMICS,
+}
+
+
+def _openstax_catalogue_entries() -> tuple[dict[str, SourcePolicy], frozenset[str],
+                                           dict[str, Any]]:
+    """One audited policy per catalogue book, derived from the publisher snapshot.
+
+    Returns ``(policies_by_slug, unlicensed_slugs, posture)``. Fail-close in the same
+    three ways the runtime gate is: a book the publisher licences permissively becomes
+    text-eligible *with the live re-verification at fetch time still applying*; a book
+    reporting a non-commercial licence is link-only and withheld from a paid offering
+    (non-commercial is decided by the use, not the user); and a book reporting **no
+    licence at all** is refused outright -- an unknown licence is not rounded to the
+    nearest permissive one.
+    """
+    try:
+        snapshot = json.loads(_OPENSTAX_CATALOGUE_FILE.read_text(encoding='utf-8'))
+    except (OSError, ValueError) as exc:
+        # Fail closed by omission: with no snapshot, only the hand-audited books exist.
+        # The system gets narrower, never wider, when its data is unreadable.
+        warnings.warn(f'OpenStax catalogue snapshot unreadable ({exc}); only the '
+                      f'hand-audited OpenStax books are available.')
+        return {}, frozenset(), {}
+    retrieved = str(snapshot.get('retrieved_at') or 'unverified date')
+    generated: dict[str, SourcePolicy] = {}
+    unlicensed: list[str] = []
+    used_names = {entry.name for entry in _OPENSTAX_HAND_AUDITED.values()}
+    for book in snapshot.get('books') or []:
+        slug = str(book.get('slug') or '')
+        if not slug or slug in _OPENSTAX_HAND_AUDITED:
+            continue
+        title = str(book.get('title') or slug)
+        state = str(book.get('book_state') or 'unknown')
+        detail_url = str(book.get('detail_url') or '') or \
+            f'https://openstax.org/details/books/{slug}'
+        licence_text = ' '.join(str(part) for part in
+                                (book.get('license_name'), book.get('license_version')) if part)
+        klass = classify_licence(licence_text)
+        provenance = (f"as reported by OpenStax's CMS book API (verified {retrieved}; "
+                      f"book state {state})")
+        name = f'OpenStax {title}'
+        if name in used_names:  # titles are unique in the catalogue, but never trust that
+            name = f'OpenStax {title} [{slug}]'
+        used_names.add(name)
+        if klass in INGESTIBLE:
+            generated[slug] = SourcePolicy(
+                name=name, url=detail_url,
+                licence=f'{licence_text}, {provenance}.',
+                licence_class=klass,
+                scope='Section text may be fetched, stored with provenance and quoted with '
+                      'attribution. OpenStax\'s own notices prohibit ingesting its content '
+                      'into LLMs or generative-AI offerings, so a stored section is never '
+                      'sent to a model: the quote is composed deterministically into a block '
+                      'type the prose-rewriting pass never reads, and agent-loop tool results '
+                      'pass through generate.redact_textbook_quotes, which withholds the '
+                      'verbatim text while keeping the citation.',
+                attribution=f'OpenStax {title}, {licence_text}. Section URL and retrieval '
+                            'date are stored and displayed with every quote.',
+                evidence_id=str(snapshot.get('evidence_id') or 'openstax_full_catalogue'))
+        else:
+            if klass is None:
+                unlicensed.append(slug)
+                licence = (f'No licence declared by OpenStax\'s CMS book API (verified '
+                           f'{retrieved}). An unknown licence is refused, not rounded to the '
+                           f'nearest permissive one.')
+                klass = LicenceClass.LINK_ONLY
+            else:
+                licence = f'{licence_text}, {provenance}. Non-commercial: link-only.'
+            generated[slug] = SourcePolicy(
+                name=name, url=detail_url, licence=licence, licence_class=klass,
+                scope='External link only. No text, exercises, figures or embeddings are '
+                      'copied or ingested. Non-commercial is decided by the use, not the '
+                      'user, so this book is withheld from a paid offering rather than '
+                      'silently kept.',
+                evidence_id=str(snapshot.get('evidence_id') or 'openstax_full_catalogue'),
+                commercial_ok=False)
+    posture = {'retrieved_at': retrieved, 'catalogue_books': len(snapshot.get('books') or []),
+               'generated_policies': len(generated), 'unlicensed': len(unlicensed),
+               'evidence_id': str(snapshot.get('evidence_id') or '')}
+    return generated, frozenset(unlicensed), posture
+
+
+_OPENSTAX_GENERATED, _OPENSTAX_UNLICENSED, _OPENSTAX_CATALOGUE_POSTURE = \
+    _openstax_catalogue_entries()
+
+#: slug -> the audited policy for every OpenStax book this project has looked at. The
+#: hand-audited entries take precedence over generated ones, so a book can never hold two
+#: different rights positions in the same registry.
+OPENSTAX_BOOK_POLICIES: dict[str, SourcePolicy] = {**_OPENSTAX_GENERATED,
+                                                   **_OPENSTAX_HAND_AUDITED}
+
+#: Catalogue books the publisher serves with **no licence fields at all** (currently the
+#: Spanish translations and one courseware shell). Registered as known-and-refused rather
+#: than unaudited: the fetcher withholds them with zero network requests and a reason that
+#: says the publisher declares no licence, so "no rights position" and "never reviewed"
+#: stay distinguishable.
+OPENSTAX_UNLICENSED: frozenset[str] = _OPENSTAX_UNLICENSED
+
+
+def openstax_catalogue() -> list[dict[str, Any]]:
+    """Every OpenStax book with its audited rights position, for the transparency panel."""
+    rows: list[dict[str, Any]] = []
+    for slug, entry in OPENSTAX_BOOK_POLICIES.items():
+        rows.append({'slug': slug, 'title': entry.name, 'url': entry.url,
+                     'licence': entry.licence, 'licence_class': entry.licence_class.value,
+                     'text_eligible': entry.ingestible, 'commercial_ok': entry.commercial_ok,
+                     'unlicensed': slug in OPENSTAX_UNLICENSED,
+                     'evidence_id': entry.evidence_id})
+    rows.sort(key=lambda row: str(row['slug']))
+    return rows
+
+
+def openstax_catalogue_posture() -> dict[str, Any]:
+    """The catalogue's headline numbers, plus the per-book rows."""
+    policies = OPENSTAX_BOOK_POLICIES.values()
+    return {**_OPENSTAX_CATALOGUE_POSTURE,
+            'books_audited': len(OPENSTAX_BOOK_POLICIES),
+            'text_eligible': sum(1 for entry in policies if entry.ingestible),
+            'noncommercial_link_only': sum(1 for slug, entry in OPENSTAX_BOOK_POLICIES.items()
+                                           if not entry.ingestible and slug not in OPENSTAX_UNLICENSED),
+            'unlicensed_refused': len(OPENSTAX_UNLICENSED),
+            'books': openstax_catalogue()}
+
 
 #: Sources this project deliberately does NOT ingest. Composed here rather than inline so the
 #: per-course reference books are part of the same audited list and appear in
 #: :func:`registry` -- a reference link that skipped the audit would be exactly the kind of
-#: quiet licence drift this module exists to prevent.
+#: quiet licence drift this module exists to prevent. The generated OpenStax catalogue rides
+#: the same list: every non-eligible book in the publisher's catalogue is here as an audited
+#: link-only reference, not an unknown slug.
 RESTRICTED = _AUTHORED_RESTRICTED + (OPENSTAX_ALGEBRA_TRIG_2E,
                                      OPENSTAX_COLLEGE_PHYSICS, OPENSTAX_CHEMISTRY, OPENSTAX_BIOLOGY,
                                      OPENSTAX_ASTRONOMY, OPENSTAX_PSYCHOLOGY, KHAN_SCIENCE,
                                      KHAN_COMPUTING, OPENSTAX_CALCULUS,
                                      OPENSTAX_PRINCIPLES_ECONOMICS,
-                                     KHAN_ECONOMICS, KHAN_ALGEBRA_2, KHAN_CALCULUS)
+                                     KHAN_ECONOMICS, KHAN_ALGEBRA_2, KHAN_CALCULUS,
+                                     *tuple(entry for slug, entry in _OPENSTAX_GENERATED.items()
+                                            if not entry.ingestible))
 
 #: Textbook sources cleared for actual text ingestion. A separate list from ``RESTRICTED``
 #: because the two are opposite rights positions kept in the same audited registry: a book
 #: is either in ``TEXTBOOK_SOURCES`` (text may be stored and quoted) or in ``RESTRICTED``
 #: (link only), never both, and ``app.ingest.sources.openstax`` refuses any book slug that
-#: appears in neither.
-TEXTBOOK_SOURCES = (OPENSTAX_ALGEBRA_TRIG,)
+#: appears in neither. The hand-audited first edition of Algebra and Trigonometry keeps its
+#: own evidence-backed entry; every other publisher-reported CC BY book in the catalogue is
+#: generated from the snapshot and still re-verified against the live API at fetch time, so
+#: a licence change on the publisher's side fails closed rather than sailing through.
+TEXTBOOK_SOURCES = (OPENSTAX_ALGEBRA_TRIG, OPENSTAX_ELEMENTARY_ALGEBRA_1E,
+                    *tuple(entry for entry in _OPENSTAX_GENERATED.values()
+                           if entry.ingestible))
 
 #: Every media source, in the same audited list as the text sources. The game sources are
 #: link-only references rather than media, but they ride the same registry so a stored

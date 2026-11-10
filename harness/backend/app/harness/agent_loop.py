@@ -8,9 +8,11 @@ in plain prose, the step cap is reached, or the caller cancels.
 
 Design rules, in the same spirit as the rest of the package:
 
-* **The model is an enhancement, never a dependency.** Every failure path - offline
-  provider, timeout, malformed tool arguments - comes back as an ``error`` or
-  ``turn_end`` event, never an exception, and never a crash in a route.
+* **A model is required.** There is no offline provider. Every failure path - an
+  unconfigured instance, a timeout, malformed tool arguments - comes back as an ``error``
+  or ``turn_end`` event that names the missing configuration, never an exception and
+  never a crash in a route. A configured model that transiently fails still degrades to
+  a declared grounded fallback for that one turn.
 * **Tools are dispatched by name, from a registry.** An unknown tool name is *refused*,
   not guessed: the refusal is fed back to the model so it can recover, and the refusal is
   visible in the event trace.
@@ -175,9 +177,11 @@ def run_agent(settings, messages: list[dict[str, Any]], registry: Registry, ctx:
     """
     steps = max(1, min(int(max_steps), HARD_MAX_STEPS))
     if not provider.available(settings):
-        yield {'type': 'error', 'message': 'Model not configured. The harness falls back to '
-                                           'deterministic, grounded-offline content when no '
-                                           'provider is set.'}
+        yield {'type': 'error', 'message': 'A language model is required and is not '
+                                           'configured on this instance. Add a provider, model '
+                                           'and API key in Settings; until then the harness '
+                                           'can only report a grounded fallback, not generate '
+                                           'a model-backed turn.'}
         yield {'type': 'turn_end', 'reason': 'unavailable', 'content': None}
         return
     yield {'type': 'turn_start'}

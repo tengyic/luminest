@@ -89,6 +89,11 @@ class AssessInput(BaseModel):
     variant_result: str = Field(default='', max_length=16)
     explained: bool | None = None
     last_notice_at: float | None = None
+    #: How to speak the notice, not what to decide. The client resolves its picker to a
+    #: (voice, tone) pair on every request; empty means the instance default. Popped out
+    #: of ``signals`` below so the supervisor never sees speech preferences as evidence.
+    voice: str = Field(default='', max_length=80)
+    tone: str = Field(default='', max_length=200)
 
 
 def _stored_mastery(db, user, concept_id: str) -> tuple[float, bool]:
@@ -127,6 +132,8 @@ def assess(payload: AssessInput, request: Request,
     signals = payload.model_dump()
     concept_id = signals.pop('concept_id', '')
     last_notice_at = signals.pop('last_notice_at', None)
+    voice = signals.pop('voice', '')
+    tone = signals.pop('tone', '')
     # Overwrite, not merge: a client-supplied mastery is ignored even when it is present.
     signals['mastery'], signals['mastery_known'] = _stored_mastery(db, user, concept_id)
     reading = supervision.assess(signals, last_notice_at=last_notice_at)
@@ -134,25 +141,28 @@ def assess(payload: AssessInput, request: Request,
     reading['notice'] = _notice(reading)
     # Only a notice that will actually be spoken gets a voice rendered for it. This is the
     # silent half of the teacher, so the clip is what makes it *supervision* rather than a
-    # line of text the learner has to be looking at the screen to notice.
+    # line of text the learner has to be looking at the screen to notice. The clip uses
+    # the same voice the tutor spoke with, so the teacher does not change mid-session.
     if reading['notice'].get('say'):
         reading['notice']['speech'] = _notice_speech(
-            request.app.state.settings, str(reading['notice']['text']))
+            request.app.state.settings, str(reading['notice']['text']),
+            voice=voice, tone=tone)
     return reading
 
 
-def _notice_speech(settings, text: str) -> dict[str, Any]:
+def _notice_speech(settings, text: str, *, voice: str = '', tone: str = '') -> dict[str, Any]:
     """Render a notice through the same voice a tutor turn uses.
 
     Off the request path, like every other spoken line: synthesis costs 20-40 s on the local
     engine, and an interval check that waited for it would be a stall, not a check. The
     descriptor therefore usually says ``pending`` and the client polls the clip exactly as it
     does for an answer. A disabled or unreachable engine returns its own refusal rather than
-    a silent no-op, so the client can say why nothing was heard.
+    a silent no-op, so the client can say why nothing was heard. ``voice``/``tone`` default
+    to the instance configuration so older callers keep their behaviour unchanged.
     """
     from .harness import speech
     try:
-        clip = speech.request_sequence(settings, text)
+        clip = speech.request_sequence(settings, text, voice=voice, tone=tone)
     except Exception as exc:  # a broken engine must not break the check itself
         return {'state': 'failed', 'reason': f'{type(exc).__name__}: {exc}'}
     return speech.classify(clip, 'notification')

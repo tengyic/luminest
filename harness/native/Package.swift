@@ -18,7 +18,12 @@ let package = Package(
             // undeclared file as an unhandled resource and warns on every build; naming
             // it here keeps the manifest honest without bundling prose into the app.
             exclude: ["Features/README.md"],
-            resources: [.process("Resources")]
+            // `Visuals/` is a WKWebView document root with a real directory hierarchy
+            // (vendor/, tikzjax/fonts/). `.process` FLATTENS every file into the bundle
+            // root, which makes `vendor/plotly.min.js` and the TeX WASM paths 404. It is
+            // therefore declared as `.copy`, outside Resources/, so the shipped bundle
+            // keeps the exact paths index.html and the CSP refer to.
+            resources: [.process("Resources"), .copy("Visuals")]
         ),
         .testTarget(name: "LearningHarnessTests", dependencies: ["LearningHarness"])
     ],

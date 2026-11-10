@@ -60,7 +60,7 @@ def test_profile_limits_and_consent_gate(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     settings = Settings.from_env()
     with TestClient(create_app(settings)) as client:
         registered = client.post('/api/v1/auth/register', json={
@@ -100,7 +100,11 @@ def test_profile_limits_and_consent_gate(tmp_path, monkeypatch):
             },
         })
         assert chat.status_code == 200, chat.text
-        assert chat.json()['content'].startswith('We can work through this one step at a time.')
+        # With no model configured the reply leads with the model-required notice. The
+        # teacher's style opening still shapes the grounded fallback that follows.
+        content = chat.json()['content']
+        assert content.startswith('A language model is not configured')
+        assert 'We can work through this one step at a time.' in content
         assert client.get('/api/v1/chat', headers=headers,
                           params={'concept_id': 'fractions'}).status_code == 200
         with client.app.state.factory() as db:
@@ -120,13 +124,13 @@ def test_generated_course_map_lesson_is_taught_with_its_limits_named(tmp_path, m
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     settings = Settings.from_env()
     node = courses.graph_for('biology').nodes['active_transport'].to_dict()
     text, provider, grounding, _ = tutor.respond(
         settings, 'active_transport', 'Please explain active transport in detail.', [],
         retrieval_context={'node': node, 'prerequisites': [], 'dependants': []})
-    assert provider == 'Grounded offline tutor'
+    assert provider == 'model-required'
     assert 'course-map lesson' in text
     assert 'Active transport' in text
     assert 'no worked example' in text
@@ -140,14 +144,14 @@ def test_concept_with_no_lesson_gets_orientation_only(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     settings = Settings.from_env()
     text, provider, grounding, _ = tutor.respond(
         settings, 'no_such_concept_at_all', 'Explain this.', [],
         retrieval_context={'node': {'title': 'Ghost concept', 'unit': 'Nowhere',
                                     'summary': 'A graph summary that is not a lesson.'},
                            'prerequisites': [], 'dependants': []})
-    assert provider == 'Grounded offline tutor'
+    assert provider == 'model-required'
     assert 'course-map orientation only' in text
     assert 'Ghost concept' in text
     assert 'will not invent' in text

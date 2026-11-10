@@ -116,10 +116,11 @@ def test_book_policy_for_nc_2e_is_link_only_and_refused_at_gate():
 
 
 def test_book_policy_refuses_unaudited_slug():
-    meta = {'slug': 'college-physics-2e', 'license_name': 'Creative Commons Attribution License',
+    """A slug outside the audited catalogue is an unknown book, whatever its licence says."""
+    meta = {'slug': 'not-an-openstax-book', 'license_name': 'Creative Commons Attribution License',
             'license_version': '4.0'}
     with pytest.raises(IngestionRefused, match='no audited rights position'):
-        openstax.book_policy(meta, book_slug='college-physics-2e')
+        openstax.book_policy(meta, book_slug='not-an-openstax-book')
 
 
 def test_book_policy_refuses_licence_drift():
@@ -190,7 +191,7 @@ def test_ingest_refuses_nc_book_and_never_requests_section_text(settings):
 
 
 def test_ingest_refuses_unaudited_book(settings):
-    record = openstax.ingest_section(settings, 'college-physics-2e', '1-introduction',
+    record = openstax.ingest_section(settings, 'not-an-openstax-book', '1-introduction',
                                      transport=openstax_transport([]))
     assert record['status'] == 'withheld'
     assert 'no audited rights position' in record['withheld_reason']

@@ -28,8 +28,8 @@ from . import account_erasure
 from . import content_locale
 
 from . import (accounts, assessment_book, courses, curriculum_route, experiments, figures,
-               harness, learning, learning_science, lecture, perspectives, planner,
-               procedure_service, schemas, simulation_map, teacher_clone, tutor)
+               harness, learning, learning_science, lecture, model_config, perspectives,
+               planner, procedure_service, schemas, simulation_map, teacher_clone, tutor)
 from .harness import agent_loop
 from .harness import ta as ta_jobs
 from .harness import board as node_boards
@@ -55,6 +55,7 @@ from .db import (Assessment, Attempt, AuthToken, Base, BetaInvite, Cohort, Conse
                  make_database, now_ts, uid)
 from .mathkit import MathSyntaxError, build as build_simulation, template_for
 from .ingest import policy
+from .ingest.sources import openstax as openstax_textbook
 from .training import set_consent, training_status
 from .user_scope import unscoped
 from .security import (ACCESS_TTL_SECONDS, HASHER, REFRESH_TTL_SECONDS, RESET_TTL_SECONDS,
@@ -2217,9 +2218,10 @@ def create_app(settings=None):
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
         result['authorization_basis'] = payload.authorization
+        _model_cfg = model_config.effective(settings)
         result['processing_notice'] = (
             'The transcript was not saved by Luminfest. It was sent to the configured AI provider for analysis.'
-            if settings.provider != 'offline' else
+            if _model_cfg.provider and _model_cfg.provider_url else
             'The transcript was processed locally with bounded heuristics and was not saved by Luminfest.')
         return result
 
@@ -2384,8 +2386,8 @@ def create_app(settings=None):
         # Meter the turn before committing, so the ledger row and the reply land in the same
         # transaction. Offline turns are recorded too, with zero tokens and outcome=fallback,
         # so the fallback rate stays visible instead of silently disappearing.
-        accounts.record_usage(db, user.id, feature='tutor_chat', provider=settings.provider,
-                              model=settings.provider_model, latency_ms=usage.get('latency_ms'),
+        accounts.record_usage(db, user.id, feature='tutor_chat', provider=model_config.effective(settings).provider,
+                              model=model_config.effective(settings).provider_model, latency_ms=usage.get('latency_ms'),
                               outcome=usage.get('outcome', 'ok'),
                               prompt_tokens=usage.get('prompt_tokens', 0),
                               completion_tokens=usage.get('completion_tokens', 0))
@@ -2565,6 +2567,19 @@ def create_app(settings=None):
     # path parameter, which is exactly the kind of silent 404 that looks like a bug in the
     # client.
 
+    @app.get(API+'/textbooks/catalogue')
+    def textbooks_catalogue(auth=Depends(authenticated)):
+        """The complete OpenStax catalogue with each book's audited rights position.
+
+        Read-only and network-free: it is the bundled publisher snapshot interpreted
+        through the fail-close licence classifier, so this surface can never block on the
+        publisher and can never claim a rights position the audit does not hold. Text
+        storage and linking are separate facts per book -- ``text_eligible`` says which.
+        """
+        posture = openstax_textbook.catalogue()
+        return {'summary': {key: value for key, value in posture.items() if key != 'books'},
+                'books': posture['books']}
+
     @app.get(API+'/media/sources')
     def media_sources(auth=Depends(authenticated)):
         """Every declared source policy, image and video included, for audit."""
@@ -2572,6 +2587,7 @@ def create_app(settings=None):
                 'image_pipeline': harness.media.describe(settings),
                 'video_pipeline': harness.video.describe(settings),
                 'simulations': simulation_map.describe(settings),
+                'textbooks': openstax_textbook.describe(settings),
                 'commercial_use': bool(settings.commercial_use),
                 'note': 'A licence gate that covers prose and not pictures is not a gate, so '
                         'image, video and simulation sources are declared in the same audited '
@@ -2666,6 +2682,8 @@ def create_app(settings=None):
     @app.post(API+'/lecture/{concept_id}/segment/{index}')
     def lecture_segment(concept_id: str, index: int,
                         minutes: int = Query(default=lecture.DEFAULT_MINUTES, ge=5, le=90),
+                        voice: str = Query(default='', max_length=80),
+                        tone: str = Query(default='', max_length=200),
                         auth=Depends(authenticated)):
         """One segment: draw its board page, resolve its media, return the spoken text."""
         db, user = auth
@@ -2691,7 +2709,8 @@ def create_app(settings=None):
         # hear page by page rather than one silence the length of the page.
         try:
             speech_payload = harness.speech.request_sequence(
-                settings, str(segment.get('narration') or ''))
+                settings, str(segment.get('narration') or ''),
+                voice=voice, tone=tone)
         except Exception:  # noqa: BLE001 - a voice that will not render is not a failed page
             log.warning('lecture speech request failed', exc_info=True)
             speech_payload = {'state': 'failed', 'reason': 'Speech rendering raised.',
@@ -3425,6 +3444,19 @@ def create_app(settings=None):
         return Response(content=audio, media_type='audio/mpeg',
                         headers={'Cache-Control': 'no-store'})
 
+    @app.get(API+'/voice/voices')
+    def voice_voices(auth=Depends(authenticated)):
+        """The voices the Settings picker can offer, and whether voice output is on.
+
+        ``presets`` are (profile, tone) pairs the client sends as the ``voice`` and ``tone``
+        of each speech request; ``default`` uses the instance's configured voice, ``custom``
+        is a freeform profile name the operator typed. ``enabled`` is ``voice_enabled`` -- the
+        same switch that gates the tutor's spoken replies and the lecture narration, so a
+        picker that points at a muted instance says so instead of looking like it worked.
+        """
+        db, user = auth
+        return voice_backend.list_voices(settings)
+
     @app.get(API+'/media/audio/{digest}')
     def media_audio_bytes(digest: str, auth=Depends(authenticated)):
         """One spoken clip, by content digest.
@@ -3468,6 +3500,8 @@ def create_app(settings=None):
         context: dict | None = None
         images: list[str] = Field(default_factory=list)
         speak: bool = False
+        voice: str = Field(default='', max_length=80)
+        tone: str = Field(default='', max_length=200)
         interrupted: bool = False
         teacher_profile: schemas.TeacherStyleProfile | None = None
 
@@ -3665,10 +3699,9 @@ def create_app(settings=None):
             reason = final.get('reason')
             # When no model answered, the loop has nothing to say and reports it honestly -
             # but "the model is not configured" is not an answer to "explain this concept".
-            # The deterministic grounded tutor is, and the same learner gets it on the classic
-            # route. Answering here is what makes the shipped configuration (offline provider,
-            # inherited environment) usable rather than a panel that always says the turn
-            # finished without a reply.
+            # The grounded curriculum fallback is, and the same learner gets it on the classic
+            # route. It is a *declared* fallback with a reason and a next action, not a second
+            # generation mode: the product requires a model, and Settings is where it is added.
             #
             # Only when the turn produced no prose at all, so a turn that already answered and
             # then hit a provider error is never overwritten with a second, different reply.
@@ -3697,16 +3730,16 @@ def create_app(settings=None):
                 final['notice'] = {
                     'kind': 'unavailable',
                     'reason': (
-                        'No tutor model is configured on this instance, and this question is '
-                        'not scoped to a concept in your course, so there is no grounded '
-                        'material to teach from.' if reason == 'unavailable' else
+                        'A language model is required and none is configured on this instance; '
+                        'this question is also not scoped to a concept in your course, so '
+                        'there is no grounded material to teach from.'
+                        if reason == 'unavailable' else
                         'The configured tutor model did not complete this turn, and no '
-                        'grounded offline answer was available for it.'),
+                        'grounded curriculum answer was available for it.'),
                     'next_action': (
-                        'Open a concept from your course and ask again, or build a course '
-                        'from your own notes so the offline tutor has a source to ground '
-                        'its answer in. Teaching a topic that is not in your course yet '
-                        'requires a configured tutor provider.'),
+                        'Add a provider, model and API key in Settings to enable model-backed '
+                        'teaching. Open a concept from your course and ask again, or build a '
+                        'course from your own notes so a grounded fallback has a source.'),
                 }
             # Speak the reply itself. Off the request path on purpose: a local synthesis
             # costs 20-40 s, and a learner must be able to read the answer and look at the
@@ -3718,7 +3751,9 @@ def create_app(settings=None):
                     # A reply is spoken as a series of clips, not one: this engine renders
                     # slower than it is listened to, so a single utterance of a paragraph
                     # is a silence the length of the lesson. See speech.request_sequence.
-                    clip = harness.speech.request_sequence(settings, str(final['content']))
+                    clip = harness.speech.request_sequence(
+                        settings, str(final['content']),
+                        voice=payload.voice, tone=payload.tone)
                 except Exception:   # noqa: BLE001 - a voice that will not render is not a failed turn
                     log.warning('speech request failed', exc_info=True)
                     clip = {'state': 'failed', 'reason': 'Speech rendering raised.',
@@ -3741,8 +3776,8 @@ def create_app(settings=None):
                 outcome = 'error'
             else:
                 outcome = usage.get('outcome', 'ok')
-            accounts.record_usage(db, user.id, feature='tutor_chat', provider=settings.provider,
-                                  model=settings.provider_model,
+            accounts.record_usage(db, user.id, feature='tutor_chat', provider=model_config.effective(settings).provider,
+                                  model=model_config.effective(settings).provider_model,
                                   latency_ms=usage.get('latency_ms'), outcome=outcome,
                                   prompt_tokens=usage.get('prompt_tokens', 0),
                                   completion_tokens=usage.get('completion_tokens', 0))
@@ -3856,8 +3891,8 @@ def create_app(settings=None):
             # ...) locked at table creation — SQLite cannot widen it, and init_db is
             # additive-only by contract. 'teacher_analyze' is the honest bucket: a
             # teacher-initiated provider call, billed to the teacher's quota.
-            accounts.record_usage(db, user.id, feature='teacher_analyze', provider=settings.provider,
-                                  model=settings.provider_model,
+            accounts.record_usage(db, user.id, feature='teacher_analyze', provider=model_config.effective(settings).provider,
+                                  model=model_config.effective(settings).provider_model,
                                   latency_ms=usage.get('latency_ms'),
                                   outcome='ok' if reason == 'completed' else 'fallback',
                                   prompt_tokens=usage.get('prompt_tokens', 0),
@@ -4327,14 +4362,16 @@ def create_app(settings=None):
         secret_like = re.compile(
             r'(?i)(sk-[A-Za-z0-9_\-]{8,}|bearer\s+\S+|(?:api[_-]?key|token|secret|password)'
             r'\s*[=:]\s*\S+)')
+        _model = model_config.status(settings)
 
         lines = [
             'environment: ' + settings.environment,
             'schema: ' + str(SCHEMA_VERSION),
             'platform: ' + _platform.platform(),
             'python: ' + _sys.version.split()[0],
-            'tutor provider: ' + (settings.provider or 'offline'),
-            'tutor model: ' + (settings.provider_model or '(none)'),
+            'tutor provider: ' + (_model['provider'] or 'model-required'),
+            'tutor model: ' + (_model['model'] or '(none)'),
+            'model state: ' + _model['state'] + ' (source: ' + _model['source'] + ')',
             'media enabled: ' + str(settings.media_enabled),
             'courses: ' + str(len(courses.COURSES)),
             'concepts: ' + str(sum(courses.stats_for(spec.id)['concepts'] for spec in courses.COURSES)),
@@ -4408,8 +4445,14 @@ def create_app(settings=None):
                 db.scalar(select(User.id).limit(1))
         except SQLAlchemyError:
             return JSONResponse({'ready': False, 'model_status': learning.model_status()}, status_code=503)
+        _model = model_config.status(settings)
         return {'ready': True, 'service': 'luminfest-learning-harness', 'schema_version': SCHEMA_VERSION, 'model_status': learning.model_status(),
-                'tutor': {'provider': settings.provider, 'availability': 'local' if settings.provider == 'offline' else 'configured; failures reported at request time'},
+                'tutor': {'provider': _model['provider'], 'model': _model['model'],
+                          'state': _model['state'], 'source': _model['source'],
+                          'api_key_set': _model['api_key_set'],
+                          'availability': ('configured; failures reported at request time'
+                                           if _model['configured'] else
+                                           'model-required; configure a language model in Settings')},
                 'harness': {'moves': len(harness.loop.MOVES), 'tools': len(harness.toolbox.REGISTRY),
                             'artefacts': len(harness.generate.KINDS),
                             'memory_kinds': list(harness.memory.KINDS),

@@ -29,7 +29,7 @@ def settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     return Settings.from_env()
 
 
@@ -52,7 +52,7 @@ def long_ttl_client(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_ACCESS_TOKEN_TTL_SECONDS', '7200')
     with TestClient(create_app(Settings.from_env())) as client:
         yield client
@@ -157,7 +157,7 @@ def test_cross_user_isolation(client):
     payload = {'text': 'Two servings require 1/2 cup, five require 5/4 cup. I verify the ratio.', 'ai_disclosure': 'No AI used.', 'reflection': 'I checked the unit rate.'}
     assert client.post(f'/api/v1/projects/{projects[0]["id"]}/submit', headers=h2, json=payload).status_code == 404
     chat = client.post('/api/v1/chat', headers=h1, json={'concept_id': 'fractions', 'message': 'How do I add fractions?', 'session_id': 'shared'})
-    assert chat.status_code == 200 and chat.json()['provider'] == 'Grounded offline tutor'
+    assert chat.status_code == 200 and chat.json()['provider'] == 'model-required'
     assert client.get('/api/v1/chat', headers=h2, params={'concept_id': 'fractions'}).json()['messages'] == []
     client.post('/api/v1/attempts', headers=h1, json=answer(q))
     assert client.get('/api/v1/dashboard', headers=h2).json()['stats']['attempts'] == 0
@@ -341,7 +341,7 @@ def test_provider_failure_falls_back_to_the_curriculum(settings, monkeypatch):
         body = result.json()
         assert 'unavailable' in body['content']
         assert 'curriculum instead of a model' in body['content']
-        assert 'offline' in body['provider'].lower(), body['provider']
+        assert 'fallback' in body['provider'].lower(), body['provider']
         # The turn is saved, so the next render of the transcript shows it.
         messages = c.get('/api/v1/chat', headers=h, params={'concept_id': 'equations'}).json()['messages']
         assert [m['role'] for m in messages] == ['user', 'assistant']

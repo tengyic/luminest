@@ -5,12 +5,23 @@ import time
 import httpx
 from fastapi import HTTPException
 
+from . import model_config
 from .curriculum import CONCEPTS
+from .harness import provider
 from .harness.conduct import TEACHING_CONDUCT, lesson_format
 from .harness.provider import learner_block, meter_usage
 from .harness.teaching import render_plan_block, render_procedure_block
 
 log = logging.getLogger('harness.tutor')
+
+#: The label stored on a turn that no model answered because no model was configured.
+#: It deliberately does not read like a product mode: the instance is degraded and the
+#: Settings screen is the next action, not "enjoy the offline tutor".
+MODEL_REQUIRED_LABEL = 'model-required'
+MODEL_REQUIRED_NOTICE = (
+    'A language model is not configured on this instance, so model-backed tutoring is '
+    'unavailable. Add a provider, model and API key in Settings. What follows is retrieved '
+    'curriculum material, not a model answer.')
 
 
 STYLE_DIMENSIONS = ('methodology', 'teaching_style', 'content_procedure',
@@ -272,13 +283,14 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
     # course-map lesson has no worked example to check, so offering one would be a dead end.
     actions = ['Explain the next step in your own words', 'Try a fresh retrieval question',
                'Check the worked example' if tier == 'authored' else 'Open the linked course source']
-    def offline_answer() -> str:
-        """The grounded answer this instance can give without a model.
+    def grounded_answer() -> str:
+        """Curriculum retrieval shown when no model answered this turn.
 
-        Used both for an explicitly offline provider and as the fallback when a configured
-        provider fails. A learner whose key has run out of credit is better served by the
-        curriculum than by an empty chat bubble, as long as the text says which of the two
-        they are reading — see the caller's prefix line.
+        This is a *declared fallback*, never a product mode. It is used when the instance
+        has no model configured (with a model-required notice and next action) and when a
+        configured model transiently failed (with the cause named). A learner whose key
+        has run out of credit is better served by the curriculum than by an empty chat
+        bubble, as long as the text says which of the two they are reading.
         """
         record = ('\nFrom your own recorded work: ' + '; '.join(memory_digest.splitlines()[:3])
                   if memory_digest else '')
@@ -286,7 +298,7 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
             summary = (graph_node or {}).get('summary') or 'No course-map summary is available for this concept.'
             unit = (graph_node or {}).get('unit') or 'the current course'
             return (_offline_style_opening(teacher_profile)
-                    + 'Grounded offline tutor — course-map orientation only; no lesson is available for this concept.\n\n'
+                    + 'Grounded curriculum — course-map orientation only; no lesson is available for this concept.\n\n'
                     + title + ' is listed under ' + unit + '. ' + summary
                     + _offline_graph_note(retrieval_context) + record
                     + '\nI do not have a verified explanation or practice set for this topic in the supplied material, '
@@ -300,7 +312,7 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
             check = _block_body(concept, 'retrieval')
             reflect = _block_body(concept, 'reflection')
             body = (_offline_style_opening(teacher_profile)
-                    + 'Grounded offline tutor — course-map lesson (summary and checks; no worked example).\n\n'
+                    + 'Grounded curriculum — course-map lesson (summary and checks; no worked example).\n\n'
                     + core + record
                     + ('\n\nCheck: ' + check if check else '')
                     + _offline_graph_note(retrieval_context)
@@ -313,18 +325,22 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
         tokens = set(message.casefold().split())
         blocks = sorted(concept['blocks'][:3], key=lambda b: len(tokens & set(b['body'].casefold().split())), reverse=True)
         return (_offline_style_opening(teacher_profile)
-                + 'Grounded offline tutor — curriculum retrieval, not an LLM.\n\n'
+                + 'Grounded curriculum — curriculum retrieval, not a model answer.\n\n'
                 + blocks[0]['body'] + '\n\n' + concept['hint']
                 + record
                 + _offline_graph_note(retrieval_context)
                 + '\nWhat quantities are given, what must you find, and which first step preserves the mathematical relationship?'
                 + '\nA wrong answer alone cannot identify its cause. We can test your explanation with a targeted cross-check.')
 
-    if settings.provider == 'offline':
-        # Recorded as a fallback with zero tokens: no model was called, but the ledger
-        # should still show that this turn did not reach one.
+    cfg = model_config.effective(settings)
+    if not cfg.provider or not cfg.provider_url:
+        # No model is configured. This is a declared degradation, not a generation mode:
+        # say what is missing and where to fix it, then show only retrieved curriculum
+        # text. Recorded as a fallback with zero tokens, so the ledger does not book a
+        # rules-engine reply as a healthy model turn.
         meter_usage(usage_out, outcome='fallback')
-        return offline_answer(), 'Grounded offline tutor', grounding, actions
+        return (MODEL_REQUIRED_NOTICE + '\n\n' + grounded_answer(),
+                MODEL_REQUIRED_LABEL, grounding, actions)
     if tier == 'authored':
         context = '\n'.join(b.get('body', '') for b in concept.get('blocks') or [])
         lesson_boundary = ('Use only the supplied lesson material as the factual source; do not imply coverage beyond it. ')
@@ -368,23 +384,23 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
     messages = ([{'role': 'system', 'content': system}]
                 + [{'role': m.role, 'content': m.content} for m in history[-10:]]
                 + [{'role': 'user', 'content': user_content}])
-    headers = {'Authorization': f'Bearer {settings.provider_key}'} if settings.provider_key else {}
+    headers = {'Authorization': f'Bearer {cfg.provider_key}'} if cfg.provider_key else {}
     started = time.monotonic()
     try:
-        with httpx.Client(timeout=settings.provider_timeout, follow_redirects=False, trust_env=False) as client:
-            if settings.provider == 'ollama':
-                result = client.post(settings.provider_url.rstrip('/') + '/api/chat', json={
-                    'model': settings.provider_model, 'messages': messages, 'stream': False,
+        with httpx.Client(timeout=cfg.provider_timeout, follow_redirects=False, trust_env=False) as client:
+            if cfg.provider == 'ollama':
+                result = client.post(cfg.provider_url.rstrip('/') + '/api/chat', json={
+                    'model': cfg.provider_model, 'messages': messages, 'stream': False,
                     'options': {'num_predict': 600}}, headers=headers)
             else:
-                result = client.post(settings.provider_url.rstrip('/') + '/chat/completions', json={
-                    'model': settings.provider_model, 'messages': messages, 'max_tokens': 600}, headers=headers)
+                result = client.post(cfg.provider_url.rstrip('/') + '/chat/completions', json={
+                    'model': cfg.provider_model, 'messages': messages, 'max_tokens': 600}, headers=headers)
             result.raise_for_status()
             if len(result.content) > 100000:
                 raise ValueError('Provider response is too large')
             data = result.json()
             meter_usage(usage_out, started=started, body=data)
-            text = data['message']['content'] if settings.provider == 'ollama' else data['choices'][0]['message']['content']
+            text = data['message']['content'] if cfg.provider == 'ollama' else data['choices'][0]['message']['content']
             if not isinstance(text, str) or not text.strip() or len(text) > 20000:
                 raise ValueError('Provider response is invalid')
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:
@@ -403,8 +419,7 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
         status = getattr(getattr(exc, 'response', None), 'status_code', None)
         cause = ('HTTP ' + str(status)) if status else type(exc).__name__
         body = ('The configured tutor is unavailable (' + cause + '), so this answer comes '
-                'from the curriculum instead of a model.\n\n' + offline_answer())
+                'from the curriculum instead of a model.\n\n' + grounded_answer())
         meter_usage(usage_out, outcome='fallback')
-        return (body, 'Grounded offline tutor (configured provider unavailable)',
-                grounding, actions)
-    return text, settings.provider + ':' + settings.provider_model, grounding, actions
+        return (body, 'model-unavailable (grounded fallback)', grounding, actions)
+    return text, cfg.provider + ':' + cfg.provider_model, grounding, actions

@@ -33,7 +33,7 @@ def provider_settings(tmp_path, monkeypatch):
 def offline_settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     return Settings.from_env()
 
 
@@ -492,7 +492,7 @@ def test_agent_chat_offline_returns_a_clean_event(client):
                            json={'session_id': 's1', 'message': 'Hello'})
     assert response.status_code == 200, response.text
     body = response.json()
-    assert body['provider'] == 'grounded-offline'
+    assert body['provider'] == 'model-required'
     types = [event['type'] for event in body['events']]
     assert 'error' in types and types[-1] == 'turn_end'
     assert body['events'][-1]['reason'] == 'unavailable'
@@ -502,7 +502,7 @@ def test_agent_chat_offline_returns_a_clean_event(client):
     # The blank panel used to say only "the turn finished without a reply". The
     # fallback now names its reason and tells the learner what to do instead.
     assert body['notice']['kind'] == 'unavailable'
-    assert 'No tutor model is configured' in body['notice']['reason']
+    assert 'A language model is required' in body['notice']['reason']
     assert 'Open a concept from your course' in body['notice']['next_action']
     assert body['events'][-1]['notice'] == body['notice']
 
@@ -538,7 +538,7 @@ def test_a_concept_scoped_offline_turn_is_answered_by_the_grounded_tutor(client)
     assert body['message'] and body['message'].strip(), 'the shipped turn answered nothing'
     assert body['finish_reason'] == 'unavailable'
     assert body['grounded_offline'] is True
-    assert body['answered_by'] == 'Grounded offline tutor'
+    assert body['answered_by'] == 'model-required'
     # A turn that really answered must not also carry an "unavailable" notice.
     assert not body.get('notice')
     # It is the grounded turn and not a filler string: the reply carries its citations.
@@ -553,7 +553,7 @@ def test_a_concept_scoped_offline_turn_is_answered_by_the_grounded_tutor(client)
                          params={'concept_id': concept}).json()['messages']
     stored = [row for row in history if row['role'] == 'assistant']
     assert stored and stored[-1]['content'] == body['message']
-    assert stored[-1]['provider'] == 'Grounded offline tutor'
+    assert stored[-1]['provider'] == 'model-required'
 
 
 def test_an_offline_turn_without_a_concept_in_scope_stays_honestly_empty(client):
@@ -574,7 +574,9 @@ def test_an_offline_turn_without_a_concept_in_scope_stays_honestly_empty(client)
     notice = body['notice']
     assert notice['kind'] == 'unavailable'
     assert 'no grounded material' in notice['reason']
-    assert 'configured tutor provider' in notice['next_action']
+    # The next action points at the place a customer can actually fix the state, not
+    # at an environment variable they cannot see from the app.
+    assert 'Settings' in notice['next_action']
 
 
 def test_a_concept_the_course_does_not_own_is_not_answered(client):

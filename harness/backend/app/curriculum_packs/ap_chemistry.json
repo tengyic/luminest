@@ -41,68 +41,315 @@
    "extension_fraction": 0.6,
    "unit_bridge": true
   },
-  "course": "AP Chemistry - Structure, Reactions and Thermodynamics",
+  "course": "AP Chemistry - Structure, Equilibrium and Energy",
   "licence": "cc0",
   "source_url": "",
   "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
   "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
-  "description": "The AP Chemistry course framework: atomic structure and properties, compound structure and properties, properties of substances and mixtures, chemical reactions, kinetics, thermodynamics, equilibrium, acids and bases, and applications of thermodynamics.",
+  "description": "A college-level chemistry course organised around the nine AP units: atomic structure and properties, compound structure, the properties of substances and mixtures, chemical reactions, kinetics, thermochemistry, equilibrium, acids and bases, and thermodynamics with electrochemistry. Each unit works from the particulate, symbolic and graphical representations an AP exam question moves between, and every quantitative claim is tied to the condition under which it holds.",
   "id_namespace": {
    "prefix": "ap_chemistry_",
    "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "OpenStax Chemistry (1e, CC BY 4.0)",
+   "supplements": [
+    "OpenStax Chemistry: Atoms First (1e, CC BY 4.0)"
+   ],
+   "link_only_note": "OpenStax Chemistry 2e reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored, quoted or used as an anchor.",
+   "units": {
+    "Atomic Structure and Properties": [
+     {
+      "book": "chemistry",
+      "page": "3-1-formula-mass-and-the-mole-concept"
+     },
+     {
+      "book": "chemistry",
+      "page": "2-3-atomic-structure-and-symbolism"
+     },
+     {
+      "book": "chemistry-atoms-first",
+      "page": "3-4-electronic-structure-of-atoms-electron-configurations"
+     },
+     {
+      "book": "chemistry",
+      "page": "6-5-periodic-variations-in-element-properties"
+     }
+    ],
+    "Compound Structure and Properties": [
+     {
+      "book": "chemistry",
+      "page": "7-1-ionic-bonding"
+     },
+     {
+      "book": "chemistry",
+      "page": "7-4-formal-charges-and-resonance"
+     },
+     {
+      "book": "chemistry",
+      "page": "7-6-molecular-structure-and-polarity"
+     },
+     {
+      "book": "chemistry",
+      "page": "8-2-hybrid-atomic-orbitals"
+     }
+    ],
+    "Properties of Substances and Mixtures": [
+     {
+      "book": "chemistry",
+      "page": "10-1-intermolecular-forces"
+     },
+     {
+      "book": "chemistry",
+      "page": "9-2-relating-pressure-volume-amount-and-temperature-the-ideal-gas-law"
+     },
+     {
+      "book": "chemistry",
+      "page": "9-6-non-ideal-gas-behavior"
+     },
+     {
+      "book": "chemistry",
+      "page": "11-3-solubility"
+     }
+    ],
+    "Chemical Reactions": [
+     {
+      "book": "chemistry",
+      "page": "4-1-writing-and-balancing-chemical-equations"
+     },
+     {
+      "book": "chemistry",
+      "page": "4-2-classifying-chemical-reactions"
+     },
+     {
+      "book": "chemistry",
+      "page": "4-3-reaction-stoichiometry"
+     },
+     {
+      "book": "chemistry",
+      "page": "4-5-quantitative-chemical-analysis"
+     }
+    ],
+    "Kinetics": [
+     {
+      "book": "chemistry",
+      "page": "12-1-chemical-reaction-rates"
+     },
+     {
+      "book": "chemistry",
+      "page": "12-3-rate-laws"
+     },
+     {
+      "book": "chemistry",
+      "page": "12-5-collision-theory"
+     },
+     {
+      "book": "chemistry",
+      "page": "12-6-reaction-mechanisms"
+     }
+    ],
+    "Thermochemistry": [
+     {
+      "book": "chemistry",
+      "page": "5-1-energy-basics"
+     },
+     {
+      "book": "chemistry",
+      "page": "5-2-calorimetry"
+     },
+     {
+      "book": "chemistry",
+      "page": "5-3-enthalpy"
+     },
+     {
+      "book": "chemistry",
+      "page": "10-3-phase-transitions"
+     }
+    ],
+    "Equilibrium": [
+     {
+      "book": "chemistry",
+      "page": "13-1-chemical-equilibria"
+     },
+     {
+      "book": "chemistry",
+      "page": "13-2-equilibrium-constants"
+     },
+     {
+      "book": "chemistry",
+      "page": "13-3-shifting-equilibria-le-chateliers-principle"
+     },
+     {
+      "book": "chemistry",
+      "page": "15-1-precipitation-and-dissolution"
+     }
+    ],
+    "Acids and Bases": [
+     {
+      "book": "chemistry",
+      "page": "14-1-bronsted-lowry-acids-and-bases"
+     },
+     {
+      "book": "chemistry",
+      "page": "14-3-relative-strengths-of-acids-and-bases"
+     },
+     {
+      "book": "chemistry",
+      "page": "14-6-buffers"
+     },
+     {
+      "book": "chemistry",
+      "page": "14-7-acid-base-titrations"
+     }
+    ],
+    "Thermodynamics and Electrochemistry": [
+     {
+      "book": "chemistry",
+      "page": "16-2-entropy"
+     },
+     {
+      "book": "chemistry",
+      "page": "16-4-free-energy"
+     },
+     {
+      "book": "chemistry",
+      "page": "17-2-galvanic-cells"
+     },
+     {
+      "book": "chemistry",
+      "page": "17-7-electrolysis"
+     }
+    ]
+   }
   }
  },
  "taxonomy": {
   "strands": {
    "Atomic Structure and Properties": {
-    "Atoms and the mole": [
-     "Moles and atomic structure"
-    ],
-    "Electrons in atoms": [
-     "Electronic structure"
+    "Atomic Structure and Properties": [
+     "Moles and Molar Mass",
+     "Mass Spectra of Elements",
+     "Elemental Composition of Pure Substances",
+     "Composition of Mixtures",
+     "Atomic Structure and Electron Configuration",
+     "Photoelectron Spectroscopy",
+     "Periodic Trends",
+     "Valence Electrons and Ionic Compounds"
     ]
    },
    "Compound Structure and Properties": {
-    "Bonding and geometry": [
-     "How atoms bond"
+    "Compound Structure and Properties": [
+     "Types of Chemical Bonds",
+     "Intramolecular Force and Potential Energy",
+     "Structure of Ionic Solids",
+     "Structure of Metals and Alloys",
+     "Lewis Diagrams",
+     "Resonance and Formal Charge",
+     "VSEPR and Hybridization"
     ]
    },
    "Properties of Substances and Mixtures": {
-    "States, gases and solutions": [
-     "Bulk properties"
+    "Properties of Substances and Mixtures": [
+     "Intermolecular and Interparticle Forces",
+     "Properties of Solids",
+     "Solids, Liquids, and Gases",
+     "Ideal Gas Law",
+     "Kinetic Molecular Theory",
+     "Deviation from Ideal Gas Law",
+     "Solutions and Mixtures",
+     "Representations of Solutions",
+     "Separation of Solutions and Mixtures",
+     "Solubility",
+     "Spectroscopy and the Electromagnetic Spectrum",
+     "Properties of Photons",
+     "Beer-Lambert Law"
     ]
    },
    "Chemical Reactions": {
-    "Reaction types and stoichiometry": [
-     "Writing and using reactions"
+    "Chemical Reactions": [
+     "Introduction for Reactions",
+     "Net Ionic Equations",
+     "Representations of Reactions",
+     "Physical and Chemical Changes",
+     "Stoichiometry",
+     "Introduction to Titration",
+     "Types of Chemical Reactions",
+     "Introduction to Acid-Base Reactions",
+     "Oxidation-Reduction (Redox) Reactions"
     ]
    },
    "Kinetics": {
-    "Reaction rates": [
-     "How fast reactions go"
+    "Kinetics": [
+     "Reaction Rates",
+     "Introduction to Rate Law",
+     "Concentration Changes Over Time",
+     "Elementary Reactions",
+     "Collision Model",
+     "Reaction Energy Profile",
+     "Introduction to Reaction Mechanisms",
+     "Reaction Mechanism and Rate Law",
+     "Pre-Equilibrium Approximation",
+     "Multistep Reaction Energy Profile",
+     "Catalysis"
     ]
    },
-   "Thermodynamics": {
-    "Energy and enthalpy": [
-     "Heat, work and enthalpy"
+   "Thermochemistry": {
+    "Thermochemistry": [
+     "Endothermic and Exothermic Processes",
+     "Energy Diagrams",
+     "Heat Transfer and Thermal Equilibrium",
+     "Heat Capacity and Calorimetry",
+     "Energy of Phase Changes",
+     "Introduction to Enthalpy of Reaction",
+     "Bond Enthalpies",
+     "Enthalpy of Formation",
+     "Hess's Law"
     ]
    },
    "Equilibrium": {
-    "Dynamic equilibrium": [
-     "Reversible reactions"
+    "Equilibrium": [
+     "Introduction to Equilibrium",
+     "Direction of Reversible Reactions",
+     "Reaction Quotient and Equilibrium Constant",
+     "Calculating the Equilibrium Constant",
+     "Magnitude of the Equilibrium Constant",
+     "Properties of the Equilibrium Constant",
+     "Calculating Equilibrium Concentrations",
+     "Representations of Equilibrium",
+     "Introduction to Le Châtelier's Principle",
+     "Reaction Quotient and Le Châtelier's Principle",
+     "Introduction to Solubility Equilibria",
+     "Common-Ion Effect"
     ]
    },
    "Acids and Bases": {
-    "Proton transfer in water": [
-     "Acidity and pH"
-    ],
-    "Buffers and titrations": [
-     "Controlling pH"
+    "Acids and Bases": [
+     "Introduction to Acids and Bases",
+     "pH and pOH of Strong Acids and Bases",
+     "Weak Acid and Base Equilibria",
+     "Acid-Base Reactions and Buffers",
+     "Acid-Base Titrations",
+     "Molecular Structure of Acids and Bases",
+     "pH and pKa",
+     "Properties of Buffers",
+     "Henderson-Hasselbalch Equation",
+     "Buffer Capacity",
+     "pH and Solubility"
     ]
    },
-   "Applications of Thermodynamics": {
-    "Electrochemistry": [
-     "Electrons doing work"
+   "Thermodynamics and Electrochemistry": {
+    "Thermodynamics and Electrochemistry": [
+     "Introduction to Entropy",
+     "Absolute Entropy and Entropy Change",
+     "Gibbs Free Energy and Thermodynamic Favorability",
+     "Thermodynamic and Kinetic Control",
+     "Free Energy and Equilibrium",
+     "Free Energy of Dissolution",
+     "Coupled Reactions",
+     "Galvanic (Voltaic) and Electrolytic Cells",
+     "Cell Potential and Free Energy",
+     "Cell Potential Under Nonstandard Conditions",
+     "Electrolysis and Faraday's Law"
     ]
    }
   },
@@ -110,648 +357,141 @@
    {
     "strand": "Atomic Structure and Properties",
     "units": [
-     "Atoms and the mole",
-     "Electrons in atoms"
+     "Atomic Structure and Properties"
     ]
    },
    {
     "strand": "Compound Structure and Properties",
     "units": [
-     "Bonding and geometry"
+     "Compound Structure and Properties"
     ]
    },
    {
     "strand": "Properties of Substances and Mixtures",
     "units": [
-     "States, gases and solutions"
+     "Properties of Substances and Mixtures"
     ]
    },
    {
     "strand": "Chemical Reactions",
     "units": [
-     "Reaction types and stoichiometry"
+     "Chemical Reactions"
     ]
    },
    {
     "strand": "Kinetics",
     "units": [
-     "Reaction rates"
+     "Kinetics"
     ]
    },
    {
-    "strand": "Thermodynamics",
+    "strand": "Thermochemistry",
     "units": [
-     "Energy and enthalpy"
+     "Thermochemistry"
     ]
    },
    {
     "strand": "Equilibrium",
     "units": [
-     "Dynamic equilibrium"
+     "Equilibrium"
     ]
    },
    {
     "strand": "Acids and Bases",
     "units": [
-     "Proton transfer in water",
-     "Buffers and titrations"
+     "Acids and Bases"
     ]
    },
    {
-    "strand": "Applications of Thermodynamics",
+    "strand": "Thermodynamics and Electrochemistry",
     "units": [
-     "Electrochemistry"
+     "Thermodynamics and Electrochemistry"
     ]
    }
   ]
  },
  "concepts": [
   {
-   "id": "ap_chemistry_acid_base_definitions",
-   "title": "Acid-base definitions",
-   "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
+   "id": "ap_chemistry_absolute_entropy_and_the_third_law",
+   "title": "Absolute Entropy and the Third Law",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Absolute Entropy and Entropy Change",
    "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_free_energy_and_equilibrium"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Brønsted-Lowry",
-    "Lewis acid",
-    "proton"
-   ],
-   "summary": "Brønsted-Lowry acids donate protons and bases accept them, and Lewis definitions generalise to electron pairs.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 57
-   }
-  },
-  {
-   "id": "ap_chemistry_acid_base_reactions",
-   "title": "Acid-base reactions",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
    "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_types_of_reactions"
-   ],
+   "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_percent_yield"
+    "ap_chemistry_entropy_and_microstates"
    ],
    "keywords": [
-    "acid-base",
-    "neutralisation",
-    "proton transfer"
+    "absolute entropy",
+    "standard entropy",
+    "third law"
    ],
-   "summary": "Proton transfer reactions neutralise acids and bases and can be followed by titration.",
+   "summary": "The third law sets the entropy of a perfect crystal at absolute zero to zero, so tabulated absolute entropies let a reaction entropy change be taken as products minus reactants without any arbitrary reference point.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 33
+    "order": 95
    }
   },
   {
-   "id": "ap_chemistry_acid_base_titration_curves",
-   "title": "Acid-base titration curves",
-   "strand": "Acids and Bases",
-   "unit": "Buffers and titrations",
-   "topic": "Controlling pH",
+   "id": "ap_chemistry_anode_cathode_and_electron_flow",
+   "title": "Anode, Cathode and Electron Flow",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Galvanic (Voltaic) and Electrolytic Cells",
    "tier": "foundation",
    "difficulty": 1,
    "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_the_henderson_hasselbalch_equation"
+    "ap_chemistry_coupled_reactions"
    ],
    "keywords": [
-    "equivalence point",
-    "half-equivalence",
-    "titration curve"
+    "anode",
+    "cathode",
+    "salt bridge"
    ],
-   "summary": "A titration curve's shape and equivalence pH depend on the strength of the acid and base.",
+   "summary": "In any electrochemical cell oxidation occurs at the anode and reduction at the cathode, electrons travel through the external circuit from anode to cathode, and ions carry the current through the salt bridge or electrolyte.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 65
+    "order": 102
    }
   },
   {
-   "id": "ap_chemistry_bond_enthalpies",
-   "title": "Bond enthalpies",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_enthalpy_of_reaction_and_hess_s_law"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "bond breaking",
-    "bond enthalpy"
-   ],
-   "summary": "Breaking bonds costs energy and forming bonds releases it, which gives an estimate of reaction enthalpy.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 47
-   }
-  },
-  {
-   "id": "ap_chemistry_buffer_capacity_and_selection",
-   "title": "Buffer capacity and selection",
-   "strand": "Acids and Bases",
-   "unit": "Buffers and titrations",
-   "topic": "Controlling pH",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_the_henderson_hasselbalch_equation"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_acid_base_titration_curves"
-   ],
-   "keywords": [
-    "buffer capacity",
-    "pKa",
-    "selection"
-   ],
-   "summary": "A buffer works best near its pKa and within a limited capacity.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 66
-   }
-  },
-  {
-   "id": "ap_chemistry_buffers",
-   "title": "Buffers",
-   "strand": "Acids and Bases",
-   "unit": "Buffers and titrations",
-   "topic": "Controlling pH",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_molecular_structure_and_acid_strength"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "buffer",
-    "conjugate base",
-    "pH resistance"
-   ],
-   "summary": "A weak acid and its conjugate base resist pH change by neutralising added acid or base.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 63
-   }
-  },
-  {
-   "id": "ap_chemistry_calculating_equilibrium_concentrations",
-   "title": "Calculating equilibrium concentrations",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "ap_chemistry_the_equilibrium_constant_k"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_le_chatelier_s_principle"
-   ],
-   "keywords": [
-    "ICE table",
-    "equilibrium concentration"
-   ],
-   "summary": "ICE tables track initial, change and equilibrium amounts to solve for concentrations.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 54
-   }
-  },
-  {
-   "id": "ap_chemistry_catalysis",
-   "title": "Catalysis",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_reaction_mechanisms"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "catalyst",
-    "heterogeneous",
-    "homogeneous"
-   ],
-   "summary": "A catalyst provides a lower-energy path without being consumed, so it raises rate not yield.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 43
-   }
-  },
-  {
-   "id": "ap_chemistry_cell_potential_and_standard_reduction_potentials",
-   "title": "Cell potential and standard reduction potentials",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_galvanic_cells"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "EMF",
-    "cell potential",
-    "standard reduction potential"
-   ],
-   "summary": "Standard reduction potentials give the cell potential as cathode minus anode.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 68
-   }
-  },
-  {
-   "id": "ap_chemistry_colligative_properties",
-   "title": "Colligative properties",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
+   "id": "ap_chemistry_assigning_oxidation_numbers_and_balancing_redox",
+   "title": "Assigning Oxidation Numbers and Balancing Redox",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Oxidation-Reduction (Redox) Reactions",
    "tier": "foundation",
    "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_concentration_and_molarity"
-   ],
+   "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_separating_mixtures"
+    "ap_chemistry_proton_transfer_in_acid_base_reactions"
    ],
    "keywords": [
-    "boiling point elevation",
-    "colligative",
-    "osmotic pressure"
+    "half-reaction",
+    "oxidation number",
+    "redox"
    ],
-   "summary": "Vapour pressure, boiling point, freezing point and osmosis depend on particle count, not identity.",
+   "summary": "Oxidation numbers follow fixed rules with oxygen at -2 and hydrogen at +1, and a redox equation balances once the electrons lost by oxidation equal the electrons gained by reduction.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 26
-   }
-  },
-  {
-   "id": "ap_chemistry_collision_theory_and_activation_energy",
-   "title": "Collision theory and activation energy",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_reaction_rate"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_integrated_rate_laws_and_half_life"
-   ],
-   "keywords": [
-    "activation energy",
-    "collision theory",
-    "orientation"
-   ],
-   "summary": "Molecules must collide with enough energy and the right orientation to react.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 40
-   }
-  },
-  {
-   "id": "ap_chemistry_concentration_and_molarity",
-   "title": "Concentration and molarity",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_solutions_and_solubility"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "concentration",
-    "dilution",
-    "molarity"
-   ],
-   "summary": "Molarity expresses moles of solute per litre of solution.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 24
-   }
-  },
-  {
-   "id": "ap_chemistry_coulomb_s_law_and_atomic_structure",
-   "title": "Coulomb's law and atomic structure",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Electrons in atoms",
-   "topic": "Electronic structure",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_electron_configuration"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_photoelectron_spectroscopy"
-   ],
-   "keywords": [
-    "Coulomb's law",
-    "effective nuclear charge",
-    "shielding"
-   ],
-   "summary": "The attraction between nucleus and electrons depends on charge and distance, which explains periodic trends.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 7
-   }
-  },
-  {
-   "id": "ap_chemistry_covalent_bonding_and_lewis_structures",
-   "title": "Covalent bonding and Lewis structures",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_types_of_chemical_bonds"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_ionic_bonding_and_lattice_energy"
-   ],
-   "keywords": [
-    "Lewis structure",
-    "bond order",
-    "lone pair"
-   ],
-   "summary": "Lewis structures show shared and lone pairs and predict bond order and geometry.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 12
-   }
-  },
-  {
-   "id": "ap_chemistry_determining_rate_laws_from_data",
-   "title": "Determining rate laws from data",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_rate_laws_and_reaction_order"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "initial rate",
-    "method of initial rates"
-   ],
-   "summary": "Initial-rate and graphical methods extract orders and the rate constant.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 38
-   }
-  },
-  {
-   "id": "ap_chemistry_deviations_from_ideal_behaviour",
-   "title": "Deviations from ideal behaviour",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_kinetic_molecular_theory"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "deviation",
-    "real gas",
-    "van der Waals"
-   ],
-   "summary": "Real gases deviate at high pressure and low temperature, where volume and attraction matter.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 22
-   }
-  },
-  {
-   "id": "ap_chemistry_dynamic_equilibrium",
-   "title": "Dynamic equilibrium",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "ap_chemistry_gibbs_free_energy"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "dynamic equilibrium",
-    "reversible reaction"
-   ],
-   "summary": "Forward and reverse rates become equal, so concentrations stop changing while reactions continue.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 50
-   }
-  },
-  {
-   "id": "ap_chemistry_electrolytic_cells",
-   "title": "Electrolytic cells",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_cell_potential_and_standard_reduction_potentials"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_the_nernst_equation"
-   ],
-   "keywords": [
-    "electrolysis",
-    "electrolytic cell",
-    "overpotential"
-   ],
-   "summary": "A non-spontaneous reaction can be driven by an external voltage.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 71
-   }
-  },
-  {
-   "id": "ap_chemistry_electron_configuration",
-   "title": "Electron configuration",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Electrons in atoms",
-   "topic": "Electronic structure",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_the_mole_and_empirical_formulae"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "aufbau",
-    "electron configuration",
-    "orbital"
-   ],
-   "summary": "Electrons fill orbitals in order of energy, following the aufbau principle and Hund's rule.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 5
-   }
-  },
-  {
-   "id": "ap_chemistry_endothermic_and_exothermic_processes",
-   "title": "Endothermic and exothermic processes",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_catalysis"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "endothermic",
-    "enthalpy",
-    "exothermic"
-   ],
-   "summary": "Energy is absorbed or released, and the sign of enthalpy change reports which.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -759,233 +499,28 @@
    }
   },
   {
-   "id": "ap_chemistry_enthalpy_of_reaction_and_hess_s_law",
-   "title": "Enthalpy of reaction and Hess's law",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_heat_capacity_and_calorimetry"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Hess's law",
-    "enthalpy of reaction",
-    "state function"
-   ],
-   "summary": "Enthalpy is a state function, so reactions can be added to find an unknown enthalpy.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 46
-   }
-  },
-  {
-   "id": "ap_chemistry_entropy",
-   "title": "Entropy",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_enthalpy_of_reaction_and_hess_s_law"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_bond_enthalpies"
-   ],
-   "keywords": [
-    "disorder",
-    "entropy",
-    "second law"
-   ],
-   "summary": "Entropy measures dispersal of energy and matter, and it tends to increase.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 48
-   }
-  },
-  {
-   "id": "ap_chemistry_faraday_s_laws_and_quantitative_electrolysis",
-   "title": "Faraday's laws and quantitative electrolysis",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_electrolytic_cells"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Faraday",
-    "charge",
-    "electrolysis"
-   ],
-   "summary": "Charge passed relates to moles of electrons and so to mass deposited.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 72
-   }
-  },
-  {
-   "id": "ap_chemistry_free_energy_and_cell_potential",
-   "title": "Free energy and cell potential",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_cell_potential_and_standard_reduction_potentials"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "cell potential",
-    "faraday",
-    "free energy"
-   ],
-   "summary": "Cell potential is proportional to the free-energy change of the reaction.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 69
-   }
-  },
-  {
-   "id": "ap_chemistry_free_energy_and_equilibrium",
-   "title": "Free energy and equilibrium",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [
-    "ap_chemistry_solubility_equilibria_and_ksp"
-   ],
-   "keywords": [
-    "K",
-    "equilibrium constant",
-    "free energy"
-   ],
-   "summary": "The standard free-energy change is related to K, which links thermodynamics and equilibrium.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 56
-   }
-  },
-  {
-   "id": "ap_chemistry_galvanic_cells",
-   "title": "Galvanic cells",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
+   "id": "ap_chemistry_average_and_instantaneous_rate",
+   "title": "Average and Instantaneous Rate",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Reaction Rates",
    "tier": "core",
-   "difficulty": 3,
+   "difficulty": 2,
    "prerequisites": [
-    "ap_chemistry_buffer_capacity_and_selection"
+    "ap_chemistry_assigning_oxidation_numbers_and_balancing_redox"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "anode",
-    "cathode",
-    "galvanic cell",
-    "half-cell"
+    "average rate",
+    "instantaneous rate",
+    "slope"
    ],
-   "summary": "A spontaneous redox reaction separated into half-cells produces a voltage.",
+   "summary": "Average rate is a concentration change over an interval while instantaneous rate is the tangent slope at one moment, so the two agree only when the rate is constant.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 67
-   }
-  },
-  {
-   "id": "ap_chemistry_gibbs_free_energy",
-   "title": "Gibbs free energy",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_entropy"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Gibbs free energy",
-    "spontaneity"
-   ],
-   "summary": "Free energy combines enthalpy and entropy to decide thermodynamic favorability.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 49
-   }
-  },
-  {
-   "id": "ap_chemistry_heat_capacity_and_calorimetry",
-   "title": "Heat capacity and calorimetry",
-   "strand": "Thermodynamics",
-   "unit": "Energy and enthalpy",
-   "topic": "Heat, work and enthalpy",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_endothermic_and_exothermic_processes"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "calorimetry",
-    "heat capacity",
-    "specific heat"
-   ],
-   "summary": "Calorimetry measures heat exchanged using mass, specific heat and temperature change.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -993,262 +528,28 @@
    }
   },
   {
-   "id": "ap_chemistry_hybridisation_and_bonding_models",
-   "title": "Hybridisation and bonding models",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_vsepr_and_molecular_geometry"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "hybridisation",
-    "sp",
-    "sp2",
-    "sp3"
-   ],
-   "summary": "Mixing atomic orbitals explains observed geometries and bond angles.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 15
-   }
-  },
-  {
-   "id": "ap_chemistry_integrated_rate_laws_and_half_life",
-   "title": "Integrated rate laws and half-life",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_determining_rate_laws_from_data"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "first order",
-    "half-life",
-    "integrated rate law"
-   ],
-   "summary": "Integrating the rate law gives concentration against time and the half-life for each order.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 39
-   }
-  },
-  {
-   "id": "ap_chemistry_intermolecular_forces",
-   "title": "Intermolecular forces",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_polarity_and_dipole_moments"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "dispersion",
-    "hydrogen bond",
-    "intermolecular force"
-   ],
-   "summary": "London dispersion, dipole-dipole and hydrogen bonding set boiling point and solubility.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 17
-   }
-  },
-  {
-   "id": "ap_chemistry_ionic_bonding_and_lattice_energy",
-   "title": "Ionic bonding and lattice energy",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_types_of_chemical_bonds"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Coulomb",
-    "ionic solid",
-    "lattice energy"
-   ],
-   "summary": "Lattice energy grows with charge and shrinks with ion size, which controls melting point and solubility.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 11
-   }
-  },
-  {
-   "id": "ap_chemistry_isotopes_and_average_atomic_mass",
-   "title": "Isotopes and average atomic mass",
+   "id": "ap_chemistry_average_atomic_mass_from_isotope_abundances",
+   "title": "Average Atomic Mass from Isotope Abundances",
    "strand": "Atomic Structure and Properties",
-   "unit": "Atoms and the mole",
-   "topic": "Moles and atomic structure",
-   "tier": "foundation",
-   "difficulty": 1,
+   "unit": "Atomic Structure and Properties",
+   "topic": "Mass Spectra of Elements",
+   "tier": "core",
+   "difficulty": 2,
    "prerequisites": [
-    "ap_chemistry_moles_and_molar_mass"
+    "ap_chemistry_reading_a_mass_spectrum"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "abundance",
     "atomic mass",
-    "isotope"
+    "isotope",
+    "weighted average"
    ],
-   "summary": "An element's atomic mass is the abundance-weighted average of its isotopes.",
+   "summary": "The average atomic mass is the sum of each isotope mass times its fractional abundance, so an element whose heaviest isotope dominates has a tabulated mass close to that isotope and never outside the isotope range.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 2
-   }
-  },
-  {
-   "id": "ap_chemistry_ka_kb_and_conjugate_pairs",
-   "title": "Ka, Kb and conjugate pairs",
-   "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_weak_acid_and_base_equilibria"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Ka",
-    "Kb",
-    "Kw",
-    "conjugate pair"
-   ],
-   "summary": "Ka and Kb of a conjugate pair multiply to the ion product of water.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 61
-   }
-  },
-  {
-   "id": "ap_chemistry_kinetic_molecular_theory",
-   "title": "Kinetic molecular theory",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_the_ideal_gas_law"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "collision",
-    "kinetic molecular theory",
-    "temperature"
-   ],
-   "summary": "Gas pressure and temperature follow from particle collisions and average kinetic energy.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 21
-   }
-  },
-  {
-   "id": "ap_chemistry_le_chatelier_s_principle",
-   "title": "Le Chatelier's principle",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "ap_chemistry_the_reaction_quotient_q"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Le Chatelier",
-    "shift",
-    "stress"
-   ],
-   "summary": "A system at equilibrium shifts to partially oppose a change in concentration, pressure or temperature.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 53
-   }
-  },
-  {
-   "id": "ap_chemistry_mass_spectrometry",
-   "title": "Mass spectrometry",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Atoms and the mole",
-   "topic": "Moles and atomic structure",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_isotopes_and_average_atomic_mass"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "isotope pattern",
-    "mass spectrometry",
-    "molecular ion"
-   ],
-   "summary": "A mass spectrum measures isotope masses and abundances, which gives atomic mass and can identify a molecule.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1256,28 +557,260 @@
    }
   },
   {
-   "id": "ap_chemistry_molecular_structure_and_acid_strength",
-   "title": "Molecular structure and acid strength",
-   "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_ka_kb_and_conjugate_pairs"
+   "id": "ap_chemistry_bond_enthalpies_and_reaction_enthalpy",
+   "title": "Bond Enthalpies and Reaction Enthalpy",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Bond Enthalpies",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_why_reaction_heats_are_tabulated_as_enthalpies"
    ],
-   "sequence_predecessors": [],
    "keywords": [
-    "acid strength",
-    "conjugate base",
-    "inductive effect"
+    "bond enthalpy",
+    "estimate",
+    "gas phase"
    ],
-   "summary": "Bond polarity and stability of the conjugate base explain why some acids are stronger.",
+   "summary": "A reaction enthalpy can be estimated as the bond enthalpies broken minus those formed, a route that works best for gas-phase reactions because bond enthalpies are averages over many compounds.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "ap_chemistry_bond_polarity_and_molecular_dipole_moments",
+   "title": "Bond Polarity and Molecular Dipole Moments",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Types of Chemical Bonds",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_chemistry_the_ionic_covalent_continuum"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dipole moment",
+    "polarity",
+    "symmetry"
+   ],
+   "summary": "A polar bond carries a dipole towards its more electronegative atom, but a molecule has a net dipole only when symmetry leaves the bond dipoles unable to cancel, which is why carbon dioxide is nonpolar.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_chemistry_bronsted_lowry_and_lewis_definitions",
+   "title": "Bronsted-Lowry and Lewis Definitions",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Introduction to Acids and Bases",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_the_common_ion_effect"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bronsted-lowry",
+    "lewis acid",
+    "proton"
+   ],
+   "summary": "A Bronsted-Lowry acid donates a proton and a base accepts one, while the Lewis definition widens acids to electron-pair acceptors so that a species without hydrogen, such as boron trifluoride, still counts as an acid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "ap_chemistry_buffer_capacity_and_effective_range",
+   "title": "Buffer Capacity and Effective Range",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Buffer Capacity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_buffers_and_the_henderson_hasselbalch_equation"
+   ],
+   "keywords": [
+    "buffer capacity",
+    "buffer range",
+    "concentration"
+   ],
+   "summary": "A buffer works within roughly one pH unit of its acid pKa, and its capacity grows with the absolute concentrations of the pair, so a buffer of correct ratio but low concentration fails on adding strong acid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "ap_chemistry_buffers_and_the_henderson_hasselbalch_equation",
+   "title": "Buffers and the Henderson-Hasselbalch Equation",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Henderson-Hasselbalch Equation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_how_a_buffer_responds_to_added_acid_or_base"
+   ],
+   "keywords": [
+    "buffer",
+    "henderson-hasselbalch",
+    "pka"
+   ],
+   "summary": "A buffer holds a weak acid and its conjugate base in comparable amounts, and its pH equals the acid pKa plus the logarithm of the base-to-acid ratio, so the ratio rather than the absolute amounts sets the pH.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "ap_chemistry_calculating_k_from_equilibrium_data",
+   "title": "Calculating K from Equilibrium Data",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Calculating the Equilibrium Constant",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_comparing_q_with_k_to_predict_direction"
+   ],
+   "keywords": [
+    "calculation",
+    "equilibrium constant",
+    "equilibrium data"
+   ],
+   "summary": "Substituting equilibrium concentrations into the expression gives K, whereas initial concentrations cannot be substituted unless the system has actually reached equilibrium.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "ap_chemistry_catalysis_and_the_lower_energy_pathway",
+   "title": "Catalysis and the Lower-Energy Pathway",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Catalysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_mechanisms_on_an_energy_diagram"
+   ],
+   "keywords": [
+    "activation energy",
+    "catalyst",
+    "equilibrium"
+   ],
+   "summary": "A catalyst supplies an alternative pathway of lower activation energy without being consumed, so it raises the rate in both directions and leaves the equilibrium constant and the enthalpy change unchanged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_chemistry_cell_potential_and_the_sign_of_free_energy",
+   "title": "Cell Potential and the Sign of Free Energy",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Cell Potential and Free Energy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_anode_cathode_and_electron_flow"
+   ],
+   "keywords": [
+    "cell potential",
+    "free energy",
+    "standard reduction potential"
+   ],
+   "summary": "The standard cell potential is the cathode reduction potential minus the anode reduction potential, and a positive potential corresponds to a negative free energy change because that change equals minus nFE.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "ap_chemistry_coffee_cup_and_bomb_calorimetry",
+   "title": "Coffee-Cup and Bomb Calorimetry",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Heat Capacity and Calorimetry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_specific_heat_and_heat_capacity"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bomb calorimeter",
+    "calorimetry",
+    "heat"
+   ],
+   "summary": "Calorimetry finds the heat exchanged as mass times specific heat times the temperature change, with a coffee-cup calorimeter measuring at constant pressure so the heat equals the enthalpy change and a bomb calorimeter at constant volume so it equals the internal energy change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1285,639 +818,28 @@
    }
   },
   {
-   "id": "ap_chemistry_moles_and_molar_mass",
-   "title": "Moles and molar mass",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Atoms and the mole",
-   "topic": "Moles and atomic structure",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Avogadro",
-    "molar mass",
-    "mole"
-   ],
-   "summary": "A mole is Avogadro's number of particles, which converts between mass and number of particles.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 1
-   }
-  },
-  {
-   "id": "ap_chemistry_net_ionic_equations",
-   "title": "Net ionic equations",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_types_of_reactions"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "net ionic equation",
-    "precipitate",
-    "spectator ion"
-   ],
-   "summary": "Spectator ions are removed to show the species that actually change.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 30
-   }
-  },
-  {
-   "id": "ap_chemistry_oxidation_reduction_reactions",
-   "title": "Oxidation-reduction reactions",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_net_ionic_equations"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_acid_base_reactions"
-   ],
-   "keywords": [
-    "half-reaction",
-    "oxidation state",
-    "redox"
-   ],
-   "summary": "Electron transfer changes oxidation states, and half-reactions separate the two processes.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 34
-   }
-  },
-  {
-   "id": "ap_chemistry_percent_yield",
-   "title": "Percent yield",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_stoichiometry_and_limiting_reactants"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "actual yield",
-    "percent yield"
-   ],
-   "summary": "Comparing actual with theoretical yield measures how complete and selective a reaction is.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 32
-   }
-  },
-  {
-   "id": "ap_chemistry_periodic_trends",
-   "title": "Periodic trends",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Electrons in atoms",
-   "topic": "Electronic structure",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_coulomb_s_law_and_atomic_structure"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "electronegativity",
-    "ionisation energy",
-    "periodic trend"
-   ],
-   "summary": "Atomic radius, ionisation energy, electron affinity and electronegativity follow from nuclear charge and shielding.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 8
-   }
-  },
-  {
-   "id": "ap_chemistry_ph_and_poh",
-   "title": "pH and pOH",
-   "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
-   "tier": "foundation",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_acid_base_definitions"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "logarithm",
-    "pH",
-    "pOH"
-   ],
-   "summary": "pH is the negative logarithm of hydrogen-ion concentration, and pH plus pOH is fourteen at 25 degrees.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 58
-   }
-  },
-  {
-   "id": "ap_chemistry_phase_changes_and_phase_diagrams",
-   "title": "Phase changes and phase diagrams",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_solids_liquids_and_gases"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "phase change",
-    "phase diagram",
-    "triple point"
-   ],
-   "summary": "Heating and pressure change the balance of phases, which a phase diagram maps.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 19
-   }
-  },
-  {
-   "id": "ap_chemistry_photoelectron_spectroscopy",
-   "title": "Photoelectron spectroscopy",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Electrons in atoms",
-   "topic": "Electronic structure",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_electron_configuration"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "binding energy",
-    "photoelectron spectroscopy",
-    "subshell"
-   ],
-   "summary": "A photoelectron spectrum reports the binding energy of each electron shell and subshell.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 6
-   }
-  },
-  {
-   "id": "ap_chemistry_polarity_and_dipole_moments",
-   "title": "Polarity and dipole moments",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_vsepr_and_molecular_geometry"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_hybridisation_and_bonding_models"
-   ],
-   "keywords": [
-    "dipole moment",
-    "polarity"
-   ],
-   "summary": "Polar bonds plus an asymmetric shape produce a net dipole, which controls intermolecular forces.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 16
-   }
-  },
-  {
-   "id": "ap_chemistry_rate_laws_and_reaction_order",
-   "title": "Rate laws and reaction order",
+   "id": "ap_chemistry_collision_model_and_activation_energy",
+   "title": "Collision Model and Activation Energy",
    "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_reaction_rate"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "rate constant",
-    "rate law",
-    "reaction order"
-   ],
-   "summary": "The rate law is determined by experiment, and its orders need not match the stoichiometric coefficients.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 37
-   }
-  },
-  {
-   "id": "ap_chemistry_reaction_mechanisms",
-   "title": "Reaction mechanisms",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_collision_theory_and_activation_energy"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_the_arrhenius_equation"
-   ],
-   "keywords": [
-    "elementary step",
-    "mechanism",
-    "rate-determining step"
-   ],
-   "summary": "A mechanism is a sequence of elementary steps whose slowest step sets the overall rate.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 42
-   }
-  },
-  {
-   "id": "ap_chemistry_reaction_rate",
-   "title": "Reaction rate",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_titration"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "concentration change",
-    "reaction rate"
-   ],
-   "summary": "Rate is the change in concentration of a reactant or product per unit time.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 36
-   }
-  },
-  {
-   "id": "ap_chemistry_resonance_and_formal_charge",
-   "title": "Resonance and formal charge",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_covalent_bonding_and_lewis_structures"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "formal charge",
-    "resonance"
-   ],
-   "summary": "Resonance spreads electrons over several positions, and formal charge selects the best structure.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 13
-   }
-  },
-  {
-   "id": "ap_chemistry_separating_mixtures",
-   "title": "Separating mixtures",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_concentration_and_molarity"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "chromatography",
-    "distillation",
-    "filtration"
-   ],
-   "summary": "Distillation, filtration and chromatography separate by differing physical properties.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 25
-   }
-  },
-  {
-   "id": "ap_chemistry_solids_liquids_and_gases",
-   "title": "Solids, liquids and gases",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "core",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_intermolecular_forces"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "kinetic energy",
-    "states of matter"
-   ],
-   "summary": "The kinetic energy of particles relative to intermolecular forces decides the state.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 18
-   }
-  },
-  {
-   "id": "ap_chemistry_solubility_equilibria_and_ksp",
-   "title": "Solubility equilibria and Ksp",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "ap_chemistry_calculating_equilibrium_concentrations"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Ksp",
-    "common ion",
-    "solubility product"
-   ],
-   "summary": "A solubility product describes the equilibrium between a solid and its ions.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 55
-   }
-  },
-  {
-   "id": "ap_chemistry_solutions_and_solubility",
-   "title": "Solutions and solubility",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
+   "unit": "Kinetics",
+   "topic": "Collision Model",
    "tier": "foundation",
    "difficulty": 1,
    "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_deviations_from_ideal_behaviour"
+    "ap_chemistry_molecularity_of_an_elementary_step"
    ],
    "keywords": [
-    "solubility",
-    "solute",
-    "solvent"
-   ],
-   "summary": "Like dissolves like, and solubility depends on temperature and pressure.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 23
-   }
-  },
-  {
-   "id": "ap_chemistry_spectrophotometry_and_the_beer_lambert_law",
-   "title": "Spectrophotometry and the Beer-Lambert law",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_concentration_and_molarity"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_colligative_properties"
-   ],
-   "keywords": [
-    "Beer-Lambert",
-    "absorbance",
-    "spectrophotometry"
-   ],
-   "summary": "Absorbance is proportional to concentration and path length, which allows concentration to be measured.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 27
-   }
-  },
-  {
-   "id": "ap_chemistry_stoichiometry_and_limiting_reactants",
-   "title": "Stoichiometry and limiting reactants",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_writing_and_balancing_equations"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_net_ionic_equations"
-   ],
-   "keywords": [
-    "limiting reactant",
-    "stoichiometry",
-    "theoretical yield"
-   ],
-   "summary": "Mole ratios from the balanced equation give theoretical yield, and the limiting reactant caps it.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 31
-   }
-  },
-  {
-   "id": "ap_chemistry_strong_acids_and_bases",
-   "title": "Strong acids and bases",
-   "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
-   "tier": "foundation",
-   "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_ph_and_poh"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "complete ionisation",
-    "strong acid",
-    "strong base"
-   ],
-   "summary": "Strong acids and bases ionise completely, so concentration directly gives the ion concentration.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 59
-   }
-  },
-  {
-   "id": "ap_chemistry_the_arrhenius_equation",
-   "title": "The Arrhenius equation",
-   "strand": "Kinetics",
-   "unit": "Reaction rates",
-   "topic": "How fast reactions go",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_collision_theory_and_activation_energy"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "Arrhenius",
     "activation energy",
-    "temperature dependence"
+    "collision model",
+    "orientation"
    ],
-   "summary": "Rate constants rise with temperature in a way that reveals activation energy.",
+   "summary": "A collision reacts only if the molecules arrive with at least the activation energy and the right orientation, so heating raises the rate mainly by raising the fraction of collisions that clear the barrier rather than by raising the collision frequency.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 41
-   }
-  },
-  {
-   "id": "ap_chemistry_the_equilibrium_constant_k",
-   "title": "The equilibrium constant K",
-   "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
-   "tier": "extension",
-   "difficulty": 4,
-   "prerequisites": [
-    "ap_chemistry_dynamic_equilibrium"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "K",
-    "equilibrium constant"
-   ],
-   "summary": "K expresses the ratio of products to reactants at equilibrium and its size reports the extent of reaction.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -1925,296 +847,840 @@
    }
   },
   {
-   "id": "ap_chemistry_the_henderson_hasselbalch_equation",
-   "title": "The Henderson-Hasselbalch equation",
+   "id": "ap_chemistry_comparing_ph_with_pka",
+   "title": "Comparing pH with pKa",
    "strand": "Acids and Bases",
-   "unit": "Buffers and titrations",
-   "topic": "Controlling pH",
+   "unit": "Acids and Bases",
+   "topic": "pH and pKa",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_inductive_and_resonance_effects_on_pka"
+   ],
+   "keywords": [
+    "ph",
+    "pka",
+    "protonation state"
+   ],
+   "summary": "When the pH is below an acid pKa the protonated form dominates and when it is above the pKa the deprotonated form dominates, so comparing the two numbers predicts the charge of the species in solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "ap_chemistry_comparing_q_with_k_to_predict_direction",
+   "title": "Comparing Q with K to Predict Direction",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Reaction Quotient and Equilibrium Constant",
    "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "ap_chemistry_buffers"
+    "ap_chemistry_writing_the_equilibrium_expression"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "Henderson-Hasselbalch",
-    "buffer ratio",
-    "pKa"
+    "comparison",
+    "direction",
+    "reaction quotient"
    ],
-   "summary": "pH depends on pKa and the ratio of conjugate base to acid, which is the buffer calculation.",
+   "summary": "The reaction quotient has the form of K but uses current concentrations, so Q below K drives the reaction forward, Q above K drives it in reverse and Q equal to K means the system is at equilibrium.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 64
+    "order": 71
    }
   },
   {
-   "id": "ap_chemistry_the_ideal_gas_law",
-   "title": "The ideal gas law",
-   "strand": "Properties of Substances and Mixtures",
-   "unit": "States, gases and solutions",
-   "topic": "Bulk properties",
+   "id": "ap_chemistry_conjugate_pairs_and_amphiprotic_species",
+   "title": "Conjugate Pairs and Amphiprotic Species",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Introduction to Acids and Bases",
    "tier": "extension",
    "difficulty": 3,
    "prerequisites": [
-    "ap_chemistry_solids_liquids_and_gases"
+    "ap_chemistry_bronsted_lowry_and_lewis_definitions"
    ],
-   "sequence_predecessors": [
-    "ap_chemistry_phase_changes_and_phase_diagrams"
-   ],
+   "sequence_predecessors": [],
    "keywords": [
-    "PV=nRT",
-    "ideal gas law",
-    "pressure"
+    "amphiprotic",
+    "conjugate pair",
+    "proton"
    ],
-   "summary": "Pressure, volume, temperature and moles are linked by PV equals nRT.",
+   "summary": "Every Bronsted-Lowry acid has a conjugate base differing by one proton, and a species such as water or the hydrogen carbonate ion can donate or accept a proton depending on its partner.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 20
+    "order": 82
    }
   },
   {
-   "id": "ap_chemistry_the_mole_and_empirical_formulae",
-   "title": "The mole and empirical formulae",
+   "id": "ap_chemistry_coulomb_s_law_and_effective_nuclear_charge",
+   "title": "Coulomb's Law and Effective Nuclear Charge",
    "strand": "Atomic Structure and Properties",
-   "unit": "Atoms and the mole",
-   "topic": "Moles and atomic structure",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Atomic Structure and Electron Configuration",
    "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_mass_percent_of_a_component_in_a_mixture"
+   ],
+   "keywords": [
+    "coulomb",
+    "effective nuclear charge",
+    "shielding"
+   ],
+   "summary": "Coulomb's law makes the nucleus-electron attraction grow with the product of the charges and fall with the square of the separation, and because inner electrons shield incompletely the effective nuclear charge still rises left to right across a period.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_chemistry_coupled_reactions",
+   "title": "Coupled Reactions",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Coupled Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_free_energy_of_dissolution"
+   ],
+   "keywords": [
+    "atp",
+    "coupled reaction",
+    "free energy"
+   ],
+   "summary": "A thermodynamically unfavourable reaction can be driven by coupling it to a favourable one whose free energy release exceeds the cost, as ATP hydrolysis does for the reactions of a cell.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "ap_chemistry_determining_a_rate_law_experimentally",
+   "title": "Determining a Rate Law Experimentally",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Introduction to Rate Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_rate_normalised_by_stoichiometric_coefficients"
+   ],
+   "keywords": [
+    "initial rates",
+    "rate law",
+    "reaction order"
+   ],
+   "summary": "A rate law is determined experimentally, not from the balanced equation, because the exponents reflect the mechanism slow step, so the orders come from varying one concentration at a time and comparing initial rates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_chemistry_direction_of_reversible_reactions",
+   "title": "Direction of Reversible Reactions",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Direction of Reversible Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_equal_forward_and_reverse_rates"
+   ],
+   "keywords": [
+    "direction",
+    "net change",
+    "reversible"
+   ],
+   "summary": "A reversible reaction proceeds in the direction that lowers the system free energy until the reaction quotient equals the equilibrium constant, after which no net change is observed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "ap_chemistry_distinguishing_physical_from_chemical_change",
+   "title": "Distinguishing Physical from Chemical Change",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Physical and Chemical Changes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_representing_a_reaction_at_the_particle_level"
+   ],
+   "keywords": [
+    "chemical change",
+    "evidence",
+    "physical change"
+   ],
+   "summary": "A physical change alters state or form without altering composition, while a chemical change produces new substances and is recognised by a colour change, gas evolution, precipitate or temperature change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_chemistry_drawing_lewis_diagrams",
+   "title": "Drawing Lewis Diagrams",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Lewis Diagrams",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_metallic_bonding_and_alloys"
+   ],
+   "keywords": [
+    "lewis diagram",
+    "lone pair",
+    "octet"
+   ],
+   "summary": "A Lewis diagram is built by counting all valence electrons, bonding the skeleton with single bonds, completing outer octets, then placing any remainder on the central atom or forming multiple bonds until it reaches an octet.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_chemistry_electrolysis_and_faraday_s_law",
+   "title": "Electrolysis and Faraday's Law",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Electrolysis and Faraday's Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_nernst_equation_and_nonstandard_potential"
+   ],
+   "keywords": [
+    "charge",
+    "electrolysis",
+    "faraday"
+   ],
+   "summary": "An electrolytic cell uses an external voltage to drive a nonspontaneous reaction, and the moles of substance deposited equal the charge passed divided by nF, so the charge alone fixes the mass produced.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "ap_chemistry_electron_domain_geometry_and_molecular_shape",
+   "title": "Electron-Domain Geometry and Molecular Shape",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "VSEPR and Hybridization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_formal_charge_and_resonance_hybrids"
+   ],
+   "keywords": [
+    "bond angle",
+    "electron domain",
+    "vsepr"
+   ],
+   "summary": "Electron domains spread to the arrangement that maximises their separation, and a lone pair occupies more angular space than a bonding pair, so a tetrahedral domain set becomes trigonal pyramidal or bent when lone pairs are present.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_chemistry_energy_diagrams_and_enthalpy_change",
+   "title": "Energy Diagrams and Enthalpy Change",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Energy Diagrams",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_sign_conventions_for_heat_flow"
+   ],
+   "keywords": [
+    "activation energy",
+    "energy diagram",
+    "enthalpy"
+   ],
+   "summary": "An energy diagram places the enthalpy of reactants and products on one vertical scale, so the difference is the enthalpy change and the barrier above the reactants is the activation energy.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "ap_chemistry_enthalpy_of_phase_change_and_heating_curves",
+   "title": "Enthalpy of Phase Change and Heating Curves",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Energy of Phase Changes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_coffee_cup_and_bomb_calorimetry"
+   ],
+   "keywords": [
+    "enthalpy of fusion",
+    "heating curve",
+    "phase change"
+   ],
+   "summary": "Melting and vaporisation absorb energy without raising the temperature, so a heating curve shows flat plateaus whose lengths are set by the enthalpy of fusion or vaporisation and by the sample mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "ap_chemistry_entropy_and_microstates",
+   "title": "Entropy and Microstates",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Introduction to Entropy",
+   "tier": "core",
    "difficulty": 2,
    "prerequisites": [
-    "ap_chemistry_moles_and_molar_mass"
-   ],
-   "sequence_predecessors": [
-    "ap_chemistry_mass_spectrometry"
-   ],
-   "keywords": [
-    "empirical formula",
-    "mole ratio",
-    "percent composition"
-   ],
-   "summary": "Percentage composition converts to a mole ratio, which gives the empirical formula.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 4
-   }
-  },
-  {
-   "id": "ap_chemistry_the_nernst_equation",
-   "title": "The Nernst equation",
-   "strand": "Applications of Thermodynamics",
-   "unit": "Electrochemistry",
-   "topic": "Electrons doing work",
-   "tier": "extension",
-   "difficulty": 3,
-   "prerequisites": [
-    "ap_chemistry_free_energy_and_cell_potential"
+    "ap_chemistry_ph_dependent_solubility_of_salts"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "Nernst equation",
-    "concentration cell"
+    "dispersal",
+    "entropy",
+    "microstates"
    ],
-   "summary": "Non-standard concentrations change cell potential in a way the Nernst equation predicts.",
+   "summary": "Entropy measures the number of microstates available to a system, so a process that spreads matter or energy over more arrangements has a positive entropy change, as when a solid melts or a gas expands into a vacuum.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 70
+    "order": 94
    }
   },
   {
-   "id": "ap_chemistry_the_reaction_quotient_q",
-   "title": "The reaction quotient Q",
+   "id": "ap_chemistry_equal_forward_and_reverse_rates",
+   "title": "Equal Forward and Reverse Rates",
    "strand": "Equilibrium",
-   "unit": "Dynamic equilibrium",
-   "topic": "Reversible reactions",
+   "unit": "Equilibrium",
+   "topic": "Introduction to Equilibrium",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_hess_s_law_and_path_independence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dynamic equilibrium",
+    "equal rates",
+    "reversible"
+   ],
+   "summary": "At equilibrium the forward and reverse reactions run at equal rates, so concentrations stop changing although both reactions continue, and the state is reached from either direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "ap_chemistry_explaining_a_shift_with_the_reaction_quotient",
+   "title": "Explaining a Shift with the Reaction Quotient",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Reaction Quotient and Le Châtelier's Principle",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_le_chatelier_s_response_to_a_disturbance"
+   ],
+   "keywords": [
+    "pressure",
+    "reaction quotient",
+    "shift direction"
+   ],
+   "summary": "Adding a reactant or removing a product makes Q smaller than K so the forward reaction dominates, and compressing a gas mixture shifts it towards the side with fewer gas moles because that direction drives Q below K.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "ap_chemistry_formal_charge_and_resonance_hybrids",
+   "title": "Formal Charge and Resonance Hybrids",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Resonance and Formal Charge",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_drawing_lewis_diagrams"
+   ],
+   "keywords": [
+    "delocalization",
+    "formal charge",
+    "resonance"
+   ],
+   "summary": "Formal charge is the valence-electron count minus the electrons an atom owns in the diagram, and the preferred structure minimises it, while forms that differ only in electron placement are resonance contributors to one delocalised hybrid.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_chemistry_formation_enthalpy_and_the_zero_convention",
+   "title": "Formation Enthalpy and the Zero Convention",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Enthalpy of Formation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_bond_enthalpies_and_reaction_enthalpy"
+   ],
+   "keywords": [
+    "elements",
+    "formation enthalpy",
+    "standard state"
+   ],
+   "summary": "The standard enthalpy of formation is the enthalpy change when one mole of a compound forms from its elements in their standard states, so an element in its standard state has a formation enthalpy of exactly zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "ap_chemistry_free_energy_and_the_equilibrium_constant",
+   "title": "Free Energy and the Equilibrium Constant",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Free Energy and Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_thermodynamic_versus_kinetic_control"
+   ],
+   "keywords": [
+    "equilibrium constant",
+    "free energy",
+    "standard"
+   ],
+   "summary": "The standard free energy change equals minus RT times the natural logarithm of K, so a large negative value corresponds to a large equilibrium constant and a reaction that runs nearly to completion.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "ap_chemistry_free_energy_of_dissolution",
+   "title": "Free Energy of Dissolution",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Free Energy of Dissolution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_free_energy_and_the_equilibrium_constant"
+   ],
+   "keywords": [
+    "dissolution",
+    "hydration",
+    "lattice enthalpy"
+   ],
+   "summary": "Dissolution must supply the lattice enthalpy and is repaid by the hydration enthalpy, and the sum corrected by the entropy gain of dispersing the ions decides whether the salt dissolves at all.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "ap_chemistry_gibbs_free_energy_as_the_favorability_criterion",
+   "title": "Gibbs Free Energy as the Favorability Criterion",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Gibbs Free Energy and Thermodynamic Favorability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_absolute_entropy_and_the_third_law"
+   ],
+   "keywords": [
+    "criterion",
+    "favorability",
+    "gibbs free energy"
+   ],
+   "summary": "The free energy change equals the enthalpy change minus temperature times the entropy change, and at constant temperature and pressure a negative value means the forward process is thermodynamically favoured while zero means equilibrium.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "ap_chemistry_hess_s_law_and_path_independence",
+   "title": "Hess's Law and Path Independence",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Hess's Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_formation_enthalpy_and_the_zero_convention"
+   ],
+   "keywords": [
+    "hess law",
+    "path",
+    "state function"
+   ],
+   "summary": "Because enthalpy is a state function, a reaction enthalpy is the same whatever sequence of steps connects reactants to products, so it can be assembled from reactions that are easier to measure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "ap_chemistry_how_a_buffer_responds_to_added_acid_or_base",
+   "title": "How a Buffer Responds to Added Acid or Base",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Properties of Buffers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_comparing_ph_with_pka"
+   ],
+   "keywords": [
+    "buffer action",
+    "ph change",
+    "strong acid"
+   ],
+   "summary": "A buffer neutralises added strong acid with its basic component and added strong base with its acidic component, so the pH moves only slightly until one member of the pair is used up.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "ap_chemistry_hybridization_and_sigma_versus_pi_bonds",
+   "title": "Hybridization and Sigma versus Pi Bonds",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "VSEPR and Hybridization",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_electron_domain_geometry_and_molecular_shape"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hybridization",
+    "pi bond",
+    "sigma bond"
+   ],
+   "summary": "Mixing one s with one, two or three p orbitals gives sp, sp2 or sp3 hybrids whose directions match the observed linear, trigonal planar or tetrahedral angles, and the untouched p orbitals form the pi bond of a double or triple bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_chemistry_hydrogen_bonding_and_dipole_dipole_forces",
+   "title": "Hydrogen Bonding and Dipole-Dipole Forces",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Intermolecular and Interparticle Forces",
    "tier": "extension",
    "difficulty": 4,
    "prerequisites": [
-    "ap_chemistry_the_equilibrium_constant_k"
+    "ap_chemistry_london_dispersion_forces_and_polarizability"
    ],
    "sequence_predecessors": [],
    "keywords": [
-    "Q",
-    "direction of shift",
-    "reaction quotient"
+    "boiling point",
+    "dipole-dipole",
+    "hydrogen bond"
    ],
-   "summary": "Comparing Q with K predicts the direction a system must shift to reach equilibrium.",
+   "summary": "A hydrogen bond is the attraction between hydrogen covalently bound to N, O or F and a lone pair on another such atom, strong enough to give water an unusually high boiling point and enthalpy of vaporisation.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 52
+    "order": 21
    }
   },
   {
-   "id": "ap_chemistry_titration",
-   "title": "Titration",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_acid_base_reactions"
-   ],
+   "id": "ap_chemistry_ice_tables_and_the_small_x_approximation",
+   "title": "ICE Tables and the Small-x Approximation",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Calculating Equilibrium Concentrations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_oxidation_reduction_reactions"
+    "ap_chemistry_rules_for_combining_equilibrium_constants"
    ],
    "keywords": [
-    "equivalence point",
-    "indicator",
-    "titration"
+    "approximation",
+    "change",
+    "ice table"
    ],
-   "summary": "A titration uses a known concentration to find an unknown one at the equivalence point.",
+   "summary": "An ICE table derives each equilibrium concentration from the initial value and the stoichiometric change, and dropping x beside an initial concentration is valid only when x stays under about 5 percent of it.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 35
+    "order": 75
    }
   },
   {
-   "id": "ap_chemistry_types_of_chemical_bonds",
-   "title": "Types of chemical bonds",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_valence_electrons_and_the_periodic_table"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "covalent bond",
-    "ionic bond",
-    "metallic bond"
-   ],
-   "summary": "Bonds range from ionic to covalent to metallic, and the type follows from electronegativity difference.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 10
-   }
-  },
-  {
-   "id": "ap_chemistry_types_of_reactions",
-   "title": "Types of reactions",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_writing_and_balancing_equations"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "combustion",
-    "precipitation",
-    "reaction type"
-   ],
-   "summary": "Synthesis, decomposition, combustion, precipitation and neutralisation predict products.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 29
-   }
-  },
-  {
-   "id": "ap_chemistry_valence_electrons_and_the_periodic_table",
-   "title": "Valence electrons and the periodic table",
-   "strand": "Atomic Structure and Properties",
-   "unit": "Electrons in atoms",
-   "topic": "Electronic structure",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_periodic_trends"
-   ],
-   "sequence_predecessors": [],
-   "keywords": [
-    "group",
-    "periodic table",
-    "valence electron"
-   ],
-   "summary": "Group position gives the valence configuration, which predicts an element's chemistry.",
-   "has_lesson": false,
-   "lesson_id": "",
-   "external_ids": {},
-   "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
-    "url": "",
-    "licence": "cc0",
-    "licence_class": "cc0",
-    "order": 9
-   }
-  },
-  {
-   "id": "ap_chemistry_vsepr_and_molecular_geometry",
-   "title": "VSEPR and molecular geometry",
-   "strand": "Compound Structure and Properties",
-   "unit": "Bonding and geometry",
-   "topic": "How atoms bond",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_covalent_bonding_and_lewis_structures"
-   ],
+   "id": "ap_chemistry_inductive_and_resonance_effects_on_pka",
+   "title": "Inductive and Resonance Effects on pKa",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Molecular Structure of Acids and Bases",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
    "sequence_predecessors": [
-    "ap_chemistry_resonance_and_formal_charge"
+    "ap_chemistry_titration_curves_and_the_half_equivalence_point"
    ],
    "keywords": [
-    "VSEPR",
-    "bond angle",
-    "molecular geometry"
+    "inductive effect",
+    "oxyacid",
+    "pka"
    ],
-   "summary": "Electron domains repel and arrange as far apart as possible, which sets the shape.",
+   "summary": "Electron-withdrawing atoms or groups stabilise the conjugate base and lower pKa, which is why trichloroacetic acid is far stronger than acetic acid and why an oxyacid strengthens as its central atom becomes more electronegative.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "ap_chemistry_integrated_rate_laws_and_half_life",
+   "title": "Integrated Rate Laws and Half-Life",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Concentration Changes Over Time",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_reaction_orders_and_the_units_of_k"
+   ],
+   "keywords": [
+    "first order",
+    "half-life",
+    "integrated rate law"
+   ],
+   "summary": "An integrated rate law gives concentration as a function of time, and a first-order reaction has a half-life of 0.693 divided by the rate constant that does not depend on the starting concentration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_chemistry_ionic_lattice_structure_and_coordination",
+   "title": "Ionic Lattice Structure and Coordination",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Structure of Ionic Solids",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_potential_energy_curves_for_covalent_bonds"
+   ],
+   "keywords": [
+    "coordination number",
+    "ionic lattice",
+    "lattice energy"
+   ],
+   "summary": "An ionic solid is a three-dimensional lattice in which every ion is surrounded by counter-ions, and its lattice energy grows with the product of the ionic charges and shrinks as the ions become larger.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -2222,28 +1688,1505 @@
    }
   },
   {
-   "id": "ap_chemistry_weak_acid_and_base_equilibria",
-   "title": "Weak acid and base equilibria",
+   "id": "ap_chemistry_ka_kb_and_the_conjugate_relationship",
+   "title": "Ka, Kb and the Conjugate Relationship",
    "strand": "Acids and Bases",
-   "unit": "Proton transfer in water",
-   "topic": "Acidity and pH",
-   "tier": "core",
-   "difficulty": 2,
-   "prerequisites": [
-    "ap_chemistry_strong_acids_and_bases"
+   "unit": "Acids and Bases",
+   "topic": "Weak Acid and Base Equilibria",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_ph_poh_and_the_water_ion_product"
    ],
-   "sequence_predecessors": [],
    "keywords": [
-    "Ka",
-    "percent ionisation",
-    "weak acid"
+    "conjugate",
+    "ka",
+    "kb"
    ],
-   "summary": "Weak acids ionise partially, so an equilibrium calculation is needed.",
+   "summary": "Ka measures the extent of weak-acid ionisation and Kb the extent for its conjugate base, and their product equals the water ion product, so a stronger acid always has a weaker conjugate base.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "ap_chemistry_kinetic_molecular_theory_and_molecular_speed",
+   "title": "Kinetic Molecular Theory and Molecular Speed",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Kinetic Molecular Theory",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_the_ideal_gas_law"
+   ],
+   "keywords": [
+    "kinetic energy",
+    "kinetic molecular theory",
+    "rms speed"
+   ],
+   "summary": "Average kinetic energy depends only on absolute temperature, so at one temperature all gases share the same average kinetic energy while their root-mean-square speeds differ as the inverse square root of molar mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_chemistry_ksp_and_molar_solubility",
+   "title": "Ksp and Molar Solubility",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Introduction to Solubility Equilibria",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_explaining_a_shift_with_the_reaction_quotient"
+   ],
+   "keywords": [
+    "ksp",
+    "molar solubility",
+    "saturated"
+   ],
+   "summary": "The solubility product is the product of the ion concentrations in a saturated solution each raised to its coefficient, so molar solubility follows from Ksp through the salt stoichiometry.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "ap_chemistry_le_chatelier_s_response_to_a_disturbance",
+   "title": "Le Chatelier's Response to a Disturbance",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Introduction to Le Châtelier's Principle",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_particulate_and_graphical_views_of_equilibrium"
+   ],
+   "keywords": [
+    "le chatelier",
+    "stress",
+    "temperature"
+   ],
+   "summary": "A system at equilibrium shifts to partly offset a change in concentration, pressure or temperature, but only a temperature change alters the value of K itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "ap_chemistry_london_dispersion_forces_and_polarizability",
+   "title": "London Dispersion Forces and Polarizability",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Intermolecular and Interparticle Forces",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_chemistry_hybridization_and_sigma_versus_pi_bonds"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boiling point",
+    "dispersion",
+    "polarizability"
+   ],
+   "summary": "Every pair of particles attracts through instantaneous dipoles, and the force strengthens with polarizability and contact area, which is why the halogens boil at higher temperatures down the group.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_chemistry_magnitude_of_k_and_the_extent_of_reaction",
+   "title": "Magnitude of K and the Extent of Reaction",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Magnitude of the Equilibrium Constant",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_calculating_k_from_equilibrium_data"
+   ],
+   "keywords": [
+    "equilibrium position",
+    "extent",
+    "magnitude"
+   ],
+   "summary": "A K far above one means the reaction has run almost to completion, a K far below one means hardly any product forms, and a K near one leaves comparable amounts of both sides at equilibrium.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "ap_chemistry_mass_percent_of_a_component_in_a_mixture",
+   "title": "Mass Percent of a Component in a Mixture",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Composition of Mixtures",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_percent_composition_from_a_formula"
+   ],
+   "keywords": [
+    "composition",
+    "mass percent",
+    "mixture"
+   ],
+   "summary": "A mixture mass percent is the mass of one component divided by the total mixture mass, and unlike percent composition it varies between samples because a mixture carries no fixed formula.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_chemistry_mechanism_steps_and_the_slow_step",
+   "title": "Mechanism Steps and the Slow Step",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Introduction to Reaction Mechanisms",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_reaction_energy_profile_and_the_transition_state"
+   ],
+   "keywords": [
+    "elementary step",
+    "mechanism",
+    "rate-determining step"
+   ],
+   "summary": "A mechanism is a series of elementary steps that sum to the overall equation, and the slowest step controls the rate, so a rate law can be written from the reactants of that step alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_chemistry_mechanisms_on_an_energy_diagram",
+   "title": "Mechanisms on an Energy Diagram",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Multistep Reaction Energy Profile",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_pre_equilibrium_approximation"
+   ],
+   "keywords": [
+    "energy diagram",
+    "intermediate",
+    "multistep"
+   ],
+   "summary": "A multistep mechanism shows one peak per transition state on its energy profile, and the highest peak belongs to the slow step, so the diagram reveals which step gates the rate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_chemistry_metallic_bonding_and_alloys",
+   "title": "Metallic Bonding and Alloys",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Structure of Metals and Alloys",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_ionic_lattice_structure_and_coordination"
+   ],
+   "keywords": [
+    "alloy",
+    "delocalized electrons",
+    "metallic bond"
+   ],
+   "summary": "Metal cations are held by a delocalised sea of valence electrons, which explains conductivity and malleability, and an alloy distorts that lattice by substituting or inserting atoms of a different size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_chemistry_molarity_and_solution_representations",
+   "title": "Molarity and Solution Representations",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Representations of Solutions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_solutions_compared_with_heterogeneous_mixtures"
+   ],
+   "keywords": [
+    "dissociation",
+    "molarity",
+    "particulate"
+   ],
+   "summary": "Molarity is moles of solute per litre of solution, so dissolving one mole of a strong electrolyte such as sodium chloride yields two moles of ions, and a particulate drawing must show that doubled count.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_chemistry_mole_ratios_and_the_limiting_reactant",
+   "title": "Mole Ratios and the Limiting Reactant",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Stoichiometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_distinguishing_physical_from_chemical_change"
+   ],
+   "keywords": [
+    "limiting reactant",
+    "mole ratio",
+    "theoretical yield"
+   ],
+   "summary": "Coefficients give the mole ratio linking any two species, and the limiting reactant is the one whose stoichiometric requirement runs out first, so it sets the maximum product while the excess reactant remains.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_chemistry_molecularity_of_an_elementary_step",
+   "title": "Molecularity of an Elementary Step",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Elementary Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_integrated_rate_laws_and_half_life"
+   ],
+   "keywords": [
+    "elementary step",
+    "molecularity",
+    "termolecular"
+   ],
+   "summary": "An elementary step is classified by its molecularity as unimolecular, bimolecular or termolecular, and because the step happens as written its rate law follows from that molecularity rather than from experiment.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_chemistry_nernst_equation_and_nonstandard_potential",
+   "title": "Nernst Equation and Nonstandard Potential",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Cell Potential Under Nonstandard Conditions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_cell_potential_and_the_sign_of_free_energy"
+   ],
+   "keywords": [
+    "cell potential",
+    "nernst equation",
+    "nonstandard"
+   ],
+   "summary": "Cell potential falls as the reaction quotient rises, following a potential equal to the standard potential minus RT over nF times the natural logarithm of Q, which at 25 degrees Celsius becomes the standard potential minus 0.0592 over n times log Q.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "ap_chemistry_neutralization_and_buffer_formation",
+   "title": "Neutralization and Buffer Formation",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Acid-Base Reactions and Buffers",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_solving_weak_acid_equilibrium_problems"
+   ],
+   "keywords": [
+    "buffer formation",
+    "conjugate base",
+    "neutralization"
+   ],
+   "summary": "Adding a limited amount of strong base to a weak acid converts part of it into its conjugate base, so the mixture left behind holds the acid and conjugate base pair a buffer requires.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "ap_chemistry_orbital_filling_and_electron_configuration",
+   "title": "Orbital Filling and Electron Configuration",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Atomic Structure and Electron Configuration",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_coulomb_s_law_and_effective_nuclear_charge"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "aufbau",
+    "electron configuration",
+    "hund's rule"
+   ],
+   "summary": "Electrons occupy the lowest-energy orbital available, filling 4s before 3d and leaving degenerate p orbitals singly occupied with parallel spins before any pairing, which is why a configuration predicts unpaired electrons and paramagnetism.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_chemistry_order_in_crystalline_and_amorphous_solids",
+   "title": "Order in Crystalline and Amorphous Solids",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Properties of Solids",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_hydrogen_bonding_and_dipole_dipole_forces"
+   ],
+   "keywords": [
+    "amorphous",
+    "crystalline",
+    "lattice"
+   ],
+   "summary": "A crystalline solid has a repeating long-range lattice and melts at one temperature, while an amorphous solid lacks that order and softens over a range, so melting behaviour alone distinguishes the two.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_chemistry_particulate_and_graphical_views_of_equilibrium",
+   "title": "Particulate and Graphical Views of Equilibrium",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Representations of Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_ice_tables_and_the_small_x_approximation"
+   ],
+   "keywords": [
+    "graph",
+    "nonzero concentration",
+    "particulate model"
+   ],
+   "summary": "At equilibrium a particulate drawing shows reactants and products present in unchanging numbers while collisions continue, and a concentration-time graph flattens at a nonzero value instead of reaching zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "ap_chemistry_particulate_structure_of_the_three_states",
+   "title": "Particulate Structure of the Three States",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Solids, Liquids, and Gases",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_order_in_crystalline_and_amorphous_solids"
+   ],
+   "keywords": [
+    "compressibility",
+    "particulate",
+    "states of matter"
+   ],
+   "summary": "Particles of a solid are fixed in place and only vibrate, particles of a liquid stay in contact but slide past one another, and particles of a gas are far apart and fill their container, so density and compressibility follow from the spacing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_chemistry_percent_composition_from_a_formula",
+   "title": "Percent Composition from a Formula",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Elemental Composition of Pure Substances",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_average_atomic_mass_from_isotope_abundances"
+   ],
+   "keywords": [
+    "formula",
+    "mass fraction",
+    "percent composition"
+   ],
+   "summary": "Percent composition is the total mass of one element in a mole of the compound divided by the molar mass, so for a pure compound it is fixed by the formula and independent of sample size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_chemistry_percent_yield_from_the_limiting_reactant",
+   "title": "Percent Yield from the Limiting Reactant",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Stoichiometry",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_mole_ratios_and_the_limiting_reactant"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "percent yield",
+    "purity",
+    "theoretical yield"
+   ],
+   "summary": "Percent yield is the actual product mass divided by the theoretical mass from the limiting reactant, so a result above 100 percent signals an impure or wet product rather than a better reaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_chemistry_ph_dependent_solubility_of_salts",
+   "title": "pH-Dependent Solubility of Salts",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "pH and Solubility",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_buffer_capacity_and_effective_range"
+   ],
+   "keywords": [
+    "ph",
+    "protonation",
+    "solubility"
+   ],
+   "summary": "The solubility of a salt whose anion is the conjugate base of a weak acid rises in acidic solution, because protonating the anion removes it and pulls the dissolution equilibrium towards dissolving.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "ap_chemistry_ph_poh_and_the_water_ion_product",
+   "title": "pH, pOH and the Water Ion Product",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "pH and pOH of Strong Acids and Bases",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_conjugate_pairs_and_amphiprotic_species"
+   ],
+   "keywords": [
+    "kw",
+    "ph",
+    "poh"
+   ],
+   "summary": "pH is the negative base-ten logarithm of the hydrogen ion concentration, and at 25 degrees Celsius pH plus pOH equals 14 because the ion product of water is 1.0 x 10^-14.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "ap_chemistry_photoelectron_spectra_and_subshell_energies",
+   "title": "Photoelectron Spectra and Subshell Energies",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Photoelectron Spectroscopy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_orbital_filling_and_electron_configuration"
+   ],
+   "keywords": [
+    "binding energy",
+    "photoelectron",
+    "subshell"
+   ],
+   "summary": "Each photoelectron peak gives the binding energy of one subshell as the photon energy minus the ejected electron kinetic energy, and its area is proportional to the number of electrons in that subshell.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_chemistry_photon_energy_and_the_electromagnetic_spectrum",
+   "title": "Photon Energy and the Electromagnetic Spectrum",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Properties of Photons",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_spectra_record_absorbed_and_emitted_photons"
+   ],
+   "keywords": [
+    "electromagnetic spectrum",
+    "frequency",
+    "photon"
+   ],
+   "summary": "A photon carries energy equal to h times its frequency, so ultraviolet photons carry enough energy to break some bonds, visible photons excite valence electrons and infrared photons only excite vibrations, which is why the spectral region fixes the kind of interaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_chemistry_potential_energy_curves_for_covalent_bonds",
+   "title": "Potential Energy Curves for Covalent Bonds",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Intramolecular Force and Potential Energy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_bond_polarity_and_molecular_dipole_moments"
+   ],
+   "keywords": [
+    "bond energy",
+    "bond length",
+    "potential energy"
+   ],
+   "summary": "A bond potential energy falls to a minimum at the equilibrium bond length and climbs steeply at shorter distances as the nuclei repel, so the depth of that well measures bond strength and, between the same two elements, a shorter equilibrium distance belongs to the deeper well.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_chemistry_pre_equilibrium_approximation",
+   "title": "Pre-Equilibrium Approximation",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Pre-Equilibrium Approximation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_rate_law_derived_from_the_slow_step"
+   ],
+   "keywords": [
+    "approximation",
+    "intermediate",
+    "pre-equilibrium"
+   ],
+   "summary": "When a fast reversible step precedes the slow step, solving the fast step for the intermediate concentration and substituting it into the slow rate gives a rate law containing only species actually present.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_chemistry_precipitation_acid_base_and_redox_classes",
+   "title": "Precipitation, Acid-Base and Redox Classes",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Types of Chemical Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_titration_and_the_equivalence_point"
+   ],
+   "keywords": [
+    "classification",
+    "neutralization",
+    "precipitation"
+   ],
+   "summary": "A precipitation reaction forms an insoluble product from soluble ions, an acid-base reaction transfers a proton and a redox reaction changes oxidation numbers, so the class is identified by what is exchanged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_chemistry_proton_transfer_in_acid_base_reactions",
+   "title": "Proton Transfer in Acid-Base Reactions",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Introduction to Acid-Base Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_precipitation_acid_base_and_redox_classes"
+   ],
+   "keywords": [
+    "acid-base",
+    "conjugate",
+    "proton transfer"
+   ],
+   "summary": "In an acid-base reaction a proton moves from the acid to the base, giving the conjugate base of the acid and the conjugate acid of the base, and the equilibrium favours the weaker acid and weaker base.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_chemistry_radius_and_ionization_energy_trends",
+   "title": "Radius and Ionization Energy Trends",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Periodic Trends",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_photoelectron_spectra_and_subshell_energies"
+   ],
+   "keywords": [
+    "atomic radius",
+    "ionization energy",
+    "trend"
+   ],
+   "summary": "Atomic radius falls across a period as effective nuclear charge rises and grows down a group as shells are added, and first ionization energy follows the opposite pattern apart from two dips: group 13 loses a lone p electron from a higher sublevel and group 16 loses one electron of a paired set.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_chemistry_rate_law_derived_from_the_slow_step",
+   "title": "Rate Law Derived from the Slow Step",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Reaction Mechanism and Rate Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_mechanism_steps_and_the_slow_step"
+   ],
+   "keywords": [
+    "mechanism test",
+    "predicted rate law",
+    "slow step"
+   ],
+   "summary": "The rate law predicted by a mechanism uses the reactants of its slow step with that step's coefficients as exponents, so a predicted law that contradicts the measured one rules the mechanism out.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_chemistry_rate_normalised_by_stoichiometric_coefficients",
+   "title": "Rate Normalised by Stoichiometric Coefficients",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Reaction Rates",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_chemistry_average_and_instantaneous_rate"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coefficient",
+    "normalization",
+    "reaction rate"
+   ],
+   "summary": "Dividing each species concentration change by its coefficient gives a single reaction rate, so a reactant consumed twice as fast as another still yields the same rate value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_chemistry_reaction_energy_profile_and_the_transition_state",
+   "title": "Reaction Energy Profile and the Transition State",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Reaction Energy Profile",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_collision_model_and_activation_energy"
+   ],
+   "keywords": [
+    "activation energy",
+    "energy profile",
+    "transition state"
+   ],
+   "summary": "A reaction energy profile plots potential energy along the reaction coordinate, its peak is the transition state, the reactant-to-peak gap is the activation energy and the reactant-to-product gap is the enthalpy change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_chemistry_reaction_orders_and_the_units_of_k",
+   "title": "Reaction Orders and the Units of k",
+   "strand": "Kinetics",
+   "unit": "Kinetics",
+   "topic": "Introduction to Rate Law",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_determining_a_rate_law_experimentally"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "rate constant",
+    "reaction order",
+    "units"
+   ],
+   "summary": "The exponents sum to the overall order, and the units of the rate constant follow from that order, being per second for first order and per molar per second for second order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_chemistry_reading_a_mass_spectrum",
+   "title": "Reading a Mass Spectrum",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Mass Spectra of Elements",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_the_mole_and_molar_mass"
+   ],
+   "keywords": [
+    "abundance",
+    "isotope",
+    "mass spectrum"
+   ],
+   "summary": "Each peak of a mass spectrum sits at the mass of a single isotope and its relative height is that isotope fraction, so the peak pattern gives the element isotope composition without any chemical separation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_chemistry_real_gases_deviate_in_both_directions",
+   "title": "Real Gases Deviate in Both Directions",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Deviation from Ideal Gas Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_kinetic_molecular_theory_and_molecular_speed"
+   ],
+   "keywords": [
+    "compressibility",
+    "deviation",
+    "real gas"
+   ],
+   "summary": "For most gases at ordinary temperature, attractions pull the measured pressure below the ideal prediction while the particles own volume pushes it above, so the compressibility factor falls below one at moderate pressure and rises above one at high pressure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_chemistry_representing_a_reaction_at_the_particle_level",
+   "title": "Representing a Reaction at the Particle Level",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Representations of Reactions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_writing_net_ionic_equations"
+   ],
+   "keywords": [
+    "conservation",
+    "particulate",
+    "representation"
+   ],
+   "summary": "The balanced equation, the particulate drawing and the net ionic equation describe one change at three levels, and any acceptable representation conserves both atoms and charge.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_chemistry_rules_for_combining_equilibrium_constants",
+   "title": "Rules for Combining Equilibrium Constants",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Properties of the Equilibrium Constant",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_magnitude_of_k_and_the_extent_of_reaction"
+   ],
+   "keywords": [
+    "combined reactions",
+    "power",
+    "reciprocal"
+   ],
+   "summary": "Reversing an equation inverts K, multiplying its coefficients raises K to that power and adding two equations multiplies their constants, so K is meaningful only for the equation as written at that temperature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "ap_chemistry_separation_by_distillation_and_chromatography",
+   "title": "Separation by Distillation and Chromatography",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Separation of Solutions and Mixtures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_molarity_and_solution_representations"
+   ],
+   "keywords": [
+    "chromatography",
+    "distillation",
+    "separation"
+   ],
+   "summary": "Distillation separates components by boiling point, while chromatography separates them by differing affinity for a mobile and a stationary phase, so each exploits a physical property rather than a reaction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_chemistry_sign_conventions_for_heat_flow",
+   "title": "Sign Conventions for Heat Flow",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Endothermic and Exothermic Processes",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_catalysis_and_the_lower_energy_pathway"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endothermic",
+    "enthalpy sign",
+    "exothermic"
+   ],
+   "summary": "An exothermic process releases heat and carries a negative enthalpy change because the system loses energy, while an endothermic process absorbs heat and carries a positive one, both at constant pressure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "ap_chemistry_solubility_as_a_saturation_equilibrium",
+   "title": "Solubility as a Saturation Equilibrium",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Solubility",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_separation_by_distillation_and_chromatography"
+   ],
+   "keywords": [
+    "equilibrium",
+    "saturated",
+    "solubility"
+   ],
+   "summary": "Solubility is the dissolved concentration in a saturated solution at a given temperature, and it is a property of the solute-solvent pair because the dissolution equilibrium shifts with temperature and with the solvent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_chemistry_solutions_compared_with_heterogeneous_mixtures",
+   "title": "Solutions Compared with Heterogeneous Mixtures",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Solutions and Mixtures",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_real_gases_deviate_in_both_directions"
+   ],
+   "keywords": [
+    "homogeneous",
+    "mixture",
+    "solution"
+   ],
+   "summary": "A solution is a homogeneous mixture whose components are dispersed at the particle level and cannot be separated by settling or filtering, while a heterogeneous mixture keeps visibly distinct regions that scatter light or settle on standing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_chemistry_solving_weak_acid_equilibrium_problems",
+   "title": "Solving Weak-Acid Equilibrium Problems",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Weak Acid and Base Equilibria",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_ka_kb_and_the_conjugate_relationship"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "approximation",
+    "ka",
+    "weak acid"
+   ],
+   "summary": "Combining Ka with an initial concentration and an unknown x gives the hydrogen ion concentration, and the shortcut that neglects x fails once x exceeds about 5 percent of the initial concentration, which happens for a relatively strong weak acid or a very dilute solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "ap_chemistry_specific_heat_and_heat_capacity",
+   "title": "Specific Heat and Heat Capacity",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Heat Capacity and Calorimetry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_thermal_equilibrium_and_the_direction_of_heat_flow"
+   ],
+   "keywords": [
+    "heat capacity",
+    "specific heat",
+    "water"
+   ],
+   "summary": "Specific heat is the energy needed to raise one gram of a substance by one kelvin, and the value 4.18 joules per gram kelvin for liquid water makes it a slow-warming reservoir that moderates climate and body temperature.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "ap_chemistry_spectra_record_absorbed_and_emitted_photons",
+   "title": "Spectra Record Absorbed and Emitted Photons",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Spectroscopy and the Electromagnetic Spectrum",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_solubility_as_a_saturation_equilibrium"
+   ],
+   "keywords": [
+    "spectroscopy",
+    "spectrum",
+    "transition"
+   ],
+   "summary": "A spectrum records the wavelengths a sample absorbs or emits, and because each transition needs a photon of matching energy, a line position identifies the species while a line intensity reports how much of it is present.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_chemistry_temperature_dependence_of_favorability",
+   "title": "Temperature Dependence of Favorability",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Gibbs Free Energy and Thermodynamic Favorability",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_gibbs_free_energy_as_the_favorability_criterion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "enthalpy",
+    "entropy",
+    "temperature"
+   ],
+   "summary": "An endothermic reaction with a positive entropy change becomes favourable only above the temperature at which T times the entropy change exceeds the enthalpy change, so the sign pair decides whether a reaction is always, never or sometimes favourable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "ap_chemistry_the_beer_lambert_law",
+   "title": "The Beer-Lambert Law",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Beer-Lambert Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_photon_energy_and_the_electromagnetic_spectrum"
+   ],
+   "keywords": [
+    "absorbance",
+    "beer-lambert",
+    "calibration"
+   ],
+   "summary": "Absorbance equals molar absorptivity times path length times concentration, so a calibration curve at one wavelength converts an absorbance reading into an unknown concentration, provided the absorbing species and the instrument settings are unchanged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_chemistry_the_common_ion_effect",
+   "title": "The Common-Ion Effect",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Common-Ion Effect",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_ksp_and_molar_solubility"
+   ],
+   "keywords": [
+    "common ion",
+    "precipitation",
+    "solubility"
+   ],
+   "summary": "Adding an ion the dissolving salt already produces pushes Q above Ksp, so solid precipitates until Q returns to Ksp and the salt solubility is lower than in pure water.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "ap_chemistry_the_ideal_gas_law",
+   "title": "The Ideal Gas Law",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Ideal Gas Law",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_vapor_pressure_and_boiling"
+   ],
+   "keywords": [
+    "assumptions",
+    "gas constant",
+    "ideal gas law"
+   ],
+   "summary": "The equation PV = nRT treats particles as point masses with no attractions, so it holds best at low pressure and high temperature and fails when particle volume and intermolecular attraction become significant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_chemistry_the_ionic_covalent_continuum",
+   "title": "The Ionic-Covalent Continuum",
+   "strand": "Compound Structure and Properties",
+   "unit": "Compound Structure and Properties",
+   "topic": "Types of Chemical Bonds",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_valence_electrons_and_main_group_ion_charges"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "covalent bond",
+    "electronegativity",
+    "ionic bond"
+   ],
+   "summary": "A bond is largely ionic once the electronegativity difference exceeds roughly 1.7 and largely covalent when the difference is small, so the two labels mark the ends of one continuum rather than two kinds of bond.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_chemistry_the_mole_and_molar_mass",
+   "title": "The Mole and Molar Mass",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Moles and Molar Mass",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "avogadro",
+    "molar mass",
+    "mole"
+   ],
+   "summary": "One mole contains 6.022 x 10^23 entities, and the molar mass in grams per mole is numerically equal to the average atomic or formula mass in u, so a measured mass becomes a particle count through one ratio.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_chemistry_thermal_equilibrium_and_the_direction_of_heat_flow",
+   "title": "Thermal Equilibrium and the Direction of Heat Flow",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Heat Transfer and Thermal Equilibrium",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_energy_diagrams_and_enthalpy_change"
+   ],
+   "keywords": [
+    "heat flow",
+    "temperature",
+    "thermal equilibrium"
+   ],
+   "summary": "Heat flows spontaneously from the hotter body to the colder one until both reach the same temperature, so at thermal equilibrium the net transfer is zero even though molecular collisions continue.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
@@ -2251,32 +3194,264 @@
    }
   },
   {
-   "id": "ap_chemistry_writing_and_balancing_equations",
-   "title": "Writing and balancing equations",
-   "strand": "Chemical Reactions",
-   "unit": "Reaction types and stoichiometry",
-   "topic": "Writing and using reactions",
+   "id": "ap_chemistry_thermodynamic_versus_kinetic_control",
+   "title": "Thermodynamic versus Kinetic Control",
+   "strand": "Thermodynamics and Electrochemistry",
+   "unit": "Thermodynamics and Electrochemistry",
+   "topic": "Thermodynamic and Kinetic Control",
    "tier": "foundation",
    "difficulty": 1,
-   "prerequisites": [
-    "ap_chemistry_spectrophotometry_and_the_beer_lambert_law"
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_temperature_dependence_of_favorability"
    ],
-   "sequence_predecessors": [],
    "keywords": [
-    "balancing",
-    "chemical equation",
-    "conservation"
+    "kinetic control",
+    "product distribution",
+    "thermodynamic control"
    ],
-   "summary": "Atoms are conserved, so coefficients must balance every element.",
+   "summary": "A reaction under thermodynamic control yields the more stable product, while under kinetic control the faster-forming product dominates, so the product distribution depends on temperature and on how long the reaction is allowed to run.",
    "has_lesson": false,
    "lesson_id": "",
    "external_ids": {},
    "provenance": {
-    "source": "AP Chemistry - Structure, Reactions and Thermodynamics",
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
     "url": "",
     "licence": "cc0",
     "licence_class": "cc0",
-    "order": 28
+    "order": 98
+   }
+  },
+  {
+   "id": "ap_chemistry_titration_and_the_equivalence_point",
+   "title": "Titration and the Equivalence Point",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Introduction to Titration",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_percent_yield_from_the_limiting_reactant"
+   ],
+   "keywords": [
+    "equivalence point",
+    "stoichiometry",
+    "titration"
+   ],
+   "summary": "A titration reaches equivalence when the added titrant moles match the stoichiometric requirement of the analyte, a point computed from the balanced equation that need not sit at neutral pH.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_chemistry_titration_curves_and_the_half_equivalence_point",
+   "title": "Titration Curves and the Half-Equivalence Point",
+   "strand": "Acids and Bases",
+   "unit": "Acids and Bases",
+   "topic": "Acid-Base Titrations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_neutralization_and_buffer_formation"
+   ],
+   "keywords": [
+    "half-equivalence",
+    "pka",
+    "titration curve"
+   ],
+   "summary": "On a weak-acid titration curve the pH at half-equivalence equals the acid pKa because acid and conjugate base are then equimolar, and the steepest segment of the curve brackets the equivalence point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "ap_chemistry_valence_electrons_and_main_group_ion_charges",
+   "title": "Valence Electrons and Main-Group Ion Charges",
+   "strand": "Atomic Structure and Properties",
+   "unit": "Atomic Structure and Properties",
+   "topic": "Valence Electrons and Ionic Compounds",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_radius_and_ionization_energy_trends"
+   ],
+   "keywords": [
+    "ion charge",
+    "octet",
+    "valence electrons"
+   ],
+   "summary": "Main-group atoms gain or lose electrons to reach a noble-gas configuration, so group 1 and 2 metals form 1+ and 2+ cations while group 16 and 17 nonmetals form 2- and 1- anions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_chemistry_vapor_pressure_and_boiling",
+   "title": "Vapor Pressure and Boiling",
+   "strand": "Properties of Substances and Mixtures",
+   "unit": "Properties of Substances and Mixtures",
+   "topic": "Solids, Liquids, and Gases",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_particulate_structure_of_the_three_states"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "altitude",
+    "boiling point",
+    "vapor pressure"
+   ],
+   "summary": "Vapor pressure rises with temperature as a larger fraction of molecules gains escape energy, and a liquid boils when that pressure equals the external pressure, which is why water boils below 100 degrees Celsius at altitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_chemistry_what_counts_as_a_chemical_reaction",
+   "title": "What Counts as a Chemical Reaction",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Introduction for Reactions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "ap_chemistry_the_beer_lambert_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bond breaking",
+    "chemical reaction",
+    "rearrangement"
+   ],
+   "summary": "A chemical reaction rearranges atoms so that existing bonds break and new ones form, which is why the same atoms appear on both sides of a balanced equation in different partnerships.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_chemistry_why_reaction_heats_are_tabulated_as_enthalpies",
+   "title": "Why Reaction Heats Are Tabulated as Enthalpies",
+   "strand": "Thermochemistry",
+   "unit": "Thermochemistry",
+   "topic": "Introduction to Enthalpy of Reaction",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_enthalpy_of_phase_change_and_heating_curves"
+   ],
+   "keywords": [
+    "constant pressure",
+    "enthalpy change",
+    "heat"
+   ],
+   "summary": "At constant pressure the heat exchanged by a reaction equals its enthalpy change, which is why reactions run in open vessels are tabulated as enthalpies rather than as internal energy changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "ap_chemistry_writing_net_ionic_equations",
+   "title": "Writing Net Ionic Equations",
+   "strand": "Chemical Reactions",
+   "unit": "Chemical Reactions",
+   "topic": "Net Ionic Equations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_what_counts_as_a_chemical_reaction"
+   ],
+   "keywords": [
+    "dissociation",
+    "net ionic",
+    "spectator ion"
+   ],
+   "summary": "A net ionic equation keeps only the species that change, so ions appearing identically on both sides are cancelled as spectators and every strong electrolyte is written as its separated ions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_chemistry_writing_the_equilibrium_expression",
+   "title": "Writing the Equilibrium Expression",
+   "strand": "Equilibrium",
+   "unit": "Equilibrium",
+   "topic": "Reaction Quotient and Equilibrium Constant",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_chemistry_direction_of_reversible_reactions"
+   ],
+   "keywords": [
+    "equilibrium constant",
+    "expression",
+    "heterogeneous"
+   ],
+   "summary": "The equilibrium constant is the product of product concentrations raised to their coefficients divided by the same expression for reactants, with pure solids and liquids omitted because their concentrations are constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Chemistry - Structure, Equilibrium and Energy",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
    }
   }
  ]

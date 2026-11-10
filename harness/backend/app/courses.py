@@ -37,6 +37,10 @@ MATHEMATICS = 'mathematics'
 SCIENCE = 'science'
 COMPUTING = 'computing'
 SOCIAL_SCIENCE = 'social_science'
+#: Language and composition. It exists because ACT English is a real course with its own
+#: skill families (organisation, usage, punctuation); folding it into ``social_science``
+#: would misreport what the learner is studying. It never uses the symbolic engine.
+LANGUAGE_ARTS = 'language_arts'
 
 
 @dataclass(frozen=True)
@@ -220,6 +224,121 @@ COURSES: tuple[Course, ...] = (
                     'and accumulation, differential equations, applications of integration, and '
                     'the parametric, polar, vector and series topics of the BC course.',
         pack='ap_calculus',
+        expected_weeks=36,
+        authored=False,
+    ),
+    # The mathematics on-ramp. Its outline is an original CC0 scope and sequence following
+    # the twelve-unit Algebra 1 framework (372 skills), and every unit is anchored to the
+    # OpenStax section that teaches it (see the pack's ``textbook_alignment`` metadata and
+    # scripts/verify_algebra_1.py). No hand-authored lessons yet, so the generated layer
+    # materialises its concepts and practice items like the other graph-only courses.
+    Course(
+        id='algebra_1',
+        title='Algebra 1',
+        subject='Mathematics',
+        subject_kind=MATHEMATICS,
+        description='The algebra on-ramp: expression language, linear equations and '
+                    'inequalities, linear functions and modelling, statistics and data, '
+                    'systems, functions, exponents and radicals, exponential functions, '
+                    'polynomials and factoring, quadratic functions and quadratic equations.',
+        pack='algebra_1',
+        expected_weeks=36,
+        authored=False,
+    ),
+    # ---- The 2026-11-10 course build ------------------------------------------------
+    # Each of these carries an outline under scripts/outlines/ and a verification report
+    # under outputs/course_verification_<id>.json. Where a CC BY OpenStax book exists, the
+    # units are anchored to real sections that the verifier re-fetches through the licence
+    # gate; where none exists (organic chemistry, linear algebra, ACT English, both calculus
+    # courses, Earth Science) the pack declares ``no_cc_by_anchor`` with a reason instead of
+    # borrowing an unrelated book.
+    Course(
+        id='astrophysics',
+        title='Astrophysics',
+        subject='Physics',
+        subject_kind=SCIENCE,
+        description='Astronomical measurement and the celestial sphere, Newtonian gravity '
+                    'and orbits, radiation and magnitudes, spectra, telescopes, binary stars, '
+                    'stellar structure and evolution, compact objects, galaxies, cosmology '
+                    'and planetary systems.',
+        pack='astrophysics',
+        expected_weeks=30,
+        authored=False,
+    ),
+    Course(
+        id='organic_chemistry',
+        title='Organic Chemistry',
+        subject='Chemistry',
+        subject_kind=SCIENCE,
+        description='Structure and bonding, acid-base and electronic effects, stereochemistry, '
+                    'curved-arrow mechanisms, substitution and elimination, spectroscopy, '
+                    'aromaticity, carbonyl and acyl chemistry, enolates, amines, multistep '
+                    'synthesis and bioorganic materials.',
+        pack='organic_chemistry',
+        expected_weeks=36,
+        authored=False,
+    ),
+    Course(
+        id='linear_algebra',
+        title='Linear Algebra',
+        subject='Mathematics',
+        subject_kind=MATHEMATICS,
+        description='Vectors and span, elimination and the complete solution, matrix algebra '
+                    'and inverses, subspaces and basis, the four fundamental subspaces, '
+                    'transformations, orthogonality and least squares, determinants, '
+                    'eigenvalues, the spectral theorem and the SVD.',
+        pack='linear_algebra',
+        expected_weeks=30,
+        authored=False,
+    ),
+    Course(
+        id='act_math',
+        title='ACT Math',
+        subject='Mathematics',
+        subject_kind=MATHEMATICS,
+        description='ACT mathematics preparation: number and quantity, algebra, functions, '
+                    'geometry, statistics and probability, integrating essential skills and '
+                    'modelling, matched to the reporting categories and their ranges.',
+        pack='act_math',
+        expected_weeks=24,
+        authored=False,
+    ),
+    Course(
+        id='act_english',
+        title='ACT English',
+        subject='English',
+        subject_kind=LANGUAGE_ARTS,
+        description='ACT English preparation: production of writing (purpose, focus, '
+                    'organisation, unity, cohesion), knowledge of language (clarity, style) '
+                    'and the conventions of standard English (sentence structure, usage, '
+                    'punctuation).',
+        pack='act_english',
+        expected_weeks=20,
+        authored=False,
+    ),
+    Course(
+        id='ap_calculus_ab',
+        title='AP Calculus AB',
+        subject='Mathematics',
+        subject_kind=MATHEMATICS,
+        description='The AP Calculus AB course: limits and continuity, differentiation and '
+                    'its fundamental properties, composite/implicit/inverse functions, '
+                    'contextual and analytical applications, integration and accumulation, '
+                    'differential equations and applications of integration.',
+        pack='ap_calculus_ab',
+        expected_weeks=36,
+        authored=False,
+    ),
+    Course(
+        id='ap_calculus_bc',
+        title='AP Calculus BC',
+        subject='Mathematics',
+        subject_kind=MATHEMATICS,
+        description='The AP Calculus BC course: everything in AB plus integration by parts, '
+                    'partial fractions, improper integrals, Euler and logistic models, arc '
+                    'length, parametric/polar/vector calculus and infinite sequences and '
+                    'series with Taylor polynomials and error bounds.',
+        pack='ap_calculus_bc',
         expected_weeks=36,
         authored=False,
     ),

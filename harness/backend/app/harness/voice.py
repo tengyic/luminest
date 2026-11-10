@@ -86,6 +86,56 @@ _OMNIVOICE_CATEGORIES: tuple[frozenset[str], ...] = (
 )
 
 
+#: Voices the Settings picker offers. Each is a **(profile, tone)** pair the client sends
+#: as the ``voice`` and ``tone`` of every speech request. They are not backend state: the
+#: selection lives on the Mac (it follows the operator's machine, not their account) and
+#: rides in on each request, so adding or renaming a preset here changes nothing the server
+#: must remember.
+#:
+#: ``default`` uses the instance's configured voice and tone (``HARNESS_VOICE_NAME`` /
+#: ``HARNESS_VOICE_INSTRUCT``) -- the safe choice when VoiceStudio has no matching profile.
+#: The instruct-based presets work with the stock OmniVoice engine **without** a named
+#: profile, because OmniVoice honours the tags directly; a non-OmniVoice engine simply
+#: passes the same string through as its own ``instructions``. ``custom`` is a sentinel the
+#: client replaces with a freeform profile name the operator typed in the picker.
+VOICE_PRESETS: tuple[dict, ...] = (
+    {'id': 'default', 'label': 'Default voice', 'voice': '', 'tone': '',
+     'note': 'The instance-configured voice and tone (HARNESS_VOICE_NAME / '
+             'HARNESS_VOICE_INSTRUCT).'},
+    {'id': 'warm_teacher', 'label': 'Warm teacher · female, British', 'voice': '',
+     'tone': 'female, young adult, moderate pitch, british accent', 'note': ''},
+    {'id': 'clear_narrator', 'label': 'Clear narrator · male, American', 'voice': '',
+     'tone': 'male, middle-aged, moderate pitch, american accent', 'note': ''},
+    {'id': 'friendly_tutor', 'label': 'Friendly tutor · female, American', 'voice': '',
+     'tone': 'female, young adult, moderate pitch, american accent', 'note': ''},
+    {'id': 'calm_explainer', 'label': 'Calm explainer · male, Australian', 'voice': '',
+     'tone': 'male, young adult, moderate pitch, australian accent', 'note': ''},
+    {'id': 'energetic_coach', 'label': 'Energetic coach · female, high pitch', 'voice': '',
+     'tone': 'female, young adult, high pitch, american accent', 'note': ''},
+    {'id': 'mandarin_teacher', 'label': 'Mandarin teacher · female, Chinese', 'voice': '',
+     'tone': 'female, young adult, moderate pitch, chinese accent', 'note': ''},
+    {'id': 'custom', 'label': 'Custom profile name…', 'voice': '', 'tone': '',
+     'note': 'Send a specific VoiceStudio profile name as the voice.'},
+)
+
+
+def list_voices(settings) -> dict:
+    """What the Settings picker offers, and whether voice output is on.
+
+    Single source of truth for the client's voice list: the picker renders
+    ``presets``, ``default`` is what an empty selection resolves to, and ``enabled`` tells
+    the UI whether the switch in Settings will do anything. ``served_models`` lets the UI
+    warn when the configured engine is not what VoiceStudio is actually serving.
+    """
+    return {
+        'enabled': bool(getattr(settings, 'voice_enabled', False)),
+        'model': model(settings),
+        'served_models': list(served_models(settings)),
+        'current_voice': default_voice(settings),
+        'presets': list(VOICE_PRESETS),
+    }
+
+
 class VoiceError(Exception):
     """A synthesis attempt that produced no audio, with an actionable reason.
 

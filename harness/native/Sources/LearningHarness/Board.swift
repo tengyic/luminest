@@ -40,7 +40,7 @@ struct BoardNode: Identifiable, Equatable {
 
 enum BoardKind {
     static let all: Set<String> = ["path", "shape", "connector", "text", "image",
-                                   "video", "simulation", "answer"]
+                                   "video", "simulation", "answer", "visual"]
     static let ink: Set<String> = ["path"]
 }
 
@@ -679,9 +679,37 @@ enum BoardRenderer {
             case "answer": drawAnswer(node)
             case "image": drawImage(node)
             case "video", "simulation": drawChip(node)
+            case "visual": drawVisualPlaceholder(node)
             default: break
             }
         }
+    }
+
+    /// Static exports (PNG/PDF) cannot contain a WKWebView. Draw an explicit labelled
+    /// placeholder rather than a blank rectangle that would look like a rendering bug.
+    private static func drawVisualPlaceholder(_ node: BoardNode) {
+        let box = node.frame
+        let card = NSBezierPath(roundedRect: box, xRadius: 8, yRadius: 8)
+        NSColor.white.setFill()
+        card.fill()
+        NSColor(calibratedRed: 0.28, green: 0.32, blue: 0.61, alpha: 1).setStroke()
+        card.lineWidth = 1.2
+        card.stroke()
+        let kind = node.payload["type"].string.uppercased()
+        let heading = node.payload["title"].string.isEmpty ? kind : node.payload["title"].string
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: NSFont.systemFont(ofSize: 13, weight: .semibold),
+            .foregroundColor: NSColor.labelColor,
+        ]
+        heading.draw(at: NSPoint(x: box.minX + 12, y: box.minY + 12),
+                     withAttributes: titleAttributes)
+        let noteAttributes: [NSAttributedString.Key: Any] = [
+            .font: NSFont.systemFont(ofSize: 10),
+            .foregroundColor: NSColor.secondaryLabelColor,
+        ]
+        ("Interactive visual (\(kind)) — rendered in the app, not in this export" as NSString)
+            .draw(at: NSPoint(x: box.minX + 12, y: box.minY + 34),
+                  withAttributes: noteAttributes)
     }
 
     private static func drawPath(_ node: BoardNode) {

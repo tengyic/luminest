@@ -30,7 +30,13 @@ def settings(monkeypatch, tmp_path):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    # Empty, not merely absent: a developer checkout has a real provider in backend/.env,
+    # and clearing the variable alone lets dotenv fill it back in, which turned this
+    # coverage test into 500+ live HTTP calls and a timeout. An explicit empty value is
+    # the only way to say "no model" that survives .env loading.
+    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', '')
+    for name in ('HARNESS_TUTOR_URL', 'HARNESS_TUTOR_MODEL', 'HARNESS_TUTOR_KEY'):
+        monkeypatch.delenv(name, raising=False)
     return Settings.from_env()
 
 
@@ -80,14 +86,17 @@ def test_every_requested_course_concept_is_teachable(settings):
                                    'dependants': [graph.nodes[c].to_dict()
                                                   for c in graph.children(node_id)][:6]})
             assert text.strip(), f'{course_id}/{node_id} produced an empty answer'
-            assert provider == 'Grounded offline tutor'
+            # No model is configured in this fixture, so the answer must be the declared
+            # curriculum fallback and must name itself as such rather than pretending a
+            # model wrote it.
+            assert provider == 'model-required', (course_id, node_id, provider)
             assert grounding and grounding[0]['title'], node_id
             assert actions, node_id
 
 
 def test_a_generated_lesson_names_the_thing_it_lacks(settings):
     """The answer must not imply a worked example that the course does not contain."""
-    node_id = 'ap_biology_active_transport'
+    node_id = 'ap_biology_passive_versus_active_transport'
     graph = courses.graph_for('ap_biology')
     node = graph.nodes[node_id].to_dict()
     text, _, grounding, actions = tutor.respond(
@@ -98,10 +107,14 @@ def test_a_generated_lesson_names_the_thing_it_lacks(settings):
                            'dependants': [graph.nodes[c].to_dict()
                                           for c in graph.children(node_id)]})
     assert 'no worked example' in text
-    assert 'Active transport' in text
+    # Case-insensitive: the concept is titled "Passive versus Active Transport", and the
+    # assertion is that the answer names the concept, not that it repeats its casing.
+    assert 'active transport' in text.lower()
     assert grounding[0]['title'].startswith('Generated course-map lesson:')
-    # It teaches from the course's own summary rather than deflecting the question.
-    assert 'respiration' in text.lower()
+    # It teaches from the course's own summary rather than deflecting the question. The
+    # summary was rewritten when the course was rebuilt, so the assertion names the idea
+    # (a gradient crossed with ATP) instead of one word from the old prose.
+    assert 'gradient' in text.lower() or 'atp' in text.lower()
     # And it must not offer an action the lesson cannot deliver.
     assert 'Check the worked example' not in actions
     assert any('course source' in action for action in actions)

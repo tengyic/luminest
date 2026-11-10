@@ -47,8 +47,10 @@ insulting a beginner on their first screen, and this one is written not to.
 - **Explain this decision** — every recommendation shows its reason in the app.
 - **Turn off activity tracking** — *Settings*. Off by default.
 - **Refuse model training** — separate, opt-in consent. Withdraw any time.
-- **Choose your tutor** — the default tutor is offline and deterministic. A language-model
-  tutor is used only if you add your own provider and key; see the privacy policy, section 4.
+- **Choose your model** — a language model is required. Until you add your own provider,
+  model and key in *Settings → Language model*, the app reports *model required* and only
+  shows grounded curriculum material with a notice that no model answered. You choose the
+  endpoint and can remove the key at any time; see the privacy policy, section 4.
 - **Export or delete** — *Settings*, self-service.
 
 ## 5. Model provenance

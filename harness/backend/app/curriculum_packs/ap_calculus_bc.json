@@ -1,0 +1,3300 @@
+{
+ "schema": 1,
+ "name": "ap_calculus_bc",
+ "title": "AP Calculus BC",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Calculus BC - Limits, Change, Coordinates and Series",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "The full AP Calculus BC sequence: limits and continuity; the derivative from its definition through the power, product, quotient, chain and implicit rules; contextual and analytical applications including related rates, L'Hopital's rule, curve analysis and optimization; integration and accumulation, substitution, parts, partial fractions and improper integrals; differential equations with slope fields, Euler's method and the logistic model; areas, volumes and arc length; parametric, polar and vector-valued functions; and infinite sequences and series through Taylor polynomials, the Lagrange error bound and power series.",
+  "id_namespace": {
+   "prefix": "ap_calculus_bc_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "",
+   "supplements": [],
+   "link_only_note": "OpenStax Calculus Volumes 1-3 report CC BY-NC-SA 4.0 and are carried as link-only study references: never stored or quoted.",
+   "units": {
+    "Limits and Continuity": [],
+    "Differentiation: Definition and Fundamental Properties": [],
+    "Differentiation: Composite, Implicit and Inverse Functions": [],
+    "Contextual Applications of Differentiation": [],
+    "Analytical Applications of Differentiation": [],
+    "Integration and Accumulation of Change": [],
+    "Differential Equations": [],
+    "Applications of Integration": [],
+    "Parametric Equations, Polar Coordinates and Vector-Valued Functions": [],
+    "Infinite Sequences and Series": []
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Limits and Continuity": {
+    "Limits and Continuity": [
+     "The Limit Idea",
+     "Limits from Several Representations",
+     "Algebraic Properties of Limits",
+     "Algebraic Manipulation for Limits",
+     "Procedure Selection and the Squeeze Theorem",
+     "Types of Discontinuity",
+     "Continuity at a Point and on an Interval",
+     "Removing Discontinuities",
+     "Infinite Limits and Asymptotes",
+     "The Intermediate Value Theorem"
+    ]
+   },
+   "Differentiation: Definition and Fundamental Properties": {
+    "Differentiation: Definition and Fundamental Properties": [
+     "Average and Instantaneous Rates of Change",
+     "The Derivative Definition and Notation",
+     "Estimating Derivatives",
+     "Differentiability and Continuity",
+     "Power and Linearity Rules",
+     "Derivatives of Sine, Cosine, e^x and ln x",
+     "The Product and Quotient Rules",
+     "Derivatives of the Remaining Trigonometric Functions"
+    ]
+   },
+   "Differentiation: Composite, Implicit and Inverse Functions": {
+    "Differentiation: Composite, Implicit and Inverse Functions": [
+     "The Chain Rule",
+     "Implicit Differentiation",
+     "Derivatives of Inverse Functions",
+     "Procedure Selection",
+     "Higher-Order Derivatives"
+    ]
+   },
+   "Contextual Applications of Differentiation": {
+    "Contextual Applications of Differentiation": [
+     "Derivative Meaning in Context",
+     "Straight-Line Motion",
+     "Related Rates",
+     "Local Linearity and Linearization",
+     "L'Hopital's Rule"
+    ]
+   },
+   "Analytical Applications of Differentiation": {
+    "Analytical Applications of Differentiation": [
+     "The Mean Value Theorem",
+     "Extrema and Critical Points",
+     "Increase, Decrease and the First Derivative Test",
+     "The Candidates Test",
+     "Concavity and the Second Derivative",
+     "Connecting f, f' and f''",
+     "Optimization",
+     "Implicit Relations"
+    ]
+   },
+   "Integration and Accumulation of Change": {
+    "Integration and Accumulation of Change": [
+     "Accumulation and Riemann Sums",
+     "Summation and Integral Notation",
+     "The Fundamental Theorem and Accumulation Functions",
+     "Properties of Definite Integrals",
+     "Evaluating Definite Integrals",
+     "Antiderivatives and Indefinite Integrals",
+     "Integration by Substitution",
+     "Long Division and Completing the Square",
+     "Integration by Parts",
+     "Linear Partial Fractions",
+     "Improper Integrals",
+     "Technique Selection"
+    ]
+   },
+   "Differential Equations": {
+    "Differential Equations": [
+     "Modelling with Differential Equations",
+     "Verifying Solutions",
+     "Slope Fields",
+     "Euler's Method",
+     "Separation of Variables",
+     "Exponential Models",
+     "Logistic Models"
+    ]
+   },
+   "Applications of Integration": {
+    "Applications of Integration": [
+     "Average Value",
+     "Motion with Integrals",
+     "Accumulation in Applied Contexts",
+     "Area Between Curves",
+     "Volumes by Cross Section",
+     "The Disc Method",
+     "The Washer Method",
+     "Arc Length"
+    ]
+   },
+   "Parametric Equations, Polar Coordinates and Vector-Valued Functions": {
+    "Parametric Equations, Polar Coordinates and Vector-Valued Functions": [
+     "Parametric Equations",
+     "Arc Length of Parametric Curves",
+     "Vector-Valued Functions",
+     "Polar Coordinates",
+     "Area Between Polar Curves"
+    ]
+   },
+   "Infinite Sequences and Series": {
+    "Infinite Sequences and Series": [
+     "Series and Geometric Series",
+     "The nth-Term and Integral Tests",
+     "Harmonic and p-Series",
+     "Comparison Tests",
+     "Alternating Series",
+     "The Ratio Test",
+     "The Alternating Series Error Bound",
+     "Taylor Polynomials",
+     "Power Series"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Limits and Continuity",
+    "units": [
+     "Limits and Continuity"
+    ]
+   },
+   {
+    "strand": "Differentiation: Definition and Fundamental Properties",
+    "units": [
+     "Differentiation: Definition and Fundamental Properties"
+    ]
+   },
+   {
+    "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+    "units": [
+     "Differentiation: Composite, Implicit and Inverse Functions"
+    ]
+   },
+   {
+    "strand": "Contextual Applications of Differentiation",
+    "units": [
+     "Contextual Applications of Differentiation"
+    ]
+   },
+   {
+    "strand": "Analytical Applications of Differentiation",
+    "units": [
+     "Analytical Applications of Differentiation"
+    ]
+   },
+   {
+    "strand": "Integration and Accumulation of Change",
+    "units": [
+     "Integration and Accumulation of Change"
+    ]
+   },
+   {
+    "strand": "Differential Equations",
+    "units": [
+     "Differential Equations"
+    ]
+   },
+   {
+    "strand": "Applications of Integration",
+    "units": [
+     "Applications of Integration"
+    ]
+   },
+   {
+    "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+    "units": [
+     "Parametric Equations, Polar Coordinates and Vector-Valued Functions"
+    ]
+   },
+   {
+    "strand": "Infinite Sequences and Series",
+    "units": [
+     "Infinite Sequences and Series"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_calculus_bc_absolute_and_conditional_convergence",
+   "title": "Absolute and Conditional Convergence",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Alternating Series",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_the_alternating_series_test"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute convergence",
+    "absolute values",
+    "conditional convergence"
+   ],
+   "summary": "A series converges absolutely when the series of absolute values converges, which implies convergence of the original, while conditional convergence means the original converges but the absolute version diverges, as with the alternating harmonic series.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "ap_calculus_bc_absolute_extrema_and_the_extreme_value_theorem",
+   "title": "Absolute Extrema and the Extreme Value Theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Extrema and Critical Points",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_mean_value_theorem"
+   ],
+   "keywords": [
+    "absolute extremum",
+    "closed interval",
+    "extreme value"
+   ],
+   "summary": "A function continuous on a closed interval attains both an absolute maximum and an absolute minimum there, and the conclusion fails once the interval is open, since 1/x on (0, 1] is unbounded and attains no maximum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_calculus_bc_accumulated_change_from_a_rate",
+   "title": "Accumulated Change from a Rate",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Accumulation and Riemann Sums",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_horizontal_and_vertical_tangents_on_implicit_curv"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accumulation",
+    "net change",
+    "rate"
+   ],
+   "summary": "If r(t) is the rate at which a quantity changes, the accumulated change on [a, b] is the limit of sums of the form sum r(t_k) dt, which is the area under the graph when r is nonnegative and the net signed area otherwise.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_calculus_bc_antiderivatives_the_constant_of_integration_and_b",
+   "title": "Antiderivatives, the Constant of Integration and Basic Rules",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Antiderivatives and Indefinite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_fundamental_theorem_part_2"
+   ],
+   "keywords": [
+    "antiderivative",
+    "constant of integration",
+    "power rule"
+   ],
+   "summary": "An antiderivative of f on an interval is a function F with F' = f there, any two of them differ by a constant on that interval so the indefinite integral carries + C, and the power rule holds for every constant n except n = -1, where the antiderivative is ln|x|.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_calculus_bc_arc_length_and_distance_travelled",
+   "title": "Arc Length and Distance Travelled",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Arc Length",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_washer_method_about_either_axis"
+   ],
+   "keywords": [
+    "arc length",
+    "distance",
+    "smooth curve"
+   ],
+   "summary": "The length of a curve y = f(x) with continuous derivative from a to b is int_a^b sqrt(1 + f'(x)^2) dx, and it equals the distance travelled only when the motion follows that curve exactly once without reversing direction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "ap_calculus_bc_arc_length_of_a_parametric_curve",
+   "title": "Arc Length of a Parametric Curve",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Arc Length of Parametric Curves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_second_derivatives_of_parametric_curves"
+   ],
+   "keywords": [
+    "arc length",
+    "parametric",
+    "single traversal"
+   ],
+   "summary": "The length of a parametric curve traced exactly once on [t1, t2] is int sqrt((dx/dt)^2 + (dy/dt)^2) dt, and the formula requires continuous derivatives and a single traversal, since a retraced arc is counted twice.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "ap_calculus_bc_area_between_curves_in_x_and_in_y",
+   "title": "Area Between Curves in x and in y",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Area Between Curves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_net_change_in_an_applied_model"
+   ],
+   "keywords": [
+    "area between curves",
+    "slicing",
+    "upper lower"
+   ],
+   "summary": "The area between two curves is int (upper - lower) dx when the region is sliced vertically and int (right - left) dy when it is sliced horizontally, and the correct slicing is the one that keeps a single pair of boundary curves across the whole region.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "ap_calculus_bc_area_between_two_polar_curves",
+   "title": "Area Between Two Polar Curves",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Area Between Polar Curves",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_area_of_a_polar_region"
+   ],
+   "keywords": [
+    "area between curves",
+    "intersection angles",
+    "polar"
+   ],
+   "summary": "The area between an outer curve r = f(theta) and an inner curve r = g(theta) over a common angular interval is 1/2 int (f^2 - g^2) dtheta, with the interval cut at the angles where the curves meet.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "ap_calculus_bc_area_of_a_polar_region",
+   "title": "Area of a Polar Region",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Polar Coordinates",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_polar_coordinates_and_differentiation_in_polar_fo"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "polar area",
+    "sector",
+    "single traversal"
+   ],
+   "summary": "The area swept by r = f(theta) from alpha to beta is 1/2 int f(theta)^2 dtheta, valid when the curve is traced exactly once on that interval so that no sector is counted twice.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "ap_calculus_bc_average_and_instantaneous_rates_of_change",
+   "title": "Average and Instantaneous Rates of Change",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Average and Instantaneous Rates of Change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_intermediate_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate",
+    "instantaneous rate",
+    "secant slope"
+   ],
+   "summary": "The average rate of change of f on [a, b] is (f(b) - f(a))/(b - a), the slope of the secant through the endpoints, and the instantaneous rate at a is the limit of that quotient as the interval shrinks, which exists only when the left-hand and right-hand quotients agree.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_calculus_bc_behaviour_of_an_accumulation_function",
+   "title": "Behaviour of an Accumulation Function",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "The Fundamental Theorem and Accumulation Functions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_accumulation_function_and_the_fundamental_the"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accumulation shape",
+    "concavity",
+    "extrema"
+   ],
+   "summary": "Because g' = f, an accumulation function increases where f is positive, has a local extremum where f changes sign, and is concave up where f is increasing, so the shape of g is read entirely from the graph of f.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_calculus_bc_choosing_a_differentiation_procedure",
+   "title": "Choosing a Differentiation Procedure",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "Procedure Selection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_derivatives_of_the_inverse_trigonometric_function"
+   ],
+   "keywords": [
+    "procedure selection",
+    "strategy",
+    "structure"
+   ],
+   "summary": "The structure of the expression selects the rule - a sum term by term, a product by the product rule, a quotient by the quotient rule, a composition by the chain rule - and an equation that cannot be solved for y is differentiated implicitly instead of after isolating y.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_calculus_bc_concavity_and_points_of_inflection",
+   "title": "Concavity and Points of Inflection",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Concavity and the Second Derivative",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_candidates_test"
+   ],
+   "keywords": [
+    "concavity",
+    "inflection",
+    "sign change"
+   ],
+   "summary": "A graph is concave up where f'' > 0 and concave down where f'' < 0, and a point of inflection requires the concavity to change across it, so f'' = 0 alone is insufficient and an inflection can also occur where f'' is undefined.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_calculus_bc_constant_sum_difference_and_constant_multiple_rul",
+   "title": "Constant, Sum, Difference and Constant-Multiple Rules",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Power and Linearity Rules",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_power_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constant rule",
+    "linearity",
+    "sum rule"
+   ],
+   "summary": "The derivative of a constant is zero and differentiation is linear, so (c f +- g)' = c f' +- g' wherever both derivatives exist, which is what lets a polynomial be differentiated term by term.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_calculus_bc_defining_and_differentiating_parametric_equations",
+   "title": "Defining and Differentiating Parametric Equations",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Parametric Equations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_arc_length_and_distance_travelled"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parametric",
+    "slope",
+    "vertical tangent"
+   ],
+   "summary": "A parametric curve (x(t), y(t)) has slope dy/dx = (dy/dt)/(dx/dt) wherever dx/dt is nonzero, so the tangent is vertical where dx/dt vanishes with dy/dt nonzero and the quotient is undefined where both vanish.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "ap_calculus_bc_defining_and_differentiating_vector_valued_functi",
+   "title": "Defining and Differentiating Vector-Valued Functions",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Vector-Valued Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_arc_length_of_a_parametric_curve"
+   ],
+   "keywords": [
+    "componentwise",
+    "tangent vector",
+    "vector function"
+   ],
+   "summary": "A vector-valued function r(t) = <x(t), y(t)> is differentiable exactly when both components are, and r'(t) = <x'(t), y'(t)> is tangent to the path at r(t) whenever it is nonzero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "ap_calculus_bc_derivatives_of_the_inverse_trigonometric_function",
+   "title": "Derivatives of the Inverse Trigonometric Functions",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "Derivatives of Inverse Functions",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_the_inverse_function_derivative_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arcsin",
+    "arctan",
+    "inverse trig"
+   ],
+   "summary": "d/dx arcsin x = 1/sqrt(1 - x^2) and d/dx arccos x = -1/sqrt(1 - x^2) hold on |x| < 1, while d/dx arctan x = 1/(1 + x^2) and d/dx arccot x = -1/(1 + x^2) hold for every real x, each one following from the inverse rule on a chosen branch.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_calculus_bc_differentiability_implies_continuity",
+   "title": "Differentiability Implies Continuity",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Differentiability and Continuity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_estimating_a_derivative_from_data"
+   ],
+   "keywords": [
+    "continuity",
+    "corner",
+    "differentiability"
+   ],
+   "summary": "Differentiability at a point implies continuity there, while continuity does not imply differentiability: |x| at 0 has a corner and x^(1/3) at 0 a vertical tangent, and neither has a limiting secant slope.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_calculus_bc_estimating_a_derivative_from_data",
+   "title": "Estimating a Derivative from Data",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Estimating Derivatives",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_derivative_at_a_point_and_its_notation"
+   ],
+   "keywords": [
+    "estimate",
+    "numerical derivative",
+    "symmetric quotient"
+   ],
+   "summary": "A derivative is estimated from a table by the symmetric quotient (f(a + h) - f(a - h))/(2h), or from a graph by the slope of a secant through two nearby points, and either estimate is limited by the data rather than by the arithmetic.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_calculus_bc_euler_s_method",
+   "title": "Euler's Method",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Euler's Method",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_sketching_and_reading_a_slope_field"
+   ],
+   "keywords": [
+    "euler method",
+    "numerical solution",
+    "step size"
+   ],
+   "summary": "Euler's method advances a solution along its tangent line for one step of size h, using y_{n+1} = y_n + h f(x_n, y_n), so the approximation improves as h shrinks but drifts from the true curve wherever the solution bends.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "ap_calculus_bc_exponential_growth_and_decay_models",
+   "title": "Exponential Growth and Decay Models",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Exponential Models",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_separation_of_variables_and_particular_solutions"
+   ],
+   "keywords": [
+    "exponential model",
+    "half life",
+    "rate constant"
+   ],
+   "summary": "The equation dy/dt = ky has the solution y = C e^(kt), growing for positive k and decaying for negative k, and a doubling time or half-life T fixes the constant through k = ln 2 / T with the sign of T matching the direction of change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "ap_calculus_bc_geometric_series_and_their_sums",
+   "title": "Geometric Series and Their Sums",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Series and Geometric Series",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_bc_partial_sums_convergence_and_divergence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closed form",
+    "geometric series",
+    "ratio"
+   ],
+   "summary": "A geometric series sum a r^n converges to a/(1 - r) exactly when |r| < 1 and diverges for |r| at least 1, which makes it the one family whose sum is available in closed form and therefore the standard comparison target.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "ap_calculus_bc_higher_order_derivatives_and_their_meaning",
+   "title": "Higher-Order Derivatives and Their Meaning",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "Higher-Order Derivatives",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_choosing_a_differentiation_procedure"
+   ],
+   "keywords": [
+    "acceleration",
+    "higher order",
+    "second derivative"
+   ],
+   "summary": "The second derivative f'' is the derivative of f', the n-th derivative exists at a only when every lower one exists and is differentiable near a, and f'' measures how the slope itself is changing, which in a motion model is acceleration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_calculus_bc_horizontal_and_vertical_tangents_on_implicit_curv",
+   "title": "Horizontal and Vertical Tangents on Implicit Curves",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Implicit Relations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_justifying_an_optimum"
+   ],
+   "keywords": [
+    "implicit curve",
+    "numerator denominator",
+    "tangent direction"
+   ],
+   "summary": "On an implicitly defined curve dy/dx vanishes where its numerator does, giving a horizontal tangent, and fails to exist where its denominator vanishes with a nonzero numerator, giving a vertical tangent, provided the point satisfies the original equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_calculus_bc_implicit_differentiation",
+   "title": "Implicit Differentiation",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "Implicit Differentiation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_chain_rule"
+   ],
+   "keywords": [
+    "dy/dx",
+    "implicit",
+    "slope"
+   ],
+   "summary": "If y is defined implicitly by an equation in x and y, differentiating both sides with respect to x while treating y as a differentiable function of x produces an equation linear in dy/dx, provided the tangent at the point is not vertical.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_calculus_bc_improper_integrals",
+   "title": "Improper Integrals",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Improper Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_linear_partial_fractions"
+   ],
+   "keywords": [
+    "convergence",
+    "improper integral",
+    "limit"
+   ],
+   "summary": "An integral over an infinite interval or with an unbounded integrand is defined as a limit of proper integrals at the offending endpoint or interior singularity, converging exactly when that limit is finite, so int_1^inf x^(-p) dx converges for p > 1 and int_0^1 x^(-p) dx converges for p < 1.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "ap_calculus_bc_infinite_limits_and_vertical_asymptotes",
+   "title": "Infinite Limits and Vertical Asymptotes",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Infinite Limits and Asymptotes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_repairing_a_removable_discontinuity"
+   ],
+   "keywords": [
+    "infinite limit",
+    "unbounded",
+    "vertical asymptote"
+   ],
+   "summary": "lim_{x->a} f(x) = inf means f(x) exceeds any bound once x is close enough to a, and x = a is a vertical asymptote exactly when some one-sided limit at a is infinite, which for a rational function means a zero of the denominator that the numerator does not cancel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_calculus_bc_instantaneous_rate_as_a_limit",
+   "title": "Instantaneous Rate as a Limit",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "The Limit Idea",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "difference quotient",
+    "indeterminate",
+    "instantaneous rate"
+   ],
+   "summary": "Instantaneous change is reached through average change, so the quotient (f(a + h) - f(a))/h takes the indeterminate form 0/0 as h tends to 0 and must be rewritten or estimated rather than evaluated by substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_calculus_bc_integrating_vector_valued_functions",
+   "title": "Integrating Vector-Valued Functions",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Vector-Valued Functions",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_defining_and_differentiating_vector_valued_functi"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antiderivative",
+    "componentwise integral",
+    "vector constant"
+   ],
+   "summary": "A vector-valued function is integrated componentwise, int r(t) dt = <int x dt, int y dt> + C, and the constant of integration is itself a vector because the position is determined only up to a translation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "ap_calculus_bc_integration_by_parts",
+   "title": "Integration by Parts",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration by Parts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_long_division_and_completing_the_square"
+   ],
+   "keywords": [
+    "integration by parts",
+    "product rule",
+    "repeated"
+   ],
+   "summary": "Integration by parts restates the product rule as int u dv = uv - int v du, and it is the right choice when the new integral is simpler than the original; applying it twice reduces x^2 e^x, while on e^x sin x it returns the original integral and the equation is solved for it instead.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "ap_calculus_bc_integration_by_substitution",
+   "title": "Integration by Substitution",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration by Substitution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_antiderivatives_the_constant_of_integration_and_b"
+   ],
+   "keywords": [
+    "chain rule reversed",
+    "inner derivative",
+    "substitution"
+   ],
+   "summary": "With u = g(x) and du = g'(x) dx, the chain rule read backwards gives int f(g(x)) g'(x) dx = int f(u) du, so the method applies only when the inner derivative appears as a factor, possibly up to a constant multiple.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "ap_calculus_bc_interpreting_a_derivative_in_context",
+   "title": "Interpreting a Derivative in Context",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Derivative Meaning in Context",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_higher_order_derivatives_and_their_meaning"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interpretation",
+    "marginal rate",
+    "units"
+   ],
+   "summary": "In a context the derivative is the rate of change of the modelled quantity with respect to the independent variable, carrying the units of the output over the units of the input, so its sign gives direction, its magnitude gives how fast, a zero derivative marks a stationary instant rather than necessarily an extremum, and a marginal rate such as marginal cost describes the next unit rather than an average over an interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_calculus_bc_intervals_of_increase_and_decrease",
+   "title": "Intervals of Increase and Decrease",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Increase, Decrease and the First Derivative Test",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_local_extrema_and_critical_points"
+   ],
+   "keywords": [
+    "decreasing",
+    "increasing",
+    "sign chart"
+   ],
+   "summary": "On an interval where f' > 0 the function is increasing and where f' < 0 it is decreasing, and the sign of f' can change only at a zero or a point where it is undefined, so those points alone separate the monotone intervals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_calculus_bc_justifying_an_optimum",
+   "title": "Justifying an Optimum",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Optimization",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_setting_up_an_optimization_problem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closed domain",
+    "endpoint",
+    "justification"
+   ],
+   "summary": "A candidate optimum is confirmed by the candidates test on a closed domain or, on an open domain, by a sign change of f' or by the second derivative test, because on a closed interval an endpoint can beat every interior critical point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_calculus_bc_l_hopital_s_rule_and_its_indeterminate_forms",
+   "title": "L'Hopital's Rule and Its Indeterminate Forms",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "L'Hopital's Rule",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_local_linearity_and_the_tangent_line_approximatio"
+   ],
+   "keywords": [
+    "derivative ratio",
+    "indeterminate form",
+    "l'hopital"
+   ],
+   "summary": "If f and g are differentiable near a with g' nonzero there and the quotient has the form 0/0 or inf/inf, then lim f/g = lim f'/g' whenever the latter limit exists or is infinite, whereas the forms 0*inf, inf - inf, 0^0, 1^inf and inf^0 must first be rewritten as a quotient or a logarithm before the rule can apply.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_calculus_bc_left_right_and_midpoint_riemann_sums",
+   "title": "Left, Right and Midpoint Riemann Sums",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Accumulation and Riemann Sums",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_accumulated_change_from_a_rate"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "overestimate",
+    "riemann sum",
+    "sampling point"
+   ],
+   "summary": "A Riemann sum multiplies each subinterval width by the rate sampled at its left endpoint, its right endpoint or its midpoint, and the three agree in the limit although at finite n a left sum underestimates an increasing rate while a right sum overestimates it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_calculus_bc_limit_notation_and_two_sided_limits",
+   "title": "Limit Notation and Two-Sided Limits",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "The Limit Idea",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_instantaneous_rate_as_a_limit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "limit notation",
+    "one-sided limit",
+    "two-sided"
+   ],
+   "summary": "The statement lim_{x->a} f(x) = L means f(x) can be forced arbitrarily close to L by taking x close to a but not equal to a, and the two-sided limit exists exactly when both one-sided limits exist and are equal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_calculus_bc_limits_at_infinity_and_horizontal_asymptotes",
+   "title": "Limits at Infinity and Horizontal Asymptotes",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Infinite Limits and Asymptotes",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_infinite_limits_and_vertical_asymptotes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "degree comparison",
+    "horizontal asymptote",
+    "limit at infinity"
+   ],
+   "summary": "lim_{x->inf} f(x) = L means f(x) stays arbitrarily close to L for all sufficiently large x, and y = L is then a horizontal asymptote; for a rational function the limit follows from comparing degrees, with a lower-degree numerator forcing the limit to zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_calculus_bc_limits_from_graphs_tables_and_multiple_representa",
+   "title": "Limits from Graphs, Tables and Multiple Representations",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits from Several Representations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_limit_notation_and_two_sided_limits"
+   ],
+   "keywords": [
+    "graphical limit",
+    "numerical limit",
+    "representations"
+   ],
+   "summary": "A graph, a table and an algebraic form of the same function must agree on the limit wherever it exists, and a hole in the graph alongside an undefined algebraic form is agreement rather than contradiction, because a limit depends on nearby values and not on the value at the point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_calculus_bc_linear_partial_fractions",
+   "title": "Linear Partial Fractions",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Linear Partial Fractions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_integration_by_parts"
+   ],
+   "keywords": [
+    "linear factors",
+    "partial fractions",
+    "repeated factor"
+   ],
+   "summary": "A proper rational function whose denominator factors into distinct linear factors decomposes into A/(x - r) terms, a repeated factor (x - r)^k contributes one term for each power up to k, and every term then integrates to a logarithm or to a negative power.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "ap_calculus_bc_local_extrema_and_critical_points",
+   "title": "Local Extrema and Critical Points",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Extrema and Critical Points",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_absolute_extrema_and_the_extreme_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "critical point",
+    "local extremum",
+    "necessary condition"
+   ],
+   "summary": "A local extremum at an interior point where f is differentiable forces f' = 0 there, so the critical points - zeros of f' and points where f' does not exist - are the only candidates, although a critical point need not be an extremum, as x^3 at 0 shows.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_calculus_bc_local_linearity_and_the_tangent_line_approximatio",
+   "title": "Local Linearity and the Tangent Line Approximation",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Local Linearity and Linearization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_solving_a_related_rate"
+   ],
+   "keywords": [
+    "linearization",
+    "locality",
+    "tangent line"
+   ],
+   "summary": "Near a point of differentiability the tangent line approximates the curve, f(x) is approximately f(a) + f'(a)(x - a), and the approximation is local because its error vanishes faster than |x - a| while the second derivative decides whether the estimate is an over- or underestimate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_calculus_bc_long_division_and_completing_the_square",
+   "title": "Long Division and Completing the Square",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Long Division and Completing the Square",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_substitution_with_changed_limits"
+   ],
+   "keywords": [
+    "completing the square",
+    "long division",
+    "rewrite"
+   ],
+   "summary": "A rational integrand whose numerator degree is at least the denominator degree is rewritten by polynomial division as a polynomial plus a proper fraction, and a quadratic denominator carrying a linear term is completed to (x - h)^2 + k so that it matches an arctangent or a logarithm formula.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "ap_calculus_bc_motion_with_vector_valued_functions",
+   "title": "Motion with Vector-Valued Functions",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Vector-Valued Functions",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_integrating_vector_valued_functions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "displacement",
+    "speed",
+    "velocity vector"
+   ],
+   "summary": "For a particle with position vector r(t), velocity is r'(t), acceleration is r''(t) and speed is the magnitude |r'(t)| rather than any component, while displacement over an interval is the integral of the velocity vector.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "ap_calculus_bc_net_change_in_an_applied_model",
+   "title": "Net Change in an Applied Model",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Accumulation in Applied Contexts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_position_velocity_and_acceleration_with_integrals"
+   ],
+   "keywords": [
+    "applied",
+    "net change",
+    "rate integral"
+   ],
+   "summary": "For any quantity whose rate of change is known, the net change over an interval is the integral of that rate, which is why a tank volume, a population and a bank balance are all handled as net change problems with the units of the rate times the units of time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "ap_calculus_bc_partial_sums_convergence_and_divergence",
+   "title": "Partial Sums, Convergence and Divergence",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Series and Geometric Series",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_area_between_two_polar_curves"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convergence",
+    "divergence",
+    "partial sums"
+   ],
+   "summary": "An infinite series converges exactly when its sequence of partial sums has a finite limit, so the sum is defined by that limit rather than by adding infinitely many terms, and a series whose partial sums fail to settle diverges.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "ap_calculus_bc_polar_coordinates_and_differentiation_in_polar_fo",
+   "title": "Polar Coordinates and Differentiation in Polar Form",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Polar Coordinates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_motion_with_vector_valued_functions"
+   ],
+   "keywords": [
+    "polar",
+    "pole",
+    "slope"
+   ],
+   "summary": "A polar curve r = f(theta) has slope dy/dx = (f'(theta) sin theta + f(theta) cos theta)/(f'(theta) cos theta - f(theta) sin theta) wherever that denominator is nonzero, and the curve passes through the pole where f(theta) = 0.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "ap_calculus_bc_position_velocity_and_acceleration",
+   "title": "Position, Velocity and Acceleration",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Straight-Line Motion",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_interpreting_a_derivative_in_context"
+   ],
+   "keywords": [
+    "acceleration",
+    "motion",
+    "velocity"
+   ],
+   "summary": "For motion along a line v(t) = s'(t) and a(t) = v'(t), so speed is |v(t)|, a particle speeds up exactly where velocity and acceleration share a sign, and a zero velocity with nonzero acceleration is a momentary stop where the direction reverses.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_calculus_bc_position_velocity_and_acceleration_with_integrals",
+   "title": "Position, Velocity and Acceleration with Integrals",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Motion with Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_average_value_of_a_function"
+   ],
+   "keywords": [
+    "displacement",
+    "distance travelled",
+    "initial value"
+   ],
+   "summary": "The integral of velocity over [a, b] is the displacement s(b) - s(a) while the integral of |v| is the distance travelled, so recovering position requires an initial value and reads s(b) = s(a) + int_a^b v(t) dt.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "ap_calculus_bc_properties_of_the_definite_integral",
+   "title": "Properties of the Definite Integral",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Properties of Definite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_behaviour_of_an_accumulation_function"
+   ],
+   "keywords": [
+    "additivity",
+    "integral properties",
+    "linearity"
+   ],
+   "summary": "For integrable functions the integral is linear, additive over adjacent intervals, zero on an interval of zero width, and changes sign when its limits are exchanged, which is what allows a region to be split and recombined across subintervals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_calculus_bc_radius_and_interval_of_convergence",
+   "title": "Radius and Interval of Convergence",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Power Series",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_lagrange_error_bound"
+   ],
+   "keywords": [
+    "endpoints",
+    "interval of convergence",
+    "radius of convergence"
+   ],
+   "summary": "A power series converges absolutely on the open interval |x - a| < R and diverges outside it, with R found from the ratio test, and the two endpoints must then be tested separately because the radius alone says nothing about them.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "ap_calculus_bc_reading_f_from_the_graph_of_its_derivative",
+   "title": "Reading f from the Graph of Its Derivative",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Connecting f, f' and f''",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_reading_slopes_from_the_graph_of_f"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "antiderivative graph",
+    "concavity",
+    "extrema"
+   ],
+   "summary": "The sign of f' gives the intervals where f increases or decreases, its zeros give the critical points and, with its sign changes, the extrema of f, while the increase or decrease of f' itself gives the concavity of f, and f is then determined only up to a vertical translation until one function value is known.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_calculus_bc_reading_slopes_from_the_graph_of_f",
+   "title": "Reading Slopes from the Graph of f",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Connecting f, f' and f''",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_second_derivative_test"
+   ],
+   "keywords": [
+    "derivative graph",
+    "graph reading",
+    "slope"
+   ],
+   "summary": "The graph of f' records the slope of f: positive where f rises, negative where f falls, zero at horizontal tangents, and greatest at the input where f is steepest upwards, so a local extremum of f' marks a change in how fast f is climbing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_calculus_bc_regions_with_more_than_two_intersections",
+   "title": "Regions with More Than Two Intersections",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Area Between Curves",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_area_between_curves_in_x_and_in_y"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intersections",
+    "piecewise",
+    "split region"
+   ],
+   "summary": "When the boundary curves meet more than twice, the region is split at every interior intersection and the integral of (upper - lower) is taken piecewise, because which curve lies on top can change from one piece to the next.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "ap_calculus_bc_removable_jump_and_infinite_discontinuities",
+   "title": "Removable, Jump and Infinite Discontinuities",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Types of Discontinuity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_squeeze_theorem"
+   ],
+   "keywords": [
+    "discontinuity types",
+    "infinite",
+    "jump"
+   ],
+   "summary": "A discontinuity at a is removable when the two-sided limit exists but f(a) is missing or different, a jump when both one-sided limits exist and differ, and infinite when at least one one-sided limit is unbounded.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_calculus_bc_repairing_a_removable_discontinuity",
+   "title": "Repairing a Removable Discontinuity",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Removing Discontinuities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_continuity_conditions"
+   ],
+   "keywords": [
+    "continuous extension",
+    "redefine value",
+    "removable discontinuity"
+   ],
+   "summary": "A discontinuity at a is removable exactly when lim_{x->a} f(x) = L exists, and redefining f(a) = L then makes f continuous at a while leaving every other value unchanged, whereas a jump or an infinite discontinuity admits no such repair.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_calculus_bc_representing_functions_as_power_series",
+   "title": "Representing Functions as Power Series",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Power Series",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "ap_calculus_bc_taylor_and_maclaurin_series"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "geometric series",
+    "power series representation",
+    "term by term"
+   ],
+   "summary": "A known series such as 1/(1 - x) equal to the sum of x^n for |x| < 1 may be differentiated, integrated or composed term by term inside its interval of convergence, which produces new representations without new coefficients being computed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "ap_calculus_bc_rewriting_quotients_that_give_0_0",
+   "title": "Rewriting Quotients That Give 0/0",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Algebraic Manipulation for Limits",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_limit_laws_and_direct_substitution"
+   ],
+   "keywords": [
+    "conjugate",
+    "equivalence",
+    "factor and cancel"
+   ],
+   "summary": "If f(x) = g(x) for every x near a except possibly at a, then their limits at a agree, so factoring, multiplying by a conjugate or combining fractions can cancel the factor responsible for the 0/0 form and leave a quotient that substitution evaluates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_calculus_bc_second_derivatives_of_parametric_curves",
+   "title": "Second Derivatives of Parametric Curves",
+   "strand": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "unit": "Parametric Equations, Polar Coordinates and Vector-Valued Functions",
+   "topic": "Parametric Equations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_defining_and_differentiating_parametric_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "concavity",
+    "parametric",
+    "second derivative"
+   ],
+   "summary": "The second derivative of a parametric curve is d^2y/dx^2 = (d/dt (dy/dx))/(dx/dt), not the quotient of the second derivatives, because dy/dx is a function of t that must be differentiated with respect to t and then divided by dx/dt.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "ap_calculus_bc_selecting_a_limit_procedure",
+   "title": "Selecting a Limit Procedure",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Procedure Selection and the Squeeze Theorem",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_rewriting_quotients_that_give_0_0"
+   ],
+   "keywords": [
+    "justification",
+    "procedure selection",
+    "strategy"
+   ],
+   "summary": "Procedures are tried in order of strength - direct substitution, then an algebraic rewrite, then the squeeze theorem or a numerical estimate - and only a law, an identity or a theorem establishes a limit, since a table can always be too coarse to exclude a nearby jump.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_calculus_bc_selecting_an_integration_technique",
+   "title": "Selecting an Integration Technique",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Technique Selection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_improper_integrals"
+   ],
+   "keywords": [
+    "integrand structure",
+    "strategy",
+    "technique selection"
+   ],
+   "summary": "The integrand is inspected before a rule is chosen: a composition carrying its inner derivative suggests substitution, a product of unlike types suggests parts, a proper rational function suggests partial fractions, and a quadratic denominator suggests completing the square.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "ap_calculus_bc_separation_of_variables_and_particular_solutions",
+   "title": "Separation of Variables and Particular Solutions",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Separation of Variables",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_euler_s_method"
+   ],
+   "keywords": [
+    "initial condition",
+    "separation",
+    "zero division"
+   ],
+   "summary": "A separable equation dy/dx = f(x)g(y) is solved by dividing so that every y-term sits with dy and every x-term with dx, integrating both sides, and fixing the single constant with the initial condition, while the division is valid only where g(y) is nonzero, so the constant solutions at the zeros of g must be recorded separately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "ap_calculus_bc_setting_up_a_related_rate",
+   "title": "Setting Up a Related Rate",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Related Rates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_position_velocity_and_acceleration"
+   ],
+   "keywords": [
+    "chain rule",
+    "differentiate in time",
+    "related rates"
+   ],
+   "summary": "A related-rate problem begins with an equation among the quantities, differentiates both sides with respect to time so every derivative becomes a rate, and substitutes the instantaneous values only afterwards, because the relation among the rates must be differentiated before the numbers are fixed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_calculus_bc_setting_up_an_optimization_problem",
+   "title": "Setting Up an Optimization Problem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Optimization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_reading_f_from_the_graph_of_its_derivative"
+   ],
+   "keywords": [
+    "constraint",
+    "domain",
+    "optimization"
+   ],
+   "summary": "An optimization problem names the objective, uses the constraint to express it as a function of one variable, and records the domain the context permits before differentiating, since a critical point outside the physical domain is not a solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_calculus_bc_sigma_notation_and_the_definite_integral",
+   "title": "Sigma Notation and the Definite Integral",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Summation and Integral Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_left_right_and_midpoint_riemann_sums"
+   ],
+   "keywords": [
+    "definite integral",
+    "integrability",
+    "sigma notation"
+   ],
+   "summary": "Sigma notation writes a sum as sum_{k=1}^{n} a_k, with the closed forms for sum k and sum k^2 used to evaluate a Riemann sum before the limit is taken, and the definite integral is that limit as the widest subinterval tends to zero, existing only when every partition and every sample choice gives the same value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_calculus_bc_sketching_and_reading_a_slope_field",
+   "title": "Sketching and Reading a Slope Field",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Slope Fields",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_verifying_a_solution_by_substitution"
+   ],
+   "keywords": [
+    "equilibrium",
+    "slope field",
+    "solution curve"
+   ],
+   "summary": "A slope field plots a segment of slope dy/dx at each sample point, computed from the equation alone, so a solution curve must stay tangent to the segment where it passes, a horizontal segment marks a constant solution, and a curve drawn through the field is consistent with the equation rather than a proof of a formula.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "ap_calculus_bc_solving_a_related_rate",
+   "title": "Solving a Related Rate",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Related Rates",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_setting_up_a_related_rate"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "sign check",
+    "solve rate",
+    "units"
+   ],
+   "summary": "The unknown rate is isolated in the differentiated relation and evaluated at the instant in question, then checked for sign and units, since a length that is decreasing must give a negative rate even when the geometry is described with positive lengths.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_calculus_bc_square_and_rectangular_cross_sections",
+   "title": "Square and Rectangular Cross Sections",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Volumes by Cross Section",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_regions_with_more_than_two_intersections"
+   ],
+   "keywords": [
+    "cross sections",
+    "squares",
+    "volume"
+   ],
+   "summary": "For a solid whose cross sections perpendicular to an axis are squares on a base of length b(x), the volume is int b(x)^2 dx, and rectangular sections require the second side length as a function of x as well.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "ap_calculus_bc_substitution_with_changed_limits",
+   "title": "Substitution with Changed Limits",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration by Substitution",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_integration_by_substitution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "change of limits",
+    "definite integral",
+    "one-to-one"
+   ],
+   "summary": "In a definite integral the limits must be converted to u-values when the substitution is made, since x-limits left on a u-antiderivative evaluate the wrong endpoints, and the substitution must be one-to-one on the interval of integration.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "ap_calculus_bc_tangent_cotangent_secant_and_cosecant_derivatives",
+   "title": "Tangent, Cotangent, Secant and Cosecant Derivatives",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Derivatives of the Remaining Trigonometric Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_quotient_rule"
+   ],
+   "keywords": [
+    "cosecant",
+    "secant",
+    "tangent"
+   ],
+   "summary": "d/dx tan x = sec^2 x and d/dx sec x = sec x tan x hold where cos x is nonzero, while d/dx cot x = -csc^2 x and d/dx csc x = -csc x cot x hold where sin x is nonzero, so each formula is valid only on the domain of the function it differentiates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_calculus_bc_taylor_and_maclaurin_series",
+   "title": "Taylor and Maclaurin Series",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Power Series",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_radius_and_interval_of_convergence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "maclaurin series",
+    "remainder",
+    "taylor series"
+   ],
+   "summary": "A function with derivatives of every order at a has the Taylor series formed from those derivatives, and the series equals the function on its interval of convergence only when the remainder tends to zero there; the Maclaurin series is the case a = 0.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "ap_calculus_bc_taylor_polynomials_about_a_point",
+   "title": "Taylor Polynomials about a Point",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Taylor Polynomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_alternating_series_error_bound"
+   ],
+   "keywords": [
+    "centre",
+    "matching derivatives",
+    "taylor polynomial"
+   ],
+   "summary": "The n-th Taylor polynomial of f about a is the sum of f^(k)(a)(x - a)^k/k! for k from 0 to n, and it agrees with f in value and in its first n derivatives at a, which is why it is the degree-n polynomial that best fits f near a.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_accumulation_function_and_the_fundamental_the",
+   "title": "The Accumulation Function and the Fundamental Theorem",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "The Fundamental Theorem and Accumulation Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_sigma_notation_and_the_definite_integral"
+   ],
+   "keywords": [
+    "accumulation function",
+    "chain rule",
+    "fundamental theorem"
+   ],
+   "summary": "If f is continuous on an interval containing a, then g(x) = int_a^x f(t) dt satisfies g'(x) = f(x) there, so differentiation undoes integration at a variable upper limit, and a differentiable limit u(x) adds the factor u'(x) by the chain rule.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_alternating_series_error_bound",
+   "title": "The Alternating Series Error Bound",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "The Alternating Series Error Bound",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_ratio_test"
+   ],
+   "keywords": [
+    "error bound",
+    "first omitted term",
+    "truncation"
+   ],
+   "summary": "For a convergent alternating series satisfying the alternating series test, the error from truncating after n terms is at most the magnitude of the first omitted term, so the bound is available only while the hypotheses of that test hold.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_alternating_series_test",
+   "title": "The Alternating Series Test",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Alternating Series",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_direct_and_limit_comparison_tests"
+   ],
+   "keywords": [
+    "alternating series",
+    "decreasing terms",
+    "zero limit"
+   ],
+   "summary": "An alternating series whose term magnitudes decrease eventually and tend to zero converges, and both conditions are required, since a decreasing sequence with a nonzero limit and a zero limit without decrease both permit divergence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_average_value_of_a_function",
+   "title": "The Average Value of a Function",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Average Value",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_logistic_model_and_its_point_of_inflection"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "attainment",
+    "average value",
+    "mean height"
+   ],
+   "summary": "The average value of a continuous f on [a, b] is (1/(b - a)) int_a^b f(x) dx, the height of the rectangle whose signed area over the interval equals the integral, and continuity guarantees that f actually attains this value somewhere on [a, b].",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_candidates_test",
+   "title": "The Candidates Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The Candidates Test",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_first_derivative_test"
+   ],
+   "keywords": [
+    "absolute extremum",
+    "candidates test",
+    "endpoints"
+   ],
+   "summary": "The absolute extrema of a continuous function on a closed interval occur only at its critical points inside the interval or at the two endpoints, so comparing f at that finite list identifies the global maximum and minimum without any sign analysis.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_chain_rule",
+   "title": "The Chain Rule",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "The Chain Rule",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_tangent_cotangent_secant_and_cosecant_derivatives"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chain rule",
+    "composition",
+    "inner derivative"
+   ],
+   "summary": "If g is differentiable at x and f is differentiable at g(x), then d/dx f(g(x)) = f'(g(x)) g'(x), so the outer derivative is evaluated at the inner function and multiplied by the inner derivative, with one application per layer of composition.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_continuity_conditions",
+   "title": "The Continuity Conditions",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Continuity at a Point and on an Interval",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_removable_jump_and_infinite_discontinuities"
+   ],
+   "keywords": [
+    "continuity",
+    "endpoint",
+    "three conditions"
+   ],
+   "summary": "f is continuous at a exactly when f(a) is defined, lim_{x->a} f(x) exists and the two are equal, and f is continuous on a closed interval when it is continuous at every interior point and its one-sided limits at the endpoints equal the endpoint values.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_derivative_at_a_point_and_its_notation",
+   "title": "The Derivative at a Point and Its Notation",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Derivative Definition and Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_average_and_instantaneous_rates_of_change"
+   ],
+   "keywords": [
+    "derivative definition",
+    "notation",
+    "tangent slope"
+   ],
+   "summary": "f is differentiable at a exactly when lim_{h->0} (f(a + h) - f(a))/h exists, and that value, written f'(a) or dy/dx at x = a, is the slope of the tangent line there, carrying the units of f divided by the units of x.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_derivatives_of_e_x_and_ln_x",
+   "title": "The Derivatives of e^x and ln x",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Derivatives of Sine, Cosine, e^x and ln x",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_bc_the_derivatives_of_sine_and_cosine"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chain rule",
+    "exponential",
+    "natural log"
+   ],
+   "summary": "d/dx e^x = e^x for every real x because e is the base whose exponential is its own derivative, and d/dx ln x = 1/x for x > 0, with the chain rule extending them to e^(u)u' and u'/u wherever u is nonzero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_derivatives_of_sine_and_cosine",
+   "title": "The Derivatives of Sine and Cosine",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Derivatives of Sine, Cosine, e^x and ln x",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_constant_sum_difference_and_constant_multiple_rul"
+   ],
+   "keywords": [
+    "cosine",
+    "cycle",
+    "sine"
+   ],
+   "summary": "d/dx sin x = cos x and d/dx cos x = -sin x for every real x, and the pair cycles with period four through -sin x and -cos x, so the fourth derivative of either function is the function itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_direct_and_limit_comparison_tests",
+   "title": "The Direct and Limit Comparison Tests",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Comparison Tests",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_harmonic_series_and_the_p_series_test"
+   ],
+   "keywords": [
+    "comparison test",
+    "limit comparison",
+    "positive terms"
+   ],
+   "summary": "If 0 <= a_n <= b_n eventually then convergence of the larger series forces convergence of the smaller and divergence of the smaller forces divergence of the larger, and when only a_n/b_n tends to a finite positive number the two series share their convergence behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_disc_method_about_either_axis",
+   "title": "The Disc Method about Either Axis",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "The Disc Method",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_triangular_and_semicircular_cross_sections"
+   ],
+   "keywords": [
+    "axis of revolution",
+    "disc method",
+    "radius"
+   ],
+   "summary": "Revolving a region that reaches from an axis out to a curve sweeps discs whose radius is the distance to the axis, so the volume is int pi f(x)^2 dx about the x-axis and int pi g(y)^2 dy about the y-axis, provided every cross section is a full disc.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_first_derivative_test",
+   "title": "The First Derivative Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Increase, Decrease and the First Derivative Test",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_intervals_of_increase_and_decrease"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "first derivative test",
+    "local maximum",
+    "sign change"
+   ],
+   "summary": "At a critical point c the function has a local maximum where f' changes from positive to negative, a local minimum where it changes from negative to positive, and neither where the sign of f' does not change.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_fundamental_theorem_part_2",
+   "title": "The Fundamental Theorem, Part 2",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Evaluating Definite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_properties_of_the_definite_integral"
+   ],
+   "keywords": [
+    "antiderivative",
+    "continuity",
+    "evaluation theorem"
+   ],
+   "summary": "If f is continuous on [a, b] and F is any antiderivative of f there, then int_a^b f(x) dx = F(b) - F(a), which turns a limit of sums into two evaluations and fails if f is not continuous across the whole interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_harmonic_series_and_the_p_series_test",
+   "title": "The Harmonic Series and the p-Series Test",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Harmonic and p-Series",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_integral_test"
+   ],
+   "keywords": [
+    "boundary case",
+    "harmonic",
+    "p series"
+   ],
+   "summary": "The p-series sum 1/n^p converges exactly when p > 1 and diverges for p at most 1, so the harmonic series diverges even though its terms tend to zero, and p = 1 is precisely the boundary where the integral test returns a logarithm.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_integral_test",
+   "title": "The Integral Test",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "The nth-Term and Integral Tests",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_nth_term_test_for_divergence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decreasing",
+    "hypotheses",
+    "integral test"
+   ],
+   "summary": "If f is positive, continuous and decreasing on [N, inf) with a_n = f(n), then the series and the integral of f from N to infinity either both converge or both diverge, and all three hypotheses are needed because a non-decreasing f breaks the rectangle comparison.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_intermediate_value_theorem",
+   "title": "The Intermediate Value Theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "The Intermediate Value Theorem",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_limits_at_infinity_and_horizontal_asymptotes"
+   ],
+   "keywords": [
+    "continuity",
+    "existence",
+    "intermediate value"
+   ],
+   "summary": "If f is continuous on [a, b] and N lies strictly between f(a) and f(b), then some c in (a, b) satisfies f(c) = N, so continuity guarantees that the value is attained while saying nothing about how many such c exist or where they lie.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_inverse_function_derivative_rule",
+   "title": "The Inverse Function Derivative Rule",
+   "strand": "Differentiation: Composite, Implicit and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit and Inverse Functions",
+   "topic": "Derivatives of Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_implicit_differentiation"
+   ],
+   "keywords": [
+    "inverse function",
+    "one-to-one",
+    "reciprocal slope"
+   ],
+   "summary": "If f is differentiable and one-to-one near a with f'(a) nonzero, then its inverse is differentiable at b = f(a) with (f^-1)'(b) = 1/f'(a), so slopes at mirrored points are reciprocals and a horizontal tangent in f becomes a vertical tangent in its inverse.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_lagrange_error_bound",
+   "title": "The Lagrange Error Bound",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "Taylor Polynomials",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_taylor_polynomials_about_a_point"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "derivative bound",
+    "lagrange error",
+    "remainder"
+   ],
+   "summary": "The error of the n-th Taylor polynomial at x equals f^(n+1)(c)(x - a)^(n+1)/(n+1)! for some c between a and x, so bounding the (n+1)-st derivative on that interval bounds the error, and the bound is useful only where such a bound is available.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_limit_laws_and_direct_substitution",
+   "title": "The Limit Laws and Direct Substitution",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Algebraic Properties of Limits",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_limits_from_graphs_tables_and_multiple_representa"
+   ],
+   "keywords": [
+    "continuity",
+    "direct substitution",
+    "limit laws"
+   ],
+   "summary": "If the limits of f and g at a exist then the limit of a sum, difference, constant multiple or product is the corresponding combination of those limits, the quotient law applies only when the denominator limit is nonzero, and for a function continuous at a direct substitution gives the limit exactly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_logistic_model_and_its_point_of_inflection",
+   "title": "The Logistic Model and Its Point of Inflection",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Logistic Models",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_exponential_growth_and_decay_models"
+   ],
+   "keywords": [
+    "carrying capacity",
+    "inflection",
+    "logistic"
+   ],
+   "summary": "The logistic equation dP/dt = kP(1 - P/K) has carrying capacity K, so a solution starting between 0 and K increases towards K without reaching it in finite time, and its growth rate is greatest at P = K/2, where the solution also changes concavity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_mean_value_theorem",
+   "title": "The Mean Value Theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The Mean Value Theorem",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_l_hopital_s_rule_and_its_indeterminate_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "existence",
+    "mean value theorem",
+    "secant"
+   ],
+   "summary": "If f is continuous on [a, b] and differentiable on (a, b), then some c in (a, b) satisfies f'(c) = (f(b) - f(a))/(b - a), so some tangent is parallel to the secant through the endpoints, and both hypotheses are needed since a corner allows no parallel tangent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_nth_term_test_for_divergence",
+   "title": "The nth-Term Test for Divergence",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "The nth-Term and Integral Tests",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_geometric_series_and_their_sums"
+   ],
+   "keywords": [
+    "divergence",
+    "necessary condition",
+    "nth term test"
+   ],
+   "summary": "If the terms of a series do not tend to zero then the series diverges, but terms tending to zero prove nothing, as the harmonic series shows, so the test can establish divergence only.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_power_rule",
+   "title": "The Power Rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Power and Linearity Rules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_differentiability_implies_continuity"
+   ],
+   "keywords": [
+    "domain",
+    "exponent",
+    "power rule"
+   ],
+   "summary": "For every constant real exponent n, d/dx x^n = n x^(n-1) on every interval where x^n is defined and differentiable, which for negative and fractional exponents restricts the domain to x > 0.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_product_rule",
+   "title": "The Product Rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Product and Quotient Rules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_derivatives_of_e_x_and_ln_x"
+   ],
+   "keywords": [
+    "differentiable",
+    "product rule",
+    "two factors"
+   ],
+   "summary": "If f and g are differentiable at x then (fg)'(x) = f'(x)g(x) + f(x)g'(x), and the rule is required because the derivative of a product is not the product of the derivatives unless one factor is constant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_quotient_rule",
+   "title": "The Quotient Rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Product and Quotient Rules",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_the_product_rule"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "nonzero denominator",
+    "order",
+    "quotient rule"
+   ],
+   "summary": "If f and g are differentiable at x with g(x) nonzero then (f/g)'(x) = (f'(x)g(x) - f(x)g'(x))/g(x)^2, and the subtraction makes the order of the numerator terms significant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_ratio_test",
+   "title": "The Ratio Test",
+   "strand": "Infinite Sequences and Series",
+   "unit": "Infinite Sequences and Series",
+   "topic": "The Ratio Test",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_absolute_and_conditional_convergence"
+   ],
+   "keywords": [
+    "inconclusive",
+    "p series boundary",
+    "ratio test"
+   ],
+   "summary": "For a series of eventually nonzero terms the ratio test gives convergence when lim |a_{n+1}/a_n| < 1 and divergence when that limit exceeds 1, while a limit of exactly 1 is inconclusive - the p-series boundary - and the integral or comparison test must decide there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_second_derivative_test",
+   "title": "The Second Derivative Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Concavity and the Second Derivative",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_concavity_and_points_of_inflection"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inconclusive",
+    "local extremum",
+    "second derivative test"
+   ],
+   "summary": "Where f'(c) = 0, a positive f''(c) makes c a local minimum and a negative f''(c) makes it a local maximum, while f''(c) = 0 is inconclusive and returns the question to the first derivative test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_squeeze_theorem",
+   "title": "The Squeeze Theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Procedure Selection and the Squeeze Theorem",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_selecting_a_limit_procedure"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bounded",
+    "sandwich",
+    "squeeze theorem"
+   ],
+   "summary": "If g(x) <= f(x) <= h(x) for all x near a and lim g = lim h = L, then lim f = L at a, and a bounded factor multiplied by a quantity tending to zero therefore has limit zero even when no product law applies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_calculus_bc_the_washer_method_about_either_axis",
+   "title": "The Washer Method about Either Axis",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "The Washer Method",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_the_disc_method_about_either_axis"
+   ],
+   "keywords": [
+    "gap from axis",
+    "outer inner",
+    "washer method"
+   ],
+   "summary": "When the region does not reach the axis of revolution, each cross section is a washer of area pi (R^2 - r^2), so the volume is the integral of that area along the axis with R and r the distances from the axis to the outer and inner curves.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "ap_calculus_bc_triangular_and_semicircular_cross_sections",
+   "title": "Triangular and Semicircular Cross Sections",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Volumes by Cross Section",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_square_and_rectangular_cross_sections"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cross section area",
+    "semicircles",
+    "triangles"
+   ],
+   "summary": "Cross sections that are equilateral triangles or semicircles on a base of length b(x) have areas (sqrt 3 / 4) b(x)^2 and (pi / 8) b(x)^2 respectively, so the volume is that area integrated along the axis.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "ap_calculus_bc_verifying_a_solution_by_substitution",
+   "title": "Verifying a Solution by Substitution",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Verifying Solutions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_bc_writing_a_differential_equation_from_a_context"
+   ],
+   "keywords": [
+    "identity",
+    "substitution",
+    "verification"
+   ],
+   "summary": "A function is a solution of a differential equation on an interval exactly when substituting it and its derivatives into the equation produces an identity for every x in that interval, which is the only accepted verification.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "ap_calculus_bc_writing_a_differential_equation_from_a_context",
+   "title": "Writing a Differential Equation from a Context",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Modelling with Differential Equations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_bc_selecting_an_integration_technique"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "modelling",
+    "proportionality",
+    "translate rate"
+   ],
+   "summary": "A verbal rate statement becomes a differential equation by replacing the rate of change with a derivative and proportionality with a constant multiple, so a population growing at a rate proportional to its size satisfies dP/dt = kP with k carrying the units of inverse time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus BC - Limits, Change, Coordinates and Series",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  }
+ ]
+}

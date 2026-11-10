@@ -175,7 +175,6 @@ def build_app():
     # lifespan runs, but the engine is created here, so the path has to be safe.
     temp = tempfile.mkdtemp(prefix='api-surface-')
     os.environ.setdefault('HARNESS_ENV', 'test')
-    os.environ.setdefault('HARNESS_TUTOR_PROVIDER', 'offline')
     os.environ['HARNESS_DATA_DIR'] = temp
     os.environ.pop('HARNESS_DATABASE_URL', None)
 

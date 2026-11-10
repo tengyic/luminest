@@ -73,8 +73,10 @@ def status(settings=None) -> dict[str, Any]:
             'telemetry': telemetry.describe(),
             'media': media.describe(settings),
             'video': video.describe(settings),
-            'generation': {'offline': 'deterministic composition from the graph and the symbolic '
-                                      'engine',
+            'generation': {'required': 'a configured language model; there is no offline '
+                                       'generation mode',
+                           'unconfigured': 'model-required: a declared grounded fallback with '
+                                           'a reason, never presented as the product',
                            'with_provider': 'the model clarifies prose only; structure, figures, '
                                             'citations and items stay generated and grounded'}}
 

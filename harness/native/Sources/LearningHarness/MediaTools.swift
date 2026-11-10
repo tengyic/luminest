@@ -69,11 +69,17 @@ struct SafeLessonLink: View {
         // The provider caps one request at 4096 characters; the device voice has
         // no such limit, so a long lesson reads in full either way.
         let payload = String(text.prefix(4096))
+        // Same resolved voice and tone as the tutor's spoken reply, so a lesson read aloud
+        // does not switch teachers halfway through a session. Empty means instance default.
+        let voiceName = AppStore.current?.effectiveVoice ?? ""
+        let tone = AppStore.current?.effectiveTone ?? ""
         status = "Asking the local voice backend to read this lesson…"
         Task {
             do {
                 let data = try await api.data("/voice/speak", method: "POST",
-                                             body: ["text": payload])
+                                             body: ["text": payload,
+                                                    "voice": voiceName,
+                                                    "tone": tone])
                 try self.play(data)
                 self.usingBackendVoice = true
                 self.status = "Reading with the local VoiceStudio voice backend."

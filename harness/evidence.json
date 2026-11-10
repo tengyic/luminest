@@ -760,5 +760,23 @@
    "The 1e is retired from OpenStax's storefront; if the webview pages are withdrawn, fetches fail closed to status 'unavailable' rather than serving a cached text as current.",
    "Third-party components inside sections (photos, embedded resources) carry their own rights; the CC BY grant is OpenStax's for its own content. Quotes are prose only."
   ]
+ },
+ {
+  "id": "openstax_full_catalogue_2026_11_10",
+  "title": "OpenStax book catalogue licences as reported by the publisher's CMS API (2026-11-10 snapshot)",
+  "authors": [
+   "OpenStax / Rice University"
+  ],
+  "year": 2026,
+  "url": "https://openstax.org/apps/cms/api/v2/pages/?type=books.Book&format=json&limit=200&fields=title,license_name,license_version,license_url,book_state,book_uuid",
+  "claim_kind": "current_first_party_resource_policy",
+  "finding": "The publisher's own CMS book listing reports 129 books. 38 report Creative Commons Attribution 4.0 (BY only) -- predominantly retired first editions (Algebra and Trigonometry, Biology, Chemistry, Precalculus, the Principles of Economics set, Psychology, Introductory Statistics) plus live titles Physics, Statistics and Introduction to Intellectual Property. 80 report Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (all current 2e editions). 11 -- the Spanish translations and one courseware shell -- report NO licence fields at all. The licence fields read here are the same ones the runtime fetcher re-reads per book at fetch time.",
+  "product_policy": "Each catalogue book is registered with the rights position its own publisher data supports: CC BY books are text-eligible subject to per-fetch live re-verification against the same API (drift fails closed); NC books are link-only and withheld from a paid offering; no-licence books are refused outright with zero network requests. Section text is never sent to a model regardless of class, mirroring OpenStax's AI-ingestion notice. The snapshot (app/ingest/sources/openstax_catalogue.json) stores raw publisher fields only and is refreshed exclusively by scripts/refresh_openstax_catalogue.py.",
+  "scope": "Publisher CMS listing served 2026-11-10 (129 books, fields verified in the same response shape the fetcher uses).",
+  "limitations": [
+   "Licence fields are per-book publisher metadata; a book's webview or preface could carry additional third-party exceptions not visible in the listing.",
+   "The 11 no-licence books may be a CMS metadata gap rather than a rights change; they stay refused until the publisher declares a licence, which is the conservative reading.",
+   "A snapshot is a point-in-time audit; the refresh script, not this file, is how the picture stays current."
+  ]
  }
 ]

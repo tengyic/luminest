@@ -365,6 +365,11 @@ struct SettingsPage: View {
             languageCard
             appearanceCard
             accessibilityCard
+            // The model is a hard dependency, so its configuration sits above the
+            // optional settings: an unconfigured instance must say "Model required"
+            // where a learner will actually see it, not in a support document.
+            ModelSettingsCard()
+            VoiceSettingsCard()
             HStack(alignment: .top, spacing: 20) {
                 Card {
                     VStack(alignment: .leading, spacing: 20) {
@@ -528,4 +533,92 @@ struct SettingsPage: View {
         catch { realtimeError = (error as? AppFailure)?.message ?? error.localizedDescription }
     }
     func clearRealtimeKey() { RealtimeKey.remove(); realtimeError = nil }
+}
+
+/// The teacher's voice. One selection, stored on this Mac, sent as the resolved
+/// ``voice``/``tone`` of every speech request — the tutor's reply, the auto-lecture,
+/// supervision notices and both read-aloud buttons. Keeping it out of the account is
+/// deliberate: it describes this machine's VoiceStudio profiles, not the learner.
+///
+/// The preview button is not decoration. A picker whose effect can only be heard by
+/// waiting for the tutor to say something is a picker nobody can verify; speaking one
+/// line through the same ``/voice/speak`` route exercises the whole selection end to end.
+private struct VoiceSettingsCard: View {
+    @EnvironmentObject var store: AppStore
+    @StateObject private var preview = VoiceIO()
+
+    private var selectedNote: String {
+        store.voiceOptions.first(where: { $0.id == store.selectedVoiceID })?.note ?? ""
+    }
+
+    var body: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 15) {
+                SectionHeading(title: "Teaching voice", detail: "VOICESTUDIO")
+                Text("Choose the voice the tutor, the auto-lecture and read-aloud all use. The choice stays on this Mac and takes effect the next time something is spoken.")
+                    .font(.system(size: 11))
+                    .foregroundStyle(Palette.secondary)
+                    .lineSpacing(4)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .top, spacing: 12) {
+                    Picker("Teaching voice", selection: $store.selectedVoiceID) {
+                        ForEach(store.voiceOptions) { option in
+                            Text(option.label).tag(option.id)
+                        }
+                    }
+                    .labelsHidden()
+                    .accessibilityIdentifier("settings.voice")
+                    Button {
+                        if preview.speaking {
+                            preview.stopSpeaking()
+                        } else {
+                            preview.speakThroughVoiceStudio(
+                                "This is the voice your tutor will use.")
+                        }
+                    } label: {
+                        Label(preview.speaking ? "Stop preview" : "Preview voice",
+                              systemImage: preview.speaking ? "stop.fill" : "play.fill")
+                    }
+                    .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                    .accessibilityIdentifier("settings.voice.preview")
+                }
+                if store.selectedVoiceID == "custom" {
+                    TextField("VoiceStudio profile name", text: $store.customVoice)
+                        .textFieldStyle(.roundedBorder)
+                        .accessibilityIdentifier("settings.voice.custom")
+                    Text("Enter a profile name installed in this instance's VoiceStudio. The name is sent unchanged with every speech request; leave it blank to use the instance default. Use Preview voice to hear whether it resolves.")
+                        .font(.system(size: 10))
+                        .foregroundStyle(Palette.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                } else if !selectedNote.isEmpty {
+                    Text(selectedNote)
+                        .font(.system(size: 10))
+                        .foregroundStyle(Palette.secondary)
+                }
+                Divider()
+                Toggle("Speak the tutor's replies aloud", isOn: $store.speakEnabled)
+                    .toggleStyle(.switch)
+                    .tint(Palette.accentTeal.deep)
+                    .font(.system(size: 11))
+                    .accessibilityIdentifier("settings.voice.speak")
+                // A muted instance, a failed list fetch and a refused preview each say so.
+                // None of them may look like a selection that quietly worked.
+                if !store.voiceStatus.isEmpty {
+                    Label(store.voiceStatus, systemImage: "exclamationmark.triangle")
+                        .font(.system(size: 10))
+                        .foregroundStyle(Palette.peachDeep)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("settings.voice.status")
+                }
+                if !preview.status.isEmpty {
+                    Text(preview.status)
+                        .font(.system(size: 10))
+                        .foregroundStyle(Palette.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("settings.voice.previewStatus")
+                }
+            }
+        }
+        .onAppear { store.refreshVoices() }
+    }
 }

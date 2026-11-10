@@ -1,0 +1,1548 @@
+{
+ "course": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+ "licence": "cc0",
+ "source_url": "",
+ "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+ "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+ "description": "A quantitative introduction to astrophysics: astronomical measurement and the celestial sphere, gravitation and orbits, radiation and spectra, telescopes and detectors, binary stars and the HR diagram, stellar atmospheres and interiors, star formation and evolution, compact objects, the Milky Way and galaxies, cosmology, and the solar system with its exoplanets.",
+ "expected_weeks": 36,
+ "strands": [
+  {
+   "strand": "Astrophysical Tools & Measurement",
+   "units": [
+    {
+     "unit": "Astrophysical Tools & Measurement",
+     "topics": [
+      {
+       "topic": "Units, Scale & Dimensional Reasoning",
+       "concepts": [
+        {
+         "title": "SI Units and Astronomical Distance Scales",
+         "summary": "Every measurement reduces to the seven SI base units, and astronomy adds the astronomical unit (1.496x10^11 m), the light-year (9.46x10^15 m) and the parsec (3.086x10^16 m, or 3.26 ly).",
+         "keywords": [
+          "si units",
+          "parsec",
+          "light-year"
+         ]
+        },
+        {
+         "title": "Dimensional Analysis of Physical Laws",
+         "summary": "An equation is dimensionally consistent only when both sides carry the same base-unit powers, so a candidate such as L ~ M R^2/t^3 can be tested before any data are taken, though consistency alone does not prove a law correct.",
+         "keywords": [
+          "dimensional analysis",
+          "units",
+          "scaling"
+         ],
+         "prerequisites": [
+          "SI Units and Astronomical Distance Scales"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Angular Measure",
+       "concepts": [
+        {
+         "title": "Angular Size and the Small-Angle Relation",
+         "summary": "A body of diameter D at distance d subtends about D/d radians, so the Moon's 3 475 km at 384 000 km gives 0.52 degrees, and one angular size can mean a small near object or a large distant one.",
+         "keywords": [
+          "angular size",
+          "small angle",
+          "distance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Significant Figures & Uncertainty",
+       "concepts": [
+        {
+         "title": "Significant Figures and Propagated Uncertainty",
+         "summary": "A quoted value carries only the digits the instrument resolves, so 12.30 mag claims 0.01 mag precision while 12.3 mag claims 0.1 mag, and averaging N readings shrinks random error as 1/sqrt(N) while a systematic offset survives.",
+         "keywords": [
+          "significant figures",
+          "uncertainty",
+          "systematic error"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Graphical Analysis & Curve Fitting",
+       "concepts": [
+        {
+         "title": "Logarithmic Plots and Power-Law Fits",
+         "summary": "Plotting log y against log x turns y = k x^n into a straight line of slope n, which is how a luminosity-mass exponent near 3.5 is read straight off the graph.",
+         "keywords": [
+          "log plot",
+          "power law",
+          "least squares"
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "units": [
+    {
+     "unit": "The Celestial Sphere, Coordinates & Time",
+     "topics": [
+      {
+       "topic": "Spherical Trigonometry on the Sky",
+       "concepts": [
+        {
+         "title": "Great Circles and Spherical Angles",
+         "summary": "Two great circles cross at antipodal points and enclose an angle equal to the dihedral angle of their planes, while a small circle such as a declination parallel does not pass through the centre of the sphere.",
+         "keywords": [
+          "great circle",
+          "spherical angle",
+          "small circle"
+         ]
+        },
+        {
+         "title": "The Spherical Law of Cosines",
+         "summary": "The spherical law of cosines, cos a = cos b cos c + sin b sin c cos A, converts between horizon and equatorial coordinates once latitude, declination and hour angle are known.",
+         "keywords": [
+          "spherical trigonometry",
+          "coordinate conversion",
+          "hour angle"
+         ],
+         "prerequisites": [
+          "Great Circles and Spherical Angles"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Celestial Sphere & Its Motions",
+       "concepts": [
+        {
+         "title": "Diurnal Rotation and Circumpolar Stars",
+         "summary": "The sky turns once on the polar axis in a sidereal day, so a star of declination d culminates at altitude 90 - |latitude - d| degrees and never sets when d > 90 - latitude.",
+         "keywords": [
+          "diurnal motion",
+          "culmination",
+          "circumpolar"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Celestial Coordinate Systems & Transforms",
+       "concepts": [
+        {
+         "title": "Horizon, Equatorial and Ecliptic Frames",
+         "summary": "Each frame is tied to a different reference, the observer's zenith, Earth's equator or the ecliptic, so a star's altitude changes hourly while its right ascension and declination stay nearly fixed.",
+         "keywords": [
+          "right ascension",
+          "declination",
+          "ecliptic coordinates"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Time Systems, Precession, Proper Motion & Parallax",
+       "concepts": [
+        {
+         "title": "Sidereal and Solar Time",
+         "summary": "A sidereal day lasts 23 h 56 m 4 s of solar time because Earth must turn about one degree extra to bring the Sun back to the meridian, and that daily shortfall accumulates into the seasonal drift of the night sky.",
+         "keywords": [
+          "sidereal time",
+          "solar time",
+          "meridian"
+         ]
+        },
+        {
+         "title": "Parallax, Proper Motion and Precession",
+         "summary": "A parallax of p arcseconds puts a star at d = 1/p parsecs, proper motion is the transverse velocity divided by distance, and precession carries the equinoxes round the ecliptic once in about 26 000 years.",
+         "keywords": [
+          "parallax",
+          "proper motion",
+          "precession"
+         ],
+         "prerequisites": [
+          "Sidereal and Solar Time"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Sky Phenomena: Seasons, Rise/Set & Eclipses",
+       "concepts": [
+        {
+         "title": "Seasons, Rise and Set, and Eclipse Geometry",
+         "summary": "Seasons follow from the 23.4 degree tilt of Earth's axis rather than its varying distance from the Sun, and a solar eclipse needs a new moon within about 18 degrees of a lunar node.",
+         "keywords": [
+          "seasons",
+          "obliquity",
+          "eclipse"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Astrophysical Tools & Measurement"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "units": [
+    {
+     "unit": "Gravity, Orbits & Celestial Mechanics",
+     "topics": [
+      {
+       "topic": "Newtonian Gravity & Gravitational Energy",
+       "concepts": [
+        {
+         "title": "The Inverse-Square Law of Gravitation",
+         "summary": "Two masses attract with F = G M m / r^2, so doubling the separation quarters the force and a satellite at twice Earth's radius weighs a quarter of what it does on the surface.",
+         "keywords": [
+          "universal gravitation",
+          "inverse square",
+          "newton"
+         ]
+        },
+        {
+         "title": "Gravitational Potential Energy and Escape Speed",
+         "summary": "With U = -G M m / r measured from infinity, a body escapes when its kinetic energy balances the well, giving v_esc = sqrt(2GM/r), which is 11.2 km/s at Earth's surface.",
+         "keywords": [
+          "potential energy",
+          "escape velocity",
+          "binding energy"
+         ],
+         "prerequisites": [
+          "The Inverse-Square Law of Gravitation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Kepler's Laws & the Geometry of the Ellipse",
+       "concepts": [
+        {
+         "title": "Kepler's Laws and Orbital Geometry",
+         "summary": "Orbits are ellipses with the primary at a focus, the radius vector sweeps equal areas in equal times, and P^2 = a^3 holds when P is in years and a in astronomical units.",
+         "keywords": [
+          "kepler laws",
+          "ellipse",
+          "orbital period"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Orbital Energy, Angular Momentum & Vis-Viva",
+       "concepts": [
+        {
+         "title": "The Vis-Viva Equation and Orbital Energy",
+         "summary": "The vis-viva equation v^2 = GM(2/r - 1/a) gives the speed anywhere on an orbit, and the sign of the specific energy -GM/2a separates bound, parabolic and hyperbolic paths.",
+         "keywords": [
+          "vis-viva",
+          "orbital energy",
+          "eccentricity"
+         ]
+        },
+        {
+         "title": "Conservation of Angular Momentum",
+         "summary": "Specific angular momentum h = r v cos(phi) is constant because gravity is a central force, which is why a comet is fastest at perihelion and why dA/dt = h/2 never changes.",
+         "keywords": [
+          "angular momentum",
+          "areal velocity",
+          "perihelion"
+         ],
+         "prerequisites": [
+          "The Vis-Viva Equation and Orbital Energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Two-Body Problem, Barycentre & Reduced Mass",
+       "concepts": [
+        {
+         "title": "Barycentre and Reduced Mass",
+         "summary": "Two bodies circle their common centre of mass with m1 r1 = m2 r2, and the relative motion is one body of reduced mass m1 m2/(m1 + m2) orbiting the total mass, so a star with a planet wobbles by only m_p/M_star of the separation.",
+         "keywords": [
+          "barycentre",
+          "reduced mass",
+          "two-body problem"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Tides, the Roche Limit & Lagrange Points",
+       "concepts": [
+        {
+         "title": "Tidal Forces, the Roche Limit and Lagrange Points",
+         "summary": "Tidal acceleration falls as 1/r^3, a fluid satellite is disrupted inside the Roche limit at about 2.44 R (rho_M/rho_m)^(1/3), and the five Lagrange points are where gravity and rotation balance in the co-rotating frame.",
+         "keywords": [
+          "tides",
+          "roche limit",
+          "lagrange points"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "The Celestial Sphere, Coordinates & Time"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Radiation, Light & Magnitudes",
+   "units": [
+    {
+     "unit": "Radiation, Light & Magnitudes",
+     "topics": [
+      {
+       "topic": "Light & the Electromagnetic Spectrum",
+       "concepts": [
+        {
+         "title": "Wavelength, Frequency and the Spectrum",
+         "summary": "All electromagnetic radiation obeys c = lambda nu, so the 21 cm hydrogen line sits at 1 420 MHz while a 1 m radio wave sits at 300 MHz, and the spectrum spans more than twenty orders of magnitude in frequency.",
+         "keywords": [
+          "wavelength",
+          "frequency",
+          "electromagnetic spectrum"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Blackbody Radiation",
+       "concepts": [
+        {
+         "title": "Wien's Law and the Peak Wavelength",
+         "summary": "A blackbody peaks at lambda_max = 2.898x10^-3 m K divided by T, so the Sun's 5 800 K photosphere peaks near 500 nm and a 300 K planet peaks in the thermal infrared near 10 microns.",
+         "keywords": [
+          "wien law",
+          "blackbody",
+          "peak wavelength"
+         ]
+        },
+        {
+         "title": "The Stefan-Boltzmann Law",
+         "summary": "A blackbody radiates F = sigma T^4 per unit area, so doubling T multiplies the output sixteenfold and a star's luminosity is L = 4 pi R^2 sigma T^4.",
+         "keywords": [
+          "stefan-boltzmann",
+          "luminosity",
+          "effective temperature"
+         ],
+         "prerequisites": [
+          "Wien's Law and the Peak Wavelength"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Flux, Luminosity & the Inverse-Square Law",
+       "concepts": [
+        {
+         "title": "Flux, Luminosity and the Inverse-Square Law",
+         "summary": "Flux falls as F = L/(4 pi d^2), so a star ten times farther away is a hundred times fainter, and a measured flux with a known distance yields the luminosity.",
+         "keywords": [
+          "flux",
+          "luminosity",
+          "inverse square"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Magnitude Scale",
+       "concepts": [
+        {
+         "title": "The Pogson Magnitude Relation",
+         "summary": "Five magnitudes correspond to a flux ratio of exactly 100, so m1 - m2 = -2.5 log10(F1/F2) and one magnitude is a factor of 2.512 in flux.",
+         "keywords": [
+          "magnitude",
+          "pogson",
+          "flux ratio"
+         ]
+        },
+        {
+         "title": "Absolute Magnitude and the Distance Modulus",
+         "summary": "Apparent and absolute magnitude differ by m - M = 5 log10(d) - 5 with d in parsecs, so a star of absolute magnitude 0 placed at 100 pc has m = 5.",
+         "keywords": [
+          "distance modulus",
+          "absolute magnitude",
+          "apparent magnitude"
+         ],
+         "prerequisites": [
+          "The Pogson Magnitude Relation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Color Index, Temperature & Bolometric Magnitude",
+       "concepts": [
+        {
+         "title": "Colour Index and Bolometric Correction",
+         "summary": "The difference of two band magnitudes is a temperature proxy, B - V near 0.65 for the Sun and negative for a hot B star, and the bolometric correction turns a band magnitude into total flux, mattering most at both temperature extremes.",
+         "keywords": [
+          "color index",
+          "bolometric correction",
+          "temperature"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Gravity, Orbits & Celestial Mechanics"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Light-Matter Interaction & Spectra",
+   "units": [
+    {
+     "unit": "Light-Matter Interaction & Spectra",
+     "topics": [
+      {
+       "topic": "Atomic Structure & the Bohr Model",
+       "concepts": [
+        {
+         "title": "Quantised Energy Levels and Ionisation",
+         "summary": "A hydrogen electron occupies levels E_n = -13.6 eV / n^2, so 13.6 eV ionises the ground state and the n = 2 level lies 3.4 eV below the continuum.",
+         "keywords": [
+          "bohr model",
+          "energy levels",
+          "ionisation"
+         ]
+        },
+        {
+         "title": "The Rydberg Formula and Spectral Series",
+         "summary": "Transitions obey 1/lambda = R(1/n_f^2 - 1/n_i^2) with R = 1.097x10^7 m^-1, placing the Balmer lines at 656, 486 and 434 nm and the Lyman series in the ultraviolet.",
+         "keywords": [
+          "rydberg formula",
+          "balmer series",
+          "spectral lines"
+         ],
+         "prerequisites": [
+          "Quantised Energy Levels and Ionisation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Kirchhoff's Laws & Spectrum Types",
+       "concepts": [
+        {
+         "title": "Kirchhoff's Three Spectral Laws",
+         "summary": "A hot dense body emits a continuum, a hot low-density gas emits bright lines at its own wavelengths, and a cooler gas in front of a continuum removes those same wavelengths as absorption lines.",
+         "keywords": [
+          "kirchhoff laws",
+          "emission lines",
+          "absorption lines"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Doppler Shift & Radial Velocity",
+       "concepts": [
+        {
+         "title": "Doppler Shift and Radial Velocity",
+         "summary": "For speeds well below c the shift is delta lambda/lambda = v_r/c, so a line at 500 nm displaced by 0.05 nm means 30 km/s, and only the line-of-sight component can be measured this way.",
+         "keywords": [
+          "doppler shift",
+          "radial velocity",
+          "redshift"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Spectral Line Formation",
+       "concepts": [
+        {
+         "title": "Equivalent Width and the Curve of Growth",
+         "summary": "Line strength grows with the absorbing column in three regimes, linear in N, roughly as sqrt(ln N) in the Doppler core and as sqrt(N) on the damping wings, so equivalent width alone gives no abundance without the regime.",
+         "keywords": [
+          "equivalent width",
+          "curve of growth",
+          "saturation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Spectral Line Broadening",
+       "concepts": [
+        {
+         "title": "Thermal and Pressure Broadening",
+         "summary": "Thermal motion widens a line by delta lambda/lambda = sqrt(2kT/m)/c, about 4x10^-5 for hydrogen at 10 000 K, while collisions thicken the damping wings in proportion to density.",
+         "keywords": [
+          "doppler broadening",
+          "pressure broadening",
+          "line width"
+         ]
+        },
+        {
+         "title": "Rotational and Macroturbulent Broadening",
+         "summary": "Rotation adds a profile whose full width is twice the projected equatorial speed, which is why a fast rotator shows broad shallow lines and a slow rotator narrow deep ones.",
+         "keywords": [
+          "rotation",
+          "line profile",
+          "projected velocity"
+         ],
+         "prerequisites": [
+          "Thermal and Pressure Broadening"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Excitation & Ionization Populations",
+       "concepts": [
+        {
+         "title": "The Boltzmann and Saha Equations",
+         "summary": "The Boltzmann equation sets the level populations at (g2/g1) exp(-dE/kT) and the Saha equation sets the ionisation balance, which is why a cool star shows neutral lines and a hot star of the same element shows ionised ones.",
+         "keywords": [
+          "boltzmann equation",
+          "saha equation",
+          "ionisation balance"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Radiation, Light & Magnitudes"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "units": [
+    {
+     "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+     "topics": [
+      {
+       "topic": "Geometric Optics of Telescopes",
+       "concepts": [
+        {
+         "title": "Focal Length, Magnification and Focal Ratio",
+         "summary": "Angular magnification is f_objective/f_eye, and the focal ratio f/D fixes both the plate scale and the light concentration, so a 0.2 m f/10 telescope has a 2 m focal length.",
+         "keywords": [
+          "focal length",
+          "magnification",
+          "focal ratio"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Light-Gathering Power & Limiting Magnitude",
+       "concepts": [
+        {
+         "title": "Collecting Area and Limiting Magnitude",
+         "summary": "Collecting area grows as D^2, so a 0.2 m telescope gathers about 800 times the light of a 7 mm dark-adapted pupil, worth roughly 7 magnitudes of extra reach.",
+         "keywords": [
+          "aperture",
+          "limiting magnitude",
+          "light grasp"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Angular Resolution, Seeing & Interferometry",
+       "concepts": [
+        {
+         "title": "The Diffraction Limit",
+         "summary": "A circular aperture resolves two points only when they are separated by more than 1.22 lambda/D radians, so a 0.1 m telescope at 500 nm is limited to about 1.3 arcseconds.",
+         "keywords": [
+          "diffraction limit",
+          "rayleigh criterion",
+          "resolution"
+         ]
+        },
+        {
+         "title": "Seeing, Adaptive Optics and Interferometry",
+         "summary": "Atmospheric seeing near 1 arcsecond usually sets the real ground-based resolution, and interferometry beats both limits by combining apertures across a baseline B to reach roughly lambda/B.",
+         "keywords": [
+          "seeing",
+          "adaptive optics",
+          "interferometry"
+         ],
+         "prerequisites": [
+          "The Diffraction Limit"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Telescope Designs & Aberrations",
+       "concepts": [
+        {
+         "title": "Refracting and Reflecting Telescope Designs",
+         "summary": "Refractors suffer chromatic aberration and a size limit set by sagging glass, so every large telescope is a reflector, in Newtonian, Cassegrain or Ritchey-Chretien form according to the field and focal ratio required.",
+         "keywords": [
+          "refractor",
+          "reflector",
+          "cassegrain"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Detectors & Observational Techniques",
+       "concepts": [
+        {
+         "title": "Detectors, Integration Time and Signal-to-Noise",
+         "summary": "A CCD accumulates signal linearly while read noise and sky background add in quadrature, so signal-to-noise grows as sqrt(t) when background-limited but only as t when read-noise-limited.",
+         "keywords": [
+          "ccd",
+          "integration time",
+          "signal-to-noise"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Atmospheric Windows & Multi-wavelength Astronomy",
+       "concepts": [
+        {
+         "title": "Atmospheric Windows and Space Observatories",
+         "summary": "The atmosphere passes visible light and part of the radio band but absorbs ultraviolet, X-rays and most infrared, so those bands need balloons, rockets or space telescopes above most of the absorbing column.",
+         "keywords": [
+          "atmospheric windows",
+          "space telescope",
+          "multiwavelength"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Light-Matter Interaction & Spectra"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Binary Stars & Stellar Parameters",
+   "units": [
+    {
+     "unit": "Binary Stars & Stellar Parameters",
+     "topics": [
+      {
+       "topic": "Classifying Binary Systems",
+       "concepts": [
+        {
+         "title": "Four Ways to Detect a Binary",
+         "summary": "A binary is classed by how it is found, resolved visually, by periodic line splitting, by eclipses in the light curve or by the wobble of the primary, and each class yields a different mix of orbital parameters.",
+         "keywords": [
+          "binary stars",
+          "light curve",
+          "detection methods"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Stellar Masses from Visual Binaries",
+       "concepts": [
+        {
+         "title": "Total Mass from Kepler's Third Law",
+         "summary": "For a visual binary the relative orbit gives a in astronomical units and P in years, so the total mass follows from M1 + M2 = a^3/P^2 in solar masses.",
+         "keywords": [
+          "kepler third law",
+          "total mass",
+          "visual binary"
+         ]
+        },
+        {
+         "title": "Individual Masses from the Barycentre",
+         "summary": "The barycentre divides the orbit in the ratio of the masses, so the measured semi-major axes give M1/M2 = a2/a1 and, with the sum, each mass separately.",
+         "keywords": [
+          "mass ratio",
+          "barycentre",
+          "individual masses"
+         ],
+         "prerequisites": [
+          "Total Mass from Kepler's Third Law"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Spectroscopic Binaries & the Mass Function",
+       "concepts": [
+        {
+         "title": "The Mass Function of a Single-Lined Binary",
+         "summary": "A single-lined spectroscopic binary yields only the mass function (M2 sin i)^3/(M1 + M2)^2 = P K1^3/(2 pi G), so the companion mass stays a lower limit until the inclination is known.",
+         "keywords": [
+          "mass function",
+          "spectroscopic binary",
+          "inclination"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Eclipsing Binaries: Radii & Temperature Ratios",
+       "concepts": [
+        {
+         "title": "Radii from Eclipse Durations and Velocities",
+         "summary": "Eclipse durations divided by the projected orbital speed give the stellar radii directly, because ingress lasts exactly the time to cross one stellar diameter.",
+         "keywords": [
+          "eclipsing binary",
+          "stellar radius",
+          "light curve"
+         ]
+        },
+        {
+         "title": "Temperature Ratio from Eclipse Depths",
+         "summary": "The relative depths of the primary and secondary minima give the surface-brightness ratio, so the temperature ratio follows from the fourth root of the flux ratio in the same bandpass.",
+         "keywords": [
+          "eclipse depth",
+          "temperature ratio",
+          "surface brightness"
+         ],
+         "prerequisites": [
+          "Radii from Eclipse Durations and Velocities"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Mass-Luminosity Relation",
+       "concepts": [
+        {
+         "title": "The Mass-Luminosity Relation",
+         "summary": "Main-sequence stars obey L/L_sun near (M/M_sun)^3.5, so a ten-solar-mass star is about 3 000 times more luminous and, with only ten times the fuel, exhausts it roughly 300 times sooner.",
+         "keywords": [
+          "mass-luminosity",
+          "main sequence",
+          "stellar lifetime"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Telescopes, Detectors & Multi-wavelength Astronomy"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Stellar Classification & the HR Diagram",
+   "units": [
+    {
+     "unit": "Stellar Classification & the HR Diagram",
+     "topics": [
+      {
+       "topic": "The OBAFGKM Spectral Sequence",
+       "concepts": [
+        {
+         "title": "The Harvard Spectral Sequence",
+         "summary": "The sequence OBAFGKM runs from about 50 000 K down to 2 500 K with ten subclasses each, so the Sun is a G2 star with T_eff near 5 800 K.",
+         "keywords": [
+          "spectral class",
+          "harvard sequence",
+          "temperature"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "MK Luminosity Classes",
+       "concepts": [
+        {
+         "title": "The MK Luminosity Classes",
+         "summary": "The Yerkes system appends Ia, Ib, II, III, IV or V to the spectral type and separates a supergiant from a dwarf of the same temperature, because a larger radius means lower gravity and narrower pressure-broadened lines.",
+         "keywords": [
+          "luminosity class",
+          "surface gravity",
+          "mk system"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Hertzsprung-Russell Diagram",
+       "concepts": [
+        {
+         "title": "Axes, Loci and the Main Sequence",
+         "summary": "The HR diagram plots luminosity against temperature, and stars gather on a main sequence from hot and bright to cool and faint, with giants, supergiants and white dwarfs lying off it.",
+         "keywords": [
+          "hr diagram",
+          "main sequence",
+          "luminosity"
+         ]
+        },
+        {
+         "title": "Mass and Evolution Read off the HR Diagram",
+         "summary": "Position on the main sequence fixes mass, so its upper end holds short-lived massive stars, and displacement off the sequence marks a post-main-sequence stage.",
+         "keywords": [
+          "hr diagram",
+          "stellar mass",
+          "evolution"
+         ],
+         "prerequisites": [
+          "Axes, Loci and the Main Sequence"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Color-Magnitude Diagram",
+       "concepts": [
+        {
+         "title": "Colour-Magnitude Diagrams of Star Clusters",
+         "summary": "Replacing temperature by colour index and luminosity by absolute magnitude gives the observed colour-magnitude diagram, whose turnoff fixes a cluster's age and whose red-giant branch tracks its metallicity.",
+         "keywords": [
+          "colour-magnitude",
+          "star cluster",
+          "turnoff"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Spectroscopic Parallax",
+       "concepts": [
+        {
+         "title": "Spectroscopic Parallax",
+         "summary": "Spectral type plus luminosity class fixes absolute magnitude, and subtracting it from the apparent magnitude gives the distance through the distance modulus, with no geometric parallax needed.",
+         "keywords": [
+          "spectroscopic parallax",
+          "absolute magnitude",
+          "distance"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Binary Stars & Stellar Parameters"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Stellar Atmospheres & Interiors",
+   "units": [
+    {
+     "unit": "Stellar Atmospheres & Interiors",
+     "topics": [
+      {
+       "topic": "The Radiation Field: Intensity, Flux & Radiation Pressure",
+       "concepts": [
+        {
+         "title": "Specific Intensity, Flux and Radiation Pressure",
+         "summary": "Specific intensity, the energy per area, time, solid angle and frequency, is conserved along a ray in vacuum, flux follows F = integral of I cos(theta) dOmega and falls as 1/d^2, and radiation pressure 4 sigma T^4/(3c) balances gravity at the Eddington luminosity.",
+         "keywords": [
+          "specific intensity",
+          "flux",
+          "radiation pressure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Opacity, Mean Free Path & Optical Depth",
+       "concepts": [
+        {
+         "title": "Opacity, Optical Depth and Mean Free Path",
+         "summary": "Optical depth, the integral of kappa rho ds, counts the mean free paths a photon crosses, so the photosphere is by definition where that depth reaches 1 and the mean free path is 1/(kappa rho).",
+         "keywords": [
+          "opacity",
+          "optical depth",
+          "mean free path"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Radiative Transfer, the Gray Atmosphere & Line Formation",
+       "concepts": [
+        {
+         "title": "The Radiative Transfer Equation",
+         "summary": "Along a ray dI/ds = -kappa rho I + j, and in local thermodynamic equilibrium the source function equals the Planck function, so emergent intensity is B_nu averaged over the last unit of optical depth.",
+         "keywords": [
+          "radiative transfer",
+          "source function",
+          "local equilibrium"
+         ]
+        },
+        {
+         "title": "Limb Darkening in a Gray Atmosphere",
+         "summary": "A grazing ray reaches optical depth 1 in a cooler, higher layer, so the solar disc darkens towards the limb, and the Eddington grey atmosphere predicts I(mu)/I(1) = (2 + 3 mu)/5 for mu = cos(theta).",
+         "keywords": [
+          "limb darkening",
+          "gray atmosphere",
+          "photosphere"
+         ],
+         "prerequisites": [
+          "The Radiative Transfer Equation"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Hydrostatic Equilibrium & the Equation of State",
+       "concepts": [
+        {
+         "title": "Hydrostatic Equilibrium and Central Conditions",
+         "summary": "Each layer balances pressure against weight, dP/dr = -G M_r rho/r^2, which for the Sun implies a central pressure near 10^16 Pa and a central temperature near 1.5x10^7 K.",
+         "keywords": [
+          "hydrostatic equilibrium",
+          "pressure gradient",
+          "central temperature"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Nuclear Energy Generation",
+       "concepts": [
+        {
+         "title": "The Proton-Proton Chain and the CNO Cycle",
+         "summary": "Hydrogen fusion yields 26.7 MeV per helium nucleus, and the proton-proton chain dominates below about 1.3 solar masses while the far steeper CNO cycle takes over in more massive stars.",
+         "keywords": [
+          "pp chain",
+          "cno cycle",
+          "hydrogen fusion"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Energy Transport: Radiative Diffusion & Convection",
+       "concepts": [
+        {
+         "title": "Radiative Diffusion and Convection",
+         "summary": "Radiative transport is a random walk that takes about 10^5 years to cross the solar interior, while convection takes over where the gradient exceeds the adiabatic one and carries the outer envelope in weeks to months.",
+         "keywords": [
+          "radiative diffusion",
+          "convection",
+          "random walk"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Stellar Structure Equations, the Virial Theorem & Timescales",
+       "concepts": [
+        {
+         "title": "The Virial Theorem",
+         "summary": "For a bound, non-relativistic system 2K + Omega = 0, so half the energy released by contraction is radiated and half raises the internal temperature, which is why a collapsing cloud heats up.",
+         "keywords": [
+          "virial theorem",
+          "contraction",
+          "binding energy"
+         ]
+        },
+        {
+         "title": "The Three Stellar Timescales",
+         "summary": "The dynamical time sqrt(R^3/GM) is about 30 minutes for the Sun, the Kelvin-Helmholtz time about 3x10^7 years and the nuclear time about 10^10 years, which is why the Sun sits stably on the main sequence.",
+         "keywords": [
+          "dynamical timescale",
+          "kelvin-helmholtz",
+          "nuclear timescale"
+         ],
+         "prerequisites": [
+          "The Virial Theorem"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Sun as the Calibrating Standard Model",
+       "concepts": [
+        {
+         "title": "The Standard Solar Model",
+         "summary": "A model with 1.989x10^30 kg, 6.96x10^8 m, 3.83x10^26 W and 5 772 K reproduces the observed p-mode frequencies and the 8.8 MeV boron-8 neutrino flux, which is how the interior solution is tested.",
+         "keywords": [
+          "standard solar model",
+          "helioseismology",
+          "solar neutrinos"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Stellar Classification & the HR Diagram"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Star Formation, Evolution & the ISM",
+   "units": [
+    {
+     "unit": "Star Formation, Evolution & the ISM",
+     "topics": [
+      {
+       "topic": "The Interstellar Medium",
+       "concepts": [
+        {
+         "title": "Phases of the Interstellar Medium",
+         "summary": "The interstellar medium ranges from molecular clouds at 10 to 20 K and 10^2 to 10^6 particles per cm^3, through warm neutral gas near 8 000 K, to hot ionised gas above 10^6 K, the phases held in rough pressure balance.",
+         "keywords": [
+          "interstellar medium",
+          "molecular cloud",
+          "phases"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Star Formation & Collapse",
+       "concepts": [
+        {
+         "title": "The Jeans Mass and Gravitational Collapse",
+         "summary": "A cloud collapses only when its mass exceeds the Jeans mass, which scales as T^(3/2) rho^(-1/2), so cold dense cores collapse while warm diffuse gas does not.",
+         "keywords": [
+          "jeans mass",
+          "gravitational collapse",
+          "molecular cloud"
+         ]
+        },
+        {
+         "title": "Protostars, Accretion Discs and Outflows",
+         "summary": "A collapsing core conserves angular momentum, so it flattens into a disc, drives bipolar outflows along the rotation axis, and reaches the main sequence only after a Kelvin-Helmholtz time of some 3x10^7 years at one solar mass.",
+         "keywords": [
+          "protostar",
+          "accretion disc",
+          "bipolar outflow"
+         ],
+         "prerequisites": [
+          "The Jeans Mass and Gravitational Collapse"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Main-Sequence Evolution",
+       "concepts": [
+        {
+         "title": "Main-Sequence Lifetimes",
+         "summary": "A star burns core hydrogen for about 10^10 (M/M_sun)^(-2.5) years, so a ten solar mass star lasts 3x10^7 years and a half-solar-mass star about 6x10^10 years.",
+         "keywords": [
+          "main sequence",
+          "stellar lifetime",
+          "hydrogen burning"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Post-Main-Sequence Evolution",
+       "concepts": [
+        {
+         "title": "Red Giants and the Helium Flash",
+         "summary": "Once core hydrogen is spent the core contracts and the envelope swells to 10 to 100 solar radii, and a one-solar-mass star ignites helium in a degenerate-core flash before settling onto the horizontal branch.",
+         "keywords": [
+          "red giant",
+          "helium flash",
+          "horizontal branch"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Star Clusters as Evolutionary Clocks",
+       "concepts": [
+        {
+         "title": "The Main-Sequence Turnoff Age",
+         "summary": "Because lifetime scales as M^(-2.5), a cluster's turnoff mass dates it, so the turnoff luminosity read from the colour-magnitude diagram is the cluster's clock.",
+         "keywords": [
+          "turnoff",
+          "cluster age",
+          "isochrone"
+         ]
+        },
+        {
+         "title": "Open versus Globular Clusters",
+         "summary": "Open clusters are young, metal-rich disc systems of 10^2 to 10^3 stars, whereas globular clusters are ancient metal-poor haloes of 10^5 to 10^6 stars whose turnoffs sit below the solar mass.",
+         "keywords": [
+          "open cluster",
+          "globular cluster",
+          "stellar population"
+         ],
+         "prerequisites": [
+          "The Main-Sequence Turnoff Age"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Nucleosynthesis & Chemical Enrichment",
+       "concepts": [
+        {
+         "title": "Stellar Nucleosynthesis and Metallicity",
+         "summary": "Fusion builds elements up to iron, elements beyond iron need neutron capture in AGB stars and supernovae, and each generation's ejecta raise the metallicity of the gas the next stars form from.",
+         "keywords": [
+          "nucleosynthesis",
+          "metallicity",
+          "chemical enrichment"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Stellar Pulsation & Variable Stars",
+       "concepts": [
+        {
+         "title": "The Period-Density Relation for Pulsators",
+         "summary": "A pulsating star obeys a constant product of period and the square root of mean density, so the period fixes that density and a Cepheid with a ten-day period has a radius of order 10^2 solar radii.",
+         "keywords": [
+          "pulsation",
+          "cepheid",
+          "period-density"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Stellar Atmospheres & Interiors"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Stellar Death & Compact Objects",
+   "units": [
+    {
+     "unit": "Stellar Death & Compact Objects",
+     "topics": [
+      {
+       "topic": "Supernovae & Their Aftermath",
+       "concepts": [
+        {
+         "title": "Core-Collapse and Thermonuclear Supernovae",
+         "summary": "A star above about eight solar masses ends in a core-collapse supernova that releases near 10^46 J and leaves a neutron star or black hole, while a Type Ia comes from a white dwarf reaching 1.4 solar masses and is standardisable for cosmology.",
+         "keywords": [
+          "supernova",
+          "core collapse",
+          "type ia"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "White Dwarfs & Electron Degeneracy",
+       "concepts": [
+        {
+         "title": "White Dwarf Degeneracy and Cooling",
+         "summary": "Electron degeneracy pressure holds a white dwarf near 0.01 solar radii only below the Chandrasekhar mass of 1.4 solar masses, and with no fusion source the star then cools along a sequence whose faint end dates its cluster.",
+         "keywords": [
+          "white dwarf",
+          "degeneracy pressure",
+          "chandrasekhar limit"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Neutron Stars & Pulsars",
+       "concepts": [
+        {
+         "title": "Neutron Star Structure and the Pulsar Beam",
+         "summary": "A neutron star puts 1.4 solar masses inside a 10 km radius at nuclear density near 10^17 kg/m^3, and a misaligned magnetic dipole beams radiation that sweeps past Earth once per rotation.",
+         "keywords": [
+          "neutron star",
+          "pulsar",
+          "magnetic dipole"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Relativity, Schwarzschild Geometry & Black Holes",
+       "concepts": [
+        {
+         "title": "The Schwarzschild Radius and Event Horizon",
+         "summary": "The Schwarzschild radius 2GM/c^2 is 3 km per solar mass, so a ten-solar-mass black hole has a 30 km horizon and a clock hovering at twice that radius ticks at 1/sqrt(2) of the rate at infinity.",
+         "keywords": [
+          "schwarzschild radius",
+          "event horizon",
+          "black hole"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Accretion & Interacting Binaries",
+       "concepts": [
+        {
+         "title": "Accretion Discs and the Eddington Limit",
+         "summary": "Accretion liberates GM(dM/dt)/R, so a neutron star accreting 10^-8 solar masses per year radiates about 10^31 W, and the Eddington limit caps how fast a compact object can be fed.",
+         "keywords": [
+          "accretion disc",
+          "x-ray binary",
+          "eddington limit"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Star Formation, Evolution & the ISM"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "The Milky Way & Galaxies",
+   "units": [
+    {
+     "unit": "The Milky Way & Galaxies",
+     "topics": [
+      {
+       "topic": "The Milky Way Galaxy",
+       "concepts": [
+        {
+         "title": "Structure and Rotation of the Milky Way",
+         "summary": "The Galaxy is a barred spiral about 30 kpc across with the Sun 8 kpc from the centre, and its rotation curve stays near 220 km/s far beyond the visible disc, which implies a dark halo of several times the visible mass.",
+         "keywords": [
+          "milky way",
+          "rotation curve",
+          "dark matter"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Galaxy Morphology & Structure",
+       "concepts": [
+        {
+         "title": "The Hubble Sequence",
+         "summary": "Galaxies divide into ellipticals, lenticulars, spirals and irregulars along the Hubble sequence, which orders them by the balance of bulge and disc rather than by a single evolutionary path.",
+         "keywords": [
+          "hubble sequence",
+          "morphology",
+          "elliptical galaxy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Extragalactic Distance Ladder",
+       "concepts": [
+        {
+         "title": "Cepheids as Standard Candles",
+         "summary": "The period-luminosity law makes a Cepheid a standard candle, so a ten-day Cepheid near 3x10^3 solar luminosities has its distance fixed by its period and apparent brightness to a few per cent.",
+         "keywords": [
+          "cepheid",
+          "period-luminosity",
+          "standard candle"
+         ]
+        },
+        {
+         "title": "The Distance Ladder and Its Systematics",
+         "summary": "Parallax, Cepheids, the red-giant tip, the Tully-Fisher relation and Type Ia supernovae calibrate one another in sequence, so an error at one rung propagates into every distance above it.",
+         "keywords": [
+          "distance ladder",
+          "tully-fisher",
+          "calibration"
+         ],
+         "prerequisites": [
+          "Cepheids as Standard Candles"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Galaxy Formation & Evolution",
+       "concepts": [
+        {
+         "title": "Hierarchical Assembly in a Dark Matter Universe",
+         "summary": "Structure grows bottom-up through mergers in a cold dark matter universe, so large galaxies are assembled from smaller pieces and their star formation peaks near redshift 2.",
+         "keywords": [
+          "hierarchical formation",
+          "mergers",
+          "star formation history"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Galaxy Clusters & Large-Scale Structure",
+       "concepts": [
+        {
+         "title": "Clusters, Groups and the Cosmic Web",
+         "summary": "A galaxy cluster holds 10^2 to 10^3 galaxies within a few Mpc and is dominated by 10^7 to 10^8 K intracluster gas and dark matter, and clusters trace the filaments and voids of the cosmic web.",
+         "keywords": [
+          "galaxy cluster",
+          "cosmic web",
+          "intracluster gas"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Active Galaxies & AGN",
+       "concepts": [
+        {
+         "title": "The Unified Model of Active Galactic Nuclei",
+         "summary": "An active nucleus is powered by accretion onto a supermassive black hole, and the viewing angle through the dusty torus explains why one engine appears as a Seyfert galaxy, a quasar or a blazar.",
+         "keywords": [
+          "active galactic nuclei",
+          "quasar",
+          "unified model"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Stellar Death & Compact Objects"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Cosmology & the Early Universe",
+   "units": [
+    {
+     "unit": "Cosmology & the Early Universe",
+     "topics": [
+      {
+       "topic": "Cosmic Expansion & Hubble's Law",
+       "concepts": [
+        {
+         "title": "Hubble's Law and the Hubble Constant",
+         "summary": "Recession grows with distance as v = H0 d, so H0 near 70 km/s/Mpc puts a galaxy at 100 Mpc at 7 000 km/s and gives a Hubble time of about 14 Gyr.",
+         "keywords": [
+          "hubble law",
+          "hubble constant",
+          "recession"
+         ]
+        },
+        {
+         "title": "Cosmological Redshift and the Scale Factor",
+         "summary": "Cosmological redshift obeys 1 + z = a_observed/a_emitted, so z = 1 means the light left when the universe was half its present size.",
+         "keywords": [
+          "redshift",
+          "scale factor",
+          "lookback time"
+         ],
+         "prerequisites": [
+          "Hubble's Law and the Hubble Constant"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Scale Factor, Critical Density & the Fate of the Universe",
+       "concepts": [
+        {
+         "title": "The Critical Density and Omega",
+         "summary": "The critical density 3H0^2/(8 pi G) is about 9x10^-27 kg/m^3 for H0 = 70 km/s/Mpc, and the ratio Omega = rho/rho_c decides whether the spatial geometry is closed, flat or open.",
+         "keywords": [
+          "critical density",
+          "omega",
+          "geometry"
+         ]
+        },
+        {
+         "title": "The Friedmann Equation and Accelerating Expansion",
+         "summary": "The Friedmann equation ties the expansion rate to density and curvature, and the data since 1998 require a dark-energy density near 0.7, so the expansion accelerates instead of slowing.",
+         "keywords": [
+          "friedmann equation",
+          "dark energy",
+          "acceleration"
+         ],
+         "prerequisites": [
+          "The Critical Density and Omega"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Cosmic Microwave Background",
+       "concepts": [
+        {
+         "title": "The CMB and Its Acoustic Peaks",
+         "summary": "The cosmic microwave background is a 2.725 K blackbody released at recombination near redshift 1 100, and its acoustic peaks fix a flat geometry and the baryon fraction.",
+         "keywords": [
+          "cmb",
+          "recombination",
+          "acoustic peaks"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Big Bang Nucleosynthesis",
+       "concepts": [
+        {
+         "title": "Big Bang Nucleosynthesis and the Light Elements",
+         "summary": "Within the first few minutes, as kT fell below about 1 MeV, nucleosynthesis left roughly 75 per cent hydrogen, 25 per cent helium-4 and traces of deuterium and lithium-7, which fixes the baryon-to-photon ratio.",
+         "keywords": [
+          "big bang nucleosynthesis",
+          "helium abundance",
+          "baryon density"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Dark Energy & Accelerating Expansion",
+       "concepts": [
+        {
+         "title": "Dark Energy and the Equation of State",
+         "summary": "Dark energy supplies about 68 per cent of the energy budget with an equation of state w = p/(rho c^2) consistent with -1, which is why the expansion accelerates although gravity pulls inward.",
+         "keywords": [
+          "dark energy",
+          "cosmological constant",
+          "equation of state"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Inflation & the Horizon and Flatness Problems",
+       "concepts": [
+        {
+         "title": "Inflation and the Horizon and Flatness Problems",
+         "summary": "An epoch of exponential expansion by at least e^60 explains how causally disconnected patches share one background temperature and why Omega is driven so close to 1.",
+         "keywords": [
+          "inflation",
+          "horizon problem",
+          "flatness problem"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "The Milky Way & Galaxies"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "The Solar System & Exoplanets",
+   "units": [
+    {
+     "unit": "The Solar System & Exoplanets",
+     "topics": [
+      {
+       "topic": "Solar System Orbital Phenomena",
+       "concepts": [
+        {
+         "title": "Oppositions, Synodic Periods and Retrograde Loops",
+         "summary": "A planet's synodic period with Earth follows 1/S = 1/P_planet - 1/P_Earth, giving 780 days for Mars, and the geometry of Earth catching up produces the opposition and its retrograde loop.",
+         "keywords": [
+          "opposition",
+          "synodic period",
+          "retrograde"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Terrestrial Planets",
+       "concepts": [
+        {
+         "title": "Comparative Geology of the Terrestrial Planets",
+         "summary": "Mercury, Venus, Earth and Mars share a rocky differentiated composition but differ in atmosphere and surface because planet size sets whether gas is retained and whether plate tectonics or volcanism dominates.",
+         "keywords": [
+          "terrestrial planets",
+          "differentiation",
+          "atmosphere"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Giant Planets",
+       "concepts": [
+        {
+         "title": "The Giant Planets and Their Interiors",
+         "summary": "Jupiter and Saturn are 318 and 95 Earth masses of hydrogen and helium with metallic-hydrogen interiors, Uranus and Neptune are 14 to 17 Earth-mass ice giants, and all four lack a solid surface and carry strong magnetic fields.",
+         "keywords": [
+          "giant planets",
+          "metallic hydrogen",
+          "ice giants"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Minor Bodies of the Solar System",
+       "concepts": [
+        {
+         "title": "Asteroids, Comets and the Kuiper Belt",
+         "summary": "Main-belt asteroids orbit between 2.2 and 3.3 au, comets arrive from the Kuiper belt and Oort cloud and grow tails only inside about 5 au, and the belt's total mass is under a thousandth of Earth's.",
+         "keywords": [
+          "asteroids",
+          "comets",
+          "kuiper belt"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Formation of Planetary Systems",
+       "concepts": [
+        {
+         "title": "The Protoplanetary Disc and Planetesimal Accretion",
+         "summary": "A protoplanetary disc builds planetesimals from sticky grains and then cores by runaway accretion, and beyond the snow line near 3 au cores grow fast enough to capture hydrogen before the gas disperses in a few million years.",
+         "keywords": [
+          "protoplanetary disc",
+          "planetesimal",
+          "snow line"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Exoplanet Detection",
+       "concepts": [
+        {
+         "title": "The Transit Method",
+         "summary": "A transiting planet dims its star by (R_p/R_star)^2, so a Jupiter across a Sun-like star gives a one per cent dip, and a hot Jupiter at 0.05 au repeats every four days.",
+         "keywords": [
+          "transit",
+          "photometry",
+          "hot jupiter"
+         ]
+        },
+        {
+         "title": "The Radial-Velocity Method",
+         "summary": "The stellar reflex motion has semi-amplitude proportional to m_p sin(i)/M_star times (2 pi G/P)^(1/3), so Jupiter moves the Sun by 12.5 m/s while Earth moves it by 9 cm/s.",
+         "keywords": [
+          "radial velocity",
+          "reflex motion",
+          "minimum mass"
+         ],
+         "prerequisites": [
+          "The Transit Method"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Cosmology & the Early Universe"
+     ]
+    }
+   ]
+  }
+ ]
+}

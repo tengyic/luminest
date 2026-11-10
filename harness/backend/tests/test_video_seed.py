@@ -42,7 +42,7 @@ def seed(monkeypatch, tmp_path):
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '0')      # the shipped default
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
     return Settings.from_env(), json.loads(SEED.read_text(encoding='utf-8'))

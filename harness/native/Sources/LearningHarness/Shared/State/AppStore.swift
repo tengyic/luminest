@@ -2,6 +2,54 @@ import Foundation
 import AppKit
 import Combine
 
+/// One voice the Settings picker can offer. Mirrors the backend's ``VOICE_PRESETS`` so the
+/// picker renders even before the first ``/voice/voices`` fetch lands, and so the chosen
+/// preset's ``tone`` is known client-side (the server only sees the resolved ``voice`` and
+/// ``tone`` strings on each request, not the picker's selection).
+struct VoiceOption: Identifiable, Codable, Hashable {
+    let id: String
+    let label: String
+    let voice: String
+    let tone: String
+    let note: String
+
+    /// The presets the backend lists, kept here as a fallback so the picker is never empty.
+    static let builtIn: [VoiceOption] = [
+        VoiceOption(id: "default", label: "Default voice", voice: "", tone: "",
+                    note: "The instance-configured voice and tone."),
+        VoiceOption(id: "warm_teacher", label: "Warm teacher · female, British", voice: "",
+                    tone: "female, young adult, moderate pitch, british accent", note: ""),
+        VoiceOption(id: "clear_narrator", label: "Clear narrator · male, American", voice: "",
+                    tone: "male, middle-aged, moderate pitch, american accent", note: ""),
+        VoiceOption(id: "friendly_tutor", label: "Friendly tutor · female, American", voice: "",
+                    tone: "female, young adult, moderate pitch, american accent", note: ""),
+        VoiceOption(id: "calm_explainer", label: "Calm explainer · male, Australian", voice: "",
+                    tone: "male, young adult, moderate pitch, australian accent", note: ""),
+        VoiceOption(id: "energetic_coach", label: "Energetic coach · female, high pitch", voice: "",
+                    tone: "female, young adult, high pitch, american accent", note: ""),
+        VoiceOption(id: "mandarin_teacher", label: "Mandarin teacher · female, Chinese", voice: "",
+                    tone: "female, young adult, moderate pitch, chinese accent", note: ""),
+        VoiceOption(id: "custom", label: "Custom profile name…", voice: "", tone: "",
+                    note: "Send a specific VoiceStudio profile name as the voice."),
+    ]
+
+    /// Resolve a picker selection into the two strings a speech request carries.
+    ///
+    /// Pure on purpose: the tutor turn, the lecture, the supervision notice and both
+    /// read-aloud buttons must all send the *same* pair, and a hidden dependency on the
+    /// live store is exactly where two paths would start disagreeing. An unknown id (an
+    /// old saved preference after a preset is renamed) resolves to the instance default
+    /// rather than to a voice nobody chose.
+    static func resolve(id: String, custom: String,
+                        options: [VoiceOption]) -> (voice: String, tone: String) {
+        if id == "custom" {
+            return (custom.trimmingCharacters(in: .whitespacesAndNewlines), "")
+        }
+        let chosen = options.first(where: { $0.id == id })
+        return (chosen?.voice ?? "", chosen?.tone ?? "")
+    }
+}
+
 @MainActor final class AppStore: ObservableObject {
     @Published var page: Page = .today
     @Published var user: JSON = .null
@@ -53,6 +101,42 @@ import Combine
     @Published var speakEnabled = UserDefaults.standard.bool(forKey: "luminfest.tutor.speak") {
         didSet { UserDefaults.standard.set(speakEnabled, forKey: "luminfest.tutor.speak") }
     }
+    /// Which voice the tutor, the lecture and read-aloud all speak with. Stored on the Mac,
+    /// not the server: the resolved ``voice`` and ``tone`` travel in on every request, so the
+    /// selection follows the operator's machine rather than their account. ``default`` means
+    /// "use the instance-configured voice"; ``custom`` means a freeform profile name the
+    /// operator typed.
+    @Published var selectedVoiceID = UserDefaults.standard.string(forKey: "luminfest.voice.id") ?? "default" {
+        didSet { UserDefaults.standard.set(selectedVoiceID, forKey: "luminfest.voice.id") }
+    }
+    /// Freeform VoiceStudio profile name, used when the picker is on "custom".
+    @Published var customVoice = UserDefaults.standard.string(forKey: "luminfest.voice.custom") ?? "" {
+        didSet { UserDefaults.standard.set(customVoice, forKey: "luminfest.voice.custom") }
+    }
+    /// The voices the Settings picker offers, fetched from ``/voice/voices``. Seeded with
+    /// ``VoiceOption.builtIn`` so the picker is usable before the first fetch.
+    @Published var voiceOptions: [VoiceOption] = VoiceOption.builtIn
+    /// Whether the backend's voice output is switched on (``voice_enabled``). The picker
+    /// shows this so a selection that points at a muted instance is obviously inert.
+    @Published var voiceEnabled = false
+    /// A human line about the voice service, when it is not speaking (off, engine absent).
+    @Published var voiceStatus = ""
+
+    /// The ``voice`` string to send: the custom name when the picker is on "custom", else the
+    /// selected preset's profile (often empty, which means "instance default").
+    var effectiveVoice: String {
+        VoiceOption.resolve(id: selectedVoiceID, custom: customVoice,
+                            options: voiceOptions).voice
+    }
+    /// The ``tone`` (instruct) string to send, from the selected preset. ``custom`` carries no tone.
+    var effectiveTone: String {
+        VoiceOption.resolve(id: selectedVoiceID, custom: customVoice,
+                            options: voiceOptions).tone
+    }
+    /// Label of the current selection, for the teacher-panel speak button's tooltip.
+    var selectedVoiceLabel: String {
+        voiceOptions.first(where: { $0.id == selectedVoiceID })?.label ?? "Default voice"
+    }
     /// Why the voice is not playing, when it is not. Empty means nothing to report.
     @Published var speechStatus = ""
 
@@ -79,6 +163,53 @@ import Combine
     /// ``notice`` because that channel means "saved" and drives a celebration animation;
     /// a supervision line is neither a reward nor an error.
     @Published var supervisionNotice: String?
+
+    /// Fetch the voice list and status from the backend, so the Settings picker offers the
+    /// instance's real presets and reflects whether voice output is switched on. Called on
+    /// both auth paths (fresh sign-in and restored session) and whenever Settings opens, so
+    /// an instance that was restarted with a different voice config is reflected without a
+    /// relaunch. A failed fetch leaves the built-in presets in place rather than blanking the UI.
+    func refreshVoices() {
+        guard authenticated else { return }
+        run { [weak self] in
+            guard let self else { return }
+            do {
+                let result = try await self.api.json("/voice/voices")
+                let presets = result["presets"].array
+                var options: [VoiceOption] = []
+                for p in presets {
+                    let option = VoiceOption(
+                        id: p["id"].string,
+                        label: p["label"].string,
+                        voice: p["voice"].string,
+                        tone: p["tone"].string,
+                        note: p["note"].string)
+                    options.append(option)
+                }
+                await MainActor.run { [weak self] in
+                    guard let self else { return }
+                    if !options.isEmpty { self.voiceOptions = options }
+                    // A saved id for a preset that was renamed or removed would leave the
+                    // picker showing nothing while speech quietly used the instance default.
+                    // Make the visible selection agree with what will actually be sent.
+                    if self.selectedVoiceID != "custom",
+                       !self.voiceOptions.contains(where: { $0.id == self.selectedVoiceID }) {
+                        self.selectedVoiceID = "default"
+                    }
+                    self.voiceEnabled = result["enabled"].bool
+                    self.voiceStatus = self.voiceEnabled
+                        ? "" : "Voice output is off on this instance (voice_enabled)."
+                }
+            } catch {
+                // Keep the built-in presets, but name the fallback: a picker that quietly
+                // showed a stale list after a failed fetch would look like it had succeeded.
+                await MainActor.run { [weak self] in
+                    self?.voiceEnabled = false
+                    self?.voiceStatus = "The voice list could not be fetched; showing the built-in presets."
+                }
+            }
+        }
+    }
 
     /// Record that the learner did something the harness can see.
     ///
@@ -107,6 +238,11 @@ import Combine
             "idle_seconds": idle,
             "window_seconds": 300,
             "active_seconds": min(300, max(0, activeSeconds)),
+            // A supervision line is the teacher speaking too. Sending the same resolved
+            // voice and tone as a tutor turn keeps one voice across the whole session
+            // instead of the notice dropping back to the instance default.
+            "voice": effectiveVoice,
+            "tone": effectiveTone,
         ]
         if let last = lastNoticeAt { body["last_notice_at"] = last }
         let version = epoch, id = selectedConcept
@@ -268,6 +404,10 @@ import Combine
             guard epoch == version else { return }
             user = me["user"].isNull ? me : me["user"]
             connected = true
+            // Restoring a saved session is the common path on launch, so it must load the
+            // voice list too — otherwise the picker only learns the instance's presets
+            // after a fresh sign-in.
+            refreshVoices()
             await refresh()
         } catch {
             guard epoch == version else { return }
@@ -312,6 +452,7 @@ import Combine
             }
             endpoint = origin; UserDefaults.standard.set(origin, forKey: "luminfest.endpoint")
             api.token = token; user = result["user"]; connected = true
+            refreshVoices()
             // New accounts opt in only through the explicit settings control.
             if register && user["telemetry_consent"].bool {
                 let updated = try await api.json("/me", method: "PATCH", body: ["telemetry_consent": false])

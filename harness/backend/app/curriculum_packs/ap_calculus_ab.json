@@ -1,0 +1,2877 @@
+{
+ "schema": 1,
+ "name": "ap_calculus_ab",
+ "title": "AP Calculus AB",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A college-level calculus course organised around the AP Calculus AB framework: limits and continuity at a point and over an interval; the derivative as a limit, the power, product and quotient rules, and the derivatives of the elementary functions; the chain rule, implicit differentiation and inverse functions; interpretation of the derivative in motion and related-rate contexts, linearization and L'Hopital's rule; the mean value theorem, monotonicity, concavity, curve sketching and optimization; Riemann sums, the fundamental theorem and techniques of antidifferentiation; slope fields, separation of variables and exponential models; and average value, displacement, area between curves and volumes of revolution.",
+  "id_namespace": {
+   "prefix": "ap_calculus_ab_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "",
+   "supplements": [],
+   "link_only_note": "OpenStax Calculus Volume 1 reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored or quoted.",
+   "units": {
+    "Limits and Continuity": [],
+    "Differentiation: Definition and Fundamental Properties": [],
+    "Differentiation: Composite, Implicit, and Inverse Functions": [],
+    "Contextual Applications of Differentiation": [],
+    "Analytical Applications of Differentiation": [],
+    "Integration and Accumulation of Change": [],
+    "Differential Equations": [],
+    "Applications of Integration": []
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Limits and Continuity": {
+    "Limits and Continuity": [
+     "Can Change Occur at an Instant?",
+     "Defining Limits and Limit Notation",
+     "Estimating Limits from Graphs",
+     "Estimating Limits from Tables",
+     "Limits Using Algebraic Properties",
+     "Limits Using Algebraic Manipulation",
+     "Selecting Procedures for Determining Limits",
+     "The Squeeze Theorem",
+     "Connecting Multiple Representations",
+     "Types of Discontinuities",
+     "Defining Continuity at a Point",
+     "Confirming Continuity over an Interval",
+     "Removing Discontinuities",
+     "Infinite Limits and Vertical Asymptotes",
+     "Limits at Infinity and Horizontal Asymptotes",
+     "The Intermediate Value Theorem"
+    ]
+   },
+   "Differentiation: Definition and Fundamental Properties": {
+    "Differentiation: Definition and Fundamental Properties": [
+     "Average and Instantaneous Rates of Change",
+     "Defining the Derivative and Its Notation",
+     "Estimating Derivatives at a Point",
+     "Differentiability and Continuity",
+     "The Power Rule",
+     "Constant, Sum, Difference and Constant Multiple Rules",
+     "Derivatives of cos x, sin x, e^x and ln x",
+     "The Product Rule",
+     "The Quotient Rule",
+     "Derivatives of Tangent, Cotangent, Secant and Cosecant"
+    ]
+   },
+   "Differentiation: Composite, Implicit, and Inverse Functions": {
+    "Differentiation: Composite, Implicit, and Inverse Functions": [
+     "The Chain Rule",
+     "Implicit Differentiation",
+     "Differentiating Inverse Functions",
+     "Differentiating Inverse Trigonometric Functions",
+     "Selecting Procedures for Calculating Derivatives",
+     "Higher-Order Derivatives"
+    ]
+   },
+   "Contextual Applications of Differentiation": {
+    "Contextual Applications of Differentiation": [
+     "Interpreting the Derivative in Context",
+     "Straight-Line Motion",
+     "Rates of Change in Other Applied Contexts",
+     "Introduction to Related Rates",
+     "Solving Related Rates Problems",
+     "Local Linearity and Linearization",
+     "L'Hopital's Rule for Indeterminate Forms"
+    ]
+   },
+   "Analytical Applications of Differentiation": {
+    "Analytical Applications of Differentiation": [
+     "The Mean Value Theorem",
+     "Extreme Value Theorem, Extrema and Critical Points",
+     "Intervals of Increase and Decrease",
+     "The First Derivative Test",
+     "The Candidates Test for Absolute Extrema",
+     "Concavity over a Domain",
+     "The Second Derivative Test",
+     "Sketching Graphs of Functions and Their Derivatives",
+     "Connecting a Function, Its First and Second Derivative",
+     "Introduction to Optimization",
+     "Solving Optimization Problems",
+     "Behaviours of Implicit Relations"
+    ]
+   },
+   "Integration and Accumulation of Change": {
+    "Integration and Accumulation of Change": [
+     "Exploring Accumulation of Change",
+     "Approximating Areas with Riemann Sums",
+     "Riemann Sums, Summation Notation and Definite Integral Notation",
+     "The Fundamental Theorem of Calculus and Accumulation Functions",
+     "Interpreting Accumulation Functions Involving Area",
+     "Properties of Definite Integrals",
+     "The Fundamental Theorem of Calculus and Definite Integrals",
+     "Antiderivatives and Indefinite Integrals",
+     "Integration by Substitution",
+     "Integration Using Long Division and Completing the Square",
+     "Selecting Techniques for Antidifferentiation"
+    ]
+   },
+   "Differential Equations": {
+    "Differential Equations": [
+     "Modeling with Differential Equations",
+     "Verifying Solutions",
+     "Sketching Slope Fields",
+     "Reasoning Using Slope Fields",
+     "General Solutions by Separation of Variables",
+     "Particular Solutions with Initial Conditions",
+     "Exponential Models with Differential Equations"
+    ]
+   },
+   "Applications of Integration": {
+    "Applications of Integration": [
+     "Average Value of a Function",
+     "Position, Velocity and Acceleration Using Integrals",
+     "Accumulation Functions in Applied Contexts",
+     "Area Between Curves as Functions of x",
+     "Area Between Curves as Functions of y",
+     "Area Between Curves with More Than Two Intersections",
+     "Volumes with Cross Sections: Squares and Rectangles",
+     "Volumes with Cross Sections: Triangles and Semicircles",
+     "Disc Method Around x- or y-Axis",
+     "Disc Method Around Other Axes",
+     "Washer Method Around x- or y-Axis",
+     "Washer Method Around Other Axes"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Limits and Continuity",
+    "units": [
+     "Limits and Continuity"
+    ]
+   },
+   {
+    "strand": "Differentiation: Definition and Fundamental Properties",
+    "units": [
+     "Differentiation: Definition and Fundamental Properties"
+    ]
+   },
+   {
+    "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+    "units": [
+     "Differentiation: Composite, Implicit, and Inverse Functions"
+    ]
+   },
+   {
+    "strand": "Contextual Applications of Differentiation",
+    "units": [
+     "Contextual Applications of Differentiation"
+    ]
+   },
+   {
+    "strand": "Analytical Applications of Differentiation",
+    "units": [
+     "Analytical Applications of Differentiation"
+    ]
+   },
+   {
+    "strand": "Integration and Accumulation of Change",
+    "units": [
+     "Integration and Accumulation of Change"
+    ]
+   },
+   {
+    "strand": "Differential Equations",
+    "units": [
+     "Differential Equations"
+    ]
+   },
+   {
+    "strand": "Applications of Integration",
+    "units": [
+     "Applications of Integration"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "ap_calculus_ab_a_decision_order_for_antidifferentiation",
+   "title": "A Decision Order for Antidifferentiation",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Selecting Techniques for Antidifferentiation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_rewriting_an_integrand_before_integrating"
+   ],
+   "keywords": [
+    "standard forms",
+    "technique choice",
+    "verify"
+   ],
+   "summary": "Check for a standard form first, then for a substitution whose inner derivative is present, then for algebraic rewriting such as division or completing the square, and always verify the result by differentiating it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "ap_calculus_ab_a_decision_order_for_evaluating_limits",
+   "title": "A Decision Order for Evaluating Limits",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Selecting Procedures for Determining Limits",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_rationalising_a_radical_expression"
+   ],
+   "keywords": [
+    "indeterminate form",
+    "method choice",
+    "strategy"
+   ],
+   "summary": "Substitute first; if the result is 0/0, try factoring, rationalising or a common denominator; if the result is a nonzero number over zero, compare the one-sided behaviours, so the form the substitution produces selects the method.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "ap_calculus_ab_a_differential_equation_as_a_rate_law",
+   "title": "A Differential Equation as a Rate Law",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Modeling with Differential Equations",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_a_decision_order_for_antidifferentiation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "differential equation",
+    "model",
+    "rate law"
+   ],
+   "summary": "A differential equation states how a quantity's rate of change depends on the quantity and on the independent variable, so dy/dt = ky models change proportional to the amount present while dy/dt = k(M - y) models change bounded by a capacity M.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "ap_calculus_ab_accumulation_as_signed_area",
+   "title": "Accumulation as Signed Area",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Exploring Accumulation of Change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_slopes_and_tangents_of_an_implicit_curve"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accumulation",
+    "rate",
+    "signed area"
+   ],
+   "summary": "The accumulated change of a rate over an interval is the signed area between its graph and the horizontal axis, so area below the axis counts negatively and the accumulation can be smaller than the geometric area.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "ap_calculus_ab_agreement_across_graph_table_and_algebra",
+   "title": "Agreement Across Graph, Table and Algebra",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Connecting Multiple Representations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_squeeze_theorem"
+   ],
+   "keywords": [
+    "consistency",
+    "evidence",
+    "representations"
+   ],
+   "summary": "A limit claim is supported only when the graph, the table and the algebra agree on one value, and a disagreement means that at least one representation has been read outside the range where it is informative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "ap_calculus_ab_applying_an_initial_condition",
+   "title": "Applying an Initial Condition",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Particular Solutions with Initial Conditions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_separation_of_variables"
+   ],
+   "keywords": [
+    "constant",
+    "initial condition",
+    "particular solution"
+   ],
+   "summary": "Substituting the initial condition into the general solution fixes the arbitrary constant and yields the particular solution, which is valid on an interval containing the initial point where the solution stays differentiable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "ap_calculus_ab_area_between_curves_in_x",
+   "title": "Area Between Curves in x",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Area Between Curves as Functions of x",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_net_change_from_a_rate"
+   ],
+   "keywords": [
+    "area between curves",
+    "upper minus lower",
+    "x-integration"
+   ],
+   "summary": "For continuous curves with f(x) at least g(x) on [a, b], the area between them is the integral of f - g over [a, b], and the upper curve must be identified before integrating because a reversed difference gives the negative area.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "ap_calculus_ab_area_between_curves_in_y",
+   "title": "Area Between Curves in y",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Area Between Curves as Functions of y",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_area_between_curves_in_x"
+   ],
+   "keywords": [
+    "horizontal strips",
+    "right minus left",
+    "y-integration"
+   ],
+   "summary": "Integrating with respect to y computes the integral of right(y) - left(y) over the y-interval, which is the practical choice when the boundary curves are more naturally described as x as a function of y.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "ap_calculus_ab_cancelling_a_common_factor",
+   "title": "Cancelling a Common Factor",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits Using Algebraic Manipulation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_direct_substitution_for_continuous_forms"
+   ],
+   "keywords": [
+    "cancellation",
+    "factoring",
+    "indeterminate form"
+   ],
+   "summary": "When substitution produces the indeterminate form 0/0, factoring numerator and denominator and cancelling the common factor gives a function that agrees with f for x near a but not equal to a, so the limit equals the value of the simplified expression at a.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "ap_calculus_ab_changing_limits_in_a_definite_substitution",
+   "title": "Changing Limits in a Definite Substitution",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration by Substitution",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_integration_by_substitution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conversion",
+    "definite substitution",
+    "limits of integration"
+   ],
+   "summary": "In a definite integral the limits must be converted to values of u when substituting, because carrying the x-limits into a u-integral evaluates the antiderivative on the wrong interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "ap_calculus_ab_choosing_a_differentiation_procedure",
+   "title": "Choosing a Differentiation Procedure",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "Selecting Procedures for Calculating Derivatives",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_derivatives_of_arcsin_arccos_and_arctan"
+   ],
+   "keywords": [
+    "procedure choice",
+    "recursion",
+    "structure"
+   ],
+   "summary": "Read the outermost structure first: a sum differentiates termwise, a product needs the product rule, a quotient the quotient rule, and a composition the chain rule, with inner structure handled recursively so that each rule is applied exactly where it belongs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "ap_calculus_ab_concavity_and_the_sign_of_the_second_derivative",
+   "title": "Concavity and the Sign of the Second Derivative",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Concavity over a Domain",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_candidates_test"
+   ],
+   "keywords": [
+    "concavity",
+    "inflection point",
+    "second derivative"
+   ],
+   "summary": "f is concave up on an interval where f'' > 0 throughout and concave down where f'' < 0 throughout, and an inflection point is a point where the concavity changes, which requires f'' to change sign there.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "ap_calculus_ab_confirming_a_global_optimum",
+   "title": "Confirming a Global Optimum",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Solving Optimization Problems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_setting_up_an_optimization_problem"
+   ],
+   "keywords": [
+    "candidates",
+    "feasible interval",
+    "global optimum"
+   ],
+   "summary": "After solving the objective's critical points, the global optimum is confirmed by the candidates test on the closed feasible interval or by a sign analysis of the derivative that also accounts for the endpoint behaviour.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "ap_calculus_ab_constructing_a_slope_field",
+   "title": "Constructing a Slope Field",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Sketching Slope Fields",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_verifying_a_solution_by_substitution"
+   ],
+   "keywords": [
+    "direction segment",
+    "grid",
+    "slope field"
+   ],
+   "summary": "A slope field draws at each grid point a short segment whose slope is the value the equation assigns there, so the field displays the direction of every solution without the equation being solved.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "ap_calculus_ab_continuity_of_combinations",
+   "title": "Continuity of Combinations",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Confirming Continuity over an Interval",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_ab_continuity_on_open_and_closed_intervals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "combinations",
+    "composition",
+    "elementary functions"
+   ],
+   "summary": "Sums, differences, products, quotients with a nonzero denominator and compositions of continuous functions are continuous, so polynomials, rationals on their domains, and sin x, cos x, e^x and ln x are continuous wherever they are defined.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "ap_calculus_ab_continuity_on_open_and_closed_intervals",
+   "title": "Continuity on Open and Closed Intervals",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Confirming Continuity over an Interval",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_three_part_continuity_condition"
+   ],
+   "keywords": [
+    "endpoint",
+    "interval continuity",
+    "one-sided continuity"
+   ],
+   "summary": "f is continuous on an open interval when it is continuous at every point of it, and on a closed interval [a, b] when it is also right-continuous at a and left-continuous at b, since only one side exists at each endpoint.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "ap_calculus_ab_critical_points_as_extremum_candidates",
+   "title": "Critical Points as Extremum Candidates",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Extreme Value Theorem, Extrema and Critical Points",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_the_extreme_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "candidates",
+    "critical point",
+    "fermat condition"
+   ],
+   "summary": "An interior extremum of a differentiable function occurs only where f'(c) = 0, so candidates for extrema are the critical points, where f' is zero or fails to exist, together with the endpoints of a closed interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "ap_calculus_ab_derivatives_of_arcsin_arccos_and_arctan",
+   "title": "Derivatives of arcsin, arccos and arctan",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "Differentiating Inverse Trigonometric Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_inverse_function_derivative_rule"
+   ],
+   "keywords": [
+    "arcsine",
+    "arctangent",
+    "inverse trig"
+   ],
+   "summary": "d/dx arcsin x = 1/sqrt(1 - x^2) and d/dx arccos x = -1/sqrt(1 - x^2) for |x| < 1, while d/dx arctan x = 1/(1 + x^2) for all real x, the restricted domains matching the range on which each inverse is defined.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "ap_calculus_ab_derivatives_of_tan_cot_sec_and_csc",
+   "title": "Derivatives of tan, cot, sec and csc",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Derivatives of Tangent, Cotangent, Secant and Cosecant",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_quotient_rule"
+   ],
+   "keywords": [
+    "secant",
+    "tangent",
+    "trigonometric derivatives"
+   ],
+   "summary": "d/dx tan x = sec^2 x, d/dx cot x = -csc^2 x, d/dx sec x = sec x tan x and d/dx csc x = -csc x cot x, each on the domain where the original function is defined, so the derivative is undefined at the vertical asymptotes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "ap_calculus_ab_derivatives_of_the_four_elementary_functions",
+   "title": "Derivatives of the Four Elementary Functions",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Derivatives of cos x, sin x, e^x and ln x",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_linearity_of_the_derivative"
+   ],
+   "keywords": [
+    "cosine",
+    "exponential",
+    "logarithm",
+    "sine"
+   ],
+   "summary": "d/dx sin x = cos x and d/dx cos x = -sin x for all real x, d/dx e^x = e^x for all real x, and d/dx ln x = 1/x for x > 0, the last restricted because ln x is defined only on the positive reals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "ap_calculus_ab_differentiability_implies_continuity",
+   "title": "Differentiability Implies Continuity",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Differentiability and Continuity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_estimating_a_derivative_from_values_or_a_graph"
+   ],
+   "keywords": [
+    "continuity",
+    "corner",
+    "differentiability"
+   ],
+   "summary": "Differentiability implies continuity but not the converse: |x| is continuous at 0 yet has no derivative there because the one-sided difference quotients disagree, so continuity is necessary but not sufficient for differentiability.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "ap_calculus_ab_differentiating_an_implicit_relation",
+   "title": "Differentiating an Implicit Relation",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "Implicit Differentiation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_chain_rule_for_composites"
+   ],
+   "keywords": [
+    "dy/dx",
+    "implicit differentiation",
+    "relation"
+   ],
+   "summary": "Differentiating both sides of F(x, y) = 0 with respect to x while treating y as a differentiable function of x produces an equation solved for dy/dx, which gives the slope wherever F_y is nonzero without solving for y explicitly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "ap_calculus_ab_direct_substitution_for_continuous_forms",
+   "title": "Direct Substitution for Continuous Forms",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits Using Algebraic Properties",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_ab_limit_laws_for_sums_products_and_quotients"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "continuous function",
+    "direct substitution",
+    "polynomial"
+   ],
+   "summary": "Direct substitution gives the limit whenever f is a polynomial, or a rational or trigonometric function at a point of its domain, because those functions are continuous there and a continuous function has limit equal to its value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "ap_calculus_ab_discs_about_a_shifted_axis",
+   "title": "Discs About a Shifted Axis",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Disc Method Around Other Axes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_disc_method"
+   ],
+   "keywords": [
+    "radius",
+    "revolution",
+    "shifted axis"
+   ],
+   "summary": "Revolving about a horizontal line y = k makes the radius |f(x) - k|, so the integrand becomes pi times (f(x) - k)^2 and it is the distance to the axis, not the function value, that is squared.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "ap_calculus_ab_displacement_and_distance_from_velocity",
+   "title": "Displacement and Distance from Velocity",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Position, Velocity and Acceleration Using Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_average_value_of_a_continuous_function"
+   ],
+   "keywords": [
+    "displacement",
+    "total distance",
+    "velocity integral"
+   ],
+   "summary": "The integral of v(t) from a to b gives displacement, the net change in position, while the integral of |v(t)| gives total distance travelled, so the two agree only when the velocity never changes sign on the interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "ap_calculus_ab_estimating_a_derivative_from_values_or_a_graph",
+   "title": "Estimating a Derivative from Values or a Graph",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Estimating Derivatives at a Point",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_derivative_as_a_limit_at_a_point"
+   ],
+   "keywords": [
+    "numerical derivative",
+    "symmetric difference",
+    "tangent slope"
+   ],
+   "summary": "A derivative is estimated by a symmetric difference quotient (f(a+h) - f(a-h))/(2h) for a small h, or by the slope of the tangent drawn at the point, and either estimate is trustworthy only where the function is locally linear to the precision wanted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "ap_calculus_ab_filling_a_removable_discontinuity",
+   "title": "Filling a Removable Discontinuity",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Removing Discontinuities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_continuity_of_combinations"
+   ],
+   "keywords": [
+    "finite limit",
+    "redefinition",
+    "removable discontinuity"
+   ],
+   "summary": "A discontinuity at a is removed by defining f(a) to be lim_{x->a} f(x), which is possible exactly when that two-sided limit exists and is finite, so a jump or infinite discontinuity cannot be repaired by one value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "ap_calculus_ab_infinite_limits_and_vertical_asymptotes",
+   "title": "Infinite Limits and Vertical Asymptotes",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Infinite Limits and Vertical Asymptotes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_filling_a_removable_discontinuity"
+   ],
+   "keywords": [
+    "infinite limit",
+    "unbounded",
+    "vertical asymptote"
+   ],
+   "summary": "If f(x) grows without bound as x approaches a from one side, the line x = a is a vertical asymptote, and the two one-sided behaviours are reported separately because they may diverge with the same sign or with opposite signs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "ap_calculus_ab_instantaneous_rate_as_a_limit_of_average_rates",
+   "title": "Instantaneous Rate as a Limit of Average Rates",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Can Change Occur at an Instant?",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate",
+    "difference quotient",
+    "instantaneous rate"
+   ],
+   "summary": "The average rate of change of f over [a, a+h] is (f(a+h) - f(a))/h, and the instantaneous rate at a is the limit of that quotient as h approaches zero, so the instantaneous rate exists only when that two-sided limit exists and is finite.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "ap_calculus_ab_integration_by_substitution",
+   "title": "Integration by Substitution",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration by Substitution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_indefinite_integral_and_its_constant"
+   ],
+   "keywords": [
+    "inner derivative",
+    "substitution",
+    "u-substitution"
+   ],
+   "summary": "Setting u = g(x) turns the integral of f(g(x)) g'(x) dx into the integral of f(u) du, and the method applies only when the integrand contains the inner derivative as a factor, which is what makes the change of variable exact rather than approximate.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "ap_calculus_ab_l_hopital_s_rule_for_quotient_indeterminate_forms",
+   "title": "L'Hopital's Rule for Quotient Indeterminate Forms",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "L'Hopital's Rule for Indeterminate Forms",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_tangent_line_approximation"
+   ],
+   "keywords": [
+    "indeterminate form",
+    "l'hopital",
+    "quotient limit"
+   ],
+   "summary": "If f and g are differentiable near a with g' nonzero there and the quotient has the indeterminate form 0/0 or infinity over infinity, then lim f/g = lim f'/g', provided the limit of the derivative quotient exists or is infinite, so the rule replaces one limit by another rather than computing a value by substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "ap_calculus_ab_left_right_and_midpoint_riemann_sums",
+   "title": "Left, Right and Midpoint Riemann Sums",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Approximating Areas with Riemann Sums",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_accumulation_as_signed_area"
+   ],
+   "keywords": [
+    "rectangle",
+    "riemann sum",
+    "sample point"
+   ],
+   "summary": "A Riemann sum approximates accumulation by rectangles whose heights are sampled at the left endpoint, the right endpoint or the midpoint of each subinterval, and the left and right sums bracket the true value only when the function is monotone on the interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "ap_calculus_ab_limit_laws_for_sums_products_and_quotients",
+   "title": "Limit Laws for Sums, Products and Quotients",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits Using Algebraic Properties",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_limits_from_tables_on_both_sides"
+   ],
+   "keywords": [
+    "limit laws",
+    "quotient law",
+    "sum rule"
+   ],
+   "summary": "If lim f and lim g both exist at a, then the limit of a sum, difference, constant multiple or product is the matching combination of the two limits, and the quotient law holds as well provided lim g is nonzero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "ap_calculus_ab_limits_at_infinity_by_comparing_degrees",
+   "title": "Limits at Infinity by Comparing Degrees",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits at Infinity and Horizontal Asymptotes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_infinite_limits_and_vertical_asymptotes"
+   ],
+   "keywords": [
+    "degree comparison",
+    "horizontal asymptote",
+    "limits at infinity"
+   ],
+   "summary": "For a rational function, the limit at plus or minus infinity is decided by the leading terms: equal degrees give the ratio of leading coefficients, a higher denominator degree gives zero, and a higher numerator degree gives no finite limit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "ap_calculus_ab_limits_from_tables_on_both_sides",
+   "title": "Limits from Tables on Both Sides",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Estimating Limits from Tables",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_reading_a_limit_from_a_graph"
+   ],
+   "keywords": [
+    "numerical estimate",
+    "table",
+    "two-sided"
+   ],
+   "summary": "A table estimates a limit only when the inputs approach a from below and from above and both output columns settle on the same value; a table is evidence for a limit and never a proof of one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "ap_calculus_ab_linearity_and_interval_properties",
+   "title": "Linearity and Interval Properties",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Properties of Definite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_reading_an_accumulation_function_from_a_graph"
+   ],
+   "keywords": [
+    "additivity",
+    "integral properties",
+    "orientation"
+   ],
+   "summary": "The integral of a sum is the sum of the integrals and a constant factor moves outside, an integral over a single point is zero, reversing the limits changes the sign, and splitting at an interior point adds, each property holding whenever the integrals involved exist.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "ap_calculus_ab_linearity_of_the_derivative",
+   "title": "Linearity of the Derivative",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Constant, Sum, Difference and Constant Multiple Rules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_power_rule_for_constant_exponents"
+   ],
+   "keywords": [
+    "constant rule",
+    "linearity",
+    "sum rule"
+   ],
+   "summary": "The derivative of a constant is zero and differentiation is linear, so (c f + g)' = c f' + g' at every point where both f' and g' exist, which lets a polynomial be differentiated term by term.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "ap_calculus_ab_marginal_rate_and_accumulated_total",
+   "title": "Marginal Rate and Accumulated Total",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Rates of Change in Other Applied Contexts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_speed_and_the_sign_test_for_speeding_up"
+   ],
+   "keywords": [
+    "applied rate",
+    "marginal",
+    "per unit"
+   ],
+   "summary": "A derivative quoted as a marginal quantity is the change in the total per one additional unit, so marginal cost is C'(q) and it approximates the cost of the next item only while the step of one unit stays small relative to the scale of q.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "ap_calculus_ab_net_change_from_a_rate",
+   "title": "Net Change from a Rate",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Accumulation Functions in Applied Contexts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_displacement_and_distance_from_velocity"
+   ],
+   "keywords": [
+    "initial amount",
+    "net change",
+    "rate"
+   ],
+   "summary": "When r(t) is a rate of change, the integral of r from a to b is the net change in the quantity over that interval, and adding the amount present at a gives the quantity's value at b.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "ap_calculus_ab_position_velocity_and_acceleration",
+   "title": "Position, Velocity and Acceleration",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Straight-Line Motion",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_units_and_meaning_of_a_derivative"
+   ],
+   "keywords": [
+    "acceleration",
+    "direction",
+    "velocity"
+   ],
+   "summary": "For a particle on a line with position s(t), velocity is v(t) = s'(t) and acceleration is a(t) = v'(t), so the particle moves forward where v > 0, backward where v < 0, and reverses direction exactly where v changes sign.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "ap_calculus_ab_rationalising_a_radical_expression",
+   "title": "Rationalising a Radical Expression",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Limits Using Algebraic Manipulation",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_ab_cancelling_a_common_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conjugate",
+    "radical",
+    "rationalise"
+   ],
+   "summary": "For a quotient whose numerator or denominator contains a radical difference and whose denominator vanishes at a, multiplying both parts by the conjugate creates a factor that cancels the source of the zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "ap_calculus_ab_reading_a_limit_from_a_graph",
+   "title": "Reading a Limit from a Graph",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Estimating Limits from Graphs",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_two_sided_limit_definition"
+   ],
+   "keywords": [
+    "graph",
+    "hole",
+    "one-sided approach"
+   ],
+   "summary": "A graph supports lim_{x->a} f(x) = L when both branches approach height L as x approaches a from either side, so an open circle, a filled point or a mismatched point height at x = a is irrelevant to the limit itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "ap_calculus_ab_reading_an_accumulation_function_from_a_graph",
+   "title": "Reading an Accumulation Function from a Graph",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Interpreting Accumulation Functions Involving Area",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_first_fundamental_theorem"
+   ],
+   "keywords": [
+    "accumulation graph",
+    "derivative of integral",
+    "net area"
+   ],
+   "summary": "An accumulation function's value is the net area gathered from a to x, its derivative is the height of the graph at x, and its concavity follows the sign of the slope of that height, so the area graph can be analysed without an antiderivative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "ap_calculus_ab_reading_shape_from_a_derivative_graph",
+   "title": "Reading Shape from a Derivative Graph",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Sketching Graphs of Functions and Their Derivatives",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_second_derivative_test"
+   ],
+   "keywords": [
+    "derivative graph",
+    "reading",
+    "shape"
+   ],
+   "summary": "A derivative graph is read by where it crosses zero, where it is positive or negative, and where it is increasing or decreasing, which respectively report the extrema and the concavity of the original function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "ap_calculus_ab_reading_solution_curves_from_a_slope_field",
+   "title": "Reading Solution Curves from a Slope Field",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Reasoning Using Slope Fields",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_constructing_a_slope_field"
+   ],
+   "keywords": [
+    "equilibrium",
+    "inflection",
+    "solution curve"
+   ],
+   "summary": "A solution curve follows the drawn segments tangentially, its inflection points occur where the field gives a locally extreme slope, and a row of constant segments along a horizontal line signals an equilibrium solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "ap_calculus_ab_relating_rates_through_a_constraint",
+   "title": "Relating Rates Through a Constraint",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Introduction to Related Rates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_marginal_rate_and_accumulated_total"
+   ],
+   "keywords": [
+    "constraint",
+    "related rates",
+    "time derivative"
+   ],
+   "summary": "When two changing quantities satisfy an equation, differentiating that equation with respect to time relates their rates, so one rate is found from the other through the relation and neither can be obtained from its own value alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "ap_calculus_ab_removable_jump_and_infinite_discontinuities",
+   "title": "Removable, Jump and Infinite Discontinuities",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Types of Discontinuities",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_agreement_across_graph_table_and_algebra"
+   ],
+   "keywords": [
+    "infinite discontinuity",
+    "jump",
+    "removable"
+   ],
+   "summary": "A discontinuity at a is removable when the two-sided limit exists but f(a) is undefined or different, jump when both one-sided limits exist and are unequal, and infinite when at least one one-sided limit is unbounded.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "ap_calculus_ab_rewriting_an_integrand_before_integrating",
+   "title": "Rewriting an Integrand Before Integrating",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Integration Using Long Division and Completing the Square",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_changing_limits_in_a_definite_substitution"
+   ],
+   "keywords": [
+    "completing the square",
+    "long division",
+    "rational integrand"
+   ],
+   "summary": "When the integrand is a rational function with numerator degree at least the denominator's, polynomial long division separates a polynomial from a proper remainder, and completing the square turns a quadratic denominator into a shifted square that matches a standard antiderivative form.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "ap_calculus_ab_rewriting_the_other_indeterminate_forms",
+   "title": "Rewriting the Other Indeterminate Forms",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "L'Hopital's Rule for Indeterminate Forms",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_ab_l_hopital_s_rule_for_quotient_indeterminate_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "indeterminate product",
+    "logarithm",
+    "rewrite"
+   ],
+   "summary": "Forms such as 0 times infinity, infinity minus infinity, 1 to the infinity, 0 to the zero and infinity to the zero are first rewritten as a ratio or as an exponential of a logarithm, because the rule itself applies only to the two quotient forms.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "ap_calculus_ab_secant_slopes_approaching_a_tangent_slope",
+   "title": "Secant Slopes Approaching a Tangent Slope",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Can Change Occur at an Instant?",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_instantaneous_rate_as_a_limit_of_average_rates"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "limit of slopes",
+    "secant line",
+    "tangent line"
+   ],
+   "summary": "As the second point of a secant line slides towards the fixed point, the secant slopes approach the slope of the tangent at that point, which is what makes the tangent slope a limit rather than a ratio of two points.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "ap_calculus_ab_second_and_higher_derivatives",
+   "title": "Second and Higher Derivatives",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "Higher-Order Derivatives",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_choosing_a_differentiation_procedure"
+   ],
+   "keywords": [
+    "higher order",
+    "notation",
+    "second derivative"
+   ],
+   "summary": "The second derivative is the derivative of f', written f'' or d^2y/dx^2, and it exists at a only where f' is itself differentiable there, so the existence of each higher derivative is a separate condition.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "ap_calculus_ab_separation_of_variables",
+   "title": "Separation of Variables",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "General Solutions by Separation of Variables",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_reading_solution_curves_from_a_slope_field"
+   ],
+   "keywords": [
+    "general solution",
+    "implicit form",
+    "separation"
+   ],
+   "summary": "When dy/dx can be written as g(x) h(y) with h(y) nonzero, separating the variables and integrating both sides gives the general solution as an equation in y and x, with the division by h(y) excluding the constant solutions h(y) = 0 from that family.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "ap_calculus_ab_setting_up_an_optimization_problem",
+   "title": "Setting Up an Optimization Problem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Introduction to Optimization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_translating_between_f_f_and_f"
+   ],
+   "keywords": [
+    "constraint",
+    "objective",
+    "optimization"
+   ],
+   "summary": "An optimization problem names the quantity to be optimized, uses the constraint to write that quantity as a function of a single variable, and states the interval the context allows before any derivative is taken.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "ap_calculus_ab_sign_of_the_derivative_and_monotonicity",
+   "title": "Sign of the Derivative and Monotonicity",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Intervals of Increase and Decrease",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_critical_points_as_extremum_candidates"
+   ],
+   "keywords": [
+    "decreasing",
+    "increasing",
+    "sign of derivative"
+   ],
+   "summary": "On an interval where f' > 0 throughout, f is strictly increasing, and where f' < 0 throughout it is strictly decreasing, the conclusion requiring continuity on the closed interval and differentiability inside it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "ap_calculus_ab_slopes_and_tangents_of_an_implicit_curve",
+   "title": "Slopes and Tangents of an Implicit Curve",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Behaviours of Implicit Relations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_confirming_a_global_optimum"
+   ],
+   "keywords": [
+    "implicit curve",
+    "partial derivatives",
+    "tangent"
+   ],
+   "summary": "On a curve F(x, y) = 0 the derivative dy/dx = -F_x/F_y gives the slope wherever F_y is nonzero, a vertical tangent occurs where F_y = 0 with F_x nonzero, and a horizontal tangent requires F_x = 0 with F_y nonzero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "ap_calculus_ab_solutions_of_dy_dt_ky",
+   "title": "Solutions of dy/dt = ky",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Exponential Models with Differential Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_applying_an_initial_condition"
+   ],
+   "keywords": [
+    "exponential model",
+    "growth constant",
+    "half-life"
+   ],
+   "summary": "The solutions of dy/dt = ky are y = C e^(kt), growing for k > 0 and decaying for k < 0, with doubling time or half-life equal to ln 2 divided by the absolute value of k, which makes that one time determine the whole model.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "ap_calculus_ab_speed_and_the_sign_test_for_speeding_up",
+   "title": "Speed and the Sign Test for Speeding Up",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Straight-Line Motion",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_position_velocity_and_acceleration"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "sign test",
+    "speed",
+    "speeding up"
+   ],
+   "summary": "Speed is |v(t)|, so the particle speeds up exactly where velocity and acceleration have the same sign and slows down where they have opposite signs, which is a statement about signs and not about the sign of v alone.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "ap_calculus_ab_splitting_at_every_intersection",
+   "title": "Splitting at Every Intersection",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Area Between Curves with More Than Two Intersections",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_area_between_curves_in_y"
+   ],
+   "keywords": [
+    "intersection points",
+    "split interval",
+    "upper curve"
+   ],
+   "summary": "When the curves cross inside the interval, the region must be split at each interior intersection and integrated piece by piece, because the identity of the upper curve changes at every crossing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "ap_calculus_ab_summation_notation_and_its_rules",
+   "title": "Summation Notation and Its Rules",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Riemann Sums, Summation Notation and Definite Integral Notation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_the_definite_integral_as_a_limit_of_sums"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "closed form",
+    "sigma notation",
+    "sum formulas"
+   ],
+   "summary": "Sigma notation compresses a sum and is manipulated by splitting at a boundary, factoring out constants and applying the standard formulas for the sum of k and of k^2, which is how a Riemann sum is evaluated in closed form before the limit is taken.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_average_value_of_a_continuous_function",
+   "title": "The Average Value of a Continuous Function",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Average Value of a Function",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_solutions_of_dy_dt_ky"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average value",
+    "continuous",
+    "integral mean"
+   ],
+   "summary": "The average value of f on [a, b] is the integral of f over [a, b] divided by b - a, and for continuous f the mean value theorem for integrals guarantees some c in [a, b] where f(c) equals that average.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_candidates_test",
+   "title": "The Candidates Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The Candidates Test for Absolute Extrema",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_first_derivative_test"
+   ],
+   "keywords": [
+    "absolute extremum",
+    "candidates test",
+    "closed interval"
+   ],
+   "summary": "On a closed interval the absolute extrema occur among the critical points and the endpoints, so evaluating f at every candidate and comparing those values decides both absolute extrema without any sign analysis.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_chain_rule_for_composites",
+   "title": "The Chain Rule for Composites",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "The Chain Rule",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_derivatives_of_tan_cot_sec_and_csc"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "chain rule",
+    "composite",
+    "outer derivative"
+   ],
+   "summary": "If g is differentiable at a and f is differentiable at g(a), then (f o g)'(a) = f'(g(a)) g'(a), so the outer derivative is evaluated at the inner value and multiplied by the inner derivative, and neglecting the last factor is the standard error.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_definite_integral_as_a_limit_of_sums",
+   "title": "The Definite Integral as a Limit of Sums",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Riemann Sums, Summation Notation and Definite Integral Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_trapezoidal_approximation"
+   ],
+   "keywords": [
+    "definite integral",
+    "integrable",
+    "limit of sums"
+   ],
+   "summary": "The definite integral of f from a to b is the limit of its Riemann sums as the number of subintervals grows and every width shrinks to zero, and that limit exists whenever f is continuous on [a, b], in which case its value does not depend on where the sample points are chosen.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_derivative_as_a_limit_at_a_point",
+   "title": "The Derivative as a Limit at a Point",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Defining the Derivative and Its Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_difference_quotient_and_its_limit"
+   ],
+   "keywords": [
+    "derivative definition",
+    "notation",
+    "two forms"
+   ],
+   "summary": "f'(a) = lim_{h->0} (f(a+h) - f(a))/h, equivalently lim_{x->a} (f(x) - f(a))/(x - a), exists exactly when both forms give the same finite value, and the two notations dy/dx, f'(x) name that value at x.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_difference_quotient_and_its_limit",
+   "title": "The Difference Quotient and Its Limit",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "Average and Instantaneous Rates of Change",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_the_intermediate_value_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate",
+    "difference quotient",
+    "instantaneous rate"
+   ],
+   "summary": "The average rate of change over [a, a+h] is (f(a+h) - f(a))/h, and the instantaneous rate at a is the limit of this quotient as h approaches zero, so the derivative is a limit of secant slopes rather than a quotient at a single point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_disc_method",
+   "title": "The Disc Method",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Disc Method Around x- or y-Axis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_volumes_with_triangular_and_semicircular_sections"
+   ],
+   "keywords": [
+    "disc method",
+    "radius",
+    "revolution"
+   ],
+   "summary": "Revolving the region between y = f(x) and the x-axis about the x-axis gives a volume equal to pi times the integral of f(x)^2, because each slice perpendicular to the axis is a disc whose radius is the height f(x).",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_extreme_value_theorem",
+   "title": "The Extreme Value Theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Extreme Value Theorem, Extrema and Critical Points",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_mean_value_theorem"
+   ],
+   "keywords": [
+    "absolute extrema",
+    "closed interval",
+    "extreme value"
+   ],
+   "summary": "A function continuous on a closed interval [a, b] attains an absolute maximum and an absolute minimum somewhere in that interval, whereas on an open interval it may approach an extreme without ever reaching it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_first_derivative_test",
+   "title": "The First Derivative Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The First Derivative Test",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_sign_of_the_derivative_and_monotonicity"
+   ],
+   "keywords": [
+    "first derivative test",
+    "local maximum",
+    "sign change"
+   ],
+   "summary": "At a critical point c, f' changing from positive to negative gives a local maximum, changing from negative to positive gives a local minimum, and no change of sign gives neither.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_first_fundamental_theorem",
+   "title": "The First Fundamental Theorem",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "The Fundamental Theorem of Calculus and Accumulation Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_summation_notation_and_its_rules"
+   ],
+   "keywords": [
+    "accumulation function",
+    "continuous integrand",
+    "fundamental theorem"
+   ],
+   "summary": "If f is continuous on an interval containing a, then the accumulation function A(x) = integral from a to x of f(t) dt is differentiable inside that interval with A'(x) = f(x), so differentiating an accumulation function returns the integrand evaluated at the upper limit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_indefinite_integral_and_its_constant",
+   "title": "The Indefinite Integral and Its Constant",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Antiderivatives and Indefinite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_second_fundamental_theorem"
+   ],
+   "keywords": [
+    "antiderivative",
+    "constant of integration",
+    "indefinite integral"
+   ],
+   "summary": "The indefinite integral of f is F(x) + C for any antiderivative F, because two antiderivatives of a function on an interval differ by a constant, and that constant must be determined by an initial condition rather than guessed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_intermediate_value_theorem",
+   "title": "The Intermediate Value Theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "The Intermediate Value Theorem",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_limits_at_infinity_by_comparing_degrees"
+   ],
+   "keywords": [
+    "continuity",
+    "intermediate value",
+    "root existence"
+   ],
+   "summary": "If f is continuous on [a, b] and k lies between f(a) and f(b), then f(c) = k for some c in (a, b), which guarantees a root whenever the endpoint values have opposite signs but guarantees nothing when f is discontinuous.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_inverse_function_derivative_rule",
+   "title": "The Inverse Function Derivative Rule",
+   "strand": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "unit": "Differentiation: Composite, Implicit, and Inverse Functions",
+   "topic": "Differentiating Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_differentiating_an_implicit_relation"
+   ],
+   "keywords": [
+    "inverse function",
+    "nonzero derivative",
+    "reciprocal slope"
+   ],
+   "summary": "If f is differentiable at a with f'(a) nonzero and f has an inverse defined near f(a), then (f^-1)'(f(a)) = 1/f'(a), because the tangent slopes of a function and its inverse are reciprocals and a zero slope would give a vertical tangent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_mean_value_theorem",
+   "title": "The Mean Value Theorem",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The Mean Value Theorem",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "ap_calculus_ab_rewriting_the_other_indeterminate_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interior point",
+    "mean value theorem",
+    "secant slope"
+   ],
+   "summary": "If f is continuous on [a, b] and differentiable on (a, b), then some c in (a, b) satisfies f'(c) = (f(b) - f(a))/(b - a), so at least one tangent is parallel to the secant, and dropping either hypothesis can destroy the conclusion.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_power_rule_for_constant_exponents",
+   "title": "The Power Rule for Constant Exponents",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Power Rule",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_differentiability_implies_continuity"
+   ],
+   "keywords": [
+    "derivative",
+    "exponent",
+    "power rule"
+   ],
+   "summary": "d/dx x^n = n x^(n-1) for every constant real exponent n, including negative and fractional ones, on any interval where x^n is defined, with the derivative failing to exist at points where the power itself is undefined.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_product_rule",
+   "title": "The Product Rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Product Rule",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_derivatives_of_the_four_elementary_functions"
+   ],
+   "keywords": [
+    "differentiable",
+    "factors",
+    "product rule"
+   ],
+   "summary": "(f g)' = f' g + f g' at every point where both f and g are differentiable, and the rule needs both terms because each factor is differentiated once while the other is held fixed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_quotient_rule",
+   "title": "The Quotient Rule",
+   "strand": "Differentiation: Definition and Fundamental Properties",
+   "unit": "Differentiation: Definition and Fundamental Properties",
+   "topic": "The Quotient Rule",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_product_rule"
+   ],
+   "keywords": [
+    "derivative",
+    "nonzero denominator",
+    "quotient rule"
+   ],
+   "summary": "(f/g)' = (f' g - f g')/g^2 wherever f and g are differentiable and g is nonzero, and the order of the numerator matters because a reversed order changes the sign of the result.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_related_rates_procedure",
+   "title": "The Related-Rates Procedure",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Solving Related Rates Problems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_relating_rates_through_a_constraint"
+   ],
+   "keywords": [
+    "differentiate in time",
+    "procedure",
+    "substitution"
+   ],
+   "summary": "Name the variables and the instant, write the relation that holds for all time, differentiate both sides with respect to t, then substitute the values at the instant and solve for the unknown rate with its units attached.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_second_derivative_test",
+   "title": "The Second Derivative Test",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "The Second Derivative Test",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_concavity_and_the_sign_of_the_second_derivative"
+   ],
+   "keywords": [
+    "inconclusive",
+    "local extremum",
+    "second derivative test"
+   ],
+   "summary": "At a critical point c with f'(c) = 0, f''(c) > 0 gives a local minimum and f''(c) < 0 a local maximum, while f''(c) = 0 leaves the test inconclusive and sends the question back to the first derivative test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_second_fundamental_theorem",
+   "title": "The Second Fundamental Theorem",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "The Fundamental Theorem of Calculus and Definite Integrals",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_linearity_and_interval_properties"
+   ],
+   "keywords": [
+    "antiderivative",
+    "endpoints",
+    "evaluation theorem"
+   ],
+   "summary": "If f is continuous on [a, b] and F is any antiderivative of f there, then the integral of f from a to b equals F(b) - F(a), so a definite integral is evaluated by one antiderivative at the two endpoints rather than by a limit of sums.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_squeeze_theorem",
+   "title": "The Squeeze Theorem",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "The Squeeze Theorem",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_a_decision_order_for_evaluating_limits"
+   ],
+   "keywords": [
+    "bounds",
+    "pinching",
+    "squeeze theorem"
+   ],
+   "summary": "If g(x) <= f(x) <= h(x) on a punctured interval around a and lim g = lim h = L, then lim f = L, which is how sin(x)/x is evaluated at zero without dividing by zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_tangent_line_approximation",
+   "title": "The Tangent-Line Approximation",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Local Linearity and Linearization",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_related_rates_procedure"
+   ],
+   "keywords": [
+    "linearization",
+    "local approximation",
+    "tangent line"
+   ],
+   "summary": "Near a, f(x) is approximately f(a) + f'(a)(x - a), and the approximation error is small only while x stays close to a and the second derivative stays bounded there, so linearization is a local and not a global claim.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_three_part_continuity_condition",
+   "title": "The Three-Part Continuity Condition",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Defining Continuity at a Point",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_removable_jump_and_infinite_discontinuities"
+   ],
+   "keywords": [
+    "continuity",
+    "point",
+    "three conditions"
+   ],
+   "summary": "f is continuous at a exactly when f(a) is defined, lim_{x->a} f(x) exists, and the limit equals f(a), so continuity is a limit statement plus a value statement and fails if either part fails.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_trapezoidal_approximation",
+   "title": "The Trapezoidal Approximation",
+   "strand": "Integration and Accumulation of Change",
+   "unit": "Integration and Accumulation of Change",
+   "topic": "Approximating Areas with Riemann Sums",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_left_right_and_midpoint_riemann_sums"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "approximation",
+    "average of sums",
+    "trapezoid"
+   ],
+   "summary": "The trapezoidal rule averages the left and right sums, which is exact for linear functions and normally closer than either sum for a smooth curve, because each slice is a trapezoid rather than a rectangle.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_two_sided_limit_definition",
+   "title": "The Two-Sided Limit Definition",
+   "strand": "Limits and Continuity",
+   "unit": "Limits and Continuity",
+   "topic": "Defining Limits and Limit Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_secant_slopes_approaching_a_tangent_slope"
+   ],
+   "keywords": [
+    "limit",
+    "punctured neighbourhood",
+    "two-sided"
+   ],
+   "summary": "lim_{x->a} f(x) = L means the values of f can be made arbitrarily close to L by taking x close enough to a but distinct from a, so f need not be defined at a and its value there, if any, does not affect the limit.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "ap_calculus_ab_the_washer_method",
+   "title": "The Washer Method",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Washer Method Around x- or y-Axis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_discs_about_a_shifted_axis"
+   ],
+   "keywords": [
+    "inner radius",
+    "outer radius",
+    "washer method"
+   ],
+   "summary": "When the region between two curves is revolved, each slice is a washer with volume pi (R^2 - r^2) dx, where R is the outer radius and r the inner radius, and the inner radius must be subtracted because the hole removes volume.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "ap_calculus_ab_translating_between_f_f_and_f",
+   "title": "Translating Between f, f' and f''",
+   "strand": "Analytical Applications of Differentiation",
+   "unit": "Analytical Applications of Differentiation",
+   "topic": "Connecting a Function, Its First and Second Derivative",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_reading_shape_from_a_derivative_graph"
+   ],
+   "keywords": [
+    "correspondence",
+    "relationship",
+    "slope"
+   ],
+   "summary": "The three graphs describe one function at successive levels: f' gives the slope of f and f'' gives the slope of f', so a zero of f' is a horizontal tangent of f and an extremum of f' is an inflection point of the concavity of f.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "ap_calculus_ab_units_and_meaning_of_a_derivative",
+   "title": "Units and Meaning of a Derivative",
+   "strand": "Contextual Applications of Differentiation",
+   "unit": "Contextual Applications of Differentiation",
+   "topic": "Interpreting the Derivative in Context",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "ap_calculus_ab_second_and_higher_derivatives"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interpretation",
+    "rate",
+    "units"
+   ],
+   "summary": "In an applied model f'(a) is the instantaneous rate of change of the output with respect to the input at a, carrying output units per input unit, and its sign states whether the quantity is increasing or decreasing at that instant.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "ap_calculus_ab_verifying_a_solution_by_substitution",
+   "title": "Verifying a Solution by Substitution",
+   "strand": "Differential Equations",
+   "unit": "Differential Equations",
+   "topic": "Verifying Solutions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_a_differential_equation_as_a_rate_law"
+   ],
+   "keywords": [
+    "interval",
+    "substitution",
+    "verify solution"
+   ],
+   "summary": "A function is a solution of a differential equation on an interval exactly when substituting it and its derivatives makes the two sides identical at every point of that interval, so verification is an identity check and not a single-point test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "ap_calculus_ab_volumes_with_square_cross_sections",
+   "title": "Volumes with Square Cross Sections",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Volumes with Cross Sections: Squares and Rectangles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_splitting_at_every_intersection"
+   ],
+   "keywords": [
+    "cross section",
+    "square section",
+    "volume integral"
+   ],
+   "summary": "If a solid has cross sections perpendicular to an axis that are squares of side s(x), its volume is the integral of s(x)^2 over the axis interval, so the geometry of the section alone fixes the integrand.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "ap_calculus_ab_volumes_with_triangular_and_semicircular_sections",
+   "title": "Volumes with Triangular and Semicircular Sections",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Volumes with Cross Sections: Triangles and Semicircles",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_volumes_with_square_cross_sections"
+   ],
+   "keywords": [
+    "equilateral triangle",
+    "section area",
+    "semicircle"
+   ],
+   "summary": "An equilateral triangle on base b has area (sqrt 3 / 4) b^2 and a semicircle on diameter b has area (pi / 8) b^2, so each section type contributes its own constant factor to the integrated area.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "ap_calculus_ab_washers_about_a_line_other_than_an_axis",
+   "title": "Washers About a Line Other Than an Axis",
+   "strand": "Applications of Integration",
+   "unit": "Applications of Integration",
+   "topic": "Washer Method Around Other Axes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "ap_calculus_ab_the_washer_method"
+   ],
+   "keywords": [
+    "axis offset",
+    "outer minus inner",
+    "shifted washer"
+   ],
+   "summary": "Revolving about y = k gives pi times the integral of (R(x) - k)^2 - (r(x) - k)^2, with both radii measured from the same line, and the larger distance is always the outer radius regardless of the signs involved.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "AP Calculus AB - Limits, Derivatives, Integrals and Applications",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  }
+ ]
+}

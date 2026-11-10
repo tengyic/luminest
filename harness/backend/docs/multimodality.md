@@ -24,7 +24,7 @@ of them (noted). Restart the API after changing any of them.
 | YouTube Data API key | `HARNESS_YOUTUBE_API_KEY` | empty | Authoritative embeddability check (`status.embeddable`) and teacher video search. Without it: keyless oEmbed probe and no search. |
 | Openverse credentials | `HARNESS_OPENVERSE_CLIENT_ID`, `HARNESS_OPENVERSE_CLIENT_SECRET` | empty | Lift Openverse from 20 req/min and 200/day to 10,000/day. |
 | Browser switch | `HARNESS_BROWSER_ENABLED` | `0` | The teacher-only Playwright page-snapshot tool. Off everywhere until an operator decides. |
-| Language model | `HARNESS_TUTOR_PROVIDER` (+ `HARNESS_TUTOR_URL`, `HARNESS_TUTOR_MODEL`, `HARNESS_TUTOR_KEY`) | `offline` | The single cost driver behind course creation and model-improved generation. `offline` means fully deterministic local content — a complete product, not a degraded one. |
+| Language model | `HARNESS_TUTOR_PROVIDER` (+ `HARNESS_TUTOR_URL`, `HARNESS_TUTOR_MODEL`, `HARNESS_TUTOR_KEY`), or Settings → Language model | unset (`model-required`) | Required. The single cost driver behind course creation and model-improved generation. There is no offline mode; an unconfigured instance reports `model-required` and shows only declared grounded fallbacks. |
 | Operator comps | `HARNESS_ENTITLEMENTS` | empty | Comma-separated `selector:capability,capability`. Selector is an email or `*`. Grants paid capabilities with no payment provider at all. |
 | Paid monthly ceiling | `HARNESS_PAID_MONTHLY_REQUESTS` / `HARNESS_PAID_MONTHLY_TOKENS` | `2000` / `2000000` | The `quota_policies` row a grant installs. Soft enforcement: it records and reports, it does not block. |
 
@@ -47,26 +47,26 @@ the quota machinery cannot enforce is a label rather than a fact.
 | `audio_tts` | plus | Local VoiceStudio backend (`POST /v1/audio/speech` on loopback, default `http://127.0.0.1:3900`). No cloud call, no per-character cost, no key — the learner's text does not leave the host. The readiness probe tries `/.well-known/voicestudio-speech` then `/v1/models` and reports an absent service as `degraded` | `HARNESS_MEDIA_ENABLED` + a running VoiceStudio (`HARNESS_VOICE_*`) | Lesson stays text; deck speaker notes remain. No audio is faked | implemented |
 | `web_search` | plus | DuckDuckGo via the `ddgs` package, every result licence-gated. Installed and live. (`duckduckgo-search` was renamed to `ddgs`; its final 8.1.1 release is a rename stub whose backend returns zero results, so `ddg_provider` resolves `ddgs` first) | `HARNESS_MEDIA_ENABLED` + the `ddgs` package | No live search; local material-pack search and citations to what was actually read | implemented |
 | `browser_snapshot` | plus | Playwright headless Chromium over the open network, teacher-only | `HARNESS_BROWSER_ENABLED` + teacher role | None — the tool refuses. A snapshot is a copy of pixels; there is nothing honest to substitute | implemented |
-| `course_creation` | plus | The configured OpenAI-compatible model, metered in tokens | `HARNESS_TUTOR_PROVIDER != offline` | None — the builder refuses a plan it cannot ground | implemented |
+| `course_creation` | plus | The configured OpenAI-compatible model, metered in tokens | A configured model (Settings or `HARNESS_TUTOR_*`) | None — the builder refuses a plan it cannot ground | implemented |
 | `vision_understanding` | plus | Would need image content parts on the chat API; the provider adapter is text-only | none yet | None. The image still shows with attribution; the tutor cannot comment on it | **missing** (listed so the UI hides it) |
 | `simulations` | free | none — mathkit builds validated, self-contained HTML locally | none | Not applicable: fully offline | implemented |
 | `whiteboard_rich` | free | none — local SVG document state | none | Not applicable | implemented |
-| `flashcards_auto` | free | Model improves prose when configured; cards are deterministic and FSRS-6 scheduled | `HARNESS_TUTOR_PROVIDER` (optional) | Deterministic curriculum cards: quality degrades, availability does not | implemented |
+| `flashcards_auto` | free | Model improves prose when configured; cards are grounded and FSRS-6 scheduled | A configured model (Settings or `HARNESS_TUTOR_*`) | Grounded curriculum cards when a configured model fails. With no model the instance reports `model-required` | implemented |
 | `pptx_export` | free | `python-pptx`, installed locally | none | The HTML/SVG deck remains | implemented |
 
 ### The tutor chat is not in the matrix, on purpose
 
 `POST /api/v1/chat` is not gated by a capability row, and that is a product decision
-with a cost consequence the operator should see before charging. With
-`HARNESS_TUTOR_PROVIDER=offline` the turn is deterministic, local and free, so the
-free tier really can learn without a model. With a model configured, every turn is a
-token spend that is *metered* (`usage_ledger`, feature `tutor_chat`) but not
+with a cost consequence the operator should see before charging. A language model is
+required; with none configured the instance reports `model-required` and a chat turn
+returns a declared grounded fallback, not a lesson. With a model configured, every turn
+is a token spend that is *metered* (`usage_ledger`, feature `tutor_chat`) but not
 *ceilinged* by this matrix.
 
 Before charging, pick one: (a) keep chat free and treat model tokens as the cost of
-the free tier, (b) set `HARNESS_TUTOR_PROVIDER=offline` for unentitled accounts and
-serve model-backed chat only to Plus, or (c) add a `tutor_chat` row to
-`CAPABILITIES` and call `require_capability` in the chat route. Option (a) is what
+the free tier, (b) meter per-account spend before forwarding a turn, or (c) add a
+`tutor_chat` row to `CAPABILITIES` and call `require_capability` in the chat route.
+There is no option to serve a deterministic tutor as a product tier. Option (a) is what
 ships today; (b) is a config change; (c) is the only one that enforces a ceiling, and
 it is a data change plus one dependency on the route. None of the three requires
 touching the teacher core, because the core is a pure function of evidence and
@@ -137,9 +137,10 @@ curl -s localhost:8765/api/v1/capabilities/images | python3 -m json.tool
 curl -s localhost:8765/health | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['tutor'], d['harness']['generation_mode'])"
 ```
 
-`generation_mode` reads `grounded-offline` when no model is configured and
+`generation_mode` reads `model-required` when no model is configured and
 `provider:model` when one is; that is the same vocabulary the capability matrix uses
-for `course_creation`. A capability whose probe fails shows `degraded` with the knob
+for `course_creation`. `/health` also reports `tutor.state`, `tutor.source` (runtime vs
+environment) and `tutor.api_key_set`. A capability whose probe fails shows `degraded` with the knob
 named — if `images` is `degraded` on a production instance, the answer is almost
 always `HARNESS_MEDIA_ENABLED=0`.
 

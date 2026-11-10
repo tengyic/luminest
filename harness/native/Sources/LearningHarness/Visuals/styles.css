@@ -1,0 +1,58 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  color: #1c1c1e;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Vendored renderers size themselves against the stage. MathBox inserts a canvas,
+   JSXGraph a board div, 3Dmol a viewer div, Mafs an SVG. */
+#stage > div, #stage > canvas, #stage > svg { max-width: 100%; }
+#stage .jsxgraph-board { width: 100% !important; height: 100% !important; }
+#stage .MafsView { width: 100%; height: 100%; }
+
+/* TikZ renders inside an srcdoc iframe; the resulting SVG must not overflow the node. */
+#stage iframe { display: block; width: 100%; height: 100%; border: 0; background: white; }
+#stage iframe svg { max-width: 100%; height: auto; }
+
+#state {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 245, 235, 0.96);
+  border: 1px solid rgba(180, 110, 40, 0.35);
+  color: #7a3f10;
+  font-size: 11px;
+  line-height: 1.4;
+  word-break: break-word;
+  z-index: 99;
+}
+#state[hidden] { display: none; }
+
+/* The `tex` visual type: one typeset formula, centred on the paper. KaTeX writes its
+   own inline metrics, so only placement belongs here — never font size or colour. */
+.luminest-tex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  overflow: auto;
+  color: #1f2733;
+}

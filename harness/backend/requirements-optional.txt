@@ -8,7 +8,10 @@
 # psycopg - PostgreSQL deployments only. ``deploy/compose.yaml`` points
 #   HARNESS_DATABASE_URL at a postgres+psycopg URL, so the container image needs it; the
 #   desktop application is SQLite and never opens a Postgres connection.
-psycopg[binary]>=3.2,<4
+#   Pinned to the same version ``requirements-dev.txt`` pins, because a range here meant
+#   the container could resolve a different driver than the one the suite was green on,
+#   and ``pip-audit -r`` refuses to scan a range at all.
+psycopg[binary]==3.3.8
 #
 # playwright - the teacher-only headless-browser tool (``browser_snapshot``). The
 #   package is ~40 MB and needs a separate chromium download on top of it, which is why

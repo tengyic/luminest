@@ -108,7 +108,47 @@ DELIBERATELY_FIGURELESS = {
     'algebra_2_matrix_multiplication',
     'algebra_2_matrix_notation_and_operations',
     'algebra_2_solving_systems_with_matrices',
+    # Dimensional analysis is unit cancellation, not a quantity against an input; there is
+    # no curve whose shape means anything here. The concept map is the honest figure.
+    # The authored course's concept of the same name was drawn as a percent-change curve
+    # (its keywords "conversion"/"unit" matched that rule), which is the same defect this
+    # file exists to catch, so it moves here too.
+    'algebra_1_dimensional_analysis',
+    'dimensional_analysis_and_unit_conversion',
+    # ACT Math's matrix and vector concepts are claimed by the existing matrix rule, which
+    # is right: a vector is not a single variable plotted against an input, and a matrix
+    # product has no one-dimensional graph. They get the concept map like the other
+    # matrix concepts.
+    'act_math_matrix_dimensions_and_products',
+    'act_math_vector_addition_and_scalar_multiplication',
+    'act_math_vector_components_and_magnitude',
 }
+
+#: Courses where no concept has a single-variable plot at all. Linear algebra is about
+#: vector spaces, rank and eigenvalues; a curve for any of its concepts would be a
+#: fabrication, so the whole course is served as concept maps by construction (see
+#: ``templates._NO_PLOT_COURSE_PREFIXES``). The expectation is derived from that
+#: declaration rather than restating 97 ids here, so the two cannot drift.
+NO_PLOT_COURSES = {'linear_algebra'}
+
+
+def _declared_figureless() -> set[str]:
+    """Every concept the engine has *declared* will get a concept map.
+
+    Composed from the two declarations that exist: the id-level table in
+    ``templates._CONCEPT_TEMPLATES`` (whose ``no_figure`` entries are decisions, with the
+    reason in the code) and the course-level prefix list. Pinning this set is what makes a
+    future template change unable to silently widen the gap.
+    """
+    from app.mathkit import templates as _t
+
+    ids = {concept_id for concept_id, builder in _t._CONCEPT_TEMPLATES.items()
+           if builder is _t.no_figure}
+    ids |= set(DELIBERATELY_FIGURELESS)
+    for spec in MATHEMATICS:
+        if spec.id in NO_PLOT_COURSES:
+            ids |= set(courses.graph_for(spec.id).nodes)
+    return ids
 
 #: The hand-authored course's figures, which these rules must not change. Each of these
 #: was briefly mis-claimed while the overrides above were being written: "Exponential
@@ -149,9 +189,9 @@ def test_only_declared_concepts_are_left_without_a_figure():
     for spec, _graph, node_id, node in _nodes():
         if templates.template_for(node.to_dict()).kind == figures.GENERIC_PROBE_KIND:
             figureless.add(node_id)
-    assert figureless == DELIBERATELY_FIGURELESS, figureless ^ DELIBERATELY_FIGURELESS
+    assert figureless == _declared_figureless(), figureless ^ _declared_figureless()
     # And for each of them the learner gets a derived concept map, not a curve.
-    for node_id in DELIBERATELY_FIGURELESS:
+    for node_id in _declared_figureless():
         spec = courses.course(courses.course_for_node(node_id))
         graph = courses.graph_for(spec.id)
         payload = figures.figure_for(graph.nodes[node_id].to_dict(), graph, {}, spec.subject_kind)

@@ -26,7 +26,7 @@ def settings_for(tmp_path, monkeypatch, *, media_enabled=True, voice_enabled=Tru
     """
     monkeypatch.setenv('HARNESS_ENV', 'test')
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     monkeypatch.setenv('HARNESS_MEDIA_ENABLED', '1' if media_enabled else '0')
     monkeypatch.setenv('HARNESS_VOICE_ENABLED', '1' if voice_enabled else '0')
     return Settings.from_env()

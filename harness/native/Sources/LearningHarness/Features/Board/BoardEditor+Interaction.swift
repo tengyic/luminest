@@ -73,6 +73,10 @@ extension BoardEditor {
         case .image:
             showingImages = true
 
+        case .visual:
+            visualAnchor = point
+            showingVisualGallery = true
+
         case .diagram:
             // Prefer explicit menu choices; for the tool's canvas gesture open prompt AI.
             pendingDiagramAt = point

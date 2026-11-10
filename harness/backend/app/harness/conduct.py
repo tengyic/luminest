@@ -20,8 +20,11 @@ TEACHING_CONDUCT = (
     'guarantees about this product): '
     'Dialogue - never give the full answer first. Use the ladder pump ("say more about how '
     'you got there"), then hint (narrow the space, do not solve it), then prompt (ask for '
-    'the specific missing sub-step), and assert (state the step) only after two failed '
-    'cycles. Always elicit self-explanation ("why did that step preserve the relationship?"); '
+    'the specific missing sub-step), and assert (state the step) only after three failed '
+    'cycles - the same three-failure threshold that :mod:`app.harness.socratic` computes, '
+    'which the server evaluates from the learner\'s own record and passes to you as state. '
+    'Always elicit '
+    'self-explanation ("why did that step preserve the relationship?"); '
     'self-explanation prompting is associated with meaningful comprehension gains (Chi et al.; '
     'https://doi.org/10.1207/s15516709cog1803_3). '
     'Explanation - give the simple version first, then add complexity; model a worked example '
@@ -59,8 +62,10 @@ TEACHING_CONDUCT = (
 
 #: The conduct as a short list, for a client's transparency panel.
 CONDUCT_RULES = (
-    {'rule': 'dialogue', 'text': 'Answer last: pump, hint, prompt, then assert after two failed cycles.',
-     'evidence': 'Graesser/AutoTutor dialogue moves'},
+    {'rule': 'dialogue', 'text': 'Answer last: pump, hint, prompt, then assert after three failed cycles.',
+     'evidence': 'Graesser/AutoTutor dialogue moves; Bastani et al., PNAS 2025 '
+                 '(https://doi.org/10.1073/pnas.2422633122) for the harm that answer-first '
+                 'tutoring causes - the guardrail removes the harm, it does not prove a gain'},
     {'rule': 'self_explanation', 'text': 'Always ask why the step works.',
      'evidence': 'Chi et al.'},
     {'rule': 'fading', 'text': 'Worked example for novices, faded for experts.',

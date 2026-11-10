@@ -85,8 +85,18 @@ final class LectureStore: ObservableObject {
         busy = true
         defer { busy = false }
         do {
-            let value = try await api.json(path(conceptID, "/segment/\(wanted)?minutes=45"),
-                                           method: "POST", body: [String: Any]())
+            // Query items rather than a baked "?minutes=45": the API client replaces the
+            // whole query when one is supplied, so minutes has to travel here too. Voice
+            // and tone are resolved on this Mac and ride in on every page, so the lecture
+            // keeps the same teacher's voice as the tutor and the read-aloud button.
+            var query: [URLQueryItem] = [URLQueryItem(name: "minutes", value: "45")]
+            if let store = AppStore.current {
+                query.append(URLQueryItem(name: "voice", value: store.effectiveVoice))
+                query.append(URLQueryItem(name: "tone", value: store.effectiveTone))
+            }
+            let value = try await api.json(path(conceptID, "/segment/\(wanted)"),
+                                           method: "POST", body: [String: Any](),
+                                           query: query)
             segment = LectureSegment(value["segment"])
             media = value["media"]
             let speech = value["speech"]

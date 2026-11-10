@@ -14,17 +14,21 @@ adds the grounded layer without weakening the gate:
    to the nearest permissive one.
 
 2. **Only audited books are eligible.** A book slug must appear in :data:`AUDITED_BOOKS`,
-   which points at an evidence-backed :class:`SourcePolicy` in ``app.ingest.policy``. An
-   unaudited book is not a permissive book, it is an unknown one. And the live API licence is
-   cross-checked against the audited entry: if OpenStax ever changes the licence of a
-   cleared book, the next fetch refuses to store text.
+   which is the complete OpenStax catalogue as the publisher's own CMS API reports it
+   (snapshotted by ``scripts/refresh_openstax_catalogue.py`` and audited in
+   ``app.ingest.policy``), and the live API licence is cross-checked against the audited
+   entry at fetch time: if OpenStax ever changes the licence of a cleared book, the next
+   fetch refuses to store text.
 
-3. **NC stays link-only, by evaluation.** Every current OpenStax 2e edition reports
-   CC BY-NC-SA 4.0. ``CC_BY_NC_SA`` is not in ``INGESTIBLE``, so ``assert_ingestible``
-   refuses and the section is stored as a *link-only* record with the refusal reason and no
-   text. The first edition of Algebra and Trigonometry is the exception: OpenStax's API
-   reports it CC BY 4.0, which is why the audited entry
-   ``OPENSTAX_ALGEBRA_TRIG`` exists and why this module can store its text.
+3. **Non-commercial and unknown licences stay link-only, by evaluation.** Most current
+   OpenStax editions report CC BY-NC-SA 4.0. ``CC_BY_NC_SA`` is not in ``INGESTIBLE``, so
+   ``assert_ingestible`` refuses and the section is stored as a *link-only* record with the
+   refusal reason and no text. The publisher-reported CC BY books -- 38 of 129 at the
+   2026-11-10 audit, mostly retired first editions plus Physics, Statistics and a few live
+   titles -- are the text-eligible set, and each still re-verifies against the live API at
+   fetch time. Books the publisher serves with **no licence fields at all** are registered
+   as known-and-refused: they are withheld with zero network requests and a reason that
+   says so, because an unknown licence is not a permissive licence.
 
 4. **A stored section is never sent to a model.** OpenStax's own notices prohibit ingesting
    their content into LLMs or generative-AI offerings. The lesson surface therefore exposes
@@ -54,9 +58,9 @@ from urllib.parse import urlencode
 
 import httpx
 
-from ..policy import (AssetRefused, IngestionRefused, OPENSTAX_ALGEBRA_TRIG,
-                      OPENSTAX_ALGEBRA_TRIG_2E, SourcePolicy, assert_ingestible,
-                      classify_licence)
+from ..policy import (AssetRefused, IngestionRefused, OPENSTAX_BOOK_POLICIES,
+                      OPENSTAX_UNLICENSED, SourcePolicy, assert_ingestible, classify_licence,
+                      openstax_catalogue_posture)
 
 USER_AGENT = ('LuminfestLearningHarness/1.0 (educational, offline-first; local single-learner '
               'instance; stores section text only from licence-cleared OpenStax books)')
@@ -74,13 +78,14 @@ SECTION_URL = OPENSTAX_HOST + '/books/{book_slug}/pages/{page_slug}'
 #: citable source.
 QUOTE_CHARS = 480
 
-#: Books with an audited, evidence-backed rights position in ``app.ingest.policy``. The map
-#: is deliberately small: adding a book means adding an audited entry first, which is a
-#: reviewable change -- the same bar every other source in this project clears.
-AUDITED_BOOKS = {
-    'algebra-and-trigonometry': OPENSTAX_ALGEBRA_TRIG,
-    'algebra-and-trigonometry-2e': OPENSTAX_ALGEBRA_TRIG_2E,
-}
+#: Books with an audited, evidence-backed rights position in ``app.ingest.policy``: the
+#: complete OpenStax catalogue as the publisher reports it. Every CC BY book in the
+#: catalogue is text-eligible *subject to the live re-verification below*; every NC book is
+#: audited link-only; every book the publisher serves with no licence fields at all is
+#: registered in ``OPENSTAX_UNLICENSED`` and refused with zero network requests. A book
+#: slug outside this map is still an unknown book, and an unknown book is refused -- the
+#: catalogue widens what is audited, never what is assumed.
+AUDITED_BOOKS: dict[str, SourcePolicy] = OPENSTAX_BOOK_POLICIES
 
 #: Concept -> (book slug, page slug) for the grounding exposure. Every page slug here was
 #: read from the live table of contents of the named book (the ``pages/index`` webview
@@ -93,6 +98,77 @@ SECTION_MAP: dict[str, tuple[str, str]] = {
     'linear_functions': ('algebra-and-trigonometry', '4-1-linear-functions'),
     'quadratics': ('algebra-and-trigonometry', '5-1-quadratic-functions'),
     'systems': ('algebra-and-trigonometry', '11-1-systems-of-linear-equations-two-variables'),
+
+    # ---- Algebra 1 (course ``algebra_1``) -------------------------------------------
+    # One anchor per teaching unit of the twelve-unit Algebra 1 framework, so a generated
+    # lesson for an entry concept can quote the textbook section that actually teaches it.
+    # Every slug was resolved against the publisher's own table of contents or fetched and
+    # confirmed (HTTP 200) on 2026-11-10; ``scripts/verify_algebra_1.py`` re-checks the
+    # whole set. Books: elementary-algebra (1e, CC BY), algebra-and-trigonometry (1e, CC BY)
+    # for function/sequence/exponential topics, introductory-statistics (1e, CC BY) for the
+    # statistics unit. ``algebra-1`` is CC BY-NC-SA and therefore never appears here.
+    'algebra_1_variables_and_expressions':
+        ('elementary-algebra', '1-2-use-the-language-of-algebra'),
+    'algebra_1_units_and_unit_conversion':
+        ('elementary-algebra', '1-10-systems-of-measurement'),
+    'algebra_1_one_step_equations':
+        ('elementary-algebra', '2-1-solve-equations-using-the-subtraction-and-addition-properties-of-equality'),
+    'algebra_1_variables_on_both_sides':
+        ('elementary-algebra', '2-3-solve-equations-with-variables-and-constants-on-both-sides'),
+    'algebra_1_rearranging_a_formula':
+        ('elementary-algebra', '2-6-solve-a-formula-for-a-specific-variable'),
+    'algebra_1_reversing_the_symbol':
+        ('elementary-algebra', '2-7-solve-linear-inequalities'),
+    'algebra_1_constraints_as_inequalities':
+        ('elementary-algebra', '3-6-solve-applications-with-linear-inequalities'),
+    'algebra_1_the_slope_formula':
+        ('elementary-algebra', '4-4-understand-slope-of-a-line'),
+    'algebra_1_slope_intercept_form':
+        ('elementary-algebra', '4-5-use-the-slope-intercept-form-of-an-equation-of-a-line'),
+    'algebra_1_common_difference':
+        ('algebra-and-trigonometry', '13-2-arithmetic-sequences'),
+    'algebra_1_center_and_spread':
+        ('introductory-statistics', '2-5-measures-of-the-center-of-the-data'),
+    'algebra_1_association':
+        ('introductory-statistics', '12-2-scatter-plots'),
+    'algebra_1_residuals':
+        ('introductory-statistics', '12-3-the-regression-equation'),
+    'algebra_1_the_substitution_method':
+        ('elementary-algebra', '5-2-solve-systems-of-equations-by-substitution'),
+    'algebra_1_the_elimination_method':
+        ('elementary-algebra', '5-3-solve-systems-of-equations-by-elimination'),
+    'algebra_1_overlapping_regions':
+        ('elementary-algebra', '5-6-graphing-systems-of-linear-inequalities'),
+    'algebra_1_the_function_definition':
+        ('algebra-and-trigonometry', '3-1-functions-and-function-notation'),
+    'algebra_1_domain':
+        ('algebra-and-trigonometry', '3-2-domain-and-range'),
+    'algebra_1_negative_exponents':
+        ('elementary-algebra', '6-7-integer-exponents-and-scientific-notation'),
+    'algebra_1_the_principal_square_root':
+        ('elementary-algebra', '9-1-simplify-and-use-square-roots'),
+    'algebra_1_fractional_exponents':
+        ('elementary-algebra', '9-8-rational-exponents'),
+    'algebra_1_the_exponential_growth_pattern':
+        ('algebra-and-trigonometry', '6-1-exponential-functions'),
+    'algebra_1_common_ratio':
+        ('algebra-and-trigonometry', '13-3-geometric-sequences'),
+    'algebra_1_multiplying_polynomials':
+        ('elementary-algebra', '6-3-multiply-polynomials'),
+    'algebra_1_the_greatest_common_factor':
+        ('elementary-algebra', '7-1-greatest-common-factor-and-factor-by-grouping'),
+    'algebra_1_leading_coefficient_one':
+        ('elementary-algebra', '7-2-factor-quadratic-trinomials-with-leading-coefficient-1'),
+    'algebra_1_vertex_and_axis_of_symmetry':
+        ('algebra-and-trigonometry', '5-1-quadratic-functions'),
+    'algebra_1_standard_form_of_a_parabola':
+        ('elementary-algebra', '10-5-graphing-quadratic-equations'),
+    'algebra_1_the_zero_product_property':
+        ('elementary-algebra', '7-6-quadratic-equations'),
+    'algebra_1_the_quadratic_formula':
+        ('elementary-algebra', '10-3-solve-quadratic-equations-using-the-quadratic-formula'),
+    'algebra_1_the_discriminant':
+        ('elementary-algebra', '10-3-solve-quadratic-equations-using-the-quadratic-formula'),
 }
 
 
@@ -123,6 +199,12 @@ def book_policy(meta: Mapping[str, Any], *, book_slug: str = '') -> SourcePolicy
     books is :func:`app.ingest.policy.assert_ingestible`, whose reason says ``link-only``.)
     """
     slug = book_slug or str(meta.get('slug') or '')
+    if slug in OPENSTAX_UNLICENSED:
+        raise IngestionRefused(
+            f'{slug!r}: OpenStax\'s catalogue reports no licence for this book, so there is '
+            f'no rights position to rely on. An unknown licence is refused, not rounded to '
+            f'the nearest permissive one; text storage stays refused until the publisher '
+            f'declares one.')
     audited = AUDITED_BOOKS.get(slug)
     if audited is None:
         raise IngestionRefused(
@@ -279,6 +361,24 @@ def ingest_section(settings, book_slug: str, page_slug: str, *,
     sections = load_sections(settings)
     key = f'{book_slug}:{page_slug}'
     record: dict[str, Any] = dict(sections.get(key) or _blank(book_slug, page_slug))
+    if book_slug in OPENSTAX_UNLICENSED:
+        # Known-and-refused, decided entirely from the audited catalogue: the publisher
+        # serves no licence fields for this book, so there is nothing the live API could
+        # add and no reason to spend a request asking.
+        record.update({'status': 'withheld', 'fetched_at': _now(),
+                       'withheld_reason': (
+                           f'{book_slug!r}: OpenStax\'s catalogue reports no licence for this '
+                           f'book, so there is no rights position to rely on. An unknown '
+                           f'licence is refused, not rounded to the nearest permissive one; '
+                           f'text storage stays refused until the publisher declares one.'),
+                       'source_url': SECTION_URL.format(book_slug=book_slug, page_slug=page_slug),
+                       'book_title': '', 'section_title': '', 'page_slug': page_slug,
+                       'licence': '', 'licence_class': 'refused'})
+        record.pop('text', None)
+        record.pop('excerpt', None)
+        sections[key] = record
+        _save(settings, sections)
+        return record
     if book_slug not in AUDITED_BOOKS:
         # Audited before any request leaves the machine: an unaudited book is not a
         # permissive book, it is an unknown one, and it costs zero network calls to refuse.
@@ -397,6 +497,16 @@ def grounding(settings, concept_id: str) -> list[dict[str, Any]]:
     return [card]
 
 
+def catalogue() -> dict[str, Any]:
+    """The full publisher-reported catalogue with each book's audited rights position.
+
+    Read-only and network-free: it is the bundled snapshot interpreted through the same
+    fail-close classifier, not a fresh fetch, so the transparency surface can never become
+    a blocking call -- and it can never claim a rights position the audit does not hold.
+    """
+    return openstax_catalogue_posture()
+
+
 def describe(settings=None) -> dict[str, Any]:
     """The module's posture, for the transparency panel."""
     stored = 0
@@ -410,6 +520,7 @@ def describe(settings=None) -> dict[str, Any]:
         'concepts_mapped': sorted(SECTION_MAP),
         'sections_stored': stored,
         'sections_ready': ready,
+        'catalogue': openstax_catalogue_posture(),
         'guarantees': [
             'A book is text-eligible only when its slug has an audited policy entry AND the '
             'publisher\'s own API still reports the licence that entry was audited against.',

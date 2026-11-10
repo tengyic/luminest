@@ -1,0 +1,3431 @@
+{
+ "schema": 1,
+ "name": "astrophysics",
+ "title": "Astrophysics",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A quantitative introduction to astrophysics: astronomical measurement and the celestial sphere, gravitation and orbits, radiation and spectra, telescopes and detectors, binary stars and the HR diagram, stellar atmospheres and interiors, star formation and evolution, compact objects, the Milky Way and galaxies, cosmology, and the solar system with its exoplanets.",
+  "id_namespace": {
+   "prefix": "astrophysics_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "OpenStax Astronomy (1e, CC BY 4.0)",
+   "supplements": [],
+   "link_only_note": "OpenStax Astronomy 2e reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored, quoted or used as an anchor.",
+   "units": {
+    "Astrophysical Tools & Measurement": [
+     {
+      "book": "astronomy",
+      "page": "1-4-numbers-in-astronomy"
+     },
+     {
+      "book": "astronomy",
+      "page": "1-7-the-universe-on-the-large-scale"
+     },
+     {
+      "book": "astronomy",
+      "page": "1-1-the-nature-of-astronomy"
+     }
+    ],
+    "The Celestial Sphere, Coordinates & Time": [
+     {
+      "book": "astronomy",
+      "page": "2-1-the-sky-above"
+     },
+     {
+      "book": "astronomy",
+      "page": "4-1-earth-and-sky"
+     },
+     {
+      "book": "astronomy",
+      "page": "4-3-keeping-time"
+     },
+     {
+      "book": "astronomy",
+      "page": "4-7-eclipses-of-the-sun-and-moon"
+     }
+    ],
+    "Gravity, Orbits & Celestial Mechanics": [
+     {
+      "book": "astronomy",
+      "page": "3-1-the-laws-of-planetary-motion"
+     },
+     {
+      "book": "astronomy",
+      "page": "3-3-newtons-universal-law-of-gravitation"
+     },
+     {
+      "book": "astronomy",
+      "page": "3-4-orbits-in-the-solar-system"
+     },
+     {
+      "book": "astronomy",
+      "page": "3-6-gravity-with-more-than-two-bodies"
+     }
+    ],
+    "Radiation, Light & Magnitudes": [
+     {
+      "book": "astronomy",
+      "page": "5-1-the-behavior-of-light"
+     },
+     {
+      "book": "astronomy",
+      "page": "5-2-the-electromagnetic-spectrum"
+     },
+     {
+      "book": "astronomy",
+      "page": "17-1-the-brightness-of-stars"
+     },
+     {
+      "book": "astronomy",
+      "page": "17-2-colors-of-stars"
+     }
+    ],
+    "Light-Matter Interaction & Spectra": [
+     {
+      "book": "astronomy",
+      "page": "5-3-spectroscopy-in-astronomy"
+     },
+     {
+      "book": "astronomy",
+      "page": "5-4-the-structure-of-the-atom"
+     },
+     {
+      "book": "astronomy",
+      "page": "5-5-formation-of-spectral-lines"
+     },
+     {
+      "book": "astronomy",
+      "page": "5-6-the-doppler-effect"
+     }
+    ],
+    "Telescopes, Detectors & Multi-wavelength Astronomy": [
+     {
+      "book": "astronomy",
+      "page": "6-1-telescopes"
+     },
+     {
+      "book": "astronomy",
+      "page": "6-3-visible-light-detectors-and-instruments"
+     },
+     {
+      "book": "astronomy",
+      "page": "6-4-radio-telescopes"
+     },
+     {
+      "book": "astronomy",
+      "page": "6-5-observations-outside-earths-atmosphere"
+     }
+    ],
+    "Binary Stars & Stellar Parameters": [
+     {
+      "book": "astronomy",
+      "page": "18-2-measuring-stellar-masses"
+     },
+     {
+      "book": "astronomy",
+      "page": "17-4-using-spectra-to-measure-stellar-radius-composition-and-motion"
+     },
+     {
+      "book": "astronomy",
+      "page": "18-3-diameters-of-stars"
+     }
+    ],
+    "Stellar Classification & the HR Diagram": [
+     {
+      "book": "astronomy",
+      "page": "17-3-the-spectra-of-stars-and-brown-dwarfs"
+     },
+     {
+      "book": "astronomy",
+      "page": "18-1-a-stellar-census"
+     },
+     {
+      "book": "astronomy",
+      "page": "18-4-the-h-r-diagram"
+     },
+     {
+      "book": "astronomy",
+      "page": "19-4-the-h-r-diagram-and-cosmic-distances"
+     }
+    ],
+    "Stellar Atmospheres & Interiors": [
+     {
+      "book": "astronomy",
+      "page": "15-1-the-structure-and-composition-of-the-sun"
+     },
+     {
+      "book": "astronomy",
+      "page": "16-1-sources-of-sunshine-thermal-and-gravitational-energy"
+     },
+     {
+      "book": "astronomy",
+      "page": "16-3-the-solar-interior-theory"
+     },
+     {
+      "book": "astronomy",
+      "page": "16-4-the-solar-interior-observations"
+     }
+    ],
+    "Star Formation, Evolution & the ISM": [
+     {
+      "book": "astronomy",
+      "page": "20-1-the-interstellar-medium"
+     },
+     {
+      "book": "astronomy",
+      "page": "21-1-star-formation"
+     },
+     {
+      "book": "astronomy",
+      "page": "22-1-evolution-from-the-main-sequence-to-red-giants"
+     },
+     {
+      "book": "astronomy",
+      "page": "22-2-star-clusters"
+     }
+    ],
+    "Stellar Death & Compact Objects": [
+     {
+      "book": "astronomy",
+      "page": "23-1-the-death-of-low-mass-stars"
+     },
+     {
+      "book": "astronomy",
+      "page": "23-2-evolution-of-massive-stars-an-explosive-finish"
+     },
+     {
+      "book": "astronomy",
+      "page": "23-4-pulsars-and-the-discovery-of-neutron-stars"
+     },
+     {
+      "book": "astronomy",
+      "page": "24-5-black-holes"
+     }
+    ],
+    "The Milky Way & Galaxies": [
+     {
+      "book": "astronomy",
+      "page": "25-1-the-architecture-of-the-galaxy"
+     },
+     {
+      "book": "astronomy",
+      "page": "26-2-types-of-galaxies"
+     },
+     {
+      "book": "astronomy",
+      "page": "26-4-the-extragalactic-distance-scale"
+     },
+     {
+      "book": "astronomy",
+      "page": "27-1-quasars"
+     }
+    ],
+    "Cosmology & the Early Universe": [
+     {
+      "book": "astronomy",
+      "page": "29-1-the-age-of-the-universe"
+     },
+     {
+      "book": "astronomy",
+      "page": "29-2-a-model-of-the-universe"
+     },
+     {
+      "book": "astronomy",
+      "page": "29-4-the-cosmic-microwave-background"
+     },
+     {
+      "book": "astronomy",
+      "page": "29-6-the-inflationary-universe"
+     }
+    ],
+    "The Solar System & Exoplanets": [
+     {
+      "book": "astronomy",
+      "page": "7-1-overview-of-our-planetary-system"
+     },
+     {
+      "book": "astronomy",
+      "page": "10-1-the-nearest-planets-an-overview"
+     },
+     {
+      "book": "astronomy",
+      "page": "11-2-the-giant-planets"
+     },
+     {
+      "book": "astronomy",
+      "page": "21-4-planets-beyond-the-solar-system-search-and-discovery"
+     }
+    ]
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Astrophysical Tools & Measurement": {
+    "Astrophysical Tools & Measurement": [
+     "Units, Scale & Dimensional Reasoning",
+     "Angular Measure",
+     "Significant Figures & Uncertainty",
+     "Graphical Analysis & Curve Fitting"
+    ]
+   },
+   "The Celestial Sphere, Coordinates & Time": {
+    "The Celestial Sphere, Coordinates & Time": [
+     "Spherical Trigonometry on the Sky",
+     "The Celestial Sphere & Its Motions",
+     "Celestial Coordinate Systems & Transforms",
+     "Time Systems, Precession, Proper Motion & Parallax",
+     "Sky Phenomena: Seasons, Rise/Set & Eclipses"
+    ]
+   },
+   "Gravity, Orbits & Celestial Mechanics": {
+    "Gravity, Orbits & Celestial Mechanics": [
+     "Newtonian Gravity & Gravitational Energy",
+     "Kepler's Laws & the Geometry of the Ellipse",
+     "Orbital Energy, Angular Momentum & Vis-Viva",
+     "The Two-Body Problem, Barycentre & Reduced Mass",
+     "Tides, the Roche Limit & Lagrange Points"
+    ]
+   },
+   "Radiation, Light & Magnitudes": {
+    "Radiation, Light & Magnitudes": [
+     "Light & the Electromagnetic Spectrum",
+     "Blackbody Radiation",
+     "Flux, Luminosity & the Inverse-Square Law",
+     "The Magnitude Scale",
+     "Color Index, Temperature & Bolometric Magnitude"
+    ]
+   },
+   "Light-Matter Interaction & Spectra": {
+    "Light-Matter Interaction & Spectra": [
+     "Atomic Structure & the Bohr Model",
+     "Kirchhoff's Laws & Spectrum Types",
+     "The Doppler Shift & Radial Velocity",
+     "Spectral Line Formation",
+     "Spectral Line Broadening",
+     "Excitation & Ionization Populations"
+    ]
+   },
+   "Telescopes, Detectors & Multi-wavelength Astronomy": {
+    "Telescopes, Detectors & Multi-wavelength Astronomy": [
+     "Geometric Optics of Telescopes",
+     "Light-Gathering Power & Limiting Magnitude",
+     "Angular Resolution, Seeing & Interferometry",
+     "Telescope Designs & Aberrations",
+     "Detectors & Observational Techniques",
+     "Atmospheric Windows & Multi-wavelength Astronomy"
+    ]
+   },
+   "Binary Stars & Stellar Parameters": {
+    "Binary Stars & Stellar Parameters": [
+     "Classifying Binary Systems",
+     "Stellar Masses from Visual Binaries",
+     "Spectroscopic Binaries & the Mass Function",
+     "Eclipsing Binaries: Radii & Temperature Ratios",
+     "The Mass-Luminosity Relation"
+    ]
+   },
+   "Stellar Classification & the HR Diagram": {
+    "Stellar Classification & the HR Diagram": [
+     "The OBAFGKM Spectral Sequence",
+     "MK Luminosity Classes",
+     "The Hertzsprung-Russell Diagram",
+     "The Color-Magnitude Diagram",
+     "Spectroscopic Parallax"
+    ]
+   },
+   "Stellar Atmospheres & Interiors": {
+    "Stellar Atmospheres & Interiors": [
+     "The Radiation Field: Intensity, Flux & Radiation Pressure",
+     "Opacity, Mean Free Path & Optical Depth",
+     "Radiative Transfer, the Gray Atmosphere & Line Formation",
+     "Hydrostatic Equilibrium & the Equation of State",
+     "Nuclear Energy Generation",
+     "Energy Transport: Radiative Diffusion & Convection",
+     "Stellar Structure Equations, the Virial Theorem & Timescales",
+     "The Sun as the Calibrating Standard Model"
+    ]
+   },
+   "Star Formation, Evolution & the ISM": {
+    "Star Formation, Evolution & the ISM": [
+     "The Interstellar Medium",
+     "Star Formation & Collapse",
+     "Main-Sequence Evolution",
+     "Post-Main-Sequence Evolution",
+     "Star Clusters as Evolutionary Clocks",
+     "Nucleosynthesis & Chemical Enrichment",
+     "Stellar Pulsation & Variable Stars"
+    ]
+   },
+   "Stellar Death & Compact Objects": {
+    "Stellar Death & Compact Objects": [
+     "Supernovae & Their Aftermath",
+     "White Dwarfs & Electron Degeneracy",
+     "Neutron Stars & Pulsars",
+     "Relativity, Schwarzschild Geometry & Black Holes",
+     "Accretion & Interacting Binaries"
+    ]
+   },
+   "The Milky Way & Galaxies": {
+    "The Milky Way & Galaxies": [
+     "The Milky Way Galaxy",
+     "Galaxy Morphology & Structure",
+     "The Extragalactic Distance Ladder",
+     "Galaxy Formation & Evolution",
+     "Galaxy Clusters & Large-Scale Structure",
+     "Active Galaxies & AGN"
+    ]
+   },
+   "Cosmology & the Early Universe": {
+    "Cosmology & the Early Universe": [
+     "Cosmic Expansion & Hubble's Law",
+     "Scale Factor, Critical Density & the Fate of the Universe",
+     "The Cosmic Microwave Background",
+     "Big Bang Nucleosynthesis",
+     "Dark Energy & Accelerating Expansion",
+     "Inflation & the Horizon and Flatness Problems"
+    ]
+   },
+   "The Solar System & Exoplanets": {
+    "The Solar System & Exoplanets": [
+     "Solar System Orbital Phenomena",
+     "The Terrestrial Planets",
+     "The Giant Planets",
+     "Minor Bodies of the Solar System",
+     "Formation of Planetary Systems",
+     "Exoplanet Detection"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Astrophysical Tools & Measurement",
+    "units": [
+     "Astrophysical Tools & Measurement"
+    ]
+   },
+   {
+    "strand": "The Celestial Sphere, Coordinates & Time",
+    "units": [
+     "The Celestial Sphere, Coordinates & Time"
+    ]
+   },
+   {
+    "strand": "Gravity, Orbits & Celestial Mechanics",
+    "units": [
+     "Gravity, Orbits & Celestial Mechanics"
+    ]
+   },
+   {
+    "strand": "Radiation, Light & Magnitudes",
+    "units": [
+     "Radiation, Light & Magnitudes"
+    ]
+   },
+   {
+    "strand": "Light-Matter Interaction & Spectra",
+    "units": [
+     "Light-Matter Interaction & Spectra"
+    ]
+   },
+   {
+    "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+    "units": [
+     "Telescopes, Detectors & Multi-wavelength Astronomy"
+    ]
+   },
+   {
+    "strand": "Binary Stars & Stellar Parameters",
+    "units": [
+     "Binary Stars & Stellar Parameters"
+    ]
+   },
+   {
+    "strand": "Stellar Classification & the HR Diagram",
+    "units": [
+     "Stellar Classification & the HR Diagram"
+    ]
+   },
+   {
+    "strand": "Stellar Atmospheres & Interiors",
+    "units": [
+     "Stellar Atmospheres & Interiors"
+    ]
+   },
+   {
+    "strand": "Star Formation, Evolution & the ISM",
+    "units": [
+     "Star Formation, Evolution & the ISM"
+    ]
+   },
+   {
+    "strand": "Stellar Death & Compact Objects",
+    "units": [
+     "Stellar Death & Compact Objects"
+    ]
+   },
+   {
+    "strand": "The Milky Way & Galaxies",
+    "units": [
+     "The Milky Way & Galaxies"
+    ]
+   },
+   {
+    "strand": "Cosmology & the Early Universe",
+    "units": [
+     "Cosmology & the Early Universe"
+    ]
+   },
+   {
+    "strand": "The Solar System & Exoplanets",
+    "units": [
+     "The Solar System & Exoplanets"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "astrophysics_absolute_magnitude_and_the_distance_modulus",
+   "title": "Absolute Magnitude and the Distance Modulus",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "The Magnitude Scale",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_the_pogson_magnitude_relation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute magnitude",
+    "apparent magnitude",
+    "distance modulus"
+   ],
+   "summary": "Apparent and absolute magnitude differ by m - M = 5 log10(d) - 5 with d in parsecs, so a star of absolute magnitude 0 placed at 100 pc has m = 5.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "astrophysics_accretion_discs_and_the_eddington_limit",
+   "title": "Accretion Discs and the Eddington Limit",
+   "strand": "Stellar Death & Compact Objects",
+   "unit": "Stellar Death & Compact Objects",
+   "topic": "Accretion & Interacting Binaries",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_schwarzschild_radius_and_event_horizon"
+   ],
+   "keywords": [
+    "accretion disc",
+    "eddington limit",
+    "x-ray binary"
+   ],
+   "summary": "Accretion liberates GM(dM/dt)/R, so a neutron star accreting 10^-8 solar masses per year radiates about 10^31 W, and the Eddington limit caps how fast a compact object can be fed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "astrophysics_angular_size_and_the_small_angle_relation",
+   "title": "Angular Size and the Small-Angle Relation",
+   "strand": "Astrophysical Tools & Measurement",
+   "unit": "Astrophysical Tools & Measurement",
+   "topic": "Angular Measure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_dimensional_analysis_of_physical_laws"
+   ],
+   "keywords": [
+    "angular size",
+    "distance",
+    "small angle"
+   ],
+   "summary": "A body of diameter D at distance d subtends about D/d radians, so the Moon's 3 475 km at 384 000 km gives 0.52 degrees, and one angular size can mean a small near object or a large distant one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "astrophysics_asteroids_comets_and_the_kuiper_belt",
+   "title": "Asteroids, Comets and the Kuiper Belt",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "Minor Bodies of the Solar System",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_giant_planets_and_their_interiors"
+   ],
+   "keywords": [
+    "asteroids",
+    "comets",
+    "kuiper belt"
+   ],
+   "summary": "Main-belt asteroids orbit between 2.2 and 3.3 au, comets arrive from the Kuiper belt and Oort cloud and grow tails only inside about 5 au, and the belt's total mass is under a thousandth of Earth's.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "astrophysics_atmospheric_windows_and_space_observatories",
+   "title": "Atmospheric Windows and Space Observatories",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Atmospheric Windows & Multi-wavelength Astronomy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_detectors_integration_time_and_signal_to_noise"
+   ],
+   "keywords": [
+    "atmospheric windows",
+    "multiwavelength",
+    "space telescope"
+   ],
+   "summary": "The atmosphere passes visible light and part of the radio band but absorbs ultraviolet, X-rays and most infrared, so those bands need balloons, rockets or space telescopes above most of the absorbing column.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "astrophysics_axes_loci_and_the_main_sequence",
+   "title": "Axes, Loci and the Main Sequence",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "The Hertzsprung-Russell Diagram",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_mk_luminosity_classes"
+   ],
+   "keywords": [
+    "hr diagram",
+    "luminosity",
+    "main sequence"
+   ],
+   "summary": "The HR diagram plots luminosity against temperature, and stars gather on a main sequence from hot and bright to cool and faint, with giants, supergiants and white dwarfs lying off it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "astrophysics_barycentre_and_reduced_mass",
+   "title": "Barycentre and Reduced Mass",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "The Two-Body Problem, Barycentre & Reduced Mass",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_conservation_of_angular_momentum"
+   ],
+   "keywords": [
+    "barycentre",
+    "reduced mass",
+    "two-body problem"
+   ],
+   "summary": "Two bodies circle their common centre of mass with m1 r1 = m2 r2, and the relative motion is one body of reduced mass m1 m2/(m1 + m2) orbiting the total mass, so a star with a planet wobbles by only m_p/M_star of the separation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "astrophysics_big_bang_nucleosynthesis_and_the_light_elements",
+   "title": "Big Bang Nucleosynthesis and the Light Elements",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Big Bang Nucleosynthesis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_cmb_and_its_acoustic_peaks"
+   ],
+   "keywords": [
+    "baryon density",
+    "big bang nucleosynthesis",
+    "helium abundance"
+   ],
+   "summary": "Within the first few minutes, as kT fell below about 1 MeV, nucleosynthesis left roughly 75 per cent hydrogen, 25 per cent helium-4 and traces of deuterium and lithium-7, which fixes the baryon-to-photon ratio.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "astrophysics_cepheids_as_standard_candles",
+   "title": "Cepheids as Standard Candles",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "The Extragalactic Distance Ladder",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_hubble_sequence"
+   ],
+   "keywords": [
+    "cepheid",
+    "period-luminosity",
+    "standard candle"
+   ],
+   "summary": "The period-luminosity law makes a Cepheid a standard candle, so a ten-day Cepheid near 3x10^3 solar luminosities has its distance fixed by its period and apparent brightness to a few per cent.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "astrophysics_clusters_groups_and_the_cosmic_web",
+   "title": "Clusters, Groups and the Cosmic Web",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "Galaxy Clusters & Large-Scale Structure",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_hierarchical_assembly_in_a_dark_matter_universe"
+   ],
+   "keywords": [
+    "cosmic web",
+    "galaxy cluster",
+    "intracluster gas"
+   ],
+   "summary": "A galaxy cluster holds 10^2 to 10^3 galaxies within a few Mpc and is dominated by 10^7 to 10^8 K intracluster gas and dark matter, and clusters trace the filaments and voids of the cosmic web.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "astrophysics_collecting_area_and_limiting_magnitude",
+   "title": "Collecting Area and Limiting Magnitude",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Light-Gathering Power & Limiting Magnitude",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_focal_length_magnification_and_focal_ratio"
+   ],
+   "keywords": [
+    "aperture",
+    "light grasp",
+    "limiting magnitude"
+   ],
+   "summary": "Collecting area grows as D^2, so a 0.2 m telescope gathers about 800 times the light of a 7 mm dark-adapted pupil, worth roughly 7 magnitudes of extra reach.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "astrophysics_colour_index_and_bolometric_correction",
+   "title": "Colour Index and Bolometric Correction",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "Color Index, Temperature & Bolometric Magnitude",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_absolute_magnitude_and_the_distance_modulus"
+   ],
+   "keywords": [
+    "bolometric correction",
+    "color index",
+    "temperature"
+   ],
+   "summary": "The difference of two band magnitudes is a temperature proxy, B - V near 0.65 for the Sun and negative for a hot B star, and the bolometric correction turns a band magnitude into total flux, mattering most at both temperature extremes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "astrophysics_colour_magnitude_diagrams_of_star_clusters",
+   "title": "Colour-Magnitude Diagrams of Star Clusters",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "The Color-Magnitude Diagram",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_mass_and_evolution_read_off_the_hr_diagram"
+   ],
+   "keywords": [
+    "colour-magnitude",
+    "star cluster",
+    "turnoff"
+   ],
+   "summary": "Replacing temperature by colour index and luminosity by absolute magnitude gives the observed colour-magnitude diagram, whose turnoff fixes a cluster's age and whose red-giant branch tracks its metallicity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "astrophysics_comparative_geology_of_the_terrestrial_planets",
+   "title": "Comparative Geology of the Terrestrial Planets",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "The Terrestrial Planets",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_oppositions_synodic_periods_and_retrograde_loops"
+   ],
+   "keywords": [
+    "atmosphere",
+    "differentiation",
+    "terrestrial planets"
+   ],
+   "summary": "Mercury, Venus, Earth and Mars share a rocky differentiated composition but differ in atmosphere and surface because planet size sets whether gas is retained and whether plate tectonics or volcanism dominates.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "astrophysics_conservation_of_angular_momentum",
+   "title": "Conservation of Angular Momentum",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Orbital Energy, Angular Momentum & Vis-Viva",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_vis_viva_equation_and_orbital_energy"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "angular momentum",
+    "areal velocity",
+    "perihelion"
+   ],
+   "summary": "Specific angular momentum h = r v cos(phi) is constant because gravity is a central force, which is why a comet is fastest at perihelion and why dA/dt = h/2 never changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "astrophysics_core_collapse_and_thermonuclear_supernovae",
+   "title": "Core-Collapse and Thermonuclear Supernovae",
+   "strand": "Stellar Death & Compact Objects",
+   "unit": "Stellar Death & Compact Objects",
+   "topic": "Supernovae & Their Aftermath",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_period_density_relation_for_pulsators"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "core collapse",
+    "supernova",
+    "type ia"
+   ],
+   "summary": "A star above about eight solar masses ends in a core-collapse supernova that releases near 10^46 J and leaves a neutron star or black hole, while a Type Ia comes from a white dwarf reaching 1.4 solar masses and is standardisable for cosmology.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "astrophysics_cosmological_redshift_and_the_scale_factor",
+   "title": "Cosmological Redshift and the Scale Factor",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Cosmic Expansion & Hubble's Law",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_hubble_s_law_and_the_hubble_constant"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "lookback time",
+    "redshift",
+    "scale factor"
+   ],
+   "summary": "Cosmological redshift obeys 1 + z = a_observed/a_emitted, so z = 1 means the light left when the universe was half its present size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "astrophysics_dark_energy_and_the_equation_of_state",
+   "title": "Dark Energy and the Equation of State",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Dark Energy & Accelerating Expansion",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_big_bang_nucleosynthesis_and_the_light_elements"
+   ],
+   "keywords": [
+    "cosmological constant",
+    "dark energy",
+    "equation of state"
+   ],
+   "summary": "Dark energy supplies about 68 per cent of the energy budget with an equation of state w = p/(rho c^2) consistent with -1, which is why the expansion accelerates although gravity pulls inward.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "astrophysics_detectors_integration_time_and_signal_to_noise",
+   "title": "Detectors, Integration Time and Signal-to-Noise",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Detectors & Observational Techniques",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_refracting_and_reflecting_telescope_designs"
+   ],
+   "keywords": [
+    "ccd",
+    "integration time",
+    "signal-to-noise"
+   ],
+   "summary": "A CCD accumulates signal linearly while read noise and sky background add in quadrature, so signal-to-noise grows as sqrt(t) when background-limited but only as t when read-noise-limited.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "astrophysics_dimensional_analysis_of_physical_laws",
+   "title": "Dimensional Analysis of Physical Laws",
+   "strand": "Astrophysical Tools & Measurement",
+   "unit": "Astrophysical Tools & Measurement",
+   "topic": "Units, Scale & Dimensional Reasoning",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_si_units_and_astronomical_distance_scales"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dimensional analysis",
+    "scaling",
+    "units"
+   ],
+   "summary": "An equation is dimensionally consistent only when both sides carry the same base-unit powers, so a candidate such as L ~ M R^2/t^3 can be tested before any data are taken, though consistency alone does not prove a law correct.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "astrophysics_diurnal_rotation_and_circumpolar_stars",
+   "title": "Diurnal Rotation and Circumpolar Stars",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "The Celestial Sphere & Its Motions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_spherical_law_of_cosines"
+   ],
+   "keywords": [
+    "circumpolar",
+    "culmination",
+    "diurnal motion"
+   ],
+   "summary": "The sky turns once on the polar axis in a sidereal day, so a star of declination d culminates at altitude 90 - |latitude - d| degrees and never sets when d > 90 - latitude.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "astrophysics_doppler_shift_and_radial_velocity",
+   "title": "Doppler Shift and Radial Velocity",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "The Doppler Shift & Radial Velocity",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_kirchhoff_s_three_spectral_laws"
+   ],
+   "keywords": [
+    "doppler shift",
+    "radial velocity",
+    "redshift"
+   ],
+   "summary": "For speeds well below c the shift is delta lambda/lambda = v_r/c, so a line at 500 nm displaced by 0.05 nm means 30 km/s, and only the line-of-sight component can be measured this way.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "astrophysics_equivalent_width_and_the_curve_of_growth",
+   "title": "Equivalent Width and the Curve of Growth",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Spectral Line Formation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_doppler_shift_and_radial_velocity"
+   ],
+   "keywords": [
+    "curve of growth",
+    "equivalent width",
+    "saturation"
+   ],
+   "summary": "Line strength grows with the absorbing column in three regimes, linear in N, roughly as sqrt(ln N) in the Doppler core and as sqrt(N) on the damping wings, so equivalent width alone gives no abundance without the regime.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "astrophysics_flux_luminosity_and_the_inverse_square_law",
+   "title": "Flux, Luminosity and the Inverse-Square Law",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "Flux, Luminosity & the Inverse-Square Law",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_stefan_boltzmann_law"
+   ],
+   "keywords": [
+    "flux",
+    "inverse square",
+    "luminosity"
+   ],
+   "summary": "Flux falls as F = L/(4 pi d^2), so a star ten times farther away is a hundred times fainter, and a measured flux with a known distance yields the luminosity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "astrophysics_focal_length_magnification_and_focal_ratio",
+   "title": "Focal Length, Magnification and Focal Ratio",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Geometric Optics of Telescopes",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_boltzmann_and_saha_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "focal length",
+    "focal ratio",
+    "magnification"
+   ],
+   "summary": "Angular magnification is f_objective/f_eye, and the focal ratio f/D fixes both the plate scale and the light concentration, so a 0.2 m f/10 telescope has a 2 m focal length.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "astrophysics_four_ways_to_detect_a_binary",
+   "title": "Four Ways to Detect a Binary",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Classifying Binary Systems",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_atmospheric_windows_and_space_observatories"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binary stars",
+    "detection methods",
+    "light curve"
+   ],
+   "summary": "A binary is classed by how it is found, resolved visually, by periodic line splitting, by eclipses in the light curve or by the wobble of the primary, and each class yields a different mix of orbital parameters.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "astrophysics_gravitational_potential_energy_and_escape_speed",
+   "title": "Gravitational Potential Energy and Escape Speed",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Newtonian Gravity & Gravitational Energy",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_the_inverse_square_law_of_gravitation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binding energy",
+    "escape velocity",
+    "potential energy"
+   ],
+   "summary": "With U = -G M m / r measured from infinity, a body escapes when its kinetic energy balances the well, giving v_esc = sqrt(2GM/r), which is 11.2 km/s at Earth's surface.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "astrophysics_great_circles_and_spherical_angles",
+   "title": "Great Circles and Spherical Angles",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Spherical Trigonometry on the Sky",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_logarithmic_plots_and_power_law_fits"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "great circle",
+    "small circle",
+    "spherical angle"
+   ],
+   "summary": "Two great circles cross at antipodal points and enclose an angle equal to the dihedral angle of their planes, while a small circle such as a declination parallel does not pass through the centre of the sphere.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "astrophysics_hierarchical_assembly_in_a_dark_matter_universe",
+   "title": "Hierarchical Assembly in a Dark Matter Universe",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "Galaxy Formation & Evolution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_distance_ladder_and_its_systematics"
+   ],
+   "keywords": [
+    "hierarchical formation",
+    "mergers",
+    "star formation history"
+   ],
+   "summary": "Structure grows bottom-up through mergers in a cold dark matter universe, so large galaxies are assembled from smaller pieces and their star formation peaks near redshift 2.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "astrophysics_horizon_equatorial_and_ecliptic_frames",
+   "title": "Horizon, Equatorial and Ecliptic Frames",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Celestial Coordinate Systems & Transforms",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_diurnal_rotation_and_circumpolar_stars"
+   ],
+   "keywords": [
+    "declination",
+    "ecliptic coordinates",
+    "right ascension"
+   ],
+   "summary": "Each frame is tied to a different reference, the observer's zenith, Earth's equator or the ecliptic, so a star's altitude changes hourly while its right ascension and declination stay nearly fixed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "astrophysics_hubble_s_law_and_the_hubble_constant",
+   "title": "Hubble's Law and the Hubble Constant",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Cosmic Expansion & Hubble's Law",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_unified_model_of_active_galactic_nuclei"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "hubble constant",
+    "hubble law",
+    "recession"
+   ],
+   "summary": "Recession grows with distance as v = H0 d, so H0 near 70 km/s/Mpc puts a galaxy at 100 Mpc at 7 000 km/s and gives a Hubble time of about 14 Gyr.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "astrophysics_hydrostatic_equilibrium_and_central_conditions",
+   "title": "Hydrostatic Equilibrium and Central Conditions",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Hydrostatic Equilibrium & the Equation of State",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_limb_darkening_in_a_gray_atmosphere"
+   ],
+   "keywords": [
+    "central temperature",
+    "hydrostatic equilibrium",
+    "pressure gradient"
+   ],
+   "summary": "Each layer balances pressure against weight, dP/dr = -G M_r rho/r^2, which for the Sun implies a central pressure near 10^16 Pa and a central temperature near 1.5x10^7 K.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "astrophysics_individual_masses_from_the_barycentre",
+   "title": "Individual Masses from the Barycentre",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Stellar Masses from Visual Binaries",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_total_mass_from_kepler_s_third_law"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "barycentre",
+    "individual masses",
+    "mass ratio"
+   ],
+   "summary": "The barycentre divides the orbit in the ratio of the masses, so the measured semi-major axes give M1/M2 = a2/a1 and, with the sum, each mass separately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "astrophysics_inflation_and_the_horizon_and_flatness_problems",
+   "title": "Inflation and the Horizon and Flatness Problems",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Inflation & the Horizon and Flatness Problems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_dark_energy_and_the_equation_of_state"
+   ],
+   "keywords": [
+    "flatness problem",
+    "horizon problem",
+    "inflation"
+   ],
+   "summary": "An epoch of exponential expansion by at least e^60 explains how causally disconnected patches share one background temperature and why Omega is driven so close to 1.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "astrophysics_kepler_s_laws_and_orbital_geometry",
+   "title": "Kepler's Laws and Orbital Geometry",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Kepler's Laws & the Geometry of the Ellipse",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_gravitational_potential_energy_and_escape_speed"
+   ],
+   "keywords": [
+    "ellipse",
+    "kepler laws",
+    "orbital period"
+   ],
+   "summary": "Orbits are ellipses with the primary at a focus, the radius vector sweeps equal areas in equal times, and P^2 = a^3 holds when P is in years and a in astronomical units.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "astrophysics_kirchhoff_s_three_spectral_laws",
+   "title": "Kirchhoff's Three Spectral Laws",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Kirchhoff's Laws & Spectrum Types",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_rydberg_formula_and_spectral_series"
+   ],
+   "keywords": [
+    "absorption lines",
+    "emission lines",
+    "kirchhoff laws"
+   ],
+   "summary": "A hot dense body emits a continuum, a hot low-density gas emits bright lines at its own wavelengths, and a cooler gas in front of a continuum removes those same wavelengths as absorption lines.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "astrophysics_limb_darkening_in_a_gray_atmosphere",
+   "title": "Limb Darkening in a Gray Atmosphere",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Radiative Transfer, the Gray Atmosphere & Line Formation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_radiative_transfer_equation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "gray atmosphere",
+    "limb darkening",
+    "photosphere"
+   ],
+   "summary": "A grazing ray reaches optical depth 1 in a cooler, higher layer, so the solar disc darkens towards the limb, and the Eddington grey atmosphere predicts I(mu)/I(1) = (2 + 3 mu)/5 for mu = cos(theta).",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "astrophysics_logarithmic_plots_and_power_law_fits",
+   "title": "Logarithmic Plots and Power-Law Fits",
+   "strand": "Astrophysical Tools & Measurement",
+   "unit": "Astrophysical Tools & Measurement",
+   "topic": "Graphical Analysis & Curve Fitting",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_significant_figures_and_propagated_uncertainty"
+   ],
+   "keywords": [
+    "least squares",
+    "log plot",
+    "power law"
+   ],
+   "summary": "Plotting log y against log x turns y = k x^n into a straight line of slope n, which is how a luminosity-mass exponent near 3.5 is read straight off the graph.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "astrophysics_main_sequence_lifetimes",
+   "title": "Main-Sequence Lifetimes",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Main-Sequence Evolution",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_protostars_accretion_discs_and_outflows"
+   ],
+   "keywords": [
+    "hydrogen burning",
+    "main sequence",
+    "stellar lifetime"
+   ],
+   "summary": "A star burns core hydrogen for about 10^10 (M/M_sun)^(-2.5) years, so a ten solar mass star lasts 3x10^7 years and a half-solar-mass star about 6x10^10 years.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "astrophysics_mass_and_evolution_read_off_the_hr_diagram",
+   "title": "Mass and Evolution Read off the HR Diagram",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "The Hertzsprung-Russell Diagram",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_axes_loci_and_the_main_sequence"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evolution",
+    "hr diagram",
+    "stellar mass"
+   ],
+   "summary": "Position on the main sequence fixes mass, so its upper end holds short-lived massive stars, and displacement off the sequence marks a post-main-sequence stage.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "astrophysics_neutron_star_structure_and_the_pulsar_beam",
+   "title": "Neutron Star Structure and the Pulsar Beam",
+   "strand": "Stellar Death & Compact Objects",
+   "unit": "Stellar Death & Compact Objects",
+   "topic": "Neutron Stars & Pulsars",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_white_dwarf_degeneracy_and_cooling"
+   ],
+   "keywords": [
+    "magnetic dipole",
+    "neutron star",
+    "pulsar"
+   ],
+   "summary": "A neutron star puts 1.4 solar masses inside a 10 km radius at nuclear density near 10^17 kg/m^3, and a misaligned magnetic dipole beams radiation that sweeps past Earth once per rotation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "astrophysics_opacity_optical_depth_and_mean_free_path",
+   "title": "Opacity, Optical Depth and Mean Free Path",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Opacity, Mean Free Path & Optical Depth",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_specific_intensity_flux_and_radiation_pressure"
+   ],
+   "keywords": [
+    "mean free path",
+    "opacity",
+    "optical depth"
+   ],
+   "summary": "Optical depth, the integral of kappa rho ds, counts the mean free paths a photon crosses, so the photosphere is by definition where that depth reaches 1 and the mean free path is 1/(kappa rho).",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "astrophysics_open_versus_globular_clusters",
+   "title": "Open versus Globular Clusters",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Star Clusters as Evolutionary Clocks",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_main_sequence_turnoff_age"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "globular cluster",
+    "open cluster",
+    "stellar population"
+   ],
+   "summary": "Open clusters are young, metal-rich disc systems of 10^2 to 10^3 stars, whereas globular clusters are ancient metal-poor haloes of 10^5 to 10^6 stars whose turnoffs sit below the solar mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "astrophysics_oppositions_synodic_periods_and_retrograde_loops",
+   "title": "Oppositions, Synodic Periods and Retrograde Loops",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "Solar System Orbital Phenomena",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_inflation_and_the_horizon_and_flatness_problems"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "opposition",
+    "retrograde",
+    "synodic period"
+   ],
+   "summary": "A planet's synodic period with Earth follows 1/S = 1/P_planet - 1/P_Earth, giving 780 days for Mars, and the geometry of Earth catching up produces the opposition and its retrograde loop.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "astrophysics_parallax_proper_motion_and_precession",
+   "title": "Parallax, Proper Motion and Precession",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Time Systems, Precession, Proper Motion & Parallax",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_sidereal_and_solar_time"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parallax",
+    "precession",
+    "proper motion"
+   ],
+   "summary": "A parallax of p arcseconds puts a star at d = 1/p parsecs, proper motion is the transverse velocity divided by distance, and precession carries the equinoxes round the ecliptic once in about 26 000 years.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "astrophysics_phases_of_the_interstellar_medium",
+   "title": "Phases of the Interstellar Medium",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "The Interstellar Medium",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_standard_solar_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interstellar medium",
+    "molecular cloud",
+    "phases"
+   ],
+   "summary": "The interstellar medium ranges from molecular clouds at 10 to 20 K and 10^2 to 10^6 particles per cm^3, through warm neutral gas near 8 000 K, to hot ionised gas above 10^6 K, the phases held in rough pressure balance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "astrophysics_protostars_accretion_discs_and_outflows",
+   "title": "Protostars, Accretion Discs and Outflows",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Star Formation & Collapse",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_jeans_mass_and_gravitational_collapse"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "accretion disc",
+    "bipolar outflow",
+    "protostar"
+   ],
+   "summary": "A collapsing core conserves angular momentum, so it flattens into a disc, drives bipolar outflows along the rotation axis, and reaches the main sequence only after a Kelvin-Helmholtz time of some 3x10^7 years at one solar mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "astrophysics_quantised_energy_levels_and_ionisation",
+   "title": "Quantised Energy Levels and Ionisation",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Atomic Structure & the Bohr Model",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_colour_index_and_bolometric_correction"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bohr model",
+    "energy levels",
+    "ionisation"
+   ],
+   "summary": "A hydrogen electron occupies levels E_n = -13.6 eV / n^2, so 13.6 eV ionises the ground state and the n = 2 level lies 3.4 eV below the continuum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "astrophysics_radiative_diffusion_and_convection",
+   "title": "Radiative Diffusion and Convection",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Energy Transport: Radiative Diffusion & Convection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_proton_proton_chain_and_the_cno_cycle"
+   ],
+   "keywords": [
+    "convection",
+    "radiative diffusion",
+    "random walk"
+   ],
+   "summary": "Radiative transport is a random walk that takes about 10^5 years to cross the solar interior, while convection takes over where the gradient exceeds the adiabatic one and carries the outer envelope in weeks to months.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "astrophysics_radii_from_eclipse_durations_and_velocities",
+   "title": "Radii from Eclipse Durations and Velocities",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Eclipsing Binaries: Radii & Temperature Ratios",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_mass_function_of_a_single_lined_binary"
+   ],
+   "keywords": [
+    "eclipsing binary",
+    "light curve",
+    "stellar radius"
+   ],
+   "summary": "Eclipse durations divided by the projected orbital speed give the stellar radii directly, because ingress lasts exactly the time to cross one stellar diameter.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "astrophysics_red_giants_and_the_helium_flash",
+   "title": "Red Giants and the Helium Flash",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Post-Main-Sequence Evolution",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_main_sequence_lifetimes"
+   ],
+   "keywords": [
+    "helium flash",
+    "horizontal branch",
+    "red giant"
+   ],
+   "summary": "Once core hydrogen is spent the core contracts and the envelope swells to 10 to 100 solar radii, and a one-solar-mass star ignites helium in a degenerate-core flash before settling onto the horizontal branch.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "astrophysics_refracting_and_reflecting_telescope_designs",
+   "title": "Refracting and Reflecting Telescope Designs",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Telescope Designs & Aberrations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_seeing_adaptive_optics_and_interferometry"
+   ],
+   "keywords": [
+    "cassegrain",
+    "reflector",
+    "refractor"
+   ],
+   "summary": "Refractors suffer chromatic aberration and a size limit set by sagging glass, so every large telescope is a reflector, in Newtonian, Cassegrain or Ritchey-Chretien form according to the field and focal ratio required.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "astrophysics_rotational_and_macroturbulent_broadening",
+   "title": "Rotational and Macroturbulent Broadening",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Spectral Line Broadening",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_thermal_and_pressure_broadening"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "line profile",
+    "projected velocity",
+    "rotation"
+   ],
+   "summary": "Rotation adds a profile whose full width is twice the projected equatorial speed, which is why a fast rotator shows broad shallow lines and a slow rotator narrow deep ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "astrophysics_seasons_rise_and_set_and_eclipse_geometry",
+   "title": "Seasons, Rise and Set, and Eclipse Geometry",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Sky Phenomena: Seasons, Rise/Set & Eclipses",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_parallax_proper_motion_and_precession"
+   ],
+   "keywords": [
+    "eclipse",
+    "obliquity",
+    "seasons"
+   ],
+   "summary": "Seasons follow from the 23.4 degree tilt of Earth's axis rather than its varying distance from the Sun, and a solar eclipse needs a new moon within about 18 degrees of a lunar node.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "astrophysics_seeing_adaptive_optics_and_interferometry",
+   "title": "Seeing, Adaptive Optics and Interferometry",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Angular Resolution, Seeing & Interferometry",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_diffraction_limit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "adaptive optics",
+    "interferometry",
+    "seeing"
+   ],
+   "summary": "Atmospheric seeing near 1 arcsecond usually sets the real ground-based resolution, and interferometry beats both limits by combining apertures across a baseline B to reach roughly lambda/B.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "astrophysics_si_units_and_astronomical_distance_scales",
+   "title": "SI Units and Astronomical Distance Scales",
+   "strand": "Astrophysical Tools & Measurement",
+   "unit": "Astrophysical Tools & Measurement",
+   "topic": "Units, Scale & Dimensional Reasoning",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "light-year",
+    "parsec",
+    "si units"
+   ],
+   "summary": "Every measurement reduces to the seven SI base units, and astronomy adds the astronomical unit (1.496x10^11 m), the light-year (9.46x10^15 m) and the parsec (3.086x10^16 m, or 3.26 ly).",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "astrophysics_sidereal_and_solar_time",
+   "title": "Sidereal and Solar Time",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Time Systems, Precession, Proper Motion & Parallax",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_horizon_equatorial_and_ecliptic_frames"
+   ],
+   "keywords": [
+    "meridian",
+    "sidereal time",
+    "solar time"
+   ],
+   "summary": "A sidereal day lasts 23 h 56 m 4 s of solar time because Earth must turn about one degree extra to bring the Sun back to the meridian, and that daily shortfall accumulates into the seasonal drift of the night sky.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "astrophysics_significant_figures_and_propagated_uncertainty",
+   "title": "Significant Figures and Propagated Uncertainty",
+   "strand": "Astrophysical Tools & Measurement",
+   "unit": "Astrophysical Tools & Measurement",
+   "topic": "Significant Figures & Uncertainty",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_angular_size_and_the_small_angle_relation"
+   ],
+   "keywords": [
+    "significant figures",
+    "systematic error",
+    "uncertainty"
+   ],
+   "summary": "A quoted value carries only the digits the instrument resolves, so 12.30 mag claims 0.01 mag precision while 12.3 mag claims 0.1 mag, and averaging N readings shrinks random error as 1/sqrt(N) while a systematic offset survives.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "astrophysics_specific_intensity_flux_and_radiation_pressure",
+   "title": "Specific Intensity, Flux and Radiation Pressure",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "The Radiation Field: Intensity, Flux & Radiation Pressure",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_spectroscopic_parallax"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "flux",
+    "radiation pressure",
+    "specific intensity"
+   ],
+   "summary": "Specific intensity, the energy per area, time, solid angle and frequency, is conserved along a ray in vacuum, flux follows F = integral of I cos(theta) dOmega and falls as 1/d^2, and radiation pressure 4 sigma T^4/(3c) balances gravity at the Eddington luminosity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "astrophysics_spectroscopic_parallax",
+   "title": "Spectroscopic Parallax",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "Spectroscopic Parallax",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_colour_magnitude_diagrams_of_star_clusters"
+   ],
+   "keywords": [
+    "absolute magnitude",
+    "distance",
+    "spectroscopic parallax"
+   ],
+   "summary": "Spectral type plus luminosity class fixes absolute magnitude, and subtracting it from the apparent magnitude gives the distance through the distance modulus, with no geometric parallax needed.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "astrophysics_stellar_nucleosynthesis_and_metallicity",
+   "title": "Stellar Nucleosynthesis and Metallicity",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Nucleosynthesis & Chemical Enrichment",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_open_versus_globular_clusters"
+   ],
+   "keywords": [
+    "chemical enrichment",
+    "metallicity",
+    "nucleosynthesis"
+   ],
+   "summary": "Fusion builds elements up to iron, elements beyond iron need neutron capture in AGB stars and supernovae, and each generation's ejecta raise the metallicity of the gas the next stars form from.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "astrophysics_structure_and_rotation_of_the_milky_way",
+   "title": "Structure and Rotation of the Milky Way",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "The Milky Way Galaxy",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_accretion_discs_and_the_eddington_limit"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dark matter",
+    "milky way",
+    "rotation curve"
+   ],
+   "summary": "The Galaxy is a barred spiral about 30 kpc across with the Sun 8 kpc from the centre, and its rotation curve stays near 220 km/s far beyond the visible disc, which implies a dark halo of several times the visible mass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "astrophysics_temperature_ratio_from_eclipse_depths",
+   "title": "Temperature Ratio from Eclipse Depths",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Eclipsing Binaries: Radii & Temperature Ratios",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_radii_from_eclipse_durations_and_velocities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "eclipse depth",
+    "surface brightness",
+    "temperature ratio"
+   ],
+   "summary": "The relative depths of the primary and secondary minima give the surface-brightness ratio, so the temperature ratio follows from the fourth root of the flux ratio in the same bandpass.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "astrophysics_the_boltzmann_and_saha_equations",
+   "title": "The Boltzmann and Saha Equations",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Excitation & Ionization Populations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_rotational_and_macroturbulent_broadening"
+   ],
+   "keywords": [
+    "boltzmann equation",
+    "ionisation balance",
+    "saha equation"
+   ],
+   "summary": "The Boltzmann equation sets the level populations at (g2/g1) exp(-dE/kT) and the Saha equation sets the ionisation balance, which is why a cool star shows neutral lines and a hot star of the same element shows ionised ones.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "astrophysics_the_cmb_and_its_acoustic_peaks",
+   "title": "The CMB and Its Acoustic Peaks",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "The Cosmic Microwave Background",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_friedmann_equation_and_accelerating_expansion"
+   ],
+   "keywords": [
+    "acoustic peaks",
+    "cmb",
+    "recombination"
+   ],
+   "summary": "The cosmic microwave background is a 2.725 K blackbody released at recombination near redshift 1 100, and its acoustic peaks fix a flat geometry and the baryon fraction.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "astrophysics_the_critical_density_and_omega",
+   "title": "The Critical Density and Omega",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Scale Factor, Critical Density & the Fate of the Universe",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_cosmological_redshift_and_the_scale_factor"
+   ],
+   "keywords": [
+    "critical density",
+    "geometry",
+    "omega"
+   ],
+   "summary": "The critical density 3H0^2/(8 pi G) is about 9x10^-27 kg/m^3 for H0 = 70 km/s/Mpc, and the ratio Omega = rho/rho_c decides whether the spatial geometry is closed, flat or open.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "astrophysics_the_diffraction_limit",
+   "title": "The Diffraction Limit",
+   "strand": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "unit": "Telescopes, Detectors & Multi-wavelength Astronomy",
+   "topic": "Angular Resolution, Seeing & Interferometry",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_collecting_area_and_limiting_magnitude"
+   ],
+   "keywords": [
+    "diffraction limit",
+    "rayleigh criterion",
+    "resolution"
+   ],
+   "summary": "A circular aperture resolves two points only when they are separated by more than 1.22 lambda/D radians, so a 0.1 m telescope at 500 nm is limited to about 1.3 arcseconds.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "astrophysics_the_distance_ladder_and_its_systematics",
+   "title": "The Distance Ladder and Its Systematics",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "The Extragalactic Distance Ladder",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_cepheids_as_standard_candles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "calibration",
+    "distance ladder",
+    "tully-fisher"
+   ],
+   "summary": "Parallax, Cepheids, the red-giant tip, the Tully-Fisher relation and Type Ia supernovae calibrate one another in sequence, so an error at one rung propagates into every distance above it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "astrophysics_the_friedmann_equation_and_accelerating_expansion",
+   "title": "The Friedmann Equation and Accelerating Expansion",
+   "strand": "Cosmology & the Early Universe",
+   "unit": "Cosmology & the Early Universe",
+   "topic": "Scale Factor, Critical Density & the Fate of the Universe",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_critical_density_and_omega"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "acceleration",
+    "dark energy",
+    "friedmann equation"
+   ],
+   "summary": "The Friedmann equation ties the expansion rate to density and curvature, and the data since 1998 require a dark-energy density near 0.7, so the expansion accelerates instead of slowing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "astrophysics_the_giant_planets_and_their_interiors",
+   "title": "The Giant Planets and Their Interiors",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "The Giant Planets",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_comparative_geology_of_the_terrestrial_planets"
+   ],
+   "keywords": [
+    "giant planets",
+    "ice giants",
+    "metallic hydrogen"
+   ],
+   "summary": "Jupiter and Saturn are 318 and 95 Earth masses of hydrogen and helium with metallic-hydrogen interiors, Uranus and Neptune are 14 to 17 Earth-mass ice giants, and all four lack a solid surface and carry strong magnetic fields.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "astrophysics_the_harvard_spectral_sequence",
+   "title": "The Harvard Spectral Sequence",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "The OBAFGKM Spectral Sequence",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_the_mass_luminosity_relation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "harvard sequence",
+    "spectral class",
+    "temperature"
+   ],
+   "summary": "The sequence OBAFGKM runs from about 50 000 K down to 2 500 K with ten subclasses each, so the Sun is a G2 star with T_eff near 5 800 K.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "astrophysics_the_hubble_sequence",
+   "title": "The Hubble Sequence",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "Galaxy Morphology & Structure",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_structure_and_rotation_of_the_milky_way"
+   ],
+   "keywords": [
+    "elliptical galaxy",
+    "hubble sequence",
+    "morphology"
+   ],
+   "summary": "Galaxies divide into ellipticals, lenticulars, spirals and irregulars along the Hubble sequence, which orders them by the balance of bulge and disc rather than by a single evolutionary path.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "astrophysics_the_inverse_square_law_of_gravitation",
+   "title": "The Inverse-Square Law of Gravitation",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Newtonian Gravity & Gravitational Energy",
+   "tier": "core",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_seasons_rise_and_set_and_eclipse_geometry"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse square",
+    "newton",
+    "universal gravitation"
+   ],
+   "summary": "Two masses attract with F = G M m / r^2, so doubling the separation quarters the force and a satellite at twice Earth's radius weighs a quarter of what it does on the surface.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "astrophysics_the_jeans_mass_and_gravitational_collapse",
+   "title": "The Jeans Mass and Gravitational Collapse",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Star Formation & Collapse",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_phases_of_the_interstellar_medium"
+   ],
+   "keywords": [
+    "gravitational collapse",
+    "jeans mass",
+    "molecular cloud"
+   ],
+   "summary": "A cloud collapses only when its mass exceeds the Jeans mass, which scales as T^(3/2) rho^(-1/2), so cold dense cores collapse while warm diffuse gas does not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "astrophysics_the_main_sequence_turnoff_age",
+   "title": "The Main-Sequence Turnoff Age",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Star Clusters as Evolutionary Clocks",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_red_giants_and_the_helium_flash"
+   ],
+   "keywords": [
+    "cluster age",
+    "isochrone",
+    "turnoff"
+   ],
+   "summary": "Because lifetime scales as M^(-2.5), a cluster's turnoff mass dates it, so the turnoff luminosity read from the colour-magnitude diagram is the cluster's clock.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "astrophysics_the_mass_function_of_a_single_lined_binary",
+   "title": "The Mass Function of a Single-Lined Binary",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Spectroscopic Binaries & the Mass Function",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_individual_masses_from_the_barycentre"
+   ],
+   "keywords": [
+    "inclination",
+    "mass function",
+    "spectroscopic binary"
+   ],
+   "summary": "A single-lined spectroscopic binary yields only the mass function (M2 sin i)^3/(M1 + M2)^2 = P K1^3/(2 pi G), so the companion mass stays a lower limit until the inclination is known.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "astrophysics_the_mass_luminosity_relation",
+   "title": "The Mass-Luminosity Relation",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "The Mass-Luminosity Relation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_temperature_ratio_from_eclipse_depths"
+   ],
+   "keywords": [
+    "main sequence",
+    "mass-luminosity",
+    "stellar lifetime"
+   ],
+   "summary": "Main-sequence stars obey L/L_sun near (M/M_sun)^3.5, so a ten-solar-mass star is about 3 000 times more luminous and, with only ten times the fuel, exhausts it roughly 300 times sooner.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "astrophysics_the_mk_luminosity_classes",
+   "title": "The MK Luminosity Classes",
+   "strand": "Stellar Classification & the HR Diagram",
+   "unit": "Stellar Classification & the HR Diagram",
+   "topic": "MK Luminosity Classes",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_harvard_spectral_sequence"
+   ],
+   "keywords": [
+    "luminosity class",
+    "mk system",
+    "surface gravity"
+   ],
+   "summary": "The Yerkes system appends Ia, Ib, II, III, IV or V to the spectral type and separates a supergiant from a dwarf of the same temperature, because a larger radius means lower gravity and narrower pressure-broadened lines.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "astrophysics_the_period_density_relation_for_pulsators",
+   "title": "The Period-Density Relation for Pulsators",
+   "strand": "Star Formation, Evolution & the ISM",
+   "unit": "Star Formation, Evolution & the ISM",
+   "topic": "Stellar Pulsation & Variable Stars",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_stellar_nucleosynthesis_and_metallicity"
+   ],
+   "keywords": [
+    "cepheid",
+    "period-density",
+    "pulsation"
+   ],
+   "summary": "A pulsating star obeys a constant product of period and the square root of mean density, so the period fixes that density and a Cepheid with a ten-day period has a radius of order 10^2 solar radii.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "astrophysics_the_pogson_magnitude_relation",
+   "title": "The Pogson Magnitude Relation",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "The Magnitude Scale",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_flux_luminosity_and_the_inverse_square_law"
+   ],
+   "keywords": [
+    "flux ratio",
+    "magnitude",
+    "pogson"
+   ],
+   "summary": "Five magnitudes correspond to a flux ratio of exactly 100, so m1 - m2 = -2.5 log10(F1/F2) and one magnitude is a factor of 2.512 in flux.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "astrophysics_the_proton_proton_chain_and_the_cno_cycle",
+   "title": "The Proton-Proton Chain and the CNO Cycle",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Nuclear Energy Generation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_hydrostatic_equilibrium_and_central_conditions"
+   ],
+   "keywords": [
+    "cno cycle",
+    "hydrogen fusion",
+    "pp chain"
+   ],
+   "summary": "Hydrogen fusion yields 26.7 MeV per helium nucleus, and the proton-proton chain dominates below about 1.3 solar masses while the far steeper CNO cycle takes over in more massive stars.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "astrophysics_the_protoplanetary_disc_and_planetesimal_accretion",
+   "title": "The Protoplanetary Disc and Planetesimal Accretion",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "Formation of Planetary Systems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_asteroids_comets_and_the_kuiper_belt"
+   ],
+   "keywords": [
+    "planetesimal",
+    "protoplanetary disc",
+    "snow line"
+   ],
+   "summary": "A protoplanetary disc builds planetesimals from sticky grains and then cores by runaway accretion, and beyond the snow line near 3 au cores grow fast enough to capture hydrogen before the gas disperses in a few million years.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "astrophysics_the_radial_velocity_method",
+   "title": "The Radial-Velocity Method",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "Exoplanet Detection",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_transit_method"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "minimum mass",
+    "radial velocity",
+    "reflex motion"
+   ],
+   "summary": "The stellar reflex motion has semi-amplitude proportional to m_p sin(i)/M_star times (2 pi G/P)^(1/3), so Jupiter moves the Sun by 12.5 m/s while Earth moves it by 9 cm/s.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "astrophysics_the_radiative_transfer_equation",
+   "title": "The Radiative Transfer Equation",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Radiative Transfer, the Gray Atmosphere & Line Formation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_opacity_optical_depth_and_mean_free_path"
+   ],
+   "keywords": [
+    "local equilibrium",
+    "radiative transfer",
+    "source function"
+   ],
+   "summary": "Along a ray dI/ds = -kappa rho I + j, and in local thermodynamic equilibrium the source function equals the Planck function, so emergent intensity is B_nu averaged over the last unit of optical depth.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "astrophysics_the_rydberg_formula_and_spectral_series",
+   "title": "The Rydberg Formula and Spectral Series",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Atomic Structure & the Bohr Model",
+   "tier": "extension",
+   "difficulty": 5,
+   "prerequisites": [
+    "astrophysics_quantised_energy_levels_and_ionisation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balmer series",
+    "rydberg formula",
+    "spectral lines"
+   ],
+   "summary": "Transitions obey 1/lambda = R(1/n_f^2 - 1/n_i^2) with R = 1.097x10^7 m^-1, placing the Balmer lines at 656, 486 and 434 nm and the Lyman series in the ultraviolet.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "astrophysics_the_schwarzschild_radius_and_event_horizon",
+   "title": "The Schwarzschild Radius and Event Horizon",
+   "strand": "Stellar Death & Compact Objects",
+   "unit": "Stellar Death & Compact Objects",
+   "topic": "Relativity, Schwarzschild Geometry & Black Holes",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_neutron_star_structure_and_the_pulsar_beam"
+   ],
+   "keywords": [
+    "black hole",
+    "event horizon",
+    "schwarzschild radius"
+   ],
+   "summary": "The Schwarzschild radius 2GM/c^2 is 3 km per solar mass, so a ten-solar-mass black hole has a 30 km horizon and a clock hovering at twice that radius ticks at 1/sqrt(2) of the rate at infinity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "astrophysics_the_spherical_law_of_cosines",
+   "title": "The Spherical Law of Cosines",
+   "strand": "The Celestial Sphere, Coordinates & Time",
+   "unit": "The Celestial Sphere, Coordinates & Time",
+   "topic": "Spherical Trigonometry on the Sky",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "astrophysics_great_circles_and_spherical_angles"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coordinate conversion",
+    "hour angle",
+    "spherical trigonometry"
+   ],
+   "summary": "The spherical law of cosines, cos a = cos b cos c + sin b sin c cos A, converts between horizon and equatorial coordinates once latitude, declination and hour angle are known.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "astrophysics_the_standard_solar_model",
+   "title": "The Standard Solar Model",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "The Sun as the Calibrating Standard Model",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_three_stellar_timescales"
+   ],
+   "keywords": [
+    "helioseismology",
+    "solar neutrinos",
+    "standard solar model"
+   ],
+   "summary": "A model with 1.989x10^30 kg, 6.96x10^8 m, 3.83x10^26 W and 5 772 K reproduces the observed p-mode frequencies and the 8.8 MeV boron-8 neutrino flux, which is how the interior solution is tested.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "astrophysics_the_stefan_boltzmann_law",
+   "title": "The Stefan-Boltzmann Law",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "Blackbody Radiation",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_wien_s_law_and_the_peak_wavelength"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "effective temperature",
+    "luminosity",
+    "stefan-boltzmann"
+   ],
+   "summary": "A blackbody radiates F = sigma T^4 per unit area, so doubling T multiplies the output sixteenfold and a star's luminosity is L = 4 pi R^2 sigma T^4.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "astrophysics_the_three_stellar_timescales",
+   "title": "The Three Stellar Timescales",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Stellar Structure Equations, the Virial Theorem & Timescales",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_the_virial_theorem"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dynamical timescale",
+    "kelvin-helmholtz",
+    "nuclear timescale"
+   ],
+   "summary": "The dynamical time sqrt(R^3/GM) is about 30 minutes for the Sun, the Kelvin-Helmholtz time about 3x10^7 years and the nuclear time about 10^10 years, which is why the Sun sits stably on the main sequence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "astrophysics_the_transit_method",
+   "title": "The Transit Method",
+   "strand": "The Solar System & Exoplanets",
+   "unit": "The Solar System & Exoplanets",
+   "topic": "Exoplanet Detection",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_the_protoplanetary_disc_and_planetesimal_accretion"
+   ],
+   "keywords": [
+    "hot jupiter",
+    "photometry",
+    "transit"
+   ],
+   "summary": "A transiting planet dims its star by (R_p/R_star)^2, so a Jupiter across a Sun-like star gives a one per cent dip, and a hot Jupiter at 0.05 au repeats every four days.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "astrophysics_the_unified_model_of_active_galactic_nuclei",
+   "title": "The Unified Model of Active Galactic Nuclei",
+   "strand": "The Milky Way & Galaxies",
+   "unit": "The Milky Way & Galaxies",
+   "topic": "Active Galaxies & AGN",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_clusters_groups_and_the_cosmic_web"
+   ],
+   "keywords": [
+    "active galactic nuclei",
+    "quasar",
+    "unified model"
+   ],
+   "summary": "An active nucleus is powered by accretion onto a supermassive black hole, and the viewing angle through the dusty torus explains why one engine appears as a Seyfert galaxy, a quasar or a blazar.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "astrophysics_the_virial_theorem",
+   "title": "The Virial Theorem",
+   "strand": "Stellar Atmospheres & Interiors",
+   "unit": "Stellar Atmospheres & Interiors",
+   "topic": "Stellar Structure Equations, the Virial Theorem & Timescales",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_radiative_diffusion_and_convection"
+   ],
+   "keywords": [
+    "binding energy",
+    "contraction",
+    "virial theorem"
+   ],
+   "summary": "For a bound, non-relativistic system 2K + Omega = 0, so half the energy released by contraction is radiated and half raises the internal temperature, which is why a collapsing cloud heats up.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "astrophysics_the_vis_viva_equation_and_orbital_energy",
+   "title": "The Vis-Viva Equation and Orbital Energy",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Orbital Energy, Angular Momentum & Vis-Viva",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_kepler_s_laws_and_orbital_geometry"
+   ],
+   "keywords": [
+    "eccentricity",
+    "orbital energy",
+    "vis-viva"
+   ],
+   "summary": "The vis-viva equation v^2 = GM(2/r - 1/a) gives the speed anywhere on an orbit, and the sign of the specific energy -GM/2a separates bound, parabolic and hyperbolic paths.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "astrophysics_thermal_and_pressure_broadening",
+   "title": "Thermal and Pressure Broadening",
+   "strand": "Light-Matter Interaction & Spectra",
+   "unit": "Light-Matter Interaction & Spectra",
+   "topic": "Spectral Line Broadening",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_equivalent_width_and_the_curve_of_growth"
+   ],
+   "keywords": [
+    "doppler broadening",
+    "line width",
+    "pressure broadening"
+   ],
+   "summary": "Thermal motion widens a line by delta lambda/lambda = sqrt(2kT/m)/c, about 4x10^-5 for hydrogen at 10 000 K, while collisions thicken the damping wings in proportion to density.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "astrophysics_tidal_forces_the_roche_limit_and_lagrange_points",
+   "title": "Tidal Forces, the Roche Limit and Lagrange Points",
+   "strand": "Gravity, Orbits & Celestial Mechanics",
+   "unit": "Gravity, Orbits & Celestial Mechanics",
+   "topic": "Tides, the Roche Limit & Lagrange Points",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_barycentre_and_reduced_mass"
+   ],
+   "keywords": [
+    "lagrange points",
+    "roche limit",
+    "tides"
+   ],
+   "summary": "Tidal acceleration falls as 1/r^3, a fluid satellite is disrupted inside the Roche limit at about 2.44 R (rho_M/rho_m)^(1/3), and the five Lagrange points are where gravity and rotation balance in the co-rotating frame.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "astrophysics_total_mass_from_kepler_s_third_law",
+   "title": "Total Mass from Kepler's Third Law",
+   "strand": "Binary Stars & Stellar Parameters",
+   "unit": "Binary Stars & Stellar Parameters",
+   "topic": "Stellar Masses from Visual Binaries",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_four_ways_to_detect_a_binary"
+   ],
+   "keywords": [
+    "kepler third law",
+    "total mass",
+    "visual binary"
+   ],
+   "summary": "For a visual binary the relative orbit gives a in astronomical units and P in years, so the total mass follows from M1 + M2 = a^3/P^2 in solar masses.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "astrophysics_wavelength_frequency_and_the_spectrum",
+   "title": "Wavelength, Frequency and the Spectrum",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "Light & the Electromagnetic Spectrum",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "astrophysics_tidal_forces_the_roche_limit_and_lagrange_points"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "electromagnetic spectrum",
+    "frequency",
+    "wavelength"
+   ],
+   "summary": "All electromagnetic radiation obeys c = lambda nu, so the 21 cm hydrogen line sits at 1 420 MHz while a 1 m radio wave sits at 300 MHz, and the spectrum spans more than twenty orders of magnitude in frequency.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "astrophysics_white_dwarf_degeneracy_and_cooling",
+   "title": "White Dwarf Degeneracy and Cooling",
+   "strand": "Stellar Death & Compact Objects",
+   "unit": "Stellar Death & Compact Objects",
+   "topic": "White Dwarfs & Electron Degeneracy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_core_collapse_and_thermonuclear_supernovae"
+   ],
+   "keywords": [
+    "chandrasekhar limit",
+    "degeneracy pressure",
+    "white dwarf"
+   ],
+   "summary": "Electron degeneracy pressure holds a white dwarf near 0.01 solar radii only below the Chandrasekhar mass of 1.4 solar masses, and with no fusion source the star then cools along a sequence whose faint end dates its cluster.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "astrophysics_wien_s_law_and_the_peak_wavelength",
+   "title": "Wien's Law and the Peak Wavelength",
+   "strand": "Radiation, Light & Magnitudes",
+   "unit": "Radiation, Light & Magnitudes",
+   "topic": "Blackbody Radiation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "astrophysics_wavelength_frequency_and_the_spectrum"
+   ],
+   "keywords": [
+    "blackbody",
+    "peak wavelength",
+    "wien law"
+   ],
+   "summary": "A blackbody peaks at lambda_max = 2.898x10^-3 m K divided by T, so the Sun's 5 800 K photosphere peaks near 500 nm and a 300 K planet peaks in the thermal infrared near 10 microns.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Astrophysics - Tools, Stars, Galaxies and the Universe",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  }
+ ]
+}

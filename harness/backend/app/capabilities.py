@@ -215,7 +215,7 @@ CAPABILITIES: tuple[Capability, ...] = (
         provider='The configured OpenAI-compatible language model '
                  '(HARNESS_TUTOR_PROVIDER/URL/KEY). This is the capability whose use '
                  'is measured in tokens and dollars.',
-        knob='HARNESS_TUTOR_PROVIDER != offline (plus an entitlement)',
+        knob='A configured language model (Settings, or HARNESS_TUTOR_*) plus an entitlement',
         fallback='None: the builder refuses a plan it cannot ground, and says so. '
                  'Creating nothing is the honest outcome of having no model.',
         probe='llm', meter='capability:course_creation',
@@ -277,9 +277,10 @@ CAPABILITIES: tuple[Capability, ...] = (
         provider='The language model improves the prose when configured; the cards '
                  'themselves are generated deterministically from the curriculum and '
                  'scheduled by FSRS-6.',
-        knob='HARNESS_TUTOR_PROVIDER (optional; offline still generates)',
-        fallback='Deterministic cards from the curriculum -- generation degrades in '
-                 'quality, never in availability.',
+        knob='A configured language model (Settings, or HARNESS_TUTOR_*)',
+        fallback='Grounded cards from the curriculum when a configured model is '
+                 'unavailable. With no model configured the instance reports '
+                 'model-required rather than presenting cards as a product mode.',
         probe='local', meter='capability:flashcards_auto',
         note='Implemented: app/flashcards.py plus /api/v1/flashcards in '
              'app/routes_flash.py.'),
@@ -372,10 +373,12 @@ def _probe_llm(settings) -> tuple[bool, str]:
         from .harness import provider
     except ImportError:  # pragma: no cover - harness is a core dependency
         return False, 'The provider adapter could not be imported.'
+    from . import model_config
+    cfg = model_config.effective(settings)
     if not provider.available(settings):
-        return False, ('No language model is configured (HARNESS_TUTOR_PROVIDER is '
-                       'offline).')
-    return True, f"Language model {settings.provider_model} is configured."
+        return False, ('No language model is configured. Add a provider, model and API key '
+                       'in Settings; until then model-backed features are unavailable.')
+    return True, f"Language model {cfg.provider_model} is configured."
 
 
 def _probe_local(settings) -> tuple[bool, str]:

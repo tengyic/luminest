@@ -376,7 +376,7 @@ def test_every_artifact_kind_composes_for_a_curve_and_a_scene_concept():
             assert artifact.kind == kind and artifact.title
             assert artifact.blocks, (concept, kind)
             assert artifact.citations, (concept, kind)
-            assert artifact.mode == 'grounded-offline'
+            assert artifact.mode == 'model-required'
             assert 'no language model was used' in ' '.join(artifact.notes).lower()
 
 
@@ -495,7 +495,7 @@ def test_a_failing_model_degrades_to_the_deterministic_artifact():
     ctx = tool_ctx(settings=settings)
     artifact = generate.compose(ctx, CURVE, 'explanation', {})
     assert artifact.blocks and artifact.citations
-    assert artifact.mode == 'grounded-offline'
+    assert artifact.mode == 'model-unavailable'
     assert any('unavailable' in note or 'deterministically' in note for note in artifact.notes)
 
 
@@ -811,7 +811,7 @@ def test_generate_endpoint_returns_a_grounded_artifact(client):
     body = response.json()
     assert body['kind'] == 'slide_deck'
     assert body['citations'] and body['blocks']
-    assert body['mode'] == 'grounded-offline'
+    assert body['mode'] == 'model-required'
     assert client.post('/api/v1/harness/generate', headers=headers,
                        json={'concept_id': LESSON, 'kind': 'hologram'}).status_code == 422
     assert client.post('/api/v1/harness/generate', headers=headers,
@@ -880,7 +880,7 @@ def test_health_reports_the_harness_posture(client):
     assert body['harness']['tools'] >= 14
     assert body['harness']['memory_half_life_days'] == pytest.approx(21.0, abs=0.1)
     assert body['harness']['sandbox_boundaries']
-    assert body['harness']['generation_mode'] == 'grounded-offline'
+    assert body['harness']['generation_mode'] == 'model-required'
 
 
 def test_harness_help_is_withheld_during_an_active_exam(client):

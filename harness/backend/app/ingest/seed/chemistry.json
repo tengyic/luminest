@@ -1,38 +1,156 @@
 {
- "course": "Chemistry — Structure, Reactions and Energy",
+ "course": "Chemistry - Matter, Reactions and Energy",
  "licence": "cc0",
  "source_url": "",
  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
- "description": "An introductory chemistry course: atomic structure and periodicity, bonding and structure, quantitative chemistry, reactions and energetics, equilibrium, and organic and analytical chemistry.",
+ "description": "A full-year introductory chemistry course: matter and measurement, the atom and its electronic structure, bonding and molecular shape, nomenclature, the mole and stoichiometry, reactions in solution, gases, thermochemistry, condensed phases, solutions, kinetics, equilibrium, acids and bases, thermodynamics, electrochemistry, nuclear chemistry and organic chemistry.",
  "expected_weeks": 36,
  "strands": [
   {
-   "strand": "Foundations of Chemistry",
+   "strand": "Matter and Measurement",
    "units": [
     {
-     "unit": "Matter, measurement and the mole",
+     "unit": "Matter and Measurement",
      "topics": [
       {
-       "topic": "Describing matter",
+       "topic": "Classifying Matter",
        "concepts": [
-        {"title": "States of matter and particle models", "summary": "The same particles arranged with different spacing and freedom of motion account for solids, liquids and gases.", "keywords": ["states of matter", "particle model", "spacing"]},
-        {"title": "Elements, compounds and mixtures", "summary": "The distinction is chemical: a compound's components are bonded, a mixture's are not.", "keywords": ["element", "compound", "mixture"], "prerequisites": ["States of matter and particle models"]},
-        {"title": "Physical and chemical changes", "summary": "A chemical change makes new substances while a physical change does not, even when appearance changes greatly.", "keywords": ["physical change", "chemical change", "reaction"], "prerequisites": ["Elements, compounds and mixtures"]},
-        {"title": "Separation techniques", "summary": "Filtration, distillation and chromatography each exploit a different physical property difference.", "keywords": ["filtration", "distillation", "chromatography"], "prerequisites": ["Elements, compounds and mixtures"]},
-        {"title": "Pure substances and purity testing", "summary": "A sharp melting point indicates purity while a range indicates contamination.", "keywords": ["purity", "melting point", "impurity"], "prerequisites": ["Separation techniques"]}
+        {
+         "title": "Pure Substances and Mixtures",
+         "summary": "A pure substance has a fixed composition throughout, while a mixture contains two or more substances that keep their own identities and can be separated by physical means.",
+         "keywords": [
+          "pure substance",
+          "mixture",
+          "composition"
+         ]
+        },
+        {
+         "title": "Elements and Compounds",
+         "summary": "An element cannot be broken into simpler substances by chemical means, whereas a compound contains two or more elements combined in a fixed whole-number ratio.",
+         "keywords": [
+          "element",
+          "compound",
+          "fixed ratio"
+         ],
+         "prerequisites": [
+          "Pure Substances and Mixtures"
+         ]
+        },
+        {
+         "title": "Homogeneous and Heterogeneous Mixtures",
+         "summary": "A homogeneous mixture is uniform at the molecular scale, so any sample has the same composition, while a heterogeneous mixture has regions that differ in composition.",
+         "keywords": [
+          "homogeneous",
+          "heterogeneous",
+          "solution"
+         ],
+         "prerequisites": [
+          "Elements and Compounds"
+         ]
+        }
        ]
       },
       {
-       "topic": "Quantitative chemistry",
+       "topic": "Properties and Changes",
        "concepts": [
-        {"title": "Atomic mass and relative masses", "summary": "Relative atomic mass is an average over natural isotopes weighted by abundance.", "keywords": ["relative atomic mass", "isotope", "weighted average"]},
-        {"title": "The mole and Avogadro's number", "summary": "A mole is a fixed count of particles, which lets chemists weigh out countable numbers of atoms.", "keywords": ["mole", "Avogadro", "count"], "prerequisites": ["Atomic mass and relative masses"]},
-        {"title": "Molar mass and mass-mole conversions", "summary": "Molar mass links the mass measured on a balance to the number of moles in the sample.", "keywords": ["molar mass", "conversion", "moles"], "prerequisites": ["The mole and Avogadro's number"]},
-        {"title": "Concentration and molarity", "summary": "Concentration is amount of solute per volume of solution, and diluting changes volume not amount.", "keywords": ["concentration", "molarity", "dilution"], "prerequisites": ["Molar mass and mass-mole conversions"]},
-        {"title": "Empirical and molecular formulae", "summary": "Percentage composition gives the simplest ratio, and molar mass decides the multiple.", "keywords": ["empirical formula", "molecular formula", "ratio"], "prerequisites": ["Molar mass and mass-mole conversions"]},
-        {"title": "Percentage yield and atom economy", "summary": "Yield measures what you actually got; atom economy measures how much of the reactants ended up in the product.", "keywords": ["yield", "atom economy", "efficiency"], "prerequisites": ["Molar mass and mass-mole conversions"]},
-        {"title": "Gas volumes and the ideal gas law", "summary": "At a given temperature and pressure equal volumes of gas contain equal numbers of particles.", "keywords": ["gas volume", "molar volume", "ideal gas"], "prerequisites": ["The mole and Avogadro's number"]}
+        {
+         "title": "Physical and Chemical Properties",
+         "summary": "A physical property such as density or melting point is observed without changing the substance, while a chemical property describes a reaction the substance undergoes.",
+         "keywords": [
+          "physical property",
+          "chemical property",
+          "density"
+         ]
+        },
+        {
+         "title": "Intensive versus Extensive Properties",
+         "summary": "An intensive property such as temperature or density does not depend on sample size, whereas an extensive property such as mass or volume does.",
+         "keywords": [
+          "intensive",
+          "extensive",
+          "sample size"
+         ],
+         "prerequisites": [
+          "Physical and Chemical Properties"
+         ]
+        },
+        {
+         "title": "Physical and Chemical Changes",
+         "summary": "A physical change alters only state or form, but a chemical change produces a new substance and is recognised by a colour change, gas, precipitate or heat release.",
+         "keywords": [
+          "physical change",
+          "chemical change",
+          "evidence"
+         ],
+         "prerequisites": [
+          "Intensive versus Extensive Properties"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Measurement, Units, and the Nature of Science",
+       "concepts": [
+        {
+         "title": "SI Base and Derived Units",
+         "summary": "The SI system fixes seven base units, and every other unit, such as the newton or the joule, is a product or quotient of those base units.",
+         "keywords": [
+          "si units",
+          "derived unit",
+          "base unit"
+         ]
+        },
+        {
+         "title": "Accuracy and Precision",
+         "summary": "Accuracy is agreement with the accepted value while precision is agreement among repeated measurements, so a set of readings can be precise and still biased.",
+         "keywords": [
+          "accuracy",
+          "precision",
+          "bias"
+         ],
+         "prerequisites": [
+          "SI Base and Derived Units"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Quantitative Reasoning",
+       "concepts": [
+        {
+         "title": "Significant Figures in Calculations",
+         "summary": "A result carries no more certainty than its least certain input, so multiplication keeps the smallest significant-figure count and addition keeps the smallest decimal place.",
+         "keywords": [
+          "significant figures",
+          "rounding",
+          "certainty"
+         ]
+        },
+        {
+         "title": "Dimensional Analysis",
+         "summary": "Multiplying by a ratio equal to one converts units while cancelling the unwanted unit, which is why the answer arrives carrying the unit the question asked for.",
+         "keywords": [
+          "dimensional analysis",
+          "conversion factor",
+          "units"
+         ],
+         "prerequisites": [
+          "Significant Figures in Calculations"
+         ]
+        },
+        {
+         "title": "Scientific Notation and Order of Magnitude",
+         "summary": "Writing a value as a coefficient between one and ten times a power of ten fixes its size, and the exponent alone gives its order of magnitude.",
+         "keywords": [
+          "scientific notation",
+          "magnitude",
+          "exponent"
+         ],
+         "prerequisites": [
+          "Dimensional Analysis"
+         ]
+        }
        ]
       }
      ]
@@ -40,174 +158,1976 @@
    ]
   },
   {
-   "strand": "Atomic Structure and Periodicity",
+   "strand": "Atomic Structure",
    "units": [
     {
-     "unit": "Atomic structure",
-     "prerequisites": ["Matter, measurement and the mole"],
+     "unit": "Atomic Structure",
      "topics": [
       {
-       "topic": "Inside the atom",
+       "topic": "Atomic Theory and Models",
        "concepts": [
-        {"title": "Subatomic particles", "summary": "Protons, neutrons and electrons differ in charge and mass, and only protons define the element.", "keywords": ["proton", "neutron", "electron"]},
-        {"title": "Atomic number, mass number and isotopes", "summary": "Atomic number counts protons and fixes identity; mass number counts protons plus neutrons.", "keywords": ["atomic number", "mass number", "isotope"], "prerequisites": ["Subatomic particles"]},
-        {"title": "Electron shells and energy levels", "summary": "Electrons occupy quantised shells, and chemical behaviour is governed by the outermost ones.", "keywords": ["shell", "energy level", "outer electron"], "prerequisites": ["Subatomic particles"]},
-        {"title": "Electron configuration", "summary": "Filling order follows increasing energy, which is why the periodic table has the shape it does.", "keywords": ["configuration", "orbital", "filling order"], "prerequisites": ["Electron shells and energy levels"]},
-        {"title": "Emission spectra and evidence for levels", "summary": "Discrete spectral lines are direct evidence that electron energies are quantised.", "keywords": ["emission spectrum", "quantised", "line"], "prerequisites": ["Electron shells and energy levels"]}
+        {
+         "title": "Dalton's Atomic Postulates",
+         "summary": "Dalton's model treats each element as identical indivisible atoms combined in fixed ratios, which explains the law of definite proportions but cannot account for isotopes.",
+         "keywords": [
+          "dalton",
+          "atomic theory",
+          "postulates"
+         ]
+        },
+        {
+         "title": "Discovery of the Electron",
+         "summary": "Thomson's cathode-ray experiments showed that atoms contain negative particles, and their charge-to-mass ratio was the same whatever gas filled the tube.",
+         "keywords": [
+          "electron",
+          "cathode ray",
+          "thomson"
+         ],
+         "prerequisites": [
+          "Dalton's Atomic Postulates"
+         ]
+        },
+        {
+         "title": "Rutherford's Nuclear Model",
+         "summary": "Alpha particles that rebounded from gold foil forced the positive charge and nearly all the mass into a tiny nucleus, leaving the rest of the atom as empty space.",
+         "keywords": [
+          "rutherford",
+          "nucleus",
+          "gold foil"
+         ],
+         "prerequisites": [
+          "Discovery of the Electron"
+         ]
+        }
        ]
       },
       {
-       "topic": "The periodic table",
+       "topic": "Subatomic Particles and Atomic Symbols",
        "concepts": [
-        {"title": "Groups, periods and the table's structure", "summary": "Columns share outer-electron count and rows share shell count, which is why the table predicts behaviour.", "keywords": ["group", "period", "periodic table"]},
-        {"title": "Metals, non-metals and metalloids", "summary": "The dividing line between metals and non-metals explains the kinds of bonding each tends to form.", "keywords": ["metal", "non-metal", "metalloid"], "prerequisites": ["Groups, periods and the table's structure"]},
-        {"title": "Trends in atomic radius", "summary": "Radius falls across a period as nuclear charge grows and rises down a group as shells are added.", "keywords": ["atomic radius", "trend", "nuclear charge"], "prerequisites": ["Groups, periods and the table's structure"]},
-        {"title": "Ionisation energy and electron affinity", "summary": "Ionisation energy measures how tightly an electron is held, so it rises across a period and falls down a group.", "keywords": ["ionisation energy", "electron affinity", "trend"], "prerequisites": ["Trends in atomic radius"]},
-        {"title": "Group trends and reactivity", "summary": "Alkali metals become more reactive down the group while halogens become less, and both follow from outer-shell shielding.", "keywords": ["reactivity", "alkali", "halogen"], "prerequisites": ["Ionisation energy and electron affinity"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Bonding and structure",
-     "prerequisites": ["Atomic structure"],
-     "topics": [
-      {
-       "topic": "Chemical bonds",
-       "concepts": [
-        {"title": "Ionic bonding", "summary": "Electron transfer between a metal and a non-metal produces oppositely charged ions held in a lattice.", "keywords": ["ionic", "lattice", "transfer"]},
-        {"title": "Covalent bonding", "summary": "Shared electron pairs hold non-metal atoms together, and the bond is directional.", "keywords": ["covalent", "shared pair", "molecule"], "prerequisites": ["Ionic bonding"]},
-        {"title": "Metallic bonding", "summary": "A sea of delocalised electrons explains why metals conduct and deform rather than shatter.", "keywords": ["metallic", "delocalised", "conduct"], "prerequisites": ["Ionic bonding"]},
-        {"title": "Dot-and-cross diagrams and Lewis structures", "summary": "Drawing outer electrons makes it visible whether an atom has achieved a stable count.", "keywords": ["Lewis structure", "dot and cross", "octet"], "prerequisites": ["Covalent bonding"]},
-        {"title": "Bond polarity and electronegativity", "summary": "Unequal sharing creates a dipole, which is what makes many molecules reactive at specific sites.", "keywords": ["polarity", "electronegativity", "dipole"], "prerequisites": ["Covalent bonding"]},
-        {"title": "Intermolecular forces", "summary": "London forces, dipole-dipole attractions and hydrogen bonding are much weaker than bonds but decide boiling points.", "keywords": ["intermolecular", "hydrogen bond", "van der Waals"], "prerequisites": ["Bond polarity and electronegativity"]}
+        {
+         "title": "Protons, Neutrons and Electrons",
+         "summary": "A proton carries +1 charge and a neutron carries none, each with a mass of about 1 u, while an electron carries -1 charge and about 1/1836 of that mass.",
+         "keywords": [
+          "proton",
+          "neutron",
+          "electron"
+         ]
+        },
+        {
+         "title": "Atomic Number and Mass Number",
+         "summary": "The atomic number Z counts protons and fixes the element, while the mass number A counts protons plus neutrons for one particular nuclide.",
+         "keywords": [
+          "atomic number",
+          "mass number",
+          "nuclide"
+         ],
+         "prerequisites": [
+          "Protons, Neutrons and Electrons"
+         ]
+        },
+        {
+         "title": "Nuclide Notation",
+         "summary": "Nuclide notation places A as a superscript and Z as a subscript before the element symbol, so a uranium-238 symbol with 92 means 92 protons and 146 neutrons.",
+         "keywords": [
+          "nuclide notation",
+          "symbol",
+          "superscript"
+         ],
+         "prerequisites": [
+          "Atomic Number and Mass Number"
+         ]
+        }
        ]
       },
       {
-       "topic": "Structure, shape and properties",
+       "topic": "Isotopes and Atomic Mass",
        "concepts": [
-        {"title": "Giant covalent and simple molecular structures", "summary": "The same strong bonds give very different properties depending on whether they extend through the whole solid.", "keywords": ["giant covalent", "simple molecular", "network"]},
-        {"title": "Shapes of molecules and VSEPR", "summary": "Electron pairs repel and arrange as far apart as possible, which predicts the shape and the bond angles.", "keywords": ["VSEPR", "shape", "bond angle"], "prerequisites": ["Covalent bonding"]},
-        {"title": "Structure and physical properties", "summary": "Melting point, conductivity and solubility all follow from which particles are present and how they are held.", "keywords": ["properties", "structure", "melting point"], "prerequisites": ["Giant covalent and simple molecular structures"]},
-        {"title": "Allotropes of carbon", "summary": "Diamond, graphite and graphene are all pure carbon yet differ completely because of how the atoms are arranged.", "keywords": ["allotrope", "diamond", "graphite"], "prerequisites": ["Structure and physical properties"]},
-        {"title": "Nanoparticles and surface area", "summary": "Nanoparticles have a very large surface area to volume ratio, which changes their behaviour compared with bulk material.", "keywords": ["nanoparticle", "surface area", "scale"], "prerequisites": ["Structure and physical properties"]}
+        {
+         "title": "Isotopes of an Element",
+         "summary": "Isotopes of one element share the proton count but differ in neutron count, so they are chemically nearly identical and differ in mass.",
+         "keywords": [
+          "isotope",
+          "neutron",
+          "mass"
+         ]
+        },
+        {
+         "title": "Atomic Mass as a Weighted Average",
+         "summary": "The atomic mass listed on the periodic table is the abundance-weighted average of the isotope masses, so it is close to but usually not equal to any single isotope.",
+         "keywords": [
+          "atomic mass",
+          "weighted average",
+          "abundance"
+         ],
+         "prerequisites": [
+          "Isotopes of an Element"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Ions",
+       "concepts": [
+        {
+         "title": "Cations and Anions",
+         "summary": "A cation forms when an atom loses electrons and an anion when it gains them, so the nucleus is unchanged while the charge and radius are not.",
+         "keywords": [
+          "cation",
+          "anion",
+          "ion"
+         ]
+        },
+        {
+         "title": "Predicting Monatomic Ion Charge",
+         "summary": "Main-group metals lose their few valence electrons and nonmetals gain electrons until the octet is complete, so group 1 forms 1+ and group 17 forms 1-.",
+         "keywords": [
+          "ion charge",
+          "octet",
+          "valence"
+         ],
+         "prerequisites": [
+          "Cations and Anions"
+         ]
+        },
+        {
+         "title": "Polyatomic Ions",
+         "summary": "A polyatomic ion is a covalently bonded group of atoms with a net charge, such as the sulfate ion, and it behaves as one unit in a formula.",
+         "keywords": [
+          "polyatomic ion",
+          "sulfate",
+          "charge"
+         ],
+         "prerequisites": [
+          "Predicting Monatomic Ion Charge"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Matter and Measurement"
      ]
     }
    ]
   },
   {
-   "strand": "Chemical Reactions",
+   "strand": "Electron Configuration and Periodicity",
    "units": [
     {
-     "unit": "Reaction types and equations",
-     "prerequisites": ["Bonding and structure"],
+     "unit": "Electron Configuration and Periodicity",
      "topics": [
       {
-       "topic": "Writing and balancing reactions",
+       "topic": "Light, Energy, and the Quantum Model",
        "concepts": [
-        {"title": "Word and symbol equations", "summary": "A balanced symbol equation is a statement of conservation of atoms and charge.", "keywords": ["equation", "symbol", "balancing"]},
-        {"title": "Balancing chemical equations", "summary": "Coefficients must be adjusted so every element's count matches on both sides.", "keywords": ["balancing", "coefficient", "conservation"], "prerequisites": ["Word and symbol equations"]},
-        {"title": "State symbols and reaction conditions", "summary": "State symbols and conditions carry real information that changes whether a reaction happens.", "keywords": ["state symbol", "conditions", "aqueous"], "prerequisites": ["Word and symbol equations"]},
-        {"title": "Ionic equations and spectator ions", "summary": "Removing ions that do not change reveals the actual reaction taking place.", "keywords": ["ionic equation", "spectator ion", "net reaction"], "prerequisites": ["Balancing chemical equations"]}
+        {
+         "title": "Wave Properties and the Speed of Light",
+         "summary": "Frequency times wavelength equals the speed of light, so a shorter wavelength means a higher frequency and a more energetic photon.",
+         "keywords": [
+          "wavelength",
+          "frequency",
+          "speed of light"
+         ]
+        },
+        {
+         "title": "Photons and Quantized Energy",
+         "summary": "Light exchanges energy in photons of energy h times its frequency, which is why dim light above the threshold ejects electrons and bright light below it does not.",
+         "keywords": [
+          "photon",
+          "planck",
+          "photoelectric"
+         ],
+         "prerequisites": [
+          "Wave Properties and the Speed of Light"
+         ]
+        },
+        {
+         "title": "The Bohr Model and Line Spectra",
+         "summary": "The Bohr model allows only certain orbits, so an electron emits a photon whose energy equals the gap between two levels and the spectrum shows discrete lines.",
+         "keywords": [
+          "bohr model",
+          "line spectrum",
+          "energy level"
+         ],
+         "prerequisites": [
+          "Photons and Quantized Energy"
+         ]
+        }
        ]
       },
       {
-       "topic": "Reaction classes",
+       "topic": "Electron Configurations",
        "concepts": [
-        {"title": "Acids, bases and neutralisation", "summary": "An acid donates protons and a base accepts them, and neutralisation produces a salt and water.", "keywords": ["acid", "base", "neutralisation"]},
-        {"title": "pH and the hydrogen ion scale", "summary": "pH is a logarithmic measure of hydrogen ion concentration, so one unit is a tenfold change.", "keywords": ["pH", "logarithmic", "hydrogen ion"], "prerequisites": ["Acids, bases and neutralisation"]},
-        {"title": "Strong and weak acids", "summary": "Strength refers to how completely an acid dissociates, which is different from concentration.", "keywords": ["strong acid", "weak acid", "dissociation"], "prerequisites": ["pH and the hydrogen ion scale"]},
-        {"title": "Titration and volumetric analysis", "summary": "A titration finds an unknown concentration by finding the exact volume that neutralises a known one.", "keywords": ["titration", "volumetric", "endpoint"], "prerequisites": ["Strong and weak acids", "Concentration and molarity"]},
-        {"title": "Redox and oxidation states", "summary": "Redox reactions move electrons, and tracking oxidation states shows which species gained them.", "keywords": ["redox", "oxidation state", "electron transfer"], "prerequisites": ["Ionic equations and spectator ions"]},
-        {"title": "Precipitation and solubility rules", "summary": "Mixing two solutions produces a solid when the ion combination is insoluble.", "keywords": ["precipitation", "solubility", "insoluble"], "prerequisites": ["Ionic equations and spectator ions"]},
-        {"title": "Reaction rates and collision theory", "summary": "Particles must collide with enough energy and the right orientation, which explains every rate factor.", "keywords": ["rate", "collision theory", "activation energy"], "prerequisites": ["Balancing chemical equations"]},
-        {"title": "Catalysts and activation energy", "summary": "A catalyst provides a lower-energy route without being consumed, so it does not change the equilibrium position.", "keywords": ["catalyst", "activation energy", "pathway"], "prerequisites": ["Reaction rates and collision theory"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Energetics and equilibrium",
-     "prerequisites": ["Reaction types and equations"],
-     "topics": [
-      {
-       "topic": "Energy in reactions",
-       "concepts": [
-        {"title": "Exothermic and endothermic reactions", "summary": "The sign of the enthalpy change says whether the system released or absorbed energy overall.", "keywords": ["exothermic", "endothermic", "enthalpy"]},
-        {"title": "Bond energies and enthalpy change", "summary": "Breaking bonds costs energy and forming them releases it, and the net of the two sets the sign.", "keywords": ["bond energy", "enthalpy", "net energy"], "prerequisites": ["Exothermic and endothermic reactions"]},
-        {"title": "Energy level diagrams", "summary": "A reaction profile shows reactant and product energies and the activation hump between them.", "keywords": ["energy profile", "activation", "diagram"], "prerequisites": ["Bond energies and enthalpy change"]},
-        {"title": "Calorimetry and measuring enthalpy change", "summary": "A measured temperature rise plus a known heat capacity gives the energy released per mole.", "keywords": ["calorimetry", "temperature rise", "specific heat"], "prerequisites": ["Exothermic and endothermic reactions"]}
+        {
+         "title": "Orbitals and Quantum Numbers",
+         "summary": "Three quantum numbers fix an orbital and a fourth fixes the electron spin, and the Pauli principle allows at most two electrons of opposite spin in one orbital.",
+         "keywords": [
+          "orbital",
+          "quantum numbers",
+          "pauli"
+         ]
+        },
+        {
+         "title": "Filling Order and Hund's Rule",
+         "summary": "Electrons fill orbitals in order of increasing energy, with 4s below 3d, and Hund's rule keeps electrons unpaired with parallel spins before any orbital is doubled.",
+         "keywords": [
+          "aufbau",
+          "hund's rule",
+          "filling order"
+         ],
+         "prerequisites": [
+          "Orbitals and Quantum Numbers"
+         ]
+        },
+        {
+         "title": "Noble-Gas Shorthand and Valence Electrons",
+         "summary": "Replacing the filled inner shells with a noble-gas symbol leaves the outer configuration visible, and those outer electrons are the valence electrons that determine bonding.",
+         "keywords": [
+          "noble gas core",
+          "valence electrons",
+          "configuration"
+         ],
+         "prerequisites": [
+          "Filling Order and Hund's Rule"
+         ]
+        }
        ]
       },
       {
-       "topic": "Equilibrium",
+       "topic": "Periodic Trends",
        "concepts": [
-        {"title": "Reversible reactions and dynamic equilibrium", "summary": "At equilibrium both directions continue at equal rates, so concentrations stop changing but nothing stops.", "keywords": ["reversible", "dynamic equilibrium", "rate"]},
-        {"title": "Le Chatelier's principle", "summary": "A system at equilibrium shifts to oppose the change imposed on it, which predicts the direction of shift.", "keywords": ["Le Chatelier", "shift", "opposition"], "prerequisites": ["Reversible reactions and dynamic equilibrium"]},
-        {"title": "The equilibrium constant", "summary": "The equilibrium constant summarises the position of equilibrium at a given temperature.", "keywords": ["equilibrium constant", "position", "temperature"], "prerequisites": ["Le Chatelier's principle"]},
-        {"title": "Factors affecting equilibrium position", "summary": "Concentration, pressure and temperature shift the position, while a catalyst only changes how fast it is reached.", "keywords": ["concentration", "pressure", "catalyst"], "prerequisites": ["Le Chatelier's principle"]},
-        {"title": "Industrial equilibrium and yield optimisation", "summary": "The Haber process trades yield against rate, which is why real conditions are a compromise.", "keywords": ["Haber", "compromise", "yield"], "prerequisites": ["Factors affecting equilibrium position"]}
+        {
+         "title": "Effective Nuclear Charge",
+         "summary": "Effective nuclear charge is the nuclear charge minus the screening of inner electrons, and it rises across a period because the screening hardly changes while Z increases.",
+         "keywords": [
+          "effective nuclear charge",
+          "shielding",
+          "trend"
+         ]
+        },
+        {
+         "title": "Atomic Radius Across and Down",
+         "summary": "Atomic radius falls from left to right across a period and rises down a group, because an added shell outweighs the greater nuclear charge.",
+         "keywords": [
+          "atomic radius",
+          "trend",
+          "shells"
+         ],
+         "prerequisites": [
+          "Effective Nuclear Charge"
+         ]
+        },
+        {
+         "title": "Ionization Energy and Electron Affinity",
+         "summary": "Ionization energy rises across a period and falls down a group, and its dips at groups 13 and 16 come from an unpaired p electron and a paired p electron respectively.",
+         "keywords": [
+          "ionization energy",
+          "electron affinity",
+          "trend"
+         ],
+         "prerequisites": [
+          "Atomic Radius Across and Down"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Atomic Structure"
      ]
     }
    ]
   },
   {
-   "strand": "Organic and Analytical Chemistry",
+   "strand": "Chemical Bonding and Molecular Geometry",
    "units": [
     {
-     "unit": "Organic chemistry",
-     "prerequisites": ["Bonding and structure"],
+     "unit": "Chemical Bonding and Molecular Geometry",
+     "topics": [
+      {
+       "topic": "Bond Types and Electronegativity",
+       "concepts": [
+        {
+         "title": "Ionic, Covalent and Metallic Bonding",
+         "summary": "Ionic bonding transfers electrons from a metal to a nonmetal, covalent bonding shares them between nonmetals, and metallic bonding delocalises them over a lattice of cations.",
+         "keywords": [
+          "ionic bond",
+          "covalent bond",
+          "metallic"
+         ]
+        },
+        {
+         "title": "Electronegativity and Bond Polarity",
+         "summary": "A bond is polar when the electronegativity difference is roughly 0.4 to 1.7 and largely ionic above that, with the shared electrons drawn towards the more electronegative atom.",
+         "keywords": [
+          "electronegativity",
+          "polar bond",
+          "difference"
+         ],
+         "prerequisites": [
+          "Ionic, Covalent and Metallic Bonding"
+         ]
+        },
+        {
+         "title": "Lattice Energy",
+         "summary": "Lattice energy grows with the product of the ion charges and falls as the ions get larger, which is why magnesium oxide melts far above sodium chloride.",
+         "keywords": [
+          "lattice energy",
+          "ion charge",
+          "coulomb"
+         ],
+         "prerequisites": [
+          "Electronegativity and Bond Polarity"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Lewis Structures",
+       "concepts": [
+        {
+         "title": "Drawing a Lewis Structure",
+         "summary": "Count the valence electrons, join the atoms with single bonds, complete the outer octets, then place the remainder on the central atom and form multiple bonds if it is short of an octet.",
+         "keywords": [
+          "lewis structure",
+          "octet",
+          "lone pair"
+         ]
+        },
+        {
+         "title": "Formal Charge and Resonance",
+         "summary": "Formal charge is the valence-electron count minus the electrons assigned to an atom, and structures that differ only in electron placement are resonance forms of one hybrid.",
+         "keywords": [
+          "formal charge",
+          "resonance",
+          "hybrid"
+         ],
+         "prerequisites": [
+          "Drawing a Lewis Structure"
+         ]
+        },
+        {
+         "title": "Octet Exceptions",
+         "summary": "Beryllium and boron compounds can be electron deficient, a species with an odd electron count such as nitric oxide has an unpaired electron, and third-period atoms may exceed eight electrons.",
+         "keywords": [
+          "octet exception",
+          "expanded octet",
+          "radical"
+         ],
+         "prerequisites": [
+          "Formal Charge and Resonance"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Molecular Geometry and Polarity",
+       "concepts": [
+        {
+         "title": "VSEPR Electron-Pair Geometry",
+         "summary": "Electron pairs repel and spread as far apart as possible, giving linear, trigonal planar, tetrahedral, trigonal bipyramidal and octahedral arrangements for two to six pairs.",
+         "keywords": [
+          "vsepr",
+          "geometry",
+          "electron pair"
+         ]
+        },
+        {
+         "title": "Lone Pairs and Molecular Shape",
+         "summary": "A lone pair occupies more angular space than a bond, so it compresses the bond angles and turns tetrahedral electron geometry into trigonal pyramidal or bent molecular shape.",
+         "keywords": [
+          "lone pair",
+          "bond angle",
+          "shape"
+         ],
+         "prerequisites": [
+          "VSEPR Electron-Pair Geometry"
+         ]
+        },
+        {
+         "title": "Molecular Polarity from Dipole Cancellation",
+         "summary": "A molecule is polar only when its bond dipoles do not cancel, so carbon dioxide is nonpolar even though each carbon-oxygen bond is polar.",
+         "keywords": [
+          "dipole",
+          "polarity",
+          "symmetry"
+         ],
+         "prerequisites": [
+          "Lone Pairs and Molecular Shape"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Advanced Bonding Theory",
+       "concepts": [
+        {
+         "title": "Hybrid Orbitals and Valence Bond Theory",
+         "summary": "Mixing s and p orbitals gives sp, sp2 or sp3 hybrids whose directions match the observed bond angles, which is how the tetrahedral carbon of methane is explained.",
+         "keywords": [
+          "hybridization",
+          "valence bond",
+          "sp3"
+         ]
+        },
+        {
+         "title": "Sigma and Pi Bonds",
+         "summary": "A sigma bond comes from head-on overlap and permits rotation, while a pi bond comes from side-on p overlap that holds the atoms in a plane and blocks rotation about a double bond.",
+         "keywords": [
+          "sigma bond",
+          "pi bond",
+          "rotation"
+         ],
+         "prerequisites": [
+          "Hybrid Orbitals and Valence Bond Theory"
+         ]
+        },
+        {
+         "title": "Molecular Orbital Theory",
+         "summary": "Combining atomic orbitals gives bonding and antibonding molecular orbitals, and filling them in order explains why oxygen is paramagnetic although its Lewis structure shows no unpaired electrons.",
+         "keywords": [
+          "molecular orbital",
+          "paramagnetic",
+          "bond order"
+         ],
+         "prerequisites": [
+          "Sigma and Pi Bonds"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Electron Configuration and Periodicity"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Chemical Nomenclature and Formulas",
+   "units": [
+    {
+     "unit": "Chemical Nomenclature and Formulas",
+     "topics": [
+      {
+       "topic": "Ionic Compounds",
+       "concepts": [
+        {
+         "title": "Charge Balance in Ionic Formulas",
+         "summary": "An ionic formula is written so the total positive charge equals the total negative charge, which is why aluminium oxide is Al2O3 rather than AlO.",
+         "keywords": [
+          "formula unit",
+          "charge balance",
+          "ionic"
+         ]
+        },
+        {
+         "title": "Naming Ionic Compounds",
+         "summary": "Name the cation first and the anion second with an -ide ending, and add a Roman numeral when the metal can take more than one stable charge.",
+         "keywords": [
+          "ionic naming",
+          "roman numeral",
+          "anion"
+         ],
+         "prerequisites": [
+          "Charge Balance in Ionic Formulas"
+         ]
+        },
+        {
+         "title": "Hydrates",
+         "summary": "A hydrate holds a fixed number of water molecules per formula unit, written after a dot, and heating drives that water off as a measurable mass loss.",
+         "keywords": [
+          "hydrate",
+          "water of crystallization",
+          "formula"
+         ],
+         "prerequisites": [
+          "Naming Ionic Compounds"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Molecular Compounds and Acids",
+       "concepts": [
+        {
+         "title": "Greek Prefixes in Molecular Names",
+         "summary": "Binary molecular compounds use prefixes from mono- to deca- to state each atom count, and the mono- on the first element is dropped.",
+         "keywords": [
+          "greek prefix",
+          "binary compound",
+          "naming"
+         ]
+        },
+        {
+         "title": "Naming Acids",
+         "summary": "An acid of the form HX is named hydro-X-ic acid, while an oxyacid takes the -ous ending when its anion ends in -ite and -ic when the anion ends in -ate.",
+         "keywords": [
+          "acid naming",
+          "oxyacid",
+          "anion suffix"
+         ],
+         "prerequisites": [
+          "Greek Prefixes in Molecular Names"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Oxidation Numbers",
+       "concepts": [
+        {
+         "title": "Rules for Assigning Oxidation Numbers",
+         "summary": "Oxygen is -2 in compounds except with fluorine, hydrogen is +1 when bonded to a nonmetal, and the oxidation numbers in a neutral compound sum to zero.",
+         "keywords": [
+          "oxidation number",
+          "rules",
+          "sum"
+         ]
+        },
+        {
+         "title": "Oxidation and Reduction as Electron Transfer",
+         "summary": "An atom is oxidised when its oxidation number rises and reduced when it falls, so the two changes always occur together in one reaction.",
+         "keywords": [
+          "oxidation",
+          "reduction",
+          "redox"
+         ],
+         "prerequisites": [
+          "Rules for Assigning Oxidation Numbers"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Chemical Bonding and Molecular Geometry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "The Mole and Stoichiometry",
+   "units": [
+    {
+     "unit": "The Mole and Stoichiometry",
+     "topics": [
+      {
+       "topic": "The Mole and Molar Mass",
+       "concepts": [
+        {
+         "title": "The Mole and Avogadro's Number",
+         "summary": "One mole contains 6.022 x 10^23 entities, so the mole converts a count of particles into an amount that can be weighed.",
+         "keywords": [
+          "mole",
+          "avogadro",
+          "particles"
+         ]
+        },
+        {
+         "title": "Molar Mass",
+         "summary": "Molar mass is the mass in grams of one mole of a substance and is numerically equal to its formula mass in unified atomic mass units.",
+         "keywords": [
+          "molar mass",
+          "formula mass",
+          "grams per mole"
+         ],
+         "prerequisites": [
+          "The Mole and Avogadro's Number"
+         ]
+        },
+        {
+         "title": "Converting Between Mass, Moles and Particles",
+         "summary": "Mass, moles and particle count convert into one another through molar mass and Avogadro's number, with each ratio chosen so the given unit cancels.",
+         "keywords": [
+          "mole conversion",
+          "molar mass",
+          "avogadro"
+         ],
+         "prerequisites": [
+          "Molar Mass"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Composition and Formulas",
+       "concepts": [
+        {
+         "title": "Percent Composition by Mass",
+         "summary": "Percent composition is the mass of one element in a mole divided by the molar mass, so water is 11.2% hydrogen by mass although two of its three atoms are hydrogen.",
+         "keywords": [
+          "percent composition",
+          "mass fraction",
+          "element"
+         ]
+        },
+        {
+         "title": "Empirical Formula from Mole Ratios",
+         "summary": "The empirical formula is the smallest whole-number atom ratio, found by converting masses to moles and dividing through by the smallest count.",
+         "keywords": [
+          "empirical formula",
+          "ratio",
+          "moles"
+         ],
+         "prerequisites": [
+          "Percent Composition by Mass"
+         ]
+        },
+        {
+         "title": "Molecular Formula from the Empirical Formula",
+         "summary": "The molecular formula is a whole-number multiple of the empirical formula, and the multiplier is the molar mass divided by the empirical formula mass.",
+         "keywords": [
+          "molecular formula",
+          "multiple",
+          "molar mass"
+         ],
+         "prerequisites": [
+          "Empirical Formula from Mole Ratios"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Balancing Equations",
+       "concepts": [
+        {
+         "title": "Conservation of Atoms in a Reaction",
+         "summary": "A balanced equation has the same number of each kind of atom on both sides, because a reaction only rearranges atoms and never creates or destroys them.",
+         "keywords": [
+          "conservation",
+          "balancing",
+          "atoms"
+         ]
+        },
+        {
+         "title": "Balancing by Inspection",
+         "summary": "Balance one element at a time and leave hydrogen and oxygen until last, adjusting only coefficients because changing a subscript would change the substance.",
+         "keywords": [
+          "inspection",
+          "coefficients",
+          "subscript"
+         ],
+         "prerequisites": [
+          "Conservation of Atoms in a Reaction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Reaction Stoichiometry",
+       "concepts": [
+        {
+         "title": "Mole Ratios from Coefficients",
+         "summary": "The coefficients of a balanced equation give the mole ratio between any two substances, and that ratio is the only bridge from one substance to another.",
+         "keywords": [
+          "mole ratio",
+          "coefficients",
+          "stoichiometry"
+         ]
+        },
+        {
+         "title": "Limiting Reactant",
+         "summary": "The limiting reactant is used up first and sets the maximum product, while the excess reactant is still present when the reaction stops.",
+         "keywords": [
+          "limiting reactant",
+          "excess",
+          "maximum product"
+         ],
+         "prerequisites": [
+          "Mole Ratios from Coefficients"
+         ]
+        },
+        {
+         "title": "Percent Yield",
+         "summary": "Percent yield is the actual yield divided by the theoretical yield times 100, and a value above 100 signals an impure or wet product rather than a better reaction.",
+         "keywords": [
+          "percent yield",
+          "theoretical yield",
+          "actual yield"
+         ],
+         "prerequisites": [
+          "Limiting Reactant"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Chemical Nomenclature and Formulas"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Chemical Reactions and Solution Stoichiometry",
+   "units": [
+    {
+     "unit": "Chemical Reactions and Solution Stoichiometry",
+     "topics": [
+      {
+       "topic": "Classifying Reactions",
+       "concepts": [
+        {
+         "title": "Precipitation Reactions",
+         "summary": "Two soluble salts exchange ions and a product of low solubility leaves solution as a solid, which a solubility table predicts before the reaction is run.",
+         "keywords": [
+          "precipitation",
+          "solubility",
+          "double displacement"
+         ]
+        },
+        {
+         "title": "Acid-Base Neutralization",
+         "summary": "An acid and a base react to give water and a salt, with the hydrogen ion and the hydroxide ion combining in a one-to-one ratio.",
+         "keywords": [
+          "neutralization",
+          "salt",
+          "water"
+         ],
+         "prerequisites": [
+          "Precipitation Reactions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Aqueous Reactions",
+       "concepts": [
+        {
+         "title": "Dissociation and Spectator Ions",
+         "summary": "A strong electrolyte dissociates completely in water, and the ions that appear unchanged on both sides are spectators omitted from the net ionic equation.",
+         "keywords": [
+          "dissociation",
+          "spectator ion",
+          "net ionic"
+         ]
+        },
+        {
+         "title": "Strong and Weak Electrolytes",
+         "summary": "A strong electrolyte ionises essentially completely, a weak electrolyte only partly and a nonelectrolyte not at all, which conductivity reveals.",
+         "keywords": [
+          "electrolyte",
+          "conductivity",
+          "ionization"
+         ],
+         "prerequisites": [
+          "Dissociation and Spectator Ions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Acid-Base and Redox Reactions",
+       "concepts": [
+        {
+         "title": "Electron Transfer in Redox Equations",
+         "summary": "In a redox reaction the oxidation number of the oxidised element rises and that of the reduced element falls, and the electrons lost must equal the electrons gained.",
+         "keywords": [
+          "redox",
+          "oxidation state",
+          "electrons"
+         ]
+        },
+        {
+         "title": "Displacement and Combustion Reactions",
+         "summary": "A single-displacement reaction has a more reactive element replace a less reactive one, and complete combustion of a hydrocarbon gives carbon dioxide and water.",
+         "keywords": [
+          "displacement",
+          "combustion",
+          "activity series"
+         ],
+         "prerequisites": [
+          "Electron Transfer in Redox Equations"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solution Stoichiometry",
+       "concepts": [
+        {
+         "title": "Molarity",
+         "summary": "Molarity is moles of solute per litre of solution, and because a solution's volume changes with temperature, so does its molarity.",
+         "keywords": [
+          "molarity",
+          "moles",
+          "volume"
+         ]
+        },
+        {
+         "title": "Dilution",
+         "summary": "Dilution adds solvent without changing the moles of solute, so the product of molarity and volume is constant before and after.",
+         "keywords": [
+          "dilution",
+          "molarity",
+          "volume"
+         ],
+         "prerequisites": [
+          "Molarity"
+         ]
+        },
+        {
+         "title": "Titration to the Equivalence Point",
+         "summary": "A titration reaches its equivalence point when the moles of titrant equal the moles required by the balanced equation, which need not be the point of neutral pH.",
+         "keywords": [
+          "titration",
+          "equivalence point",
+          "moles"
+         ],
+         "prerequisites": [
+          "Dilution"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "The Mole and Stoichiometry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Gases",
+   "units": [
+    {
+     "unit": "Gases",
+     "topics": [
+      {
+       "topic": "The Gas Laws",
+       "concepts": [
+        {
+         "title": "Gas Pressure and Its Units",
+         "summary": "Gas pressure is force per unit area on the walls of its container, and one atmosphere equals 760 mmHg, 101.325 kPa and 14.7 pounds per square inch.",
+         "keywords": [
+          "pressure",
+          "atmosphere",
+          "units"
+         ]
+        },
+        {
+         "title": "Boyle's and Charles's Laws",
+         "summary": "At fixed temperature the volume of a gas is inversely proportional to its pressure, and at fixed pressure the volume is directly proportional to its absolute temperature.",
+         "keywords": [
+          "boyle",
+          "charles",
+          "gas law"
+         ],
+         "prerequisites": [
+          "Gas Pressure and Its Units"
+         ]
+        },
+        {
+         "title": "Avogadro's Law and the Combined Gas Law",
+         "summary": "At fixed temperature and pressure equal volumes of gases hold equal moles, and combining the three laws makes pressure times volume over temperature constant for a fixed amount.",
+         "keywords": [
+          "avogadro",
+          "combined gas law",
+          "proportional"
+         ],
+         "prerequisites": [
+          "Boyle's and Charles's Laws"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "The Ideal Gas Law",
+       "concepts": [
+        {
+         "title": "The Ideal Gas Equation",
+         "summary": "The equation PV = nRT with R equal to 0.08206 litre-atmosphere per mole kelvin relates pressure, volume, amount and absolute temperature for a gas treated as non-interacting point particles.",
+         "keywords": [
+          "ideal gas law",
+          "gas constant",
+          "pv nrt"
+         ]
+        },
+        {
+         "title": "Molar Volume at Standard Conditions",
+         "summary": "One mole of an ideal gas occupies 22.4 litres at 0 degrees Celsius and one atmosphere, and 22.7 litres at one bar, so a gas volume can be read as an amount.",
+         "keywords": [
+          "molar volume",
+          "stp",
+          "22.4"
+         ],
+         "prerequisites": [
+          "The Ideal Gas Equation"
+         ]
+        },
+        {
+         "title": "Gas Density and Molar Mass",
+         "summary": "Rearranging the ideal gas law gives density equal to pressure times molar mass over RT, so measuring density at known pressure and temperature yields a molar mass.",
+         "keywords": [
+          "gas density",
+          "molar mass",
+          "ideal gas"
+         ],
+         "prerequisites": [
+          "Molar Volume at Standard Conditions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Gas Mixtures and Stoichiometry",
+       "concepts": [
+        {
+         "title": "Dalton's Law of Partial Pressures",
+         "summary": "Each gas in a mixture exerts the pressure it would exert alone, and the total pressure is the sum of those partial pressures.",
+         "keywords": [
+          "partial pressure",
+          "dalton",
+          "mixture"
+         ]
+        },
+        {
+         "title": "Volume Ratios in Gas Reactions",
+         "summary": "Because equal volumes hold equal moles at the same temperature and pressure, gaseous reactants and products combine in the volume ratio of their coefficients.",
+         "keywords": [
+          "volume ratio",
+          "gas stoichiometry",
+          "coefficients"
+         ],
+         "prerequisites": [
+          "Dalton's Law of Partial Pressures"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Kinetic-Molecular Theory",
+       "concepts": [
+        {
+         "title": "Postulates of the Kinetic-Molecular Model",
+         "summary": "Gas particles move randomly with negligible volume and no attractions, and the pressure they exert comes from collisions with the container walls.",
+         "keywords": [
+          "kinetic molecular theory",
+          "collisions",
+          "ideal gas"
+         ]
+        },
+        {
+         "title": "Temperature and Molecular Speed",
+         "summary": "Average kinetic energy depends only on absolute temperature, so at one temperature all gases share the same average kinetic energy but have different root-mean-square speeds.",
+         "keywords": [
+          "kinetic energy",
+          "rms speed",
+          "temperature"
+         ],
+         "prerequisites": [
+          "Postulates of the Kinetic-Molecular Model"
+         ]
+        },
+        {
+         "title": "Effusion and Diffusion",
+         "summary": "Graham's law states that the rate of effusion is inversely proportional to the square root of molar mass, so a lighter gas escapes through a small hole faster.",
+         "keywords": [
+          "effusion",
+          "diffusion",
+          "graham"
+         ],
+         "prerequisites": [
+          "Temperature and Molecular Speed"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Chemical Reactions and Solution Stoichiometry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Thermochemistry",
+   "units": [
+    {
+     "unit": "Thermochemistry",
+     "topics": [
+      {
+       "topic": "Energy and Heat",
+       "concepts": [
+        {
+         "title": "Internal Energy and the First Law",
+         "summary": "The internal energy of a system changes by the heat added to it plus the work done on it, so energy is conserved and only moves between system and surroundings.",
+         "keywords": [
+          "internal energy",
+          "first law",
+          "work"
+         ]
+        },
+        {
+         "title": "Specific Heat Capacity",
+         "summary": "Specific heat is the energy needed to raise one gram of a substance by one kelvin, and the value of 4.18 joules per gram kelvin for water makes it a slow-warming thermal reservoir.",
+         "keywords": [
+          "specific heat",
+          "heat capacity",
+          "joule"
+         ],
+         "prerequisites": [
+          "Internal Energy and the First Law"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Enthalpy and Calorimetry",
+       "concepts": [
+        {
+         "title": "Enthalpy Change at Constant Pressure",
+         "summary": "Enthalpy change is the heat exchanged at constant pressure, and a negative value means the system released energy to the surroundings.",
+         "keywords": [
+          "enthalpy",
+          "exothermic",
+          "constant pressure"
+         ]
+        },
+        {
+         "title": "Calorimetry",
+         "summary": "A calorimeter finds the heat transferred from a temperature change using q equals mass times specific heat times temperature change, and a bomb calorimeter does it at constant volume instead of constant pressure.",
+         "keywords": [
+          "calorimetry",
+          "heat measurement",
+          "bomb"
+         ],
+         "prerequisites": [
+          "Enthalpy Change at Constant Pressure"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Hess's Law and Formation Enthalpies",
+       "concepts": [
+        {
+         "title": "Hess's Law",
+         "summary": "Because enthalpy is a state function, the enthalpy change of a reaction is the same whatever route is taken, so it can be assembled from steps that are easier to measure.",
+         "keywords": [
+          "hess law",
+          "state function",
+          "path"
+         ]
+        },
+        {
+         "title": "Standard Enthalpies of Formation",
+         "summary": "The standard enthalpy of reaction is the sum of the formation enthalpies of the products minus that of the reactants, with each element in its standard state assigned zero.",
+         "keywords": [
+          "formation enthalpy",
+          "standard state",
+          "products minus reactants"
+         ],
+         "prerequisites": [
+          "Hess's Law"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Gases"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Intermolecular Forces, Liquids, and Solids",
+   "units": [
+    {
+     "unit": "Intermolecular Forces, Liquids, and Solids",
+     "topics": [
+      {
+       "topic": "Intermolecular Forces",
+       "concepts": [
+        {
+         "title": "London Dispersion Forces",
+         "summary": "Instantaneous dipoles attract every pair of molecules, and the force strengthens with polarisability, which is why the larger halogens boil at higher temperatures.",
+         "keywords": [
+          "dispersion",
+          "polarizability",
+          "london"
+         ]
+        },
+        {
+         "title": "Dipole-Dipole Forces and Hydrogen Bonding",
+         "summary": "A hydrogen bond is the strong attraction between a hydrogen bonded to N, O or F and a lone pair on another of those atoms, and it explains the high boiling point of water.",
+         "keywords": [
+          "hydrogen bond",
+          "dipole",
+          "boiling point"
+         ],
+         "prerequisites": [
+          "London Dispersion Forces"
+         ]
+        },
+        {
+         "title": "Ion-Dipole Forces",
+         "summary": "An ion attracts the oppositely charged end of a polar molecule, and these ion-dipole attractions are what pull sodium chloride apart in water.",
+         "keywords": [
+          "ion-dipole",
+          "dissolution",
+          "polar"
+         ],
+         "prerequisites": [
+          "Dipole-Dipole Forces and Hydrogen Bonding"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Phase Changes and Diagrams",
+       "concepts": [
+        {
+         "title": "Vapour Pressure and Boiling",
+         "summary": "Vapour pressure rises with temperature, and a liquid boils when that pressure equals the external pressure, which is why water boils below 100 degrees Celsius on a mountain.",
+         "keywords": [
+          "vapour pressure",
+          "boiling",
+          "altitude"
+         ]
+        },
+        {
+         "title": "Energy Absorbed in Phase Changes",
+         "summary": "Melting and vaporisation absorb energy without raising the temperature, so the heating curve of water has flat plateaus at 0 and 100 degrees Celsius.",
+         "keywords": [
+          "latent heat",
+          "heating curve",
+          "plateau"
+         ],
+         "prerequisites": [
+          "Vapour Pressure and Boiling"
+         ]
+        },
+        {
+         "title": "Phase Diagrams and the Triple Point",
+         "summary": "A phase diagram plots pressure against temperature, its triple point is where all three phases coexist, and its critical point ends the liquid-vapour boundary.",
+         "keywords": [
+          "phase diagram",
+          "triple point",
+          "critical point"
+         ],
+         "prerequisites": [
+          "Energy Absorbed in Phase Changes"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solids",
+       "concepts": [
+        {
+         "title": "Crystalline and Amorphous Solids",
+         "summary": "A crystalline solid has a repeating long-range lattice, while an amorphous solid such as glass lacks one and softens over a range instead of melting at a single temperature.",
+         "keywords": [
+          "crystalline",
+          "amorphous",
+          "lattice"
+         ]
+        },
+        {
+         "title": "Classes of Crystalline Solids",
+         "summary": "Molecular, ionic, covalent-network and metallic solids differ in what holds the lattice together, so a network solid such as diamond melts above 3500 degrees Celsius while molecular solids melt far lower.",
+         "keywords": [
+          "network solid",
+          "ionic solid",
+          "melting point"
+         ],
+         "prerequisites": [
+          "Crystalline and Amorphous Solids"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Thermochemistry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Solutions and Their Properties",
+   "units": [
+    {
+     "unit": "Solutions and Their Properties",
+     "topics": [
+      {
+       "topic": "The Dissolution Process",
+       "concepts": [
+        {
+         "title": "Energetics of Dissolution",
+         "summary": "A solute dissolves when the energy released by solute-solvent attractions offsets the energy needed to separate the solute particles and the solvent molecules.",
+         "keywords": [
+          "dissolution",
+          "hydration",
+          "energy"
+         ]
+        },
+        {
+         "title": "Like Dissolves Like",
+         "summary": "A polar solvent dissolves polar and ionic solutes while a nonpolar solvent dissolves nonpolar solutes, because the new attractions must resemble the ones they replace.",
+         "keywords": [
+          "like dissolves like",
+          "polarity",
+          "solvent"
+         ],
+         "prerequisites": [
+          "Energetics of Dissolution"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Concentration",
+       "concepts": [
+        {
+         "title": "Molarity and Molality",
+         "summary": "Molality is moles of solute per kilogram of solvent, so unlike molarity it does not change when the solution is heated or cooled.",
+         "keywords": [
+          "molality",
+          "molarity",
+          "temperature"
+         ]
+        },
+        {
+         "title": "Mass Percent and Parts per Million",
+         "summary": "Mass percent compares solute mass with total solution mass, and parts per million scales the same ratio by 10^6 for trace concentrations.",
+         "keywords": [
+          "mass percent",
+          "ppm",
+          "trace"
+         ],
+         "prerequisites": [
+          "Molarity and Molality"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Colligative Properties",
+       "concepts": [
+        {
+         "title": "Raoult's Law and Vapour Pressure Lowering",
+         "summary": "A nonvolatile solute lowers the vapour pressure in proportion to its mole fraction, because solute particles occupy part of the surface otherwise available for evaporation.",
+         "keywords": [
+          "raoult",
+          "vapour pressure",
+          "mole fraction"
+         ]
+        },
+        {
+         "title": "Boiling Point Elevation and Freezing Point Depression",
+         "summary": "Dissolved particles raise the boiling point and lower the freezing point by amounts proportional to molality, which is why salt melts ice on a road.",
+         "keywords": [
+          "boiling point elevation",
+          "freezing point depression",
+          "molality"
+         ],
+         "prerequisites": [
+          "Raoult's Law and Vapour Pressure Lowering"
+         ]
+        },
+        {
+         "title": "Osmotic Pressure",
+         "summary": "Osmosis moves solvent through a semipermeable membrane into the more concentrated solution, and the pressure that just stops it is proportional to molarity and absolute temperature.",
+         "keywords": [
+          "osmosis",
+          "osmotic pressure",
+          "membrane"
+         ],
+         "prerequisites": [
+          "Boiling Point Elevation and Freezing Point Depression"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Intermolecular Forces, Liquids, and Solids"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Reaction Kinetics",
+   "units": [
+    {
+     "unit": "Reaction Kinetics",
+     "topics": [
+      {
+       "topic": "Reaction Rates and Collision Theory",
+       "concepts": [
+        {
+         "title": "Expressing Reaction Rate",
+         "summary": "Reaction rate is the change in concentration per unit time, divided by the species coefficient so that one number describes the whole reaction.",
+         "keywords": [
+          "reaction rate",
+          "concentration",
+          "coefficient"
+         ]
+        },
+        {
+         "title": "Collision Theory and Activation Energy",
+         "summary": "A reaction proceeds only when colliding molecules have at least the activation energy and the right orientation, so raising temperature raises the fraction of successful collisions.",
+         "keywords": [
+          "collision theory",
+          "activation energy",
+          "orientation"
+         ],
+         "prerequisites": [
+          "Expressing Reaction Rate"
+         ]
+        },
+        {
+         "title": "Factors That Change Rate",
+         "summary": "Concentration, surface area, temperature and catalysts change the rate by changing how often particles collide or how high the barrier is.",
+         "keywords": [
+          "concentration",
+          "surface area",
+          "temperature"
+         ],
+         "prerequisites": [
+          "Collision Theory and Activation Energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Rate Laws",
+       "concepts": [
+        {
+         "title": "Rate Law and Reaction Order",
+         "summary": "A rate law expresses rate as the rate constant times concentrations raised to experimentally determined powers, and those exponents sum to the overall order.",
+         "keywords": [
+          "rate law",
+          "reaction order",
+          "rate constant"
+         ]
+        },
+        {
+         "title": "Determining Order from Initial Rates",
+         "summary": "Order is found by comparing runs in which one concentration changes, because doubling a first-order reactant doubles the rate while doubling a second-order one quadruples it.",
+         "keywords": [
+          "order determination",
+          "initial rates",
+          "data"
+         ],
+         "prerequisites": [
+          "Rate Law and Reaction Order"
+         ]
+        },
+        {
+         "title": "Half-Life of a First-Order Reaction",
+         "summary": "A first-order reaction has a half-life equal to 0.693 divided by the rate constant, independent of starting concentration, which is why radioactive decay follows the same law.",
+         "keywords": [
+          "half-life",
+          "first order",
+          "rate constant"
+         ],
+         "prerequisites": [
+          "Determining Order from Initial Rates"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Mechanisms and Catalysis",
+       "concepts": [
+        {
+         "title": "Elementary Steps and the Rate-Determining Step",
+         "summary": "A mechanism is a sequence of elementary steps that must sum to the balanced equation, and the slowest step controls the overall rate.",
+         "keywords": [
+          "mechanism",
+          "rate-determining step",
+          "elementary"
+         ]
+        },
+        {
+         "title": "How a Catalyst Works",
+         "summary": "A catalyst supplies a lower-energy pathway without being consumed, so it raises the rate in both directions and leaves the equilibrium constant unchanged.",
+         "keywords": [
+          "catalyst",
+          "activation energy",
+          "equilibrium"
+         ],
+         "prerequisites": [
+          "Elementary Steps and the Rate-Determining Step"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Solutions and Their Properties"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Chemical Equilibrium",
+   "units": [
+    {
+     "unit": "Chemical Equilibrium",
+     "topics": [
+      {
+       "topic": "Equilibrium and the Equilibrium Constant",
+       "concepts": [
+        {
+         "title": "Dynamic Equilibrium",
+         "summary": "At equilibrium the forward and reverse rates are equal, so concentrations stop changing even though both reactions continue at the molecular level.",
+         "keywords": [
+          "dynamic equilibrium",
+          "forward rate",
+          "reverse rate"
+         ]
+        },
+        {
+         "title": "The Equilibrium Constant Expression",
+         "summary": "The equilibrium constant is the product of product concentrations raised to their coefficients divided by the same expression for reactants, with pure solids and liquids omitted.",
+         "keywords": [
+          "equilibrium constant",
+          "expression",
+          "heterogeneous"
+         ],
+         "prerequisites": [
+          "Dynamic Equilibrium"
+         ]
+        },
+        {
+         "title": "Interpreting the Magnitude of K",
+         "summary": "A large K means products dominate at equilibrium and a small K means reactants dominate, but K says nothing about how fast equilibrium is reached.",
+         "keywords": [
+          "magnitude of k",
+          "products",
+          "kinetics"
+         ],
+         "prerequisites": [
+          "The Equilibrium Constant Expression"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Equilibrium Calculations",
+       "concepts": [
+        {
+         "title": "The Reaction Quotient and Direction",
+         "summary": "The reaction quotient has the form of K but uses current concentrations, so Q below K drives the reaction forward and Q above K drives it in reverse.",
+         "keywords": [
+          "reaction quotient",
+          "direction",
+          "compare"
+         ]
+        },
+        {
+         "title": "ICE Table Calculations",
+         "summary": "An ICE table records initial and equilibrium concentrations with the change set by the stoichiometry, and K then supplies the equation that fixes the unknown.",
+         "keywords": [
+          "ice table",
+          "change",
+          "equilibrium concentration"
+         ],
+         "prerequisites": [
+          "The Reaction Quotient and Direction"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Le Chatelier's Principle",
+       "concepts": [
+        {
+         "title": "Response to Concentration and Pressure Changes",
+         "summary": "A system at equilibrium shifts to oppose a change in concentration or partial pressure, and a catalyst does not shift it because it speeds both directions equally.",
+         "keywords": [
+          "le chatelier",
+          "shift",
+          "stress"
+         ]
+        },
+        {
+         "title": "Temperature Dependence of K",
+         "summary": "Changing the temperature changes the value of K itself rather than only the position, and an endothermic reaction is favoured by heating.",
+         "keywords": [
+          "temperature",
+          "endothermic",
+          "equilibrium constant"
+         ],
+         "prerequisites": [
+          "Response to Concentration and Pressure Changes"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Reaction Kinetics"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Acids, Bases, and Aqueous Equilibria",
+   "units": [
+    {
+     "unit": "Acids, Bases, and Aqueous Equilibria",
+     "topics": [
+      {
+       "topic": "Acid-Base Definitions and pH",
+       "concepts": [
+        {
+         "title": "Bronsted-Lowry Proton Transfer",
+         "summary": "A Bronsted-Lowry acid donates a proton and a base accepts one, so every acid has a conjugate base that differs from it by a single hydrogen ion.",
+         "keywords": [
+          "bronsted-lowry",
+          "proton",
+          "conjugate"
+         ]
+        },
+        {
+         "title": "pH and pOH",
+         "summary": "pH is the negative base-ten logarithm of the hydrogen ion concentration, and at 25 degrees Celsius pH plus pOH equals 14 because the ion product of water is 1.0 x 10^-14.",
+         "keywords": [
+          "ph",
+          "poh",
+          "water constant"
+         ],
+         "prerequisites": [
+          "Bronsted-Lowry Proton Transfer"
+         ]
+        },
+        {
+         "title": "Strong versus Weak Acids",
+         "summary": "A strong acid ionises completely in water while a weak acid reaches an equilibrium, so solutions of equal concentration differ greatly in pH and conductivity.",
+         "keywords": [
+          "strong acid",
+          "weak acid",
+          "ionization"
+         ],
+         "prerequisites": [
+          "pH and pOH"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Weak Acid-Base Equilibria",
+       "concepts": [
+        {
+         "title": "Ka, Kb and the Conjugate Pair",
+         "summary": "Ka measures the extent of weak-acid ionisation, and Ka times Kb equals the ion product of water for a conjugate pair, so a stronger acid has a weaker conjugate base.",
+         "keywords": [
+          "ka",
+          "kb",
+          "conjugate pair"
+         ]
+        },
+        {
+         "title": "Calculating the pH of a Weak Acid",
+         "summary": "Solving the Ka expression for a weak acid gives the hydrogen ion concentration, and the shortcut that ignores the change in the denominator fails once the acid is not actually weak or dilute.",
+         "keywords": [
+          "weak acid ph",
+          "ka expression",
+          "approximation"
+         ],
+         "prerequisites": [
+          "Ka, Kb and the Conjugate Pair"
+         ]
+        },
+        {
+         "title": "Percent Ionization",
+         "summary": "Percent ionization is the fraction of acid molecules ionised times 100, and it falls as the initial concentration rises because the equilibrium shifts towards the intact acid.",
+         "keywords": [
+          "percent ionization",
+          "dilution",
+          "weak acid"
+         ],
+         "prerequisites": [
+          "Calculating the pH of a Weak Acid"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Neutralization, Titration, and Buffers",
+       "concepts": [
+        {
+         "title": "Buffer Action",
+         "summary": "A buffer resists pH change because it contains a weak acid and its conjugate base in comparable amounts, which neutralise any added acid or base.",
+         "keywords": [
+          "buffer",
+          "conjugate pair",
+          "ph resistance"
+         ]
+        },
+        {
+         "title": "The Henderson-Hasselbalch Equation",
+         "summary": "A buffer pH equals the acid pKa plus the logarithm of the conjugate base to acid ratio, and the buffer works best within about one pH unit of that pKa.",
+         "keywords": [
+          "henderson hasselbalch",
+          "buffer range",
+          "pka"
+         ],
+         "prerequisites": [
+          "Buffer Action"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Solubility Equilibria",
+       "concepts": [
+        {
+         "title": "The Solubility Product Ksp",
+         "summary": "The solubility product is the product of the ion concentrations in a saturated solution, each raised to its coefficient, and comparing Q with Ksp predicts whether a precipitate forms.",
+         "keywords": [
+          "ksp",
+          "saturated solution",
+          "precipitation"
+         ]
+        },
+        {
+         "title": "The Common Ion Effect",
+         "summary": "Adding an ion that the salt already supplies lowers its solubility, because Q then exceeds Ksp and solid precipitates until Q returns to Ksp.",
+         "keywords": [
+          "common ion",
+          "solubility",
+          "precipitate"
+         ],
+         "prerequisites": [
+          "The Solubility Product Ksp"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Chemical Equilibrium"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Thermodynamics: Entropy and Free Energy",
+   "units": [
+    {
+     "unit": "Thermodynamics: Entropy and Free Energy",
+     "topics": [
+      {
+       "topic": "Entropy and Spontaneity",
+       "concepts": [
+        {
+         "title": "Entropy as Energy Dispersal",
+         "summary": "Entropy measures how widely a system's energy is dispersed among microstates, so a process that spreads matter or energy over more arrangements has a positive entropy change.",
+         "keywords": [
+          "entropy",
+          "microstates",
+          "dispersal"
+         ]
+        },
+        {
+         "title": "The Second Law of Thermodynamics",
+         "summary": "A process is spontaneous when the total entropy of system plus surroundings increases, so an entropy decrease in the system is allowed if the surroundings gain more.",
+         "keywords": [
+          "second law",
+          "total entropy",
+          "spontaneous"
+         ],
+         "prerequisites": [
+          "Entropy as Energy Dispersal"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Gibbs Free Energy",
+       "concepts": [
+        {
+         "title": "Gibbs Free Energy and Spontaneity",
+         "summary": "The free energy change equals enthalpy change minus temperature times entropy change, and at constant temperature and pressure a negative value means spontaneous while zero means equilibrium.",
+         "keywords": [
+          "gibbs free energy",
+          "spontaneity",
+          "criterion"
+         ]
+        },
+        {
+         "title": "Temperature and Reaction Feasibility",
+         "summary": "The signs of the enthalpy and entropy changes decide whether a reaction is always, never or only at some temperatures feasible, with the crossover at temperature equal to enthalpy change over entropy change.",
+         "keywords": [
+          "crossover temperature",
+          "enthalpy",
+          "entropy"
+         ],
+         "prerequisites": [
+          "Gibbs Free Energy and Spontaneity"
+         ]
+        },
+        {
+         "title": "Standard Free Energy and the Equilibrium Constant",
+         "summary": "The standard free energy change equals minus RT times the natural logarithm of K, so a large negative value corresponds to a large equilibrium constant.",
+         "keywords": [
+          "free energy",
+          "equilibrium constant",
+          "standard"
+         ],
+         "prerequisites": [
+          "Temperature and Reaction Feasibility"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Acids, Bases, and Aqueous Equilibria"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Electrochemistry",
+   "units": [
+    {
+     "unit": "Electrochemistry",
+     "topics": [
+      {
+       "topic": "Redox Reactions",
+       "concepts": [
+        {
+         "title": "Splitting a Redox Reaction into Half-Reactions",
+         "summary": "A redox reaction separates into an oxidation half-reaction and a reduction half-reaction, each balanced for atoms and charge before they are combined.",
+         "keywords": [
+          "half-reaction",
+          "oxidation",
+          "reduction"
+         ]
+        },
+        {
+         "title": "Balancing Redox in Acid and Base",
+         "summary": "Balancing in acidic solution adds water and hydrogen ions to equalise atoms and charge, and in basic solution the same steps are followed before hydrogen ions are replaced by hydroxide.",
+         "keywords": [
+          "balancing redox",
+          "acidic",
+          "basic"
+         ],
+         "prerequisites": [
+          "Splitting a Redox Reaction into Half-Reactions"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Electrochemical Cells",
+       "concepts": [
+        {
+         "title": "Galvanic Cells and the Salt Bridge",
+         "summary": "In a galvanic cell oxidation occurs at the anode and reduction at the cathode, electrons flow through the external circuit and ions carry charge through the salt bridge.",
+         "keywords": [
+          "galvanic cell",
+          "anode",
+          "salt bridge"
+         ]
+        },
+        {
+         "title": "Cell Notation and Electrolytic Cells",
+         "summary": "Cell notation places the anode on the left and the cathode on the right, and an electrolytic cell uses an external supply to drive the reverse, nonspontaneous reaction.",
+         "keywords": [
+          "cell notation",
+          "electrolytic",
+          "external supply"
+         ],
+         "prerequisites": [
+          "Galvanic Cells and the Salt Bridge"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Cell Potential and Conditions",
+       "concepts": [
+        {
+         "title": "Standard Reduction Potentials",
+         "summary": "A cell potential is the cathode reduction potential minus the anode reduction potential, and a positive value means the cell reaction is spontaneous under standard conditions.",
+         "keywords": [
+          "standard reduction potential",
+          "cell potential",
+          "cathode"
+         ]
+        },
+        {
+         "title": "The Nernst Equation",
+         "summary": "Cell potential falls as the reaction quotient rises, following the Nernst equation, which at 25 degrees Celsius reduces to the standard potential minus 0.0592 over n times the logarithm of Q.",
+         "keywords": [
+          "nernst equation",
+          "concentration",
+          "cell potential"
+         ],
+         "prerequisites": [
+          "Standard Reduction Potentials"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Thermodynamics: Entropy and Free Energy"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Nuclear Chemistry",
+   "units": [
+    {
+     "unit": "Nuclear Chemistry",
+     "topics": [
+      {
+       "topic": "Radioactivity and Nuclear Equations",
+       "concepts": [
+        {
+         "title": "Nuclear Stability and Binding Energy",
+         "summary": "A nucleus is stable when the strong force outweighs proton repulsion, which is why the neutron-to-proton ratio needed for stability rises with atomic number and heavy nuclei decay.",
+         "keywords": [
+          "nuclear stability",
+          "binding energy",
+          "neutron ratio"
+         ]
+        },
+        {
+         "title": "Alpha, Beta and Gamma Decay",
+         "summary": "Alpha decay lowers the mass number by four and the atomic number by two, beta-minus decay raises the atomic number by one, and gamma emission changes neither.",
+         "keywords": [
+          "alpha decay",
+          "beta decay",
+          "gamma"
+         ],
+         "prerequisites": [
+          "Nuclear Stability and Binding Energy"
+         ]
+        }
+       ]
+      },
+      {
+       "topic": "Half-Life and Nuclear Energy",
+       "concepts": [
+        {
+         "title": "Half-Life of a Radionuclide",
+         "summary": "After n half-lives the fraction of a radionuclide remaining is one half raised to n, so activity falls by half in every equal time interval.",
+         "keywords": [
+          "half-life",
+          "decay",
+          "fraction"
+         ]
+        },
+        {
+         "title": "Fission and Fusion Energy",
+         "summary": "Fission splits a heavy nucleus and fusion joins light ones, and both release energy because the products are more tightly bound than the reactants.",
+         "keywords": [
+          "fission",
+          "fusion",
+          "mass defect"
+         ],
+         "prerequisites": [
+          "Half-Life of a Radionuclide"
+         ]
+        }
+       ]
+      }
+     ],
+     "prerequisites": [
+      "Electrochemistry"
+     ]
+    }
+   ]
+  },
+  {
+   "strand": "Organic Chemistry",
+   "units": [
+    {
+     "unit": "Organic Chemistry",
      "topics": [
       {
        "topic": "Hydrocarbons",
        "concepts": [
-        {"title": "Carbon's bonding and catenation", "summary": "Carbon forms four strong bonds and bonds to itself, which is why there are millions of organic compounds.", "keywords": ["carbon", "catenation", "tetravalent"]},
-        {"title": "Alkanes and saturated hydrocarbons", "summary": "Alkanes contain only single carbon-carbon bonds and are relatively unreactive.", "keywords": ["alkane", "saturated", "single bond"], "prerequisites": ["Carbon's bonding and catenation"]},
-        {"title": "Alkenes and unsaturation", "summary": "A carbon-carbon double bond makes alkenes reactive and lets them add atoms across the bond.", "keywords": ["alkene", "double bond", "unsaturated"], "prerequisites": ["Alkanes and saturated hydrocarbons"]},
-        {"title": "Homologous series and functional groups", "summary": "A functional group behaves consistently across a series, which is what makes organic chemistry predictable.", "keywords": ["homologous series", "functional group", "predictable"], "prerequisites": ["Alkenes and unsaturation"]},
-        {"title": "Naming organic compounds", "summary": "Systematic names encode chain length, functional group and position, so a name is a structure.", "keywords": ["IUPAC", "nomenclature", "prefix"], "prerequisites": ["Homologous series and functional groups"]},
-        {"title": "Isomerism", "summary": "The same molecular formula can give different structures, and different structures give different properties.", "keywords": ["isomer", "structural", "formula"], "prerequisites": ["Naming organic compounds"]},
-        {"title": "Alcohols and carboxylic acids", "summary": "The hydroxyl and carboxyl groups give these compounds their distinctive solubility, acidity and reactivity.", "keywords": ["alcohol", "carboxylic acid", "hydroxyl"], "prerequisites": ["Homologous series and functional groups"]},
-        {"title": "Polymers and polymerisation", "summary": "Addition and condensation routes build long chains from small monomers with different by-products.", "keywords": ["polymer", "monomer", "addition"], "prerequisites": ["Alkenes and unsaturation"]}
+        {
+         "title": "Alkanes and Structural Isomerism",
+         "summary": "Alkanes are saturated hydrocarbons with the formula CnH2n+2, and from butane onward the same formula admits branched isomers with different boiling points.",
+         "keywords": [
+          "alkane",
+          "isomer",
+          "saturated"
+         ]
+        },
+        {
+         "title": "Alkenes, Alkynes and Aromatic Rings",
+         "summary": "A carbon-carbon double or triple bond makes a hydrocarbon unsaturated, while the delocalised six-electron ring of benzene makes it aromatic.",
+         "keywords": [
+          "alkene",
+          "alkyne",
+          "aromatic"
+         ],
+         "prerequisites": [
+          "Alkanes and Structural Isomerism"
+         ]
+        }
        ]
       },
       {
-       "topic": "Fuels and the environment",
+       "topic": "Functional Groups and Isomerism",
        "concepts": [
-        {"title": "Crude oil and fractional distillation", "summary": "Hydrocarbons separate by boiling point because chain length changes the strength of intermolecular forces.", "keywords": ["crude oil", "fractional distillation", "boiling point"], "prerequisites": ["Alkanes and saturated hydrocarbons"]},
-        {"title": "Combustion of fuels", "summary": "Complete combustion gives carbon dioxide and water, while incomplete combustion gives carbon monoxide and soot.", "keywords": ["combustion", "complete", "carbon monoxide"], "prerequisites": ["Crude oil and fractional distillation"]},
-        {"title": "Cracking and feedstock supply", "summary": "Cracking converts long, abundant chains into shorter, more useful ones including alkenes.", "keywords": ["cracking", "feedstock", "short chain"], "prerequisites": ["Crude oil and fractional distillation"]},
-        {"title": "Greenhouse gases and climate effects", "summary": "Gases that absorb infrared radiation change the planet's energy balance, which changes climate.", "keywords": ["greenhouse", "infrared", "climate"], "prerequisites": ["Combustion of fuels"]}
-       ]
-      }
-     ]
-    },
-    {
-     "unit": "Analysis and the atmosphere",
-     "prerequisites": ["Organic chemistry"],
-     "topics": [
-      {
-       "topic": "Analytical techniques",
-       "concepts": [
-        {"title": "Flame tests and cation identification", "summary": "Different metal ions emit characteristic colours, giving a quick identification test.", "keywords": ["flame test", "cation", "colour"]},
-        {"title": "Testing for anions and gases", "summary": "Characteristic precipitates and gas reactions identify common anions and gases.", "keywords": ["anion test", "precipitate", "gas test"], "prerequisites": ["Flame tests and cation identification"]},
-        {"title": "Paper and thin-layer chromatography", "summary": "Components travel at different rates according to how they partition, so they separate into spots.", "keywords": ["chromatography", "Rf value", "separation"], "prerequisites": ["Testing for anions and gases"]},
-        {"title": "Instrumental analysis", "summary": "Spectroscopy and spectrometry identify and quantify substances from how they interact with radiation.", "keywords": ["spectroscopy", "spectrometry", "instrumental"], "prerequisites": ["Paper and thin-layer chromatography"]}
+        {
+         "title": "Functional Group Families",
+         "summary": "A functional group is the reactive part of a molecule, and its identity defines the family: hydroxyl for alcohols, carbonyl for ketones and aldehydes, carboxyl for acids.",
+         "keywords": [
+          "functional group",
+          "hydroxyl",
+          "carboxyl"
+         ]
+        },
+        {
+         "title": "Naming and Isomer Classes",
+         "summary": "An organic name takes the longest carbon chain as parent and adds suffixes for the principal functional group, while constitutional isomers differ in connectivity and stereoisomers differ only in spatial arrangement.",
+         "keywords": [
+          "iupac naming",
+          "constitutional isomer",
+          "stereoisomer"
+         ],
+         "prerequisites": [
+          "Functional Group Families"
+         ]
+        }
        ]
       },
       {
-       "topic": "Atmosphere and sustainability",
+       "topic": "Organic Reactions and Polymers",
        "concepts": [
-        {"title": "Composition and evolution of the atmosphere", "summary": "The early atmosphere was largely carbon dioxide and water vapour, and photosynthesis changed that.", "keywords": ["atmosphere", "composition", "photosynthesis"]},
-        {"title": "Air pollution and its chemistry", "summary": "Sulfur dioxide and nitrogen oxides form acid rain, and particulates affect health.", "keywords": ["air pollution", "acid rain", "particulate"], "prerequisites": ["Composition and evolution of the atmosphere"]},
-        {"title": "Water treatment and purity", "summary": "Filtration, sedimentation and chlorination remove different classes of contaminant in sequence.", "keywords": ["water treatment", "chlorination", "filtration"], "prerequisites": ["Composition and evolution of the atmosphere"]},
-        {"title": "Life cycle assessment and recycling", "summary": "Comparing products across their whole life cycle is more informative than comparing them at the point of use.", "keywords": ["life cycle", "recycling", "assessment"], "prerequisites": ["Composition and evolution of the atmosphere"]}
+        {
+         "title": "Substitution, Addition and Elimination",
+         "summary": "Alkanes react mainly by substitution, alkenes by addition across the double bond, and alkyl halides by elimination to form an alkene.",
+         "keywords": [
+          "substitution",
+          "addition",
+          "elimination"
+         ]
+        },
+        {
+         "title": "Addition and Condensation Polymers",
+         "summary": "An addition polymer links monomers through their double bonds, while a condensation polymer forms by losing a small molecule such as water at each new link.",
+         "keywords": [
+          "polymer",
+          "addition polymerization",
+          "condensation"
+         ],
+         "prerequisites": [
+          "Substitution, Addition and Elimination"
+         ]
+        }
        ]
       }
+     ],
+     "prerequisites": [
+      "Nuclear Chemistry"
      ]
     }
    ]

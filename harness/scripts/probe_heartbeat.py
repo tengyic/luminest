@@ -58,8 +58,7 @@ def main():
         database.unlink()
     environment = {'HARNESS_ENV': 'test', 'HARNESS_DATA_DIR': str(state),
                    'HARNESS_DATABASE_URL': 'sqlite:///' + str(database), 'HARNESS_AUTO_CREATE': '1',
-                   'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_TUTOR_PROVIDER': 'offline',
-                   'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin',
+                   'HARNESS_SECRET': secrets.token_urlsafe(48), 'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin',
                    'PYTHONDONTWRITEBYTECODE': '1'}
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as listener:
         listener.bind(('127.0.0.1', args.port))

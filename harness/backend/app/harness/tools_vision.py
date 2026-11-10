@@ -24,6 +24,7 @@ from __future__ import annotations
 
 from typing import Any, Mapping
 
+from .. import model_config
 from . import attention, vla
 from .toolbox import ToolContext, ToolResult
 
@@ -57,7 +58,7 @@ def look_at_image(ctx: ToolContext, source: str, question: str = '') -> ToolResu
     digest = vla.digest(raw)
     provenance = {'sha256': digest, 'bytes': len(raw), 'origin': origin,
                   'model': (vla.card_for(settings).display_name if vla.card_for(settings)
-                            else getattr(settings, 'provider_model', '') or '')}
+                            else model_config.effective(settings).provider_model or '')}
     question = (question or '').strip()
     if not question:
         # Attach, do not describe: the loop injects the picture and the model looks itself.

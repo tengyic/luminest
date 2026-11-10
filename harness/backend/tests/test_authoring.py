@@ -66,7 +66,7 @@ def settings(tmp_path, monkeypatch):
     monkeypatch.setenv('HARNESS_DATA_DIR', str(tmp_path))
     monkeypatch.delenv('HARNESS_DATABASE_URL', raising=False)
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
-    monkeypatch.setenv('HARNESS_TUTOR_PROVIDER', 'offline')
+    monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     # Authoring illustrates by default, and a test suite must not reach the network. The
     # illustration tests opt back in through ``media_settings``, which is also the honest
     # shape of the feature: offline is a reported outcome, not a failure.

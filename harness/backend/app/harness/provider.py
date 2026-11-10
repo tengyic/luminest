@@ -1,10 +1,12 @@
-"""A single, small adapter to the configured language model.
+"""A single, small adapter to the *required* language model.
 
-The harness is designed so that the model is an *enhancement*, never a dependency. Every
-call returns ``None`` on any failure - missing configuration, timeout, malformed JSON,
-oversized reply - and every caller has a deterministic path that does not need it. That
-way the offline build produces real content instead of a degraded placeholder, and a
-misconfigured key degrades quality rather than availability.
+The harness requires a configured language model; there is no offline rules-engine mode.
+A call returns ``None`` only on a *transient* failure - timeout, malformed JSON, oversized
+reply, a model that is configured but momentarily unreachable - so a lapsed key degrades a
+single request rather than breaking the product. Callers distinguish "no model configured"
+from "model failed" through :func:`available` and :func:`label`: the former is a declared
+``model-required`` state reported to the user, never a silent fall back to deterministic
+content presented as a product mode.
 
 Learner text is always passed as data inside a delimited block, never as instructions,
 and the model is told so explicitly.
@@ -18,6 +20,7 @@ import time
 from typing import Any, Mapping, Sequence
 
 from .. import content_locale
+from .. import model_config
 
 import httpx
 
@@ -52,20 +55,25 @@ def meter_usage(usage_out, *, started=None, body=None, outcome='ok') -> None:
 
 
 def available(settings) -> bool:
-    return bool(settings and getattr(settings, 'provider', 'offline') != 'offline'
-                and getattr(settings, 'provider_url', ''))
+    cfg = model_config.effective(settings)
+    return bool(cfg.provider and cfg.provider != 'offline' and cfg.provider_url)
 
 
 def label(settings) -> str:
     if not available(settings):
-        return 'grounded-offline'
-    return f"{settings.provider}:{settings.provider_model}"
+        return 'model-required'
+    cfg = model_config.effective(settings)
+    return f"{cfg.provider}:{cfg.provider_model}"
 
 
 def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
          temperature: float = 0.2, usage_out: dict | None = None,
          reasoning: str = 'auto', max_reply_chars: int | None = None) -> str | None:
-    """One completion, or ``None``. Never raises: the caller always has a fallback.
+    """One completion, or ``None``. Never raises: callers keep a declared fallback.
+
+    With no model configured this returns ``None`` immediately and the caller reports
+    ``model-required``. With a configured model that fails, ``None`` means one degraded
+    turn; that is a request-time safety net, not a product mode.
 
     ``usage_out``, when supplied, receives the provider's own token accounting plus
     ``latency_ms``, ``outcome`` and -- the part that matters for diagnosis -- the
@@ -89,16 +97,17 @@ def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
     if not available(settings):
         meter_usage(usage_out, outcome='fallback')
         return None
+    cfg = model_config.effective(settings)
     ceiling = MAX_REPLY_CHARS if max_reply_chars is None else int(max_reply_chars)
     started = time.monotonic()
-    headers = {'Authorization': f'Bearer {settings.provider_key}'} if settings.provider_key else {}
+    headers = {'Authorization': f'Bearer {cfg.provider_key}'} if cfg.provider_key else {}
     finish_reason = ''
     try:
-        with httpx.Client(timeout=settings.provider_timeout, follow_redirects=False,
+        with httpx.Client(timeout=cfg.provider_timeout, follow_redirects=False,
                           trust_env=False) as client:
-            if settings.provider == 'ollama':
-                response = client.post(settings.provider_url.rstrip('/') + '/api/chat', json={
-                    'model': settings.provider_model, 'messages': content_locale.apply(messages), 'stream': False,
+            if cfg.provider == 'ollama':
+                response = client.post(cfg.provider_url.rstrip('/') + '/api/chat', json={
+                    'model': cfg.provider_model, 'messages': content_locale.apply(messages), 'stream': False,
                     'options': {'num_predict': max_tokens, 'temperature': temperature}}, headers=headers)
                 response.raise_for_status()
                 if len(response.content) > ceiling * 4:
@@ -109,11 +118,11 @@ def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
                 finish_reason = str(body.get('done_reason') or '')
                 meter_usage(usage_out, started=started, body=body)
             else:
-                payload = {'model': settings.provider_model, 'messages': content_locale.apply(messages),
+                payload = {'model': cfg.provider_model, 'messages': content_locale.apply(messages),
                            'max_tokens': max_tokens, 'temperature': temperature}
                 if reasoning == 'off':
                     payload['reasoning_effort'] = 'none'
-                response = client.post(settings.provider_url.rstrip('/') + '/chat/completions',
+                response = client.post(cfg.provider_url.rstrip('/') + '/chat/completions',
                                        json=payload, headers=headers)
                 response.raise_for_status()
                 if len(response.content) > ceiling * 4:
@@ -146,7 +155,8 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
     """One completion with native OpenAI function calling, or ``None`` on any failure.
 
     Same never-raise contract as :func:`chat`: a missing configuration, a timeout or a
-    malformed reply yields ``None`` and the caller keeps a deterministic path. The result,
+    malformed reply yields ``None`` and the caller reports the state rather than crashing.
+    The result,
     when there is one, is a dict::
 
         {'content': str | None,
@@ -169,11 +179,12 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
     if not available(settings):
         meter_usage(usage_out, outcome='fallback')
         return None
-    if settings.provider == 'ollama':
+    cfg = model_config.effective(settings)
+    if cfg.provider == 'ollama':
         meter_usage(usage_out, outcome='fallback')
         return None
     started = time.monotonic()
-    headers = {'Authorization': f'Bearer {settings.provider_key}'} if settings.provider_key else {}
+    headers = {'Authorization': f'Bearer {cfg.provider_key}'} if cfg.provider_key else {}
 
     def _spec(tool: Mapping[str, Any]) -> Mapping[str, Any]:
         """Accept either a raw tool spec ``{'name', 'description', 'parameters'}`` or an
@@ -200,10 +211,10 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
         meter_usage(usage_out, started=started, outcome='error')
         return None
     try:
-        with httpx.Client(timeout=settings.provider_timeout, follow_redirects=False,
+        with httpx.Client(timeout=cfg.provider_timeout, follow_redirects=False,
                           trust_env=False) as client:
-            response = client.post(settings.provider_url.rstrip('/') + '/chat/completions', json={
-                'model': settings.provider_model, 'messages': content_locale.apply(messages),
+            response = client.post(cfg.provider_url.rstrip('/') + '/chat/completions', json={
+                'model': cfg.provider_model, 'messages': content_locale.apply(messages),
                 'tools': wire_tools, 'tool_choice': tool_choice,
                 'max_tokens': max_tokens, 'temperature': temperature}, headers=headers)
             response.raise_for_status()

@@ -33,7 +33,12 @@ extension AppStore {
             var request: [String: Any] = ["message": text, "developer_mode": false,
                                           "context": ["concept_id": id, "role": "learner",
                                                       "board_id": "wb-\(id)"],
-                                          "speak": speakEnabled]
+                                          "speak": speakEnabled,
+                                          // Resolved on this Mac, not stored on the account.
+                                          // Both /agent/stream and the /agent/chat fallback
+                                          // take the same body, so one selection covers both.
+                                          "voice": effectiveVoice,
+                                          "tone": effectiveTone]
             if !teacherStyleProfile.isEmpty { request["teacher_profile"] = teacherStyleProfile }
 
             // The streamed turn first: each event arrives as the loop produces it, so the

@@ -1,0 +1,5107 @@
+{
+ "schema": 1,
+ "name": "algebra_1",
+ "title": "Algebra 1",
+ "metadata": {
+  "generated_by": "app.ingest.pipeline",
+  "rules": {
+   "sequence_within": "unit",
+   "keyword_edges": false,
+   "min_stem_length": 6,
+   "keyword_blocklist": [
+    "method",
+    "methods",
+    "problem",
+    "problems",
+    "example",
+    "examples",
+    "introduction",
+    "application",
+    "applications",
+    "comparison",
+    "comparing",
+    "concept",
+    "concepts",
+    "notation",
+    "vocabulary",
+    "review",
+    "practice",
+    "model",
+    "models",
+    "modelling",
+    "modeling",
+    "context",
+    "contexts",
+    "word",
+    "words",
+    "basic",
+    "basics"
+   ],
+   "foundation_fraction": 0.2,
+   "extension_fraction": 0.6,
+   "unit_bridge": true
+  },
+  "course": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+  "licence": "cc0",
+  "source_url": "",
+  "attribution": "Original scope and sequence authored for the Luminfest Learning Harness, dedicated to the public domain under CC0.",
+  "scope": "Structure only: concept titles, unit order and prerequisite intent. No third-party curriculum text is reproduced, and no restricted source is ingested.",
+  "description": "A full Algebra 1 course: algebraic expression language, linear equations and inequalities, linear functions and modelling, statistics and data, systems, functions, exponents and radicals, exponential functions, polynomials and factoring, quadratic functions and quadratic equations.",
+  "id_namespace": {
+   "prefix": "algebra_1_",
+   "reason": "Concept ids are global; the prefix keeps this course disjoint from the shipped courses that share concept titles."
+  },
+  "textbook_alignment": {
+   "spine": "OpenStax Elementary Algebra (1e, CC BY 4.0)",
+   "supplements": [
+    "OpenStax Algebra and Trigonometry (1e, CC BY 4.0)",
+    "OpenStax Introductory Statistics (1e, CC BY 4.0)"
+   ],
+   "link_only_note": "OpenStax Algebra 1 reports CC BY-NC-SA 4.0 and is carried as a link-only study reference: never stored or quoted.",
+   "units": {
+    "Foundations for Algebra 1": [
+     {
+      "book": "elementary-algebra",
+      "page": "1-2-use-the-language-of-algebra"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "1-8-the-real-numbers"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "1-9-properties-of-real-numbers"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "1-10-systems-of-measurement"
+     }
+    ],
+    "Linear Equations": [
+     {
+      "book": "elementary-algebra",
+      "page": "2-1-solve-equations-using-the-subtraction-and-addition-properties-of-equality"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "2-2-solve-equations-using-the-division-and-multiplication-properties-of-equality"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "2-3-solve-equations-with-variables-and-constants-on-both-sides"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "2-4-use-a-general-strategy-to-solve-linear-equations"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "2-5-solve-equations-with-fractions-or-decimals"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "2-6-solve-a-formula-for-a-specific-variable"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "2-7-linear-inequalities-and-absolute-value-inequalities"
+     }
+    ],
+    "Linear Inequalities": [
+     {
+      "book": "elementary-algebra",
+      "page": "2-7-solve-linear-inequalities"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "3-6-solve-applications-with-linear-inequalities"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "2-7-linear-inequalities-and-absolute-value-inequalities"
+     }
+    ],
+    "Linear Functions": [
+     {
+      "book": "elementary-algebra",
+      "page": "4-1-use-the-rectangular-coordinate-system"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "4-2-graph-linear-equations-in-two-variables"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "4-3-graph-with-intercepts"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "4-4-understand-slope-of-a-line"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "4-5-use-the-slope-intercept-form-of-an-equation-of-a-line"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "4-6-find-the-equation-of-a-line"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "13-2-arithmetic-sequences"
+     }
+    ],
+    "Statistics and Data Modeling": [
+     {
+      "book": "introductory-statistics",
+      "page": "2-5-measures-of-the-center-of-the-data"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "2-7-measures-of-the-spread-of-the-data"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "12-2-scatter-plots"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "12-3-the-regression-equation"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "1-2-data-sampling-and-variation-in-data-and-sampling"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "3-4-contingency-tables"
+     },
+     {
+      "book": "introductory-statistics",
+      "page": "3-3-two-basic-rules-of-probability"
+     }
+    ],
+    "Linear Systems": [
+     {
+      "book": "elementary-algebra",
+      "page": "5-1-solve-systems-of-equations-by-graphing"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "5-2-solve-systems-of-equations-by-substitution"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "5-3-solve-systems-of-equations-by-elimination"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "5-4-solve-applications-with-systems-of-equations"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "5-5-solve-mixture-applications-with-systems-of-equations"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "5-6-graphing-systems-of-linear-inequalities"
+     }
+    ],
+    "Functions": [
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "3-1-functions-and-function-notation"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "3-2-domain-and-range"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "13-2-arithmetic-sequences"
+     }
+    ],
+    "Exponents and Radicals": [
+     {
+      "book": "elementary-algebra",
+      "page": "6-2-use-multiplication-properties-of-exponents"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "6-7-integer-exponents-and-scientific-notation"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "1-8-the-real-numbers"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-1-simplify-and-use-square-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-2-simplify-square-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-3-add-and-subtract-square-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-4-multiply-square-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-5-divide-square-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-7-higher-roots"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "9-8-rational-exponents"
+     }
+    ],
+    "Exponential Functions": [
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "6-1-exponential-functions"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "13-3-geometric-sequences"
+     }
+    ],
+    "Polynomials and Factoring": [
+     {
+      "book": "elementary-algebra",
+      "page": "6-1-add-and-subtract-polynomials"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "6-3-multiply-polynomials"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "6-4-special-products"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "6-5-divide-monomials"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "6-6-divide-polynomials"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "7-1-greatest-common-factor-and-factor-by-grouping"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "7-2-factor-quadratic-trinomials-with-leading-coefficient-1"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "7-3-factor-quadratic-trinomials-with-leading-coefficient-other-than-1"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "7-4-factor-special-products"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "7-5-general-strategy-for-factoring-polynomials"
+     }
+    ],
+    "Quadratic Functions": [
+     {
+      "book": "elementary-algebra",
+      "page": "10-5-graphing-quadratic-equations"
+     },
+     {
+      "book": "algebra-and-trigonometry",
+      "page": "5-1-quadratic-functions"
+     }
+    ],
+    "Quadratic Equations": [
+     {
+      "book": "elementary-algebra",
+      "page": "7-6-quadratic-equations"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "10-1-solve-quadratic-equations-using-the-square-root-property"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "10-2-solve-quadratic-equations-by-completing-the-square"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "10-3-solve-quadratic-equations-using-the-quadratic-formula"
+     },
+     {
+      "book": "elementary-algebra",
+      "page": "10-4-solve-applications-modeled-by-quadratic-equations"
+     }
+    ]
+   }
+  }
+ },
+ "taxonomy": {
+  "strands": {
+   "Foundations for Algebra 1": {
+    "Foundations for Algebra 1": [
+     "Algebraic Expression Language",
+     "Evaluating Expressions",
+     "Equivalent Linear Expressions",
+     "Algebra Readiness Arithmetic",
+     "Units and Dimensional Analysis"
+    ]
+   },
+   "Linear Equations": {
+    "Linear Equations": [
+     "One-Step and Two-Step Equations",
+     "Multi-Step Linear Equations",
+     "Literal Equations and Formulas",
+     "Equation Modeling",
+     "Absolute Value Equations"
+    ]
+   },
+   "Linear Inequalities": {
+    "Linear Inequalities": [
+     "Solving One-Variable Inequalities",
+     "Compound Inequalities and Interval Notation",
+     "Inequality Modeling",
+     "Absolute Value Inequalities"
+    ]
+   },
+   "Linear Functions": {
+    "Linear Functions": [
+     "Coordinate Plane and Graph Reading",
+     "Identifying Linear Relationships",
+     "Proportional Relationships and Unit Rates",
+     "Slope and Rate of Change",
+     "Intercepts",
+     "Forms of Linear Equations",
+     "Special Lines and Line Families",
+     "Arithmetic Sequences",
+     "Linear Modeling"
+    ]
+   },
+   "Statistics and Data Modeling": {
+    "Statistics and Data Modeling": [
+     "One-Variable Data",
+     "Two-Way Tables and Categorical Data",
+     "Scatter Plots and Trend Lines",
+     "Residuals, Correlation, and Causation",
+     "Sampling, Bias, and Measurement Precision",
+     "Probability"
+    ]
+   },
+   "Linear Systems": {
+    "Linear Systems": [
+     "Systems by Graphing",
+     "Solving by Substitution",
+     "Solving by Elimination",
+     "Special Systems",
+     "System Modeling",
+     "Two-Variable Linear Inequalities",
+     "Systems of Inequalities and Feasible Regions"
+    ]
+   },
+   "Functions": {
+    "Functions": [
+     "Relations and Functions",
+     "Function Notation",
+     "Domain and Range",
+     "Interpreting Function Graphs",
+     "Sequences and Recursive Rules",
+     "Piecewise Functions",
+     "Absolute Value Functions",
+     "Inverse Functions"
+    ]
+   },
+   "Exponents and Radicals": {
+    "Exponents and Radicals": [
+     "Zero and Negative Exponents",
+     "Exponent Rules",
+     "Scientific Notation",
+     "Square and Cube Roots",
+     "Rational and Irrational Numbers",
+     "Simplifying Radicals",
+     "Rational Exponents"
+    ]
+   },
+   "Exponential Functions": {
+    "Exponential Functions": [
+     "Exponential Functions and Graphs",
+     "Exponential Growth and Decay",
+     "Geometric Sequences",
+     "Exponential Modeling",
+     "Simple Exponential Equations",
+     "Linear versus Exponential Change"
+    ]
+   },
+   "Polynomials and Factoring": {
+    "Polynomials and Factoring": [
+     "Polynomial Structure",
+     "Polynomial Operations",
+     "Special Products",
+     "Common Factors and Grouping",
+     "Factoring Quadratic Trinomials",
+     "Special Factoring Patterns",
+     "Factoring Strategy"
+    ]
+   },
+   "Quadratic Functions": {
+    "Quadratic Functions": [
+     "Identifying Quadratic Relationships",
+     "Parabolas and Their Features",
+     "Quadratic Forms and Graphing",
+     "Quadratic Transformations",
+     "Quadratic Modeling"
+    ]
+   },
+   "Quadratic Equations": {
+    "Quadratic Equations": [
+     "Roots, Zeros, and Graphical Solutions",
+     "Solving by Factoring",
+     "Solving with Square Roots",
+     "Completing the Square",
+     "Quadratic Formula and Discriminant",
+     "Quadratic Modeling and Synthesis"
+    ]
+   }
+  },
+  "order": [
+   {
+    "strand": "Foundations for Algebra 1",
+    "units": [
+     "Foundations for Algebra 1"
+    ]
+   },
+   {
+    "strand": "Linear Equations",
+    "units": [
+     "Linear Equations"
+    ]
+   },
+   {
+    "strand": "Linear Inequalities",
+    "units": [
+     "Linear Inequalities"
+    ]
+   },
+   {
+    "strand": "Linear Functions",
+    "units": [
+     "Linear Functions"
+    ]
+   },
+   {
+    "strand": "Statistics and Data Modeling",
+    "units": [
+     "Statistics and Data Modeling"
+    ]
+   },
+   {
+    "strand": "Linear Systems",
+    "units": [
+     "Linear Systems"
+    ]
+   },
+   {
+    "strand": "Functions",
+    "units": [
+     "Functions"
+    ]
+   },
+   {
+    "strand": "Exponents and Radicals",
+    "units": [
+     "Exponents and Radicals"
+    ]
+   },
+   {
+    "strand": "Exponential Functions",
+    "units": [
+     "Exponential Functions"
+    ]
+   },
+   {
+    "strand": "Polynomials and Factoring",
+    "units": [
+     "Polynomials and Factoring"
+    ]
+   },
+   {
+    "strand": "Quadratic Functions",
+    "units": [
+     "Quadratic Functions"
+    ]
+   },
+   {
+    "strand": "Quadratic Equations",
+    "units": [
+     "Quadratic Equations"
+    ]
+   }
+  ]
+ },
+ "concepts": [
+  {
+   "id": "algebra_1_a_general_order",
+   "title": "A General Order",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Factoring Strategy",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_sum_and_difference_of_cubes"
+   ],
+   "keywords": [
+    "check",
+    "factoring strategy",
+    "pattern"
+   ],
+   "summary": "Take out the greatest common factor first, then count the terms to choose a pattern, and always check by multiplying back.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 137
+   }
+  },
+  {
+   "id": "algebra_1_absolute_value_as_distance",
+   "title": "Absolute Value as Distance",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Absolute Value Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_checking_a_model_against_the_context"
+   ],
+   "keywords": [
+    "absolute value",
+    "distance",
+    "two cases"
+   ],
+   "summary": "The absolute value of x is its distance from zero, so |x| = a with a > 0 has two solutions, x = a and x = -a.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 26
+   }
+  },
+  {
+   "id": "algebra_1_adding_and_subtracting_polynomials",
+   "title": "Adding and Subtracting Polynomials",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Polynomial Operations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_classifying_polynomials"
+   ],
+   "keywords": [
+    "add polynomials",
+    "like terms",
+    "subtract polynomials"
+   ],
+   "summary": "Addition combines like terms, and subtraction distributes the minus sign to every term of the polynomial being subtracted.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 126
+   }
+  },
+  {
+   "id": "algebra_1_additive_versus_multiplicative_change",
+   "title": "Additive versus Multiplicative Change",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Linear versus Exponential Change",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_estimating_a_solution"
+   ],
+   "keywords": [
+    "compare",
+    "exponential",
+    "linear"
+   ],
+   "summary": "Linear change adds a constant amount per step while exponential change multiplies by a constant factor, so their tables differ immediately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 122
+   }
+  },
+  {
+   "id": "algebra_1_and_versus_or",
+   "title": "And versus Or",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Compound Inequalities and Interval Notation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_multi_step_inequalities"
+   ],
+   "keywords": [
+    "compound inequality",
+    "conjunction",
+    "disjunction"
+   ],
+   "summary": "A conjunction requires both conditions at once, while a disjunction requires at least one, which changes the shape of the solution set.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 31
+   }
+  },
+  {
+   "id": "algebra_1_arithmetic_explicit_rule",
+   "title": "Arithmetic Explicit Rule",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Arithmetic Sequences",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_common_difference"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "arithmetic sequence",
+    "explicit rule",
+    "nth term"
+   ],
+   "summary": "The rule a_n = a_1 + (n - 1)d gives any term directly from its position, and the slope of the sequence is d.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 55
+   }
+  },
+  {
+   "id": "algebra_1_association",
+   "title": "Association",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Scatter Plots and Trend Lines",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_conditional_relative_frequency"
+   ],
+   "keywords": [
+    "association",
+    "scatter plot",
+    "trend"
+   ],
+   "summary": "A scatter plot shows the direction, strength and form of an association between two quantitative variables.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 62
+   }
+  },
+  {
+   "id": "algebra_1_average_rate_of_change",
+   "title": "Average Rate of Change",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Interpreting Function Graphs",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_key_features"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "average rate of change",
+    "interval",
+    "secant"
+   ],
+   "summary": "The average rate of change over an interval is the change in output divided by the change in input, which is the slope of the secant line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 89
+   }
+  },
+  {
+   "id": "algebra_1_bias_and_precision",
+   "title": "Bias and Precision",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Sampling, Bias, and Measurement Precision",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_random_sampling"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bias",
+    "measurement error",
+    "precision"
+   ],
+   "summary": "Question wording, sampling method and measurement error each distort a conclusion in a different way, so they are diagnosed separately.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 67
+   }
+  },
+  {
+   "id": "algebra_1_building_a_linear_model",
+   "title": "Building a Linear Model",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Linear Modeling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_arithmetic_explicit_rule"
+   ],
+   "keywords": [
+    "initial value",
+    "linear model",
+    "rate"
+   ],
+   "summary": "A constant rate together with a starting value gives a model of the form y = mx + b, with units on both the rate and the start.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 56
+   }
+  },
+  {
+   "id": "algebra_1_building_a_quadratic_model",
+   "title": "Building a Quadratic Model",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_shifts_stretches_and_reflections"
+   ],
+   "keywords": [
+    "context",
+    "quadratic model",
+    "second difference"
+   ],
+   "summary": "A constant second difference, or a context with a maximum or minimum, points to a quadratic rather than a linear model.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 147
+   }
+  },
+  {
+   "id": "algebra_1_building_an_exponential_model",
+   "title": "Building an Exponential Model",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_geometric_explicit_rule"
+   ],
+   "keywords": [
+    "exponential model",
+    "initial value",
+    "percent change"
+   ],
+   "summary": "An initial value together with a constant percent change gives a model of the form f(t) = a b^t, with b determined by the change per period.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 118
+   }
+  },
+  {
+   "id": "algebra_1_center_and_spread",
+   "title": "Center and Spread",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "One-Variable Data",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_interpreting_and_evaluating_a_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "mean",
+    "median",
+    "standard deviation"
+   ],
+   "summary": "The mean and median describe the centre of a distribution, while the range, interquartile range and standard deviation describe its spread.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 58
+   }
+  },
+  {
+   "id": "algebra_1_checking_a_model_against_the_context",
+   "title": "Checking a Model Against the Context",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Equation Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_translating_a_context_into_an_equation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check",
+    "model",
+    "reasonable answer"
+   ],
+   "summary": "A solution is accepted only when it satisfies the equation and makes sense in the situation, including its sign and size.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 25
+   }
+  },
+  {
+   "id": "algebra_1_checking_a_system_solution",
+   "title": "Checking a System Solution",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "System Modeling",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_two_constraints"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check",
+    "substitute",
+    "verify"
+   ],
+   "summary": "A proposed solution is verified by substituting it into both original equations, because a graphing error can imitate a solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 77
+   }
+  },
+  {
+   "id": "algebra_1_choosing_a_method",
+   "title": "Choosing a Method",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Quadratic Modeling and Synthesis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_discriminant"
+   ],
+   "keywords": [
+    "factoring",
+    "method choice",
+    "quadratic formula"
+   ],
+   "summary": "Factoring is fastest when the factors are clean, square roots when there is no linear term, and the formula always works.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 156
+   }
+  },
+  {
+   "id": "algebra_1_classifying_polynomials",
+   "title": "Classifying Polynomials",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Polynomial Structure",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_degree_and_leading_coefficient"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "binomial",
+    "monomial",
+    "trinomial"
+   ],
+   "summary": "Polynomials are named by degree and by number of terms, which tells you which operations and patterns apply.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 125
+   }
+  },
+  {
+   "id": "algebra_1_combining_like_terms",
+   "title": "Combining Like Terms",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Equivalent Linear Expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_negative_and_rational_inputs"
+   ],
+   "keywords": [
+    "coefficient",
+    "like terms",
+    "simplify"
+   ],
+   "summary": "Like terms carry identical variable factors, so only their coefficients add and the variable part is unchanged.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 6
+   }
+  },
+  {
+   "id": "algebra_1_common_difference",
+   "title": "Common Difference",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Arithmetic Sequences",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_perpendicular_lines"
+   ],
+   "keywords": [
+    "arithmetic sequence",
+    "common difference",
+    "linear"
+   ],
+   "summary": "An arithmetic sequence adds the same difference at each step, so it is a linear function whose domain is the term positions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 54
+   }
+  },
+  {
+   "id": "algebra_1_common_ratio",
+   "title": "Common Ratio",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Geometric Sequences",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_compound_interest"
+   ],
+   "keywords": [
+    "common ratio",
+    "exponential",
+    "geometric sequence"
+   ],
+   "summary": "A geometric sequence multiplies by the same ratio at each step, which is exactly why its terms follow an exponential rule.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 116
+   }
+  },
+  {
+   "id": "algebra_1_comparing_long_run_behaviour",
+   "title": "Comparing Long-Run Behaviour",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Linear versus Exponential Change",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_additive_versus_multiplicative_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compare models",
+    "growth",
+    "long run"
+   ],
+   "summary": "Over a long enough interval exponential growth overtakes any linear growth, which is why the two models answer different questions.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 123
+   }
+  },
+  {
+   "id": "algebra_1_compound_interest",
+   "title": "Compound Interest",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Growth and Decay",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_growth_and_decay_factors"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compound interest",
+    "growth factor",
+    "periods"
+   ],
+   "summary": "Compounding applies the growth factor repeatedly, so more compounding periods raise the effective rate without changing the nominal one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 115
+   }
+  },
+  {
+   "id": "algebra_1_computing_with_scientific_notation",
+   "title": "Computing with Scientific Notation",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Scientific Notation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_writing_scientific_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "divide",
+    "multiply",
+    "scientific notation"
+   ],
+   "summary": "Multiplying or dividing separates the coefficients from the powers of ten, and the result is renormalised into scientific form.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 103
+   }
+  },
+  {
+   "id": "algebra_1_conditional_relative_frequency",
+   "title": "Conditional Relative Frequency",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Two-Way Tables and Categorical Data",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_joint_and_marginal_frequencies"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compare groups",
+    "conditional frequency",
+    "relative frequency"
+   ],
+   "summary": "Dividing by a row or column total gives a conditional relative frequency, which compares groups of different sizes fairly.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 61
+   }
+  },
+  {
+   "id": "algebra_1_constant_rate_of_change",
+   "title": "Constant Rate of Change",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Identifying Linear Relationships",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_reading_a_graph"
+   ],
+   "keywords": [
+    "constant rate",
+    "difference",
+    "linear"
+   ],
+   "summary": "A relationship is linear exactly when equal changes in the input produce equal changes in the output.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 39
+   }
+  },
+  {
+   "id": "algebra_1_constant_second_differences",
+   "title": "Constant Second Differences",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Identifying Quadratic Relationships",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_factoring_completely"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "quadratic",
+    "second difference",
+    "table"
+   ],
+   "summary": "A table of values is quadratic exactly when the second differences are constant, just as a linear table has constant first differences.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 139
+   }
+  },
+  {
+   "id": "algebra_1_constraints_as_inequalities",
+   "title": "Constraints as Inequalities",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Inequality Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_interval_notation"
+   ],
+   "keywords": [
+    "at least",
+    "at most",
+    "constraint"
+   ],
+   "summary": "Phrases such as at most, at least and no more than set a boundary rather than an exact value, which is what makes the model an inequality.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 33
+   }
+  },
+  {
+   "id": "algebra_1_converting_between_forms",
+   "title": "Converting Between Forms",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Forms of Linear Equations",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_point_slope_form"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "convert",
+    "equivalent",
+    "rearrange"
+   ],
+   "summary": "Algebraic rearrangement moves one form into another without changing the line, so the form is chosen for what it reveals.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 51
+   }
+  },
+  {
+   "id": "algebra_1_correlation_and_causation",
+   "title": "Correlation and Causation",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Residuals, Correlation, and Causation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_residuals"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "causation",
+    "confounding",
+    "correlation"
+   ],
+   "summary": "Correlation measures only the strength of a linear association, so a strong correlation by itself never establishes a cause.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 65
+   }
+  },
+  {
+   "id": "algebra_1_cube_roots",
+   "title": "Cube Roots",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Square and Cube Roots",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_principal_square_root"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "cube root",
+    "negative",
+    "radical"
+   ],
+   "summary": "A cube root of a number is the value whose cube is that number, and unlike a square root it exists for negative inputs too.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 105
+   }
+  },
+  {
+   "id": "algebra_1_degree_and_leading_coefficient",
+   "title": "Degree and Leading Coefficient",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Polynomial Structure",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_comparing_long_run_behaviour"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "degree",
+    "leading coefficient",
+    "polynomial"
+   ],
+   "summary": "The degree of a polynomial is its highest exponent, and the leading coefficient belongs to that highest-degree term.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 124
+   }
+  },
+  {
+   "id": "algebra_1_dimensional_analysis",
+   "title": "Dimensional Analysis",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Units and Dimensional Analysis",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_units_and_unit_conversion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dimensional analysis",
+    "rate",
+    "units"
+   ],
+   "summary": "Carrying units through a computation shows whether the result is the quantity the question asked for, and cancels units like factors.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 13
+   }
+  },
+  {
+   "id": "algebra_1_direct_proportion",
+   "title": "Direct Proportion",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Proportional Relationships and Unit Rates",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_linear_versus_nonlinear"
+   ],
+   "keywords": [
+    "origin",
+    "proportional",
+    "unit rate"
+   ],
+   "summary": "A relationship of the form y = kx passes through the origin, and k is both the unit rate and the constant ratio y/x.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 41
+   }
+  },
+  {
+   "id": "algebra_1_direction_of_opening",
+   "title": "Direction of Opening",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Parabolas and Their Features",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_vertex_and_axis_of_symmetry"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "leading coefficient",
+    "maximum",
+    "opening"
+   ],
+   "summary": "The sign of the leading coefficient decides whether the parabola opens upward with a minimum or downward with a maximum.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 142
+   }
+  },
+  {
+   "id": "algebra_1_displays_and_shape",
+   "title": "Displays and Shape",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "One-Variable Data",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_center_and_spread"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "box plot",
+    "histogram",
+    "skew"
+   ],
+   "summary": "Dot plots, histograms and box plots expose shape, including skew and outliers, which a single summary number can hide.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 59
+   }
+  },
+  {
+   "id": "algebra_1_distributing_before_solving",
+   "title": "Distributing Before Solving",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Multi-Step Linear Equations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_two_step_equations"
+   ],
+   "keywords": [
+    "distribute",
+    "multi-step",
+    "simplify first"
+   ],
+   "summary": "Clearing parentheses first turns a multi-step equation into the two-step form already solved, and avoids dividing by an expression.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 18
+   }
+  },
+  {
+   "id": "algebra_1_dividing_by_a_monomial",
+   "title": "Dividing by a Monomial",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Polynomial Operations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_multiplying_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "divide",
+    "monomial",
+    "quotient"
+   ],
+   "summary": "Each term of the polynomial is divided by the monomial separately, because a sum divided by a term distributes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 128
+   }
+  },
+  {
+   "id": "algebra_1_domain",
+   "title": "Domain",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Domain and Range",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_evaluating_and_interpreting"
+   ],
+   "keywords": [
+    "domain",
+    "input",
+    "restriction"
+   ],
+   "summary": "The domain is the set of allowed inputs, restricted by the context, by division by zero and by even roots of negative numbers.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 86
+   }
+  },
+  {
+   "id": "algebra_1_doubling_time_and_half_life",
+   "title": "Doubling Time and Half-Life",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_building_an_exponential_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "doubling time",
+    "half-life",
+    "model"
+   ],
+   "summary": "A fixed doubling time or half-life determines the base and the exponent, so the model can be written from that single time.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 119
+   }
+  },
+  {
+   "id": "algebra_1_estimating_a_solution",
+   "title": "Estimating a Solution",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Simple Exponential Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_solving_by_matching_bases"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "estimate",
+    "graph",
+    "solve"
+   ],
+   "summary": "When the bases cannot be matched, a solution is estimated from a graph or a table and checked by substitution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 121
+   }
+  },
+  {
+   "id": "algebra_1_evaluating_and_graphing",
+   "title": "Evaluating and Graphing",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Piecewise Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_piecewise_notation"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "branch",
+    "evaluate",
+    "graph"
+   ],
+   "summary": "Evaluation selects the branch whose interval contains the input, and the graph draws each branch only on its own interval.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 93
+   }
+  },
+  {
+   "id": "algebra_1_evaluating_and_interpreting",
+   "title": "Evaluating and Interpreting",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Function Notation",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_reading_f_x"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evaluate",
+    "function notation",
+    "interpret"
+   ],
+   "summary": "Evaluating substitutes a value into the rule, while interpreting states what the resulting output means in the situation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 85
+   }
+  },
+  {
+   "id": "algebra_1_factored_form",
+   "title": "Factored Form",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Forms and Graphing",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_standard_form_of_a_parabola"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factored form",
+    "symmetry",
+    "x-intercept"
+   ],
+   "summary": "Factored form displays the x-intercepts directly, and their midpoint gives the axis of symmetry.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 144
+   }
+  },
+  {
+   "id": "algebra_1_factoring_by_grouping",
+   "title": "Factoring by Grouping",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Common Factors and Grouping",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_greatest_common_factor"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "common binomial",
+    "factor",
+    "grouping"
+   ],
+   "summary": "Grouping terms in pairs with a shared factor exposes a common binomial factor, which then factors out of the whole expression.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 132
+   }
+  },
+  {
+   "id": "algebra_1_factoring_completely",
+   "title": "Factoring Completely",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Factoring Strategy",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_a_general_order"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "check",
+    "factor completely",
+    "repeat"
+   ],
+   "summary": "A factorisation is complete only when no remaining factor can be factored further, which sometimes requires two passes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 138
+   }
+  },
+  {
+   "id": "algebra_1_feasible_region",
+   "title": "Feasible Region",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Systems of Inequalities and Feasible Regions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_overlapping_regions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "constraint",
+    "feasible region",
+    "vertex"
+   ],
+   "summary": "In a constraint model the overlap is the set of allowed choices, and its vertices are where a linear objective reaches its extremes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 81
+   }
+  },
+  {
+   "id": "algebra_1_finding_an_inverse",
+   "title": "Finding an Inverse",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_inverse_relationship"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inverse function",
+    "one-to-one",
+    "swap"
+   ],
+   "summary": "Swap x and y in the equation and solve for y; the result is a function only when the original passes the horizontal line test.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 97
+   }
+  },
+  {
+   "id": "algebra_1_finding_intercepts",
+   "title": "Finding Intercepts",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Intercepts",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_horizontal_and_vertical_lines"
+   ],
+   "keywords": [
+    "solve",
+    "x-intercept",
+    "y-intercept"
+   ],
+   "summary": "An intercept is where a graph meets an axis: set the other variable to zero and solve for the remaining one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 46
+   }
+  },
+  {
+   "id": "algebra_1_formulas_in_context",
+   "title": "Formulas in Context",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Literal Equations and Formulas",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_rearranging_a_formula"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "context",
+    "formula",
+    "solve for a variable"
+   ],
+   "summary": "A rearranged formula answers a different question about the same relationship, such as solving d = rt for the time t.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 23
+   }
+  },
+  {
+   "id": "algebra_1_fraction_and_decimal_fluency",
+   "title": "Fraction and Decimal Fluency",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebra Readiness Arithmetic",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_operations_with_signed_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "decimals",
+    "fractions",
+    "reciprocal"
+   ],
+   "summary": "Common denominators, reciprocals and decimal place value are the arithmetic moves every later algebraic step still depends on.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 10
+   }
+  },
+  {
+   "id": "algebra_1_fractional_exponents",
+   "title": "Fractional Exponents",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Rational Exponents",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_rationalising_a_denominator"
+   ],
+   "keywords": [
+    "power",
+    "rational exponent",
+    "root"
+   ],
+   "summary": "A rational exponent combines a power and a root, so a raised to m/n is the nth root of a to the m.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 110
+   }
+  },
+  {
+   "id": "algebra_1_fractions_and_decimals_in_equations",
+   "title": "Fractions and Decimals in Equations",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Multi-Step Linear Equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_variables_on_both_sides"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "clear fractions",
+    "decimals",
+    "least common denominator"
+   ],
+   "summary": "Multiplying by the least common denominator or by a power of ten clears fractions and decimals without changing the solution set.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 20
+   }
+  },
+  {
+   "id": "algebra_1_geometric_explicit_rule",
+   "title": "Geometric Explicit Rule",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Geometric Sequences",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_common_ratio"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "explicit rule",
+    "geometric sequence",
+    "nth term"
+   ],
+   "summary": "The rule a_n = a_1 r^(n-1) gives any term from its position, and r is the base of the matching exponential function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 117
+   }
+  },
+  {
+   "id": "algebra_1_graph_features",
+   "title": "Graph Features",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Functions and Graphs",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_the_exponential_growth_pattern"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "asymptote",
+    "graph",
+    "intercept"
+   ],
+   "summary": "An exponential graph has a horizontal asymptote, passes through (0, a), and grows or decays without ever crossing the asymptote.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 113
+   }
+  },
+  {
+   "id": "algebra_1_grouping_and_order_of_operations",
+   "title": "Grouping and Order of Operations",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebra Readiness Arithmetic",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_fraction_and_decimal_fluency"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "grouping",
+    "order of operations",
+    "precedence"
+   ],
+   "summary": "Exponents first, then multiplication and division left to right, then addition and subtraction, with grouping symbols overriding the order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 11
+   }
+  },
+  {
+   "id": "algebra_1_growth_and_decay_factors",
+   "title": "Growth and Decay Factors",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Growth and Decay",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_graph_features"
+   ],
+   "keywords": [
+    "decay",
+    "growth",
+    "percent change"
+   ],
+   "summary": "A base greater than one grows, a base between zero and one decays, and the percent change is the base minus one.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 114
+   }
+  },
+  {
+   "id": "algebra_1_half_planes",
+   "title": "Half-Planes",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Two-Variable Linear Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_checking_a_system_solution"
+   ],
+   "keywords": [
+    "boundary",
+    "half-plane",
+    "inequality"
+   ],
+   "summary": "A linear inequality in two variables has a boundary line and one of the two half-planes it divides the coordinate plane into.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 78
+   }
+  },
+  {
+   "id": "algebra_1_horizontal_and_vertical_lines",
+   "title": "Horizontal and Vertical Lines",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Slope and Rate of Change",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_slope_in_context"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "horizontal line",
+    "undefined slope",
+    "vertical line"
+   ],
+   "summary": "A horizontal line has slope zero because its output never changes, and a vertical line has undefined slope because its input never changes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 45
+   }
+  },
+  {
+   "id": "algebra_1_identities_and_contradictions",
+   "title": "Identities and Contradictions",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Multi-Step Linear Equations",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_fractions_and_decimals_in_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "all real numbers",
+    "identity",
+    "no solution"
+   ],
+   "summary": "An equation that reduces to a true statement holds for every value, while one that reduces to a false statement has no solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 21
+   }
+  },
+  {
+   "id": "algebra_1_infinitely_many_solutions",
+   "title": "Infinitely Many Solutions",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Special Systems",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_no_solution"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coincident",
+    "dependent",
+    "infinite solutions"
+   ],
+   "summary": "Coincident lines are the same equation written twice, so every point on the line solves the system.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 75
+   }
+  },
+  {
+   "id": "algebra_1_intercepts_in_context",
+   "title": "Intercepts in Context",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Intercepts",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_finding_intercepts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "context",
+    "intercept",
+    "interpret"
+   ],
+   "summary": "In a model an intercept usually marks a starting amount, a break-even point or a time when a quantity reaches zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 47
+   }
+  },
+  {
+   "id": "algebra_1_interpreting_a_boundary",
+   "title": "Interpreting a Boundary",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Inequality Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_constraints_as_inequalities"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "boundary",
+    "inclusive",
+    "interpret"
+   ],
+   "summary": "The solution set states every allowed value, and a boundary value is tested separately because the context may or may not include it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 34
+   }
+  },
+  {
+   "id": "algebra_1_interpreting_a_unit_rate",
+   "title": "Interpreting a Unit Rate",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Proportional Relationships and Unit Rates",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_direct_proportion"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "ratio",
+    "scale",
+    "unit rate"
+   ],
+   "summary": "A unit rate restates a ratio as per one, which makes comparisons and scaling direct and keeps the units attached.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 42
+   }
+  },
+  {
+   "id": "algebra_1_interpreting_and_evaluating_a_model",
+   "title": "Interpreting and Evaluating a Model",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Linear Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_building_a_linear_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "evaluate",
+    "interpret",
+    "predict"
+   ],
+   "summary": "A model is used by substituting an input for a prediction, and every output is judged against the range the context allows.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 57
+   }
+  },
+  {
+   "id": "algebra_1_interpreting_vertex_and_intercepts",
+   "title": "Interpreting Vertex and Intercepts",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_building_a_quadratic_model"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intercept",
+    "interpret",
+    "vertex"
+   ],
+   "summary": "In a model the vertex is the optimum value and the intercepts are where the modelled quantity is zero.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 148
+   }
+  },
+  {
+   "id": "algebra_1_intersection_as_solution",
+   "title": "Intersection as Solution",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Systems by Graphing",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_two_way_tables_and_probability"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graphing",
+    "intersection",
+    "system"
+   ],
+   "summary": "A solution of a system is an ordered pair that satisfies both equations at once, which is exactly a point where the two graphs meet.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 71
+   }
+  },
+  {
+   "id": "algebra_1_interval_notation",
+   "title": "Interval Notation",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Compound Inequalities and Interval Notation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_and_versus_or"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "bracket",
+    "interval notation",
+    "parenthesis"
+   ],
+   "summary": "A parenthesis excludes an endpoint and a bracket includes it, and an interval is always read from left to right.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 32
+   }
+  },
+  {
+   "id": "algebra_1_inverse_operations",
+   "title": "Inverse Operations",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "One-Step and Two-Step Equations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_precision_and_reasonable_answers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "balance",
+    "inverse operation",
+    "properties of equality"
+   ],
+   "summary": "An equation stays true when the same operation is applied to both sides, so the inverse operation isolates the variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 15
+   }
+  },
+  {
+   "id": "algebra_1_irrational_numbers",
+   "title": "Irrational Numbers",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Rational and Irrational Numbers",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_rational_numbers"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "irrational number",
+    "non-repeating",
+    "real number"
+   ],
+   "summary": "An irrational number cannot be written as a ratio of integers, so its decimal neither terminates nor repeats.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 107
+   }
+  },
+  {
+   "id": "algebra_1_joint_and_marginal_frequencies",
+   "title": "Joint and Marginal Frequencies",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Two-Way Tables and Categorical Data",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_displays_and_shape"
+   ],
+   "keywords": [
+    "joint frequency",
+    "marginal frequency",
+    "two-way table"
+   ],
+   "summary": "A two-way table counts pairs of categories, and its margins give the totals for each variable on its own.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 60
+   }
+  },
+  {
+   "id": "algebra_1_key_features",
+   "title": "Key Features",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Interpreting Function Graphs",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_range"
+   ],
+   "keywords": [
+    "increasing",
+    "intercept",
+    "maximum"
+   ],
+   "summary": "Intercepts, intervals of increase and decrease, and local maxima and minima summarise what a function graph is doing.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 88
+   }
+  },
+  {
+   "id": "algebra_1_leading_coefficient_one",
+   "title": "Leading Coefficient One",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Factoring Quadratic Trinomials",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_factoring_by_grouping"
+   ],
+   "keywords": [
+    "factor",
+    "sum and product",
+    "trinomial"
+   ],
+   "summary": "For a trinomial with leading coefficient one, two numbers whose product is the constant and whose sum is the middle coefficient give the factors.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 133
+   }
+  },
+  {
+   "id": "algebra_1_leading_coefficient_other_than_one",
+   "title": "Leading Coefficient Other Than One",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Factoring Quadratic Trinomials",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_leading_coefficient_one"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "factor",
+    "grouping",
+    "split middle term"
+   ],
+   "summary": "Splitting the middle term into two terms whose product is the product of the end coefficients allows factoring by grouping.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 134
+   }
+  },
+  {
+   "id": "algebra_1_less_than_and_greater_than_forms",
+   "title": "Less Than and Greater Than Forms",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Absolute Value Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_interpreting_a_boundary"
+   ],
+   "keywords": [
+    "absolute value inequality",
+    "interval",
+    "two cases"
+   ],
+   "summary": "An inequality of the form |x| < a gives one interval between -a and a, while |x| > a gives two rays pointing outward.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 35
+   }
+  },
+  {
+   "id": "algebra_1_line_of_best_fit",
+   "title": "Line of Best Fit",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Scatter Plots and Trend Lines",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_association"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "line of best fit",
+    "predict",
+    "trend line"
+   ],
+   "summary": "A trend line summarises an association and supports prediction inside the observed range, not far outside it.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 63
+   }
+  },
+  {
+   "id": "algebra_1_linear_versus_nonlinear",
+   "title": "Linear versus Nonlinear",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Identifying Linear Relationships",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_constant_rate_of_change"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compare",
+    "curve",
+    "nonlinear"
+   ],
+   "summary": "A table whose successive differences change, or a graph that curves, is not linear no matter how straight a short segment looks.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 40
+   }
+  },
+  {
+   "id": "algebra_1_making_a_perfect_square",
+   "title": "Making a Perfect Square",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Completing the Square",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_square_root_property"
+   ],
+   "keywords": [
+    "complete the square",
+    "perfect square",
+    "solve"
+   ],
+   "summary": "Adding the square of half the linear coefficient turns a quadratic into a perfect square, which then yields to the square root property.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 153
+   }
+  },
+  {
+   "id": "algebra_1_modelling_with_quadratics",
+   "title": "Modelling with Quadratics",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Quadratic Modeling and Synthesis",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_choosing_a_method"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "application",
+    "interpret",
+    "quadratic model"
+   ],
+   "summary": "A context about maximum height, area or an optimum yields a quadratic equation whose solutions are interpreted and checked in the situation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 157
+   }
+  },
+  {
+   "id": "algebra_1_moving_between_forms",
+   "title": "Moving Between Forms",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Rational Exponents",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_fractional_exponents"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equivalence",
+    "exponent form",
+    "radical form"
+   ],
+   "summary": "Radical form and rational-exponent form describe the same quantity, and each one makes a different simplification visible.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 111
+   }
+  },
+  {
+   "id": "algebra_1_multi_step_inequalities",
+   "title": "Multi-Step Inequalities",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Solving One-Variable Inequalities",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_reversing_the_symbol"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "endpoint",
+    "inequality",
+    "multi-step"
+   ],
+   "summary": "The solving steps match linear equations; only the direction rule for negative factors differs, and endpoints are open or closed by symbol.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 30
+   }
+  },
+  {
+   "id": "algebra_1_multiplying_polynomials",
+   "title": "Multiplying Polynomials",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Polynomial Operations",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_adding_and_subtracting_polynomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distribute",
+    "multiply",
+    "polynomial"
+   ],
+   "summary": "Every term of one factor multiplies every term of the other, and like terms are combined afterwards.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 127
+   }
+  },
+  {
+   "id": "algebra_1_negative_and_rational_inputs",
+   "title": "Negative and Rational Inputs",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Evaluating Expressions",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_substitution_and_order_of_operations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative",
+    "parentheses",
+    "substitution"
+   ],
+   "summary": "Parentheses around a substituted negative protect its sign, which is why (-3)^2 and -3^2 are different quantities.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 5
+   }
+  },
+  {
+   "id": "algebra_1_negative_exponents",
+   "title": "Negative Exponents",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Zero and Negative Exponents",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_zero_exponent"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative exponent",
+    "power",
+    "reciprocal"
+   ],
+   "summary": "A negative exponent means the reciprocal of the positive power, so a negative exponent never makes the value negative.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 99
+   }
+  },
+  {
+   "id": "algebra_1_no_solution",
+   "title": "No Solution",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Special Systems",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_elimination_method"
+   ],
+   "keywords": [
+    "inconsistent",
+    "no solution",
+    "parallel"
+   ],
+   "summary": "Parallel lines never intersect, so a system describing them is inconsistent and has no solution.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 74
+   }
+  },
+  {
+   "id": "algebra_1_one_step_equations",
+   "title": "One-Step Equations",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "One-Step and Two-Step Equations",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_inverse_operations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "isolate",
+    "one-step",
+    "solve"
+   ],
+   "summary": "A single inverse operation undoes the one operation attached to the variable, whether it is addition, subtraction, multiplication or division.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 16
+   }
+  },
+  {
+   "id": "algebra_1_operations_with_signed_numbers",
+   "title": "Operations with Signed Numbers",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebra Readiness Arithmetic",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_testing_equivalence"
+   ],
+   "keywords": [
+    "arithmetic",
+    "integers",
+    "sign rules"
+   ],
+   "summary": "Adding, subtracting, multiplying and dividing signed numbers follows sign rules that keep arithmetic consistent with the number line.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 9
+   }
+  },
+  {
+   "id": "algebra_1_ordered_pairs_and_quadrants",
+   "title": "Ordered Pairs and Quadrants",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Coordinate Plane and Graph Reading",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_solving_and_graphing"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coordinate plane",
+    "ordered pair",
+    "quadrant"
+   ],
+   "summary": "A point (x, y) is located by a horizontal and a vertical displacement, and the axes divide the plane into four quadrants.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 37
+   }
+  },
+  {
+   "id": "algebra_1_overlapping_regions",
+   "title": "Overlapping Regions",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Systems of Inequalities and Feasible Regions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_testing_a_point"
+   ],
+   "keywords": [
+    "overlap",
+    "solution region",
+    "system of inequalities"
+   ],
+   "summary": "The solution of a system of inequalities is the overlap of the individual solution regions, so a point must satisfy every inequality.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 80
+   }
+  },
+  {
+   "id": "algebra_1_parallel_lines",
+   "title": "Parallel Lines",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Special Lines and Line Families",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_converting_between_forms"
+   ],
+   "keywords": [
+    "equal slope",
+    "no intersection",
+    "parallel"
+   ],
+   "summary": "Parallel lines have equal slopes and never meet, because equal slopes mean equal rates of change with a fixed vertical offset.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 52
+   }
+  },
+  {
+   "id": "algebra_1_perfect_square_trinomials",
+   "title": "Perfect-Square Trinomials",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Special Factoring Patterns",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_leading_coefficient_other_than_one"
+   ],
+   "keywords": [
+    "factor",
+    "pattern",
+    "perfect square trinomial"
+   ],
+   "summary": "A trinomial whose first and last terms are squares and whose middle term is twice the product factors as a binomial squared.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 135
+   }
+  },
+  {
+   "id": "algebra_1_perpendicular_lines",
+   "title": "Perpendicular Lines",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Special Lines and Line Families",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_parallel_lines"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative reciprocal",
+    "perpendicular",
+    "slope"
+   ],
+   "summary": "Perpendicular slopes are negative reciprocals, so their product is -1 and one line rises where the other falls.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 53
+   }
+  },
+  {
+   "id": "algebra_1_piecewise_notation",
+   "title": "Piecewise Notation",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Piecewise Functions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_sequence_as_function"
+   ],
+   "keywords": [
+    "interval",
+    "piecewise",
+    "rule"
+   ],
+   "summary": "A piecewise function applies different rules on different intervals of its domain, with each interval stated beside its rule.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 92
+   }
+  },
+  {
+   "id": "algebra_1_point_slope_form",
+   "title": "Point-Slope Form",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Forms of Linear Equations",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_standard_form_of_a_line"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "point",
+    "point-slope",
+    "slope"
+   ],
+   "summary": "The form y - y1 = m(x - x1) writes the line through a known point with a known slope, which is the form a context usually supplies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 50
+   }
+  },
+  {
+   "id": "algebra_1_power_rules",
+   "title": "Power Rules",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Exponent Rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_product_and_quotient_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponent",
+    "power rule",
+    "product"
+   ],
+   "summary": "A power of a power multiplies exponents, and a power of a product applies the exponent to every factor.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 101
+   }
+  },
+  {
+   "id": "algebra_1_precision_and_reasonable_answers",
+   "title": "Precision and Reasonable Answers",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Units and Dimensional Analysis",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_dimensional_analysis"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "estimation",
+    "precision",
+    "reasonableness"
+   ],
+   "summary": "A result carries the precision of its inputs, so an answer is checked against the size and units the context implies.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 14
+   }
+  },
+  {
+   "id": "algebra_1_probability_rules",
+   "title": "Probability Rules",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Probability",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_sample_space_and_events"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "addition rule",
+    "complement",
+    "probability"
+   ],
+   "summary": "Probabilities lie between zero and one, complementary events sum to one, and the addition rule handles events that can overlap.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 69
+   }
+  },
+  {
+   "id": "algebra_1_product_and_quotient_properties",
+   "title": "Product and Quotient Properties",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Simplifying Radicals",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_irrational_numbers"
+   ],
+   "keywords": [
+    "product property",
+    "radical",
+    "simplify"
+   ],
+   "summary": "The product property of radicals lets a perfect-square factor leave the radical, which is what simplifying a radical means.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 108
+   }
+  },
+  {
+   "id": "algebra_1_product_and_quotient_rules",
+   "title": "Product and Quotient Rules",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Exponent Rules",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_negative_exponents"
+   ],
+   "keywords": [
+    "exponent",
+    "product rule",
+    "quotient rule"
+   ],
+   "summary": "Multiplying powers of one base adds the exponents, and dividing subtracts them, because the factors are counted rather than multiplied.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 100
+   }
+  },
+  {
+   "id": "algebra_1_quadratic_versus_linear",
+   "title": "Quadratic versus Linear",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Identifying Quadratic Relationships",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_constant_second_differences"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "linear",
+    "quadratic",
+    "turning point"
+   ],
+   "summary": "A quadratic graph curves with a single turning point, while a line has the same rate of change everywhere.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 140
+   }
+  },
+  {
+   "id": "algebra_1_random_sampling",
+   "title": "Random Sampling",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Sampling, Bias, and Measurement Precision",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_correlation_and_causation"
+   ],
+   "keywords": [
+    "inference",
+    "population",
+    "random sample"
+   ],
+   "summary": "A random sample supports inference about the population, while a sample chosen for convenience does not.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 66
+   }
+  },
+  {
+   "id": "algebra_1_range",
+   "title": "Range",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Domain and Range",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_domain"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graph",
+    "output",
+    "range"
+   ],
+   "summary": "The range is the set of outputs a function actually produces, which is not always every number the rule could theoretically give.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 87
+   }
+  },
+  {
+   "id": "algebra_1_rational_numbers",
+   "title": "Rational Numbers",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Rational and Irrational Numbers",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_cube_roots"
+   ],
+   "keywords": [
+    "decimal",
+    "ratio",
+    "rational number"
+   ],
+   "summary": "A rational number is a ratio of two integers, and its decimal expansion either terminates or repeats.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 106
+   }
+  },
+  {
+   "id": "algebra_1_rationalising_a_denominator",
+   "title": "Rationalising a Denominator",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Simplifying Radicals",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_product_and_quotient_properties"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "denominator",
+    "radical",
+    "rationalise"
+   ],
+   "summary": "Multiplying by a form of one removes a radical from a denominator without changing the value of the expression.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 109
+   }
+  },
+  {
+   "id": "algebra_1_reading_a_graph",
+   "title": "Reading a Graph",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Coordinate Plane and Graph Reading",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_ordered_pairs_and_quadrants"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "graph reading",
+    "increase",
+    "intercept"
+   ],
+   "summary": "A graph is read by tracing an input to its output, noting intercepts, where the graph rises or falls, and where it is steepest.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 38
+   }
+  },
+  {
+   "id": "algebra_1_reading_f_x",
+   "title": "Reading f(x)",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Function Notation",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_vertical_line_test"
+   ],
+   "keywords": [
+    "f(x)",
+    "function notation",
+    "input"
+   ],
+   "summary": "The notation f(x) names the output of the function f at input x, so f(3) means the output when the input is three.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 84
+   }
+  },
+  {
+   "id": "algebra_1_rearranging_a_formula",
+   "title": "Rearranging a Formula",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Literal Equations and Formulas",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_identities_and_contradictions"
+   ],
+   "keywords": [
+    "formula",
+    "literal equation",
+    "rearrange"
+   ],
+   "summary": "Solving for a named variable treats the other variables as constants and applies the same inverse operations in reverse order.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 22
+   }
+  },
+  {
+   "id": "algebra_1_recursive_definition",
+   "title": "Recursive Definition",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Sequences and Recursive Rules",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_average_rate_of_change"
+   ],
+   "keywords": [
+    "initial term",
+    "recursive",
+    "sequence"
+   ],
+   "summary": "A recursive rule states the first term and how each later term follows from the previous one, which is enough to generate the whole sequence.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 90
+   }
+  },
+  {
+   "id": "algebra_1_residuals",
+   "title": "Residuals",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Residuals, Correlation, and Causation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_line_of_best_fit"
+   ],
+   "keywords": [
+    "pattern",
+    "prediction error",
+    "residual"
+   ],
+   "summary": "A residual is the actual value minus the predicted value, and a pattern in the residuals shows the line is missing structure.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 64
+   }
+  },
+  {
+   "id": "algebra_1_reversing_the_symbol",
+   "title": "Reversing the Symbol",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Solving One-Variable Inequalities",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_solution_sets_on_a_number_line"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "negative",
+    "reverse inequality",
+    "solve"
+   ],
+   "summary": "Multiplying or dividing both sides by a negative number reverses the inequality because the number line is reflected.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 29
+   }
+  },
+  {
+   "id": "algebra_1_sample_space_and_events",
+   "title": "Sample Space and Events",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Probability",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_bias_and_precision"
+   ],
+   "keywords": [
+    "event",
+    "outcome",
+    "sample space"
+   ],
+   "summary": "The sample space lists every possible outcome, and an event is a subset of that space whose probability is a fraction of the whole.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 68
+   }
+  },
+  {
+   "id": "algebra_1_sequence_as_function",
+   "title": "Sequence as Function",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Sequences and Recursive Rules",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_recursive_definition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discrete",
+    "domain",
+    "sequence"
+   ],
+   "summary": "A sequence is a function whose domain is the positive integers, so its graph is a set of isolated points rather than a curve.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 91
+   }
+  },
+  {
+   "id": "algebra_1_shifts_stretches_and_reflections",
+   "title": "Shifts, Stretches and Reflections",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Transformations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_vertex_form"
+   ],
+   "keywords": [
+    "reflection",
+    "stretch",
+    "translation"
+   ],
+   "summary": "Changing the horizontal and vertical shift moves the vertex, while changing the leading coefficient stretches or reflects the parabola.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 146
+   }
+  },
+  {
+   "id": "algebra_1_slope_in_context",
+   "title": "Slope in Context",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Slope and Rate of Change",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_the_slope_formula"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "interpret",
+    "rate of change",
+    "units"
+   ],
+   "summary": "The units of a slope are output units per input unit, so in a model it names the rate the situation actually describes.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 44
+   }
+  },
+  {
+   "id": "algebra_1_slope_intercept_form",
+   "title": "Slope-Intercept Form",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Forms of Linear Equations",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_intercepts_in_context"
+   ],
+   "keywords": [
+    "graph",
+    "slope-intercept",
+    "y = mx + b"
+   ],
+   "summary": "The form y = mx + b displays the slope m and the y-intercept b directly, which is why it is the fastest form to graph from.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 48
+   }
+  },
+  {
+   "id": "algebra_1_solution_sets_on_a_number_line",
+   "title": "Solution Sets on a Number Line",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Solving One-Variable Inequalities",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_solving_absolute_value_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "inequality",
+    "number line",
+    "solution set"
+   ],
+   "summary": "An inequality has a set of solutions described by a symbol, a number-line graph or interval notation, rather than a single value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 28
+   }
+  },
+  {
+   "id": "algebra_1_solving_absolute_value_equations",
+   "title": "Solving Absolute Value Equations",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Absolute Value Equations",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_absolute_value_as_distance"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "absolute value equation",
+    "cases",
+    "extraneous solution"
+   ],
+   "summary": "Isolate the absolute value first, then split into the positive and negative cases and reject any solution that fails the original equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 27
+   }
+  },
+  {
+   "id": "algebra_1_solving_and_graphing",
+   "title": "Solving and Graphing",
+   "strand": "Linear Inequalities",
+   "unit": "Linear Inequalities",
+   "topic": "Absolute Value Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_less_than_and_greater_than_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "compound",
+    "graph",
+    "solve"
+   ],
+   "summary": "Isolate the absolute value, rewrite it as a compound inequality, then graph the result and check both endpoints.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 36
+   }
+  },
+  {
+   "id": "algebra_1_solving_by_matching_bases",
+   "title": "Solving by Matching Bases",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Simple Exponential Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_doubling_time_and_half_life"
+   ],
+   "keywords": [
+    "exponent",
+    "exponential equation",
+    "matching bases"
+   ],
+   "summary": "If two powers of the same base are equal then their exponents are equal, so rewriting both sides with one base solves the equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 120
+   }
+  },
+  {
+   "id": "algebra_1_standard_form_of_a_line",
+   "title": "Standard Form of a Line",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Forms of Linear Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_slope_intercept_form"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "intercept",
+    "linear equation",
+    "standard form"
+   ],
+   "summary": "The form Ax + By = C describes the same line, and its intercepts are read by setting each variable to zero in turn.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 49
+   }
+  },
+  {
+   "id": "algebra_1_standard_form_of_a_parabola",
+   "title": "Standard Form of a Parabola",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Forms and Graphing",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_direction_of_opening"
+   ],
+   "keywords": [
+    "standard form",
+    "vertex formula",
+    "y-intercept"
+   ],
+   "summary": "Standard form shows the y-intercept immediately and, with the vertex formula, locates the turning point.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 143
+   }
+  },
+  {
+   "id": "algebra_1_substitution_and_order_of_operations",
+   "title": "Substitution and Order of Operations",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Evaluating Expressions",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_translating_words_into_expressions"
+   ],
+   "keywords": [
+    "evaluate",
+    "order of operations",
+    "substitution"
+   ],
+   "summary": "Evaluating replaces each variable with a value and then applies the order of operations, so the same expression always produces one value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 4
+   }
+  },
+  {
+   "id": "algebra_1_sum_and_difference_of_cubes",
+   "title": "Sum and Difference of Cubes",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Special Factoring Patterns",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_perfect_square_trinomials"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "difference of cubes",
+    "factor",
+    "sum of cubes"
+   ],
+   "summary": "A sum or difference of cubes factors into a binomial and a trinomial whose signs follow a fixed pattern.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 136
+   }
+  },
+  {
+   "id": "algebra_1_terms_coefficients_and_constants",
+   "title": "Terms, Coefficients, and Constants",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebraic Expression Language",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_variables_and_expressions"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "coefficient",
+    "constant",
+    "term"
+   ],
+   "summary": "A term is a product of a number and variables; its coefficient is that number, and a constant term contains no variable at all.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 2
+   }
+  },
+  {
+   "id": "algebra_1_testing_a_point",
+   "title": "Testing a Point",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Two-Variable Linear Inequalities",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_half_planes"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "dashed boundary",
+    "shade",
+    "test point"
+   ],
+   "summary": "Substituting a test point decides which side of the boundary satisfies the inequality, and a dashed boundary excludes the line itself.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 79
+   }
+  },
+  {
+   "id": "algebra_1_testing_equivalence",
+   "title": "Testing Equivalence",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Equivalent Linear Expressions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_the_distributive_property"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "equivalent expressions",
+    "justify",
+    "simplify"
+   ],
+   "summary": "Two expressions are equivalent when every substitution gives the same value, and simplifying one into the other proves it structurally.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 8
+   }
+  },
+  {
+   "id": "algebra_1_the_difference_of_squares",
+   "title": "The Difference of Squares",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Special Products",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_the_square_of_a_binomial"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "difference of squares",
+    "factor",
+    "special product"
+   ],
+   "summary": "The product of a sum and a difference collapses to the difference of the two squares because the middle terms cancel.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 130
+   }
+  },
+  {
+   "id": "algebra_1_the_discriminant",
+   "title": "The Discriminant",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Quadratic Formula and Discriminant",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_quadratic_formula"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "discriminant",
+    "number of solutions",
+    "sign"
+   ],
+   "summary": "The discriminant decides the number of real solutions: positive gives two, zero gives one, and negative gives none.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 155
+   }
+  },
+  {
+   "id": "algebra_1_the_distributive_property",
+   "title": "The Distributive Property",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Equivalent Linear Expressions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_combining_like_terms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "distributive property",
+    "expand",
+    "factor"
+   ],
+   "summary": "a(b + c) = ab + ac lets a factor outside parentheses multiply every term inside, which is the move that removes grouping.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 7
+   }
+  },
+  {
+   "id": "algebra_1_the_elimination_method",
+   "title": "The Elimination Method",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Solving by Elimination",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_substitution_method"
+   ],
+   "keywords": [
+    "add equations",
+    "elimination",
+    "system"
+   ],
+   "summary": "Adding or subtracting multiples of the equations removes a variable when its coefficients become opposites or equal.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 73
+   }
+  },
+  {
+   "id": "algebra_1_the_exponential_growth_pattern",
+   "title": "The Exponential Growth Pattern",
+   "strand": "Exponential Functions",
+   "unit": "Exponential Functions",
+   "topic": "Exponential Functions and Graphs",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_moving_between_forms"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "exponential function",
+    "growth factor",
+    "ratio"
+   ],
+   "summary": "A function of the form f(x) = a b^x multiplies by b at each unit step, so equal input steps give equal output ratios rather than equal differences.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 112
+   }
+  },
+  {
+   "id": "algebra_1_the_function_definition",
+   "title": "The Function Definition",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Relations and Functions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_feasible_region"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "function",
+    "input",
+    "output"
+   ],
+   "summary": "A function assigns exactly one output to each input, so a relation that gives one input two different outputs is not a function.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 82
+   }
+  },
+  {
+   "id": "algebra_1_the_greatest_common_factor",
+   "title": "The Greatest Common Factor",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Common Factors and Grouping",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_difference_of_squares"
+   ],
+   "keywords": [
+    "distribute",
+    "factor",
+    "greatest common factor"
+   ],
+   "summary": "The greatest common factor of all terms moves outside the parentheses by the distributive property, which is always the first factoring step.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 131
+   }
+  },
+  {
+   "id": "algebra_1_the_inverse_relationship",
+   "title": "The Inverse Relationship",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Inverse Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_transformations_of_the_absolute_value_graph"
+   ],
+   "keywords": [
+    "inverse",
+    "swap",
+    "undo"
+   ],
+   "summary": "An inverse swaps the roles of input and output, so it undoes whatever the original function did.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 96
+   }
+  },
+  {
+   "id": "algebra_1_the_number_of_real_solutions",
+   "title": "The Number of Real Solutions",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Roots, Zeros, and Graphical Solutions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_zeros_and_x_intercepts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "parabola",
+    "real solutions",
+    "x-axis"
+   ],
+   "summary": "A parabola meets the x-axis zero, one or two times, and that count matches the number of real solutions of the equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 150
+   }
+  },
+  {
+   "id": "algebra_1_the_parent_graph",
+   "title": "The Parent Graph",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Absolute Value Functions",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_evaluating_and_graphing"
+   ],
+   "keywords": [
+    "V-shape",
+    "absolute value",
+    "vertex"
+   ],
+   "summary": "The graph of y = |x| is V-shaped with its vertex at the origin and slopes of 1 and -1 on its two branches.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 94
+   }
+  },
+  {
+   "id": "algebra_1_the_principal_square_root",
+   "title": "The Principal Square Root",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Square and Cube Roots",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_computing_with_scientific_notation"
+   ],
+   "keywords": [
+    "principal root",
+    "radicand",
+    "square root"
+   ],
+   "summary": "The principal square root is the nonnegative number whose square is the radicand, which is why solving x^2 = a gives both signs.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 104
+   }
+  },
+  {
+   "id": "algebra_1_the_quadratic_formula",
+   "title": "The Quadratic Formula",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Quadratic Formula and Discriminant",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_making_a_perfect_square"
+   ],
+   "keywords": [
+    "quadratic formula",
+    "solve",
+    "standard form"
+   ],
+   "summary": "The formula solves every quadratic in standard form, and it is derived by completing the square on the general equation.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 154
+   }
+  },
+  {
+   "id": "algebra_1_the_slope_formula",
+   "title": "The Slope Formula",
+   "strand": "Linear Functions",
+   "unit": "Linear Functions",
+   "topic": "Slope and Rate of Change",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_interpreting_a_unit_rate"
+   ],
+   "keywords": [
+    "formula",
+    "rise over run",
+    "slope"
+   ],
+   "summary": "Slope is the change in y divided by the change in x between two points, so it measures steepness and direction together.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 43
+   }
+  },
+  {
+   "id": "algebra_1_the_square_of_a_binomial",
+   "title": "The Square of a Binomial",
+   "strand": "Polynomials and Factoring",
+   "unit": "Polynomials and Factoring",
+   "topic": "Special Products",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_dividing_by_a_monomial"
+   ],
+   "keywords": [
+    "binomial square",
+    "perfect square",
+    "special product"
+   ],
+   "summary": "Squaring a binomial gives the square of the first term plus twice the product plus the square of the last term.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 129
+   }
+  },
+  {
+   "id": "algebra_1_the_square_root_property",
+   "title": "The Square Root Property",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Solving with Square Roots",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_zero_product_property"
+   ],
+   "keywords": [
+    "plus or minus",
+    "solve",
+    "square root property"
+   ],
+   "summary": "If x squared equals a nonnegative number then x is plus or minus the square root of that number, because both signs square to the same value.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 152
+   }
+  },
+  {
+   "id": "algebra_1_the_substitution_method",
+   "title": "The Substitution Method",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "Solving by Substitution",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_intersection_as_solution"
+   ],
+   "keywords": [
+    "solve",
+    "substitution",
+    "system"
+   ],
+   "summary": "Solving one equation for a variable and substituting into the other turns a system of two equations into one equation in one variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 72
+   }
+  },
+  {
+   "id": "algebra_1_the_vertical_line_test",
+   "title": "The Vertical Line Test",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Relations and Functions",
+   "tier": "extension",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_function_definition"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "function",
+    "graph",
+    "vertical line test"
+   ],
+   "summary": "A graph represents a function exactly when no vertical line meets it more than once, which is the graphical form of the definition.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 83
+   }
+  },
+  {
+   "id": "algebra_1_the_zero_exponent",
+   "title": "The Zero Exponent",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Zero and Negative Exponents",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_finding_an_inverse"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "base",
+    "power",
+    "zero exponent"
+   ],
+   "summary": "Any nonzero base raised to the zero power is 1, because dividing equal powers leaves no factor behind.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 98
+   }
+  },
+  {
+   "id": "algebra_1_the_zero_product_property",
+   "title": "The Zero Product Property",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Solving by Factoring",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_the_number_of_real_solutions"
+   ],
+   "keywords": [
+    "factoring",
+    "solve",
+    "zero product property"
+   ],
+   "summary": "If a product equals zero then at least one factor is zero, so factored form turns a quadratic equation into two linear equations.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 151
+   }
+  },
+  {
+   "id": "algebra_1_transformations_of_the_absolute_value_graph",
+   "title": "Transformations of the Absolute Value Graph",
+   "strand": "Functions",
+   "unit": "Functions",
+   "topic": "Absolute Value Functions",
+   "tier": "foundation",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_the_parent_graph"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "stretch",
+    "transformation",
+    "vertex"
+   ],
+   "summary": "Shifts move the vertex, a stretch changes how steep the branches are, and a reflection turns the V upside down.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 95
+   }
+  },
+  {
+   "id": "algebra_1_translating_a_context_into_an_equation",
+   "title": "Translating a Context into an Equation",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Equation Modeling",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_formulas_in_context"
+   ],
+   "keywords": [
+    "define variable",
+    "model",
+    "translate"
+   ],
+   "summary": "Define the unknown, state the relationship in words, then write the relationship symbolically with units attached to each quantity.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 24
+   }
+  },
+  {
+   "id": "algebra_1_translating_words_into_expressions",
+   "title": "Translating Words into Expressions",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebraic Expression Language",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_terms_coefficients_and_constants"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "operation words",
+    "phrase",
+    "translate"
+   ],
+   "summary": "A phrase such as five more than twice a number becomes 2x + 5, one operation at a time, with order words deciding the grouping.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 3
+   }
+  },
+  {
+   "id": "algebra_1_two_constraints",
+   "title": "Two Constraints",
+   "strand": "Linear Systems",
+   "unit": "Linear Systems",
+   "topic": "System Modeling",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_infinitely_many_solutions"
+   ],
+   "keywords": [
+    "constraint",
+    "system model",
+    "two variables"
+   ],
+   "summary": "Two conditions on two unknowns form a system whose solution satisfies both conditions simultaneously, not one after the other.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 76
+   }
+  },
+  {
+   "id": "algebra_1_two_step_equations",
+   "title": "Two-Step Equations",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "One-Step and Two-Step Equations",
+   "tier": "extension",
+   "difficulty": 4,
+   "prerequisites": [
+    "algebra_1_one_step_equations"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "reverse order",
+    "solve",
+    "two-step"
+   ],
+   "summary": "Undo addition or subtraction first and multiplication or division second, which reverses the order the expression was built in.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 17
+   }
+  },
+  {
+   "id": "algebra_1_two_way_tables_and_probability",
+   "title": "Two-Way Tables and Probability",
+   "strand": "Statistics and Data Modeling",
+   "unit": "Statistics and Data Modeling",
+   "topic": "Probability",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_probability_rules"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "conditional probability",
+    "denominator",
+    "two-way table"
+   ],
+   "summary": "Joint, marginal and conditional probabilities are read directly from a two-way table by choosing the right denominator.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 70
+   }
+  },
+  {
+   "id": "algebra_1_units_and_unit_conversion",
+   "title": "Units and Unit Conversion",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Units and Dimensional Analysis",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_grouping_and_order_of_operations"
+   ],
+   "keywords": [
+    "conversion factor",
+    "measurement",
+    "unit conversion"
+   ],
+   "summary": "Multiplying by a conversion factor equal to one changes the unit without changing the quantity, so 12 inches and 1 foot name the same length.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 12
+   }
+  },
+  {
+   "id": "algebra_1_variables_and_expressions",
+   "title": "Variables and Expressions",
+   "strand": "Foundations for Algebra 1",
+   "unit": "Foundations for Algebra 1",
+   "topic": "Algebraic Expression Language",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [],
+   "keywords": [
+    "algebraic language",
+    "expression",
+    "variable"
+   ],
+   "summary": "A variable names a quantity that can change, and an expression combines variables, numbers and operations without an equals sign.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 1
+   }
+  },
+  {
+   "id": "algebra_1_variables_on_both_sides",
+   "title": "Variables on Both Sides",
+   "strand": "Linear Equations",
+   "unit": "Linear Equations",
+   "topic": "Multi-Step Linear Equations",
+   "tier": "foundation",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_distributing_before_solving"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "both sides",
+    "collect terms",
+    "solve"
+   ],
+   "summary": "Collecting variable terms on one side and constants on the other reduces the equation to a single coefficient times the variable.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 19
+   }
+  },
+  {
+   "id": "algebra_1_vertex_and_axis_of_symmetry",
+   "title": "Vertex and Axis of Symmetry",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Parabolas and Their Features",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_quadratic_versus_linear"
+   ],
+   "keywords": [
+    "axis of symmetry",
+    "parabola",
+    "vertex"
+   ],
+   "summary": "The vertex is the turning point of a parabola, and the axis of symmetry is the vertical line through it that mirrors one side onto the other.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 141
+   }
+  },
+  {
+   "id": "algebra_1_vertex_form",
+   "title": "Vertex Form",
+   "strand": "Quadratic Functions",
+   "unit": "Quadratic Functions",
+   "topic": "Quadratic Forms and Graphing",
+   "tier": "core",
+   "difficulty": 3,
+   "prerequisites": [
+    "algebra_1_factored_form"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "transformation",
+    "vertex",
+    "vertex form"
+   ],
+   "summary": "Vertex form displays the vertex and the direction and steepness of the opening in one glance.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 145
+   }
+  },
+  {
+   "id": "algebra_1_writing_scientific_notation",
+   "title": "Writing Scientific Notation",
+   "strand": "Exponents and Radicals",
+   "unit": "Exponents and Radicals",
+   "topic": "Scientific Notation",
+   "tier": "foundation",
+   "difficulty": 1,
+   "prerequisites": [],
+   "sequence_predecessors": [
+    "algebra_1_power_rules"
+   ],
+   "keywords": [
+    "magnitude",
+    "power of ten",
+    "scientific notation"
+   ],
+   "summary": "A number in scientific notation is written as a factor between 1 and 10 times a power of ten, which fixes both size and precision.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 102
+   }
+  },
+  {
+   "id": "algebra_1_zeros_and_x_intercepts",
+   "title": "Zeros and x-Intercepts",
+   "strand": "Quadratic Equations",
+   "unit": "Quadratic Equations",
+   "topic": "Roots, Zeros, and Graphical Solutions",
+   "tier": "core",
+   "difficulty": 2,
+   "prerequisites": [
+    "algebra_1_interpreting_vertex_and_intercepts"
+   ],
+   "sequence_predecessors": [],
+   "keywords": [
+    "solution",
+    "x-intercept",
+    "zero"
+   ],
+   "summary": "A zero of a quadratic function is an input whose output is zero, which is exactly where its graph meets the x-axis.",
+   "has_lesson": false,
+   "lesson_id": "",
+   "external_ids": {},
+   "provenance": {
+    "source": "Algebra 1 - Expressions, Linear and Quadratic Relationships",
+    "url": "",
+    "licence": "cc0",
+    "licence_class": "cc0",
+    "order": 149
+   }
+  }
+ ]
+}

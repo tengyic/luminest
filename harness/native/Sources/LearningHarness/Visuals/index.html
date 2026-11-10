@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--
+  Luminest whiteboard visual host. Loaded by WKWebView from a custom URL scheme
+  (luminest-visuals://bundle/index.html) so that fetch() for the vendored TeX WASM
+  assets is same-origin. Loading from file:// would break that fetch with a CORS error.
+
+  Tokens below are intentionally narrow: all renderer code is local; the ONLY network
+  origin allowed is the Desmos API loader, which is an explicitly external provider.
+  spec strings are never executed as JavaScript - see src/safeexpr.js.
+-->
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'wasm-unsafe-eval' https://www.desmos.com;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self' data:;
+  img-src 'self' data: blob: https://www.desmos.com;
+  connect-src 'self' data: blob: https://www.desmos.com;
+  worker-src 'self' blob:;
+  child-src 'self' blob:;
+  frame-src 'self' blob: data:;
+  media-src 'none';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'none'">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<link rel="stylesheet" href="vendor/mafs.css">
+<link rel="stylesheet" href="vendor/mathbox.css">
+<link rel="stylesheet" href="vendor/jsxgraph.css">
+<script src="vendor/plotly.min.js"></script>
+<script src="vendor/jsxgraphcore.js"></script>
+<script src="vendor/3Dmol-min.js"></script>
+<script src="visuals.bundle.js"></script>
+</head>
+<body>
+  <div id="stage"></div>
+  <div id="state" hidden aria-live="polite"></div>
+</body>
+</html>
