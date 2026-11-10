@@ -502,5 +502,44 @@ def register(target_concepts: dict, target_questions: dict,
     return summary
 
 
-__all__ = ['GENERATED_KIND', 'VARIANTS', 'materialise', 'materialise_graph', 'question_id',
-           'register', 'structural_items']
+def as_problem(item: Mapping[str, Any]):
+    """View a generated multiple-choice item as a canonical :class:`Problem`.
+
+    The generated layer and the authored layer share the same *shapes* (``CONCEPTS`` /
+    ``QUESTIONS``), so a generated item - which already carries ``options``, ``answer_id``
+    and ``distractor_diagnoses`` - can be lifted into the structured problem schema without
+    changing how it is stored. ``format`` is fixed to ``multipleChoice``; every option that
+    is not the correct one becomes a ``distractor`` whose ``mistake_type`` is taken from the
+    diagnosis category the builder already records (e.g. ``"conceptual"``). ``figure_*`` /
+    ``given_equation`` are left absent: generated items are derived from graph structure and
+    carry no authored figure or equation, which is exactly the honest case the schema's
+    optional fields describe.
+
+    Reconstructing the object this way (rather than round-tripping through a dict) also runs
+    :class:`MultipleChoiceProblem`'s ``correct_label in choices`` check, so a malformed
+    generated item fails loudly instead of shipping a silently wrong answer key.
+    """
+    options = list(item.get('options') or [])
+    correct_label = item.get('answer_id')
+    diagnoses = item.get('distractor_diagnoses') or {}
+    # Local import: problem_schema pulls in visual_specs through app.harness, which is a
+    # heavy package that imports this module back (via curriculum.register at load time).
+    # Importing it here, at call time, avoids a circular import at module import time.
+    from .harness import problem as problem_schema
+    choices = [problem_schema.Choice(label=o['id'], text=o.get('text')) for o in options]
+    distractors = [
+        problem_schema.MistakeMeta(
+            mistake_type=str(diagnoses.get(o['id'], {}).get('category', 'conceptual')))
+        for o in options if o['id'] != correct_label
+    ]
+    return problem_schema.MultipleChoiceProblem(
+        stem=item['prompt'],
+        explanation=item.get('explanation') or '',
+        choices=choices,
+        correct_label=correct_label,
+        distractors=distractors,
+    )
+
+
+__all__ = ['GENERATED_KIND', 'VARIANTS', 'as_problem', 'materialise', 'materialise_graph',
+           'question_id', 'register', 'structural_items']
