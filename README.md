@@ -61,7 +61,7 @@ All eight are real captures from the running native app, not mockups or renders.
 | ![Practice question](docs/assets/screenshots/03-practice-question.jpg) | ![Practice feedback](docs/assets/screenshots/04-practice-feedback.jpg) |
 | Practice · one question at a time | Feedback · grading and explanation |
 | ![Grounded tutor](docs/assets/screenshots/05-grounded-tutor.jpg) | ![Daily review](docs/assets/screenshots/06-daily-review.jpg) |
-| Tutor · grounded offline answer when no provider is set | Daily review · spaced scheduling |
+| Tutor · retrieved-curriculum response when no generative model is configured | Daily review · spaced scheduling |
 | ![Insights](docs/assets/screenshots/07-insights.jpg) | ![Course picker](docs/assets/screenshots/08-course-picker.jpg) |
 | Insights · mastery evidence | Courses · choosing what to study |
 
@@ -79,7 +79,7 @@ All eight are real captures from the running native app, not mockups or renders.
 
 - Compiled lesson procedures with ordered activity blocks; a plan only promises artifacts that already exist (missing ones become `skipped`).
 - Multiple-choice practice with distractor-level diagnosis (concept / procedure / calculation), explain-back and variant questions.
-- Tutor chat, streaming agent turns, Socratic ladder, and a grounded offline tutor when no model provider is configured.
+- Tutor chat, streaming agent turns, and a Socratic ladder; with no model provider the tutor serves retrieved curriculum and reports a named `model-required` state rather than fabricating an answer.
 - Editable slide decks with real `.pptx` export, whiteboard/board editor with diagrams and images, image search with licence gating, TTS narration, and interactive simulations.
 
 **Evidence and insight**
@@ -91,7 +91,7 @@ All eight are real captures from the running native app, not mockups or renders.
 **Adaptation and honesty**
 
 - Five separate decision layers, with supervision deciding *whether to interrupt* rather than *what to teach*.
-- Grounded-offline generation determines content when no provider is set, and says so in the response.
+- An unconfigured instance reports a `model-required` state and serves retrieved curriculum with a named reason; it never fabricates a generated answer.
 - Configurable tutor provider, local VoiceStudio TTS, Chromium-based web/video discovery without an API key, and optional duplex voice via an OpenAI Realtime key.
 
 A capability → file → test map is maintained in [`harness/context/01-repo-map.md`](harness/context/01-repo-map.md) and [`02-interfaces.md`](harness/context/02-interfaces.md).
@@ -160,7 +160,7 @@ python3 -m venv .venv
 
 The dev requirements matter: `hypothesis`, `pandas` and `pytest-timeout` are needed for the property-based tests and the per-test timeout ceiling. Without them the suite fails at collection or runs without its configured ceiling. Run tests with `backend/` as the working directory and a temp directory inside the workspace.
 
-Environment and provider options are documented in [`docs/LOCAL_SERVICES.md`](harness/docs/LOCAL_SERVICES.md) and [`REALTIME_VOICE_AND_SETUP.md`](harness/docs/REALTIME_VOICE_AND_SETUP.md). No API key is needed for the grounded-offline path.
+Environment and provider options are documented in [`docs/LOCAL_SERVICES.md`](harness/docs/LOCAL_SERVICES.md) and [`REALTIME_VOICE_AND_SETUP.md`](harness/docs/REALTIME_VOICE_AND_SETUP.md). No API key is needed to browse retrieved curriculum; a model provider is required for generated tutor answers.
 
 ---
 
