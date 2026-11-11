@@ -1,0 +1,129 @@
+AC-2 EVIDENCE — clean full-suite green on the shipping test environment
+Task: T-0001   Owner: qa-engineer   Evidence date: 2026-11-11
+Git root: /Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50
+Retained log: harness/backend/.tmp_1111_clean.log (69 lines, full, retained)
+UTC of original run completion (bus #build [24]): 2026-11-11T04:07:55Z
+UTC of QA independent re-verification below: 2026-11-11T05:08:54Z / 05:09:09Z
+
+IMPORTANT (D19 / team-lead): AC-2's authoritative run is the LEAD-STARTED clean
+invocation recorded in bus message [24]. It was explicitly NOT restarted by QA.
+The "never restart" instruction is honoured: no full-suite pytest was re-run for
+AC-2. All commands below are read-only inspections of the retained log, plus one
+SEPARATE, small, targeted -rs invocation used ONLY to name the 2 skips (not a
+restart of the full suite).
+
+==============================================================================
+CMD 1 — ORIGINAL RUN (verbatim from bus #build [24], reproduced as the record)
+  $ cd '/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend' && \
+    CODEBUDDY_SAFE_DELETE_ENABLED=0 TMPDIR=.../.tmp_1111_clean \
+    .venv/bin/python -m pytest --basetemp=.../.tmp_1111_clean -q \
+    -p no:cacheprovider --timeout=300 --tb=line > .tmp_1111_clean.log 2>&1; \
+    echo EXIT_CODE=$?
+  STDOUT (verbatim [24]): EXIT_CODE=0
+  Summary line (verbatim [24]): '2289 passed, 2 skipped, 8 warnings in 1488.95s (0:24:48)'
+  UTC: 2026-11-11T04:07:55Z
+  NOTE on CODEBUDDY_SAFE_DELETE_ENABLED=0: this is a TEST-PROCESS-ONLY switch that
+  disables the WorkBuddy bulk-delete guard which otherwise collapses the suite.
+  Allowed by D4(a)/D5 [9]. Contrast log harness/backend/.tmp_1111.log shows the
+  SAME suite with the guard ENABLED produced
+  '1 failed, 1244 passed, 1 skipped, 1045 errors' — confirming the guard, not the
+  product, was the sole cause. That contrast log is NOT AC-2 evidence.
+
+==============================================================================
+CMD 2 — QA independent re-read of the retained log (D14 [23] pt5 semantics)
+
+D14 pt5 / team-lead / security-reviewer: on a green run pytest OMITS zero counts,
+so "0 failed, 0 errors" is assessed as EXIT_CODE=0 AND the summary line containing
+NO 'failed'/'error' tokens — NOT a literal substring search for "0 failed".
+
+  $ sed -n '69p' harness/backend/.tmp_1111_clean.log
+  STDOUT (full):
+2289 passed, 2 skipped, 8 warnings in 1488.95s (0:24:48)
+  exit=0
+
+  $ sed -n '69p' harness/backend/.tmp_1111_clean.log | grep -oiE 'failed|error'
+  STDOUT (full): (empty — zero lines)
+  exit=1   (grep exits 1 on zero matches = PASS; zero 'failed'/'error' tokens)
+  token hit count: 0
+
+  $ grep -c 'SAFE_DELETE_BULK_CONFIRM_REQUIRED' harness/backend/.tmp_1111_clean.log
+  STDOUT (full): 0
+  exit=1 (zero matches)
+
+  $ grep -cF '[safe-delete]' harness/backend/.tmp_1111_clean.log
+  STDOUT (full): 0
+  exit=1 (zero matches)
+
+  $ grep -c 'ERROR at setup' harness/backend/.tmp_1111_clean.log
+  STDOUT (full): 0
+  exit=1 (zero matches)
+
+  exit code of clean run (bus [24]): 0
+  UTC: 2026-11-11T05:08:54Z
+
+AC-2 BAR (D14 pt5) — all four conditions:
+  (1) EXIT_CODE = 0 ............................................ PASS (CMD 1, [24])
+  (2) summary has NO 'failed'/'error' tokens ................... PASS (CMD 2, grep exit 1)
+  (3) zero [safe-delete] / bulk-guard markers .................. PASS (CMD 2, count 0)
+  (4) zero 'ERROR at setup' .................................... PASS (CMD 2, count 0)
+  => AC-2 PASS.
+
+==============================================================================
+CMD 3 — the 2 skips MUST be named (bus [24] / quality_gate.py blocks test-level
+skips at EVERY strictness level, so QA names them here rather than hand-waving).
+
+Small SEPARATE targeted run (NOT a restart of AC-2's full suite; only the two
+opt-in live modules, -k live, to obtain -rs skip reasons):
+  $ cd '/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend' && \
+    CODEBUDDY_SAFE_DELETE_ENABLED=0 TMPDIR=/tmp/qa_1111/skipbt \
+    .venv/bin/python -m pytest --basetemp=/tmp/qa_1111/skipbt -q -rs \
+    -p no:cacheprovider --timeout=60 \
+    tests/test_live_smoke.py tests/test_diagram.py -k 'live'
+  exit=0
+  STDOUT (short test summary info, verbatim, /tmp/qa_1111/skip_identify.txt lines 16-19):
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_live_smoke.py:39: Live smoke disabled; set HARNESS_LIVE_SMOKE=1
+SKIPPED [1] tests/test_diagram.py:255: Live DeepSeek diagram smoke disabled; set HARNESS_DIAGRAM_LIVE_SMOKE=1
+2 skipped, 13 deselected, 3 warnings in 7.81s
+
+  NAMED SKIPS (exactly 2, both opt-in live-provider tests, gated by env flags):
+    1. tests/test_live_smoke.py::test_live_provider_returns_a_typed_tool_call
+       reason: Live smoke disabled; set HARNESS_LIVE_SMOKE=1  (line 39)
+       module-level pytestmark = pytest.mark.live (line 20)
+    2. tests/test_diagram.py::test_live_deepseek_v41_flash_reads_board_snapshot_and_commits_line_paths
+       reason: Live DeepSeek diagram smoke disabled; set HARNESS_DIAGRAM_LIVE_SMOKE=1 (line 255)
+       decorator @pytest.mark.live (line 251)
+
+  Corroboration in the retained AC-2 log: the two 's' progress markers are at
+  .tmp_1111_clean.log lines 9 ([ 28%]) and 15 ([ 47%]); the warnings summary names
+  tests/test_diagram.py:251 and tests/test_live_smoke.py:20 as the only two
+  PytestUnknownMarkWarning (unknown 'live' mark) sources — consistent with exactly
+  these 2 live-marked skips.
+  UTC: 2026-11-11T05:09:09Z
+
+  AC-2 permits skips (it forbids failed/errors only, per D4(b)/D5/D14 pt5).
+  The 2 skips are declared here for quality_gate.py's benefit; they are NOT
+  failures and do not change the AC-2 PASS.
+
+==============================================================================
+CMD 4 — faithful log excerpt (lines 1-2 and 24-69 of 69, cited range)
+  $ sed -n '1,2p;24,69p' harness/backend/.tmp_1111_clean.log
+  Lines 1-2 (progress 3%/6%), lines 24-31 (75%..100%),
+  lines 32-68 (warnings summary incl. the two 'live' mark warnings),
+  line 69: 2289 passed, 2 skipped, 8 warnings in 1488.95s (0:24:48)
+  Full log retained at harness/backend/.tmp_1111_clean.log (69 lines).
+
+==============================================================================
+HEAD-TRACKED PROOF MAPPING (D19 [37] step 5 / systems-architect advisory)
+  This AC-2.txt is WORKTREE evidence at the time of Phase 3 (HEAD is still
+  a7bfb6d). The binding HEAD-tracked proof — `git show HEAD:harness/docs/evidence/
+  2026-11-11/AC-2.txt` with command + stdout + exit code — is PENDING the single
+  authorised local commit (D19 step 4) and will be produced by qa-engineer in the
+  final binding verdict (D19 step 5). Pre-commit substitutes ([ -f ], 
+  git check-ignore -v, git status --short -- <f>) apply at Phase 4b. Recording
+  that mapping here so worktree evidence is not misread as a missing HEAD check.
+
+RESIDUAL (not blockers, no product change made by QA):
+  - AC-2 was run on the local Python 3.14 environment; Python 3.12 parity is
+    separate AC-3 evidence (AC-3.txt / T-0003.txt), per D4/D12/D13.
+  - No commit, push, tag, or product edit was performed by qa-engineer (D8).

@@ -1,0 +1,527 @@
+AC-1 EVIDENCE — CI tracked: quality-gate job added to existing root workflow
+Task: T-0004  Owner: fullstack-engineer
+Git root: /Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50
+Workflow: .github/workflows/quality.yml (tracked, at GIT ROOT — not harness/.github/)
+UTC timestamp of verification run: 2026-11-11T04:11:58Z
+Scope: ONLY two edits to the workflow — (a) top-level `permissions: contents: read`,
+       (b) one new `quality-gate` job. No existing job was modified. No commit / git add /
+       push / tag was performed (D8; another agent owns the single final commit).
+
+Reproduction note: all commands run from the git root. CMD 2 uses PyYAML 6.0.3 from the
+project's local harness/backend/.venv/bin/python (verified present on this machine). On a
+clean checkout without that venv, install `pyyaml==6.0.3` first, or use CMD 3 (Ruby stdlib
+Psych, zero dependencies) for the YAML parse and CMD 4/5/6/7 (grep + git) for the rest.
+GitHub Actions parses `on:` as a normal key; Ruby's YAML 1.1 loader maps `on` to boolean
+`true`, which is why CMD 2 uses PyYAML's BaseLoader (all scalars stay strings, so `d['on']`
+is addressable). Both parsers succeeded.
+
+==============================================================================
+CMD 0 (timestamp)
+  $ date -u +"%Y-%m-%dT%H:%M:%SZ"
+  2026-11-11T04:11:58Z
+  exit=0
+
+CMD 1 (working tree — proves only the workflow is modified by me)
+  $ git status --short
+   M .github/workflows/quality.yml
+  ?? harness/.agent-bus/
+  ?? harness/backend/.tmp_1111.log
+  ?? harness/backend/.tmp_1111_clean.log
+  exit=0
+  NOTE: the three untracked entries are pre-existing scratch from other agents
+  (agent bus + T-0001 in-progress logs). They were NOT created or touched by T-0004.
+
+==============================================================================
+CMD 2 — YAML parse + structural assertions (PyYAML BaseLoader, architect C3 assertion)
+  $ harness/backend/.venv/bin/python - <<'PY'
+    import yaml
+    path = '.github/workflows/quality.yml'
+    d = yaml.load(open(path, encoding='utf-8'), Loader=yaml.BaseLoader)
+    print('parsed: YES  top-level keys =', ','.join(sorted(d.keys())))
+    assert 'push' in d['on'], 'push trigger missing'
+    assert 'pull_request' in d['on'], 'pull_request trigger missing'
+    print('on.push =', 'present', '| on.pull_request =', 'present')
+    assert d['permissions']['contents'] == 'read'
+    print('permissions.contents =', d['permissions']['contents'])
+    jobs = d['jobs']
+    expected = ['layer-1-unit','layer-2-integration','releasable-tree',
+                'full-suite-on-the-shipping-runtime','layer-3-native','dependency-audit','mutation']
+    for j in expected:
+        assert j in jobs, 'existing job missing: ' + j
+    print('original 7 jobs intact =', ','.join(expected))
+    assert 'quality-gate' in jobs
+    print('quality-gate job = present  | total jobs =', len(jobs))
+    job = jobs['quality-gate']
+    assert job['runs-on'] == 'ubuntu-latest'
+    assert job['services']['postgres']['image'] == 'postgres:16'
+    print('services.postgres.image =', job['services']['postgres']['image'])
+    assert job['env']['HARNESS_TEST_PG_ADMIN'] == 'postgresql://postgres:postgres@127.0.0.1:5432/postgres'
+    print('env.HARNESS_TEST_PG_ADMIN =', job['env']['HARNESS_TEST_PG_ADMIN'])
+    steps = job['steps']
+    uses = [s['uses'] for s in steps if 'uses' in s]
+    print('uses =', ','.join(uses))
+    assert 'actions/checkout@v4' in uses and 'actions/setup-python@v5' in uses
+    pyvers = [s.get('with', {}).get('python-version') for s in steps]
+    assert '3.12' in pyvers
+    print('setup-python version =', '3.12')
+    installs = [s['run'] for s in steps if s.get('name') == 'Install pinned dependencies']
+    assert any('pip install -r harness/backend/requirements-dev.txt' in r for r in installs)
+    print('pip install requirements-dev.txt =', 'present')
+    gate = [s for s in steps if 'quality_gate.py' in s.get('run', '')]
+    assert len(gate) == 1
+    line = gate[0]['run']
+    assert gate[0].get('working-directory') == 'harness'
+    assert '--layers 1,2' in line and '--python' in line and '--no-audit' in line
+    print('working-directory =', gate[0]['working-directory'])
+    print('run =', line)
+    print('has --layers 1,2 =', '--layers 1,2' in line, '| has --python =', '--python' in line, '| has --no-audit =', '--no-audit' in line)
+    print('ALL ASSERTIONS PASSED')
+    PY
+
+  STDOUT (full):
+parsed: YES  top-level keys = concurrency,env,jobs,name,on,permissions
+on.push = present | on.pull_request = present
+permissions.contents = read
+original 7 jobs intact = layer-1-unit,layer-2-integration,releasable-tree,full-suite-on-the-shipping-runtime,layer-3-native,dependency-audit,mutation
+quality-gate job = present  | total jobs = 8
+services.postgres.image = postgres:16
+env.HARNESS_TEST_PG_ADMIN = postgresql://postgres:postgres@127.0.0.1:5432/postgres
+uses = actions/checkout@v4,actions/setup-python@v5
+setup-python version = 3.12
+pip install requirements-dev.txt = present
+working-directory = harness
+run = python scripts/quality_gate.py --layers 1,2 --python "$(command -v python)" --no-audit --output "$RUNNER_TEMP/gate"
+has --layers 1,2 = True | has --python = True | has --no-audit = True
+ALL ASSERTIONS PASSED
+  exit=0
+
+==============================================================================
+CMD 3 — independent, dependency-free YAML parse (Ruby stdlib Psych)
+  $ ruby -ryaml -e 'd=YAML.load_file(".github/workflows/quality.yml"); puts "parsed: YES (Ruby Psych; YAML 1.1 maps on: -> true)"; puts "jobs count = #{d["jobs"].keys.length}"; puts "quality-gate present = #{d["jobs"].key?("quality-gate")}"; puts "permissions present = #{d.key?("permissions")}"'
+
+  STDOUT (full):
+parsed: YES (Ruby Psych; YAML 1.1 maps on: -> true)
+jobs count = 8
+quality-gate present = true
+permissions present = true
+  exit=0
+
+==============================================================================
+CMD 4 — forbidden-pattern grep (DONE criterion 4: count must be 0)
+  $ grep -cE 'pull_request_target|secrets\.|printenv|cat [^ ]*\.env|set -x|pytest -s|ignore-vuln|continue-on-error' .github/workflows/quality.yml
+
+  STDOUT (full):
+0
+  grep exit=1   (grep -c prints 0 and returns 1 when no lines match; that is expected)
+
+  Explicit PASS assertion (count == 0):
+  $ C=$(grep -cE 'pull_request_target|secrets\.|printenv|cat [^ ]*\.env|set -x|pytest -s|ignore-vuln|continue-on-error' .github/workflows/quality.yml); echo "forbidden-pattern count = $C"; test "$C" -eq 0
+
+  STDOUT (full):
+forbidden-pattern count = 0
+  assertion exit=0
+
+==============================================================================
+CMD 5 — git diff (DONE criterion 5: ONLY intended changes)
+  $ git diff -- .github/workflows/quality.yml
+
+  STDOUT (full):
+diff --git a/.github/workflows/quality.yml b/.github/workflows/quality.yml
+index cef25e0..00159e3 100644
+--- a/.github/workflows/quality.yml
++++ b/.github/workflows/quality.yml
+@@ -26,6 +26,9 @@ on:
+       - '.github/workflows/quality.yml'
+   workflow_dispatch:
+ 
++permissions:
++  contents: read
++
+ concurrency:
+   group: quality-${{ github.ref }}
+   cancel-in-progress: true
+@@ -247,3 +250,39 @@ jobs:
+       - name: Apply curated mutants and require every one to be killed
+         working-directory: harness
+         run: python scripts/mutation_check.py --python "$(command -v python)"
++
++  # Runs the release gate's backend layers through scripts/quality_gate.py. The gate's
++  # default interpreter is harness/backend/.venv/bin/python, which does not exist on a
++  # fresh runner, so --python is mandatory. Layer 2 reads HARNESS_TEST_PG_ADMIN at import
++  # time; without this postgres service and value, its PostgreSQL half skips and
++  # summarise() blocks on any test-level skip. Dependency auditing is delegated to the
++  # separate dependency-audit job, hence --no-audit.
++  quality-gate:
++    name: Quality gate — backend layers 1 and 2
++    runs-on: ubuntu-latest
++    services:
++      postgres:
++        image: postgres:16
++        env:
++          POSTGRES_PASSWORD: postgres
++          POSTGRES_DB: postgres
++        ports: ['5432:5432']
++        options: >-
++          --health-cmd pg_isready
++          --health-interval 5s
++          --health-timeout 5s
++          --health-retries 20
++    env:
++      HARNESS_TEST_PG_ADMIN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++          cache: pip
++          cache-dependency-path: harness/backend/requirements-dev.txt
++      - name: Install pinned dependencies
++        run: pip install -r harness/backend/requirements-dev.txt
++      - name: Run the layered quality gate
++        working-directory: harness
++        run: python scripts/quality_gate.py --layers 1,2 --python "$(command -v python)" --no-audit --output "$RUNNER_TEMP/gate"
+  exit=0
+  The diff has exactly two hunks, both pure additions; no `-` line removes or rewrites
+  any of the 7 pre-existing jobs.
+
+==============================================================================
+CMD 6 — removed-line check (0 => no existing job altered)
+  $ git diff -- .github/workflows/quality.yml | grep -cE '^-[^-]'
+
+  STDOUT (full):
+0
+  grep exit=1   (no removed lines; expected)
+
+==============================================================================
+CMD 7 — whitespace sanity
+  $ git diff --check -- .github/workflows/quality.yml
+
+  STDOUT (full): (empty)
+  exit=0
+
+==============================================================================
+DONE CRITERIA — verdict
+  1. Parses as YAML; `on: push` + `on: pull_request` present .......... PASS (CMD 2, CMD 3)
+  2. `quality-gate` job invokes scripts/quality_gate.py with --python
+     and --layers 1,2 ..................................................... PASS (CMD 2)
+  3. Top-level `permissions: contents: read` present ................... PASS (CMD 2, CMD 5)
+  4. Forbidden-pattern count = 0 ......................................... PASS (CMD 4)
+  5. `git diff` shows ONLY intended changes; 0 removed lines ........... PASS (CMD 5, CMD 6)
+  6. AC-1.txt written .................................................... PASS (this file)
+
+Also honoured (verified by CMD 2/CMD 4/CMD 5):
+  - C-2: no printenv / env dump / cat *.env / set -x / pytest -s / echo secrets.
+  - C-3: `pull_request` trigger kept; no pull_request_target; no secrets.* anywhere;
+         top-level permissions added.
+  - C-4 / D10[16](2): new job reuses the SAME action refs already in the file
+         (actions/checkout@v4, actions/setup-python@v5); no bulk SHA-pinning today.
+  - C-10 / D10[16]: no upload-artifact added.
+  - No continue-on-error, no ignore-vuln, no .env values read.
+  - Architect C3 contract matched verbatim: setup-python 3.12, requirements-dev.txt,
+    postgres:16 service, HARNESS_TEST_PG_ADMIN at job level, working-directory: harness,
+    run: python scripts/quality_gate.py --layers 1,2 --python "$(command -v python)"
+         --no-audit --output "$RUNNER_TEMP/gate".
+  - --no-audit is permitted by D10[16](3) because the separate dependency-audit job
+    runs pip-audit; findings are recorded, not suppressed (C-9).
+
+Deviations from the construction order / contracts: NONE.
+Residual / not in scope for T-0004:
+  - This evidence proves the workflow FILE is correct; it does NOT prove the suite is
+    green (AC-2) or Python 3.12 parity (AC-3). Those are separate evidence files owned
+    by qa-engineer / release-engineer (D4, D12).
+  - Floating action tags in pre-existing jobs remain an OPEN FINDING for AC-5 evidence
+    (D10[16](2)); not an AC-1 blocker.
+  - Files are left in the working tree, uncommitted, per D8 / team-lead instruction;
+    the single final commit is owned by another agent.
+==============================================================================
+
+##############################################################################
+# APPEND — D18 [35] REOPEN OF T-0004: C-10 FIX TO THE EXISTING UPLOAD BLOCK
+# UTC timestamp of this re-verification run: 2026-11-11T04:19:33Z
+#
+# SUPERSEDES (append-only; the CMD 0-7 block above is NOT deleted or edited):
+#   * CMD 5 note "exactly two hunks, both pure additions; no `-` line removes or
+#     rewrites any of the 7 pre-existing jobs" — now STALE. The diff has 3 hunks;
+#     2 removed lines are the AUTHORISED C-10 edit inside layer-3-native only.
+#   * CMD 6 "0 removed lines" — now STALE for the same reason (now 2).
+#   * verdict line 5 "0 removed lines" — now STALE.
+#   * "Also honoured: - C-10 / D10[16]: no upload-artifact added" — still TRUE (no NEW
+#     upload step was added), but C-10 also governs the PRE-EXISTING upload step, which
+#     D18 [35] found non-compliant. That gap is now closed below.
+#   * "Deviations from the construction order / contracts: NONE" — no UNAUTHORISED
+#     deviation; the single edit to the 7 existing jobs is the NARROW, EXPLICITLY
+#     AUTHORISED exception of D18 [35] / architect C3' [26] / D10[16](2).
+#
+# AUTHORITY: D18 [35] (TEAM-LEAD, BINDING). It reopens T-0004 because result [30]
+# left security threat T6 unfixed: .github/workflows/quality.yml lines 210-217
+# uploaded `${{ runner.temp }}/journeys/*.png` (broad, fork-controllable glob) with
+# `if-no-files-found: warn` and NO `retention-days`. Canonical checklist v2 [31]
+# asserts `grep -cE '^permissions:|contents: read|if-no-files-found: error|retention-days'
+# .github/workflows/quality.yml` >= 3; it returned 2, so T-0007 would FAIL.
+#
+# THE ONE EDIT (only this block; no other change to any of the 7 jobs):
+#   - `*.png` glob -> `${{ runner.temp }}/journeys/backend-evidence.json`
+#     (alongside the two already-present fixed names journeys.json, run-summary.json)
+#   - added `retention-days: 7`
+#   - `if-no-files-found: warn` -> `error`
+#   - `if: always()` KEPT; `name: journeys` and `uses:` KEPT.
+# Filename provenance verified in harness/scripts/native_qa.py:
+#   :201 comment "Writes journeys.json next to the evidence" / :156 read_journeys
+#   :241 summary_path = output / 'run-summary.json'  / :352 save_json(summary_path, summary)
+#   :311 save_json(output / 'backend-evidence.json', evidence)
+##############################################################################
+
+==============================================================================
+CMD 8 (fresh UTC timestamp)
+  $ date -u +"%Y-%m-%dT%H:%M:%SZ"
+  2026-11-11T04:19:33Z
+  exit=0
+
+==============================================================================
+CMD 9 — PyYAML BaseLoader, re-run of ALL original DONE checks + C-10 assertions
+  $ harness/backend/.venv/bin/python - <<'PY'
+    import yaml
+    d = yaml.load(open('.github/workflows/quality.yml', encoding='utf-8'), Loader=yaml.BaseLoader)
+    assert 'push' in d['on'] and 'pull_request' in d['on']
+    print('DONE1: YAML parsed; on.push + on.pull_request present')
+    g = d['jobs']['quality-gate']
+    line = [s['run'] for s in g['steps'] if 'quality_gate.py' in s.get('run','')][0]
+    assert '--layers 1,2' in line and '--python' in line and '--no-audit' in line
+    print('DONE2: quality-gate invokes quality_gate.py with --layers 1,2 + --python')
+    assert d['permissions']['contents'] == 'read'
+    print('DONE3: top-level permissions.contents = read')
+    up = [s for s in d['jobs']['layer-3-native']['steps'] if s.get('name') == 'Upload journey evidence'][0]
+    w = up['with']
+    assert up['if'] == 'always()'
+    assert '*.png' not in w['path'] and '*' not in w['path']
+    for f in ('journeys.json','run-summary.json','backend-evidence.json'):
+        assert '${{ runner.temp }}/journeys/' + f in w['path'], f
+    assert w['retention-days'] == '7' and w['if-no-files-found'] == 'error'
+    print('C-10: if:always kept; explicit 3-file whitelist; no glob; retention-days=7; if-no-files-found=error')
+    print('upload path =', repr(w['path']))
+    print('ALL ASSERTIONS PASSED')
+    PY
+
+  STDOUT (full):
+DONE1: YAML parsed; on.push + on.pull_request present
+DONE2: quality-gate invokes quality_gate.py with --layers 1,2 + --python
+DONE3: top-level permissions.contents = read
+C-10: if:always kept; explicit 3-file whitelist; no glob; retention-days=7; if-no-files-found=error
+upload path = '${{ runner.temp }}/journeys/journeys.json\n${{ runner.temp }}/journeys/run-summary.json\n${{ runner.temp }}/journeys/backend-evidence.json\n'
+ALL ASSERTIONS PASSED
+  exit=0
+
+==============================================================================
+CMD 10 — STRUCTURAL diff vs `git show HEAD` (proves NO other change to the 7 jobs)
+  $ harness/backend/.venv/bin/python - <<'PY'
+    import subprocess, yaml
+    head = subprocess.check_output(['git','show','HEAD:.github/workflows/quality.yml'], text=True)
+    dh = yaml.load(head, Loader=yaml.BaseLoader)
+    dw = yaml.load(open('.github/workflows/quality.yml', encoding='utf-8'), Loader=yaml.BaseLoader)
+    assert set(dw) - set(dh) == {'permissions'}, set(dw)-set(dh)
+    for k in dh:
+        if k != 'jobs':
+            assert dh[k] == dw[k], 'non-job top-level key changed: ' + k
+    print('non-job top-level keys unchanged; only permissions: added')
+    jh, jw = dh['jobs'], dw['jobs']
+    assert set(jw) - set(jh) == {'quality-gate'}
+    changed = [j for j in jh if jh[j] != jw[j]]
+    unchanged = [j for j in jh if jh[j] == jw[j]]
+    print('existing 7 jobs identical =', ','.join(unchanged))
+    print('existing jobs differing =', changed)
+    assert changed == ['layer-3-native']
+    sh, sw = jh['layer-3-native']['steps'], jw['layer-3-native']['steps']
+    assert len(sh) == len(sw)
+    for i in range(len(sh)-1):
+        assert sh[i] == sw[i], 'an earlier layer-3-native step changed'
+    assert sh[-1]['name'] == sw[-1]['name'] and sh[-1]['uses'] == sw[-1]['uses'] and sh[-1]['if'] == sw[-1]['if']
+    print('upload step name/uses/if unchanged; only with: block edited')
+    print('OLD with =', sh[-1]['with'])
+    print('NEW with =', sw[-1]['with'])
+    print('STRUCTURAL CHECK PASSED')
+    PY
+
+  STDOUT (full):
+non-job top-level keys unchanged; only permissions: added
+existing 7 jobs identical = layer-1-unit,layer-2-integration,releasable-tree,full-suite-on-the-shipping-runtime,dependency-audit,mutation
+existing jobs differing = ['layer-3-native']
+upload step name/uses/if unchanged; only with: block edited
+OLD with = {'name': 'journeys', 'path': '${{ runner.temp }}/journeys/journeys.json\n${{ runner.temp }}/journeys/run-summary.json\n${{ runner.temp }}/journeys/*.png\n', 'if-no-files-found': 'warn'}
+NEW with = {'name': 'journeys', 'path': '${{ runner.temp }}/journeys/journeys.json\n${{ runner.temp }}/journeys/run-summary.json\n${{ runner.temp }}/journeys/backend-evidence.json\n', 'retention-days': '7', 'if-no-files-found': 'error'}
+STRUCTURAL CHECK PASSED
+  exit=0
+  NOTE: HEAD is the PRE-T-0004 original (nothing has been committed, per D8), so this
+  is a direct comparison against the untouched baseline, not against an intermediate.
+
+==============================================================================
+CMD 11 — Ruby stdlib Psych parse (dependency-free)
+  $ ruby -ryaml -e 'd=YAML.load_file(".github/workflows/quality.yml"); puts "parsed: YES (Ruby Psych; YAML 1.1 maps on: -> true)"; puts "jobs count = #{d["jobs"].keys.length}"; puts "quality-gate present = #{d["jobs"].key?("quality-gate")}"; puts "permissions present = #{d.key?("permissions")}"'
+
+  STDOUT (full):
+parsed: YES (Ruby Psych; YAML 1.1 maps on: -> true)
+jobs count = 8
+quality-gate present = true
+permissions present = true
+  exit=0
+
+==============================================================================
+CMD 12 — DONE criterion 4, forbidden-pattern grep (re-run)
+  $ grep -cE 'pull_request_target|secrets\.|printenv|cat [^ ]*\.env|set -x|pytest -s|ignore-vuln|continue-on-error' .github/workflows/quality.yml
+
+  STDOUT (full):
+0
+  grep exit=1   (grep -c exits 1 on zero matches; expected)
+
+  $ C=$(grep -cE 'pull_request_target|secrets\.|printenv|cat [^ ]*\.env|set -x|pytest -s|ignore-vuln|continue-on-error' .github/workflows/quality.yml); echo "forbidden-pattern count = $C"; test "$C" -eq 0
+  STDOUT (full):
+forbidden-pattern count = 0
+  assertion exit=0
+
+==============================================================================
+CMD 13 — canonical T-0007 checklist v2 [31] C-10 grep, REQUIRED >= 3
+  $ grep -cE '^permissions:|contents: read|if-no-files-found: error|retention-days' .github/workflows/quality.yml
+
+  STDOUT (full):
+4
+  grep exit=0
+
+  $ C=$(grep -cE '^permissions:|contents: read|if-no-files-found: error|retention-days' .github/workflows/quality.yml); echo "C-10 checklist count = $C"; test "$C" -ge 3
+  STDOUT (full):
+C-10 checklist count = 4
+  assertion exit=0
+
+  Before this fix the same command returned 2 (D18 [35]). Now 4:
+    ^permissions: (1) + contents: read (1) + if-no-files-found: error (1) + retention-days (1).
+
+==============================================================================
+CMD 14 — DONE criterion 5, full git diff
+  $ git diff -- .github/workflows/quality.yml
+
+  STDOUT (full):
+diff --git a/.github/workflows/quality.yml b/.github/workflows/quality.yml
+index cef25e0..5ce7438 100644
+--- a/.github/workflows/quality.yml
++++ b/.github/workflows/quality.yml
+@@ -26,6 +26,9 @@ on:
+       - '.github/workflows/quality.yml'
+   workflow_dispatch:
+ 
++permissions:
++  contents: read
++
+ concurrency:
+   group: quality-${{ github.ref }}
+   cancel-in-progress: true
+@@ -210,8 +213,9 @@ jobs:
+           path: |
+             ${{ runner.temp }}/journeys/journeys.json
+             ${{ runner.temp }}/journeys/run-summary.json
+-            ${{ runner.temp }}/journeys/*.png
+-          if-no-files-found: warn
++            ${{ runner.temp }}/journeys/backend-evidence.json
++          retention-days: 7
++          if-no-files-found: error
+ 
+   dependency-audit:
+     name: Dependency and vulnerability check
+@@ -247,3 +251,39 @@ jobs:
+       - name: Apply curated mutants and require every one to be killed
+         working-directory: harness
+         run: python scripts/mutation_check.py --python "$(command -v python)"
++
++  # Runs the release gate's backend layers through scripts/quality_gate.py. The gate's
++  # default interpreter is harness/backend/.venv/bin/python, which does not exist on a
++  # fresh runner, so --python is mandatory. Layer 2 reads HARNESS_TEST_PG_ADMIN at import
++  # time; without this postgres service and value, its PostgreSQL half skips and
++  # summarise() blocks on any test-level skip. Dependency auditing is delegated to the
++  # separate dependency-audit job, hence --no-audit.
++  quality-gate:
++    name: Quality gate — backend layers 1 and 2
++    runs-on: ubuntu-latest
++    services:
++      postgres:
++        image: postgres:16
++        env:
++          POSTGRES_PASSWORD: postgres
++          POSTGRES_DB: postgres
++        ports: ['5432:5432']
++        options: >-
++          --health-cmd pg_isready
++          --health-interval 5s
++          --health-timeout 5s
++          --health-retries 20
++    env:
++      HARNESS_TEST_PG_ADMIN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
++    steps:
++      - uses: actions/checkout@v4
++      - uses: actions/setup-python@v5
++        with:
++          python-version: '3.12'
++          cache: pip
++          cache-dependency-path: harness/backend/requirements-dev.txt
++      - name: Install pinned dependencies
++        run: pip install -r harness/backend/requirements-dev.txt
++      - name: Run the layered quality gate
++        working-directory: harness
++        run: python scripts/quality_gate.py --layers 1,2 --python "$(command -v python)" --no-audit --output "$RUNNER_TEMP/gate"
+  exit=0
+  Three hunks. The 2 removed lines and 3 added lines in the middle hunk are the
+  AUTHORISED D18 [35] / C3' [26] C-10 edit to the single upload block. CMD 10 proves
+  all other lines of the 7 existing jobs are byte-identical to HEAD.
+
+==============================================================================
+CMD 15 — diff --check, status, name-only
+  $ git diff --check -- .github/workflows/quality.yml; echo "diff --check exit=$?"
+  STDOUT (full):
+diff --check exit=0
+
+  $ git status --short; echo "status exit=$?"
+  STDOUT (full):
+ M .github/workflows/quality.yml
+?? harness/.agent-bus/
+?? harness/backend/.tmp_1111.log
+?? harness/backend/.tmp_1111_clean.log
+?? harness/docs/evidence/2026-11-11/
+status exit=0
+
+  $ git diff --name-only; echo "name-only exit=$?"
+  STDOUT (full):
+.github/workflows/quality.yml
+name-only exit=0
+  The three untracked entries other than the evidence dir are pre-existing scratch
+  from other agents; not created or touched by T-0004. Only ONE tracked file modified.
+
+==============================================================================
+CMD 16 — DONE criterion 6, evidence file present
+  $ ls -l harness/docs/evidence/2026-11-11/AC-1.txt
+  STDOUT (full):
+-rw-r--r-- 1 tengyi staff 11869 2026-11-11 12:13 harness/docs/evidence/2026-11-11/AC-1.txt
+  exit=0
+  (size/timestamp shown as of CMD 16, BEFORE this append was written; the file now
+   contains this appended CMD 8+ section.)
+
+==============================================================================
+RE-VERIFICATION VERDICT (UTC 2026-11-11T04:19:33Z)
+  1. YAML parses; on.push + on.pull_request ......................... PASS (CMD 9, CMD 11)
+  2. quality-gate -> quality_gate.py --layers 1,2 + --python ......... PASS (CMD 9)
+  3. top-level permissions: contents: read ........................... PASS (CMD 9, CMD 10)
+  4. forbidden-pattern count = 0 ...................................... PASS (CMD 12)
+  5. git diff shows ONLY intended changes ............................ PASS (CMD 14, CMD 10)
+  6. AC-1.txt written ................................................. PASS (CMD 16)
+  C-10 checklist v2 grep >= 3 ......................................... PASS (CMD 13: 4, was 2)
+  No unauthorised change to the 7 existing jobs ...................... PASS (CMD 10)
+  ALL PASS. No commit / git add / push / tag (D8).
+
+Residual observations for security-reviewer / qa-engineer (NOT blockers, NOT
+deviations; recorded for transparency, no architecture change made by me):
+  - native_qa.py:311 writes backend-evidence.json inside a try/except in the finally
+    block, so if inspect_database() raises the file is absent; journeys.json is written
+    by the native app and may be absent if the app produced no evidence. run-summary.json
+    (:352, finally) is unconditional. actions/upload-artifact@v4 with
+    if-no-files-found: error fails when NO path matches, so at least run-summary.json
+    should always be present. Implemented exactly as D18 [35] directs.
+  - Floating action tags in the 7 pre-existing jobs remain the declared OPEN FINDING
+    for AC-5 (D10[16](2) / checklist v2 [31]); not an AC-1 blocker.
+  - AC-1 proves the workflow FILE only; it does NOT prove suite green (AC-2) or
+    Python 3.12 parity (AC-3) — separate evidence per D4/D12/D13.
+==============================================================================

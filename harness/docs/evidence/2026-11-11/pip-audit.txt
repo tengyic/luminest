@@ -1,0 +1,42 @@
+T-0008 — dependency vulnerability scan (pip-audit)
+Harness shipping audit — 2026-11-11
+
+SCOPE / LIMITATION (recorded, not suppressed — C-10/D10)
+  The release gate's `dependency-audit` job runs:
+      pip-audit -r harness/backend/requirements.txt --progress-spinner off
+      pip-audit -r harness/backend/requirements-optional.txt --progress-spinner off
+  In this sandbox `pip-audit -r <file>` cannot run: it builds an internal resolution venv,
+  and venv creation is blocked here (ensurepip SIGABRT) — an environment limit, not a scan
+  result. The fallback below audits the INSTALLED dev environment (.venv, Python 3.14), which
+  is a superset of the pinned runtime set. It is therefore a valid but slightly different
+  scope than CI; CI re-runs the exact `-r` scans on a clean runner.
+
+COMMAND
+  $ .venv/bin/pip-audit --cache-dir /tmp/pa_cache --progress-spinner off --timeout 120
+  (run in harness/backend at 2026-11-11T07:42:13Z)
+
+OUTPUT (verbatim)
+  Found 13 known vulnerabilities in 4 packages
+  Name    Version   ID                  Fix Versions
+  ------- --------- ------------------- ------------
+  certifi 2026.7.22 PYSEC-2026-4320     2026.10.18
+  pip     25.3      PYSEC-2026-196      26.1.2
+  pip     25.3      PYSEC-2026-1796     26.0
+  pip     25.3      PYSEC-2026-2875     26.1
+  pip     25.3      PYSEC-2026-2876     26.1
+  pip     25.3      PYSEC-2026-3721     26.2
+  pyasn1  0.6.4     GHSA-2qm8-x737-gmw5 0.6.5
+  pyasn1  0.6.4     GHSA-fm9c-5rcf-2q5p 0.6.5
+  pyasn1  0.6.4     GHSA-mm57-4v3p-rchx 0.6.5
+  pyasn1  0.6.4     GHSA-9m75-vc3g-4x39 0.6.5
+  urllib3 2.7.0     PYSEC-2026-4177     2.8.0
+  urllib3 2.7.0     PYSEC-2026-4176     2.8.0
+  urllib3 2.7.0     PYSEC-2026-4175     2.8.0
+
+READING
+  - 13 advisories across 4 packages; every one has a fixed version available.
+  - `pip` (the installer) and `pyasn1`/`urllib3`/`certifi` are present here via the dev/venv
+    superset. The runtime-pinned files (requirements.txt, requirements-optional.txt) are the
+    authoritative set CI scans; this run is a recorded heads-up, not a gate failure.
+  - Not suppressed. Remediation (bumping the pins) is left for a dedicated dependency PR so
+    it is not bundled into the shipping-audit evidence commit.

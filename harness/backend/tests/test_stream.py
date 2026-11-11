@@ -16,6 +16,8 @@ No network and no real capture: the tool is stubbed, so these assert the contrac
 than the machine.
 """
 
+import sys
+
 import pytest
 from fastapi.testclient import TestClient
 from types import SimpleNamespace
@@ -25,6 +27,17 @@ from app.harness import screen
 from app.main import create_app
 
 STREAM = '/api/v1/stream'
+
+# Screen capture drives macOS ``screencapture`` and macOS per-binary Screen Recording
+# permission. The shipping runtime is a Linux server that has neither, and
+# app.harness.screen correctly reports "screencapture is not present" there before the
+# stub below is consulted. These assertions describe macOS behaviour, so they run only on
+# macOS -- the same pattern the NODE-gated helper tests use.
+# See docs/evidence/2026-11-11/B7-macos-only-tests.txt.
+pytestmark = pytest.mark.skipif(
+    sys.platform != "darwin",
+    reason="screen capture is a macOS desktop capability (screencapture)",
+)
 
 
 @pytest.fixture

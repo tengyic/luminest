@@ -1,0 +1,87 @@
+AC-4 — Phase 4a: unsigned staging artifact + release docs (NO commit yet)
+Harness shipping audit — 2026-11-11
+All commands run from the repository root on the feature/a11y-i18n working tree.
+
+SCOPE
+  Phase 4a produces the unsigned staging artifact and the release documentation that the
+  single (not-yet-made) commit will carry. It does NOT commit. Items covered here:
+  AC-4 (staging artifact + CHANGELOG + ROLLBACK), C-1/C-6 (tracked-files-only, secret-free),
+  C-11 (archive stays untracked), C-12 (rollback without secret restore),
+  D15/D16/D21 (in-archive marker, two-step grep + POSIX cross-check).
+
+1. STAGING ARTIFACT
+   builder      : git archive HEAD | tar -x   (tracked files only)
+   source commit: a7bfb6d5b433e25518a05b97f3fef6fe94881c96   (HEAD)
+   marker       : STAGING-MARKER.md written INTO the tree before re-archiving (D16)
+   path         : outputs/staging/lumen-harness-staging-a7bfb6d5b433.tar.gz
+   size         : 75,585,558 bytes (~72 MiB)
+   sha256       : e7c2c8f51d9020348618a0d94a6f0033ab6816fb683500e7de09767a5df7f29e
+   verify       : shasum -a 256 -c <path>.sha256  ->  outputs/staging/lumen-harness-staging-a7bfb6d5b433.tar.gz: OK  (rc=0)
+   marker count : 1  (STAGING-MARKER.md present INSIDE the archive)
+   tracked-only : zero matches for (^|/)\.env$, model_config.json, *.sqlite3, *.pem, *.key
+   gitignore    : outputs/staging/ is ignored (.gitignore:9) — C-11: the archive is NOT committed
+   status       : UNSIGNED — no codesign, no notarization, not shippable, not distributable
+
+2. ARCHIVE INTEGRITY COMMANDS + OUTPUT (verbatim)
+
+   $ shasum -a 256 -c outputs/staging/lumen-harness-staging-a7bfb6d5b433.tar.gz.sha256
+   outputs/staging/lumen-harness-staging-a7bfb6d5b433.tar.gz: OK
+   shasum_rc=0
+   marker_count=1
+   archive_sha256=e7c2c8f51d9020348618a0d94a6f0033ab6816fb683500e7de09767a5df7f29e
+
+   (A harness notice "WorkBuddy: file rollback is not tracked for these tar options." is
+   emitted by the macOS tar shim to stdout during `tar -tzf`; it is not part of the archive
+   and does not affect marker_count=1.)
+
+3. CHANGELOG
+   - `## Unreleased` gained: `### Added — unsigned staging artifact and shipping-audit
+     evidence (2026-11-11 follow-up)`.
+   - The pre-existing `### Pending` line
+       "- **A signed, notarized artifact.** Blocked on credentials, not on code."
+     is preserved VERBATIM. It now sits at line 212 (was 201) only because the new
+     `### Added` block was inserted ABOVE it. This is the D21(2) allowed exception — a
+     statement that a signed artifact is *blocked*, not a claim that one exists.
+
+4. ROLLBACK.md (C-12)
+   - Documents the ONLY supported rollback: `git checkout a7bfb6d…` and
+     `shasum -a 256 -c` against the archive's `.sha256`.
+   - Explicitly does NOT restore secrets, `.env`, or `model_config.json`, and does NOT
+     rotate keys. Production secret restoration is declared out of scope (operator's own
+     secret store).
+
+5. WORD-SCAN DISCIPLINE (D15 two-step + D21(1)) — verbatim
+
+   $ grep -c "UNSIGNED" harness/CHANGELOG.md harness/ROLLBACK.md
+   harness/CHANGELOG.md:1
+   harness/ROLLBACK.md:1
+   grep_exit=0                # affirmative tripwire PASS — both files declare UNSIGNED
+
+   $ grep -nwE 'signed|notarized|stapled|shippable|distributable' harness/CHANGELOG.md harness/ROLLBACK.md
+   harness/CHANGELOG.md:18:  declaring **UNSIGNED — no codesign, no notarization, not shippable, not distributable**.
+   harness/CHANGELOG.md:212:- **A signed, notarized artifact.** Blocked on credentials, not on code.
+   harness/ROLLBACK.md:42:  not shippable, not distributable. A signed, notarized release remains blocked on
+   grep_exit=0
+
+   $ grep -nEi '(^|[^[:alnum:]_])(signed|notarized|stapled|shippable|distributable)([^[:alnum:]_]|$)' harness/CHANGELOG.md harness/ROLLBACK.md
+   harness/CHANGELOG.md:18:  declaring **UNSIGNED — no codesign, no notarization, not shippable, not distributable**.
+   harness/CHANGELOG.md:212:- **A signed, notarized artifact.** Blocked on credentials, not on code.
+   harness/ROLLBACK.md:42:  not shippable, not distributable. A signed, notarized release remains blocked on
+   grep_exit=0
+
+   Interpretation: exactly three occurrences, all negations (CHANGELOG:18, ROLLBACK:42) or
+   the documented pre-existing exception (CHANGELOG:212). No line asserts the artifact IS
+   signed or shippable.
+
+   $ printf 'unsigned, not signed\n' | grep -nwE 'signed|notarized|stapled|shippable|distributable'
+   compound_w_exit=1            # compound -w MISSES "signed" inside "unsigned,..." (toybox bug)
+   $ printf 'unsigned, not signed\n' | grep -nEi '(^|[^[:alnum:]_])(signed|notarized|stapled|shippable|distributable)([^[:alnum:]_]|$)'
+   1:unsigned, not signed
+   posix_exit=0                 # POSIX-class cross-check CATCHES it — D21(1) binding scan
+
+6. SCOPE NOTE ON THE ARCHIVE vs THE COMMIT
+   - The staging archive is a snapshot of CODE commit a7bfb6d. It deliberately does NOT
+     include the Phase 4 documentation/evidence/CI changes, nor the requirements-dev.txt
+     test-dependency declaration (see B6-ci-dependency.txt). Those land in the single commit, not
+     in a HEAD-derived archive. The archive is a QA snapshot for internal verification, not
+     the release, and it is explicitly UNSIGNED.

@@ -11,6 +11,24 @@ what the release gate accepts. Everything below that starts with *audit* came ou
 
 ## Unreleased
 
+### Added — unsigned staging artifact and shipping-audit evidence (2026-11-11 follow-up)
+
+- An **unsigned** staging archive is produced from `git archive HEAD` (tracked files only;
+  no `.env`, no `model_config.json`, no keys). It carries an in-archive `STAGING-MARKER.md`
+  declaring **UNSIGNED — no codesign, no notarization, not shippable, not distributable**.
+- `harness/ROLLBACK.md` documents the only supported rollback: `git checkout a7bfb6d…` and
+  `shasum -a 256 -c` against the archive `.sha256`. No secret or `model_config` restore, no
+  key rotation.
+- Shipping-audit evidence (AC-1…AC-5, T-0002/T-0003, pip-audit, findings B6/B7) is recorded
+  under `harness/docs/evidence/2026-11-11/` so a clean clone can re-verify the release gate.
+  Two release-gate portability defects surfaced and are addressed here: **B6** — pycryptodome
+  (needed by the encrypted-backup tests) was undeclared in `requirements-dev.txt`, so a clean
+  Python 3.12 runner failed ten tests; it is now declared. **B7** — the macOS-only
+  `test_stream` screen-capture tests ran (and failed) on the Linux 3.12 job; `test_stream.py`
+  is now platform-guarded to macOS, so they skip on Linux and still run on macOS. The only
+  residual local constraint is memory: `test_kst` needs > 4 GiB, so CI's 7 GB runner is the
+  authority. See `B6-ci-dependency.txt` / `B7-macos-only-tests.txt`.
+
 ### Fixed — the hosted deployment could not boot (audit B2)
 
 `deploy/compose.yaml` defaulted `HARNESS_TUTOR_PROVIDER` to `offline`, a value

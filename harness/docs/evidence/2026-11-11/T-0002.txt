@@ -1,0 +1,35 @@
+T-0002 — Python 3.12 parity run record (raw)
+Harness shipping audit — 2026-11-11
+
+IMAGES (derived from the pre-built staging test image, tracked-only source at run time)
+  lumen/backend-py312-test:staging    python 3.12.16, pytest 9.1.1, pytest-timeout 2.4.0
+                                      (NO pycryptodome — mirrors a clean dev install)
+  lumen/backend-py312-parity:staging  + pycryptodome==3.23.0  (B6 reproduction/fix proof)
+  lumen/backend-py312-forked:staging  + pycryptodome==3.23.0 + pytest-forked  (memory-safe full run)
+
+SOURCE
+  git archive HEAD | tar -x   into /srv/harness  (tracked files only; no .env / model_config)
+
+RUNS AND KEY OUTPUT (all EXIT codes captured from the process, not the wrapper)
+  1. backup+engines, NO pycryptodome (clean dev env):
+       10 failed, 43 passed, 2 skipped   -> ALL failures "No module named 'Crypto'"   [B6]
+  2. backup+engines, WITH pycryptodome:
+       53 passed, 2 skipped              -> B6 fix confirmed
+  3. plain full suite (one container):    SIGKILLed (exit 137) ~37%  -> 4 GiB OOM
+  4. 4 shards (~573 tests each):          shard 1 SIGKILLed (exit 137) ~50%  -> cumulative OOM
+  5. full suite, `--forked` (memory-safe): 14 failed, 2241 passed, 36 skipped in 1559s
+                                           EXIT_CODE=1
+  6. the 14 failures re-run WITHOUT --forked:
+       4 test_kst: SIGKILL again (genuine > 4 GiB)
+       2 (tts, user_scope) isolated: fail in isolation (pass sequentially in AC-2)
+       8 test_stream: macOS-only (see B7)
+
+LOGS (host)
+  /tmp/parity_py312.log            (plain full run, killed)
+  /tmp/parity_diag.log             (-x, killed)
+  /tmp/parity_forked_full.log      (full --forked: the 14/2241/36 result)
+  /tmp/shard{1..4}.log            (shards)
+
+CONCLUSION -> see T-0003.txt / AC-3.txt / B7-macos-only-tests.txt
+  Python 3.12 is language-parity-clean (2241 pass). The remaining failures are macOS-only
+  tests on Linux (B7, open) + a > 4 GiB memory test + two --forked isolation artifacts.

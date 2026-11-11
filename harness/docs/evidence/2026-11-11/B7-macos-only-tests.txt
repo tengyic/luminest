@@ -1,0 +1,66 @@
+FINDING B7 — the "full suite on the shipping runtime" job runs macOS-only tests on Linux
+Harness shipping audit — 2026-11-11 (found during AC-3 Python 3.12 parity)
+
+SUMMARY
+  .github/workflows/quality.yml defines the job `full-suite-on-the-shipping-runtime`
+  (`runs-on: ubuntu-latest`, Python 3.12) that runs the ENTIRE backend suite with
+  `python -m pytest -q -rs`. Eight tests in tests/test_stream.py assert macOS screen-capture
+  behaviour (the ``screencapture`` binary and per-binary Screen Recording permission). On
+  Linux those tests fail, so this job cannot go green as written — independent of the
+  pycryptodome issue (B6, fixed).
+
+EVIDENCE
+  On the 3.12 Linux container (tracked-only source), tests/test_stream.py:
+    AssertionError: 'has not reported its window'  ... in
+      '/usr/sbin/screencapture is not present on this system.'
+    AssertionError: 'Screen Recording'  ... in '/usr/sbin/screencapture is not present ...'
+    AssertionError: 'display is asleep' / 'locked' / 'refused' == 'permitted'  (same cause)
+  -> 8 failures, all from the same root: the screen module reports the macOS binary absent;
+     the tests assert the macOS sentences. `screen.py` short-circuits on the missing binary
+     before the test's stub is consulted.
+
+  test_stream.py has NO platform guard (grep for skipif/darwin/platform → none).
+
+WHY THIS IS A GATE BLOCKER
+  `full-suite-on-the-shipping-runtime` uses `runs-on: ubuntu-latest` and `pytest -q -rs`.
+  ubuntu has no ``screencapture``; the eight tests fail; `pytest` exits non-zero; the job is
+  red. (The pycryptodome gap, B6, added ten more red tests to the same job; B6 is now fixed
+  by declaring pycryptodome in requirements-dev.txt.)
+
+REMEDIATION OPTIONS (for the human — this is a scope decision, not applied unilaterally)
+  (a) Platform-guard the file: add to test_stream.py
+        pytestmark = pytest.mark.skipif(sys.platform != "darwin",
+                    reason="screen capture is a macOS desktop capability")
+      — matches the existing NODE-gated helper tests; the shipping Linux server has no
+      screen-capture feature, so skipping is honest. Smallest change.
+  (b) Make the stub truly platform-independent: teach screen.py (or the test fixture) to
+      reach the stubbed capture path on Linux so the tests assert the CONTRACT (which the
+      file docstring claims they do) instead of failing on the missing binary. Larger, but
+      preserves real coverage on Linux.
+  (c) Run `full-suite-on-the-shipping-runtime` on `macos-14` instead of `ubuntu-latest`.
+      Fixes stream/audio here and gives the memory-heavy test_kst room, but weakens the
+      job's stated purpose ("the Python the IMAGE ships" — the image is a Linux container)
+      and costs macOS runner minutes.
+
+RECOMMENDATION
+  (a) if the goal is a green Linux gate quickly; (b) if the "contract, not the machine"
+  intent must be honoured. Either way, (c) alone is a category error for a Linux shipping
+  image. Do NOT treat the 3.12 suite as green until one of (a)/(b) lands.
+
+RELATED (not blockers)
+  - test_kst.py (4 tests) need > 4 GiB; they OOM in the audit's 4 GiB Colima VM. CI's 7 GB
+    runner should pass them.
+  - test_tts and test_user_scope fail only under `--forked` / isolation; they pass in the
+    normal sequential suite (AC-2). Not defects.
+
+RESOLUTION (applied 2026-11-11)
+  Option (a) was applied. tests/test_stream.py now carries:
+      pytestmark = pytest.mark.skipif(
+          sys.platform != "darwin",
+          reason="screen capture is a macOS desktop capability (screencapture)",
+      )
+  Verified:
+    - 3.12 Linux container : `pytest tests/test_stream.py` -> 17 skipped  (was 8 failed / 9 passed)
+    - macOS 3.14 (local)   : `pytest tests/test_stream.py` -> 17 passed   (guard is false on darwin)
+  The ubuntu 3.12 `full-suite-on-the-shipping-runtime` job will now SKIP these tests instead
+  of failing. B7 is resolved for a green gate.

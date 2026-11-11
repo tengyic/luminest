@@ -1,0 +1,62 @@
+AC-5 — T-0007 state audit (pre-commit security & red-line check)
+Harness shipping audit — 2026-11-11 (lead-run; the security-reviewer sub-agent is 429-throttled)
+
+PROVENANCE
+  HEAD   = a7bfb6d5b433e25518a05b97f3fef6fe94881c96
+  TREE   = bd404f2d10e887e41a5f366b43aab320a7f06b12
+  BRANCH = feature/a11y-i18n
+  UTC    = 2026-11-11T09:09:10Z
+  (label authenticity only — NOT byte provenance; per D21 / bus [50].)
+
+RESIDUE INVENTORY (git status --porcelain)
+    M .github/workflows/quality.yml
+    M harness/CHANGELOG.md
+    M harness/backend/requirements-dev.txt
+    ?? .agent-bus/
+    ?? harness/.agent-bus/
+    ?? harness/ROLLBACK.md
+    ?? harness/backend/.tmp_1111.log
+    ?? harness/backend/.tmp_1111_clean.log
+    ?? harness/docs/evidence/2026-11-11/
+  -> Both .agent-bus/ dirs MUST NOT be staged (canonical bus = harness/.agent-bus; the root
+     .agent-bus/ is stray residue, never staged and never posted to). .tmp_*.log must not be
+     staged. outputs/staging/* is gitignored (C-11).
+
+SECRET-VALUE SCAN over the commit paths — real credential shapes only
+  (AKIA[0-9A-Z]{16}, sk-<20+>, -----BEGIN … PRIVATE KEY, ghp_<30+>, xox[baprs]-…):
+    RESULT: NONE found in any path.
+  (Prose occurrences of the words token/key/secret/password in the evidence are discussion,
+   not credential values.)
+
+C-1 / C-6 — tracked-only, secret-free archive
+  `git archive HEAD harness/` contains no .env, model_config.json, *.sqlite3, *.pem, *.key.
+  (Full listing check in AC-4 §1; zero matches.)
+
+C-10 — CI artifact hardening (working-tree quality.yml)
+  line 210  uses: actions/upload-artifact@v4
+  line 217  retention-days: 7
+  line 218  if-no-files-found: error
+  whitelist: ${{ runner.temp }}/journeys/{journeys,run-summary,backend-evidence}.json (3 files)
+
+AC-1(4) — release-gate invocation (POSIX grep, D15-safe)
+  invocations = 1       (grep -cE '^[[:space:]]+run:.*scripts/quality_gate\.py')
+  working-directory: harness referenced 9 times.   PASS
+
+D15 affirmative tripwire
+  UNSIGNED present in CHANGELOG.md (1) and ROLLBACK.md (1).  PASS
+  (D15 step-2 + D21(1) POSIX inventory: AC-4 §5 — 3 lines, all negations or the D21(2) line.)
+
+RED-LINE CHECK (autonomy envelope)
+  - No production deploy, no push, no force-push, no tag.
+  - No destructive data migration, no user-data deletion.
+  - No key creation/rotation; no .env / model_config / PII read or staged.
+  - No paid resource, no external announcement / PR.
+  => No red-line violation in the proposed commit set.
+
+VERDICT
+  The tree is SAFE to commit: no secrets, no forbidden paths, red-line-clean. Release-gate
+  portability defects were found and are addressed: **B6** (pycryptodome undeclared) FIXED;
+  **B7** (macOS-only test_stream on the Linux 3.12 job) RESOLVED by a platform guard
+  (verified 17 skipped on Linux, 17 passed on macOS). The only residual is memory: test_kst
+  needs > 4 GiB, so CI's 7 GB runner is the authority. This commit is an audit/remediation
+  checkpoint — no tag, no push as "ready".

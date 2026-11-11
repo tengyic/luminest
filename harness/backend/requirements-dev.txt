@@ -44,3 +44,12 @@ psycopg[binary]==3.3.8
 # Dependency and vulnerability scanning for the release gate. Lives in the dev file because
 # nothing imports it at runtime, for the same reason pytest does not live in requirements.
 pip-audit==2.9.0
+# pycryptodome backs the encrypted-backup tests (tests/test_database_backup.py) and is
+# declared runtime-optional in requirements-optional.txt: the application detects it and
+# degrades to a clear BackupEncryptionError when it is absent, so the desktop bundle ships
+# without it. The *test suite*, however, does not skip those ten encryption tests when the
+# module is missing -- it fails them -- so a clean `pip install -r requirements-dev.txt`
+# (exactly what every CI job runs) could not go green on Python 3.12, the version the image
+# ships. Declaring it here keeps the test/build environment complete, as this file's header
+# promises, without adding it to the runtime bundle.
+pycryptodome==3.23.0

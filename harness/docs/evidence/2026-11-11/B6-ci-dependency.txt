@@ -1,0 +1,54 @@
+FINDING B6 — the CI release gate cannot go green on a clean Python 3.12 runner
+Harness shipping audit — 2026-11-11 (found during AC-3 parity verification)
+
+SUMMARY
+  The layer-2 CI job runs the FULL suite on Python 3.12 (the version the image ships) after
+  `pip install -r harness/backend/requirements-dev.txt`. That file pulls `requirements.txt`
+  but NOT `requirements-optional.txt`. `pycryptodome` is declared only in the optional file,
+  and ten tests in tests/test_database_backup.py call `create_sqlite_backup(encrypt=True)`
+  with NO `importorskip`/`skipif` guard. On a clean 3.12 runner those ten tests therefore
+  error with `ModuleNotFoundError: No module named 'Crypto'` and the job fails.
+
+  This is a TEST/BUILD reproducibility gap, not a production runtime gap: the production
+  `Dockerfile` installs `requirements.txt` + `requirements-optional.txt`, so a deployment
+  that sets LUMINEST_BACKUP_KEY does have pycryptodome. The defect is that CI does not, yet
+  runs tests that require it.
+
+EVIDENCE
+  1. .github/workflows/quality.yml (layer-2, Python 3.12):
+       line 145  python-version: '3.12'
+       line 149  run: pip install -r harness/backend/requirements-dev.txt
+       line 173  run: python -m pytest -q -rs          # the full suite
+     No test job installs requirements-optional.txt (line 237 only AUDITS it).
+
+  2. harness/backend/requirements-dev.txt (HEAD a7bfb6d) contains no pycryptodome and does
+     not include requirements-optional.txt. requirements.txt does not either.
+
+  3. Reproduction — 3.12 image built from the dev requirements (no optional), tracked-only
+     source via `git archive HEAD`, cwd harness/backend:
+       $ python -m pytest tests/test_database_backup.py tests/test_database_engines.py -q
+       ...
+       FAILED tests/test_database_backup.py::test_encryption_round_trip_restores_byte_identically
+       ... (10 encryption tests) ...
+       E   app.database_backup.BackupEncryptionError: Backup encryption needs the pycryptodome
+           package (AES-GCM) and it is not importable from this interpreter:
+           No module named 'Crypto'.
+       10 failed, 43 passed, 2 skipped
+
+  4. Fix verification — same image + `pip install pycryptodome==3.23.0`:
+       $ python -m pytest tests/test_database_backup.py tests/test_database_engines.py -q
+       53 passed, 2 skipped
+
+REMEDIATION APPLIED
+  Added `pycryptodome==3.23.0` to harness/backend/requirements-dev.txt (with a comment naming
+  this reason). requirements-dev.txt is the file whose header promises "a superset … all a
+  contributor or a build needs," and every CI job installs it, so one line repairs all five
+  jobs without touching the runtime bundle or requirements-optional.txt's design intent.
+
+RESIDUAL / FOR THE HUMAN
+  - This expands the single evidence commit from the planned 12 paths to 13
+    (adds harness/backend/requirements-dev.txt). Recorded as D22.
+  - Alternative accepted fix (if the team prefers to keep the dev file dependency-free):
+    install `-r requirements-optional.txt` in the pytest jobs, or add
+    `pytest.importorskip("Crypto")` guards to the ten tests. The chosen fix keeps CI coverage
+    of the encryption path instead of skipping it.

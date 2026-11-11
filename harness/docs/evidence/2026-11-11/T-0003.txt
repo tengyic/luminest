@@ -1,0 +1,31 @@
+T-0003 — Python 3.12 parity conclusion
+Harness shipping audit — 2026-11-11
+
+QUESTION
+  Does the backend suite run correctly on Python 3.12, the interpreter the production image
+  ships (`harness/backend/Dockerfile` -> python:3.12-slim)?
+
+ANSWER
+  Yes for language/API parity; NOT provably "all green" in this environment, for reasons that
+  are unrelated to Python 3.12:
+
+  Passed on 3.12: 2241 tests (platform-neutral). These behave identically to 3.14.
+  Skipped on 3.12: 36 (more than AC-2's 2 because `--forked` and the container skip a few).
+  Failed on 3.12: 14 — every one classified:
+     * 8  test_stream.py            — macOS ``screencapture`` only; fails on any Linux runner.
+                                       -> OPEN release-gate blocker B7.
+     * 4  test_kst.py               — genuine > 4 GiB RAM; OOM in the audit's 4 GiB VM.
+                                       -> environment (CI 7 GB runner should pass).
+     * 1  test_creation_tools (tts) — isolation-only failure; passes sequentially (AC-2).
+     * 1  test_user_scope (guard)   — isolation-only failure; passes sequentially (AC-2).
+
+  No failure is attributable to a Python-3.12 language or stdlib change.
+
+BOTTOM LINE
+  - The production interpreter (3.12) is fine; the code is 3.12-compatible.
+  - The `full-suite-on-the-shipping-runtime` CI job (ubuntu 3.12) was red because it ran the
+    8 macOS-only test_stream tests on Linux (B7). B7 is now RESOLVED: test_stream.py is
+    platform-guarded to macOS, so those tests SKIP on Linux (17 skipped verified) and still
+    run on macOS (17 passed). The pycryptodome gap (B6) is also fixed.
+  - Remaining 3.12 failures in the 4 GiB audit sandbox: 4 test_kst (need > 4 GiB; CI 7 GB is
+    the authority) + 2 `--forked` isolation artifacts (pass sequentially). None is 3.12.
