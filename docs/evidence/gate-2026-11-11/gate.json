@@ -1,0 +1,81 @@
+{
+  "runId": "20261111-102057",
+  "startedAt": "2026-11-11T10:22:11+0800",
+  "python": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+  "layers": [
+    "1",
+    "2"
+  ],
+  "results": [
+    {
+      "command": [
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "/private/tmp/gate2/tmp-unit/bt",
+        "tests/test_memory.py",
+        "tests/test_flashcards.py",
+        "tests/test_learning_science.py",
+        "tests/test_memory_properties.py",
+        "tests/test_learning_properties.py",
+        "tests/test_security_contract.py"
+      ],
+      "cwd": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend",
+      "exit": 0,
+      "seconds": 27.3,
+      "stdout": "..................................................................       [100%]\n=============================== warnings summary ===============================\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n66 passed, 1 warning in 25.81s\n",
+      "stderr": "",
+      "layer": "unit",
+      "passed": true,
+      "skipped_tests": 0
+    },
+    {
+      "command": [
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "/private/tmp/gate2/tmp-integration/bt",
+        "tests/test_api.py",
+        "tests/test_database_engines.py",
+        "tests/test_desktop_environment.py"
+      ],
+      "cwd": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend",
+      "exit": 0,
+      "seconds": 45.9,
+      "stdout": "...............................................                          [100%]\n=============================== warnings summary ===============================\n../../../../.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1\n  /Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n47 passed, 1 warning in 44.04s\n",
+      "stderr": "",
+      "layer": "integration",
+      "passed": true,
+      "skipped_tests": 0
+    }
+  ],
+  "extras": [
+    {
+      "command": [
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/pip-audit",
+        "-r",
+        "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/requirements.txt",
+        "--format",
+        "json",
+        "--output",
+        "/private/tmp/gate2/pip-audit.json",
+        "--progress-spinner",
+        "off"
+      ],
+      "cwd": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness",
+      "exit": 1,
+      "seconds": 0.9,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/bin/pip-audit\", line 9, in <module>\n    sys.exit(audit())\n             ~~~~~^^\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_cli.py\", line 538, in audit\n    for spec, vulns in auditor.audit(source):\n                       ~~~~~~~~~~~~~^^^^^^^^\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_audit.py\", line 68, in audit\n    for dep, vulns in self._service.query_all(specs):\n                      ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_service/interface.py\", line 155, in query_all\n    for spec in specs:\n                ^^^^^\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_dependency_source/requirement.py\", line 134, in collect\n    yield from self._collect_from_files(collect_files)\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_dependency_source/requirement.py\", line 180, in _collect_from_files\n    ve.create(ve_dir)\n    ~~~~~~~~~^^^^^^^^\n  File \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/backend/.venv/lib/python3.14/site-packages/pip_audit/_virtual_env.py\", line 80, in create\n    return super().create(env_dir)\n           ~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/venv/__init__.py\", line 82, in create\n    self._setup_pip(context)\n    ~~~~~~~~~~~~~~~^^^^^^^^^\n  File \"/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/venv/__init__.py\", line 458, in _setup_pip\n    self._call_new_python(context, '-m', 'ensurepip', '--upgrade',\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                          '--default-pip', stderr=subprocess.STDOUT)\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/venv/__init__.py\", line 454, in _call_new_python\n    subprocess.check_output(args, **kwargs)\n    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\n  File \"/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/subprocess.py\", line 472, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n               **kwargs).stdout\n               ^^^^^^^^^\n  File \"/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/lib/python3.14/subprocess.py\", line 577, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/var/folders/89/rmx7917d25bdsc9hwsht00n00000gn/T/tmpq7xm4qr4/bin/python3.14', '-m', 'ensurepip', '--upgrade', '--default-pip']' died with <Signals.SIGABRT: 6>.\n",
+      "layer": "dependencies",
+      "passed": false,
+      "vulnerabilities": []
+    }
+  ],
+  "blockers": [],
+  "passed": true
+}

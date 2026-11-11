@@ -166,24 +166,50 @@ Environment and provider options are documented in [`docs/LOCAL_SERVICES.md`](ha
 
 ## Testing evidence
 
-Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evidence/README.md). Headlines:
+Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evidence/README.md). **Every row states what it covers, how much that is, the commit it was measured on, and how to reproduce it.** A number without those four is not a measurement; it is a recollection, and this table no longer publishes any.
 
-| Check | Date | Result |
-|---|---|---|
-| Release gate, layers 1–2 (unit + integration) | 2026-11-08 | **PASS** — 66 unit + 45 integration tests, 111 passed, 0 failed |
-| First-person acceptance run (fresh account, unseen topic, real database) | 2026-11-06 | **17 / 20 steps passed**, 3 known failures recorded |
-| Backend suite (documented measurement) | 2026-11-05 | 1813 passed / 1 failed / 2 skipped, per [`READINESS_ASSESSMENT.md`](harness/docs/READINESS_ASSESSMENT.md) |
+| Check | Date | Covers | Commit | Result |
+|---|---|---|---|---|
+| Backend suite — shipping branch | 2026-11-11 | all 122 test files, 2,291 collected | `ab8bcda` | **2,286 passed / 3 failed / 2 skipped.** All three failures were real and are fixed in `a7bfb6d`, with the affected files re-run green (130 passed); the aggregate *after* the fix has **not** been measured |
+| Backend suite — `main` | 2026-11-11 | all 101 test files, 1,838 collected | `bbbe2e4` | **1,835 passed / 1 failed / 2 skipped.** The one failure is `test_packaging_manifest` comparing `requirements.txt` against the *local* venv (Pillow 13.0.0 installed vs 12.3.0 declared, python-multipart 0.0.31 vs 0.0.22) — an environment artefact, not code on `main` |
+| Release gate, **layers 1–2 only** | 2026-11-11 | **9 of 122 test files (7.4%)**: 66 unit + 47 integration | `a7bfb6d` | **PASS** — 113 passed, 0 failed, 0 skipped, 71 s. This is a *subset*, chosen for speed; it is not the suite |
+| First-person acceptance run | 2026-11-11 | 29 steps, fresh database, unseen topic, provider explicitly unconfigured | `a7bfb6d` | **29 / 29 steps passed** |
+| Native UI layer (gate layer 3) | — | 10 golden journeys in the real app | — | **not run in this snapshot.** The journeys drive the app in-process and need a built binary, not a signing identity; the reason it is absent here is that layers 1–2 were requested |
 
-The first-person run is the important one: it registered a brand-new learner, generated a course from an unseen topic (*creep deformation of titanium aluminide turbine blades*), started a lesson, served a question, graded an answer, moved the learning state, recompiled the plan and finished with a summary. Database row counts went from `attempts: 0` to `attempts: 1`, `learning_states: 0 → 1`, `created_courses: 0 → 1`. The three failures are not hidden: an agent chat turn on a wholly unseen topic returns `unavailable` without a configured provider, the generated lesson lacks an independent worked example, and completing the first block does not itself write an attempt.
+Reproduce, in order:
+
+```sh
+# the suite, sharded: one process is killed on a busy machine
+cd harness/backend
+for f in tests/test_*.py; do echo "$f"; done | split -l 31 - chunk-
+for c in chunk-*; do .venv/bin/python -m pytest -q -p no:cacheprovider \
+  --basetemp=/tmp/pt-$(basename $c) $(cat $c | tr '\n' ' '); done
+
+# the gate as published (the runner lives on feature/a11y-i18n, not on main)
+cd harness && python3 scripts/quality_gate.py --layers 1,2
+
+# the journey: needs a backend on --base-url, started with a fresh data dir
+HARNESS_ENV=test HARNESS_TUTOR_PROVIDER= \
+  python3 harness/scripts/first_person_run.py --base-url http://127.0.0.1:8798 \
+  --database /tmp/fp/h.sqlite3 --output /tmp/fp-out
+```
+
+**What the first-person run actually shows.** It registered a brand-new learner, confirmed the topic was absent from the curriculum, generated a course from that topic (*creep deformation of titanium aluminide turbine blades*), started a lesson, served a signed question, graded an answer, moved the learning state, recompiled the plan, spoke a real MP3, ended with a summary, and then exercised the unit grade book and written perspective evidence over HTTP. Database rows went `attempts: 0 → 1`, `learning_states: 0 → 1`, `created_courses: 0 → 1`.
+
+It is **not** a like-for-like improvement on the earlier 17/20 run: the runner itself changed (18 steps unchanged, 2 re-specified, 9 added), so the scores are not comparable. The three failures the older run recorded are worth keeping in view: an agent turn on a wholly unseen topic still returns `unavailable` without a provider, the generated lesson still has no worked example, and block completion still does not itself write an attempt.
 
 **Known limitations, stated plainly:**
 
-- The tutor provider is `offline` by default; grounded-offline content is deterministic curriculum retrieval, not an LLM generation.
-- Duplex realtime voice requires an OpenAI Realtime key, and the VAD is heuristic.
-- The public release gate is not cleared: signing/notarization credentials and legal-text placeholders are still required ([DISTRIBUTION.md](harness/DISTRIBUTION.md)). Builds in this repository are developer builds.
-- A `gap` or a `skip` is never counted as a pass. PostgreSQL parity skips when no server is reachable, and the native UI layer requires a signing identity that this machine does not have.
+- **No model, no generation.** A fresh clone boots *unconfigured*: a small configuration layer takes a provider, model and key at runtime (`/api/v1/settings/model-config`, four presets, no restart), but nothing requires you to set one. Until you do, the tutor teaches from retrieved curriculum, which is genuinely useful for a concept the pack covers and refuses — with a named reason — for a topic it has never seen. `HARNESS_TUTOR_PROVIDER=offline` no longer exists; production refuses to boot without a model.
+- **Content is mostly generated, not authored.** 30 of 2,205 graph nodes carry a hand-written lesson (all in `integrated_math_1`); the other 2,041 get a four-block generated lesson with no worked example, and the tutor says so. The authoring audit has never run (`overlay_concepts: 0` everywhere). Breadth is not depth.
+- **Camera capture and on-camera recording do not exist.** A learner can submit a project with text, a reflection and an AI-use disclosure, and get formative rubric feedback; there is no camera or recording path, and no certified grade. Creativity, collaboration and soft-skills analytics are human-written 0–4 observations with written evidence — null until a person writes one — and a teacher's group observation is an API call, not a native screen.
+- **Simulation execution is unverified in the bundle.** Playwright is deliberately excluded from the shipped app (≈40 MB plus a Chromium download), so the packaged check validates a simulation's licence and URL and reports that runtime behaviour is unknown. `observable` is `false` by construction: free PhET has no telemetry.
+- **Duplex realtime voice** requires an OpenAI Realtime key, and the VAD is heuristic.
+- **Not a public release.** `security find-identity -v -p codesigning` reports 0 identities on the build machine, so `release_kit.py` refuses; legal text now has 0 placeholders, but signing and notarization are still required ([DISTRIBUTION.md](harness/DISTRIBUTION.md)).
+- **A skip is not a pass, and the gate now enforces it.** The gate parses each layer's skipped-test count and blocks the verdict on it, at every strictness level — a test-level skip used to sail through because pytest exits 0. A layer that was not run at all blocks unconditionally.
+- **This is not certification.** The gate covers 7.4% of the test files, its runner is not on `main`, no commit has a green full-suite aggregate archived, and nothing here exercises the native client. Read it as evidence of specific behaviour on specific dates, not as a statement that the product is fit to ship.
 
-The gate runner used for the 2026-11-08 snapshot currently lives on the `feature/a11y-i18n` development branch; the tests it ran are the ones in `harness/backend/tests/` on this branch. The snapshot itself — `GATE.md` and `gate.json` — is committed in `docs/evidence/`.
+The gate runner lives on the `feature/a11y-i18n` development branch; the snapshots themselves — `GATE.md` and `gate.json` — are committed in `docs/evidence/`, including the 2026-11-11 run this table cites.
 
 ---
 
