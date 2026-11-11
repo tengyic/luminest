@@ -8,6 +8,20 @@
 
 ---
 
+## 2026-11-11 更正（本文其余部分是 11-05 的历史快照，不要当现状读）
+
+这份文档写于 2026-11-05，此后发布分支增加了 14 门课程、约 500 个测试、模型配置层与白板 `tex` 渲染器。下面三处数字已经过期，**读之前先看这里**：
+
+| 本文说法 | 2026-11-11 实测 |
+|---|---|
+| 后端套件 1813 passed / 1 failed / 2 skipped | 该数字出自一个从未提交的工作树，任何提交都复现不出来。发布分支 `ab8bcda` 实测 **2291 collected → 2286 passed / 3 failed / 2 skipped**；那 3 个失败已于同日修复（陈旧的 concept id、14 条指向不存在课时的策展视频行、一个把哨兵当成兜底的错误谓词）。`main` (`bbbe2e4`) 为 **1835 / 1 / 2**，唯一的失败是本机 venv 版本漂移（`test_packaging_manifest`），与 `main` 的代码无关 |
+| "唯一失败是已修成确定性断言的既有墙钟 flake" | 那个 flake 确实已修（`test_stream.py` 17 passed）。但 11-05 的"1 failed"不是它，而是现在仍存在于 `main` 的 pin 漂移；两个失败被混为一谈 |
+| "LLM 导师默认 `offline`" | `offline` 已被 `config.py` 删除，传它会直接 `ValueError`。现在是"未配置"状态：`development`/`desktop` 照常启动并声明 `model-required`，`production` 拒绝启动 |
+
+当前口径以仓库根 `README.md` 的 Testing evidence 表与 `docs/evidence/` 下的日期化证据为准；每行都标明覆盖范围、commit 与复现命令。本文件其余内容作为 11-05 的历史记录保留，不再更新。
+
+---
+
 ## 0. 一句话结论
 
 **一句话结论：核心学习闭环能用；"教师调用工具产课件 → PPT → quiz/单词卡 → 等级反馈"这条线是真的。第二轮实测已把之前缺的三个外部条件全部接通：本机 VoiceStudio 出真 MP3、Chromium 驱动 web_search 出真结果、Chromium 现场策展让 `/media/video` 出真视频——**全程没有申请任何 YouTube API key**。仍待外部输入的是双向语音的 OpenAI Realtime key 与在线 LLM 导师。发布层面仍不可公开分发——签名、公证、法律文本三条 release gate 未清，与代码质量无关。**
@@ -28,7 +42,7 @@
 | web_search | ✅ **第二轮接通**：headless Chromium 走 Bing，`provider_ready: true`，4 个真结果 |
 | LLM 导师 | ⚠️ 默认 `offline`；`HARNESS_TUTOR_PROVIDER` 被故意留空 |
 | 找图片 | ✅ 联网搜到 35 个候选，全被质量/许可闸拒并写明理由（换 query 即出图） |
-| 后端测试套件 | 1785 passed / 0 failed / 5 skipped（第一轮）；第二轮 v5 为 1813 passed / 1 failed / 2 skipped，唯一失败是已修成确定性断言的既有墙钟 flake，见 §4 |
+| 后端测试套件 | **（2026-11-05 当时）** 1785 passed / 0 failed / 5 skipped（第一轮）；第二轮 v5 为 1813 passed / 1 failed / 2 skipped，唯一失败是已修成确定性断言的既有墙钟 flake，见 §4 —— **两个数字都已过期，见文首 2026-11-11 更正** |
 
 ---
 

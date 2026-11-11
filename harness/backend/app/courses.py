@@ -14,7 +14,7 @@ Two design decisions are load-bearing here.
    were about Newton's second law. So the subject kind is explicit, and only
    ``mathematics`` courses route through the symbolic engine.
 
-2. **A graph is not a course.** The algebra pack has 164 nodes but only 15 authored
+2. **A graph is not a course.** The algebra pack has 164 nodes but only 30 authored
    lessons. The graph gives structure; the lesson layer gives depth. Courses that
    have no authored lessons are still real courses - they are simply served by
    generated content rather than hand-written content, and the registry says so

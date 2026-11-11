@@ -126,9 +126,16 @@ def test_generated_course_map_lesson_is_taught_with_its_limits_named(tmp_path, m
     monkeypatch.delenv('HARNESS_SECRET', raising=False)
     monkeypatch.delenv('HARNESS_TUTOR_PROVIDER', raising=False)
     settings = Settings.from_env()
-    node = courses.graph_for('biology').nodes['active_transport'].to_dict()
+    # Resolve the node instead of hardcoding an id. The biology pack was regenerated on
+    # 2026-11-10 and every concept id gained a course prefix and a descriptive tail
+    # (``active_transport`` became ``biology_active_transport_against_a_gradient``), so a
+    # literal here turns a packing change into a red test about the tutor.
+    graph = courses.graph_for('biology')
+    concept_id = next(concept_id for concept_id, candidate in sorted(graph.nodes.items())
+                      if 'active transport' in candidate.title.lower())
+    node = graph.nodes[concept_id].to_dict()
     text, provider, grounding, _ = tutor.respond(
-        settings, 'active_transport', 'Please explain active transport in detail.', [],
+        settings, concept_id, 'Please explain active transport in detail.', [],
         retrieval_context={'node': node, 'prerequisites': [], 'dependants': []})
     assert provider == 'model-required'
     assert 'course-map lesson' in text

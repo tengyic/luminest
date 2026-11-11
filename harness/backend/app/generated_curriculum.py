@@ -1,8 +1,8 @@
 """Generated lesson and question layer for courses with no authored content.
 
-The algebra course ships with 15 hand-authored lessons and 60 hand-written questions.
-The other courses ship with a knowledge graph and nothing else, which would leave a
-physics learner able to browse a map but unable to practise - a course that looks
+The algebra course ships with 30 hand-authored lessons (120 hand-written questions, four per
+lesson). Every other course ships with a knowledge graph and nothing else, which would leave
+a physics learner able to browse a map but unable to practise - a course that looks
 complete and is not.
 
 This module closes that gap by *materialising* the graph into the same shapes the

@@ -498,7 +498,7 @@ A feature is verified only when all six elements are present and the cited test 
 
 **Status:** `implemented`
 
-- **User-facing functionality:** Five perspective dimensions (participation, communication, creativity, collaboration, soft skills) with a published measurement definition beside each number. A learner writes a self-observation on a real project; a teacher records group observations; either can be withdrawn.
+- **User-facing functionality:** Five perspective dimensions (participation, communication, creativity, collaboration, soft skills) with a published measurement definition beside each number. A learner writes a self-observation on a real project through the native app. A **teacher's** observation of a group exists only as the API (`POST /api/v1/perspectives/reviews` with `reviewer_role: teacher` and a group size); there is no native teacher surface for it, so a teacher must drive the API directly. Either kind can be withdrawn.
 - **Native implementation:** native/Sources/LearningHarness/AssessmentInsights.swift — PerspectiveCard; InsightsView renders every analytics dimension; AppStore+Assessment.swift — recordSelfObservation, withdrawObservation.
 - **Backend implementation:** backend/app/perspectives.py (DIMENSIONS, validate_observation, summary, public_definitions); main.py GET /api/v1/perspectives, GET /api/v1/perspectives/dimensions, POST/DELETE /api/v1/perspectives/reviews; analytics_data() includes the rows.
 - **Data model:** perspective_reviews table: subject, real artifact anchor, dimension, 0-4 score, written evidence note, reviewer role, group size, timestamps. Unique per (subject, artifact, dimension, reviewer).

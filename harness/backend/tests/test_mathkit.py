@@ -220,9 +220,27 @@ def test_every_parameter_extreme_still_builds():
 
 
 def test_no_concept_falls_back_to_the_generic_probe():
-    """A quadratic probe is wrong content for "Points, lines, rays and planes"."""
-    generic = [n['title'] for n in _nodes() if templates.template_for(n).kind == 'function_probe']
-    assert generic == [], generic
+    """A quadratic probe is wrong content for "Points, lines, rays and planes".
+
+    The probe kind alone does not mean "fell back": ``no_figure()`` returns the probe kind
+    *deliberately*, because ``figures.figure_for`` recognises it and substitutes a concept
+    map for concepts no single-variable curve can show (matrices, dimensional analysis).
+    Asserting on the kind alone therefore fails on the sentinel's own note, which is what
+    this test used to do. The fallback is identifiable by its note, and the two are checked
+    separately so a real fallback still fails.
+    """
+    GENERIC = 'generic probe used when a concept has no more specific figure yet'
+    fell_back = [n['title'] for n in _nodes()
+                 if any(GENERIC in note for note in (templates.template_for(n).notes or []))]
+    assert fell_back == [], fell_back
+    # And the sentinel is still the sentinel: every probe-kind spec that is not a fallback
+    # must say plainly that no one-variable figure can show the concept.
+    probes = [templates.template_for(n) for n in _nodes()
+              if templates.template_for(n).kind == 'function_probe']
+    assert probes, 'the probe kind disappeared; check the template router'
+    for spec in probes:
+        # ``template_for`` prefixes the concept's own title, so compare the suffix.
+        assert spec.title.endswith('No single-variable figure'), spec.title
 
 
 def test_template_selection_uses_whole_words():

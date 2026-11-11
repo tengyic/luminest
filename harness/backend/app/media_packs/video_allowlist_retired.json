@@ -1,0 +1,27 @@
+{
+  "note": "Curated videos that no current lesson can serve. Kept so the curation decision is reviewable instead of silently deleted; no course reads this file.",
+  "retired": [
+    {
+      "course": "chemistry",
+      "concept_id": "air_pollution_and_its_chemistry",
+      "provider": "youtube",
+      "video_id": "e8RFtRi-Q2Q",
+      "title": "Revealing the Culprit Unmasking Air Pollution with Chemistry and Environmental Preservation",
+      "channel": "Atomic Chemistry",
+      "why_curated": "curated by the TA: 3 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar",
+      "retired_on": "2026-11-11",
+      "retired_because": "The regenerated chemistry pack has no lesson on air pollution or atmospheric chemistry, so this video has no lesson to attach to. The video itself is still good; it belongs to whichever pack re-introduces the topic."
+    },
+    {
+      "course": "chemistry",
+      "concept_id": "alcohols_and_carboxylic_acids",
+      "provider": "youtube",
+      "video_id": "3YeXGpDdgZw",
+      "title": "Carboxylic Acids, Typical Acids and Esters | Organic Chemistry | Chemistry | FuseSchool",
+      "channel": "FuseSchool - Global Education",
+      "why_curated": "curated by the TA: 4 concept term(s) in the title, youtube_page, embeddability verified, source unfamiliar",
+      "retired_on": "2026-11-11",
+      "retired_because": "The regenerated chemistry pack has no lesson on alcohols, carboxylic acids or esters; its organic unit covers hydrocarbons and functional groups only. Retired rather than attached to a hydrocarbon lesson it does not teach."
+    }
+  ]
+}

@@ -903,7 +903,11 @@ final class NativeQA {
             environment["HARNESS_ENV"] = "desktop"
             environment["HARNESS_AUTO_CREATE"] = "1"
             environment["HARNESS_ALLOWED_HOSTS"] = "localhost,127.0.0.1"
-            environment["HARNESS_TUTOR_PROVIDER"] = "offline"
+            // Deliberately no HARNESS_TUTOR_PROVIDER. This used to be pinned to "offline",
+            // a value config.py now rejects at startup, so the QA child failed to boot and
+            // the failure looked like the app's. The dialectic loop filters every HARNESS_
+            // key out of the parent environment above, so the child starts unconfigured —
+            // which is exactly the desktop default these journeys are meant to exercise.
             environment["HARNESS_SECRET"] = UUID().uuidString // generated; never logged
             environment["PYTHONDONTWRITEBYTECODE"] = "1"
 

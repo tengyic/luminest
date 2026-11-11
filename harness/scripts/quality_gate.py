@@ -5,7 +5,11 @@ unless every layer and all ten golden journeys are green.
 Design rules, because a gate that lies is worse than no gate:
 
 * A **skip is not a pass.** The PostgreSQL half of Layer 2 skips when no server is
-  reachable; the gate records ``skipped`` and does not treat it as green in ``--strict``.
+  reachable. That is a *test-level* skip, and it blocks the verdict at every strictness:
+  the layer's `skipped_tests` count is parsed from the runner's own summary and turned
+  into a blocker. A **layer** that was not run at all (``--skip-ui``, no built app) blocks
+  unconditionally too. ``--strict`` only promotes the advisory *checks* (the dependency
+  audit) into blockers.
 * A **gap is not a pass.** Any journey whose native path cannot be driven is reported as
   ``gap`` (and a runner error as ``blocked``); both fail the release decision while the
   reason is printed. Course creation (J6) does have a native authoring sheet now, but its
@@ -26,6 +30,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -61,10 +66,22 @@ def find_python(explicit: str | None) -> Path:
         if not path.is_file():
             raise SystemExit(f'--python does not exist: {path}')
         return path
+    # Prefer the canonical venv by name. ``sorted(...)[-1]`` used to pick whichever
+    # throwaway venv happened to sort last — on the build machine that was
+    # ``.venv-phase2-test``, which has no dependencies, so the gate failed at collection in
+    # 3.7 s while a correct run took two minutes. A release gate whose default command is
+    # deterministically broken is worse than no gate: it teaches people to pass --python.
+    canonical = BACKEND / '.venv' / 'bin' / 'python'
+    if canonical.is_file():
+        return canonical
     candidates = sorted(BACKEND.glob('.venv*/bin/python'))
     if not candidates:
         raise SystemExit('No backend virtualenv found; pass --python <venv python>')
-    return candidates[-1]
+    if len(candidates) > 1:
+        listed = ', '.join(str(c) for c in candidates)
+        raise SystemExit(f'No {canonical} and several alternatives exist ({listed}); '
+                         'pass --python <venv python> to say which one this gate should trust')
+    return candidates[0]
 
 
 def run(command: list[str], cwd: Path, env: dict[str, str], timeout: int) -> dict:
@@ -97,6 +114,15 @@ def pytest_layer(python: Path, files: list[str], output: Path, name: str) -> dic
                  BACKEND, env, timeout=1800)
     result['layer'] = name
     result['passed'] = result['exit'] == 0
+    # pytest exits 0 when tests skip. The published promise is that "a skip is never
+    # counted as a pass", and until this line the gate could not back that sentence: it
+    # read the exit code only, so a layer whose PostgreSQL half skipped was green. Record
+    # the count and let the verdict block on it, without pretending the runner failed.
+    skipped = re.search(r'(\d+) skipped', result.get('stdout') or '')
+    result['skipped_tests'] = int(skipped.group(1)) if skipped else 0
+    if result['skipped_tests']:
+        result['skipped_reason'] = (f'{result["skipped_tests"]} test(s) skipped inside this '
+                                    'layer; a skip is not a pass')
     return result
 
 
@@ -189,6 +215,13 @@ def summarise(rows: list[dict], strict: bool, extras: list[dict] | None = None) 
             continue
         if not row.get('passed'):
             blockers.append(f'{name}: failed (exit {row.get("exit")})')
+        # A test-level skip is a blocker whatever --strict says: the front page promises
+        # that a skip is never counted as a pass, and this is the only place that promise
+        # can be kept. Without --strict the advisory *checks* stay advisory; skipped
+        # *tests* do not.
+        if row.get('skipped_tests'):
+            blockers.append(f'{name}: {row["skipped_tests"]} test(s) skipped — '
+                            'a skip is not a pass')
         if name == 'native-ui':
             gate = row.get('gate') or {}
             for key in ('failed', 'gaps', 'blocked', 'missing'):
