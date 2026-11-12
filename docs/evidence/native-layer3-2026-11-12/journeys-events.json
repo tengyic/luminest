@@ -1,0 +1,1691 @@
+{
+  "accountName" : "Native QA 20261112-111408-2432e9e2",
+  "backendVerified" : false,
+  "driver" : "in-process AXUIElement (same channel as external tooling)",
+  "email" : "native-20261112-111408-2432e9e2@example.com",
+  "events" : [
+    {
+      "action" : "launch",
+      "details" : {
+        "arguments" : [
+          "\/Users\/tengyi\/WorkBuddy AI\/2026-10-10-18-14-50\/harness\/native\/.build\/arm64-apple-macosx\/debug\/LearningHarness",
+          "--ui-test",
+          "--native-qa",
+          "--qa-output",
+          "\/Users\/tengyi\/WorkBuddy AI\/2026-10-10-18-14-50\/outputs\/qa-1112\/native-layer3",
+          "--qa-endpoint",
+          "8891"
+        ],
+        "directory" : "\/Users\/tengyi\/WorkBuddy AI\/2026-10-10-18-14-50\/outputs\/qa-1112\/native-layer3"
+      },
+      "elapsedSeconds" : 0.00052258331561461091,
+      "outcome" : "driver started",
+      "sequence" : 1,
+      "stage" : "journey-startup",
+      "target" : "journeys"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 1.2331600833276752,
+      "outcome" : "First launch, registration and onboarding",
+      "sequence" : 2,
+      "stage" : "journey:J1",
+      "target" : "J1"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 1.3568708749953657,
+      "outcome" : "accepted",
+      "sequence" : 3,
+      "stage" : "auth",
+      "target" : "Local learning server"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 21,
+        "secret" : false
+      },
+      "elapsedSeconds" : 1.9256482916534878,
+      "outcome" : "invoked on real field",
+      "sequence" : 4,
+      "stage" : "auth",
+      "target" : "auth.endpoint"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 2.2880711666657589,
+      "outcome" : "matched",
+      "sequence" : 5,
+      "stage" : "auth",
+      "target" : "auth.endpoint"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 34,
+        "secret" : false
+      },
+      "elapsedSeconds" : 2.5117974999884609,
+      "outcome" : "invoked on real field",
+      "sequence" : 6,
+      "stage" : "auth",
+      "target" : "auth.name"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 2.8639097499835771,
+      "outcome" : "matched",
+      "sequence" : 7,
+      "stage" : "auth",
+      "target" : "auth.name"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 43,
+        "secret" : false
+      },
+      "elapsedSeconds" : 3.0797319583361968,
+      "outcome" : "invoked on real field",
+      "sequence" : 8,
+      "stage" : "auth",
+      "target" : "auth.email"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 3.4316082916629966,
+      "outcome" : "matched",
+      "sequence" : 9,
+      "stage" : "auth",
+      "target" : "auth.email"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 36,
+        "secret" : true
+      },
+      "elapsedSeconds" : 3.6746256249898579,
+      "outcome" : "invoked on real field",
+      "sequence" : 10,
+      "stage" : "auth",
+      "target" : "auth.password"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 4.0260233749868348,
+      "outcome" : "protected or unmatched; backend password verification required",
+      "sequence" : 11,
+      "stage" : "auth",
+      "target" : "auth.password"
+    },
+    {
+      "action" : "compliance-gate",
+      "details" : {
+        "authRegisterEnabled" : false
+      },
+      "elapsedSeconds" : 4.0283921250083949,
+      "outcome" : "disabled until age and terms are accepted",
+      "sequence" : 12,
+      "stage" : "auth",
+      "target" : "auth.register"
+    },
+    {
+      "action" : "toggle-readback",
+      "details" : {
+        "enabled" : true
+      },
+      "elapsedSeconds" : 4.3855464583321009,
+      "outcome" : "matched",
+      "sequence" : 13,
+      "stage" : "auth",
+      "target" : "auth.age"
+    },
+    {
+      "action" : "toggle-readback",
+      "details" : {
+        "enabled" : true
+      },
+      "elapsedSeconds" : 4.7740679166745394,
+      "outcome" : "matched",
+      "sequence" : 14,
+      "stage" : "auth",
+      "target" : "auth.terms"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 4.7790848333388567,
+      "outcome" : "accepted",
+      "sequence" : 15,
+      "stage" : "auth",
+      "target" : "auth.register"
+    },
+    {
+      "action" : "diagnostic",
+      "details" : {
+        "appActive" : true,
+        "authNamePresent" : false,
+        "compactNavTodayPresent" : false,
+        "navTodayPresent" : false,
+        "visibleWindows" : 1
+      },
+      "elapsedSeconds" : 12.141420708328951,
+      "outcome" : "state captured",
+      "sequence" : 16,
+      "stage" : "auth",
+      "target" : "after-register"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 12.524457416671794,
+      "outcome" : "captured own windows",
+      "sequence" : 17,
+      "stage" : "auth",
+      "target" : "after-register"
+    },
+    {
+      "action" : "authentication",
+      "details" : {
+        "accountName" : "Native QA 20261112-111408-2432e9e2",
+        "backendAccountAndPasswordVerification" : "pending launcher; no direct authentication fallback",
+        "email" : "native-20261112-111408-2432e9e2@example.com",
+        "firstRunSetupShown" : true
+      },
+      "elapsedSeconds" : 12.648391374998027,
+      "outcome" : "signed-in UI observed",
+      "sequence" : 18,
+      "stage" : "auth",
+      "target" : "auth.register"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 13.603362291672966,
+      "outcome" : "captured own windows",
+      "sequence" : 19,
+      "stage" : "auth",
+      "target" : "signed-in"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 14.009458624990657,
+      "outcome" : "captured own windows",
+      "sequence" : 20,
+      "stage" : "onboarding",
+      "target" : "onboarding-subject"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 14.070878166676266,
+      "outcome" : "accepted",
+      "sequence" : 21,
+      "stage" : "onboarding",
+      "target" : "setup.course.integrated_math_1"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 14.876383708324283,
+      "outcome" : "accepted",
+      "sequence" : 22,
+      "stage" : "onboarding",
+      "target" : "setup.continue"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 80,
+        "secret" : false
+      },
+      "elapsedSeconds" : 15.366016583342571,
+      "outcome" : "invoked on real field",
+      "sequence" : 23,
+      "stage" : "onboarding",
+      "target" : "setup.goal"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 15.740451791672967,
+      "outcome" : "matched",
+      "sequence" : 24,
+      "stage" : "onboarding",
+      "target" : "setup.goal"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 16.021671958325896,
+      "outcome" : "captured own windows",
+      "sequence" : 25,
+      "stage" : "onboarding",
+      "target" : "onboarding-goal"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 16.07481774999178,
+      "outcome" : "accepted",
+      "sequence" : 26,
+      "stage" : "onboarding",
+      "target" : "setup.continue"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 16.342976166662993,
+      "outcome" : "accepted",
+      "sequence" : 27,
+      "stage" : "onboarding",
+      "target" : "setup.pace.20"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 17.882181083317846,
+      "outcome" : "captured own windows",
+      "sequence" : 28,
+      "stage" : "onboarding",
+      "target" : "onboarding-pace"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 17.961986583337421,
+      "outcome" : "accepted",
+      "sequence" : 29,
+      "stage" : "onboarding",
+      "target" : "setup.finish"
+    },
+    {
+      "action" : "onboarding",
+      "details" : {
+        "goalTyped" : "Get ready for the next course and understand the ideas rather than memorise them",
+        "requestedCourse" : "integrated_math_1",
+        "sheetDismissed" : true
+      },
+      "elapsedSeconds" : 18.451818208326586,
+      "outcome" : "course, goal and pace saved through the real sheet",
+      "sequence" : 30,
+      "stage" : "onboarding",
+      "target" : "setup.finish"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 21.239209458319237,
+      "outcome" : "captured own windows",
+      "sequence" : 31,
+      "stage" : "onboarding",
+      "target" : "onboarding-plan"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 24.896399458317319,
+      "outcome" : "captured own windows",
+      "sequence" : 32,
+      "stage" : "onboarding",
+      "target" : "journey-J1-plan"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 5,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 25.031769666675245,
+      "outcome" : "pass",
+      "sequence" : 33,
+      "stage" : "onboarding",
+      "target" : "J1"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 25.032830916665262,
+      "outcome" : "Selecting a course and starting a lesson",
+      "sequence" : 34,
+      "stage" : "journey:J2",
+      "target" : "J2"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 25.125285833317321,
+      "outcome" : "accepted",
+      "sequence" : 35,
+      "stage" : "journey:J2",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 25.912246416672133,
+      "outcome" : "destination UI observed",
+      "sequence" : 36,
+      "stage" : "journey:J2",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 27.809570083336439,
+      "outcome" : "accepted",
+      "sequence" : 37,
+      "stage" : "journey:J2",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 29.554610666673398,
+      "outcome" : "destination UI observed",
+      "sequence" : 38,
+      "stage" : "journey:J2",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 36.306504958338337,
+      "outcome" : "captured own windows",
+      "sequence" : 39,
+      "stage" : "journey:J2",
+      "target" : "journey-J2-lesson"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 3,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 36.552726083318703,
+      "outcome" : "pass",
+      "sequence" : 40,
+      "stage" : "journey:J2",
+      "target" : "J2"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 36.554046458331868,
+      "outcome" : "Completing a practice question and receiving grading feedback",
+      "sequence" : 41,
+      "stage" : "journey:J3",
+      "target" : "J3"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 36.871117500006221,
+      "outcome" : "accepted",
+      "sequence" : 42,
+      "stage" : "journey:J3",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 37.663911916664802,
+      "outcome" : "destination UI observed",
+      "sequence" : 43,
+      "stage" : "journey:J3",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+        "attempt" : 1
+      },
+      "elapsedSeconds" : 38.412336874986067,
+      "outcome" : "retrying after AXError -25200",
+      "sequence" : 44,
+      "stage" : "journey:J3",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 38.964688416657737,
+      "outcome" : "accepted (attempt 2)",
+      "sequence" : 45,
+      "stage" : "journey:J3",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 40.607780874997843,
+      "outcome" : "destination UI observed",
+      "sequence" : 46,
+      "stage" : "journey:J3",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 40.639172625000356,
+      "outcome" : "accepted",
+      "sequence" : 47,
+      "stage" : "journey:J3",
+      "target" : "studio.practice"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 41.141622083319817,
+      "outcome" : "accepted",
+      "sequence" : 48,
+      "stage" : "journey:J3",
+      "target" : "question.option.a"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 41.437584583327407,
+      "outcome" : "accepted",
+      "sequence" : 49,
+      "stage" : "journey:J3",
+      "target" : "question.submit"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 50.417459499993129,
+      "outcome" : "captured own windows",
+      "sequence" : 50,
+      "stage" : "journey:J3",
+      "target" : "journey-J3-feedback"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 50.775495583337033,
+      "outcome" : "accepted",
+      "sequence" : 51,
+      "stage" : "journey:J3",
+      "target" : "question.finish"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 3,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 51.075608374987496,
+      "outcome" : "pass",
+      "sequence" : 52,
+      "stage" : "journey:J3",
+      "target" : "J3"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 51.076716874988051,
+      "outcome" : "Completing a review and receiving the next scheduled review",
+      "sequence" : 53,
+      "stage" : "journey:J4",
+      "target" : "J4"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 51.321660666668322,
+      "outcome" : "accepted",
+      "sequence" : 54,
+      "stage" : "journey:J4",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 52.087831583339721,
+      "outcome" : "destination UI observed",
+      "sequence" : 55,
+      "stage" : "journey:J4",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 52.546725041669561,
+      "outcome" : "accepted",
+      "sequence" : 56,
+      "stage" : "journey:J4",
+      "target" : "nav.review"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 53.357808291650144,
+      "outcome" : "destination UI observed",
+      "sequence" : 57,
+      "stage" : "journey:J4",
+      "target" : "nav.review"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+        "attempt" : 1
+      },
+      "elapsedSeconds" : 53.738168999989284,
+      "outcome" : "retrying after AXError -25200",
+      "sequence" : 58,
+      "stage" : "journey:J4",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 54.2877147916588,
+      "outcome" : "accepted (attempt 2)",
+      "sequence" : 59,
+      "stage" : "journey:J4",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 55.681582999997772,
+      "outcome" : "destination UI observed",
+      "sequence" : 60,
+      "stage" : "journey:J4",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 55.87943195833941,
+      "outcome" : "accepted",
+      "sequence" : 61,
+      "stage" : "journey:J4",
+      "target" : "Cards"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 57.210310291673522,
+      "outcome" : "accepted",
+      "sequence" : 62,
+      "stage" : "journey:J4",
+      "target" : "flashcards.generate"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 57.828765291662421,
+      "outcome" : "accepted",
+      "sequence" : 63,
+      "stage" : "journey:J4",
+      "target" : "Preview"
+    },
+    {
+      "action" : "wait-timeout",
+      "details" : {
+        "sample" : [
+          "Luminfest",
+          "Add 12 cards",
+          "Cancel",
+          "0",
+          "0",
+          "The denominator must be nonzero and pieces must refer to the same whole. A numerator counts units; a denominator names their size. Multiplying both by 2 changes the description, not the quantity.",
+          "What conditions must hold for Fractions and equivalent quantities?",
+          "Definition",
+          "The numerator may have been omitted while forming a common denominator. Next: Rename both fractions using a common denominator before adding.",
+          "In “Compute 1\/2 + 1\/4. Give a simplified fraction.”, the answer “1\/6” is wrong. What error does it represent?",
+          "Misconception",
+          "1. To add 2\/3 and 1\/4, choose twelfths because 12 is divisible by 3 and 4. 2. Rename 2\/3 as 8\/12 and 1\/4 as 3\/12. 3. Add like units: 8\/12 + 3\/12 = 11\/12. 4. Check magnitude: the result exceeds 2\/3 but is below 1; 11\/12 fits those bounds.",
+          "Worked multi-step example: what is the method?",
+          "Basic"
+        ],
+        "windows" : 1
+      },
+      "elapsedSeconds" : 90.620589791651582,
+      "outcome" : "no match",
+      "sequence" : 64,
+      "stage" : "journey:J4",
+      "target" : "a revealed card"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 2,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 90.624482874991372,
+      "outcome" : "blocked",
+      "sequence" : 65,
+      "stage" : "journey:J4",
+      "target" : "J4"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 90.625434083340224,
+      "outcome" : "Leaving and reopening an autosaved project",
+      "sequence" : 66,
+      "stage" : "journey:J5",
+      "target" : "J5"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 90.849682208325248,
+      "outcome" : "accepted",
+      "sequence" : 67,
+      "stage" : "journey:J5",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 91.68188216665294,
+      "outcome" : "destination UI observed",
+      "sequence" : 68,
+      "stage" : "journey:J5",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 92.135875916661462,
+      "outcome" : "accepted",
+      "sequence" : 69,
+      "stage" : "journey:J5",
+      "target" : "nav.projects"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 93.174612750008237,
+      "outcome" : "destination UI observed",
+      "sequence" : 70,
+      "stage" : "journey:J5",
+      "target" : "nav.projects"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 47,
+        "secret" : false
+      },
+      "elapsedSeconds" : 93.39219629165018,
+      "outcome" : "invoked on real field",
+      "sequence" : 71,
+      "stage" : "journey:J5",
+      "target" : "project.text"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 93.751761416671798,
+      "outcome" : "matched",
+      "sequence" : 72,
+      "stage" : "journey:J5",
+      "target" : "project.text"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 95.115153083315818,
+      "outcome" : "accepted",
+      "sequence" : 73,
+      "stage" : "journey:J5",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 95.900032750010723,
+      "outcome" : "destination UI observed",
+      "sequence" : 74,
+      "stage" : "journey:J5",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+        "attempt" : 1
+      },
+      "elapsedSeconds" : 96.919831791659817,
+      "outcome" : "retrying after AXError -25200",
+      "sequence" : 75,
+      "stage" : "journey:J5",
+      "target" : "nav.projects"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 97.464145041652955,
+      "outcome" : "accepted (attempt 2)",
+      "sequence" : 76,
+      "stage" : "journey:J5",
+      "target" : "nav.projects"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 98.252102625003317,
+      "outcome" : "destination UI observed",
+      "sequence" : 77,
+      "stage" : "journey:J5",
+      "target" : "nav.projects"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 100.46238574999734,
+      "outcome" : "captured own windows",
+      "sequence" : 78,
+      "stage" : "journey:J5",
+      "target" : "journey-J5-project"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 2,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 100.56644820832298,
+      "outcome" : "pass",
+      "sequence" : 79,
+      "stage" : "journey:J5",
+      "target" : "J5"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 100.56790075000026,
+      "outcome" : "Creating a course and accessing it again",
+      "sequence" : 80,
+      "stage" : "journey:J6",
+      "target" : "J6"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 100.74621804166236,
+      "outcome" : "accepted",
+      "sequence" : 81,
+      "stage" : "journey:J6",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 101.50547470833408,
+      "outcome" : "destination UI observed",
+      "sequence" : 82,
+      "stage" : "journey:J6",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 101.97991200000979,
+      "outcome" : "accepted",
+      "sequence" : 83,
+      "stage" : "journey:J6",
+      "target" : "course.create"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 515,
+        "secret" : false
+      },
+      "elapsedSeconds" : 102.55115158332046,
+      "outcome" : "invoked on real field",
+      "sequence" : 84,
+      "stage" : "journey:J6",
+      "target" : "course.create.notes"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 102.92555991664995,
+      "outcome" : "matched",
+      "sequence" : 85,
+      "stage" : "journey:J6",
+      "target" : "course.create.notes"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 32,
+        "secret" : false
+      },
+      "elapsedSeconds" : 103.13696241666912,
+      "outcome" : "invoked on real field",
+      "sequence" : 86,
+      "stage" : "journey:J6",
+      "target" : "course.create.title"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 103.50059987499844,
+      "outcome" : "matched",
+      "sequence" : 87,
+      "stage" : "journey:J6",
+      "target" : "course.create.title"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 7,
+        "secret" : false
+      },
+      "elapsedSeconds" : 103.7194061249902,
+      "outcome" : "invoked on real field",
+      "sequence" : 88,
+      "stage" : "journey:J6",
+      "target" : "course.create.subject"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 104.08596991666127,
+      "outcome" : "matched",
+      "sequence" : 89,
+      "stage" : "journey:J6",
+      "target" : "course.create.subject"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 104.08940425000037,
+      "outcome" : "accepted",
+      "sequence" : 90,
+      "stage" : "journey:J6",
+      "target" : "course.create.preview"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 104.38120549998712,
+      "outcome" : "accepted",
+      "sequence" : 91,
+      "stage" : "journey:J6",
+      "target" : "course.create.commit"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 104.64815525000449,
+      "outcome" : "accepted",
+      "sequence" : 92,
+      "stage" : "journey:J6",
+      "target" : "course.create.enrol"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 2
+      },
+      "elapsedSeconds" : 120.94109904166544,
+      "outcome" : "captured own windows",
+      "sequence" : 93,
+      "stage" : "journey:J6",
+      "target" : "journey-J6-authoring"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 121.06402299998445,
+      "outcome" : "accepted",
+      "sequence" : 94,
+      "stage" : "journey:J6",
+      "target" : "course.create.close"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 6,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 121.965529374982,
+      "outcome" : "pass",
+      "sequence" : 95,
+      "stage" : "journey:J6",
+      "target" : "J6"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 121.966962458333,
+      "outcome" : "Using the tutor offline and handling provider failure",
+      "sequence" : 96,
+      "stage" : "journey:J7",
+      "target" : "J7"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 122.05888279166538,
+      "outcome" : "accepted",
+      "sequence" : 97,
+      "stage" : "journey:J7",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 122.83438987500267,
+      "outcome" : "destination UI observed",
+      "sequence" : 98,
+      "stage" : "journey:J7",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+        "attempt" : 1
+      },
+      "elapsedSeconds" : 123.33155041665304,
+      "outcome" : "retrying after AXError -25200",
+      "sequence" : 99,
+      "stage" : "journey:J7",
+      "target" : "nav.teacher"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 123.87632149999263,
+      "outcome" : "accepted (attempt 2)",
+      "sequence" : 100,
+      "stage" : "journey:J7",
+      "target" : "nav.teacher"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 124.63981954165502,
+      "outcome" : "destination UI observed",
+      "sequence" : 101,
+      "stage" : "journey:J7",
+      "target" : "nav.teacher"
+    },
+    {
+      "action" : "setAccessibilityValue",
+      "details" : {
+        "characters" : 68,
+        "secret" : false
+      },
+      "elapsedSeconds" : 124.88393166667083,
+      "outcome" : "invoked on real field",
+      "sequence" : 102,
+      "stage" : "journey:J7",
+      "target" : "teacher.message"
+    },
+    {
+      "action" : "field-readback",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 125.23894404165912,
+      "outcome" : "matched",
+      "sequence" : 103,
+      "stage" : "journey:J7",
+      "target" : "teacher.message"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 125.25061283333343,
+      "outcome" : "accepted",
+      "sequence" : 104,
+      "stage" : "journey:J7",
+      "target" : "teacher.send"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 136.09034266666276,
+      "outcome" : "captured own windows",
+      "sequence" : 105,
+      "stage" : "journey:J7",
+      "target" : "journey-J7-tutor"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 3,
+        "failed" : 0
+      },
+      "elapsedSeconds" : 136.14109645833378,
+      "outcome" : "pass",
+      "sequence" : 106,
+      "stage" : "journey:J7",
+      "target" : "J7"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 136.14220733332331,
+      "outcome" : "Viewing Insights and distinguishing learning from engagement",
+      "sequence" : 107,
+      "stage" : "journey:J9",
+      "target" : "J9"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 136.25983337499201,
+      "outcome" : "accepted",
+      "sequence" : 108,
+      "stage" : "journey:J9",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 137.0303051249939,
+      "outcome" : "destination UI observed",
+      "sequence" : 109,
+      "stage" : "journey:J9",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 137.52712633332703,
+      "outcome" : "accepted",
+      "sequence" : 110,
+      "stage" : "journey:J9",
+      "target" : "nav.insights"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 138.34422125000856,
+      "outcome" : "destination UI observed",
+      "sequence" : 111,
+      "stage" : "journey:J9",
+      "target" : "nav.insights"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 139.46287724998547,
+      "outcome" : "captured own windows",
+      "sequence" : 112,
+      "stage" : "journey:J9",
+      "target" : "journey-J9-insights"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 3,
+        "failed" : 1
+      },
+      "elapsedSeconds" : 139.5197695416573,
+      "outcome" : "fail",
+      "sequence" : 113,
+      "stage" : "journey:J9",
+      "target" : "J9"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 139.5209159583319,
+      "outcome" : "Changing consent, exporting data and deleting an account",
+      "sequence" : 114,
+      "stage" : "journey:J10",
+      "target" : "J10"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 139.62586629166617,
+      "outcome" : "accepted",
+      "sequence" : 115,
+      "stage" : "journey:J10",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 140.4186292916711,
+      "outcome" : "destination UI observed",
+      "sequence" : 116,
+      "stage" : "journey:J10",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 141.08058112498838,
+      "outcome" : "accepted",
+      "sequence" : 117,
+      "stage" : "journey:J10",
+      "target" : "nav.settings"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 141.86663529166253,
+      "outcome" : "destination UI observed",
+      "sequence" : 118,
+      "stage" : "journey:J10",
+      "target" : "nav.settings"
+    },
+    {
+      "action" : "toggle-readback",
+      "details" : {
+        "enabled" : true
+      },
+      "elapsedSeconds" : 142.27924433333101,
+      "outcome" : "matched",
+      "sequence" : 119,
+      "stage" : "journey:J10",
+      "target" : "settings.telemetry"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 146.43216833332554,
+      "outcome" : "accepted",
+      "sequence" : 120,
+      "stage" : "journey:J10",
+      "target" : "settings.save"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 156.97405262500979,
+      "outcome" : "accepted",
+      "sequence" : 121,
+      "stage" : "journey:J10",
+      "target" : "settings.delete"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 157.66309266665485,
+      "outcome" : "accepted",
+      "sequence" : 122,
+      "stage" : "journey:J10",
+      "target" : "Cancel"
+    },
+    {
+      "action" : "screenshot",
+      "details" : {
+        "count" : 1
+      },
+      "elapsedSeconds" : 163.85170845832909,
+      "outcome" : "captured own windows",
+      "sequence" : 123,
+      "stage" : "journey:J10",
+      "target" : "journey-J10-settings"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 6,
+        "failed" : 1
+      },
+      "elapsedSeconds" : 164.12734524998814,
+      "outcome" : "fail",
+      "sequence" : 124,
+      "stage" : "journey:J10",
+      "target" : "J10"
+    },
+    {
+      "action" : "journey-start",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 164.12899591666064,
+      "outcome" : "Using read-aloud and handling unavailable voice services",
+      "sequence" : 125,
+      "stage" : "journey:J8",
+      "target" : "J8"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 164.4222519583418,
+      "outcome" : "accepted",
+      "sequence" : 126,
+      "stage" : "journey:J8",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 165.21711620833958,
+      "outcome" : "destination UI observed",
+      "sequence" : 127,
+      "stage" : "journey:J8",
+      "target" : "nav.today"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+        "attempt" : 1
+      },
+      "elapsedSeconds" : 165.95993366665789,
+      "outcome" : "retrying after AXError -25200",
+      "sequence" : 128,
+      "stage" : "journey:J8",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "accessibilityPerformPress",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 166.52847241665586,
+      "outcome" : "accepted (attempt 2)",
+      "sequence" : 129,
+      "stage" : "journey:J8",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "navigation",
+      "details" : {
+
+      },
+      "elapsedSeconds" : 167.33272733332706,
+      "outcome" : "destination UI observed",
+      "sequence" : 130,
+      "stage" : "journey:J8",
+      "target" : "nav.studio"
+    },
+    {
+      "action" : "journey-end",
+      "details" : {
+        "checks" : 1,
+        "failed" : 1
+      },
+      "elapsedSeconds" : 167.34377908334136,
+      "outcome" : "fail",
+      "sequence" : 131,
+      "stage" : "journey:J8",
+      "target" : "J8"
+    },
+    {
+      "action" : "journeys",
+      "details" : {
+        "blocked" : 1,
+        "failed" : 3,
+        "gaps" : 0,
+        "total" : 10
+      },
+      "elapsedSeconds" : 167.34458483333583,
+      "outcome" : "blocked",
+      "sequence" : 132,
+      "stage" : "journey:J8",
+      "target" : "release gate"
+    }
+  ],
+  "failures" : [
+
+  ],
+  "screenshots" : [
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "01-after-register-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 81,
+      "stage" : "auth",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "02-signed-in-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 81,
+      "stage" : "auth",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "03-onboarding-subject-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 81,
+      "stage" : "onboarding",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "04-onboarding-goal-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 52,
+      "stage" : "onboarding",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "05-onboarding-pace-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 52,
+      "stage" : "onboarding",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "06-onboarding-plan-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 278,
+      "stage" : "onboarding",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "07-journey-J1-plan-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 269,
+      "stage" : "onboarding",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "08-journey-J2-lesson-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 104,
+      "stage" : "journey:J2",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "09-journey-J3-feedback-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 162,
+      "stage" : "journey:J3",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "10-journey-J5-project-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 152,
+      "stage" : "journey:J5",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "11-journey-J6-authoring-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 256,
+      "stage" : "journey:J6",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "12-journey-J6-authoring-window-1.png",
+      "height" : 1178,
+      "sampledDistinctColors" : 133,
+      "stage" : "journey:J6",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 1320,
+      "windowTitle" : ""
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "13-journey-J7-tutor-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 84,
+      "stage" : "journey:J7",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "14-journey-J9-insights-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 367,
+      "stage" : "journey:J9",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    },
+    {
+      "capture" : "own NSWindow.contentView.cacheDisplay",
+      "file" : "15-journey-J10-settings-window-0.png",
+      "height" : 1720,
+      "sampledDistinctColors" : 90,
+      "stage" : "journey:J10",
+      "suspectedBlank" : false,
+      "visualValidation" : "pending human inspection; pixel diversity is not visual acceptance",
+      "width" : 2640,
+      "windowTitle" : "Luminfest"
+    }
+  ],
+  "stage" : "journey:J8",
+  "status" : "blocked",
+  "verificationPolicy" : "No AppStore workflow mutations, synthetic views, direct auth fallback, external XCTest, or screen capture permissions; launcher must verify isolated backend records",
+  "workflowCompleted" : false
+}

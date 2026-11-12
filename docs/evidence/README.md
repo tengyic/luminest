@@ -8,6 +8,8 @@ Dated, machine-readable evidence for the claims on the repository front page. No
 | [`gate-2026-11-08/GATE.md`](gate-2026-11-08/GATE.md) · [`gate.json`](gate-2026-11-08/gate.json) | The earlier gate run, kept for comparison. Same 9 files; integration has since grown 45 → 47 |
 | [`first-person-run-2026-11-11.json`](first-person-run-2026-11-11.json) | 29-step acceptance run, **29/29**, fresh database, provider explicitly unconfigured |
 | [`first-person-run-2026-11-06.json`](first-person-run-2026-11-06.json) | The earlier 20-step run, **17/20**, kept because its three failures are still the honest description of a provider-less instance |
+| [`full-suite-2026-11-12/SUMMARY.md`](full-suite-2026-11-12/SUMMARY.md) · [`full-suite.log`](full-suite-2026-11-12/full-suite.log) · [`collection.txt`](full-suite-2026-11-12/collection.txt) | Full backend suite **after** the three fixes, on `c35d24f`: **2,289 passed / 0 failed / 2 skipped**, 2,291 collected, 14 m 49 s |
+| [`native-layer3-2026-11-12/SUMMARY.md`](native-layer3-2026-11-12/SUMMARY.md) · [`run-summary.json`](native-layer3-2026-11-12/run-summary.json) · [`journeys.json`](native-layer3-2026-11-12/journeys.json) | Ten native journeys on the rebuilt app: **6 passed / 1 blocked / 3 failed**, `databaseVerified: true`, 3 m 03 s |
 
 Bearer tokens, refresh tokens and the throwaway account's email were redacted before publishing. All other fields are verbatim.
 
@@ -31,7 +33,7 @@ What the unit layer covers: scheduler maths, FSRS property invariants, grading a
 
 **Skips.** A layer's verdict still comes from its runner's exit code, but the gate now also parses the skipped-test count out of that layer's own summary and treats it as a blocker at every strictness level. Before this, a test-level skip sailed through: pytest exits 0 with skips, so a layer whose PostgreSQL half never ran was green. That is the difference between "a skip is never a pass" as a published promise and as behaviour.
 
-**What the gate does not cover.** Layer 3 (the ten native journeys) was not requested in either snapshot. It does not need a signing identity — it drives the app in-process — it needs a built binary and takes minutes. Layer 4 is the packaging/distribution check. Both are outside these numbers, and the native client is therefore unmeasured on this front page.
+**What the gate does not cover.** Layer 3 (the ten native journeys) was not requested in either gate snapshot. It does not need a signing identity — it drives the app in-process — it needs a built binary and takes minutes; it has since been run separately on 2026-11-12 and is **not green** (6 of 10 passed, see §5). Layer 4 is the packaging/distribution check. Both are outside these numbers.
 
 ---
 
@@ -80,7 +82,48 @@ The 2026-11-05 document is kept as history at [`harness/docs/READINESS_ASSESSMEN
 - It does not claim a cleared public release. Legal text now has **0 placeholders**, but `security find-identity -v -p codesigning` reports 0 identities on the build machine, so `release_kit.py` refuses and the shipped artifacts are ad-hoc signed (`harness/DISTRIBUTION.md`).
 - It does not claim a configured LLM tutor. A fresh clone boots unconfigured (`offline` was removed; production refuses to boot without a model), so a topic outside the curriculum is **refused with a reason, not taught**. That is the boundary this product still has.
 - It does not claim complete or verified content. 30 of 2,205 graph nodes carry a hand-written lesson; 2,041 carry a generated four-block lesson with no worked example; 134 nodes of the default course have nothing. Breadth is not depth, and no check here measures whether a generated lesson teaches.
-- It does not claim the native client works. Gate layer 3 was not run in either snapshot, so every number above describes the backend only.
+- It does not claim the native client works. Gate layer 3 was not run in either gate snapshot; the separate 2026-11-12 run executed all ten journeys and got **6 passed / 1 blocked / 3 failed**. The native client is now exercised, but it is not green.
 - It does not claim 100% feature coverage, and it no longer claims that a skip is never a pass on trust: the gate now parses skipped-test counts and blocks on them.
-- It does not claim certification. The gate covers 7.4% of the test files, its runner is not on `main`, and no commit has a green full-suite aggregate archived here.
+- It does not claim certification. The gate covers 7.4% of the test files and its runner is not on `main`. A green full-suite aggregate is now archived here (2,289 / 0 / 2 on `c35d24f`), but that commit is on the development branch, and layer 3 remains not green.
 - It does not claim the walkthrough video is a continuous screen recording. The video is assembled from the real captures in `docs/assets/screenshots/`, each labelled as such.
+
+---
+
+## 5. Full suite and native layer 3 — 2026-11-12
+
+Two gaps named in earlier revisions of the front page were closed by measuring, not by
+rewording. Both runs are on `c35d24f` (`feature/a11y-i18n`), which was pushed alongside them.
+
+| | Full backend suite | Native layer 3 |
+|---|---|---|
+| Command | `pytest -q -rs -p no:cacheprovider --basetemp=<workspace>/outputs/qa/bt`, one process, `env -u PYTHONPATH` | `swift build --disable-sandbox`, then `native_qa.py --journeys --port 8891 --timeout 900` |
+| Scope | 122 files, 2,291 collected | 10 golden journeys, isolated backend + SQLite |
+| Result | **2,289 passed / 0 failed / 2 skipped**, 8 warnings, 14 m 49 s, exit 0 | **6 passed / 1 blocked / 3 failed / 0 gaps / 0 missing**, 3 m 03 s, `databaseVerified: true` |
+| Raw output | [`full-suite.log`](full-suite-2026-11-12/full-suite.log), [`collection.txt`](full-suite-2026-11-12/collection.txt) | [`run-summary.json`](native-layer3-2026-11-12/run-summary.json), [`journeys.json`](native-layer3-2026-11-12/journeys.json), [`journeys-events.json`](native-layer3-2026-11-12/journeys-events.json) |
+
+**Before → after.** `ab8bcda` measured 2,286 / 3 failed / 2 skipped. `a7bfb6d` fixed the three
+tests (`test_teacher_clone`, `test_video_seed`, `test_mathkit`) and re-ran only those files
+(130 passed), which is why the front page previously said the aggregate *after* the fix was
+unmeasured. The 2026-11-12 run closes that arithmetic exactly: +3 passes, the same two
+opt-in skips, zero failures. The two skips are live-provider smokes behind
+`HARNESS_DIAGRAM_LIVE_SMOKE` / `HARNESS_LIVE_SMOKE`.
+
+**Layer 3 needed a rebuild, not a signing identity.** The two attempts on 2026-11-11 ended
+`blocked` with `total: 0` and `total: 1`, one of them spending 477 s between pressing
+`auth.register` and the first diagnostic. The debug binary then on disk predated `a7bfb6d`,
+which removed the now-rejected `HARNESS_TUTOR_PROVIDER=offline` from the QA child. Rebuilding
+from the fixed source made all ten journeys execute in three minutes.
+
+**The four non-passes are still open.** J4 is a legitimate `blocked` (no review due on a
+brand-new account). J8 found no `lesson.read` in the current AX tree although the control
+exists at `Studio.swift:124`; J10 found no phrase field although the `TextField` exists at
+`ProjectsInsightsSettings.swift:522`; J9's global-text empty-state assertion was false even
+though the database holds one real attempt. None was made green by weakening an assertion,
+and none is claimed here as a proven product regression. See
+[`native-layer3-2026-11-12/SUMMARY.md`](native-layer3-2026-11-12/SUMMARY.md).
+
+**Content depth is unchanged by either run.** A read-only count of the shipped curriculum
+pack: 2,071 concepts, 30 hand-written, 2,041 generated. `worked_example` blocks: **30**, all
+in the hand-written lessons. `misconception` blocks: **0**. `overlay_concepts`: **0**.
+Generated lessons contain only concept / reflection / retrieval blocks. No test run turns
+breadth into depth; that remains a product investment, not an evidence gap.

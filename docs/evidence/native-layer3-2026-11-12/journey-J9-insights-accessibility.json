@@ -1,0 +1,1177 @@
+{
+  "elements" : [
+    {
+      "AXTitle" : "Luminfest",
+      "identifier" : "SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.Group<SwiftUI._ConditionalContent<SwiftUI.ModifiedContent<LearningHarness.RootView, SwiftUI._EnvironmentKeyWritingModifier<SwiftUI.DynamicTypeSize>>, LearningHarness.RootView>>, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<LearningHarness.AppStore>>>, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<LearningHarness.Localization>>>, SwiftUI._PreferenceWritingModifier<SwiftUI.PreferredColorSchemeKey>>, SwiftUI._AppearanceActionModifier>-1-AppWindow-1",
+      "role" : "AXWindow",
+      "subrole" : "AXStandardWindow",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXMinimizeButton",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXFullScreenButton",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXCloseButton",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXGroup",
+      "subrole" : "AXHostingView",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXScrollArea",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXScrollBar",
+      "subrole" : "",
+      "valueSettable" : true
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXDecrementPage",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXIncrementPage",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXDecrementArrow",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXIncrementArrow",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "identifier" : "",
+      "role" : "AXValueIndicator",
+      "subrole" : "",
+      "valueSettable" : true
+    },
+    {
+      "AXValue" : "LUMINFEST \/ LEARNING HARNESS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Designed for understanding, not just completion.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Formative feedback, not an accredited grade or trait diagnosis.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Measurement definitions are still loading.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Record an observation about your own work",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No telemetry or pointer activity is used to infer a perspective.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "WRITTEN EVIDENCE ONLY",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Perspective observations",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Open a course and answer some questions. No sample grades are shown.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No units to grade yet",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Formative, course-local mastery score.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A unit is graded only when every declared standard has evidence.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "DECLARED STANDARDS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Unit grade book",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Error patterns are based only on submitted answers.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Nothing to diagnose yet",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No dimension evidence yet.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Places to look closer",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Learning dimensions",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Complete some practice to see measured activity here. No sample data is used.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A clearer picture will emerge",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "SUBMITTED ANSWERS ONLY",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Practice over time",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Foreground activity is only a focus proxy. Empty dimensions mean there is not enough evidence yet.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0 DAY STREAK",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Progress needs evidence, not a prediction.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "YOUR EVIDENCE, IN PERSPECTIVE",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "关闭",
+      "enabled" : true,
+      "identifier" : "xmark",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "You are enrolled in Integrated Mathematics I. Your plan is ready on Today.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "已选择",
+      "enabled" : true,
+      "identifier" : "checkmark.circle",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "An honest picture of the practice you have actually done.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXBusyIndicator",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "洞察",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "EVIDENCE, NOT ASSUMPTIONS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "设置",
+      "enabled" : true,
+      "identifier" : "nav.settings",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "Change course or goal",
+      "enabled" : true,
+      "identifier" : "sidebar.setup",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "20 intentional minutes.\nOne idea at a time.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Your course",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "book.closed",
+      "enabled" : true,
+      "identifier" : "book.closed",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "洞察",
+      "enabled" : true,
+      "identifier" : "nav.insights",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "项目",
+      "enabled" : true,
+      "identifier" : "nav.projects",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "老师",
+      "enabled" : true,
+      "identifier" : "nav.teacher",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "每日复习",
+      "enabled" : true,
+      "identifier" : "nav.review",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "知识地图",
+      "enabled" : true,
+      "identifier" : "nav.map",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "学习工坊",
+      "enabled" : true,
+      "identifier" : "nav.studio",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "今日",
+      "enabled" : true,
+      "identifier" : "nav.today",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "LEARN",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A SPACE TO UNDERSTAND",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "luminfest",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "调高亮度",
+      "enabled" : true,
+      "identifier" : "sun.max.fill",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Native QA 20261112-111408-2432e9e2",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "N",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "Create a course",
+      "enabled" : true,
+      "identifier" : "course.create",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "刷新",
+      "enabled" : true,
+      "identifier" : "arrow.clockwise",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Backend connected",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Your learning space",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXTitle" : "LearningHarness",
+      "identifier" : "",
+      "role" : "AXApplication",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXMenuBar",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXTitle" : "Luminfest",
+      "identifier" : "SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.ModifiedContent<SwiftUI.Group<SwiftUI._ConditionalContent<SwiftUI.ModifiedContent<LearningHarness.RootView, SwiftUI._EnvironmentKeyWritingModifier<SwiftUI.DynamicTypeSize>>, LearningHarness.RootView>>, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<LearningHarness.AppStore>>>, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<LearningHarness.Localization>>>, SwiftUI._PreferenceWritingModifier<SwiftUI.PreferredColorSchemeKey>>, SwiftUI._AppearanceActionModifier>-1-AppWindow-1",
+      "role" : "AXWindow",
+      "subrole" : "AXStandardWindow",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXMinimizeButton",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXFullScreenButton",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXCloseButton",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXGroup",
+      "subrole" : "AXHostingView",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXScrollArea",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXScrollBar",
+      "subrole" : "",
+      "valueSettable" : true
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXDecrementPage",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXIncrementPage",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXDecrementArrow",
+      "valueSettable" : false
+    },
+    {
+      "identifier" : "",
+      "role" : "AXButton",
+      "subrole" : "AXIncrementArrow",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "identifier" : "",
+      "role" : "AXValueIndicator",
+      "subrole" : "",
+      "valueSettable" : true
+    },
+    {
+      "AXValue" : "LUMINFEST \/ LEARNING HARNESS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Designed for understanding, not just completion.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Formative feedback, not an accredited grade or trait diagnosis.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Measurement definitions are still loading.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Record an observation about your own work",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No telemetry or pointer activity is used to infer a perspective.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "WRITTEN EVIDENCE ONLY",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Perspective observations",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Open a course and answer some questions. No sample grades are shown.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No units to grade yet",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Formative, course-local mastery score.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A unit is graded only when every declared standard has evidence.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "DECLARED STANDARDS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Unit grade book",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Error patterns are based only on submitted answers.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Nothing to diagnose yet",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "No dimension evidence yet.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Places to look closer",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Learning dimensions",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Complete some practice to see measured activity here. No sample data is used.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A clearer picture will emerge",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "SUBMITTED ANSWERS ONLY",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Practice over time",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Foreground activity is only a focus proxy. Empty dimensions mean there is not enough evidence yet.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0 DAY STREAK",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Progress needs evidence, not a prediction.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "YOUR EVIDENCE, IN PERSPECTIVE",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "关闭",
+      "enabled" : true,
+      "identifier" : "xmark",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "You are enrolled in Integrated Mathematics I. Your plan is ready on Today.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "已选择",
+      "enabled" : true,
+      "identifier" : "checkmark.circle",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "An honest picture of the practice you have actually done.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "0",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXBusyIndicator",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "洞察",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "EVIDENCE, NOT ASSUMPTIONS",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "设置",
+      "enabled" : true,
+      "identifier" : "nav.settings",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "Change course or goal",
+      "enabled" : true,
+      "identifier" : "sidebar.setup",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "20 intentional minutes.\nOne idea at a time.",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Your course",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "book.closed",
+      "enabled" : true,
+      "identifier" : "book.closed",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "洞察",
+      "enabled" : true,
+      "identifier" : "nav.insights",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "项目",
+      "enabled" : true,
+      "identifier" : "nav.projects",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "老师",
+      "enabled" : true,
+      "identifier" : "nav.teacher",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "每日复习",
+      "enabled" : true,
+      "identifier" : "nav.review",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "知识地图",
+      "enabled" : true,
+      "identifier" : "nav.map",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "学习工坊",
+      "enabled" : true,
+      "identifier" : "nav.studio",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "今日",
+      "enabled" : true,
+      "identifier" : "nav.today",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "LEARN",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "A SPACE TO UNDERSTAND",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "luminfest",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "调高亮度",
+      "enabled" : true,
+      "identifier" : "sun.max.fill",
+      "role" : "AXImage",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Native QA 20261112-111408-2432e9e2",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "N",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "Create a course",
+      "enabled" : true,
+      "identifier" : "course.create",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXDescription" : "刷新",
+      "enabled" : true,
+      "identifier" : "arrow.clockwise",
+      "role" : "AXButton",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Backend connected",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    },
+    {
+      "AXValue" : "Your learning space",
+      "enabled" : true,
+      "identifier" : "",
+      "role" : "AXStaticText",
+      "subrole" : "",
+      "valueSettable" : false
+    }
+  ],
+  "stage" : "journey:J9",
+  "texts" : [
+    "0",
+    "0 DAY STREAK",
+    "20 intentional minutes.\nOne idea at a time.",
+    "A SPACE TO UNDERSTAND",
+    "A clearer picture will emerge",
+    "A unit is graded only when every declared standard has evidence.",
+    "An honest picture of the practice you have actually done.",
+    "Backend connected",
+    "Build a course from your own notes",
+    "Change course or goal",
+    "Complete some practice to see measured activity here. No sample data is used.",
+    "Create a course",
+    "DECLARED STANDARDS",
+    "Designed for understanding, not just completion.",
+    "EVIDENCE, NOT ASSUMPTIONS",
+    "Error patterns are based only on submitted answers.",
+    "Foreground activity is only a focus proxy. Empty dimensions mean there is not enough evidence yet.",
+    "Formative feedback, not an accredited grade or trait diagnosis.",
+    "Formative, course-local mastery score.",
+    "LEARN",
+    "LUMINFEST \/ LEARNING HARNESS",
+    "Learning dimensions",
+    "LearningHarness",
+    "Luminfest",
+    "Measurement definitions are still loading.",
+    "N",
+    "Native QA 20261112-111408-2432e9e2",
+    "No dimension evidence yet.",
+    "No telemetry or pointer activity is used to infer a perspective.",
+    "No units to grade yet",
+    "Nothing to diagnose yet",
+    "Open a course and answer some questions. No sample grades are shown.",
+    "Perspective observations",
+    "Places to look closer",
+    "Practice over time",
+    "Progress needs evidence, not a prediction.",
+    "Record an observation about your own work",
+    "Refresh current page",
+    "SUBMITTED ANSWERS ONLY",
+    "Unit grade book",
+    "WRITTEN EVIDENCE ONLY",
+    "YOUR EVIDENCE, IN PERSPECTIVE",
+    "You are enrolled in Integrated Mathematics I. Your plan is ready on Today.",
+    "Your course",
+    "Your learning space",
+    "book.closed",
+    "luminfest",
+    "this button also has an action to zoom the window",
+    "今日",
+    "关闭",
+    "刷新",
+    "学习工坊",
+    "已选择",
+    "每日复习",
+    "洞察",
+    "知识地图",
+    "老师",
+    "设置",
+    "调高亮度",
+    "项目"
+  ]
+}

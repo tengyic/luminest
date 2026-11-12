@@ -1,0 +1,297 @@
+{
+  "account" : "native-20261112-111408-2432e9e2@example.com",
+  "driver" : "in-process AXUIElement against the running SwiftUI app",
+  "generatedAt" : "2026-11-12T03:17:01Z",
+  "journeys" : [
+    {
+      "checks" : [
+        {
+          "detail" : "auth.name present before any action",
+          "name" : "authentication form is the first surface",
+          "ok" : true
+        },
+        {
+          "detail" : "signed-in UI observed after pressing Register",
+          "name" : "registration replaced the auth form",
+          "ok" : true
+        },
+        {
+          "detail" : "setup sheet no longer present",
+          "name" : "onboarding dismissed",
+          "ok" : true
+        },
+        {
+          "detail" : "YOUR PLAN visible on the today surface",
+          "name" : "a plan is shown after onboarding",
+          "ok" : true
+        },
+        {
+          "detail" : "nav.today or compact equivalent present",
+          "name" : "sidebar navigation is reachable",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 23.799170017242432,
+      "id" : "J1",
+      "notes" : [
+
+      ],
+      "requirement" : "A stranger can install, register and reach a personalised plan.",
+      "status" : "pass",
+      "title" : "First launch, registration and onboarding"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "lesson chrome rendered",
+          "name" : "the enrolled course surfaces a concept",
+          "ok" : true
+        },
+        {
+          "detail" : "present: lesson.read, lesson.deck, lesson.lecture",
+          "name" : "lesson actions are offered",
+          "ok" : true
+        },
+        {
+          "detail" : "lesson.read enabled",
+          "name" : "read-aloud control is present and enabled",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 11.519516944885254,
+      "id" : "J2",
+      "notes" : [
+
+      ],
+      "requirement" : "A learner can open a lesson for the enrolled course and see its content.",
+      "status" : "pass",
+      "title" : "Selecting a course and starting a lesson"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "question.option.a present",
+          "name" : "a practice question is shown with options",
+          "ok" : true
+        },
+        {
+          "detail" : "feedback text observed after submit",
+          "name" : "feedback names the correct answer or explains the gap",
+          "ok" : true
+        },
+        {
+          "detail" : "question.next present",
+          "name" : "the learner can advance to another question",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 14.521045923233032,
+      "id" : "J3",
+      "notes" : [
+
+      ],
+      "requirement" : "A submitted answer produces evaluated feedback and is recorded.",
+      "status" : "pass",
+      "title" : "Completing a practice question and receiving grading feedback"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "queue heading observed",
+          "name" : "the review queue claims to be backend-scheduled",
+          "ok" : true
+        },
+        {
+          "detail" : "empty-state copy shown with a disabled Start review",
+          "name" : "the empty queue is explained",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 39.547426104545593,
+      "id" : "J4",
+      "notes" : [
+        "no review items were due and the deck could not be seeded: Blocked(message: \"Timed out waiting for a revealed card\")"
+      ],
+      "requirement" : "A completed review returns a next due date rather than a dead end.",
+      "status" : "blocked",
+      "title" : "Completing a review and receiving the next scheduled review"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "project.text holds the typed marker",
+          "name" : "the draft was typed into the real editor",
+          "ok" : true
+        },
+        {
+          "detail" : "field still holds the draft",
+          "name" : "the draft is still there after leaving and returning",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 9.9405339956283569,
+      "id" : "J5",
+      "notes" : [
+
+      ],
+      "requirement" : "Draft text survives navigating away and back without an explicit save.",
+      "status" : "pass",
+      "title" : "Leaving and reopening an autosaved project"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "course.create entry point present in the shell header",
+          "name" : "the native app offers course creation",
+          "ok" : true
+        },
+        {
+          "detail" : "Preview ready: 5 concepts, 5 graph nodes and 20 questions. Nothing has been saved yet — you can still edit your notes.",
+          "name" : "a preview shows concepts without persisting a course",
+          "ok" : true
+        },
+        {
+          "detail" : "course_id: mine_4da02d8507",
+          "name" : "the app reports a stored course id",
+          "ok" : true
+        },
+        {
+          "detail" : "status names the enrolment step",
+          "name" : "creation is reported as owned but not yet active",
+          "ok" : true
+        },
+        {
+          "detail" : "enrolment confirmed and the plan reloaded",
+          "name" : "the authored course becomes the active course",
+          "ok" : true
+        },
+        {
+          "detail" : "sidebar reachable after the sheet closes",
+          "name" : "the app is still usable after authoring",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 21.397307991981506,
+      "id" : "J6",
+      "notes" : [
+
+      ],
+      "requirement" : "A learner can author a course in the app and reopen it.",
+      "status" : "pass",
+      "title" : "Creating a course and accessing it again"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "new tutor text rendered",
+          "name" : "the tutor answers instead of returning an empty bubble",
+          "ok" : true
+        },
+        {
+          "detail" : "grounding label or curriculum attribution visible",
+          "name" : "the reply is labelled when it is not a live model",
+          "ok" : true
+        },
+        {
+          "detail" : "no stack trace, status code or request id on screen",
+          "name" : "no raw provider exception is shown to the learner",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 14.173869967460632,
+      "id" : "J7",
+      "notes" : [
+
+      ],
+      "requirement" : "A missing or failing model still yields a grounded answer, never an empty reply.",
+      "status" : "pass",
+      "title" : "Using the tutor offline and handling provider failure"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "SUBMITTED ANSWERS ONLY caption present",
+          "name" : "the measured chart is labelled as submissions only",
+          "ok" : true
+        },
+        {
+          "detail" : "empty-state copy absent after practice in J3",
+          "name" : "real attempts replace the no-practice empty state",
+          "ok" : false
+        },
+        {
+          "detail" : "an engagement section exists and is not conflated with mastery",
+          "name" : "engagement is named separately from learning",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 3.3773939609527588,
+      "id" : "J9",
+      "notes" : [
+
+      ],
+      "requirement" : "Insights separates measured outcomes from activity, and says which is which.",
+      "status" : "fail",
+      "title" : "Viewing Insights and distinguishing learning from engagement"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "confirmation observed after enabling activity consent",
+          "name" : "a consent change is saved and confirmed",
+          "ok" : true
+        },
+        {
+          "detail" : "settings.export present and enabled",
+          "name" : "data export is offered to the learner",
+          "ok" : true
+        },
+        {
+          "detail" : "confirmation sheet shown",
+          "name" : "deletion requires an explicit confirmation sheet",
+          "ok" : true
+        },
+        {
+          "detail" : "no phrase field found in the confirmation sheet",
+          "name" : "deletion is gated on typing the exact phrase",
+          "ok" : false
+        },
+        {
+          "detail" : "sheet dismissed by Cancel",
+          "name" : "the confirmation can be abandoned safely",
+          "ok" : true
+        },
+        {
+          "detail" : "sidebar still reachable",
+          "name" : "the account is still signed in after cancelling",
+          "ok" : true
+        }
+      ],
+      "durationSeconds" : 24.60583508014679,
+      "id" : "J10",
+      "notes" : [
+
+      ],
+      "requirement" : "Consent is changeable, export is reachable, and deletion is gated deliberately.",
+      "status" : "fail",
+      "title" : "Changing consent, exporting data and deleting an account"
+    },
+    {
+      "checks" : [
+        {
+          "detail" : "lesson.read missing",
+          "name" : "a read-aloud control exists",
+          "ok" : false
+        }
+      ],
+      "durationSeconds" : 3.214806079864502,
+      "id" : "J8",
+      "notes" : [
+        "no read-aloud control on the studio surface"
+      ],
+      "requirement" : "Read-aloud either speaks or refuses with a named reason; it never hangs.",
+      "status" : "fail",
+      "title" : "Using read-aloud and handling unavailable voice services"
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "checks": {
+    "actualAssistantReplyRendered": false,
+    "actualAttemptFeedbackRendered": false,
+    "actualOptionAndReasoningPropagated": false,
+    "actualProjectSubmissionAndReflection": false,
+    "actualUserMessagePersisted": false,
+    "backendIssuedSignedInSession": true,
+    "enrolledCourseMatchesRequested": false,
+    "explicitActivityConsentSaved": true,
+    "goalFieldPropagated": false,
+    "isolatedDatabaseExists": true,
+    "lastHeartbeatRecorded": true,
+    "onboardingCompletedThroughRealUi": true,
+    "realForegroundHeartbeat": false,
+    "realPracticeAttempt": true,
+    "registeredNameMatches": true,
+    "registeredPasswordMatchesRealFieldInput": true,
+    "trainingConsentRemainsSeparate": true,
+    "uniqueAccount": true
+  },
+  "databaseCounts": {
+    "admin_audit_log": 0,
+    "assessments": 0,
+    "attempts": 1,
+    "auth_tokens": 1,
+    "beta_invites": 0,
+    "cohorts": 0,
+    "consent_ledger": 2,
+    "created_courses": 1,
+    "experiment_assignments": 0,
+    "experiment_exposures": 0,
+    "experiments": 0,
+    "feedback": 0,
+    "feedback_events": 0,
+    "flashcards": 0,
+    "harness_runs": 0,
+    "invite_redemptions": 0,
+    "learning_states": 1,
+    "memory_notes": 2,
+    "messages": 0,
+    "perspective_reviews": 0,
+    "playground_runs": 0,
+    "procedure_runs": 0,
+    "projects": 35,
+    "quota_counters": 3,
+    "quota_policies": 0,
+    "rate_buckets": 6,
+    "receipts": 1,
+    "refresh_tokens": 1,
+    "schema_version": 1,
+    "server_secrets": 0,
+    "teacher_style_profiles": 0,
+    "telemetry_events": 1,
+    "tokens": 1,
+    "training_consent_ledger": 0,
+    "unit_grades": 0,
+    "usage_daily_rollup": 0,
+    "usage_ledger": 1,
+    "user_preferences": 0,
+    "users": 1,
+    "waitlist_signups": 0
+  },
+  "records": {
+    "assessments": [],
+    "attempts": [
+      {
+        "category": "conceptual",
+        "concept_id": "fractions",
+        "correct": 0,
+        "elapsed_seconds": 0.0,
+        "id": "c46bbd21-770c-42f3-a7c1-b7d77a657fc0",
+        "mode": "practice",
+        "payload": {
+          "answer_text": null,
+          "client_event_id": "80919D38-64C5-4038-B7C7-199008E9A459",
+          "confidence": 0.5,
+          "elapsed_seconds": 0.0,
+          "option_id": "a",
+          "question_id": "fractions-1",
+          "reasoning": null,
+          "receipt": "785d7bd2-c239-49ba-a82a-c75ecd248f3a.94c4740a036c53119d7240af92623d5e03d5058dcbcda20aa9181ed8889b55e0",
+          "self_explanation": null
+        },
+        "question_id": "fractions-1",
+        "response": {
+          "assessment_complete": false,
+          "assessment_progress": {
+            "answered": 0,
+            "total": 0
+          },
+          "correct": false,
+          "correct_answer": "3/4",
+          "diagnosis": {
+            "alternatives": [
+              "An arithmetic slip",
+              "Misreading or accidental selection",
+              "A conceptual or procedural gap"
+            ],
+            "category": "conceptual",
+            "confidence": 0.35,
+            "next_action": "Use equal-sized pieces to compare 1/2 + 1/2 with one whole.",
+            "reason": "Tentative: The choice adds denominators as though units could be combined. This option is compatible with, but does not prove, that error process.",
+            "response_confidence": 0.5,
+            "scope": "Task-level hypothesis; confidence is a heuristic, not calibrated diagnostic probability."
+          },
+          "exam_complete": false,
+          "explanation": "Use denominator 4: 2/4 + 1/4 = 3/4 = 3/4.",
+          "grade": null,
+          "id": "c46bbd21-770c-42f3-a7c1-b7d77a657fc0",
+          "mastery": 0.14022988505747125,
+          "review_at": "2026-11-12T11:46:10.855009+00:00"
+        }
+      }
+    ],
+    "messages": [],
+    "projects": [],
+    "telemetry_events": [
+      {
+        "active_seconds": 0.0,
+        "occurred_at": "2026-11-12T03:16:57+00:00",
+        "payload": "{\"window_active\": true, \"interval_seconds\": 4.000880250008777}",
+        "type": "heartbeat"
+      }
+    ],
+    "users": [
+      {
+        "course_id": "mine_4da02d8507",
+        "daily_minutes": 20,
+        "email": "native-20261112-111408-2432e9e2@example.com",
+        "goal": "Get ready for the next course and understand the ideas rather than memorise them",
+        "id": "422d0ba4-c2c0-4e34-bfcd-3a04f975d68e",
+        "last_heartbeat": 1794453417.809716,
+        "name": "Native QA 20261112-111408-2432e9e2",
+        "onboarding_completed_at": 1794453358.612728,
+        "telemetry_consent": 1,
+        "training_consent": 0
+      }
+    ]
+  }
+}

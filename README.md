@@ -170,23 +170,39 @@ Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evi
 
 | Check | Date | Covers | Commit | Result |
 |---|---|---|---|---|
-| Backend suite — shipping branch | 2026-11-11 | all 122 test files, 2,291 collected | `ab8bcda` | **2,286 passed / 3 failed / 2 skipped.** All three failures were real and are fixed in `a7bfb6d`, with the affected files re-run green (130 passed); the aggregate *after* the fix has **not** been measured |
+| Backend suite — shipping branch, **after** the fix | 2026-11-12 | all 122 test files, 2,291 collected | `c35d24f` | **2,289 passed / 0 failed / 2 skipped**, 8 warnings, 14 m 49 s, `PYTEST_EXIT=0`. The two skips are explicit opt-in live-provider smokes. [Raw log, collection and reproduction](docs/evidence/full-suite-2026-11-12/) |
+| Backend suite — shipping branch, before the fix | 2026-11-11 | all 122 test files, 2,291 collected | `ab8bcda` | **2,286 passed / 3 failed / 2 skipped.** All three failures were real and were fixed in `a7bfb6d`; the aggregate after the fix is the row above, not an inference |
 | Backend suite — `main` | 2026-11-11 | all 101 test files, 1,838 collected | `bbbe2e4` | **1,835 passed / 1 failed / 2 skipped.** The one failure is `test_packaging_manifest` comparing `requirements.txt` against the *local* venv (Pillow 13.0.0 installed vs 12.3.0 declared, python-multipart 0.0.31 vs 0.0.22) — an environment artefact, not code on `main` |
 | Release gate, **layers 1–2 only** | 2026-11-11 | **9 of 122 test files (7.4%)**: 66 unit + 47 integration | `a7bfb6d` | **PASS** — 113 passed, 0 failed, 0 skipped, 71 s. This is a *subset*, chosen for speed; it is not the suite |
 | First-person acceptance run | 2026-11-11 | 29 steps, fresh database, unseen topic, provider explicitly unconfigured | `a7bfb6d` | **29 / 29 steps passed** |
-| Native UI layer (gate layer 3) | — | 10 golden journeys in the real app | — | **not run in this snapshot.** The journeys drive the app in-process and need a built binary, not a signing identity; the reason it is absent here is that layers 1–2 were requested |
+| Native UI layer (gate layer 3) | 2026-11-12 | 10 golden journeys in the rebuilt real app, with an isolated backend and database | `c35d24f` | **NOT GREEN — 6 passed / 1 blocked / 3 failed / 0 gaps**, 3 m 03 s, `databaseVerified: true`. J4 is blocked (no review due on a fresh account); J8/J9/J10 failed. [Evidence and per-journey notes](docs/evidence/native-layer3-2026-11-12/) |
 
 Reproduce, in order:
 
 ```sh
-# the suite, sharded: one process is killed on a busy machine
+# the full suite, one process (the 2026-11-12 row: 14m49s on this host).
+# TMPDIR and --basetemp must be inside the workspace; PYTHONPATH must be unset.
+mkdir -p outputs/qa/tmp
+cd harness/backend
+env -u PYTHONPATH TMPDIR="<workspace>/outputs/qa/tmp" PYTHONDONTWRITEBYTECODE=1 \
+  .venv/bin/python -m pytest -q -rs -p no:cacheprovider \
+  --basetemp="<workspace>/outputs/qa/bt"
+
+# sharded alternative if a busy machine kills the single process
 cd harness/backend
 for f in tests/test_*.py; do echo "$f"; done | split -l 31 - chunk-
-for c in chunk-*; do .venv/bin/python -m pytest -q -p no:cacheprovider \
-  --basetemp=/tmp/pt-$(basename $c) $(cat $c | tr '\n' ' '); done
+for c in chunk-*; do env -u PYTHONPATH .venv/bin/python -m pytest -q -p no:cacheprovider \
+  --basetemp="<workspace>/outputs/qa/pt-$(basename $c)" $(cat $c | tr '\n' ' '); done
 
 # the gate as published (the runner lives on feature/a11y-i18n, not on main)
 cd harness && python3 scripts/quality_gate.py --layers 1,2
+
+# layer 3: rebuild first, then drive the ten journeys in a fresh output directory
+cd harness/native && env -u PYTHONPATH swift build --disable-sandbox
+cd .. && env -u PYTHONPATH backend/.venv/bin/python scripts/native_qa.py --journeys \
+  --app native/.build/debug/LearningHarness \
+  --backend-python backend/.venv/bin/python --port 8891 \
+  --output <fresh-empty-directory> --timeout 900
 
 # the journey: needs a backend on --base-url, started with a fresh data dir
 HARNESS_ENV=test HARNESS_TUTOR_PROVIDER= \
@@ -207,9 +223,9 @@ It is **not** a like-for-like improvement on the earlier 17/20 run: the runner i
 - **Duplex realtime voice** requires an OpenAI Realtime key, and the VAD is heuristic.
 - **Not a public release.** `security find-identity -v -p codesigning` reports 0 identities on the build machine, so `release_kit.py` refuses; legal text now has 0 placeholders, but signing and notarization are still required ([DISTRIBUTION.md](harness/DISTRIBUTION.md)).
 - **A skip is not a pass, and the gate now enforces it.** The gate parses each layer's skipped-test count and blocks the verdict on it, at every strictness level — a test-level skip used to sail through because pytest exits 0. A layer that was not run at all blocks unconditionally.
-- **This is not certification.** The gate covers 7.4% of the test files, its runner is not on `main`, no commit has a green full-suite aggregate archived, and nothing here exercises the native client. Read it as evidence of specific behaviour on specific dates, not as a statement that the product is fit to ship.
+- **This is not certification.** The gate covers 7.4% of the test files and its runner is not on `main`. A green full-suite aggregate is now archived, but it is on the development commit `c35d24f`, not on `main`, whose row still has its one environment-artefact failure. The native client is now exercised rather than unmeasured, but layer 3 is **not green** (6 of 10 journeys passed). Read this as evidence of specific behaviour on specific dates, not as a statement that the product is fit to ship.
 
-The gate runner lives on the `feature/a11y-i18n` development branch; the snapshots themselves — `GATE.md` and `gate.json` — are committed in `docs/evidence/`, including the 2026-11-11 run this table cites.
+The gate runner lives on the `feature/a11y-i18n` development branch; the snapshots themselves — `GATE.md` and `gate.json` — are committed in `docs/evidence/`, including the 2026-11-11 run this table cites. The two 2026-11-12 rows add [`full-suite-2026-11-12/`](docs/evidence/full-suite-2026-11-12/) and [`native-layer3-2026-11-12/`](docs/evidence/native-layer3-2026-11-12/); both hold raw logs and JSON, not just prose.
 
 ---
 
