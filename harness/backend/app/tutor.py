@@ -393,8 +393,18 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
                     'model': cfg.provider_model, 'messages': messages, 'stream': False,
                     'options': {'num_predict': 600}}, headers=headers)
             else:
+                # The configured endpoint may be a *reasoning* model, whose hidden trace
+                # is billed against the same ``max_tokens`` as the visible answer. Measured
+                # on 2026-11-13 with deepseek-flash and a real tutor turn: reasoning spent
+                # all 600 tokens, ``content`` came back empty with finish_reason=length, and
+                # the learner got a declared fallback instead of a tutor reply; on other
+                # turns the answer was cut off mid-sentence. Asking it to skip the hidden
+                # trace is what makes the 600-token ceiling mean what it says. This mirrors
+                # ``app.harness.provider.chat(reasoning='off')``, which every artifact
+                # caller already uses for exactly this reason.
                 result = client.post(cfg.provider_url.rstrip('/') + '/chat/completions', json={
-                    'model': cfg.provider_model, 'messages': messages, 'max_tokens': 600}, headers=headers)
+                    'model': cfg.provider_model, 'messages': messages, 'max_tokens': 600,
+                    'reasoning_effort': 'none'}, headers=headers)
             result.raise_for_status()
             if len(result.content) > 100000:
                 raise ValueError('Provider response is too large')
