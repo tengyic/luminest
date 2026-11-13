@@ -665,8 +665,20 @@ final class NativeQA {
                 // erase the database evidence for J1-J9 that the launcher reads afterwards.
                 if sheetShown { try? await self.pressLabel("Cancel") }
                 await self.pause(0.6)
-                rec.check("the confirmation can be abandoned safely",
-                          !self.containsText("Permanently delete your account?") && !phraseFieldPresent,
+                // Overlay buttons do not always expose their label as an AXButton; if the
+                // sheet is still on screen, press the most specific pressable descendant
+                // that carries "Cancel" before checking the outcome.
+                if self.containsText("Permanently delete your account?") {
+                    try? await self.pressContaining("Cancel")
+                    await self.pause(0.6)
+                }
+                // Read the live tree, not the snapshot taken while the sheet was open:
+                // `phraseFieldPresent` is deliberately true here (the phrase field was
+                // typed into above), so reusing it would fail even after a real dismissal.
+                let sheetStillOpen = self.containsText("Permanently delete your account?")
+                    || self.find("settings.delete.phrase") != nil
+                    || self.findEditable(containing: "DELETE MY ACCOUNT") != nil
+                rec.check("the confirmation can be abandoned safely", !sheetStillOpen,
                           "sheet dismissed by Cancel")
                 rec.check("the account is still signed in after cancelling", self.find("nav.settings") != nil
                             || self.find("nav.compact.settings") != nil,
