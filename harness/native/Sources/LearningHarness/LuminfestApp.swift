@@ -574,7 +574,20 @@ struct AppShell: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .sheet(isPresented: $showCourseAuthoring) { CourseAuthoringSheet() }
+        // Presented inline rather than as a separate `.sheet` window: a SwiftUI sheet is a
+        // distinct NSWindow that the accessibility server does not expose through
+        // `kAXWindowsAttribute` on this OS, so the AX-driven journey J6 could never locate
+        // `course.create.notes`. An inline overlay keeps every control in the main window's
+        // AX tree while looking and behaving like a modal for a human.
+        .overlay {
+            if showCourseAuthoring {
+                ZStack {
+                    Color.black.opacity(0.4).ignoresSafeArea()
+                    CourseAuthoringSheet(onDismiss: { showCourseAuthoring = false })
+                        .frame(width: 680)
+                }
+            }
+        }
     }
 
     /// Below 1,120 pt the labelled sidebar becomes an icon rail. Every icon keeps an

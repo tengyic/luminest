@@ -508,7 +508,14 @@ struct SettingsPage: View {
             }
             .confirmationDialog("Sign out of Luminest?", isPresented: $logoutPrompt, titleVisibility: .visible) { Button("Sign out") { store.run { await store.signOut() } }; Button("Cancel", role: .cancel) {} }
             .confirmationDialog("Change the backend and sign out?", isPresented: $endpointPrompt, titleVisibility: .visible) { Button("Change server") { do { try store.changeEndpoint(server) } catch { store.error = error.localizedDescription } }; Button("Cancel", role: .cancel) {} }
-            .sheet(isPresented: $deletePrompt) {
+            // Inline overlay, not a separate `.sheet`: SwiftUI sheets are distinct
+            // NSWindows the accessibility server hides from `kAXWindowsAttribute`, so the AX
+            // journey J10 could not reach the "Permanently delete your account?" sheet. Inline
+            // keeps the controls in the main window's AX tree.
+            .overlay {
+                if deletePrompt {
+                    ZStack {
+                        Color.black.opacity(0.4).ignoresSafeArea()
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Permanently delete your account?").font(.system(size: 22, weight: .semibold))
                     // Fourth revision. The previous one got the direction of the caveat
@@ -519,10 +526,14 @@ struct SettingsPage: View {
                     // "up to four rollback copies" is added because the newest-of-each-kind
                     // clause alone understated what is kept.
                     Text("This removes your account and its learning records from the backend immediately, and signs it out everywhere on this Mac. The deletion is recorded outside the database, so restoring an old snapshot does not let the account sign back in. Recovery snapshots of the data can stay on this Mac until you remove them — the newest snapshot of each kind, and up to four rollback copies, are kept. If the deletion record itself is removed, or the whole folder the app keeps its data in is replaced from an older backup, the app can no longer tell that the account was deleted. Export your data first if you want a copy.").font(.system(size: 13)).foregroundStyle(Palette.secondary)
-                    TextField("Type DELETE MY ACCOUNT", text: $deletePhrase).textFieldStyle(.roundedBorder)
+                    TextField("Type DELETE MY ACCOUNT", text: $deletePhrase)
+                        .textFieldStyle(.roundedBorder)
+                        .accessibilityIdentifier("settings.delete.phrase")
                     HStack { Button("Cancel") { deletePrompt = false }.buttonStyle(LuminfestButtonStyle(primary: false)); Spacer(); Button("Delete permanently", role: .destructive) { store.run { await store.deleteAccount(); if !store.authenticated { deletePrompt = false } } }.buttonStyle(LuminfestButtonStyle()).disabled(deletePhrase != "DELETE MY ACCOUNT") }
                     if let error = store.error { Text(error).font(.system(size: 11)).foregroundStyle(.red) }
                 }.padding(30).frame(width: 520).background(Palette.background)
+                }
+            }
             }
     }
     func sync() { goal = store.user["goal"].string; minutes = max(5, min(210, store.user["daily_minutes"].int)); consent = store.user["telemetry_consent"].bool; server = store.endpoint }

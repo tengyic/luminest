@@ -632,6 +632,7 @@ struct CourseSwitcher: View {
                                     store.run { await store.switchCourse(id) }
                                 }
                                 .buttonStyle(LuminfestButtonStyle(compact: true))
+                                .accessibilityIdentifier("settings.course." + id + ".switch")
                                 Button("Cancel") { confirmID = "" }
                                     .buttonStyle(.plain)
                                     .font(.system(size: 11))
@@ -640,6 +641,7 @@ struct CourseSwitcher: View {
                         } else {
                             Button("Enrol") { confirmID = id }
                                 .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                                .accessibilityIdentifier("settings.course." + id + ".enrol")
                         }
                     }
                 }

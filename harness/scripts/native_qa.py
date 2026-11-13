@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run an already-built native app against an owned, isolated backend; never build or use XCTest."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -10,6 +11,7 @@ import socket
 import sqlite3
 import subprocess
 import sys
+import threading
 import time
 import urllib.request
 
@@ -21,6 +23,43 @@ def save_json(path, value):
     temporary = path.with_name(path.name + '.tmp')
     temporary.write_text(json.dumps(value, indent=2, sort_keys=True) + '\n')
     temporary.replace(path)
+
+
+def binary_fingerprint(path):
+    """Pin the exact executable a run used. Without this, two runs that name the same
+    debug path cannot be compared after a rebuild overwrites it (see the B8 panel:
+    the 2026-11-11 binary was replaced on 2026-11-12 and its identity was lost)."""
+    digest = hashlib.sha256()
+    with open(path, 'rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    stat = path.stat()
+    return {'path': str(path), 'sha256': digest.hexdigest(),
+            'size': stat.st_size, 'mtime': stat.st_mtime}
+
+
+def inject_access_expiry(database, output, delay):
+    """Fault injection, not a fake pass: rewind the *owned* test database's live access
+    token so the app meets a genuinely expired credential. The client still has to
+    redeem its own refresh token through the real public endpoint. No app state, no
+    response and no assertion is modified."""
+    marker = {'kind': 'access-token-expiry', 'delaySeconds': delay, 'applied': False,
+              'note': 'Only the QA-owned isolated SQLite database is written; the app, the '
+                      'assertions and the response bodies are untouched.'}
+    deadline = time.monotonic() + delay
+    while time.monotonic() < deadline:
+        time.sleep(0.2)
+    try:
+        with sqlite3.connect(database, timeout=15) as connection:
+            cursor = connection.execute(
+                'UPDATE tokens SET expires_at = created_at - 1 '
+                'WHERE revoked_at IS NULL AND expires_at > ?', (time.time(),))
+            marker['rowsUpdated'] = cursor.rowcount
+        marker['applied'] = True
+        marker['atEpoch'] = time.time()
+    except Exception as error:  # the marker must exist even when the injection fails
+        marker['error'] = str(error)
+    save_json(output / 'fault-injection.json', marker)
 
 
 def executable_for(path):
@@ -105,8 +144,22 @@ def inspect_database(database, output, python, expected, password, course=None):
         user_id = account['id']
         encoded = connection.execute('SELECT password_hash FROM users WHERE id=?', (user_id,)).fetchone()[0]
         checks['registeredPasswordMatchesRealFieldInput'] = verify_password(python, password, encoded)
+        # "Issued" is a historical fact, not a statement about the clock at verification
+        # time. The old `expires_at > time.time()` filter turned a valid, expired token
+        # into `false` when the run lasted longer than the 1-hour TTL (B8, 2026-11-11),
+        # which read as "the backend never signed the learner in". No raw tokens or
+        # digests are written into the evidence: only the fact and its timestamps.
         checks['backendIssuedSignedInSession'] = connection.execute(
-            'SELECT COUNT(*) FROM tokens WHERE user_id=? AND expires_at>?', (user_id, time.time())).fetchone()[0] > 0
+            'SELECT COUNT(*) FROM tokens WHERE user_id=?', (user_id,)).fetchone()[0] > 0
+        records['session'] = {
+            'access': [dict(row) for row in connection.execute(
+                'SELECT created_at,expires_at,last_used_at,revoked_at FROM tokens WHERE user_id=?',
+                (user_id,))],
+            'refresh': [dict(row) for row in connection.execute(
+                'SELECT created_at,expires_at,last_used_at,revoked_at,rotated_from FROM refresh_tokens '
+                'WHERE session_digest IN (SELECT digest FROM tokens WHERE user_id=?)', (user_id,))]
+            if 'refresh_tokens' in tables else [],
+        }
         selections = {
             'attempts': 'SELECT id,question_id,concept_id,mode,correct,elapsed_seconds,category,payload,response FROM attempts WHERE user_id=? ORDER BY created_at',
             'assessments': 'SELECT mode,total,answered,correct,complete FROM assessments WHERE user_id=?',
@@ -196,6 +249,15 @@ def main():
                              'transient notice banner before each frame. Layout and state unchanged.')
     parser.add_argument('--backend-python', type=Path, default=HARNESS / 'ui-tests/.venv/bin/python')
     parser.add_argument('--timeout', type=float, default=420, help='Native process timeout in seconds')
+    parser.add_argument('--access-token-ttl', type=int, default=0,
+                        help='Override HARNESS_ACCESS_TOKEN_TTL_SECONDS on the owned backend. '
+                             'The server enforces a 300s floor, so use --expire-access-after '
+                             'for a fast, deterministic expiry test.')
+    parser.add_argument('--expire-access-after', type=float, default=0,
+                        help='Fault injection: N seconds after the app starts, rewind the '
+                             'owned database\'s live access token expires_at to before its '
+                             'creation. This reproduces B8 (a token that expires mid-run) '
+                             'without a one-hour host sleep. Recorded in fault-injection.json.')
     parser.add_argument('--journeys', action='store_true',
                         help='Run the ten golden student journeys through the app instead of the '
                              'legacy single workflow. Writes journeys.json next to the evidence.')
@@ -204,6 +266,11 @@ def main():
         parser.error('Native QA requires macOS and an interactive desktop session')
     if not 1024 <= args.port <= 65535 or args.timeout <= 0:
         parser.error('Use a nonprivileged loopback port and a positive timeout')
+    if args.access_token_ttl and not 300 <= args.access_token_ttl <= 3600:
+        parser.error('--access-token-ttl must be 0 (server default) or 300..3600; '
+                     'config.py enforces a 300-second floor')
+    if args.expire_access_after < 0:
+        parser.error('--expire-access-after must be >= 0 (0 disables the injection)')
     executable = executable_for(args.app)
     python = args.backend_python.expanduser().absolute()
     if not python.is_file() or not os.access(python, os.X_OK):
@@ -228,6 +295,11 @@ def main():
                         'HARNESS_PORT': str(args.port), 'HARNESS_SECRET': secrets.token_urlsafe(48),
                         'HARNESS_ALLOWED_HOSTS': '127.0.0.1,localhost',
                         'PYTHONDONTWRITEBYTECODE': '1'})
+    if args.access_token_ttl:
+        # Deliberately on the owned child only. A short TTL lets us cross the expiry
+        # boundary inside one run rather than waiting for the machine to sleep for an
+        # hour, which is how B8 first appeared (2026-11-11, Clamshell Sleep).
+        environment['HARNESS_ACCESS_TOKEN_TTL_SECONDS'] = str(args.access_token_ttl)
     command = [str(executable), '--ui-test', '--native-qa', '--qa-output', str(output),
                '--qa-endpoint', str(args.port)]
     if args.capture_mode:
@@ -235,12 +307,17 @@ def main():
     summary = {'driver': 'in-process native AppKit accessibility (no external XCTest)', 'status': 'running',
                'port': args.port, 'output': str(output), 'command': command, 'expectedAccount': expected,
                'requestedCourse': args.course, 'capturePages': args.capture_pages,
-               'captureMode': bool(args.capture_mode),
+               'captureMode': bool(args.capture_mode), 'timeoutSeconds': args.timeout,
+               'accessTokenTtlSeconds': args.access_token_ttl or None,
+               'faultInjection': {'kind': 'access-token-expiry', 'afterSeconds': args.expire_access_after}
+               if args.expire_access_after else None,
+               'appBinary': binary_fingerprint(executable),
                'stateDirectory': str(state), 'databaseVerified': False,
                'permissionPolicy': 'Owned loopback backend, own app windows only, no app-state mutation fallback, no stored passwords'}
     summary_path = output / 'run-summary.json'
     save_json(summary_path, summary)
     backend = app = None
+    injection_thread = None
     exit_code = 1
     try:
         # Bind and keep ownership before spawning. Passing this socket to the child
@@ -248,11 +325,15 @@ def main():
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as listener:
             listener.bind(('127.0.0.1', args.port))
             listener.listen(128)
+            # Access log is ON. The 2026-11-11 B8 investigation could only infer three
+            # 401s from a rate-limit bucket because request lines were suppressed; a
+            # renewal regression needs the actual path, status and moment of every
+            # /auth/refresh and /dashboard call.
             bootstrap = (
                 'import socket,sys; sys.path.insert(0,sys.argv[1]); import uvicorn; '
                 'listener=socket.socket(fileno=int(sys.argv[2])); '
                 'config=uvicorn.Config("app.main:create_app",factory=True,host="127.0.0.1",'
-                'port=int(sys.argv[3]),access_log=False,proxy_headers=False); '
+                'port=int(sys.argv[3]),access_log=True,proxy_headers=False); '
                 'uvicorn.Server(config).run(sockets=[listener])'
             )
             with (output / 'backend.stdout.log').open('w') as stdout, (output / 'backend.stderr.log').open('w') as stderr:
@@ -292,6 +373,11 @@ def main():
             app = subprocess.Popen(command, cwd=ROOT, env=app_environment, stdout=stdout, stderr=stderr)
             summary['appPID'] = app.pid
             save_json(summary_path, summary)
+            if args.expire_access_after:
+                injection_thread = threading.Thread(
+                    target=inject_access_expiry,
+                    args=(database, output, args.expire_access_after), daemon=True)
+                injection_thread.start()
             try:
                 summary['appExitCode'] = app.wait(timeout=args.timeout)
             except subprocess.TimeoutExpired:
@@ -302,6 +388,8 @@ def main():
     except (Exception, KeyboardInterrupt) as error:
         summary.update({'status': 'blocked', 'error': 'Interrupted' if isinstance(error, KeyboardInterrupt) else str(error)})
     finally:
+        if injection_thread is not None:
+            injection_thread.join(timeout=2)
         stop_owned(app)
         stop_owned(backend)
         # Read only our isolated database after the processes have stopped. Counts and

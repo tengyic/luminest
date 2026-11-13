@@ -278,9 +278,19 @@ struct FlashcardsView: View {
         .background(Palette.background)
         .task(id: conceptID) { await reload() }
         .sheet(item: $editing) { card in FlashcardEditor(flash: flash, card: card) }
-        .sheet(isPresented: $showGenerate) {
-            GenerateSheet(flash: flash, conceptID: conceptID, title: conceptTitle,
-                          count: $generateCount)
+        // Inline overlay, not a separate `.sheet`: SwiftUI sheets are distinct NSWindows the
+        // accessibility server hides from `kAXWindowsAttribute`, so the AX journey J4 could not
+        // reach the generate sheet. Inline keeps its controls in the main window's AX tree.
+        .overlay {
+            if showGenerate {
+                ZStack {
+                    Color.black.opacity(0.4).ignoresSafeArea()
+                    GenerateSheet(flash: flash, conceptID: conceptID, title: conceptTitle,
+                                  count: $generateCount,
+                                  onDismiss: { showGenerate = false })
+                        .frame(width: 560)
+                }
+            }
         }
     }
 
@@ -617,6 +627,8 @@ private struct GenerateSheet: View {
     let title: String
     @Binding var count: Int
     @Environment(\.dismiss) private var dismiss
+    /// Used when the sheet is presented inline (no presentation to pop); clears the flag instead.
+    var onDismiss: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -654,11 +666,11 @@ private struct GenerateSheet: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") { flash.clearPreview(); dismiss() }.keyboardShortcut(.cancelAction)
+                Button("Cancel") { flash.clearPreview(); onDismiss?() ?? dismiss() }.keyboardShortcut(.cancelAction)
                 Button("Add \(flash.previewCreated) card\(flash.previewCreated == 1 ? "" : "s")") {
                     Task {
                         await flash.commitGeneration(conceptID: conceptID, count: count)
-                        dismiss()
+                        onDismiss?() ?? dismiss()
                     }
                 }
                 .buttonStyle(LuminfestButtonStyle(primary: true, compact: true))

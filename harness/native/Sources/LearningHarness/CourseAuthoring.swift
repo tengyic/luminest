@@ -17,6 +17,9 @@ import SwiftUI
 struct CourseAuthoringSheet: View {
     @EnvironmentObject var store: AppStore
     @Environment(\.dismiss) private var dismiss
+    /// When presented inline (not as a separate sheet window) the close affordance must
+    /// clear the presenting flag rather than call `dismiss()`, which has no presentation to pop.
+    var onDismiss: (() -> Void)? = nil
 
     @State private var title = ""
     @State private var subject = ""
@@ -89,7 +92,7 @@ struct CourseAuthoringSheet: View {
                         .accessibilityIdentifier("course.create.enrol")
                 }
                 Spacer()
-                Button("Close") { dismiss() }
+                Button("Close") { onDismiss?() ?? dismiss() }
                     .buttonStyle(.borderless)
                     .accessibilityIdentifier("course.create.close")
             }

@@ -20,13 +20,20 @@ Two real instances of this were found in review and are what these tests now pin
 ``waitlist_signups.confirm_digest`` / ``confirmed_at`` (a v4 table that gained v6 columns)
 and ``users.age_confirmed_at`` / ``terms_accepted_at`` / ``terms_version`` (a v1 table).
 Both worked on a fresh database and broke on an upgraded one.
+
+A third shape of drift is pinned here too: a *table* added without a version bump while the
+database stamp stays current. ``perspectives.PerspectiveReview`` shipped that way, and app
+startup deliberately never calls ``create_all`` on an existing database, so real installs
+were stamped v11 with 38 of 40 tables and returned 503 from dashboard/export/analytics.
+Only ``scripts/init_db.initialize()`` repairs it; ``_needs_upgrade`` must recognise that
+state so the repair is preceded by a pre-migration backup.
 """
 import pytest
 from sqlalchemy import inspect, text
 
 from app.config import Settings
-from app.db import make_database
-from scripts.init_db import initialize
+from app.db import SCHEMA_VERSION, make_database
+from scripts.init_db import _needs_upgrade, initialize
 
 
 @pytest.fixture
@@ -113,5 +120,61 @@ def test_upgrading_is_idempotent(settings):
         once = _snapshot(engine)
         initialize(engine)
         assert _snapshot(engine) == once
+    finally:
+        engine.dispose()
+
+
+def test_a_missing_table_counts_as_drift_at_the_current_stamp(settings):
+    """The version stamp matching is not proof the schema is complete.
+
+    Before this was pinned, ``_needs_upgrade`` looked only for missing *columns*. A v11
+    database missing ``perspective_reviews`` was reported as not needing an upgrade, so
+    ``initialize()`` repaired it with DDL but wrote no pre-migration backup - contradicting
+    that function's own docstring.
+    """
+    engine, _ = make_database(settings)
+    try:
+        initialize(engine)
+        assert 'perspective_reviews' in inspect(engine).get_table_names()
+        assert _needs_upgrade(engine, SCHEMA_VERSION) is False
+
+        with engine.begin() as connection:
+            connection.execute(text('DROP TABLE perspective_reviews'))
+        assert 'perspective_reviews' not in inspect(engine).get_table_names()
+        assert _needs_upgrade(engine, SCHEMA_VERSION) is True
+    finally:
+        engine.dispose()
+
+
+def test_a_current_stamp_missing_a_declared_table_is_repaired_without_losing_data(settings):
+    """``initialize()`` restores a dropped declared table and leaves learner rows alone.
+
+    This is the exact shape of the installed database that made dashboard, export and
+    analytics return 503 on 2026-11-12: current stamp, one declared table absent.
+    """
+    engine, _ = make_database(settings)
+    try:
+        initialize(engine)
+        complete = _snapshot(engine)
+
+        with engine.begin() as connection:
+            # A stand-in for learner data that must survive the repair. A separate table
+            # keeps the assertion independent of any model's NOT NULL requirements.
+            connection.execute(text('CREATE TABLE learner_data_probe (value text)'))
+            connection.execute(text("INSERT INTO learner_data_probe VALUES ('survives')"))
+            connection.execute(text('DROP TABLE perspective_reviews'))
+        assert 'perspective_reviews' not in _snapshot(engine)
+
+        initialize(engine)
+        repaired = _snapshot(engine)
+        assert 'perspective_reviews' in repaired
+        assert set(repaired) >= set(complete), (
+            f'declared tables still missing: {sorted(set(complete) - set(repaired))}'
+        )
+        assert repaired['perspective_reviews'] == complete['perspective_reviews']
+        with engine.connect() as connection:
+            assert connection.execute(
+                text('SELECT value FROM learner_data_probe')
+            ).scalar() == 'survives'
     finally:
         engine.dispose()

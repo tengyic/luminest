@@ -11,6 +11,25 @@ what the release gate accepts. Everything below that starts with *audit* came ou
 
 ## Unreleased
 
+### Fixed — B8: an expired session no longer signs the learner out (2026-11-12)
+
+The server already issued a 1-hour access token **and** a 60-day refresh token, with a
+public `POST /api/v1/auth/refresh`, but the native client stored only the access half and
+`AppStore.record()` answered every 401 with `logout()`. After a host sleep crossed the TTL,
+a learner whose account had just been created was returned to a fresh authentication form —
+the blocker reported as "post-registration navigation". `AppStore` now stores both halves in
+`SessionVault`, redeems the refresh token on a 401 (single-flight, no epoch change), stores
+the rotated pair and replays the failed work; only a failed exchange signs out. 403 is
+explicitly excluded. Seven regression tests cover renewal, rotation, concurrent 401s,
+403, missing/failed refresh and credential scoping. See
+`harness/docs/evidence/2026-11-12/B8-post-registration-navigation.md`.
+
+The QA runner now records the exact binary sha256/mtime and the timeout it used, enables
+uvicorn access logs, and offers `--expire-access-after` to inject an expired access token
+into its own isolated database. Its `backendIssuedSignedInSession` check no longer asks
+"is the token valid *right now*" — a historical issuance is not invalidated by the clock at
+verification time, which is what produced the misleading `false` on 2026-11-11.
+
 ### Added — unsigned staging artifact and shipping-audit evidence (2026-11-11 follow-up)
 
 - An **unsigned** staging archive is produced from `git archive HEAD` (tracked files only;

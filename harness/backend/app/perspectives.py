@@ -27,10 +27,17 @@ here. The only inputs are text a person chose to write. ``GET /perspectives/dime
 publishes each measurement definition so the UI can say what a number means rather than
 implying it is a psychometric instrument.
 
-New table, no ``SCHEMA_VERSION`` bump: ``create_all`` creates a brand-new table on both a
-fresh and an upgraded database. ``scripts/init_db.py`` imports this module so the frozen
-build registers the model before ``create_all`` runs (see ``course_builder`` for the
-precedent and the reason).
+New table, no ``SCHEMA_VERSION`` bump: ``create_all`` creates it on a fresh database, and
+``scripts/init_db.initialize()`` creates it on an existing one because that function calls
+``create_all`` unconditionally and imports this module so the model is registered (see
+``course_builder`` for the precedent and the reason).
+
+**App startup does not do this.** ``app/main.py`` gates ``create_all`` on the ``users`` table
+being absent, deliberately refusing to migrate an existing database. An install created
+before this table existed is therefore stamped at the current version but lacks the table,
+and dashboard/export/analytics fail with ``no such table: perspective_reviews`` until the
+operator runs ``scripts/init_db.py``. ``init_db._needs_upgrade`` now detects that drift and
+takes a pre-migration backup. See ``tests/test_schema_equivalence.py``.
 """
 from __future__ import annotations
 

@@ -309,7 +309,24 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     /// late replies against it. See ADR-0003, "access-level changes".
     var epoch = UUID()
     private var tasks: [UUID: Task<Void, Never>] = [:]
-    private var retryAction: (() async -> Void)?
+    /// The last unit of work to replay after a transient failure. Also the seam a
+    /// regression test uses to prove a renewed session replays the failed loads
+    /// without touching the network.
+    var retryAction: (() async -> Void)?
+    /// The server issues a short-lived access token *and* a long-lived refresh token
+    /// (`main.py:956-959 session_payload`), with a public rotation endpoint
+    /// (`POST /api/v1/auth/refresh`). Until both halves are persisted and redeemed, an
+    /// ordinary TTL expiry is indistinguishable from a forced sign-out: `record()` used
+    /// to call `logout()` on every 401 and the learner landed back on the registration
+    /// form with a freshly created account behind them (B8).
+    private var sessionRefreshInFlight = false
+    /// A Keychain-less macOS session can still renew within this run. The vault is the
+    /// durable copy; this is the in-memory fallback when `SecItemAdd` is unavailable.
+    private var inMemoryRefreshToken: String?
+    /// Test seam for the exchange itself. `nil` means "use the real server"; a test can
+    /// substitute a deterministic payload to assert the state machine without a network
+    /// or a one-hour sleep. It is deliberately narrow: only `/auth/refresh` goes through it.
+    var sessionRefreshExchange: ((_ endpoint: String, _ refreshToken: String) async throws -> JSON)?
     private var timer: AnyCancellable?
     private var lastTick = ProcessInfo.processInfo.systemUptime
     /// `internal`, not `private`: `updateSettings` in `AppStore+Account.swift` resets it.
@@ -371,13 +388,16 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     /// alive by this.
     static weak var current: AppStore?
 
-    init() {
+    /// `startBundledBackend` is an injection seam for tests: launching the bundled server
+    /// from a unit test would probe the operator's real ports and restore a real session.
+    /// Production always uses the default.
+    init(startBundledBackend: Bool = true) {
         let origin = UserDefaults.standard.string(forKey: "luminfest.endpoint") ?? "http://127.0.0.1:8765"
         endpoint = origin
         api = APIClient(endpoint: origin)
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect().sink { [weak self] _ in self?.tick() }
         AppStore.current = self
-        if ProcessInfo.processInfo.arguments.contains("--ui-test") { restoring = false }
+        if !startBundledBackend || ProcessInfo.processInfo.arguments.contains("--ui-test") { restoring = false }
         else { run { [weak self] in
             await BackendLauncher.shared.startIfBundled()
             if let failure = BackendLauncher.shared.failure { self?.error = failure }
@@ -397,7 +417,9 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     func restore() async {
         let version = epoch
         defer { if epoch == version { restoring = false } }
-        guard let token = SecureSession.read(endpoint: endpoint) else { return }
+        // Prefer the vault's access half; the legacy single-token Keychain item is still
+        // readable so a session saved by an older build survives an upgrade.
+        guard let token = SessionVault.readAccess(endpoint: endpoint) ?? SecureSession.read(endpoint: endpoint) else { return }
         api.token = token
         do {
             let me = try await api.json("/me")
@@ -412,7 +434,15 @@ struct VoiceOption: Identifiable, Codable, Hashable {
         } catch {
             guard epoch == version else { return }
             api.token = nil
-            if (error as? AppFailure)?.status == 401 { SecureSession.remove(endpoint: endpoint) }
+            // An expired access token is not a reason to sign the learner out. The
+            // refresh half is still valid for 60 days and `/auth/refresh` needs no bearer;
+            // redeeming it here is the same recovery path `record()` uses at runtime.
+            if (error as? AppFailure)?.status == 401,
+               SessionVault.readRefresh(endpoint: endpoint) != nil {
+                await refreshSession()
+                return
+            }
+            SessionVault.clear(endpoint: endpoint); SecureSession.remove(endpoint: endpoint)
             self.error = "Your session could not be restored. Sign in again or check the server. " + error.localizedDescription
         }
     }
@@ -444,11 +474,21 @@ struct VoiceOption: Identifiable, Codable, Hashable {
             // Persisting the session is a convenience, not a condition of signing in. A managed or
             // headless macOS session may expose no default keychain; in that case keep the real
             // authenticated session in memory for this run and say so plainly.
+            // Both halves must be stored. The server rotates refresh tokens on every use
+            // (`main.py:1046-1062`), so dropping `refresh_token` here would make the 401
+            // recovery path below impossible and turn an ordinary expiry into a logout.
+            let issuedRefresh = result["refresh_token"].string
+            inMemoryRefreshToken = issuedRefresh.isEmpty ? nil : issuedRefresh
             do {
-                try SecureSession.write(token, endpoint: origin)
+                try SessionVault.store(access: token,
+                                       refresh: issuedRefresh.isEmpty ? nil : issuedRefresh,
+                                       endpoint: origin)
+                // Keep the legacy single-token item in step for an older build that is
+                // launched against the same Keychain before this one is installed.
+                try? SecureSession.write(token, endpoint: origin)
                 notice = nil
             } catch {
-                notice = "Signed in for this session only. macOS Keychain could not store the session, so you will need to sign in again next time you open Luminfest."
+                notice = "Signed in for this session only. macOS Keychain could not store the session, so an expired login cannot be renewed automatically."
             }
             endpoint = origin; UserDefaults.standard.set(origin, forKey: "luminfest.endpoint")
             api.token = token; user = result["user"]; connected = true
@@ -467,11 +507,90 @@ struct VoiceOption: Identifiable, Codable, Hashable {
         if failure is CancellationError || (failure as? URLError)?.code == .cancelled { return }
         if let e = failure as? AppFailure {
             connected = true
+            // A 401 on a live session means the *access* half expired, not that the
+            // learner signed out. The server issued a 60-day refresh token for exactly
+            // this case. Redeeming it before discarding the session is the B8 fix: on
+            // 2026-11-11 a host sleep crossed the 1-hour TTL and the unconditional
+            // `logout()` here sent a freshly registered learner back to the auth form.
+            // 403 is deliberately excluded: `StateViews` renders 401/403 with the same
+            // wording, but a forbidden request must never trigger a credential exchange.
+            if e.status == 401 && authenticated {
+                errorStatus = nil; error = nil
+                renewExpiredSession()
+                return
+            }
             errorStatus = e.status
-            if e.status == 401 && authenticated { logout(); error = "Your session expired. Please sign in again."; return }
         } else if failure is URLError { connected = false; errorStatus = nil }
         else { errorStatus = nil }
         error = failure.localizedDescription
+    }
+    /// Single-flight guard: `refresh()` issues four loads with the same expired bearer,
+    /// and the server invalidates a refresh token on first use. Four concurrent
+    /// exchanges would rotate against the same credential and three would be rejected.
+    private func renewExpiredSession() {
+        guard !sessionRefreshInFlight else { return }
+        sessionRefreshInFlight = true
+        run { [weak self] in
+            defer { self?.sessionRefreshInFlight = false }
+            await self?.refreshSession()
+        }
+    }
+    /// Exchange the refresh half for a new session, keep `user` and `epoch` intact, and
+    /// replay the work that hit the 401. Only a *failed* exchange signs the learner out.
+    /// `epoch` must not change on the success path: `logout()` bumps it, which would
+    /// silently discard every in-flight reply through the epoch guards.
+    /// `internal` (not `private`) so the regression test can drive this state machine.
+    func refreshSession() async {
+        let version = epoch
+        let origin = endpoint
+        guard let refresh = SessionVault.readRefresh(endpoint: origin) ?? inMemoryRefreshToken,
+              !refresh.isEmpty else {
+            logout()
+            errorStatus = 401
+            error = "Your session expired. Please sign in again."
+            return
+        }
+        do {
+            let payload: JSON
+            if let exchange = sessionRefreshExchange {
+                payload = try await exchange(origin, refresh)
+            } else {
+                // No bearer on this request: the access half is the thing that expired,
+                // and `/auth/refresh` is a public route (`security.py:283`).
+                let client = APIClient(endpoint: origin)
+                payload = try await client.json("/auth/refresh", method: "POST",
+                                                body: ["refresh_token": refresh])
+            }
+            let access = payload["token"].string
+            guard !access.isEmpty else {
+                throw AppFailure(message: "The server did not return a renewed session.", status: nil)
+            }
+            guard epoch == version else { return }
+            let rotated = payload["refresh_token"].string
+            let nextRefresh = rotated.isEmpty ? nil : rotated
+            inMemoryRefreshToken = nextRefresh
+            try? SessionVault.store(access: access, refresh: nextRefresh, endpoint: origin)
+            try? SecureSession.write(access, endpoint: origin)
+            api.token = access
+            connected = true; error = nil; errorStatus = nil; notice = nil
+            // Replay whichever load last armed the retry closure; otherwise reload the
+            // shell data so the four requests that failed are actually retried.
+            let replay = retryAction
+            // `self.` is required: the guard above binds a String named `refresh`.
+            if let replay { await replay() } else { await self.refresh() }
+        } catch {
+            // `error` here is the implicit catch constant; the published property needs `self.`.
+            if failureIsCancellation(error) { return }
+            guard epoch == version else { return }
+            SessionVault.clear(endpoint: origin)
+            inMemoryRefreshToken = nil
+            logout()
+            errorStatus = 401
+            self.error = "Your session expired. Please sign in again."
+        }
+    }
+    private func failureIsCancellation(_ failure: Error) -> Bool {
+        failure is CancellationError || (failure as? URLError)?.code == .cancelled
     }
     func load(_ path: String, apply: @escaping (JSON) -> Void) async {
         let version = epoch
@@ -504,7 +623,17 @@ struct VoiceOption: Identifiable, Codable, Hashable {
         switch page {
         case .today: await refresh()
         case .map: await loadMap()
-        case .studio: await selectConcept(selectedConcept)
+        case .studio:
+            // A concept must be selected for the lesson body to render; without one the
+            // studio shows the "Choose an idea to begin" empty state and read-aloud, the
+            // deck and the board are all unaddressable. Onboarding normally sets this, but
+            // any path that reaches studio with it cleared must still land on a lesson,
+            // so fall back to the first curriculum concept (the same one the picker shows).
+            if selectedConcept.isEmpty,
+               let first = curriculum["concepts"].array.first?["id"].string {
+                selectedConcept = first
+            }
+            await selectConcept(selectedConcept)
         case .teacher: await loadChat()
         case .review: await load("/reviews") { self.reviews = $0 }
         case .projects: await load("/projects") { self.projects = $0 }
@@ -602,7 +731,11 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     }
     func logout() {
         epoch = UUID(); tasks.values.forEach { $0.cancel() }; tasks = [:]; api.cancelAll()
-        SecureSession.remove(endpoint: endpoint); api.token = nil
+        // Clear both halves for the *current* origin. `changeEndpoint` calls logout()
+        // before it reassigns `endpoint`, so the old origin's credentials are removed
+        // and the new one never inherits them (`SessionVault` keys by endpoint).
+        SessionVault.clear(endpoint: endpoint); SecureSession.remove(endpoint: endpoint)
+        inMemoryRefreshToken = nil; api.token = nil
         user = .null; dashboard = .null; curriculum = .null; graph = .null; lesson = .null; reviews = .null; projects = .null; analytics = .null; gradebook = .null; perspectives = .null; messages = []; teacherStyleProfile = [:]
         courses = .null; plan = .null; showCourseSetup = false; setupBusy = false; setupError = nil; setupDismissed = false
         selectedConcept = ""; page = .today; showQuestion = false; question = .null; attempt = .null

@@ -15,20 +15,20 @@ import Security
 /// sent only over the origin they belong to (the endpoint is part of the lookup
 /// key), so switching servers cannot replay a credential across origins.
 ///
-/// **Integration note (blocked by file ownership, deliberately minimal):**
-/// `Core.swift` is owned by another work stream in this cycle, so the one-line
-/// wiring change is documented here instead of landed:
+/// **Wiring (B8, 2026-11-12).** This vault used to compile and be tested entirely on
+/// its own: `AppStore.authenticate` stored only the access token, so a normal 1-hour
+/// expiry was answered by `record()` with `logout()` and a freshly registered learner
+/// was sent back to the auth form. `AppStore` now:
 ///
-///     // AppStore.authenticate, after login/register succeed:
-///     try? SessionVault.store(access: result["token"].string ?? "",
-///                             refresh: result["refresh_token"].string, endpoint: origin)
-///     // AppStore.restoreSession: prefer SessionVault.readAccess(endpoint:) and
-///     // on 401 redeem SessionVault.readRefresh(endpoint:) via /auth/refresh,
-///     // re-storing the rotated pair.
-///     // AppStore.signOut / endpoint switch: SessionVault.clear(endpoint:)
+/// - stores both halves on register/login (`authenticate`);
+/// - prefers `readAccess(endpoint:)` when restoring a saved session (`restore`);
+/// - redeems `readRefresh(endpoint:)` against the public `POST /auth/refresh` on a
+///   401, stores the rotated pair and replays the failed work (`refreshSession`);
+/// - calls `clear(endpoint:)` from `logout()`, which also covers `signOut`,
+///   `deleteAccount` and `changeEndpoint` (the latter before `endpoint` changes).
 ///
-/// Until that lands, `SecureSession` continues to store the access token and this
-/// vault compiles and is tested independently of `AppStore`.
+/// `SecureSession` remains as the legacy single-token item, kept in step so an older
+/// build launched against the same Keychain can still restore its access token.
 enum SessionVault {
     private static let service = "com.luminfest.learning-harness.session.vault"
 

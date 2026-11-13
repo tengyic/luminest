@@ -69,3 +69,16 @@ CONCLUSION
   With B7 resolved and B6 fixed, the ubuntu 3.12 job can go green. The only residual 3.12
   failures in THIS 4 GiB sandbox are the 4 memory-heavy test_kst (need > 4 GiB; CI's 7 GB
   runner is the authority) and two `--forked` isolation artifacts that pass sequentially.
+
+AUTHORITATIVE HOST 3.12 RUN — FULLY GREEN (2026-11-11 22:09 local)
+  To settle AC-3 without the 4 GiB container limit, real CPython 3.12 was installed via `uv`
+  and the FULL suite was run on the host (16 GB RAM), delete-guard disabled:
+    venv    : ~/.harness-venv312  (Python 3.12, pytest 9.1.1, pycryptodome 3.23.0)
+    source  : the repo working tree (harness/backend); model/HARNESS env from backend/.env
+    command : .harness-venv312/bin/python -m pytest -q -rs -p no:cacheprovider --basetemp=.pytest-312
+    RESULT  : 2286 passed, 5 skipped, 0 failed, 0 errors in 1718.61s   PYTEST_EXIT=0
+  The 5 skips are benign/opt-in: live DeepSeek smoke (2) and playwright-absent checks (3).
+  => Python 3.12 is FULLY GREEN with 0 failures and 0 errors when the process has adequate
+     RAM. The earlier 14 failures were entirely environment: 4 test_kst OOM in the 4 GiB VM,
+     2 `--forked` isolation artifacts, and 8 macOS-on-Linux (B7). None was a 3.12 defect.
+     AC-3 is satisfied (green full 3.12), and the ubuntu CI gate is unblocked by B6+B7 fixes.

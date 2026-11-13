@@ -96,6 +96,8 @@ extension AppStore {
     func changeEndpoint(_ value: String) throws {
         let origin = try APIClient.validateEndpoint(value)
         guard origin != endpoint else { return }
+        // logout() clears the vault *before* endpoint changes, so credentials scoped to
+        // the old origin are removed and cannot be replayed against the new one.
         logout(); endpoint = origin; api.endpoint = origin
         UserDefaults.standard.set(origin, forKey: "luminfest.endpoint")
     }

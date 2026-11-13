@@ -218,11 +218,19 @@ final class NativeQA {
     /// An AX text field found by its placeholder, for controls that ship no identifier.
     /// Only the account-deletion phrase field needs this today; it is purposely narrow so
     /// it cannot become a back door for "find whatever is on screen".
+    ///
+    /// SwiftUI emits a `TextField`'s label through whichever attribute the current SDK
+    /// chooses: the deletion-phrase field in particular arrives as `AXTitle`/`AXValue`
+    /// rather than `AXPlaceholderValue`, so every candidate attribute is checked. The
+    /// comparison stays an exact `==`, so this remains a narrow, attribute-agnostic lookup.
     private func findPlaceholder(_ placeholder: String) -> AXUIElement? {
         var match: AXUIElement?
         enumerate { element in
             if match != nil { return false }
-            if let value = string(element, kAXPlaceholderValueAttribute as String), value == placeholder {
+            let candidates = [kAXPlaceholderValueAttribute, kAXTitleAttribute,
+                             kAXValueAttribute, kAXDescriptionAttribute]
+                .compactMap { string(element, $0 as String) }
+            if candidates.contains(placeholder) {
                 match = element
                 return false
             }
@@ -510,6 +518,11 @@ final class NativeQA {
             }
         }
 
+        // J6 enrolled in the freshly authored course (proving the enrolment path), but that
+        // course ships without lesson content here, which would break the lesson-dependent
+        // journeys that follow. Restore the seed course before J7 so J4 and J8 have lessons.
+        await restoreSeedCourse()
+
         await journey("J7", "Using the tutor offline and handling provider failure",
                       "A missing or failing model still yields a grounded answer, never an empty reply.") { rec in
             do {
@@ -547,6 +560,15 @@ final class NativeQA {
                       "Insights separates measured outcomes from activity, and says which is which.") { rec in
             do {
                 try await self.navigateRetry("insights", text: "Practice over time")
+                // Insights loads `/analytics` asynchronously only once the surface is shown
+                // (see `AppStore.loadPage`); the no-practice empty state ("A clearer picture
+                // will emerge") therefore persists briefly after navigation. Wait for that
+                // fetch to land so the two assertions below read settled UI rather than
+                // racing the request. J3's practice attempt makes `daily` non-empty, so the
+                // empty state is expected to clear.
+                try await self.wait("insights analytics settled", seconds: 25) {
+                    !self.containsText("A clearer picture will emerge")
+                }
                 rec.check("the measured chart is labelled as submissions only",
                           self.containsText("SUBMITTED ANSWERS ONLY"),
                           "SUBMITTED ANSWERS ONLY caption present")
@@ -595,7 +617,7 @@ final class NativeQA {
                 if !self.containsText("Permanently delete your account?") {
                     try? await self.pressRetry("settings.delete", attempts: 2)
                 }
-                let hasPhraseField = { self.findPlaceholder("Type DELETE MY ACCOUNT") != nil }
+                let hasPhraseField = { self.find("settings.delete.phrase") != nil }
                 try await self.wait("delete confirmation sheet", seconds: 25) {
                     self.containsText("Permanently delete your account?") || hasPhraseField()
                 }
@@ -613,7 +635,7 @@ final class NativeQA {
                     // gate is checked through the mechanism that actually protects the
                     // account: the sheet demands the exact phrase and the button is bound
                     // to it (`disabled(deletePhrase != "DELETE MY ACCOUNT")`).
-                    let phraseField = self.findPlaceholder("Type DELETE MY ACCOUNT") != nil
+                    let phraseField = self.find("settings.delete.phrase") != nil
                     rec.check("deletion is gated on typing the exact phrase",
                               phraseField && sheetShown,
                               phraseField ? "phrase field present in the confirmation sheet"
@@ -641,8 +663,12 @@ final class NativeQA {
             do {
                 if self.find("tour.skip") != nil { try? await self.press("tour.skip") }
                 try await self.navigateRetry("studio", marker: "studio.practice")
+                // Selecting a concept triggers an async `/lessons/{id}` fetch; the lesson body
+                // (and thus `lesson.read`) only renders once that returns. Wait for it rather
+                // than racing the fetch and reporting a missing control on a healthy surface.
+                try await self.wait("read-aloud control", seconds: 20) { self.find("lesson.read") != nil }
                 guard let read = self.find("lesson.read") else {
-                    rec.check("a read-aloud control exists", false, "lesson.read missing")
+                    rec.check("a read-aloud control exists", false, "lesson.read missing after lesson load")
                     rec.blocked("no read-aloud control on the studio surface")
                     return
                 }
@@ -716,6 +742,34 @@ final class NativeQA {
         throw last
     }
 
+    /// J6 enrolls in the freshly authored course to prove the enrolment path, but that course
+    /// ships without lesson content in the harness (its concepts have no lessons), which would
+    /// leave the studio empty for the lesson- and deck-dependent journeys that follow (J4 needs
+    /// a lesson to generate cards; J8 needs one to read aloud). Restore the seed course the
+    /// learner actually enrolled in during onboarding so those journeys have a lesson to work
+    /// with. This is a test-sequencing step, not a product change: J6's "becomes the active
+    /// course" assertion has already passed before we switch back.
+    private func restoreSeedCourse() async {
+        let seed = ProcessInfo.processInfo.environment["NATIVE_QA_COURSE"] ?? "integrated_math_1"
+        do {
+            try await navigateRetry("settings")
+            // Only act if the seed course is not already the active one (it shows an Enrol
+            // button only when it is not the enrolled course).
+            guard find("settings.course." + seed + ".enrol") != nil else {
+                try? await navigateRetry("today"); return
+            }
+            try? await press("settings.course." + seed + ".enrol")
+            await pause(0.6)
+            try? await press("settings.course." + seed + ".switch")
+            // Let the switch land and the curriculum reload before the next journey drives studio.
+            try? await wait("seed course restored", seconds: 20) { self.containsText("ENROLLED") }
+            try? await navigateRetry("today")
+        } catch {
+            // Non-fatal: if the switcher is unreachable the downstream journeys will report
+            // their own, more specific failures rather than a cryptic sequencing error.
+        }
+    }
+
     /// Press with retries, for controls inside a surface that rebuilds while we look at it.
     private func pressRetry(_ id: String, attempts: Int = 3) async throws {
         var last: Error = Blocked(message: "press never attempted: \(id)")
@@ -747,9 +801,13 @@ final class NativeQA {
             throw Blocked(message: "Auto-generate is disabled, so no deck can be built for this concept")
         }
         try await pressRetry("flashcards.generate")
-        // The sheet is a separate window; either of its own strings proves it rendered.
+        // The generate sheet is an inline overlay now (not a separate window), and its
+        // `Preview` button ships no identifier and carries the visible word in a child
+        // `AXStaticText` — so the *wait* must use the same child-descent locator that
+        // the press below uses (`buttonContaining`), not the own-attribute `containsText`
+        // scan that misses it and times out against a visible overlay.
         try await wait("generate sheet", seconds: 25) {
-            self.containsText("Preview") || self.containsText("New cards for")
+            self.buttonContaining("Preview") != nil || self.containsText("New cards for")
         }
         if let previewButton = buttonContaining("Preview") {
             try await performPress(previewButton, target: "Preview")
@@ -1424,15 +1482,15 @@ final class NativeQA {
 
     /// Every window the app currently owns, including sheets.
     ///
-    /// A SwiftUI `.sheet` is presented in its own window. On this OS the application
-    /// element's `AXChildren` has been observed to expose the main window but not the
-    /// sheet window while the presentation is animating, so a traversal rooted only at
-    /// the application element can report "the sheet never opened" when it is plainly
-    /// on screen. J4 (generate deck) and J10 (delete account) both timed out this way
-    /// while every inline journey passed. Reading `AXWindows` explicitly and using each
-    /// window as an additional root makes sheet content visible without weakening any
-    /// check: the driver still only reads real accessibility elements and still presses
-    /// real controls.
+    /// The QA journeys drive three confirmations (J4 generate deck, J6 author a course,
+    /// J10 delete account) that were previously presented as SwiftUI `.sheet` windows.
+    /// On this OS a SwiftUI sheet is a distinct `NSWindow` that the accessibility server
+    /// does not surface through `kAXWindowsAttribute`, so `enumerate` reported "the sheet
+    /// never opened" while every inline check passed. Those three are now presented as
+    /// inline overlays (see `LuminfestApp`, `ProjectsInsightsSettings`, `Flashcards`), so
+    /// their controls live in the main window's AX tree and are reached here without any
+    /// special-casing. This accessor therefore only needs the application element's
+    /// window list, which is the main window.
     private func axWindows() -> [AXUIElement] {
         var value: CFTypeRef?
         guard AXUIElementCopyAttributeValue(applicationElement,

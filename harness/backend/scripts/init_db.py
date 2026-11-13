@@ -177,8 +177,17 @@ def _needs_upgrade(engine, current):
     ``create_all`` never adds a column to an existing table, so drift is repaired by the
     same additive path. A drifted database must be backed up too, even though its version
     stamp already matches ``SCHEMA_VERSION``.
+
+    A *table* can be missing for the same reason and at the same stamp. A model added
+    without a version bump (``perspectives.PerspectiveReview`` was one) is created by
+    ``create_all`` on a fresh install but never by app startup on an existing one: see
+    ``app/main.py``'s ``not inspect(engine).has_table('users')`` gate. Such a database is
+    drifted too, so it needs the same pre-migration backup before the DDL that repairs it.
     """
     if current != SCHEMA_VERSION:
+        return True
+    present_tables = set(inspect(engine).get_table_names())
+    if set(Base.metadata.tables) - present_tables:
         return True
     for table, columns in ADDED_COLUMNS.items():
         present = _columns(engine, table)
