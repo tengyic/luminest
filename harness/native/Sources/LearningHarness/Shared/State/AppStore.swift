@@ -603,7 +603,23 @@ struct VoiceOption: Identifiable, Codable, Hashable {
         busy = true; error = nil; errorStatus = nil
         retryAction = { [weak self] in await self?.refresh() }
         await load("/dashboard") { self.dashboard = $0; if !$0["user"].isNull { self.user = $0["user"] } }
-        await load("/curriculum") { self.curriculum = $0; if self.selectedConcept.isEmpty { self.selectedConcept = $0["concepts"].array.first?["id"].string ?? "" } }
+        await load("/curriculum") { data in
+            self.curriculum = data
+            let ids = data["concepts"].array.compactMap { $0["id"].string }
+            guard let first = ids.first else { return }
+            // Enrolling in another course replaces this catalogue underneath the studio.
+            // `/lessons/{id}` resolves against the *active* course, so a concept id carried
+            // over from the previous course returns 404 and leaves the studio permanently
+            // in its empty state: no read-aloud, no deck, no board. Re-anchor on the new
+            // course's first concept and drop the old lesson. This is the same invariant
+            // saveSetup() enforces by clearing the selection outright, but it also covers
+            // the authoring enrolment path, which only calls refresh().
+            if self.selectedConcept.isEmpty || !ids.contains(self.selectedConcept) {
+                self.selectedConcept = first
+                self.lesson = .null
+                self.messages = []
+            }
+        }
         await load("/courses") { self.courses = $0 }
         await load("/plan") { self.plan = $0 }
         if epoch == version { busy = false }
@@ -627,11 +643,14 @@ struct VoiceOption: Identifiable, Codable, Hashable {
             // A concept must be selected for the lesson body to render; without one the
             // studio shows the "Choose an idea to begin" empty state and read-aloud, the
             // deck and the board are all unaddressable. Onboarding normally sets this, but
-            // any path that reaches studio with it cleared must still land on a lesson,
-            // so fall back to the first curriculum concept (the same one the picker shows).
-            if selectedConcept.isEmpty,
-               let first = curriculum["concepts"].array.first?["id"].string {
+            // any path that reaches studio with it cleared — or with an id belonging to a
+            // course the learner has since left — must still land on a lesson, so fall back
+            // to the first concept of the *current* curriculum (the same one the picker shows).
+            let ids = curriculum["concepts"].array.compactMap { $0["id"].string }
+            if let first = ids.first,
+               selectedConcept.isEmpty || !ids.contains(selectedConcept) {
                 selectedConcept = first
+                lesson = .null
             }
             await selectConcept(selectedConcept)
         case .teacher: await loadChat()

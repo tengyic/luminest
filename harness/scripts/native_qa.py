@@ -403,7 +403,11 @@ def main():
         except Exception as error:
             summary.update({'status': 'blocked', 'verificationError': str(error), 'databaseVerified': False})
         password = ''
-        report_path = output / 'workflow-events.json'
+        # The ten-journey driver writes journeys-events.json; the legacy single workflow
+        # writes workflow-events.json. Reading the latter in --journeys mode only ever
+        # finds the "no native evidence" stub below and forces the final verdict to
+        # blocked even when journeyGate.allGreen is true.
+        report_path = output / ('journeys-events.json' if args.journeys else 'workflow-events.json')
         try:
             if report_path.is_file():
                 native = json.loads(report_path.read_text())
@@ -413,13 +417,10 @@ def main():
                           'reason': 'No native evidence produced; integrate NativeQA.shared.runIfRequested() onAppear and rebuild'}
                 save_json(report_path, native)
             summary['nativeStatus'] = native.get('status')
+            summary['nativeEvidenceFile'] = report_path.name
             if args.journeys:
                 summary['journeys'] = read_journeys(output)
                 summary['journeyGate'] = journey_gate(summary['journeys'])
-                success = (summary.get('status') != 'blocked' and summary.get('appExitCode') == 0
-                           and summary['journeyGate']['allGreen'])
-                summary['status'] = 'passed' if success else 'blocked'
-                summary['stage'] = 'finished'
                 summary['databaseVerified'] = bool(summary.get('databaseCounts', {}).get('attempts', 0))
             summary['nativeFailures'] = native.get('failures', [])
             summary['screenshots'] = native.get('screenshots', [])
@@ -427,10 +428,15 @@ def main():
             summary['screenshotsPresent'] = bool(files) and all(
                 path.is_file() and path.read_bytes().startswith(b'\x89PNG\r\n\x1a\n') for path in files)
             summary['screenshotsSuspectedBlank'] = any(item.get('suspectedBlank', False) for item in summary['screenshots'])
-            success = (summary.get('status') != 'blocked' and summary.get('appExitCode') == 0
-                       and native.get('status') == 'completed' and native.get('workflowCompleted') is True
-                       and summary['databaseVerified'] and summary['screenshotsPresent']
-                       and not summary['screenshotsSuspectedBlank'])
+            # Both modes must prove a clean app exit, a completed in-process driver, real
+            # non-blank screenshots and recorded database evidence. In --journeys mode the
+            # ten-journey gate is an ADDITIONAL requirement, never something the legacy
+            # single-workflow evidence can override in either direction.
+            common = (summary.get('status') != 'blocked' and summary.get('appExitCode') == 0
+                      and native.get('status') == 'completed' and native.get('workflowCompleted') is True
+                      and summary['databaseVerified'] and summary['screenshotsPresent']
+                      and not summary['screenshotsSuspectedBlank'])
+            success = common and summary['journeyGate']['allGreen'] if args.journeys else common
             summary['status'] = 'passed' if success else 'blocked'
             summary['stage'] = 'finished'
             summary['visualReview'] = 'Inspect actual PNG files; presence and pixel checks are not a human visual acceptance claim'
