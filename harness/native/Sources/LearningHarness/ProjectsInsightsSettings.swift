@@ -87,6 +87,11 @@ struct ProjectEditor: View {
         .onChange(of: reflection) { _, _ in saveDraft() }
         .onChange(of: usedAI) { _, _ in saveDraft() }
         .onChange(of: disclosureConfirmed) { _, _ in saveDraft() }
+        // A draft must survive the learner leaving the editor, regardless of how the edit was made.
+        // Programmatic input (the QA harness sets values through accessibility) does not always fire
+        // SwiftUI's `onChange`, so a navigate-away would otherwise discard an unsubmitted draft. Saving
+        // on disappear is the guaranteed last write: what the editor holds when it closes is what persists.
+        .onDisappear { saveDraft() }
     }
 }
 struct InsightsView: View {

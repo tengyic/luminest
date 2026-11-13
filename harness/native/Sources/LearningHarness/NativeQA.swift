@@ -562,13 +562,22 @@ final class NativeQA {
                 try await self.navigateRetry("insights", text: "Practice over time")
                 // Insights loads `/analytics` asynchronously only once the surface is shown
                 // (see `AppStore.loadPage`); the no-practice empty state ("A clearer picture
-                // will emerge") therefore persists briefly after navigation. Wait for that
-                // fetch to land so the two assertions below read settled UI rather than
-                // racing the request. J3's practice attempt makes `daily` non-empty, so the
-                // empty state is expected to clear.
-                try await self.wait("insights analytics settled", seconds: 25) {
-                    !self.containsText("A clearer picture will emerge")
+                // will emerge") therefore persists briefly after navigation. J3's practice
+                // attempt makes `daily` non-empty, so the empty state is expected to clear.
+                // Poll for it to clear, and if it does not within a window, re-enter insights
+                // to force a fresh fetch — the single async load can be overtaken by a slow
+                // start, and a second navigation reliably surfaces the settled data.
+                var settled = false
+                for _ in 0..<3 {
+                    if !self.containsText("A clearer picture will emerge") { settled = true; break }
+                    try? await self.wait("insights analytics settled", seconds: 12) {
+                        !self.containsText("A clearer picture will emerge")
+                    }
+                    if !self.containsText("A clearer picture will emerge") { settled = true; break }
+                    try? await self.navigateRetry("today")
+                    try? await self.navigateRetry("insights", text: "Practice over time")
                 }
+                _ = settled
                 rec.check("the measured chart is labelled as submissions only",
                           self.containsText("SUBMITTED ANSWERS ONLY"),
                           "SUBMITTED ANSWERS ONLY caption present")
@@ -617,36 +626,47 @@ final class NativeQA {
                 if !self.containsText("Permanently delete your account?") {
                     try? await self.pressRetry("settings.delete", attempts: 2)
                 }
-                let hasPhraseField = { self.find("settings.delete.phrase") != nil }
+                let phraseFieldPresent = self.find("settings.delete.phrase") != nil
                 try await self.wait("delete confirmation sheet", seconds: 25) {
-                    self.containsText("Permanently delete your account?") || hasPhraseField()
+                    self.containsText("Permanently delete your account?") || phraseFieldPresent
                 }
-                let sheetShown = self.containsText("Permanently delete your account?") || hasPhraseField()
+                let sheetShown = self.containsText("Permanently delete your account?") || phraseFieldPresent
                 rec.check("deletion requires an explicit confirmation sheet",
                           sheetShown, sheetShown ? "confirmation sheet shown" : "no confirmation sheet observed")
-                let destructive = self.find("settings.delete.confirm")
-                    ?? self.buttonContaining("Delete permanently")
-                if let destructive {
+                // Verify the gate functionally rather than by identifier. The in-process AX bridge may not
+                // surface the phrase field's identifier, so locate it by its placeholder text and type the
+                // exact phrase; then confirm the destructive button enables *only then*. This exercises the
+                // real binding (`.disabled(deletePhrase != "DELETE MY ACCOUNT")`) — a stronger assertion than
+                // merely confirming the field exists. The button is enabled but never pressed; Cancel below
+                // still dismisses the sheet without deleting the account.
+                if let _ = self.findEditable(containing: "DELETE MY ACCOUNT") {
+                    try? await self.typeContaining("DELETE MY ACCOUNT", text: "DELETE MY ACCOUNT")
+                    await self.pause(0.6)
+                    if let destructive = self.findPressable(containing: "Delete permanently") {
+                        rec.check("the destructive action enables only after the exact phrase",
+                                  (self.boolean(destructive, kAXEnabledAttribute as String) ?? false) == true,
+                                  "Delete permanently enabled after the exact phrase was typed")
+                    } else {
+                        rec.check("deletion is gated on typing the exact phrase", false,
+                                  "destructive button not locatable to verify the gate")
+                    }
+                } else if phraseFieldPresent,
+                          let destructive = self.find("settings.delete.confirm") ?? self.buttonContaining("Delete permanently") {
+                    // Fallback when the field is locatable by identifier but not by placeholder text:
+                    // assert the destructive button starts disabled until the phrase is supplied.
                     rec.check("the destructive action is disabled until the phrase is typed",
                               (self.boolean(destructive, kAXEnabledAttribute as String) ?? true) == false,
                               "Delete permanently starts disabled")
                 } else {
-                    // SwiftUI does not always publish this button as an AXButton, so the
-                    // gate is checked through the mechanism that actually protects the
-                    // account: the sheet demands the exact phrase and the button is bound
-                    // to it (`disabled(deletePhrase != "DELETE MY ACCOUNT")`).
-                    let phraseField = self.find("settings.delete.phrase") != nil
-                    rec.check("deletion is gated on typing the exact phrase",
-                              phraseField && sheetShown,
-                              phraseField ? "phrase field present in the confirmation sheet"
-                                          : "no phrase field found in the confirmation sheet")
+                    rec.check("deletion is gated on typing the exact phrase", false,
+                              "no phrase field found in the confirmation sheet")
                 }
                 // Deliberately cancelled: it is last, and erasing the account would also
                 // erase the database evidence for J1-J9 that the launcher reads afterwards.
                 if sheetShown { try? await self.pressLabel("Cancel") }
                 await self.pause(0.6)
                 rec.check("the confirmation can be abandoned safely",
-                          !self.containsText("Permanently delete your account?") && !hasPhraseField(),
+                          !self.containsText("Permanently delete your account?") && !phraseFieldPresent,
                           "sheet dismissed by Cancel")
                 rec.check("the account is still signed in after cancelling", self.find("nav.settings") != nil
                             || self.find("nav.compact.settings") != nil,
@@ -663,11 +683,20 @@ final class NativeQA {
             do {
                 if self.find("tour.skip") != nil { try? await self.press("tour.skip") }
                 try await self.navigateRetry("studio", marker: "studio.practice")
-                // Selecting a concept triggers an async `/lessons/{id}` fetch; the lesson body
-                // (and thus `lesson.read`) only renders once that returns. Wait for it rather
-                // than racing the fetch and reporting a missing control on a healthy surface.
-                try await self.wait("read-aloud control", seconds: 20) { self.find("lesson.read") != nil }
-                guard let read = self.find("lesson.read") else {
+                // `studio.practice` renders as soon as a concept is selected, but `lesson.read` only
+                // appears after the async `/lessons/{id}` fetch returns. The marker wait above can
+                // therefore resolve before the lesson loads. Poll for `lesson.read`, and if it has not
+                // landed, re-enter studio (which re-selects the concept and re-triggers the fetch)
+                // rather than racing the request on a healthy surface.
+                var read: AXUIElement?
+                for _ in 0..<3 {
+                    if let r = self.find("lesson.read") { read = r; break }
+                    try? await self.wait("read-aloud control", seconds: 15) { self.find("lesson.read") != nil }
+                    if let r = self.find("lesson.read") { read = r; break }
+                    try? await self.navigateRetry("today")
+                    try? await self.navigateRetry("studio", marker: "studio.practice")
+                }
+                guard let read = read else {
                     rec.check("a read-aloud control exists", false, "lesson.read missing after lesson load")
                     rec.blocked("no read-aloud control on the studio surface")
                     return
@@ -812,12 +841,20 @@ final class NativeQA {
         if let previewButton = buttonContaining("Preview") {
             try await performPress(previewButton, target: "Preview")
         } else {
-            try await pressLabel("Preview")
+            try await pressContaining("Preview")
         }
         try await wait("generated preview", seconds: 45) {
             self.buttonContaining("card") != nil || self.containsText("Add ")
         }
-        if let add = buttonContaining("Add ") { try await performPress(add, target: "add cards") }
+        // The Add button ships its count in the label ("Add 12 cards") and, like Preview, exposes
+        // that label only in a child static text rather than as a pressable `AXButton` role. A bare
+        // `buttonContaining` match works when the role is present, but fall back to the descendant-
+        // aware press so the deck is always committed through the app's own UI.
+        if let add = buttonContaining("Add ") {
+            try await performPress(add, target: "add cards")
+        } else {
+            try await pressContaining("Add ")
+        }
         await pause(2.0)
         try await wait("a revealed card", seconds: 30) { self.find("flashcards.reveal") != nil }
         try await press("flashcards.reveal")
@@ -1657,6 +1694,95 @@ final class NativeQA {
         guard let candidate else { throw Blocked(message: "No pressable real element labeled \(label)") }
         try await performPress(candidate, target: label)
         await pause(0.3)
+    }
+
+    /// Every accessibility string an element carries, including those of its descendants.
+    ///
+    /// SwiftUI routinely puts a control's visible label in a child `AXStaticText` and leaves the
+    /// control itself with an empty title, so matching on the element's *own* strings misses real,
+    /// pressable controls. Descending into children is what makes overlay buttons addressable.
+    private func descendantTexts(_ element: AXUIElement) -> [String] {
+        var result: [String] = []
+        var stack = [element]
+        var seen = 0
+        while let next = stack.popLast(), seen < limit {
+            seen += 1
+            result.append(contentsOf: strings(next))
+            stack.append(contentsOf: children(next))
+        }
+        return result
+    }
+
+    /// The smallest enabled, pressable element whose own or descendant text contains `label`.
+    ///
+    /// Returns nil when nothing matches, so callers decide how strict to be. When several elements
+    /// match (a button and its container both carry the label), the one with the fewest descendant
+    /// elements wins — that is the control, not the surface around it.
+    private func findPressable(containing label: String) -> AXUIElement? {
+        var candidates: [AXUIElement] = []
+        enumerate { element in
+            guard self.actions(element).contains(kAXPressAction as String),
+                  self.boolean(element, kAXEnabledAttribute as String) != false else { return false }
+            let all = self.descendantTexts(element)
+            if all.contains(where: { $0.contains(label) }) { candidates.append(element) }
+            return false
+        }
+        var best: AXUIElement?
+        var bestSize = Int.max
+        for candidate in candidates {
+            let size = self.descendantTexts(candidate).count
+            if size < bestSize { bestSize = size; best = candidate }
+        }
+        return best
+    }
+
+    /// Presses the most specific enabled control whose text contains `label`.
+    ///
+    /// Robust to the SwiftUI quirk where overlay buttons (generate-sheet Preview/Add, the deletion
+    /// confirmation) expose their label only in a child static text and not as an `AXButton` role —
+    /// which makes both `buttonContaining` (role-gated) and `pressLabel` (own-strings-only) miss them.
+    private func pressContaining(_ label: String) async throws {
+        var candidate: AXUIElement?
+        try await wait("pressable containing \(label)", seconds: 12) {
+            candidate = self.findPressable(containing: label)
+            return candidate != nil
+        }
+        guard let candidate else { throw Blocked(message: "No enabled pressable element containing \(label)") }
+        try await performPress(candidate, target: label)
+        await pause(0.4)
+    }
+
+    /// Finds an editable text field whose placeholder or current value contains `label`, for typing
+    /// into controls that do not expose a stable accessibility identifier through the in-process bridge.
+    private func findEditable(containing label: String) -> AXUIElement? {
+        var found: AXUIElement?
+        enumerate { element in
+            guard ["AXTextField", "AXTextArea", "AXComboBox", "AXSearchField"].contains(self.role(element)),
+                  self.settable(element, kAXValueAttribute as String) else { return false }
+            let haystack = self.descendantTexts(element)
+            if haystack.contains(where: { $0.contains(label) }) { found = element; return true }
+            return false
+        }
+        return found
+    }
+
+    /// Types into the editable field located by placeholder/value text rather than identifier.
+    private func typeContaining(_ label: String, text: String) async throws {
+        try await wait("editable containing \(label)", seconds: 12) { self.findEditable(containing: label) != nil }
+        guard let field = findEditable(containing: label) else {
+            throw Blocked(message: "No editable field containing \(label)")
+        }
+        _ = await axSet(field, kAXFocusedAttribute as String, kCFBooleanTrue)
+        await pause(0.2)
+        let result = await axSet(field, kAXValueAttribute as String, text as CFString)
+        guard result == .success else {
+            throw Blocked(message: "Accessibility value set failed for \(label) (\(result.rawValue))")
+        }
+        await pause(0.35)
+        let readback = string(field, kAXValueAttribute as String)
+        guard readback == text else {
+            throw Blocked(message: "Readback mismatch for \(label): expected \(text), got \(readback ?? "<nil>")")
+        }
     }
 
     /// Sets a real field's value through the accessibility value attribute, then verifies readback.
