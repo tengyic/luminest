@@ -783,25 +783,42 @@ final class NativeQA {
         throw last
     }
 
-    /// J6 enrolls in the freshly authored course to prove the enrolment path, but that course
-    /// ships without lesson content in the harness (its concepts have no lessons), which would
-    /// leave the studio empty for the lesson- and deck-dependent journeys that follow (J4 needs
-    /// a lesson to generate cards; J8 needs one to read aloud). Restore the seed course the
-    /// learner actually enrolled in during onboarding so those journeys have a lesson to work
-    /// with. This is a test-sequencing step, not a product change: J6's "becomes the active
-    /// course" assertion has already passed before we switch back.
+    /// J6 enrolls in the freshly authored course to prove the enrolment path. That course's
+    /// concepts are generated on the fly (so they do have lessons), but the lesson-dependent
+    /// journeys were written and calibrated against the seed course's authored lesson content.
+    /// Restore the course the learner enrolled in during onboarding before J7 so J4/J8 exercise
+    /// the same lesson surface J2 did. This is test sequencing, not a product change: J6's
+    /// "becomes the active course" assertion has already passed before we switch back.
     private func restoreSeedCourse() async {
         let seed = ProcessInfo.processInfo.environment["NATIVE_QA_COURSE"] ?? "integrated_math_1"
         do {
             try await navigateRetry("settings")
-            // Only act if the seed course is not already the active one (it shows an Enrol
-            // button only when it is not the enrolled course).
-            guard find("settings.course." + seed + ".enrol") != nil else {
+            // The settings surface rebuilds asynchronously after the press, so the course
+            // switcher is not necessarily in the tree yet.
+            try? await wait("course switcher", seconds: 20) { self.find("settings.course." + seed) != nil }
+            // SwiftUI's in-process AX bridge exposes the *row* identifier on the Enrol
+            // button (AXDescription "Enrol") rather than the `.enrol` suffix declared on
+            // the Button itself, so looking only for `.enrol` silently never matches and
+            // leaves the learner in J6's authored course for the rest of the run.
+            let row = self.find("settings.course." + seed)
+            let isEnrolButton = row.map {
+                self.role($0) == "AXButton" && self.strings($0).contains(where: { $0.contains("Enrol") })
+            } ?? false
+            let enrol = self.find("settings.course." + seed + ".enrol")
+                ?? (isEnrolButton ? row : nil)
+            guard let enrol else {
+                // Already the active course, or the switcher is genuinely unavailable.
                 try? await navigateRetry("today"); return
             }
-            try? await press("settings.course." + seed + ".enrol")
+            try? await performPress(enrol, target: "enrol in seed course")
             await pause(0.6)
-            try? await press("settings.course." + seed + ".switch")
+            // The confirmation step exposes "Switch"; its own identifier is likewise not
+            // reliably surfaced, so locate the most specific labelled pressable as a fallback.
+            if let confirm = self.find("settings.course." + seed + ".switch") {
+                try? await performPress(confirm, target: "confirm seed course switch")
+            } else {
+                try? await self.pressContaining("Switch")
+            }
             // Let the switch land and the curriculum reload before the next journey drives studio.
             try? await wait("seed course restored", seconds: 20) { self.containsText("ENROLLED") }
             try? await navigateRetry("today")

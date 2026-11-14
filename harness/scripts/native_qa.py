@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run an already-built native app against an owned, isolated backend; never build or use XCTest."""
 import argparse
+import errno
 import hashlib
 import json
 import os
@@ -17,6 +18,111 @@ import urllib.request
 
 ROOT = Path(__file__).resolve().parents[2]
 HARNESS = ROOT / 'harness'
+
+#: Interpreters to try when --backend-python is not pinned. The first is the one the
+#: project's own test/verification docs declare; the second is the historical UI-test
+#: venv, which does not exist in every checkout. sys.executable is last because a host
+#: Python usually lacks the backend's pinned dependencies.
+BACKEND_PYTHON_CANDIDATES = (
+    HARNESS / 'backend/.venv/bin/python',
+    HARNESS / 'ui-tests/.venv/bin/python',
+)
+
+#: The launcher scans 8765..8785 (BackendLauncher.defaultPort). QA must do the same:
+#: a developer running the desktop app already owns 8765, and treating that as a
+#: product failure produces ten "missing" journeys and a raw errno instead of a name.
+QA_PORT_FIRST = 8765
+QA_PORT_LAST = 8785
+
+
+def backend_python_status(path):
+    """(usable, reason) for one interpreter. Existence is not enough: the backend is
+    spawned with this interpreter, so a venv without uvicorn fails *after* the app
+    starts and reads as a broken product rather than a misconfigured runner."""
+    path = Path(path).expanduser().resolve()
+    if not path.is_file() or not os.access(path, os.X_OK):
+        return False, 'missing or not executable'
+    probe = ('import uvicorn, fastapi, sqlalchemy, argon2, httpx  # noqa: F401')
+    try:
+        result = subprocess.run([str(path), '-c', probe], capture_output=True,
+                                text=True, timeout=40)
+    except (OSError, subprocess.SubprocessError) as error:
+        return False, f'dependency probe failed ({error})'
+    if result.returncode != 0:
+        last = (result.stderr or '').strip().splitlines()
+        return False, f'missing backend dependencies ({last[-1] if last else result.returncode})'
+    return True, ''
+
+
+def resolve_backend_python(explicit=None):
+    """Pick a backend interpreter that can actually import the backend's deps.
+
+    An explicitly pinned path is never silently swapped: if it cannot run the backend,
+    the failure names that interpreter and the missing piece, so the operator fixes the
+    right thing instead of wondering why a different Python was used.
+    """
+    if explicit is not None:
+        path = Path(explicit).expanduser().resolve()
+        usable, reason = backend_python_status(path)
+        if not usable:
+            raise RuntimeError(f'--backend-python {path} is unusable: {reason}')
+        return path
+    attempts = [path for path in BACKEND_PYTHON_CANDIDATES]
+    attempts.append(Path(sys.executable).resolve())
+    reasons = []
+    for path in attempts:
+        usable, reason = backend_python_status(path)
+        if usable:
+            return path
+        reasons.append(f'{path}: {reason}')
+    raise RuntimeError('No backend interpreter with the required dependencies was found. '
+                       + ' | '.join(reasons)
+                       + ' | Create harness/backend/.venv from requirements.txt or pass --backend-python.')
+
+
+def port_candidates(requested):
+    """(start, candidates, automatic) for the owned loopback listener.
+
+    ``0`` or the default means scan the same range as the desktop launcher. An explicit
+    port is bound exactly, so an operator who pinned one never gets a silent move.
+    """
+    automatic = requested is None or requested == 0
+    start = QA_PORT_FIRST if automatic else requested
+    candidates = range(QA_PORT_FIRST, QA_PORT_LAST + 1) if automatic else (requested,)
+    return start, candidates, automatic
+
+
+def bind_owned_listener(requested):
+    """Bind and keep ownership of one loopback port before any child is spawned.
+
+    Returns ``(listener, port, selection)``. The socket stays open so its file
+    descriptor can be handed to the owned backend, which removes the check-then-bind
+    race and guarantees QA never trusts a server somebody else started. A busy port is
+    a *named environment fact*, not ten missing journeys and a raw errno.
+    """
+    start, candidates, automatic = port_candidates(requested)
+    listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    busy = []
+    for candidate in candidates:
+        try:
+            listener.bind(('127.0.0.1', candidate))
+            listener.listen(128)
+            return listener, candidate, ('automatic' if automatic else 'pinned')
+        except OSError as error:
+            if error.errno not in (errno.EADDRINUSE, errno.EACCES):
+                listener.close()
+                raise RuntimeError(f'Cannot own loopback port {candidate}: {error}') from error
+            busy.append(candidate)
+            if not automatic:
+                listener.close()
+                raise RuntimeError(
+                    f'Loopback port {candidate} is already owned by another process. Stop the '
+                    f'desktop app or pass --port 0 to scan {QA_PORT_FIRST}..{QA_PORT_LAST}.') from error
+    listener.close()
+    raise RuntimeError(
+        f'Every QA loopback port {QA_PORT_FIRST}..{QA_PORT_LAST} is in use '
+        f'({len(busy)} busy). Stop other Luminfest instances, or pin a free port with --port. '
+        'No app or backend was started, so this is not a journey failure.')
 
 
 def save_json(path, value):
@@ -230,7 +336,11 @@ def main():
     parser.add_argument('--app', '--executable', dest='app', type=Path,
                         default=HARNESS / 'native/.build/release/LearningHarness',
                         help='Already-built .app bundle or executable; this script never compiles')
-    parser.add_argument('--port', '--qa-endpoint', dest='port', type=int, default=8765)
+    parser.add_argument('--port', '--qa-endpoint', dest='port', type=int, default=0,
+                        help='Owned loopback port. 0 (default) picks the first free port in '
+                             '8765..8785, the same range the desktop launcher scans, so a '
+                             'running desktop app cannot make QA report ten missing journeys. '
+                             'A pinned port is bound exactly and never silently moved.')
     parser.add_argument('--output', '--qa-output', dest='output', type=Path,
                         help='Fresh evidence directory (default: outputs/native-qa/<unique-run>)')
     parser.add_argument('--course', default='integrated_math_1',
@@ -247,7 +357,10 @@ def main():
     parser.add_argument('--capture-mode', action='store_true',
                         help='Presentation capture: hide the backend status pill and clear the '
                              'transient notice banner before each frame. Layout and state unchanged.')
-    parser.add_argument('--backend-python', type=Path, default=HARNESS / 'ui-tests/.venv/bin/python')
+    parser.add_argument('--backend-python', type=Path, default=None,
+                        help='Interpreter with the backend dependencies. When omitted, the '
+                             'declared backend venv, the historical ui-tests venv and '
+                             'sys.executable are probed in that order.')
     parser.add_argument('--timeout', type=float, default=420, help='Native process timeout in seconds')
     parser.add_argument('--access-token-ttl', type=int, default=0,
                         help='Override HARNESS_ACCESS_TOKEN_TTL_SECONDS on the owned backend. '
@@ -264,17 +377,20 @@ def main():
     args = parser.parse_args()
     if sys.platform != 'darwin':
         parser.error('Native QA requires macOS and an interactive desktop session')
-    if not 1024 <= args.port <= 65535 or args.timeout <= 0:
-        parser.error('Use a nonprivileged loopback port and a positive timeout')
+    if args.port != 0 and not 1024 <= args.port <= 65535:
+        parser.error('Use --port 0 for automatic selection or a nonprivileged loopback port')
+    if args.timeout <= 0:
+        parser.error('Use a positive timeout')
     if args.access_token_ttl and not 300 <= args.access_token_ttl <= 3600:
         parser.error('--access-token-ttl must be 0 (server default) or 300..3600; '
                      'config.py enforces a 300-second floor')
     if args.expire_access_after < 0:
         parser.error('--expire-access-after must be >= 0 (0 disables the injection)')
     executable = executable_for(args.app)
-    python = args.backend_python.expanduser().absolute()
-    if not python.is_file() or not os.access(python, os.X_OK):
-        parser.error('Backend Python is missing; pass --backend-python with installed backend dependencies')
+    try:
+        python = resolve_backend_python(args.backend_python)
+    except RuntimeError as error:
+        parser.error(str(error))
     run_id = time.strftime('%Y%m%d-%H%M%S') + '-' + secrets.token_hex(4)
     output = (args.output or ROOT / 'outputs/native-qa' / run_id).expanduser().resolve()
     if output.exists() and (not output.is_dir() or any(output.iterdir())):
@@ -288,6 +404,15 @@ def main():
     expected = {'name': args.name.strip() or 'Native QA ' + run_id,
                 'email': 'native-' + run_id + '@example.com'}
     password = 'Qa-' + secrets.token_urlsafe(24) + '!'
+    # Bind before the app's command line is built: --qa-endpoint must name the port we
+    # actually own, not the one we hoped for. The socket stays owned until the child
+    # inherits its fd; a busy port is a named environment fact, never a journey failure.
+    try:
+        listener, chosen_port, port_selection = bind_owned_listener(args.port)
+    except RuntimeError as error:
+        parser.error(str(error))
+    requested_port = args.port
+    args.port = chosen_port
     environment = {key: value for key, value in os.environ.items()
                    if not key.startswith(('HARNESS_', 'NATIVE_QA_'))}
     environment.update({'HARNESS_ENV': 'test', 'HARNESS_DATA_DIR': str(state),
@@ -305,7 +430,9 @@ def main():
     if args.capture_mode:
         command.append('--capture-mode')
     summary = {'driver': 'in-process native AppKit accessibility (no external XCTest)', 'status': 'running',
-               'port': args.port, 'output': str(output), 'command': command, 'expectedAccount': expected,
+               'port': args.port, 'requestedPort': requested_port, 'portSelection': port_selection,
+               'backendPython': str(python),
+               'output': str(output), 'command': command, 'expectedAccount': expected,
                'requestedCourse': args.course, 'capturePages': args.capture_pages,
                'captureMode': bool(args.capture_mode), 'timeoutSeconds': args.timeout,
                'accessTokenTtlSeconds': args.access_token_ttl or None,
@@ -320,11 +447,10 @@ def main():
     injection_thread = None
     exit_code = 1
     try:
-        # Bind and keep ownership before spawning. Passing this socket to the child
-        # eliminates the check-then-bind race and prevents trusting somebody else's port.
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as listener:
-            listener.bind(('127.0.0.1', args.port))
-            listener.listen(128)
+        # The listener was bound before the app's command line was built, so the port in
+        # --qa-endpoint is already owned. Passing its fd to the child eliminates the
+        # check-then-bind race and prevents trusting somebody else's server.
+        with listener:
             # Access log is ON. The 2026-11-11 B8 investigation could only infer three
             # 401s from a rate-limit bucket because request lines were suppressed; a
             # renewal regression needs the actual path, status and moment of every
@@ -388,6 +514,12 @@ def main():
     except (Exception, KeyboardInterrupt) as error:
         summary.update({'status': 'blocked', 'error': 'Interrupted' if isinstance(error, KeyboardInterrupt) else str(error)})
     finally:
+        # The listener is bound before the try, so a failure while building evidence
+        # would otherwise leak it. Closing an already-closed socket is harmless.
+        try:
+            listener.close()
+        except OSError:
+            pass
         if injection_thread is not None:
             injection_thread.join(timeout=2)
         stop_owned(app)

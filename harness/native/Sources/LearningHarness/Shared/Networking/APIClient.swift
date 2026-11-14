@@ -37,11 +37,15 @@ import Foundation
         }
         return trimmed
     }
-    func data(_ path: String, method: String = "GET", body: [String: Any]? = nil, query: [URLQueryItem] = []) async throws -> Data {
+    func data(_ path: String, method: String = "GET", body: [String: Any]? = nil, query: [URLQueryItem] = [], timeout: TimeInterval? = nil) async throws -> Data {
         guard var components = URLComponents(string: endpoint + "/api/v1" + path) else { throw AppFailure(message: "Invalid server address.", status: nil) }
         if !query.isEmpty { components.queryItems = query }
         guard let url = components.url else { throw AppFailure(message: "Invalid request URL.", status: nil) }
         var request = URLRequest(url: url)
+        // A caller may need a tighter bound than the session default. Read-aloud is the
+        // reason this exists: a local voice service that answers in minutes must not
+        // hold a button press hostage when the device voice is already speaking.
+        if let timeout { request.timeoutInterval = timeout }
         request.httpMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         // Telling the server which language the learner is reading is what makes generated

@@ -33,6 +33,22 @@ struct SafeLessonLink: View {
     private let synthesizer = AVSpeechSynthesizer()
     private var player: AVAudioPlayer?
     private weak var api: APIClient?
+    /// Bumped by every stop/read cycle. A slow backend answer belongs to the press
+    /// that started it; without this, an old upgrade can replace the audio (or the
+    /// named outcome) of a newer read, or resurrect speech after the learner stopped.
+    private var playbackGeneration = 0
+    /// The first `speak` on a fresh (isolated) Home directory can synchronously load
+    /// system voice assets for seconds. On the main actor that freezes the window and
+    /// collapses its whole accessibility tree to the app menu bar, which is how a
+    /// read-aloud press used to look like a hang. All engine calls go through this
+    /// queue so the outcome stays reachable while speech starts.
+    private let speechQueue = DispatchQueue(label: "luminfest.lesson-speech", qos: .userInitiated)
+    /// AVSpeechSynthesizer is not Sendable; boxing the reference keeps the queued
+    /// work free of main-actor hops and explicit about crossing that boundary.
+    private final class SynthBox: @unchecked Sendable {
+        let value: AVSpeechSynthesizer
+        init(_ value: AVSpeechSynthesizer) { self.value = value }
+    }
     /// One-shot completion for narrated-deck autoplay. ``stop`` deliberately clears it:
     /// manually pausing or changing slide must never let an old utterance advance the deck.
     private var completion: (() -> Void)?
@@ -51,7 +67,6 @@ struct SafeLessonLink: View {
             status = "There is no lesson text to read yet. Open a lesson on Studio first."
             return
         }
-        status = ""
         readAloud(text)
     }
 
@@ -60,33 +75,54 @@ struct SafeLessonLink: View {
     /// fall back to the device voice when the backend is not running, refuses, or
     /// is slow. A read-aloud button that dies because a local service is down is
     /// a worse button than one that changes voice.
+    ///
+    /// The crucial ordering: the press **always** produces a named outcome and
+    /// starts the device voice synchronously, before any I/O. `status` therefore
+    /// never sits at "Asking…" while a service decides, and a backend that takes
+    /// minutes to synthesise cannot leave the button silent, unnamed or hung.
+    /// VoiceStudio is an optional upgrade with its own short deadline; its result
+    /// can only replace the audio, never be a precondition for an outcome.
     func readAloud(_ text: String) {
-        guard let api else {
-            status = "Reading with this Mac's built-in voice (no local voice backend is connected)."
-            speakOnDevice(text)
+        guard !text.isEmpty else {
+            status = "There is no lesson text to read yet. Open a lesson on Studio first."
             return
         }
-        // The provider caps one request at 4096 characters; the device voice has
-        // no such limit, so a long lesson reads in full either way.
+        // 1. Immediate, network-free outcome. The device voice is always available,
+        //    so the learner hears the lesson and sees a named result on this very turn.
+        status = "Reading with this Mac's built-in voice."
+        speakOnDevice(text)
+        guard let api else { return }
+
         let payload = String(text.prefix(4096))
         // Same resolved voice and tone as the tutor's spoken reply, so a lesson read aloud
         // does not switch teachers halfway through a session. Empty means instance default.
         let voiceName = AppStore.current?.effectiveVoice ?? ""
         let tone = AppStore.current?.effectiveTone ?? ""
-        status = "Asking the local voice backend to read this lesson…"
+        let generation = playbackGeneration
+        // 2. Optional upgrade. Six seconds is deliberately shorter than the driver's
+        //    outcome window and far shorter than the backend's 120 s synthesis budget:
+        //    an unavailable or slow local service is answered, not waited on.
         Task {
             do {
                 let data = try await api.data("/voice/speak", method: "POST",
                                              body: ["text": payload,
                                                     "voice": voiceName,
-                                                    "tone": tone])
+                                                    "tone": tone],
+                                             timeout: 6)
+                guard self.playbackGeneration == generation else { return }
+                // The device voice has been speaking since the press. Stop it before
+                // the backend clip starts, otherwise the learner hears both at once.
+                self.silenceDeviceVoice()
                 try self.play(data)
                 self.usingBackendVoice = true
                 self.status = "Reading with the local VoiceStudio voice backend."
             } catch {
-                self.status = "The local voice backend refused (\(error.localizedDescription)); "
-                    + "reading with this Mac's built-in voice instead."
-                self.speakOnDevice(text)
+                guard self.playbackGeneration == generation else { return }
+                self.usingBackendVoice = false
+                // Keep the device-voice outcome and name the reason the upgrade did
+                // not happen. This is a refusal with a named reason, not a silent hang.
+                self.status = "Reading with this Mac's built-in voice. "
+                    + "The local VoiceStudio backend was unavailable (\(error.localizedDescription))."
             }
         }
     }
@@ -100,20 +136,31 @@ struct SafeLessonLink: View {
     }
 
     private func speakOnDevice(_ text: String) {
-        let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.9
         isSpeaking = true
-        synthesizer.speak(utterance)
+        let box = SynthBox(synthesizer)
+        speechQueue.async {
+            let utterance = AVSpeechUtterance(string: text)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.rate = AVSpeechUtteranceDefaultSpeechRate * 0.9
+            box.value.speak(utterance)
+        }
+    }
+
+    /// Stop only the on-device voice, leaving the published outcome and the
+    /// generation intact. Used when a backend clip supersedes it.
+    private func silenceDeviceVoice() {
+        let box = SynthBox(synthesizer)
+        speechQueue.async { box.value.stopSpeaking(at: .immediate) }
     }
 
     func stop() {
+        playbackGeneration += 1
         player?.stop()
         player = nil
-        synthesizer.stopSpeaking(at: .immediate)
         isSpeaking = false
         usingBackendVoice = false
         status = ""
+        silenceDeviceVoice()
     }
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) { Task { @MainActor in self.isSpeaking = false } }
     nonisolated func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) { Task { @MainActor in self.isSpeaking = self.synthesizer.isSpeaking } }
