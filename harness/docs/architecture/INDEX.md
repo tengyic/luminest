@@ -7,8 +7,9 @@ working tree on 2026-11-08 with the checks described in
 `backend/tests/test_architecture_guards.py` re-checks the file references on every run,
 so a moved or deleted file fails the suite rather than leaving a plausible-looking lie.
 
-Read this with [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md) for the shape of the system
-and the ADRs for the rules: [ADR-0001](ADR-0001-architecture-principles.md),
+Read this with [`ARCHITECTURE_DEEP_DIVE.md`](ARCHITECTURE_DEEP_DIVE.md) for the shape of the
+system — control flow, algorithms and the exact constants — and the ADRs for the rules:
+[ADR-0001](ADR-0001-architecture-principles.md),
 [ADR-0003](ADR-0003-native-boundaries.md), [ADR-0004](ADR-0004-api-contract-discipline.md),
 [ADR-0005](ADR-0005-database-migration-policy.md),
 [ADR-0006](ADR-0006-no-duplicated-business-logic.md).
