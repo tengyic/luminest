@@ -1,4 +1,4 @@
-/* Luminfest workbench client. Vanilla JS, no build step.
+/* Luminest workbench client. Vanilla JS, no build step.
  *
  * Layout: sidebar | main (canvas + transcript + composer) | details.
  * Core interaction: hover-to-select on the simulation iframe, then

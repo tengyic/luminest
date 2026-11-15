@@ -144,7 +144,13 @@ def deck_from_concept(concept_id: str, request: Request, title: str = ''):
         spec = _course_for(user)
         ctx = _context(settings, user, db, spec)
         try:
-            payload = presentation.compose(ctx, concept_id, {'include_visuals': True})
+            # ``include_image`` asks for a live search when the shipped pack has no match.
+            # Without it a learner-uploaded course could never carry a picture at all: the
+            # pack only covers shipped concepts, and a deck with no picture is the complaint
+            # this route exists to answer. The licence gate and the attribution still apply,
+            # and an instance without network media degrades to a stated reason.
+            payload = presentation.compose(ctx, concept_id,
+                                           {'include_visuals': True, 'include_image': True})
         except ValueError as exc:
             raise HTTPException(404, str(exc))
     doc = deck.from_presentation(payload, owner_id=user.id)
@@ -177,6 +183,20 @@ def _context(settings, user, db, spec):
 @router.get('/api/v1/deck/{deck_id}')
 def get_deck(deck_id: str, request: Request):
     return _owned(request, deck_id)
+
+
+@router.get('/api/v1/deck/{deck_id}/lint')
+def lint_deck(deck_id: str, request: Request):
+    """The house-style violations in this deck, as data.
+
+    Read-only and derived: a client can call it after any edit, and the export path can
+    refuse on the same rules, so "the deck looks bad" stops being a matter of taste that
+    nobody wrote down.
+    """
+    doc = _owned(request, deck_id)
+    return {'violations': deck.lint(doc),
+            'rules': {'min_body_pt': deck.MIN_BODY_PT, 'min_title_pt': deck.MIN_TITLE_PT,
+                      'max_bullets': deck.MAX_BULLETS, 'canvas': list(deck.SLIDE_SIZE)}}
 
 
 @router.put('/api/v1/deck/{deck_id}')

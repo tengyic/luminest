@@ -267,6 +267,15 @@ SIMULATIONS = {
     'systems': [parameter('m1', 'First slope', -3, 3, -1), parameter('b1', 'First intercept', -9, 9, 7), parameter('m2', 'Second slope', -3, 3, 1), parameter('b2', 'Second intercept', -9, 9, -1), parameter('value', 'Probe input x', -5, 5, 4)],
     'probability': [parameter('n', 'Independent trials n', 1, 40, 10, 1), parameter('p', 'Success probability p', 0, 1, 0.5, 0.05)],
 }
+# A second complete hand-authored unit (exponents, radicals and irrational numbers).
+# It is written and reviewed in the source tree like the original 30 lessons, so it
+# counts as `reviewed_concepts` rather than as a generated overlay. See the module
+# docstring for the provenance rules that keep that claim true.
+from .authored_unit_exponents import register as _register_authored_unit  # noqa: E402
+_UNIT = _register_authored_unit()
+SPECS = [*SPECS, *_UNIT['specs']]
+LESSON_DETAILS.update(_UNIT['details'])
+
 CONCEPTS = {}
 QUESTIONS = {}
 for spec in SPECS:
@@ -348,6 +357,10 @@ DISTRACTOR_RULES = {
     'parallel_and_perpendicular_lines': [('procedural', 'The reciprocal was taken without negating.', 'Flip the fraction and change the sign.'), ('procedural', 'The sign was changed without taking the reciprocal.', 'Perpendicular needs both the flip and the sign change.'), ('conceptual', 'The parallel slope was given instead of the perpendicular one.', 'Parallel lines share m; perpendicular lines need -1/m.')],
     'the_pythagorean_theorem': [('conceptual', 'The legs were added without squaring.', 'Square each leg, add, then take the square root.'), ('procedural', 'The square was kept without taking the root.', 'c^2 = 100 means c = 10, not 100.'), ('conceptual', 'The legs were multiplied instead of squared and added.', 'Compute a^2 + b^2, not a times b.')],
 }
+
+
+# The second authored unit brings its own three diagnoses per concept.
+DISTRACTOR_RULES.update(_UNIT['rules'])
 
 
 def add(cid, variant, prompt, answer, distractors, explanation, category='procedure_cross_check', seconds=60):
@@ -451,6 +464,11 @@ for v in range(4):
         5*n, [7*n, 25*n, 12*n*n],
         f'({3*n})^2 + ({4*n})^2 = {9*n*n} + {16*n*n} = {25*n*n} = ({5*n})^2, so the hypotenuse is {5*n}.', 'right_angle_cross_check')
 
+# The second authored unit's four variants per concept. `validate_curriculum`
+# below requires four questions for every concept, so this cannot be omitted.
+_UNIT['build_questions'](add)
+
+
 def validate_curriculum():
     visited, visiting = set(), set()
     def visit(cid):
@@ -517,6 +535,7 @@ LESSON_TARGETS = {
     'solving_systems_by_elimination': 'solving_systems_by_elimination',
     'parallel_and_perpendicular_lines': 'parallel_and_perpendicular_lines',
     'the_pythagorean_theorem': 'the_pythagorean_theorem',
+    **_UNIT['targets'],
 }
 
 

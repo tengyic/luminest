@@ -80,7 +80,11 @@ async function main() {
   mkdirSync(OUT, { recursive: true });
 
   // 1. Catalog: generated from the backend's single source of truth.
-  execFileSync('python3', [
+  //    ``PYTHON`` first, like every other script here: the exporter imports the backend
+  //    package, which needs the project venv's dependencies (httpx), and a bare ``python3``
+  //    on this machine has none of them - the build failed with ModuleNotFoundError while
+  //    looking like a bundle error.
+  execFileSync(process.env.PYTHON || 'python3', [
     join(REPO, 'scripts', 'export_visual_catalog.py'),
     join(HERE, 'src', 'catalog.generated.json'),
   ], { stdio: 'inherit' });

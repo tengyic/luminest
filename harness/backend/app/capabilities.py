@@ -698,6 +698,15 @@ def revoke(db, user, capability_id: str) -> bool:
 
 # --------------------------------------------------------------------- resolver
 
+#: The user-facing brand. A rename must not leave the capability matrix, the 402
+#: refusal and the tests disagreeing about what the product is called - they all
+#: read this one name. Internal identifiers intentionally keep the historical
+#: ``luminfest`` spelling so existing installs are not orphaned.
+BRAND = 'Luminest'
+PLUS_WITHHOLD_REASON = (f'This capability is part of {BRAND} Plus. Pay to enable it, '
+                        'or ask the operator to comp this account.')
+
+
 def _withhold_reason(capability: Capability, *, authenticated: bool,
                      expired: bool) -> str:
     if not authenticated:
@@ -706,8 +715,7 @@ def _withhold_reason(capability: Capability, *, authenticated: bool,
     if expired:
         return ('This capability was part of your plan, but the entitlement has '
                 'expired. Renew to switch it back on.')
-    return ('This capability is part of Luminfest Plus. Pay to enable it, or ask the '
-            'operator to comp this account.')
+    return PLUS_WITHHOLD_REASON
 
 
 def resolve(user, settings, *, db=None, now: float | None = None) -> dict:
@@ -739,9 +747,19 @@ def resolve(user, settings, *, db=None, now: float | None = None) -> dict:
             entry['reason'] = ('Not implemented in this build; the UI should hide it '
                                'rather than offer it.')
         elif capability.tier == TIER_PLUS and not (authenticated and granted):
-            entry['state'] = STATE_WITHHELD
-            entry['reason'] = _withhold_reason(capability, authenticated=authenticated,
-                                               expired=expired)
+            if getattr(settings, 'alpha_free', False):
+                # Closed-alpha override: the paid tier is not enforced yet, so the
+                # matrix must not tell the client these are locked. This matches the
+                # actual route behaviour (no require_capability wiring exists) and is
+                # the explicit "alpha is free for the cohort" promise. Flip
+                # HARNESS_ALPHA_FREE off before a paid launch to re-arm the withhold.
+                entry['state'] = STATE_ENABLED
+                entry['reason'] = ('Free for every account during the closed beta '
+                                   '(HARNESS_ALPHA_FREE=1). No billing in this cohort.')
+            else:
+                entry['state'] = STATE_WITHHELD
+                entry['reason'] = _withhold_reason(capability, authenticated=authenticated,
+                                                   expired=expired)
         elif not ready:
             entry['state'] = STATE_DEGRADED
             entry['reason'] = f'{note} Fallback: {capability.fallback}'
@@ -751,11 +769,14 @@ def resolve(user, settings, *, db=None, now: float | None = None) -> dict:
                                     'expires_at': record.get('expires_at'),
                                     'source': record.get('source')}
         rows.append(entry)
+    alpha_free = bool(getattr(settings, 'alpha_free', False))
     return {'tiers': list(TIERS),
             'principal': {'authenticated': authenticated,
                           'user_id': getattr(user, 'id', None),
                           'tier': TIER_PLUS if any(r['granted'] for r in rows) else TIER_FREE},
-            'paid_plan': paid_plan(settings) if settings is not None else {},
+            'paid_plan': {} if alpha_free else (paid_plan(settings) if settings is not None else {}),
+            'billing_required': not alpha_free,
+            'cohort': 'closed-beta' if alpha_free else 'standard',
             'capabilities': rows,
             'note': 'Fail-closed by default: an unknown or unauthenticated principal '
                     'sees the free tier only. A capability whose provider is '

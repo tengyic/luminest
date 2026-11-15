@@ -399,6 +399,10 @@ def asset_payload(asset: Mapping[str, Any]) -> dict[str, Any]:
         'sha256': sha,
         'url': f'/api/v1/media/images/{sha}/bytes',
         'alt': str(asset.get('alt_text') or '')[:300],
+        # The curator's own sentence about what the picture shows. A slide that holds a
+        # photograph should be able to say what it is looking at; without this the figure
+        # slide kept its graph-neighbourhood bullets and the picture sat unexplained.
+        'caption': str(asset.get('description') or '')[:240],
         'title': str(asset.get('title') or '')[:200],
         'credit': credit,
         'attribution': credit,
@@ -408,6 +412,101 @@ def asset_payload(asset: Mapping[str, Any]) -> dict[str, Any]:
         'width': int(asset.get('width') or 0),
         'height': int(asset.get('height') or 0),
     }
+
+
+def _concept_keys(concept_id: str, pack_keys=None) -> list[str]:
+    """Candidate pack keys for one concept id, most specific first.
+
+    The curated pack is keyed by short slugs (``acceleration``, ``active_transport``) while
+    every caller holds a course-qualified id (``physics_acceleration_as_the_rate_of_change_
+    of_velocity``). Looking the pack up with the long id alone meant the whole curated pack
+    was unreachable -- which is why a lesson could be "illustrated" and still carry no
+    photograph.
+
+    Candidates are generated from the id itself, as every contiguous run of up to five
+    tokens, so a short slug is always reachable without consulting the pack. This matters:
+    an earlier version derived the keys *from* the pack, so a pack that failed to load
+    silently degraded to "no candidates" and reproduced the very bug it was meant to fix.
+    ``pack_keys`` is only used to admit a key whose tokenisation differs from the id's.
+    """
+    text = str(concept_id or '').strip().lower()
+    if not text:
+        return []
+    tokens = [token for token in text.split('_') if token]
+    candidates: list[str] = [text]
+    # Five tokens, not three: a curator writes "active_transport_across_a_membrane" and a
+    # three-token window cannot reach it, so a legitimate slug would have looked missing.
+    # The cost is bounded by the id's own length and the list is only used for membership.
+    widest = min(5, len(tokens))
+    for size in range(1, widest + 1):
+        for start in range(0, len(tokens) - size + 1):
+            candidates.append('_'.join(tokens[start:start + size]))
+    for pack_key in (pack_keys or ()):
+        key = str(pack_key).strip().lower()
+        if key and (text == key or text.startswith(key + '_') or text.endswith('_' + key)
+                    or ('_' + key + '_') in text):
+            candidates.append(key)
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for key in sorted(candidates, key=len, reverse=True):
+        if key and key not in seen:
+            seen.add(key)
+            ordered.append(key)
+    return ordered
+
+
+def photograph_for_concept(settings, concept_id: str, *, title: str = '',
+                           summary: str = '', allow_search: bool = True) -> dict[str, Any]:
+    """One photograph for a concept, or a refusal that names the reason.
+
+    Shipped first. The curated pack travels inside the bundle, so it needs no network and
+    cannot fail at 3am; only when nothing shipped matches does this reach the network, and
+    only when the operator cleared ``media_enabled``. The result always carries
+    ``available``, and when false it carries ``reason``: a caller must never have to guess
+    whether a missing picture means "nobody asked" or "asked and refused", because those
+    two states need different fixes and used to look identical from the outside.
+    """
+    concept_id = str(concept_id or '').strip()
+    pack = shipped_pack()
+    tried: list[str] = []
+    for key in _concept_keys(concept_id, pack.keys()):
+        if key not in pack:
+            continue
+        tried.append(key)
+        row = shipped_for(settings, key)
+        if not row:
+            continue
+        payload = asset_payload(row)
+        payload.update({'available': True, 'via': 'shipped', 'matched_key': key})
+        return payload
+    if not allow_search:
+        return {'available': False, 'via': 'shipped', 'concept_id': concept_id,
+                'tried': tried[:6],
+                'reason': 'No curated photograph is shipped for this concept, and this '
+                          'path does not search the network.'}
+    if not enabled(settings):
+        return {'available': False, 'via': 'shipped', 'concept_id': concept_id,
+                'tried': tried[:6],
+                'reason': 'No curated photograph is shipped for this concept, and network '
+                          'media is disabled for this instance.'}
+    query = _concept_query(title, summary) or title or concept_id
+    try:
+        found = fetch(settings, query, concept_id=concept_id, count=1,
+                      alt_text=f'Photograph illustrating {title or concept_id}',
+                      support=summary)
+    except Exception as exc:  # noqa: BLE001 - a missing picture must not fail the route
+        return {'available': False, 'via': 'search', 'concept_id': concept_id,
+                'tried': tried[:6], 'query': query,
+                'reason': f'The image search raised {type(exc).__name__}: {exc}'[:300]}
+    assets = found.get('assets') or []
+    if not assets:
+        return {'available': False, 'via': 'search', 'concept_id': concept_id,
+                'tried': tried[:6], 'query': query,
+                'reason': str(found.get('outcome') or 'no_image'),
+                'notes': list(found.get('notes') or [])[:3]}
+    payload = asset_payload(assets[0])
+    payload.update({'available': True, 'via': 'search', 'concept_id': concept_id})
+    return payload
 
 
 def _signature(query: str, source: str, source_id: str) -> str:
@@ -838,6 +937,66 @@ def head_mentioned(query: str, *fields: str) -> bool:
     return any(_same_term(_root(word), head) for word in _tokens(haystack))
 
 
+#: Words that appear in a catalogue record for a made object rather than a photograph of
+#: something. They are measurable - the record says so - which is the only kind of rejection
+#: reason this module allows itself.
+_ARTWORK_MEDIA = ('tapestry', 'engraving', 'etching', 'lithograph', 'woodcut',
+                  'manuscript', 'illumination', 'fresco', 'mural', 'allegory')
+
+#: Museum hosts whose catalogue numbers appear in the filename of their photography. A
+#: museum's own photograph of an object is evidence about the object, not about a concept.
+_ARTWORK_HOSTS = ('metmuseum.org', 'nga.gov', 'rijksmuseum', 'getty.edu', 'wga.hu',
+                  'nationalgallery', 'britishmuseum', 'louvre.fr')
+
+
+#: A single common word does not identify a picture. Searched twice for "Overconfidence" and
+#: both times the winning candidate was a homonym: a sixteenth-century tapestry named
+#: "Vanity Sounds the Horn ... Overconfidence", then an abstract painting from a 365-day art
+#: project. Both were correct by every lexical gate the module had, and neither showed a
+#: person being overconfident. A curated pack entry is still used for such a concept - it was
+#: chosen by a person - but a search result cannot be.
+def _single_word_is_a_homonym(query: str, support: str) -> str:
+    if len(_tokens(query)) != 1 or not (support or '').strip():
+        return ''
+    return ('the concept is one common word, and a full-text image search answers it with '
+            'whatever else is named that, not with the subject')
+
+
+def _artwork_not_about_art(candidate, support: str, query: str = '') -> str:
+    """The art-medium word this candidate is catalogued under, when the concept is not art.
+
+    "Overconfidence" is a psychologist's term and also the subject of a sixteenth-century
+    tapestry whose own title contains the word, so every lexical gate above lets it through:
+    correct by every measure the module had, and a deer with a hunting horn on a slide about
+    judgement. The catalogue says what the object *is*, so refusing it is checkable, and the
+    refusal is conditional on the concept's own summary having no art vocabulary - a lesson
+    about Renaissance allegory keeps its tapestry.
+
+    The medium is usually in the description or the holding institution rather than the
+    title (the title of that tapestry reads "... from The Hunt of the Frail Stag, MET
+    DP170289"), so this one check reads the description the others deliberately ignore. The
+    word list is a closed set of media names, which is what keeps "mentions everything"
+    from becoming a false positive.
+    """
+    text = ' '.join((str(candidate.title or ''), str(candidate.description or ''),
+                     ' '.join(candidate.tags or ()), str(candidate.creator or ''),
+                     str(candidate.landing_page_url or ''))).lower()
+    art_word = next((word for word in _ARTWORK_MEDIA + _ARTWORK_HOSTS if word in text), '')
+    if art_word:
+        if any(word in (support or '').lower() for word in _ARTWORK_MEDIA):
+            return ''
+        return art_word
+    # A title that reads as a sentence is a caption for a titled object, not a description of
+    # a photograph: "Vanity Sounds the Horn and Ignorance Unleashes the Hounds Overconfidence,
+    # Rashness and Desire (from The Hunt of the Frail Stag)". Measured, not judged - the count
+    # of words in the asset's own title - and it only fires when the concept is a single word,
+    # because a long concept title legitimately produces long matches.
+    title_words = str(candidate.title or '').split()
+    if len(title_words) >= 8 and len(_tokens(query)) <= 1:
+        return 'sentence-long caption'
+    return ''
+
+
 def filter_candidates(candidates: Iterable[Candidate], query: str, *,
                       min_width: int = MIN_WIDTH, min_height: int = MIN_HEIGHT,
                       min_overlap: float = 0.5,
@@ -906,6 +1065,18 @@ def filter_candidates(candidates: Iterable[Candidate], query: str, *,
                         f'The query is about {opposed[0]!r} and the asset\'s own words claim '
                         f'{opposed[1]!r} - the case the concept is defined against. That is a '
                         f'wrong answer with a credit line, not a near miss.')
+                elif (homonym := _single_word_is_a_homonym(query, support)):
+                    candidate.rejected = (
+                        f'Refused: {homonym}. The picture was matched on the name and says '
+                        f'nothing about the idea, which teaches a false association.')
+                elif (art := _artwork_not_about_art(candidate, support, query)):
+                    kind = (f'a museum holding ({art})' if art in _ARTWORK_HOSTS
+                            else f'a {art}')
+                    candidate.rejected = (
+                        f'The asset is {kind}, and this concept is not about art: the word '
+                        f'in the title matched, the subject did not. A lesson about '
+                        f'judgement needs a photograph of judgement, not a picture that '
+                        f'happens to be named after it.')
                 elif not head_mentioned(query, *identity):
                     # Deliberately *not* the description. Measured on the second AP Micro pass:
                     # a topographic map of Libya cleared "tragedy of the commons" because its
@@ -1530,7 +1701,30 @@ def fetch_for_lesson(settings, *, concept_id: str, title: str, summary: str = ''
                           'deterministic figure remains available.']}
     images: list[dict[str, Any]] = []
     assignments: list[dict[str, Any]] = []
+    # The curated pack travels inside the bundle, is already licence-cleared and needs
+    # no network. ``photograph_for_concept`` joins short curated slugs to the course-
+    # qualified ids callers actually hold; without this step fetch_for_lesson went
+    # straight to a web search and reported ``no_images`` for a concept that had a
+    # perfectly good photograph sitting on disk. One shipped picture fills the concept
+    # slot; the remaining needs still go through the normal cleared search.
+    shipped = photograph_for_concept(settings, concept_id, title=title,
+                                     summary=summary, allow_search=False)
+    shipped_asset = dict(shipped) if shipped.get('available') else None
     for need in needs:
+        if shipped_asset is not None:
+            images.append({'slot': need['slot'], 'block_index': need['block_index'],
+                           'query': need['query'], 'outcome': 'shipped', 'via': 'shipped',
+                           'seen': 1, 'accepted': 1, 'asset': shipped_asset,
+                           'rejections': [],
+                           'notes': ['A licence-cleared photograph shipped in the bundle was '
+                                     'installed from the local media pack; no network search '
+                                     'was made for this slot.']})
+            assignments.append({'block_index': need['block_index'], 'slot': need['slot'],
+                                'sha256': shipped_asset.get('sha256'),
+                                'caption': str(shipped_asset.get('caption')
+                                               or shipped_asset.get('title') or '')[:200]})
+            shipped_asset = None
+            continue
         found = fetch(settings, need['query'], concept_id=concept_id, course_id=course_id,
                       count=1, alt_text=need['alt_text'],
                       support=need.get('support') or summary)

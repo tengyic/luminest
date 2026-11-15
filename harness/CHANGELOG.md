@@ -11,6 +11,22 @@ what the release gate accepts. Everything below that starts with *audit* came ou
 
 ## Unreleased
 
+### Added — closed-alpha distribution channel and alpha-free capability flag (2026-11-15)
+
+A self-contained internal-alpha program now lives under `docs/internal-alpha/` (README,
+ADMISSION, INTERNAL_ALPHA_AGREEMENT, CONFIG, INSTALL) plus a builder,
+`scripts/package_internal.sh`, that packages the **release** SwiftPM build into an
+ad-hoc-signed `.app` and zips it to
+`outputs/internal-distribution/Luminfest Learning Harness-internal-alpha.zip` with a
+`STAGING-MARKER.md` (UNSIGNED / INTERNAL-ALPHA-ONLY) and a `sha256.txt`. Testers bypass
+Gatekeeper once (INSTALL.md); the app is **not** notarized and **not** shippable.
+
+`Settings.alpha_free` (`HARNESS_ALPHA_FREE=1`) makes every `TIER_PLUS` capability resolve as
+available to all accounts, closing the readiness-audit contradiction where `images` /
+`video` / `course_creation` were reported "withheld" while their routes were open. Default
+is off, so the withhold paths re-arm unchanged for a future paid launch. Verified both ways
+in the backend venv.
+
 ### Fixed — B8: an expired session no longer signs the learner out (2026-11-12)
 
 The server already issued a 1-hour access token **and** a 60-day refresh token, with a

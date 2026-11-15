@@ -224,6 +224,12 @@ class Settings:
     #: attempt is remembered for 24h so an offline instance does not launch a browser
     #: on every request. Off on a bare ``Settings(...)`` for the same test reason.
     video_auto_curate: bool = False
+    #: Closed-alpha override: when set, every ``TIER_PLUS`` capability resolves as
+    #: available to all accounts, matching the current reality that no route enforces
+    #: the paid tier yet. This is the explicit "alpha is free for the cohort" switch;
+    #: flip it off (the default) before any paid launch so the withhold paths re-arm.
+    #: See ``app/capabilities.py::resolve``.
+    alpha_free: bool = False
 
     @classmethod
     def from_env(cls):
@@ -389,7 +395,8 @@ class Settings:
                    # call site, so an instance that promises no outbound media never
                    # launches a browser. Set either to 0 to disable explicitly.
                    os.getenv('HARNESS_CHROMIUM_SEARCH', '1') == '1',
-                   os.getenv('HARNESS_VIDEO_AUTO_CURATE', '1') == '1')
+                   os.getenv('HARNESS_VIDEO_AUTO_CURATE', '1') == '1',
+                   os.getenv('HARNESS_ALPHA_FREE', '0') == '1')
 
 
 def _bounded_int(name: str, default: int, low: int, high: int) -> int:

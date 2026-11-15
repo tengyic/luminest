@@ -116,6 +116,18 @@ DOCUMENT_CONTENT_TYPES = {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 }
 
+#: A live-course ASR turn posts one recorded utterance, not JSON. The path carries a
+#: concept id, so it is matched by pattern rather than listed in DOCUMENT_BODY_CAPS.
+#: ``MediaRecorder`` in Chrome emits webm/opus, Safari emits mp4; the others are what a
+#: native client or a test clip may send. Only the ASR path may declare them, so this
+#: does not widen the boundary for any other write.
+LIVE_ASR_PATH = re.compile(r'^' + re.escape(API + '/live/') + r'[^/]+/asr$')
+LIVE_ASR_BODY_CAP = 9 * 1024 * 1024  # MAX_ASR_BYTES (8 MiB) plus framing
+AUDIO_CONTENT_TYPES = frozenset({
+    'audio/webm', 'audio/mpeg', 'audio/mp4', 'audio/wav', 'audio/ogg',
+    'audio/x-wav', 'audio/x-m4a', 'application/octet-stream',
+})
+
 
 def user_json(user):
     payload = {key: getattr(user, key) for key in ('id', 'name', 'email', 'goal', 'daily_minutes',
@@ -800,8 +812,10 @@ def create_app(settings=None):
                                and '/diagram' in request.url.path)
             diagram_cap = (17 * 1024 * 1024 if request.url.path.endswith('/diagram/trace')
                            else 3 * 1024 * 1024)
-            cap = DOCUMENT_BODY_CAPS.get(request.url.path,
-                                         diagram_cap if diagram_request else 131072)
+            asr_request = bool(LIVE_ASR_PATH.match(request.url.path))
+            cap = (LIVE_ASR_BODY_CAP if asr_request else
+                   DOCUMENT_BODY_CAPS.get(request.url.path,
+                                          diagram_cap if diagram_request else 131072))
             try:
                 size = int(request.headers.get('content-length', '0'))
             except ValueError:
@@ -828,9 +842,14 @@ def create_app(settings=None):
                 # A document path is the exception: it declares the type of the thing
                 # it is actually carrying, from the documented set. Note the boundary
                 # still buffers the body above, so a route on a document path can read
-                # it either as multipart or straight from the buffered bytes.
-                if ((request.url.path not in DOCUMENT_BODY_CAPS and not diagram_request)
-                        or declared not in DOCUMENT_CONTENT_TYPES):
+                # it either as multipart or straight from the buffered bytes. The ASR
+                # path is the one audio exception: a raw MediaRecorder blob must reach
+                # the route, and the route's own 8 MiB check still binds.
+                allowed_types = (DOCUMENT_CONTENT_TYPES | AUDIO_CONTENT_TYPES
+                                 if asr_request else DOCUMENT_CONTENT_TYPES)
+                if ((request.url.path not in DOCUMENT_BODY_CAPS and not diagram_request
+                     and not asr_request)
+                        or declared not in allowed_types):
                     return JSONResponse({'detail': 'application/json is required'}, status_code=415)
             # A client that walks away mid-turn must stop costing model tokens. The body
             # is buffered above, so nothing downstream needs this receive again except
@@ -948,7 +967,7 @@ def create_app(settings=None):
     def send_verification(db, user, request):
         raw = issue_auth_token(db, user, 'verify_email', VERIFY_TTL_SECONDS)
         link = app.state.mailer.link('/verify-email', raw)
-        app.state.mailer.send(user.email, 'Confirm your Luminfest email',
+        app.state.mailer.send(user.email, 'Confirm your Luminest email',
                               f'Open this link to confirm your email address:\n\n{link}\n\n'
                               f'It expires in 3 days. If you did not sign up, ignore this message.')
         return raw
@@ -1103,7 +1122,7 @@ def create_app(settings=None):
             if user and getattr(user, 'status', 'active') == 'active':
                 raw = issue_auth_token(db, user, 'reset_password', RESET_TTL_SECONDS)
                 link = app.state.mailer.link('/reset-password', raw)
-                app.state.mailer.send(user.email, 'Reset your Luminfest password',
+                app.state.mailer.send(user.email, 'Reset your Luminest password',
                                       f'Open this link to choose a new password:\n\n{link}\n\n'
                                       f'It expires in 1 hour and can be used once.')
                 db.commit()
@@ -2220,9 +2239,9 @@ def create_app(settings=None):
         result['authorization_basis'] = payload.authorization
         _model_cfg = model_config.effective(settings)
         result['processing_notice'] = (
-            'The transcript was not saved by Luminfest. It was sent to the configured AI provider for analysis.'
+            'The transcript was not saved by Luminest. It was sent to the configured AI provider for analysis.'
             if _model_cfg.provider and _model_cfg.provider_url else
-            'The transcript was processed locally with bounded heuristics and was not saved by Luminfest.')
+            'The transcript was processed locally with bounded heuristics and was not saved by Luminest.')
         return result
 
     @app.get(API+'/chat')
@@ -3519,7 +3538,7 @@ def create_app(settings=None):
         # provider module's docstring promises: a message that says "ignore previous
         # instructions" arrives as quoted data for the model to read, never as an
         # instruction in the trusted channel. Server-authored framing stays outside it.
-        system = ('You are the Luminfest tutor. You may call tools to ground your '
+        system = ('You are the Luminest tutor. You may call tools to ground your '
                   'answer in the curriculum graph, this learner\'s own recorded '
                   'evidence and the restricted workspace. Call a tool when '
                   'evidence would improve the answer; otherwise reply in plain '
@@ -3681,6 +3700,18 @@ def create_app(settings=None):
             ctx.client_context = dict(payload.context or {})
         except Exception:
             pass
+        # A live course enforces its surface at the toolbox boundary. The value is
+        # server-derived from the running lesson, never from the client's message: a
+        # learner saying "open the video" must not widen the teacher's tool set. An
+        # empty value means no live lesson is running, and no boundary is applied.
+        live_concept = str((payload.context or {}).get('concept_id') or '')
+        if re.fullmatch(r'[a-z0-9_.-]{1,80}', live_concept):
+            try:
+                ctx.surface = str(procedure_service.surface_state(
+                    db, user, live_concept).get('surface') or '')
+            except Exception:   # noqa: BLE001 - a missing state must not break a turn
+                log.warning('live surface state unavailable for %s', live_concept,
+                            exc_info=True)
         tools = agent_loop.tools_payload(harness.toolbox.available_specs())
         usage: dict = usage_out if usage_out is not None else {}
         final: dict = {}
@@ -4167,7 +4198,7 @@ def create_app(settings=None):
                 referrer_code=payload.referrer_code, consent_marketing=payload.consent_marketing,
                 ip=client_ip(request), user_agent=request.headers.get('user-agent'))
             link = app.state.mailer.link('/waitlist/confirm', raw)
-            app.state.mailer.send(row.email, 'Confirm your place on the Luminfest Beta list',
+            app.state.mailer.send(row.email, 'Confirm your place on the Luminest Beta list',
                                   f'Confirm your email to hold your place:\n\n{link}\n\n'
                                   f'Your position: {accounts.waitlist_position(db, row)}.')
             db.commit()
@@ -4269,7 +4300,7 @@ def create_app(settings=None):
         db.flush()
         codes = [i.code for i in created]
         if payload.email:
-            app.state.mailer.send(payload.email, 'Your Luminfest Beta invite',
+            app.state.mailer.send(payload.email, 'Your Luminest Beta invite',
                                   'Your invite code:\n\n' + '\n'.join(codes) +
                                   '\n\nRedeem it in the app when you create your account.')
         db.commit()

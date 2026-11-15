@@ -1,6 +1,6 @@
-# Luminfest Workbench (`harness/web/`)
+# Luminest Workbench (`harness/web/`)
 
-The interactive web surface for the Luminfest learning harness: a learner previews a
+The interactive web surface for the Luminest learning harness: a learner previews a
 simulation, hovers to select parts of it, and asks the AI to explain — while
 students are bounded to filing categorized change requests instead of issuing
 code instructions.

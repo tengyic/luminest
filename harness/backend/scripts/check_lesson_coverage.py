@@ -83,8 +83,9 @@ def main() -> int:
             print(f'DRIFT: {problem}')
 
     # The totals used to describe the algebra graph alone, which read as a statement about
-    # the product: "30 of 164 concepts have lessons" is true and, as a summary of twelve
-    # courses and 944 nodes, badly incomplete. Both are reported now, labelled.
+    # the product: "38 of 164 concepts have lessons" is true and, as a summary of
+    # twenty-one courses and 2,205 nodes, badly incomplete. Both are reported now,
+    # labelled. The numbers move as authored units are added, so prose must not pin them.
     all_nodes = sum(len(courses.graph_for(spec.id).nodes) for spec in courses.COURSES)
     all_taught = sum(len(courses.graph_for(spec.id).nodes)
                      - len(per_course[spec.id]['graph_remaining']) for spec in courses.COURSES)

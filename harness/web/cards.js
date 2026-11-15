@@ -1,4 +1,4 @@
-/* Luminfest workbench — pure card helpers.
+/* Luminest workbench — pure card helpers.
  *
  * These live outside app.js on purpose: app.js is one IIFE that touches the DOM at
  * load time, so nothing in it can be exercised without a browser. The merge below

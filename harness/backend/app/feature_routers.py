@@ -46,6 +46,18 @@ FEATURE_ROUTERS = (
     # surface that lets an operator supply one without editing the environment and
     # restarting. See app/model_config.py and app/routes_model_config.py.
     'routes_model_config',
+    # Learning-efficiency measurement: the reading, the cold-probe budget, and the
+    # estimator benchmark. Separate router because it is the only surface whose job is to
+    # report on the harness rather than to teach. See app/measurement/ and docs/MEASUREMENT.md.
+    'routes_measurement',
+    # The concept mind map: a tree the client may draw itself, plus one
+    # self-contained interactive page. See app/mindmap.py.
+    'routes_mindmap',
+    # Live course: the compiled presentation-surface decision, the artifact state a
+    # client renders, ASR for barge-in questions, and the block cursor. The teaching
+    # turn itself stays on /agent/stream. See app/routes_live.py and
+    # app/harness/teaching/surface.py.
+    'routes_live',
 )
 
 __all__ = ['FEATURE_ROUTERS']

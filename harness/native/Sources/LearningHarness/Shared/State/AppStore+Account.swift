@@ -75,7 +75,7 @@ extension AppStore {
             let build = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "unknown"
             let system = ProcessInfo.processInfo.operatingSystemVersionString
             NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString("Luminfest \(build) on \(system)\n\n" + body, forType: .string)
+            NSPasteboard.general.setString("Luminest \(build) on \(system)\n\n" + body, forType: .string)
             notice = "A diagnostic report was copied to the clipboard."
         } catch { if epoch == version { record(error) } }
     }

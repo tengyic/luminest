@@ -63,3 +63,17 @@ node_modules/
 # gitlink that clones back as an empty directory, so it is deliberately not part of
 # this repository's history.
 /luminest-v2/
+
+# 2026-11-15 agent-run residue. The bus holds private coordination messages; the two
+# slices are throwaway reverse-engineering experiments; backend/data is a live SQLite
+# database with learner rows; the .log files are per-run pytest captures. None of these
+# are source, and `git add -A` must never publish them.
+/.agent-bus/
+/harness/.agent-bus/
+/ddsa-slice/
+/luminest-slice/
+/harness/backend/data/
+/harness/backend/*.log
+/harness/beta_control/seed_codes.json
+# Per-run classifier/orchestrator snapshots are coordination state, not documentation.
+/harness/docs/closed-beta/ROUTING_MAP-*.json

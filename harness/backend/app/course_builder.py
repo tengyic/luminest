@@ -978,6 +978,9 @@ def _plain_span(text: str, limit: int | None = None) -> str:
     summary; a span is stored whole because prerequisite detection reads it.
     """
     plain = text.replace('**', '').strip()
+    # Deliberately does NOT strip a heading's "##": a span must remain a verbatim substring
+    # of the source, and the marker is in the source. Markdown is removed where text is
+    # shown to a learner (see ``concept_entry``), not where it is stored as evidence.
     return plain[:limit] if limit else plain
 
 
@@ -1008,6 +1011,19 @@ def _title_is_usable(title: str) -> bool:
     if words and all(word in _FURNITURE for word in words if word):
         return False
     return True
+
+
+#: Headings that organise a section rather than name one. Myers opens every module with a
+#: "Learning Targets" box, so a section-span collector that stops at the next heading stops
+#: on the first paragraph after the title - which is how a lesson ended up quoting only its
+#: own objective line.
+_SECTION_FURNITURE = re.compile(
+    r'^(learning targets?|objectives?|module\s+overview|overview|key terms|vocabulary)\b',
+    re.IGNORECASE)
+
+#: A numbered objective such as "0.1-3 How does critical thinking feed a scientific
+#: attitude?" - a table of contents for the section, not its content.
+_OBJECTIVE_LINE = re.compile(r'^\d+(?:\.\d+)?\s*[-–]\s*\d+\b')
 
 
 def extract_concepts(text: str, *, limit: int = MAX_CONCEPTS) -> list[ExtractedConcept]:
@@ -1059,12 +1075,42 @@ def extract_concepts(text: str, *, limit: int = MAX_CONCEPTS) -> list[ExtractedC
                 following_block, _, _ = _trim(text, nxt_start, nxt_end)
                 first = _SENTENCE.match(following_block)
                 following = (first.group().strip() if first else following_block)[:240]
+            # The section's own prose, not the heading line. Passing the heading as the span
+            # made every lesson quote its own title: the AP Psychology deck read
+            # "0.1-3 How does critical thinking feed a scientific attitude…" and stopped,
+            # because that was the entire material the concept held. Collect the paragraphs
+            # that follow, stopping at the next heading, up to a readable excerpt.
+            span_start, span_end = block_start, block_end
+            collected = [block]
+            cursor = index + 1
+            while cursor < len(paragraphs) and len(' '.join(collected)) < 1200:
+                next_start, next_end = paragraphs[cursor]
+                next_block, _, _ = _trim(text, next_start, next_end)
+                stripped = next_block.strip()
+                if not stripped:
+                    break
+                if _is_heading(stripped):
+                    # "Learning Targets" is furniture with a heading's font: skipping past
+                    # it is what reaches the prose. Any other heading ends the section.
+                    if _SECTION_FURNITURE.match(stripped):
+                        cursor += 1
+                        continue
+                    break
+                # Every Myers module opens with numbered objectives ("0.1-3 How does ...").
+                # They are a table of contents for the section, not its content.
+                if _OBJECTIVE_LINE.match(stripped):
+                    cursor += 1
+                    continue
+                collected.append(stripped)
+                span_end = next_end
+                cursor += 1
+            section_span = text[block_start:span_end]
             # An explicit markdown heading names a concept at any length; an
             # inferred one (a short standalone line in a flattened PDF) has to
             # earn it with a second word, because "Why" and "It" are lines too.
             explicit = bool(_MARKDOWN_HEADING.match(block))
             if explicit or len(heading.split()) >= 2:
-                consider(heading, following or heading, block, block_start, block_end,
+                consider(heading, following or heading, section_span, span_start, span_end,
                          'heading')
             continue
 
@@ -1259,7 +1305,10 @@ def _worked_walkthrough(title: str, span: str,
     example stays honest while being a different artefact from the passage: it can
     be read, performed, and checked, which is what makes it a worked example.
     """
-    quote = ' '.join(str(span or '').split())
+    # Quoted verbatim, newlines and all. Collapsing the whitespace made the quotation no
+    # longer contain the span, and the test that pins "the worked example quotes the exact
+    # source" caught it. Display collapses the whitespace later; evidence does not.
+    quote = str(span or '').strip()
     neighbour = (prerequisites[0].title if prerequisites
                  else (dependants[0].title if dependants else ''))
     steps = [
@@ -1302,7 +1351,24 @@ def lesson_blocks(node: ConceptNode, graph: KnowledgeGraph, concept: ExtractedCo
     prerequisites = [graph.nodes[p] for p in graph.parents(node.id) if p in graph.nodes]
     dependants = [graph.nodes[c] for c in graph.children(node.id) if c in graph.nodes]
     depth = len(graph.ancestors(node.id))
-    core = concept.summary or node.summary or f'{title} comes from your own source material.'
+    # The passage the learner supplied, not the classifier's one-line summary. A lesson
+    # built from the summary teaches nothing: the deck for an uploaded AP Psychology course
+    # showed "0.1-1 Explain how psychology is a science." and 70% white space, because the
+    # summary is a label and the span is the material. The summary stays as the fallback for
+    # a source whose span is a stub.
+    passage = ' '.join(str(getattr(concept, 'span', '') or '').split())
+    # The span keeps its markdown so it stays verbatim evidence; the lesson is where it is
+    # shown, so it is where the heading marker comes off.
+    passage = re.sub(r'^#{1,6}\s*', '', passage)
+    # The span starts at the heading, so the lesson read "Overconfidence We humans tend to
+    # think we know more than we do." - the title twice, with no stop between. Drop the
+    # heading when it is the first thing in the passage and real text follows it.
+    if passage.lower().startswith(title.lower()):
+        remainder = passage[len(title):].lstrip(' \t.:—-|')
+        if len(remainder) >= 120:
+            passage = remainder
+    core = passage[:1200] if len(passage) >= 200 else (concept.summary or node.summary or '')
+    core = core or f'{title} comes from your own source material.'
     if prerequisites:
         core += (' It builds on ' + ', '.join(p.title for p in prerequisites[:3]) +
                  ' earlier in your source.')

@@ -2,7 +2,7 @@
   "program": "Program 1 — Stabilization and correctness",
   "product": "Luminest / Luminfest Learning Harness",
   "version": 1,
-  "updated": "2026-11-08",
+  "updated": "2026-11-15",
   "purpose": "One register for the whole application: what the learner sees, where it is implemented natively, where it is implemented on the server, what it persists, what proves it, and the measurable condition that makes it done.",
   "boundaries": {
     "database_security": "A parallel agent owns database/tenant security hardening. This register records the current expected path and the existing security tests, but makes no change to security code and does not claim that hardening is complete.",
@@ -517,6 +517,45 @@
           "data": "db.py UsageLedger, UsageDailyRollup, QuotaCounter.",
           "tests": "backend/tests/test_metering.py; test_capabilities.py.",
           "acceptance": "Every tutor turn writes one UsageLedger row, including offline fallback with outcome=fallback and zero tokens; latency and provider/model are recorded; a failed write does not silently disappear."
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Learning-efficiency measurement",
+      "features": [
+        {
+          "id": "MEASURE-01",
+          "name": "Learning-efficiency reading",
+          "status": "partial",
+          "user_facing": "A reading of how fast the error rate is falling (with an interval), how much of the measured performance belongs to the support, what survived a delay, and an explicit list of what the data cannot yet establish.",
+          "native": "Absent. There is no SwiftUI surface for the reading yet; the JSON report is the only reader today, so this is registered as partial rather than implemented.",
+          "backend": "backend/app/routes_measurement.py GET /api/v1/measurement/report; backend/app/measurement/report.py (assembly), estimators.py (learning rate, Hake <g>, Paas efficiency, aided-vs-unaided gap), episodes.py (episode segmentation, aid derivation), contracts.py.",
+          "data": "Derived from attempts, messages (tutor turns), telemetry_events (lesson_view), assessments (delayed transfer). No new table for the reading itself: it is a pure function of those rows.",
+          "tests": "backend/tests/test_measurement.py; the estimator benchmark in backend/app/measurement/bench.py run via the suite.",
+          "acceptance": "An account with no attempts returns 200 with learning_rate.status=insufficient_evidence and a populated cannot_claim; the aided/unaided buckets are derived from recorded conditions, never inferred from absence; the pivotal interval always contains its own point estimate; the aided-minus-unaided gap is withheld below 5 unaided observations; no figure is reported without the evidence it rests on."
+        },
+        {
+          "id": "MEASURE-02",
+          "name": "Cold probe budget and conditions capture",
+          "status": "partial",
+          "user_facing": "A quick unaided recall check, offered at most once per sitting, with feedback held back. Presented as what it is: retrieval practice with delayed feedback.",
+          "native": "Absent. The client must serve a question for the probed concept through the existing question flow and then call complete with the attempt id; no SwiftUI surface drives that yet.",
+          "backend": "backend/app/routes_measurement.py GET /measurement/probe/next, POST /measurement/probe, POST /measurement/probe/{id}/complete, POST /measurement/probe/{id}/abandon, POST /measurement/effort; backend/app/measurement/probe.py (scheduling policy); backend/app/measurement/models.py (measurement_probes).",
+          "data": "measurement_probes: kind, concept_id, question_id, status, conditions (support state captured at issue), response, value, reason.",
+          "tests": "backend/tests/test_measurement.py probe cases; test_the_probe_kinds_are_the_same_in_the_table_and_the_policy.",
+          "acceptance": "No probe is issued without a concept at or above the practice floor; at most one per episode and none inside a 20-minute cooldown; a probe is never issued during an active assessment; correctness is read from the server-graded Attempt, never from the client; an abandoned probe is recorded as abandoned rather than deleted; effort ratings are constrained to the published 1-9 scale."
+        },
+        {
+          "id": "MEASURE-03",
+          "name": "Estimator recovery benchmark",
+          "status": "implemented",
+          "user_facing": "Not learner-facing. An operator surface that answers whether the instrument measures what it claims.",
+          "native": "Not applicable.",
+          "backend": "backend/app/measurement/bench.py; GET /api/v1/measurement/bench (teacher role only, 403 for a learner token).",
+          "data": "Synthetic learners with a known learning rate. No learner data is read.",
+          "tests": "backend/tests/test_measurement.py::test_the_estimator_benchmark_passes_its_own_checks.",
+          "acceptance": "Five checks over seeded synthetic cohorts: recovery (rank correlation >= 0.60, |median bias| <= 0.02, MAE <= 0.06 on identifiable curves), coverage (empirical 0.80-0.98 for a nominal 0.90), discrimination (Cohen's d >= 0.8 between flat and improving), aided inflation (support inflates accuracy and the gap estimator tracks it within 0.04), and null false-positive rate <= 0.12. The suite validates the estimator only, and says so in its own payload."
         }
       ]
     },

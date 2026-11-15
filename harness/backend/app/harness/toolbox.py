@@ -26,7 +26,9 @@ Three rules shape this module.
 
 from __future__ import annotations
 
+import inspect
 import json
+import re
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -36,6 +38,7 @@ from ..curriculum import (CONCEPTS, GRAPH_TO_LESSON, KNOWLEDGE_GRAPH, LESSON_TAR
                           QUESTIONS)
 from ..ingest import policy
 from ..mathkit import MathSyntaxError, build as build_simulation
+from .teaching import surface as surface_router
 
 #: Postures a tool can have, from most to least trusted.
 #: ``internal``  reads this project's own graph and curriculum;
@@ -134,6 +137,18 @@ class ToolContext:
     #: The learner's course id. Media curation is keyed by course, so a tool that resolved
     #: a simulation or a curated video without this would silently return nothing.
     course_id: str = ''
+    #: The live presentation surface (``deck`` / ``video`` / ``whiteboard`` / ``chat``)
+    #: when this call belongs to a running live course. Empty everywhere else, which is
+    #: what keeps plan execution, authoring and offline probes unrestricted. The
+    #: toolbox refuses a presentation tool belonging to a different surface: switching
+    #: what the learner sees is a decision (``stage_surface``), not a side effect of
+    #: whichever tool the model happened to call first.
+    surface: str = ''
+    #: Client-supplied routing facts for the live turn (``concept_id``, ``board_id``).
+    #: Declared here so identifier grounding in :func:`invoke` has a typed home rather
+    #: than an attribute set ad-hoc by whichever route built the context. ``None``
+    #: rather than a shared mutable class default.
+    client_context: dict[str, Any] | None = None
 
     @property
     def user_id(self) -> str:
@@ -610,6 +625,65 @@ def deck_control(ctx: ToolContext, concept_id: str = '', action: str = 'next',
     return ToolResult('deck_control', True, {**payload, 'action': verb},
                       notes=[f'Slide {position} of {count}'
                              + ('' if moved else ' (it was already showing)')])
+
+
+def stage_surface(ctx: ToolContext, surface: str = '', reason: str = '',
+                  concept_id: str = '', interrupted: bool = False,
+                  intent: str = '') -> ToolResult:
+    """Decide which surface the learner is looking at for this live turn.
+
+    This is the teacher's decision, not a view setter. Three things make it real:
+
+    * the compiled lesson names a surface for the current block, and deviating from it
+      requires a stated reason, which is stored with the switch;
+    * a surface whose artifact was never bound is refused with a declared fallback
+      rather than presenting an empty player or an imaginary deck;
+    * the switch updates ``ctx.surface``, so the presentation tools of the new surface
+      become callable *in the same turn*. Without that, a teacher who decided to draw
+      would be refused by the boundary it had just moved.
+
+    Ungated for the same reason ``deck_control`` is: this changes the learner's own
+    display, never the lesson, the progress record or mastery. The server re-derives
+    the compiled plan and the artifact inventory on every call.
+    """
+    from sqlalchemy import select
+
+    from .. import procedure_service
+    from ..db import ProcedureRun
+
+    db, user = ctx.db, ctx.user
+    if db is None or user is None:
+        return ToolResult('stage_surface', False,
+                          refused='No session is bound to this call.')
+    concept = ' '.join(str(concept_id or '').split())
+    if not concept:
+        open_runs = list(db.scalars(select(ProcedureRun).where(
+            ProcedureRun.user_id == user.id, ProcedureRun.status == 'active')
+            .order_by(ProcedureRun.updated_at.desc()).limit(2)))
+        if not open_runs:
+            return ToolResult('stage_surface', False,
+                              refused='No lesson is running, so there is no surface '
+                                      'to decide.')
+        if len(open_runs) > 1:
+            return ToolResult('stage_surface', False,
+                              refused=(f'{len(open_runs)} lessons are open; name the '
+                                       'concept whose surface you are choosing.'))
+        concept = str(open_runs[0].concept_id)
+    result = procedure_service.set_surface(
+        db, user, concept, surface, reason=reason,
+        interrupted=bool(interrupted), intent=str(intent or ''))
+    if not result.get('ok'):
+        return ToolResult('stage_surface', False,
+                          refused=str(result.get('refused') or 'Surface refused'),
+                          data={'fallback': result.get('fallback'),
+                                'available': result.get('available')},
+                          notes=[f"The compiled surface stays {result['compiled_surface']!r}."])
+    chosen = str(result['surface'])
+    ctx.surface = chosen
+    return ToolResult('stage_surface', True, result,
+                      notes=[f'Now showing the {chosen} surface: {result.get("why", "")[:180]}'],
+                      citations=[{'kind': 'decision', 'source': 'teaching/surface.py',
+                                  'detail': str(result.get('why') or '')[:200]}])
 
 
 def _template_for_node(node: Mapping[str, Any]):
@@ -1141,6 +1215,20 @@ _register(ToolSpec('deck_control',
                    'slide: int = -1 (0-based, for goto)', 'internal',
                    '{concept_id, action, slide, count, at} or refusal'),
           deck_control)
+_register(ToolSpec('stage_surface',
+                   'Decide which presentation surface the learner looks at this turn: '
+                   'deck (the exported slides), video (a curated embed in the browser), '
+                   'whiteboard (draw while explaining) or chat. Always give a reason '
+                   'when the decision differs from the compiled lesson surface. Only '
+                   'surfaces whose artifact is actually bound can be chosen. Call this '
+                   'BEFORE a presentation tool from another surface; those tools are '
+                   'refused on the wrong surface.',
+                   'surface: str = "deck" | "video" | "whiteboard" | "chat", '
+                   'reason: str = "", concept_id: str = "", '
+                   'interrupted: bool = False, intent: str = ""', 'internal',
+                   '{ok, surface, compiled_surface, why, tools, available, '
+                   'resume_surface, fallback} or refusal'),
+          stage_surface)
 _register(ToolSpec('check_understanding',
                    'Offer one authored retrieval item for a concept.',
                    'concept_id: str, exclude: [str] = []', 'internal', '{question, available}'),
@@ -1385,6 +1473,17 @@ _register(ToolSpec('whiteboard_place_image',
                    '{board_id, version, placed: {title, licence, credit, source_url}} '
                    'or refusal'),
           _tools_whiteboard.whiteboard_place_image)
+_register(ToolSpec('draw_diagram',
+                   'Draw a structured visual on the shared whiteboard from a natural-language '
+                   'description: a 2D graph (type "mafs" or "jsxgraph"), a chart or 3D plot '
+                   '("plotly"), a 3D surface ("mathbox"), a molecule ("molecule"), or a TikZ '
+                   'drawing ("tikz"). Prefer this over whiteboard_apply when the learner '
+                   'needs a real diagram rather than a hand-drawn sketch. Teacher-facing.',
+                   'board_id: str, type: str, description: str = "", spec: dict | None = None, '
+                   'mode: str = "description", title: str = "", w: float = 0, h: float = 0',
+                   'internal',
+                   '{board_id, version, type, title, payload} or refusal'),
+          _tools_whiteboard.whiteboard_draw_visual)
 
 from . import tools_board as _tools_board  # noqa: E402  (needs REGISTRY-side gate)
 
@@ -1517,19 +1616,114 @@ def signatures() -> list[str]:
     return [spec.signature() for spec in available_specs()]
 
 
+#: Identifiers the *server* owns. The model decides what to draw and when; the
+#: address of the live lesson's board and the concept being taught are client-
+#: supplied facts that must not be re-invented. Small local models reliably copy
+#: schema examples ("board_id_example", "concept_id_example") into these slots, and
+#: the resulting refusal looked like a broken whiteboard when the actual defect was
+#: an unbound identifier. Only placeholder-shaped values are replaced: an explicit
+#: real id is the teacher deliberately addressing another board and stays untouched.
+_IDENTIFIER_KEYS = ('board_id', 'concept_id')
+_PLACEHOLDER_VALUE = re.compile(
+    r'(?:^|[_<\s-])(?:example|examples|placeholder|sample|dummy|todo|xxx+|your|insert|replace)'
+    r'(?:$|[_>\s-])', re.IGNORECASE)
+
+
+def _board_id_resolves(value: str) -> bool:
+    """True when a board id can name a node board, using the board layer's own rule.
+
+    A small model does not only emit ``board_id_example``; it also invents short ids
+    like ``lesson_1`` or ``board_1``. Enumerating placeholder spellings can never be
+    exhaustive. The board layer already owns the one authoritative answer to "is this
+    an address at all", so an unresolvable value is treated as an error, not a decision.
+    """
+    from . import whiteboard as legacy
+    try:
+        return legacy.concept_node_id(value) is not None
+    except Exception:  # noqa: BLE001 - a bad id must never take the gate down
+        return False
+
+
+def _ground_identifiers(ctx: 'ToolContext', fn: Callable, arguments: dict) -> tuple[dict, list[str]]:
+    """Bind server-owned identifiers when the model left an unusable value.
+
+    Only parameters the tool actually declares are touched, so a tool that does not
+    accept ``concept_id`` never receives an unexpected kwarg. A *resolvable*, explicit
+    id is never overwritten: the teacher may legitimately address another board. The
+    substituted keys are returned so the caller can say it happened in the trace
+    rather than silently rewriting the model's decision.
+    """
+    context = getattr(ctx, 'client_context', None) or {}
+    if not isinstance(context, Mapping):
+        return arguments, []
+    try:
+        params = inspect.signature(fn).parameters
+    except (TypeError, ValueError):
+        return arguments, []
+    grounded = dict(arguments)
+    replaced: list[str] = []
+    for key in _IDENTIFIER_KEYS:
+        if key not in params:
+            continue
+        truth = str(context.get(key) or '').strip()
+        if not truth or (key == 'board_id' and not _board_id_resolves(truth)):
+            continue
+        supplied = grounded.get(key)
+        missing = key not in grounded or supplied is None
+        placeholder = False
+        unresolvable = False
+        if isinstance(supplied, str):
+            raw = supplied.strip()
+            bare = raw.strip('<>').strip()
+            placeholder = (not raw or bare.casefold() == key
+                           or bool(_PLACEHOLDER_VALUE.search(raw)))
+            unresolvable = (key == 'board_id' and raw
+                            and not _board_id_resolves(raw))
+        if missing or placeholder or unresolvable:
+            grounded[key] = truth
+            replaced.append(key)
+    return grounded, replaced
+
+
 def invoke(ctx: ToolContext, name: str, arguments: Mapping[str, Any] | None = None) -> ToolResult:
-    """Call a tool by name. Unknown names are a refusal, never a silent no-op."""
+    """Call a tool by name. Unknown names are a refusal, never a silent no-op.
+
+    A live course also enforces the surface boundary here, at the one place every
+    tool call passes through. Checking it inside each tool would need eleven copies,
+    and a twelfth tool would arrive without one. The refusal is fed back to the model
+    by ``agent_loop`` with the decision it needs to recover: call ``stage_surface``
+    with a reason, then retry.
+    """
     entry = REGISTRY.get(name)
     if entry is None:
         return ToolResult(name, False, refused=f'Unknown tool {name!r}',
                           error=f'Unknown tool {name!r}')
+    active = str(getattr(ctx, 'surface', '') or '')
+    owner = surface_router.tool_surface(name)
+    if (active and owner and owner != active
+            and name != surface_router.NEUTRAL_DECISION_TOOL):
+        return ToolResult(
+            name, False,
+            refused=(f'The live lesson is on the {active!r} surface; {name!r} belongs '
+                     f'to {owner!r}. Decide the switch first: call stage_surface with '
+                     f'surface={owner!r} and a reason, then retry. A refusal here is '
+                     'a decision boundary, not a failed tool.'),
+            data={'active_surface': active, 'tool_surface': owner,
+                  'decision_tool': surface_router.NEUTRAL_DECISION_TOOL})
     spec, fn = entry
-    arguments = dict(arguments or {})
+    arguments, grounded = _ground_identifiers(ctx, fn, dict(arguments or {}))
     try:
-        return fn(ctx, **arguments)
+        result = fn(ctx, **arguments)
     except TypeError as exc:
         return ToolResult(name, False, refused=f'Bad arguments for {name}: {exc}',
                           error=str(exc))
+    if grounded and isinstance(result, ToolResult):
+        # The trace must show the substitution: the model's tool_call event still
+        # carries what it asked for, and this note names what the server actually used.
+        result.notes.append(
+            'Server-bound ' + ', '.join(grounded) + ' from the live lesson context; '
+            'the model supplied a placeholder or omitted it.')
+    return result
 
 
 def postures() -> dict[str, int]:

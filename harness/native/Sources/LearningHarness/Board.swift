@@ -616,7 +616,7 @@ enum BoardRenderer {
         var mediaBox = CGRect(origin: .zero, size: pageSize)
         guard let consumer = CGDataConsumer(data: NSMutableData()),
               let cg = CGContext(consumer: consumer, mediaBox: &mediaBox,
-                                 [kCGPDFContextCreator: "Luminfest Learning Harness"] as CFDictionary) else { return nil }
+                                 [kCGPDFContextCreator: "Luminest"] as CFDictionary) else { return nil }
         cg.beginPDFPage(nil)
         let bounds = boundsOf(nodes).insetBy(dx: -40, dy: -40)
         withContext(cg, size: pageSize) { () -> Bool in

@@ -69,6 +69,7 @@ TOOL_LABELS: dict[str, str] = {
     'board_apply': 'Drawing on the board',
     'board_place_media': 'Pinning media on the board',
     'deck_control': 'Moving the slides',
+    'stage_surface': 'Choosing what to show you',
     # orienting in the course
     'search_concepts': 'Searching the course',
     'read_concept': 'Reading the concept',

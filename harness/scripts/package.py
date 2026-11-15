@@ -134,6 +134,15 @@ FEATURE_ROUTE_PROBES = (
     # public, so a frozen bundle that drops this router answers 404 and fails the smoke
     # test instead of shipping an app that cannot be configured.
     ("routes_model_config", "/settings/model-config/catalog"),
+    # Measurement. `/bench` is teacher-only (403 for a learner token, which is still a pass),
+    # so the probe targets the describe endpoint, which any authenticated account can read.
+    ("routes_measurement", "/measurement"),
+    # A learner token resolves a map for the enrolled course; only a 404 (an
+    # uncollected router) is a failure.
+    ("routes_mindmap", "/mindmap/course"),
+    # Live course catalog needs a signed-in principal but returns no account data,
+    # so a bundled router that landed answers 200 with the smoke-test token.
+    ("routes_live", "/live/catalog"),
 )
 
 

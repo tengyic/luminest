@@ -40,6 +40,27 @@ import WebKit
     @Published var assets: [JSON] = []
     @Published var webURLString = ""
 
+    // MARK: - the live course's presentation surface
+    //
+    // The teacher decides what the learner is looking at: a generated .pptx deck, a
+    // curated video in the browser, or the shared board being drawn on. That decision
+    // is compiled into the lesson and enforced at the toolbox boundary on the server
+    // (GET /api/v1/live/{concept}/state). The Stage renders it; it does not make it.
+    // A learner may still take the Stage back with the segmented picker - the server
+    // keeps its decision, and "Follow teacher" re-attaches to it. Without that escape
+    // hatch a wrong surface would trap the learner behind a decision they cannot see.
+    @Published var liveSurface = ""
+    @Published var compiledSurface = ""
+    @Published var surfaceWhy = ""
+    @Published var surfaceBlock = ""
+    @Published var surfaceHold = false
+    @Published var followTeacher = true
+    @Published var liveError = ""
+    /// Set for one run-loop while ``apply(live:)`` moves the picker programmatically,
+    /// so ``onChange(of: mode)`` does not mistake it for a learner override.
+    var applyingSurface = false
+    private var appliedDecision = ""
+
     private var pollTask: Task<Void, Never>?
     private var resultsCursor: Double = 0
 
@@ -122,6 +143,79 @@ import WebKit
         } catch {
             boardError = "Board unavailable: \((error as? AppFailure)?.message ?? "backend unreachable")"
         }
+        await refreshLiveSurface()
+    }
+
+    /// Read the server's surface decision for the running lesson and put that surface
+    /// in front of the learner. A missing live run is a normal state (no lesson has
+    /// been started), so it clears the badge rather than showing a broken Stage.
+    func refreshLiveSurface() async {
+        guard let store, store.authenticated, !store.selectedConcept.isEmpty else { return }
+        guard let encoded = store.selectedConcept.addingPercentEncoding(
+            withAllowedCharacters: .urlPathAllowed) else { return }
+        do {
+            let state = try await store.api.json("/live/\(encoded)/state")
+            let info = state["surface"]
+            let live = info["surface"].string
+            let decision = [state["run_id"].string, info["block_order"].string,
+                            live, info["at"].string, info["switch"].string].joined(separator: "|")
+            liveSurface = live
+            compiledSurface = info["compiled_surface"].string
+            surfaceWhy = info["why"].string
+            surfaceBlock = info["block_kind"].string
+            surfaceHold = info["interrupted"].bool
+            liveError = ""
+            guard followTeacher, decision != appliedDecision else { return }
+            appliedDecision = decision
+            apply(live: live, state: state)
+        } catch {
+            // No lesson running is not an error the learner should see. Only report a
+            // live course that answered and then went quiet.
+            if !liveSurface.isEmpty {
+                liveError = "Lesson surface unavailable: \((error as? AppFailure)?.message ?? "backend unreachable")"
+            }
+        }
+    }
+
+    /// Map the server's four surfaces onto the Stage's five tabs. ``chat`` has no
+    /// presentation surface, so it deliberately leaves the current tab alone: a
+    /// diagnostic should not yank a learner away from the deck they are reading.
+    private func apply(live: String, state: JSON) {
+        var target: Mode?
+        switch live {
+        case "deck": target = .deck
+        case "whiteboard": target = .whiteboard
+        case "video":
+            // Play the embed the lesson actually bound. A lesson must never promise a
+            // video it does not show, so an absent URL is a reason to hold, not a
+            // plausible-looking empty player.
+            let video = state["video"]
+            let url = video["embed_url"].string.isEmpty ? video["watch_url"].string : video["embed_url"].string
+            if !url.isEmpty {
+                webURLString = url
+                target = .web
+            }
+        default: break
+        }
+        guard let target, target != mode else { return }
+        applyingSurface = true
+        mode = target
+        // An interrupted turn holds the surface the learner was already looking at.
+        // The server guarantees this; the flag only makes the intent visible here.
+        _ = surfaceHold
+    }
+
+    /// The learner took the Stage back. The server keeps its compiled decision; this
+    /// only stops the local poll from overriding the manual tab on its next tick.
+    func learnerOverrodeSurface() {
+        followTeacher = false
+    }
+
+    /// Re-attach to the server's decision, applying the current one immediately.
+    func followTeacherSurface() async {
+        followTeacher = true
+        appliedDecision = ""
+        await refreshLiveSurface()
     }
 
     // ---- student ink / teacher hand strokes ----
@@ -248,6 +342,13 @@ struct StageView: View {
         Card(padding: 18) {
             VStack(alignment: .leading, spacing: 12) {
                 header
+                if !stage.liveSurface.isEmpty {
+                    liveSurfaceBadge
+                }
+                if !stage.liveError.isEmpty {
+                    Text(stage.liveError).font(.system(size: 10))
+                        .foregroundStyle(Palette.peachDeep)
+                }
                 if !stage.note.isEmpty {
                     Text(stage.note).font(.system(size: 11, weight: .medium))
                         .foregroundStyle(Palette.peachDeep)
@@ -297,10 +398,58 @@ struct StageView: View {
         .onChange(of: stage.mode) { _, mode in
             // A Stage tab change is the clearest "what did the learner reach for" signal the
             // app has: it distinguishes a learner who read the deck from one who went straight
-            // to the cards. Recorded coarsely and never scored.
-            store.recordInteraction("stage.tab." + ClickTelemetry.sanitise(mode.rawValue))
+            // to the cards. Recorded coarsely and never scored. A tab the server moved is
+            // not the learner reaching for anything, so it is neither an override nor a tap.
+            if stage.applyingSurface {
+                stage.applyingSurface = false
+            } else {
+                stage.learnerOverrodeSurface()
+                store.recordInteraction("stage.tab." + ClickTelemetry.sanitise(mode.rawValue))
+            }
         }
         .onDisappear { stage.stopPolling() }
+    }
+
+    /// The teacher's surface decision, made on the server and shown rather than hidden.
+    ///
+    /// "Why a video?" is a question a learner is entitled to ask. The server publishes
+    /// the reason with every decision; showing it is what makes a live course reviewable.
+    /// When the learner has taken the Stage back with the picker, the badge says so and
+    /// offers one tap to re-attach - a surface that silently overrides a manual tab every
+    /// poll would read as a broken app.
+    @ViewBuilder
+    private var liveSurfaceBadge: some View {
+        HStack(spacing: 8) {
+            Image(systemName: stage.liveSurface == "video" ? "play.rectangle" :
+                  stage.liveSurface == "deck" ? "rectangle.on.rectangle" :
+                  stage.liveSurface == "whiteboard" ? "pencil.and.outline" : "text.bubble")
+                .font(.system(size: 11))
+            Text("TEACHER: " + stage.liveSurface.uppercased())
+                .font(.system(size: 9, weight: .semibold)).tracking(0.8)
+            if stage.surfaceHold {
+                Text("· held on interruption").font(.system(size: 10))
+                    .foregroundStyle(Palette.secondary)
+            }
+            if !stage.surfaceWhy.isEmpty {
+                Text(stage.surfaceWhy).font(.system(size: 10))
+                    .foregroundStyle(Palette.secondary).lineLimit(1)
+                    .help(stage.surfaceWhy)
+            }
+            Spacer(minLength: 4)
+            if !stage.followTeacher {
+                Button("Follow teacher") {
+                    Task { await stage.followTeacherSurface() }
+                }.buttonStyle(LuminfestButtonStyle(primary: false))
+                    .font(.system(size: 10))
+                    .help("Return to the surface the teacher chose for this turn")
+            } else if stage.liveSurface != stage.compiledSurface {
+                Text("teacher switched").font(.system(size: 10))
+                    .foregroundStyle(Palette.tertiary)
+            }
+        }
+        .foregroundStyle(Palette.ink)
+        .padding(.horizontal, 8).padding(.vertical, 5)
+        .background(Palette.sage.opacity(0.16), in: RoundedRectangle(cornerRadius: 8))
     }
 
     /// The Stage header.

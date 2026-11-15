@@ -203,6 +203,22 @@ def prepare(payload: PrepareInput, request: Request, principal=Depends(authentic
 
     figure = figures.figure_for(concept, graph, _states_for(db, user, graph),
                                 subject_kind=courses.subject_kind_for(concept_id))
+    # A photograph is not a nicer figure: it is the thing a learner means by "a picture".
+    # The deterministic engine only ever draws, so before this the figure slot was answered
+    # with vector art no matter what the lesson asked for, and no code path in this route
+    # ever looked at the curated image pack. Attaching it here is what turns "no image, no
+    # reason" into a picture or a named refusal.
+    from .harness import media as media_store
+    try:
+        photograph = media_store.photograph_for_concept(
+            settings, concept_id,
+            title=str(concept.get('title') or ''),
+            summary=str(concept.get('summary') or concept.get('description') or ''))
+    except Exception as exc:  # noqa: BLE001 - a missing picture must not fail the lesson
+        photograph = {'available': False, 'concept_id': concept_id,
+                      'reason': f'photograph lookup failed: {type(exc).__name__}: {exc}'[:300]}
+    if isinstance(figure, dict):
+        figure = {**figure, 'photograph': photograph}
     curated = _curated_cards(settings, course_id, concept_id)
     review = assets.sweep(concept, _sweep_assets(figure, curated))
 

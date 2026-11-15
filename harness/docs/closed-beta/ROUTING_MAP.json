@@ -1,0 +1,59 @@
+{
+  "run": "923b0b87",
+  "pattern": "classify-and-act",
+  "date": "2026-11-15",
+  "orchestrator_status": "nodes_unavailable",
+  "orchestrator_detail": "orch-classifier x2 and orch-handler x1 all returned 'Task agent ... is not available'. Per the no-fake-pass rule, classify -> route -> handler -> merge was executed in the main thread and this routing map is the persisted classifier output. No subagent output was fabricated.",
+  "routes": {
+    "access": {
+      "items": ["B1", "B2", "B3", "B4"],
+      "handler_spec": "Build a stdlib-only beta control server owning share codes, session tokens, consent-gated collection and the update manifest; decide email auth; disable billing in the capability matrix.",
+      "files": ["harness/beta_control/**", "harness/docs/closed-beta/ACCESS.md", "harness/backend/app/capabilities.py"],
+      "result": "12/12 tests pass; ACCESS.md written"
+    },
+    "landing": {
+      "items": ["B5", "B10"],
+      "handler_spec": "Classify all six landing variants, finalise the design from the initial version with a live aristotle-style alternate, and produce the publishable site plus link.",
+      "files": ["outputs/closed-beta-site/**", "harness/docs/closed-beta/LANDING_DECISION.md"],
+      "result": "site assembled; variants mapped with confidence; BOTH landing designs live and smoke-tested. Public link NOT published: sites deploy returned SITES_APP_NOT_FOUND / retryable:false for deleted appId wbapp_3EiXiwaWSovkxwc1HX78j5 on three attempts. See PUBLISH_BLOCKER.md"
+    },
+    "distribution": {
+      "items": ["B7", "B8"],
+      "handler_spec": "Verify the self-contained bundle, gate downloads server-side, document the real cross-OS path, and implement remote update manifest + client checkers.",
+      "files": ["harness/scripts/package_beta.py", "harness/native/Sources/LearningHarness/BetaUpdate.swift", "harness/docs/closed-beta/DISTRIBUTION.md"],
+      "result": "checksums verified; BetaUpdate.swift added and wired into LuminfestApp.swift; check_update.py shipped for the existing 1.4.0 bundle"
+    },
+    "webclient": {
+      "items": ["B6", "B9"],
+      "handler_spec": "Resolve the frontend brand to Luminest without touching internal identifiers, add PWA + production base path, and fix all defects found during beta prep.",
+      "files": ["harness/webapp/**", "harness/web/**", "harness/scripts/rename_frontend_brand.py", "harness/docs/closed-beta/WEBCLIENT.md", "harness/docs/closed-beta/BRAND_DECISION.md"],
+      "result": "35 replacements, 0 residual; npm run build passes; 10 fixes recorded"
+    }
+  },
+  "items": {
+    "B1": "share code / beta access gate",
+    "B2": "consent-gated user data collection",
+    "B3": "email auth decision",
+    "B4": "no billing in beta",
+    "B5": "finalise landing page design",
+    "B6": "frontend rename Luminfest -> Luminest",
+    "B7": "bundle downloadable / usable on another device, other OS and macOS versions, alongside the web version",
+    "B8": "remote updates in the bundle",
+    "B9": "concrete fixes",
+    "B10": "publish and provide a link"
+  },
+  "decisions": {
+    "email_auth": "identifier-only, NO verification email; share code is the credential (Mailer has no SMTP on a small device)",
+    "billing": "none; HARNESS_ALPHA_FREE=1 plus billing_required:false in the capability response",
+    "brand": "Luminest for user-visible strings; internal identifiers preserved; one-command revert available",
+    "landing": "initial version as default, ?variant=aristotle as the live alternate",
+    "cross_platform": "web version / PWA is the real path for iPad, Intel Mac, older macOS, Windows and Linux"
+  },
+  "merge_order": ["classifier", "access", "landing", "distribution", "webclient", "verify", "deploy"],
+  "verification": {
+    "beta_control_tests": "12 passed",
+    "webapp_build": "tsc --noEmit + vite build, 44 modules",
+    "artifact_sha256": "verified against download-manifest.json",
+    "rename_audit": "0 residual user-visible Luminfest strings"
+  }
+}

@@ -131,9 +131,13 @@ def test_config(request: Request, auth=Depends(authenticated)):
                           [{'role': 'user', 'content': 'Reply with the single word: ready'}],
                           max_tokens=16, reasoning='off', usage_out=usage)
     if reply is None:
-        return {'ok': False, 'state': 'unreachable',
-                'detail': 'The configured model did not answer. Check the base URL, model id '
-                          'and API key, and that this machine can reach the endpoint.',
-                'usage': usage}
+        # A valid key with no credit answers 402 "Insufficient Balance"; telling the
+        # operator to check the base URL in that case sends them after the wrong thing.
+        # The provider records its own reason in usage_out, so name it when it has one.
+        reason = str(usage.get('error_detail') or '')
+        detail = ('The configured model did not answer' + (f' ({reason})' if reason else '')
+                  + '. Check the base URL, model id and API key, and that this machine can '
+                    'reach the endpoint.')
+        return {'ok': False, 'state': 'unreachable', 'detail': detail, 'usage': usage}
     return {'ok': True, 'state': 'configured', 'provider': status['label'],
             'reply': reply.strip()[:80], 'usage': usage}

@@ -42,6 +42,12 @@ from pathlib import Path
 
 HARNESS = Path(__file__).resolve().parents[1]
 PYTHON = HARNESS / 'ui-tests' / '.venv' / 'bin' / 'python'
+if not PYTHON.exists():
+    # A source checkout does not always carry the UI-test venv, and the probe used to die
+    # on a FileNotFoundError before it ran a single assertion. Fall back to the interpreter
+    # that invoked this script: ``scripts/start_local_services.sh`` installs the declared
+    # dependencies into ``backend/.venv``, so that interpreter can already run the server.
+    PYTHON = Path(sys.executable)
 
 DEFAULT_CONCEPT = 'algebra_2_permutations_and_combinations'
 DEFAULT_MESSAGE = (

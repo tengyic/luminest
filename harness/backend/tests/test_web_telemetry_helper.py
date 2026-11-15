@@ -84,7 +84,14 @@ console.log(JSON.stringify({
 def _probe():
     import os
 
+    # This probe is a self-contained `node -e` script that requires one local
+    # CommonJS file by absolute path. It must not inherit a host-injected
+    # NODE_OPTIONS preload: some managed shells add a `--require` fs broker whose
+    # short-lived execution capability expires during a long test run, turning a
+    # perfectly healthy JS module into `Error: execution capability expired`.
+    # Strip it so the assertion below measures telemetry.js, not the host shell.
     env = dict(os.environ, LUMINFEST_TELEMETRY_JS=str(TELEMETRY_JS))
+    env.pop('NODE_OPTIONS', None)
     result = subprocess.run([NODE, '-e', PROBE],
                             capture_output=True, text=True, timeout=30, env=env)
     assert result.returncode == 0, result.stderr

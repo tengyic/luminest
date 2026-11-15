@@ -734,6 +734,21 @@ def to_svg(settings, doc: dict) -> str:
             parts.append(f'<rect x="{x}" y="{y}" width="480" height="{28 + 20 * len(lines)}" rx="8" fill="#eef2ff" stroke="#6366f1"/>')
             for i, line in enumerate(lines[:24]):
                 parts.append(f'<text x="{x + 12}" y="{y + 24 + 20 * i}" font-size="{size}" fill="#312e81">{_svg_escape(line[:120])}</text>')
+        elif kind == 'visual':
+            # A live renderer (Mafs, Plotly, Desmos...) cannot run inside a static SVG, and
+            # this branch did not exist: a board holding eleven drawn diagrams exported as a
+            # blank white page. A labelled frame is not the diagram, but an export that says
+            # what is on the board beats one that claims the board is empty.
+            w = node.get('w') or 480
+            h = node.get('h') or 320
+            label = str(p.get('title') or p.get('type') or 'visual')
+            parts.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" '
+                         f'fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="6 4"/>'
+                         f'<text x="{x + 14}" y="{y + 30}" font-size="16" fill="#334155">'
+                         f'{_svg_escape(label[:70])}</text>'
+                         f'<text x="{x + 14}" y="{y + 54}" font-size="12" fill="#64748b">'
+                         f'{_svg_escape(str(p.get("type") or ""))} renderer — interactive, '
+                         f'not representable in a static SVG</text>')
         elif kind == 'image':
             data = _image_data_uri(settings, p.get('sha256', ''))
             w = node.get('w') or 320

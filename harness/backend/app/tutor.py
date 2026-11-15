@@ -9,8 +9,9 @@ from . import model_config
 from .curriculum import CONCEPTS
 from .harness import provider
 from .harness.conduct import TEACHING_CONDUCT, lesson_format
-from .harness.provider import learner_block, meter_usage
+from .harness.provider import error_detail, learner_block, meter_usage
 from .harness.teaching import render_plan_block, render_procedure_block
+from .harness.teaching import diagnosis as diagnosis_gate
 
 log = logging.getLogger('harness.tutor')
 
@@ -240,6 +241,40 @@ def _procedure_section(procedure, completed=()):
     return '\n' + block + '\n' if block else ''
 
 
+#: Moves whose whole point is to make the learner produce something. A written turn
+#: for one of these that contains no question has not done its job, whatever else it
+#: says; ``explain`` and ``simulate`` are deliberately absent.
+QUESTION_MOVES = frozenset({'retrieve', 'discuss', 'orient'})
+
+
+def _enforce_turn_contract(text: str, plan, concept, usage_out) -> tuple[str, str]:
+    """Check the written turn against the diagnosis that gated it.
+
+    The repair is additive on purpose. A model that ignored "ask one question" gets
+    the plan's probe appended; a model that asked two is recorded and left alone,
+    because deleting a sentence is a worse failure than an extra question mark.
+    Nothing here rewrites teaching.
+    """
+    diagnosis = getattr(plan, 'diagnosis', None) if plan is not None else None
+    move = getattr(getattr(plan, 'move', None), 'move', '') if plan is not None else ''
+    if not diagnosis or move not in QUESTION_MOVES:
+        return text, 'not_gated'
+    reading = diagnosis_gate.TurnReading.from_dict(diagnosis)
+    if not reading.must_ask:
+        return text, 'not_gated'
+    violations = diagnosis_gate.check(text, reading)
+    title = str((concept or {}).get('title') or '')
+    repaired, action = diagnosis_gate.apply(text, reading, title=title)
+    if usage_out is not None:
+        usage_out['gate'] = action
+        if violations:
+            usage_out['gate_violations'] = list(violations)
+    if violations:
+        log.warning('turn gate %s on move %r: %s', action, move,
+                    ', '.join(violations))
+    return repaired, action
+
+
 def respond(settings, concept_id, message, history, memory_digest='', teacher_profile=None,
             retrieval_context=None, usage_out=None, plan=None, procedure=None,
             procedure_completed=()):
@@ -416,20 +451,28 @@ def respond(settings, concept_id, message, history, memory_digest='', teacher_pr
     except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:
         # The attempt is metered either way. When the body already parsed the token counts
         # are kept -- those tokens were really spent -- and only the outcome changes.
+        cause = error_detail(exc)
         if usage_out is not None:
             usage_out.setdefault('prompt_tokens', 0)
             usage_out.setdefault('completion_tokens', 0)
             usage_out.setdefault('total_tokens', 0)
             usage_out.setdefault('latency_ms', int((time.monotonic() - started) * 1000))
             usage_out['outcome'] = 'error'
+            usage_out['error_detail'] = cause
         # A configured provider that fails used to end the turn with a 503, which the app
         # drew as an empty bubble: the learner sent a message and nothing came back. The
         # curriculum is still here, so answer from it and *name the substitution*. A learner
         # gets a lesson instead of silence, and no one is told a model wrote it.
-        status = getattr(getattr(exc, 'response', None), 'status_code', None)
-        cause = ('HTTP ' + str(status)) if status else type(exc).__name__
+        # ``cause`` names the provider's own reason when it sent one -- "HTTP 402:
+        # Insufficient Balance" instead of a bare "HTTP 402". A dead key is a billing
+        # problem, not an endpoint problem, and the learner-facing fallback should say
+        # which, so nobody spends an afternoon debugging a URL.
         body = ('The configured tutor is unavailable (' + cause + '), so this answer comes '
                 'from the curriculum instead of a model.\n\n' + grounded_answer())
         meter_usage(usage_out, outcome='fallback')
         return (body, 'model-unavailable (grounded fallback)', grounding, actions)
+    # The gate runs after the model has written, not inside the provider: the
+    # contract is about the *turn*, and a provider that also policed it would make
+    # a model that never answered look compliant.
+    text, _action = _enforce_turn_contract(text, plan, concept, usage_out)
     return text, cfg.provider + ':' + cfg.provider_model, grounding, actions

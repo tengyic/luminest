@@ -1,4 +1,4 @@
-/* Luminfest workbench — interaction telemetry, browser side.
+/* Luminest workbench — interaction telemetry, browser side.
  *
  * The macOS app has had a click channel since `ClickTelemetry.swift`; the web
  * workbench had none at all, so a learner who used the browser surface was

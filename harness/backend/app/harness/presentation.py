@@ -61,7 +61,10 @@ SLIDE_PAD_SECONDS = 0.6
 
 #: A slide is a caption for speech, so its bullets are short and few.
 MAX_BULLETS = 5
-MAX_BULLET_WORDS = 14
+#: Words per slide bullet. 14 was a narration limit applied to written text, and the result
+#: read as truncation: "(Is Boston north…". A bullet is read, not spoken, and the deck caps
+#: a bullet at 220 characters anyway, so this can afford a full sentence.
+MAX_BULLET_WORDS = 30
 
 #: Hard ceiling on deck length. A narrated deck is a summary, and an unbounded one is a way
 #: to bury a learner in a format they cannot skim.
@@ -564,19 +567,46 @@ def compose(ctx_tool, concept_id: str, options: Mapping[str, Any] | None = None)
     if wants_image and settings is not None:
         from . import media as media_pipeline
         found = None
-        shipped = media_pipeline.shipped_for(settings, concept_id)
-        if shipped is not None:
-            found = {'asset': shipped, 'outcome': 'shipped'}
-        elif options.get('include_image') is True:
+        # The shipped pack is keyed by short slugs ("active_transport") and this is called
+        # with the course-qualified concept id ("biology_active_transport_against_a_gradient"),
+        # so a direct lookup missed every one of the curated pictures and each deck came out
+        # as a wall of text. Match by any token window of the id and let the pack decide.
+        pack = media_pipeline.shipped_pack()
+        for key in media_pipeline._concept_keys(concept_id, pack.keys()):
+            if key not in pack:
+                continue
+            shipped = media_pipeline.shipped_for(settings, key)
+            if shipped is not None:
+                found = {'asset': shipped, 'outcome': 'shipped', 'matched_key': key}
+                break
+        if found is None and options.get('include_image') is True:
             found = media_pipeline.find_image(settings, context.title,
                                               summary=context.summary)
         if found and found.get('asset'):
             asset = found['asset']
-            target = next((s for s in segments if s.layout == 'idea'), segments[0])
+            # The figure slide is the one whose job is to carry a picture, so it gets the
+            # photograph; the idea slides stay text. Before this the picture always landed
+            # on the first idea slide and the figure slide - the layout with the widest
+            # image slot - exported with no image at all.
+            target = (next((s for s in segments if s.layout == 'figure'), None)
+                      or next((s for s in segments if s.layout == 'idea'), segments[0]))
+            payload = media_pipeline.asset_payload(asset)
             # ``type`` plus the shared payload: the native deck renders ``photograph``, and
             # ``deck.from_presentation`` reads ``sha256``/``attribution`` off the same dict to
             # place a real image element in an editable deck.
-            target.visual = {'type': 'photograph', **media_pipeline.asset_payload(asset)}
+            target.visual = {'type': 'photograph', **payload}
+            if target.layout in {'figure', 'caption'}:
+                # That slide is now a picture, so its copy has to be about the picture. It
+                # used to keep the graph-neighbourhood bullets it was built with — a slide
+                # headed "See it move" listing prerequisites, with a tapestry beside it.
+                # A downloaded asset carries ``alt`` but not always a curator's
+                # ``description``, so retitling on the caption alone produced a worse slide
+                # than before: "What this shows" above a list of prerequisites. Only
+                # rewrite the copy when there is something true to say about the picture.
+                caption = str(payload.get('caption') or payload.get('alt') or '').strip()
+                if caption:
+                    target.title = 'What this shows'
+                    target.bullets = [caption]
             enrichments.append(f"photograph from {asset.get('source')} "
                                f"({asset.get('licence_code')})")
         else:

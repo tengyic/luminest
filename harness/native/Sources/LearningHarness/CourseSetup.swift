@@ -105,7 +105,7 @@ struct CourseSetupView: View {
     private let subtitles = [
         "Every course is its own knowledge map with its own practice items. You can switch later without losing what you have recorded.",
         "Say it in your own words. This is the framing the tutor is given - the harness also tracks a measurable target, and will never claim your goal has been reached.",
-        "This is your budget, not a target set for you. It decides how much fits in one session, and the plan is re-derived every time you open Luminfest.",
+        "This is your budget, not a target set for you. It decides how much fits in one session, and the plan is re-derived every time you open Luminest.",
     ]
 
     // MARK: Step 1 - subject

@@ -1,0 +1,19 @@
+{
+  "name": "Luminest — Learn in your browser",
+  "short_name": "Luminest",
+  "description": "The Luminest closed-beta learning client. Works on iPad, Windows, Linux and older macOS.",
+  "start_url": "/app/",
+  "scope": "/app/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F7F5F0",
+  "theme_color": "#2B3A2E",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

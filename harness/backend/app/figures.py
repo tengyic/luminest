@@ -71,7 +71,15 @@ def concept_map(node: Mapping[str, Any], graph, states: Mapping[str, Any] | None
 
     prerequisites = [n for n in graph.parents(node_id) if n in graph.nodes][:limit]
     dependants = [n for n in graph.children(node_id) if n in graph.nodes][:limit]
-    siblings = [n for n in graph.in_unit(node_id) if n != node_id][:limit]
+    # ``in_unit`` takes a *unit name*, not a concept id. Passing the id here made the sibling
+    # ring permanently empty - eleven concepts share "Cells & Cell Transport" and the map
+    # showed none of them - which is why a concept map looked like a single prerequisite edge.
+    unit_name = str(getattr(graph.nodes.get(node_id), 'unit', '') or node.get('unit') or '')
+    # ``in_unit`` returns concept nodes from the real graph and bare ids from the lighter
+    # graphs some tests build, so both are accepted here rather than assuming one shape.
+    members = graph.in_unit(unit_name) if unit_name else []
+    siblings = [getattr(m, 'id', m) for m in members
+                if getattr(m, 'id', m) != node_id][:limit]
     deeper = [n for n in graph.ancestors(node_id) if n in graph.nodes]
 
     mastery = _mastery(states, node_id)

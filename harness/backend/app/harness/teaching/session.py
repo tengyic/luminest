@@ -29,6 +29,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
+from . import diagnosis as diagnosis_gate
 from .evidence import ConceptFacts, LearnerEvidence
 from .modalities import ModalityChoice, ToolCall, choose_modality
 from .policy import MoveScore, select_move
@@ -97,6 +98,10 @@ class TeachingPlan:
     profile_name: str = 'default'
     retrieval: Mapping[str, Any] | None = None
     rationale: str = ''
+    #: The diagnosis query that gated this plan: the BKT reading, the band, and
+    #: the target difficulty. ``None`` only for plans assembled before the gate
+    #: existed (e.g. by a caller constructing the dataclass directly in a test).
+    diagnosis: Mapping[str, Any] | None = None
 
     @property
     def phases(self) -> tuple[str, ...]:
@@ -122,7 +127,8 @@ class TeachingPlan:
                 'steps': [step.to_dict() for step in self.steps],
                 'phases': list(self.phases),
                 'retrieval': dict(self.retrieval) if self.retrieval else None,
-                'rationale': self.rationale}
+                'rationale': self.rationale,
+                'diagnosis': dict(self.diagnosis) if self.diagnosis else None}
 
 
 def plan_session(evidence: LearnerEvidence, facts: ConceptFacts, profile, *,
@@ -137,6 +143,10 @@ def plan_session(evidence: LearnerEvidence, facts: ConceptFacts, profile, *,
     names the evidence that opens it, and the default is to omit the phase - a step
     the evidence does not call for is a step that wastes the learner's session.
     """
+    # The gate runs before the move is chosen, not after it: what the belief
+    # state says fixes the shape of the turn, and every plan carries that reading
+    # so a caller (or a transcript) can show *why* this turn looked like this.
+    reading = diagnosis_gate.read(evidence)
     decision = select_move(evidence, profile)
     modality: ModalityChoice = choose_modality(
         facts, evidence, profile, last_modality=last_modality, board_id=board_id,
@@ -153,7 +163,8 @@ def plan_session(evidence: LearnerEvidence, facts: ConceptFacts, profile, *,
                                 why=decision.reason, skippable=False),),
             profile_name=profile.name, retrieval=retrieval_plan,
             rationale=(f"Chose 'rest' (score {decision.score:.3f}); the session closes "
-                       f'without further steps. {decision.reason}'))
+                       f'without further steps. {decision.reason}'),
+            diagnosis=reading.to_dict())
 
     # A session already past its budget gets the chosen move and an exit, not the
     # full loop. Starting a six-phase sequence that cannot be finished is worse than
@@ -267,7 +278,7 @@ def plan_session(evidence: LearnerEvidence, facts: ConceptFacts, profile, *,
     rationale = _rationale(decision, modality, steps, evidence, profile)
     return TeachingPlan(concept_id=facts.id, move=decision, steps=tuple(steps),
                         profile_name=profile.name, retrieval=retrieval_plan,
-                        rationale=rationale)
+                        rationale=rationale, diagnosis=reading.to_dict())
 
 
 def _rationale(decision: MoveScore, modality: ModalityChoice,

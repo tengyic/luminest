@@ -107,6 +107,8 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
     raw INSERT per table would test a schema nobody ships. Returns ``{table: row_id}`` for
     the rows a test wants to follow into the "survives" half of the policy.
     """
+    from app.measurement.models import MeasurementProbe
+
     marked: dict[str, str] = {}
     with factory() as db:
         assessment = Assessment(user_id=user_id, mode='practice', total=1,
@@ -167,6 +169,15 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
                 dimension='communication', score=2,
                 evidence_note='Explained the method but skipped the units.',
                 reviewer_id=user_id, reviewer_role='self'),
+            # Imported here rather than at module scope: the measurement package owns
+            # this table, and its model must be registered on Base.metadata before
+            # create_all builds the schema. The cascade test walks *every* table with a
+            # foreign key into users, so a new table that is not seeded here makes the
+            # "delete removes every cascading row" assertion vacuous and fails loudly.
+            MeasurementProbe(
+                user_id=user_id, kind='cold', concept_id='fractions',
+                question_id='q1', status='issued', conditions={}, response={},
+                value=None, reason='seeded for the erasure check', issued_at=now_ts()),
             course, feedback, ledger,
         ])
         db.commit()

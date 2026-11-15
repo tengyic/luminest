@@ -124,9 +124,7 @@ def test_tier_resolution_for_a_signed_in_learner(client):
     headers = account(client)
     matrix = rows(client.get('/api/v1/capabilities', headers=headers).json())
     assert matrix['images']['state'] == capabilities.STATE_WITHHELD
-    assert matrix['images']['reason'] == (
-        'This capability is part of Luminfest Plus. Pay to enable it, or ask the '
-        'operator to comp this account.')
+    assert matrix['images']['reason'] == capabilities.PLUS_WITHHOLD_REASON
     # ...and the paid plan is stated, so the client can show the metered ceiling.
     plan = client.get('/api/v1/capabilities', headers=headers).json()['paid_plan']
     assert plan == {'period': 'month', 'requests': 2000, 'total_tokens': 2_000_000,
@@ -343,7 +341,14 @@ def test_http_surface_shape(client):
     anonymous = client.get('/api/v1/capabilities')
     assert anonymous.status_code == 200
     payload = anonymous.json()
-    assert set(payload) == {'tiers', 'principal', 'paid_plan', 'capabilities', 'note'}
+    # ``billing_required`` and ``cohort`` arrived with the closed-beta cohort
+    # controls. Assert the exact shape so a new key cannot silently change the
+    # storefront contract, and check the two flags are honest about the cohort.
+    assert set(payload) == {'tiers', 'principal', 'paid_plan', 'capabilities', 'note',
+                            'billing_required', 'cohort'}
+    assert isinstance(payload['billing_required'], bool)
+    assert payload['cohort'] in {'standard', 'closed-beta'}
+    assert payload['billing_required'] is (payload['cohort'] == 'standard')
     assert len(payload['capabilities']) == len(PLUS_IDS | FREE_IDS)
     # Every row carries what a storefront needs, before any tap.
     for entry in payload['capabilities']:
@@ -438,7 +443,7 @@ def test_the_adoption_seam_other_routes_will_use(settings, tmp_path):
         # Not entitled: 402 carrying the matrix's own reason.
         refused = client.get('/gated', headers=headers)
         assert refused.status_code == 402
-        assert 'Luminfest Plus' in refused.json()['detail']
+        assert capabilities.BRAND + ' Plus' in refused.json()['detail']
         assert client.get('/gated').status_code == 401  # anonymous is not a downgrade
 
         with factory() as db:

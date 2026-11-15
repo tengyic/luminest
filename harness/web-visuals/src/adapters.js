@@ -148,7 +148,14 @@ function renderJSXGraph(spec, host) {
     throw new VisualError('RENDERER_ASSETS_NOT_INSTALLED', 'JSXGraph bundle is missing');
   }
   host.id = host.id || `jsxgraph-${Math.random().toString(36).slice(2)}`;
-  const bb = (spec.viewport && spec.viewport.boundingbox) || [-10, 10, 10, -10];
+  // Honour the viewport the spec actually asked for. Reading only `boundingbox` meant a
+  // spec that set `viewport: {x: [...], y: [...]}` - the shape the validator enforces and
+  // the draw agent is told to emit - silently rendered at the default -10..10 window, so
+  // the curve was drawn but the learner saw the wrong axes. JSXGraph's bounding box is
+  // [left, top, right, bottom] = [xmin, ymax, xmax, ymin].
+  const vp = viewportOf(spec);
+  const bb = (spec.viewport && spec.viewport.boundingbox)
+    || [vp.x[0], vp.y[1], vp.x[1], vp.y[0]];
   const board = JXG.JSXGraph.initBoard(host.id, {
     boundingbox: bb, axis: true, showCopyright: false, showNavigation: false,
     keepaspectratio: false,

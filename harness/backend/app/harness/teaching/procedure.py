@@ -51,9 +51,10 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Any, Mapping, Sequence
 
+from . import surface as surface_router
 from .config import default_profile
 from .evidence import ConceptFacts, LearnerEvidence
 
@@ -165,6 +166,11 @@ class ProcedureAssets:
     worked_example: Mapping[str, Any] | None = None
     #: Authored retrieval prompts, verbatim, for the in-chat example questions.
     practice_prompts: tuple[str, ...] = ()
+    #: How many of this concept's items can locate an error process, and how many can only
+    #: tell one topic from another. A topic-recognition item is answerable by elimination,
+    #: so a mastery estimate built only from those is measuring the wrong thing -- which is
+    #: why the block says so rather than presenting the number as a measurement.
+    practice_quality: Mapping[str, int] = field(default_factory=dict)
     #: The concept's scored items, in the order the scheduler would serve them.
     #:
     #: A commitment block binds the ids it promises, and that list is the whole point:
@@ -211,6 +217,14 @@ class ProcedureBlock:
     artifact: Mapping[str, Any] = field(default_factory=dict)
     produces: tuple[str, ...] = ()
     optional: bool = True
+    #: Which surface this activity is presented on, and the decision that chose it.
+    #: A plan promises its artifacts *and* the surface that shows them: a deck block
+    #: on a whiteboard surface would still owe the learner its slides. Compiled by
+    #: :mod:`app.harness.teaching.surface` from the bound artifact, not invented by
+    #: the model at turn time. See ``_attach_surfaces``.
+    surface: str = 'chat'
+    surface_why: str = ''
+    surface_decision: Mapping[str, Any] = field(default_factory=dict)
 
     @property
     def role(self) -> str:
@@ -225,7 +239,9 @@ class ProcedureBlock:
                 'role': self.role, 'minutes': self.minutes, 'title': self.title,
                 'purpose': self.purpose, 'why': self.why,
                 'artifact': dict(self.artifact), 'produces': list(self.produces),
-                'optional': self.optional}
+                'optional': self.optional, 'surface': self.surface,
+                'surface_why': self.surface_why,
+                'surface_decision': dict(self.surface_decision)}
 
 
 @dataclass(frozen=True)
@@ -439,7 +455,8 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
             skip(kind, 'Not offered: the learner is overloaded, and the useful '
                        'intervention is a shorter session, not another activity.')
         return _finish(facts, assets, profile, budget, blocks, skipped,
-                       'Session closed on the overload rule; no new material was added.')
+                       'Session closed on the overload rule; no new material was added.',
+                       evidence=evidence)
 
     if evidence.session_minutes >= profile.difficulty.long_session_minutes:
         push('close', _minutes_for('close', cfg), 'Stop here',
@@ -453,7 +470,7 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
             skip(kind, 'Not offered: the session has already run past its useful '
                        'length.')
         return _finish(facts, assets, profile, budget, blocks, skipped,
-                       'Session closed on the long-session rule.')
+                       'Session closed on the long-session rule.', evidence=evidence)
 
     # ---- 1. diagnostic ---------------------------------------------------
     # No evidence means no basis for choosing an input. Two items buy more information
@@ -467,14 +484,26 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
         if assets.practice_count:
             size = min(size, assets.practice_count)
         diagnostic_items = _promised_items(assets, size)
+        quality = dict(getattr(assets, 'practice_quality', {}) or {})
+        process_items = int(quality.get('error_process') or 0)
+        # The block says what kind of check this is. When every item only separates topics,
+        # the honest sentence is "orientation, not evidence" -- the alternative is a number
+        # that reads like a measurement and is not one.
+        why = ('No scored attempt exists for this concept, so there is no evidence to '
+               'teach against yet. Two low-stakes questions cost three minutes and '
+               'replace an assumption with a measurement.')
+        if diagnostic_items and not process_items:
+            why = ('No scored attempt exists for this concept, so this check replaces an '
+                   'assumption with a measurement. Every item here separates topics rather '
+                   'than mistakes, though, so treat the result as orientation rather than '
+                   'as evidence about what you can do.')
         push('diagnostic', _minutes_for('diagnostic', cfg), 'Quick check',
              ACTIVITIES['diagnostic']['does'],
-             'No scored attempt exists for this concept, so there is no evidence to '
-             'teach against yet. Two low-stakes questions cost three minutes and '
-             'replace an assumption with a measurement.',
+             why,
              {'kind': 'questions', 'mode': 'practice', 'concept_id': facts.id,
               'count': len(diagnostic_items) or size, 'purpose': 'diagnostic',
-              'scored': True, 'items': diagnostic_items},
+              'scored': True, 'items': diagnostic_items,
+              'item_quality': quality},
              produces=('accuracy',))
     else:
         skip('diagnostic', f'Not needed: {evidence.attempts} recorded attempt(s) '
@@ -647,7 +676,8 @@ def compile_procedure(facts: ConceptFacts, evidence: LearnerEvidence,
                        bank_size=int(assets.practice_count or 0))
 
     return _finish(facts, assets, profile, budget, blocks, skipped,
-                   _rationale(evidence, blocks, skipped, budget, profile))
+                   _rationale(evidence, blocks, skipped, budget, profile),
+                   evidence=evidence)
 
 
 def _input_block(kind: str, facts: ConceptFacts, evidence: LearnerEvidence,
@@ -699,6 +729,11 @@ def _input_block(kind: str, facts: ConceptFacts, evidence: LearnerEvidence,
                              'embed_url': video.get('embed_url', ''),
                              'licence_class': video.get('licence_class', 'embed_only'),
                              'attribution': video.get('attribution', ''),
+                             # The card's still frame. Deliberately outside
+                             # ``_artifact_identity``: re-curating a photograph must not read
+                             # as the lesson changing shape, and this block is the only place
+                             # a picture can appear when the deck is skipped on first exposure.
+                             'poster': dict(video.get('poster') or {}),
                              'verify_on_open': True},
                 'produces': ()}
     if kind == 'worked_example':
@@ -957,14 +992,41 @@ def _rationale(evidence: LearnerEvidence, blocks: Sequence[ProcedureBlock],
             f'{profile.name!r}.')
 
 
+def _attach_surfaces(blocks: Sequence[ProcedureBlock], *, evidence: LearnerEvidence,
+                     assets: ProcedureAssets) -> tuple[ProcedureBlock, ...]:
+    """Bind each compiled activity to the surface that can actually show it.
+
+    This runs *after* the activity sequence and the budget are fixed, and changes
+    neither. The surface router reads the same bound artifacts the compiler already
+    promised, so a deck block can never be handed a surface with no deck. Keeping the
+    two decisions in separate modules is what stops "what should I look at" quietly
+    rewriting "what should I learn".
+    """
+    available = surface_router.available_surfaces(assets.summary())
+    ev = {'mastery': float(getattr(evidence, 'mastery', 0.0) or 0.0),
+          'attempts': int(getattr(evidence, 'attempts', 0) or 0),
+          'top_error': str(getattr(evidence, 'top_error', '') or ''),
+          'frustrated': bool(getattr(evidence, 'frustrated', False))}
+    out: list[ProcedureBlock] = []
+    for block in blocks:
+        decision = surface_router.choose_surface(
+            block=block.to_dict(), evidence=ev, available=available)
+        out.append(replace(block, surface=decision.surface,
+                           surface_why=decision.why,
+                           surface_decision=decision.to_dict()))
+    return tuple(out)
+
+
 def _finish(facts: ConceptFacts, assets: ProcedureAssets, profile, budget: int,
             blocks: Sequence[ProcedureBlock], skipped: Sequence[Mapping[str, str]],
-            rationale: str) -> CourseProcedure:
+            rationale: str, *, evidence: LearnerEvidence | None = None) -> CourseProcedure:
+    bound = (_attach_surfaces(blocks, evidence=evidence, assets=assets)
+             if evidence is not None else tuple(blocks))
     return CourseProcedure(
         concept_id=facts.id, concept_title=facts.title or assets.concept_title,
-        course_id=assets.course_id, blocks=tuple(blocks),
+        course_id=assets.course_id, blocks=bound,
         skipped=tuple(dict(row) for row in skipped), budget_minutes=budget,
-        total_minutes=sum(block.minutes for block in blocks),
+        total_minutes=sum(block.minutes for block in bound),
         profile_name=profile.name, assets=assets.summary(), rationale=rationale)
 
 
@@ -972,9 +1034,12 @@ def procedure_hash(procedure: CourseProcedure) -> str:
     """A stable fingerprint of the plan, for resuming a run and spotting drift.
 
     Hashes the *decision*, not the prose: concept, budget, and each block's kind,
-    minutes and artifact identity. A recompiled lesson whose evidence has not changed
-    produces the same hash and resumes; one whose evidence moved produces a new hash
-    and is a genuinely different lesson.
+    minutes, artifact identity and presentation surface. A recompiled lesson whose
+    evidence has not changed produces the same hash and resumes; one whose evidence
+    moved produces a new hash and is a genuinely different lesson. The surface belongs
+    in this list because a plan promises what the learner will *see* as well as what
+    they will do - showing the same five slides on a whiteboard would be a different
+    lesson from the one that was compiled.
     """
     payload = {
         'concept_id': procedure.concept_id,
@@ -983,7 +1048,8 @@ def procedure_hash(procedure: CourseProcedure) -> str:
         'profile': procedure.profile_name,
         'blocks': [
             {'kind': block.kind, 'minutes': block.minutes,
-             'artifact': _artifact_identity(block.artifact)}
+             'artifact': _artifact_identity(block.artifact),
+             'surface': block.surface}
             for block in procedure.blocks
         ],
         'skipped': [row.get('kind') for row in procedure.skipped],
@@ -1051,7 +1117,7 @@ def _artifact_line(block: ProcedureBlock) -> str:
 
 
 def render_procedure_block(procedure: Any, *, completed: Sequence[int] = (),
-                           max_chars: int = 3500) -> str:
+                           max_chars: int = 5200) -> str:
     """The lesson, rendered into the system prompt as the plan this turn must follow.
 
     The move block (:func:`app.harness.teaching.render.render_plan_block`) names the
@@ -1094,6 +1160,11 @@ def render_procedure_block(procedure: Any, *, completed: Sequence[int] = (),
                            minutes=int(row.get('minutes') or 1),
                            title=str(row.get('title') or ''), purpose='', why='',
                            artifact=row.get('artifact') or {})))
+        # The surface is a compiled decision, not a hint. Naming it for every block is
+        # what stops the model from presenting a later activity on an earlier surface.
+        surface_name = str(row.get('surface') or 'chat')[:24]
+        lines.append(f'   Surface: {surface_name} - '
+                     f'{str(row.get("surface_why") or "")[:200]}')
     skipped = [row for row in (data.get('skipped') or []) if isinstance(row, Mapping)]
     if skipped:
         lines.append('- Not in this lesson. Do not offer these; if the learner asks for '
@@ -1127,6 +1198,26 @@ def render_procedure_block(procedure: Any, *, completed: Sequence[int] = (),
                      'deck_control (next, prev, first, last or goto) as you teach, and '
                      'say which slide you moved to. Do not describe a slide they are not '
                      'looking at.')
+    if current is not None:
+        live = str(current.get('surface') or 'chat')[:24]
+        lines.append(f'- The live surface for this turn is {live}. Presentation tools '
+                     'belong to exactly one surface; a tool from a different surface '
+                     'will be refused. If the teaching genuinely needs another surface, '
+                     'decide it explicitly: call stage_surface with the surface and a '
+                     'reason, then use its tools. Do not switch surfaces for variety.')
+        # Name only the tools of the *live* surface. Advertising another surface's
+        # tools before it is current invites the model to use them too early - the
+        # same leak as telling a tutor it can flip a deck during a diagnostic.
+        live_tools = {
+            'deck': 'deck_control / generate_slides',
+            'video': 'find_video / browser_snapshot',
+            'whiteboard': 'whiteboard_* / draw_diagram',
+        }.get(live)
+        if live_tools:
+            lines.append(f'- Tools for the {live} surface: {live_tools}.')
+        lines.append('- On an interruption, hold the surface already showing and never '
+                     'advance the deck. A drawn answer records the surface to resume '
+                     'to; only resuming the lecture moves the cursor.')
     lines.append('- The artifacts above are already bound. Name them as they are; do '
                  'not invent an alternative deck, video, simulation or question set.')
     text = '\n'.join(lines)

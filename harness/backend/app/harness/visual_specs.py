@@ -270,6 +270,68 @@ def _viewport(spec: dict) -> dict:
     return out
 
 
+#: The nested contract of each renderer's spec, in the words the validators below enforce.
+#:
+#: ``CATALOG[...]['specKeys']`` says which top-level keys exist; it does not say what a
+#: curve or a point looks like. A draw agent told only the key names wrote
+#: ``{"points": [{"at": [1, 1]}]}``, which the validator refused without saying why, so the
+#: board stayed empty. Only renderers whose shape can be stated exactly are listed here.
+SPEC_SHAPES = {
+    'mafs': ('viewport: {"x": [min, max], "y": [min, max]}; '
+             'curves: [{"expr": "x^2"} or {"points": [[x, y], ...]}, with optional '
+             '"domain": [a, b], "color": "#rrggbb"]; '
+             'points: [{"x": 1, "y": 2, "label": "A"}] (x and y, never a pair); '
+             'segments and vectors: [{"from": [x, y], "to": [x, y]}]'
+             # The expression grammar: implicit multiplication is refused, and a model
+             # writing "2x + 1" is being reasonable, not careless. Say the rule.
+             '; expressions need explicit multiplication: "2*x + 1", never "2x + 1"; '
+             'x^2, sin(x), e^x, sqrt(x) are accepted'),
+    'plotly': ('{"traces": [{"type": "scatter", "x": [...], "y": [...], '
+               '"mode": "lines", "name": "..."}], "layout": {"title": "..."}}; x, y and z '
+               'are lists of numbers, or a list of rows for a 3D surface. '
+               # Axis titles and frame size are refused: the frame comes from the node's
+               # width and height, and the renderer owns its axes.
+               'layout accepts only "title" - no width, height, xaxis or yaxis'),
+    # The same fix as mafs/plotly, for the two renderers that were left out. Without the
+    # nested shape the model guessed ``viewport: {xMin, xMax...}``, ``polygons:
+    # [{points: ...}]`` and ``segments: [{point1, point2}]``; the validator refused all
+    # three, so a described diagram always ended RENDER_FAILED with an empty board.
+    'jsxgraph': ('viewport: {"x": [min, max], "y": [min, max]}; '
+                 'functions: [{"expr": "x^2 - 2*x - 3", "domain": [a, b], '
+                 '"color": "#rrggbb"}]; '
+                 'points: [{"x": 1, "y": -4, "label": "vertex", "color": "#rrggbb"}] '
+                 '(x and y are separate numbers, never a pair or "coords"); '
+                 'segments: [{"from": [x, y], "to": [x, y], "color": "#rrggbb"}]; '
+                 'polygons: [{"vertices": [[x, y], [x, y], ...], "color": "#rrggbb"}] '
+                 '(at least 3 vertices; use "vertices", never "points"; each polygon '
+                 'accepts only vertices and color); expressions need explicit '
+                 'multiplication: "2*x + 1", never "2x + 1"'),
+    'tikz': ('{"source": "\\\\begin{tikzpicture}...\\\\end{tikzpicture}"}; source is one '
+             'complete TikZ picture as a JSON string with escaped backslashes '
+             '(\\\\draw, \\\\fill, \\\\node, \\\\shade, \\\\begin{scope}). '
+             'Use only standard TikZ; never \\\\input, \\\\include, \\\\write18 or an HTML '
+             'tag. Draw with coordinates, arcs and bezier curves; do not add '
+             '\\\\usepackage or a document environment'),
+    'mathbox': ('range: [[xmin, xmax], [ymin, ymax], [zmin, zmax]]; '
+                'surfaces: [{"expr": "sin(x)*cos(y)", "xRange": [-3, 3], '
+                '"yRange": [-3, 3], "grid": 24, "color": "#rrggbb"}] '
+                '(expr is in x and y; grid is an integer 4..64); '
+                'curves3d: [{"expr": "cos(t)", "tRange": [0, 6.28], '
+                '"color": "#rrggbb"}] (expr is in t). Expressions need explicit '
+                'multiplication: "sin(x)*cos(y)", never "sin(x)cos(y)"'),
+    'molecule': ('{"format": "mol", "data": "<complete structure block>", '
+                 '"style": "stick", "spin": false}; format is one of pdb|sdf|mol|xyz; '
+                 'style is one of stick|sphere|cartoon|line|cross. data must be a real '
+                 'structure block as one JSON string: for mol/sdf include the atom lines '
+                 'and the bond lines, for xyz the atom count line then one atom per line. '
+                 'Do not describe the molecule in words; emit the block'),
+    'desmos': ('{"expressions": [{"latex": "y=x^2-2x-3", "color": "#rrggbb"}], '
+               '"viewport": {"bounds": {"left": -5, "right": 5, "bottom": -8, '
+               '"top": 8}}}; expressions are LaTeX strings (at most 24), never HTML; '
+               'viewport.bounds is optional and all four numbers are required if used'),
+}
+
+
 def _clean_mafs(spec: dict) -> dict | None:
     if not _only_keys(spec, ('viewport', 'curves', 'points', 'segments', 'vectors')):
         return None

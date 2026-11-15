@@ -119,3 +119,25 @@ partial bundle that looks fine until a learner opens one renderer.
 `node test/smoke.mjs` treats a 404 as a failure on purpose. A missing font does not raise —
 the renderer falls back and reports success — so a green status table is not evidence on
 its own. That change is what caught the KaTeX path bug described in `CHANGELOG.md`.
+
+## 5. Teacher bridge: `draw_diagram` (2026-11-15)
+
+The scratch agent stays isolated: `WhiteboardDrawAgent.draw()` still writes only
+`agent-scratch-<hash>`. What changed is that the tutor can now *borrow* its resolver
+without borrowing its board:
+
+- `WhiteboardDrawAgent.resolve(request)` was added. It parses, resolves and validates a
+  request with the same fail-close validator and returns `(payload, refusal)` without
+  writing anything.
+- A new teacher-gated toolbox tool, `draw_diagram`, calls `resolve()` and writes the
+  resulting `visual` node to the lesson board (`board-<concept>`) the learner is
+  watching. A description that cannot be resolved is refused with the blocking
+  features; nothing is drawn.
+- `tools_whiteboard.whiteboard_draw_visual` implements it; `toolbox.py` registers it
+  next to the four vector tools.
+
+Verified with a real teacher turn (live `deepseek-flash`, teacher principal, temp data
+dir): the model called `whiteboard_read` (refused, no board yet), then `draw_diagram`
+(mafs PPC, DRAWN), re-read the board, wrote five axis/point annotations, and produced
+the caption. Board result: 1 `visual` node + 5 `text` nodes. Gate: 133 tests across
+`test_whiteboard_agent`, `test_board`, `test_visual_specs` and `test_agent_loop` pass.

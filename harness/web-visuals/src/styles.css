@@ -23,6 +23,15 @@ html, body {
 #stage .jsxgraph-board { width: 100% !important; height: 100% !important; }
 #stage .MafsView { width: 100%; height: 100%; }
 
+/* The board is paper. Mafs defaults to its dark theme when nothing sets the variables, so
+ * every mafs node rendered as a black slab on a white canvas - correct maths, wrong
+ * surface. The host owns the surface, so the host states it. */
+#stage .MafsView {
+  --mafs-bg: #ffffff;
+  --mafs-fg: #1c1c1e;
+  --mafs-line-color: #d4d4d8;
+}
+
 /* TikZ renders inside an srcdoc iframe; the resulting SVG must not overflow the node. */
 #stage iframe { display: block; width: 100%; height: 100%; border: 0; background: white; }
 #stage iframe svg { max-width: 100%; height: auto; }

@@ -17,7 +17,7 @@ enum CapturePresentation {
         NSApp.activate(ignoringOtherApps: true)
         DispatchQueue.main.async {
             if let iconURL = Bundle.main.url(forResource: "Luminfest", withExtension: "icns"), let icon = NSImage(contentsOf: iconURL) { NSApp.applicationIconImage = icon }
-            NSApp.windows.first?.title = "Luminfest"
+            NSApp.windows.first?.title = "Luminest"
             NSApp.windows.first?.minSize = NSSize(width: SidebarLayout.minimumWindowWidth, height: 700)
         }
     }
@@ -47,7 +47,7 @@ enum CapturePresentation {
     private var textScale: TextScale { TextScale(rawValue: textScaleRaw) ?? .system }
 
     var body: some Scene {
-        WindowGroup("Luminfest") {
+        WindowGroup("Luminest") {
             // The text size modifier is applied only when one has been chosen. `dynamicTypeSize`
             // is not optional, so passing the resolved value unconditionally would make
             // "Match System" mean `.large` and silently discard a macOS text size the learner
@@ -69,6 +69,9 @@ enum CapturePresentation {
             .onAppear {
                 delegate.store = store
                 NativeQA.shared.runIfRequested()
+                // Closed beta: read the remote update manifest once at launch and
+                // record the verdict. It never downloads or installs anything.
+                Task { await BetaUpdate.checkOnLaunch() }
                 // The browser view at `/app` presents this window, so it needs to know
                 // where the window is. Reporting is silent when the instance has
                 // streaming switched off.
@@ -87,6 +90,10 @@ enum CapturePresentation {
                 // Replayable on purpose: a walkthrough that runs once, at the moment the
                 // learner is least able to absorb it, helps exactly once.
                 Button(L10n.t("tour.replay")) { GuidedTour.postReplay() }
+                Divider()
+                Button("Check for updates") {
+                    Task { await BetaUpdate.checkAndPresent() }
+                }
                 Divider()
                 Button("Start diagnostic") { store.run { await store.startQuestion(mode: "diagnostic") } }.disabled(!store.authenticated).keyboardShortcut("d", modifiers: [.command, .shift])
                 Button("Refresh") { store.run { await store.loadPage() } }.disabled(!store.authenticated).keyboardShortcut("r", modifiers: .command)
@@ -395,7 +402,7 @@ struct OnboardingView: View {
                         HStack {
                             Spacer()
                             if store.authBusy { ProgressView().controlSize(.small).padding(.trailing, 4) }
-                            Text(registering ? "Create my learning space" : "Sign in to Luminfest")
+                            Text(registering ? "Create my learning space" : "Sign in to Luminest")
                             Image(systemName: "arrow.right")
                             Spacer()
                         }
@@ -599,7 +606,7 @@ struct AppShell: View {
                 .font(.system(size: 21))
                 .foregroundStyle(Palette.forest)
                 .frame(height: 62)
-                .accessibilityLabel("Luminfest")
+                .accessibilityLabel("Luminest")
             ForEach(Page.allCases) { page in
                 let accent = Palette.accent(at: Page.allCases.firstIndex(of: page) ?? 0)
                 let selected = store.page == page

@@ -40,11 +40,13 @@ from .harness.playground import catalogue
 from .harness.teaching import (ConceptFacts, ProcedureAssets, build_evidence,
                                compile_procedure, concept_facts, default_profile,
                                procedure_hash, served_items)
+from .harness.teaching import surface as surface_router
 
 __all__ = ['UnknownConcept', 'advance_run', 'assets_for', 'compile_for', 'concept_title_for',
            'current_run', 'deck_cursor', 'deck_section_count', 'item_progress',
            'materialize', 'next_item', 'prompt_context', 'recent_kinds', 'run_to_dict',
-           'set_deck_cursor', 'start_run', 'with_item_progress']
+           'set_deck_cursor', 'set_surface', 'start_run', 'surface_state',
+           'with_item_progress']
 
 
 class UnknownConcept(Exception):
@@ -182,9 +184,18 @@ def _deck_image(settings, title: str, lesson_id: str = '') -> tuple[dict[str, An
     cover.
     """
     from .harness import media
-    shipped = media.shipped_for(settings, lesson_id)
-    if shipped is not None:
-        return _deck_image_payload(shipped), ''
+    # The pack is keyed by short slugs ("active_transport") while this is called with the
+    # course-qualified lesson id ("biology_active_transport_across_a_membrane"), so asking
+    # for the id alone missed all 107 curated pictures and every deck fell through to a live
+    # search that answers "network_disabled" on the desktop build. Match by any token window
+    # of the id instead, and let the pack decide what actually exists.
+    pack = media.shipped_pack()
+    for key in media._concept_keys(lesson_id, pack.keys()):
+        if key not in pack:
+            continue
+        shipped = media.shipped_for(settings, key)
+        if shipped is not None:
+            return _deck_image_payload(shipped), ''
     query = ' '.join(str(title or '').split())[:200]
     if not query:
         return None, 'This concept has no title to search a picture for.'
@@ -254,6 +265,17 @@ def _video(course_id: str, concept_id: str, settings) -> tuple[dict[str, Any] | 
         return None, (reason or 'The curated video for this concept was withheld by the '
                                 'licence gate.')
     card = usable[0]
+    # A poster, not a new block: the video card needs a still frame, and on first exposure
+    # the deck (the only other image-bearing block) is skipped, so without this the lesson a
+    # learner actually receives carries no picture at all. Shipped pack only -- compiling a
+    # lesson must not make a network call. When nothing is curated the reason travels with
+    # the block instead of vanishing.
+    from .harness import media as media_store
+    try:
+        poster = media_store.photograph_for_concept(settings, concept_id, allow_search=False)
+    except Exception as exc:   # noqa: BLE001 - a missing poster must not break the block
+        poster = {'available': False, 'concept_id': concept_id,
+                  'reason': f'poster lookup failed: {type(exc).__name__}: {exc}'[:200]}
     return ({'provider': str(card.get('provider') or ''),
              'title': str(card.get('title') or ''),
              'channel': str(card.get('channel') or ''),
@@ -261,6 +283,7 @@ def _video(course_id: str, concept_id: str, settings) -> tuple[dict[str, Any] | 
              'embed_url': str(card.get('embed_url') or ''),
              'licence_class': str(card.get('licence_class') or 'embed_only'),
              'attribution': str(card.get('attribution') or card.get('channel') or ''),
+             'poster': poster,
              'why': str(card.get('why_this_video') or '')[:300]}, '')
 
 
@@ -398,10 +421,22 @@ def assets_for(concept_id: str, *, course_id: str, graph, settings,
                     for block in lesson.get('blocks') or []
                     if isinstance(block, Mapping) and block.get('kind') == 'retrieval')
     bank = course_questions(course_id)
-    bank_ids = tuple(str(question.get('id')) for question in bank.values()
-                     if str(question.get('concept_id')) == lesson_id)
+    own = [question for question in bank.values()
+           if str(question.get('concept_id')) == lesson_id]
+    bank_ids = tuple(str(question.get('id')) for question in own)
     practice_count = len(bank_ids)
-    practice_items = _ranked_items(bank_ids, order)
+    # Error-process items first. Order is not cosmetic here: the diagnostic block serves the
+    # first item, and a topic-recognition item served first produces an answer that looks
+    # like evidence of understanding while it only proves the learner can rule out three
+    # statements about other things.
+    quality = {'error_process': 0, 'topic_recognition': 0, 'none': 0}
+    ordered_ids: list[str] = []
+    for label in ('error_process', 'topic_recognition', 'none'):
+        for question in own:
+            if _item_quality(question) == label:
+                ordered_ids.append(str(question.get('id')))
+                quality[label] += 1
+    practice_items = _ranked_items(tuple(ordered_ids), order)
 
     prerequisites: tuple[str, ...] = ()
     dependants: tuple[str, ...] = ()
@@ -417,7 +452,33 @@ def assets_for(concept_id: str, *, course_id: str, graph, settings,
         worked_example=example, practice_prompts=prompts,
         practice_items=practice_items,
         practice_count=practice_count, prerequisites=prerequisites,
+        practice_quality=quality,
         dependants=dependants, reasons=reasons)
+
+
+_TOPIC_ONLY = ('is the statement for', 'different part of the course')
+
+
+def _item_quality(question: Mapping[str, Any]) -> str:
+    """Whether this item separates two *misconceptions*, or only two topics.
+
+    An item whose every wrong option is another concept's summary is answerable by
+    elimination: cross out the three statements that are about something else and the
+    remaining one must be right. Its outcome still moves a mastery number, which is how a
+    harness ends up confident about something it never measured. Tagging the item is the
+    cheap honest half; generating better items is the expensive half.
+    """
+    diagnoses = question.get('distractor_diagnoses') or {}
+    if not isinstance(diagnoses, Mapping) or not diagnoses:
+        return 'none'
+    reasons = [str(row.get('reason') or '').strip() for row in diagnoses.values()
+               if isinstance(row, Mapping)]
+    reasons = [reason for reason in reasons if reason]
+    if not reasons:
+        return 'none'
+    if all(any(marker in reason for marker in _TOPIC_ONLY) for reason in reasons):
+        return 'topic_recognition'
+    return 'error_process'
 
 
 def _ranked_items(bank_ids: Sequence[str], order: Sequence[str]) -> tuple[str, ...]:
@@ -674,6 +735,165 @@ def set_deck_cursor(db, user, concept_id: str, slide: int) -> dict[str, Any]:
             'at': ui['deck_cursor']['at']}
 
 
+# ------------------------------------------------------------ live surface state
+
+
+def _current_block(run: ProcedureRun | None) -> dict[str, Any] | None:
+    """The block the learner is on, from the persisted run."""
+    if run is None:
+        return None
+    blocks = [dict(row) for row in (run.blocks or []) if isinstance(row, Mapping)]
+    done = {int(row.get('order') or 0) for row in (run.completed or [])
+            if isinstance(row, Mapping)}
+    return next((row for row in blocks
+                 if int(row.get('order') or 0) not in done), None)
+
+
+def _surface_availability(run: ProcedureRun | None) -> dict[str, Any]:
+    """Read the bound artifacts off the run, not off a fresh recompile.
+
+    A live course must decide from the lesson the learner is actually in. Recompiling
+    here would consult today's evidence rather than the plan that was frozen when the
+    run started, and could switch surfaces mid-lesson without a decision being made.
+    """
+    blocks = [dict(row) for row in ((run.blocks if run else None) or [])
+              if isinstance(row, Mapping)]
+    deck = next((row for row in blocks if row.get('kind') == 'deck'), None)
+    video = next((row for row in blocks if row.get('kind') == 'video'), None)
+    deck_artifact = dict((deck or {}).get('artifact') or {})
+    summary = {
+        'deck': ({'slides': len(deck_artifact.get('sections') or []),
+                  'artifact_id': deck_artifact.get('artifact_id')}
+                 if deck else None),
+        'video': (dict((video or {}).get('artifact') or {}) if video else None),
+    }
+    return surface_router.available_surfaces(summary)
+
+
+def surface_state(db, user, concept_id: str) -> dict[str, Any]:
+    """The compiled surface for the current block, plus the one actually showing.
+
+    ``compiled_surface`` is the plan's promise and does not change while the block is
+    current. ``surface`` is the live display: it differs only after a recorded teacher
+    decision (``set_surface``). Keeping both in the response is what lets a client
+    resume a drawn interruption back to the deck without guessing.
+    """
+    key = _lesson_key(user, concept_id)
+    run = current_run(db, user, key)
+    block = _current_block(run)
+    available = _surface_availability(run)
+    compiled = str((block or {}).get('surface') or 'chat')
+    decision = dict((block or {}).get('surface_decision') or {})
+    if not decision:
+        # A run compiled before surfaces existed still has to serve honestly: derive a
+        # fresh decision from its bound artifacts rather than inventing one.
+        decision = surface_router.choose_surface(
+            block=block or {'kind': 'explain'}, available=available).to_dict()
+    preference = db.get(UserPreference, user.id)
+    stored = dict(((preference.ui if preference else {}) or {}).get('stage_surface') or {})
+    live = stored if str(stored.get('concept_id') or '') == key else {}
+    surface = str(live.get('surface') or compiled)
+    return {
+        'concept_id': concept_id,
+        'run_id': run.id if run else None,
+        'block_order': int((block or {}).get('order') or 0) or None,
+        'block_kind': str((block or {}).get('kind') or ''),
+        'compiled_surface': compiled,
+        'surface': surface,
+        'primary': str(decision.get('primary') or compiled),
+        'why': str(live.get('why') or decision.get('why') or ''),
+        'source': str(live.get('source') or 'compiled'),
+        'switch': bool(live.get('switch')),
+        'resume_surface': str(live.get('resume_surface') or ''),
+        'interrupted': bool(live.get('interrupted')),
+        'at': float(live.get('at') or 0.0),
+        'tools': list(surface_router.PRESENTATION_TOOLS.get(surface, ())),
+        'available': available,
+        'alternatives': list(decision.get('alternatives') or []),
+        'fallback': dict(decision.get('fallback') or {}),
+        'decision': decision,
+    }
+
+
+def set_surface(db, user, concept_id: str, surface: str, *, reason: str = '',
+                interrupted: bool = False, intent: str = '',
+                source: str = 'teacher') -> dict[str, Any]:
+    """Record a *decided* surface switch for the current live block.
+
+    Three refusals, all product states rather than exceptions:
+
+    * an unknown surface name;
+    * a surface whose artifact was never bound (a declared fallback with its reason);
+    * a deviation from the compiled surface with no reason. A surface is not a toy
+      dial: the teacher must say why the lesson is changing what the learner sees,
+      and that sentence is stored so the decision can be reviewed later.
+
+    On a drawn interruption the compiled surface is kept as ``resume_surface``, so
+    returning from the board does not require the client to remember where it was.
+    """
+    key = _lesson_key(user, concept_id)
+    state = surface_state(db, user, concept_id)
+    available = dict(state.get('available') or {})
+    surface = str(surface or '').strip().lower()
+    if surface not in surface_router.SURFACES:
+        return {**state, 'ok': False,
+                'refused': f'Unknown surface {surface!r}; choose one of '
+                           f'{", ".join(surface_router.SURFACES)}.'}
+    if not available.get(surface, False):
+        reason_unavailable = str(dict(available.get('reasons') or {}).get(surface)
+                                 or 'no artifact is bound for it')
+        return {**state, 'ok': False,
+                'refused': f'The {surface} surface cannot be shown: {reason_unavailable}',
+                # The fallback describes the surface the teacher *asked for*, not the
+                # compiled one. Using the compiled surface here returned {} whenever the
+                # plan was on chat, so a refused video came back with no declared
+                # fallback at all - the exact "absence is designed" contract broken.
+                'fallback': surface_router.declared_fallback(surface, available)}
+    note = ' '.join(str(reason or '').split())[:300]
+    deviates = surface != state['compiled_surface']
+    if deviates and not note:
+        return {**state, 'ok': False,
+                'refused': ('Switching away from the compiled surface needs a reason. '
+                            'Call stage_surface with the surface and a sentence saying '
+                            'why this turn needs it.')}
+    if not note:
+        note = str(state.get('why') or surface_router.SURFACE_WHEN[surface])
+    resume = state['compiled_surface'] if interrupted and deviates else ''
+    preference = db.get(UserPreference, user.id)
+    if preference is None:
+        preference = UserPreference(user_id=user.id)
+        db.add(preference)
+    ui = dict(preference.ui or {})
+    ui['stage_surface'] = {
+        'concept_id': key, 'surface': surface, 'why': note,
+        'source': source, 'switch': bool(state['surface'] != surface),
+        'resume_surface': resume, 'interrupted': bool(interrupted),
+        'intent': str(intent or ''), 'at': now_ts(),
+        'block_order': state.get('block_order'),
+    }
+    preference.ui = ui
+    preference.updated_at = now_ts()
+    db.flush()
+    result = surface_state(db, user, concept_id)
+    result['ok'] = True
+    result['refused'] = ''
+    return result
+
+
+def _clear_surface(db, run: ProcedureRun) -> None:
+    """A new block re-decides its own surface; a stale switch must not leak into it."""
+    preference = db.get(UserPreference, run.user_id)
+    if preference is None:
+        return
+    ui = dict(preference.ui or {})
+    stored = ui.get('stage_surface') or {}
+    if str(stored.get('concept_id') or '') == run.concept_id:
+        ui.pop('stage_surface', None)
+        preference.ui = ui
+        preference.updated_at = now_ts()
+        db.flush()
+
+
 def start_run(db, user, procedure) -> ProcedureRun:
     """Persist the plan, or return the identical one already running.
 
@@ -912,6 +1132,10 @@ def advance_run(db, run: ProcedureRun, order: int, *, outcome: str = 'done',
     run.completed = completed
     run.status = 'completed' if len(completed) >= len(blocks) else 'active'
     run.updated_at = now_ts()
+    # The next block has its own compiled surface. A switch made to answer one block
+    # must not become the default display of the next one.
+    if run.status == 'active':
+        _clear_surface(db, run)
     return run
 
 

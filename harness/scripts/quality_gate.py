@@ -4,12 +4,19 @@ unless every layer and all ten golden journeys are green.
 
 Design rules, because a gate that lies is worse than no gate:
 
-* A **skip is not a pass.** The PostgreSQL half of Layer 2 skips when no server is
-  reachable. That is a *test-level* skip, and it blocks the verdict at every strictness:
-  the layer's `skipped_tests` count is parsed from the runner's own summary and turned
-  into a blocker. A **layer** that was not run at all (``--skip-ui``, no built app) blocks
-  unconditionally too. ``--strict`` only promotes the advisory *checks* (the dependency
-  audit) into blockers.
+* **The backend layers run every test file.** Layer 1 and Layer 2 are discovered from
+  ``backend/tests/test_*.py`` at run time, not enumerated by hand. A gate that hardcodes
+  nine files can report PASS while 113 files have never been executed by it -- the exact
+  failure the 2026-11-12 review named ("7.4% of test files"). ``--fast`` keeps the old
+  nine-file subset for a quick local smoke, but a smoke run is *never* a release verdict:
+  ``summarise`` blocks it and the coverage field says so.
+* A **skip is not a pass**, except for the two *declared, opt-in* live-provider smokes
+  (``HARNESS_LIVE_SMOKE`` / ``HARNESS_DIAGRAM_LIVE_SMOKE``). Those are off by design and
+  their reasons are recorded in ``gate.json``; they are never hidden. Every other test-level
+  skip -- notably the PostgreSQL half of Layer 2 when no server is reachable -- blocks the
+  verdict at every strictness. A **layer** that was not run at all (``--skip-ui``, no built
+  app) blocks unconditionally too. ``--strict`` promotes the advisory *checks* (the
+  dependency audit) into blockers.
 * A **gap is not a pass.** Any journey whose native path cannot be driven is reported as
   ``gap`` (and a runner error as ``blocked``); both fail the release decision while the
   reason is printed. Course creation (J6) does have a native authoring sheet now, but its
@@ -19,8 +26,9 @@ Design rules, because a gate that lies is worse than no gate:
 
 Usage::
 
-    python3 scripts/quality_gate.py                     # every layer
-    python3 scripts/quality_gate.py --layers 1,2        # backend only (fast, CI-friendly)
+    python3 scripts/quality_gate.py                     # every layer, full backend suite
+    python3 scripts/quality_gate.py --layers 1,2        # full backend suite, no UI
+    python3 scripts/quality_gate.py --layers 1,2 --fast # 9-file smoke; NOT a release verdict
     python3 scripts/quality_gate.py --layers 3 --skip-ui  # records the UI layer as skipped
     python3 scripts/quality_gate.py --strict            # skips also fail the gate
 """
@@ -41,7 +49,10 @@ ROOT = Path(__file__).resolve().parents[2]
 HARNESS = ROOT / 'harness'
 BACKEND = HARNESS / 'backend'
 
-UNIT_TESTS = [
+#: These are the *old* nine-file subset, retained only for ``--fast``. They are a smoke,
+#: not a release gate: ``summarise`` refuses to call a smoke run releasable. The default
+#: layers discover the whole suite instead (see ``discover_test_files``).
+FAST_UNIT_TESTS = [
     'tests/test_memory.py',
     'tests/test_flashcards.py',
     'tests/test_learning_science.py',
@@ -50,11 +61,56 @@ UNIT_TESTS = [
     'tests/test_security_contract.py',
 ]
 
-INTEGRATION_TESTS = [
+FAST_INTEGRATION_TESTS = [
     'tests/test_api.py',
     'tests/test_database_engines.py',
     'tests/test_desktop_environment.py',
 ]
+
+#: Test files that legitimately need an external service and therefore belong to Layer 2.
+#: Everything else discovered under tests/ is Layer 1. Both sets are computed from the
+#: directory, so a newly added test file cannot silently escape the gate.
+SERVICE_TEST_FILES = {
+    'tests/test_database_engines.py',   # PostgreSQL half skips when no server is reachable
+    'tests/test_desktop_environment.py',
+    'tests/test_api.py',
+}
+
+#: The only skips that do not block the verdict. Both are explicit opt-in live-provider
+#: smokes, off by default with a named reason; everything else is an untested path.
+DECLARED_SKIP_REASONS = (
+    'Live smoke disabled; set HARNESS_LIVE_SMOKE=1',
+    'Live DeepSeek diagram smoke disabled; set HARNESS_DIAGRAM_LIVE_SMOKE=1',
+)
+
+
+def discover_test_files() -> list[str]:
+    """Every test file in the backend, discovered rather than enumerated by hand."""
+    return sorted(str(path.relative_to(BACKEND))
+                  for path in (BACKEND / 'tests').glob('test_*.py'))
+
+
+def split_backend_layers(fast: bool) -> tuple[list[str], list[str], dict]:
+    """Return (unit files, service files, coverage) for this run.
+
+    ``coverage`` is the gate's own, machine-readable answer to "how much of the suite did
+    this run actually execute?" so a subset can never be published as a full pass again.
+    """
+    all_files = discover_test_files()
+    if fast:
+        unit, service = FAST_UNIT_TESTS, FAST_INTEGRATION_TESTS
+    else:
+        unit = [f for f in all_files if f not in SERVICE_TEST_FILES]
+        service = [f for f in all_files if f in SERVICE_TEST_FILES]
+    executed = sorted(set(unit) | set(service))
+    coverage = {
+        'discovered': len(all_files),
+        'executed': len(executed),
+        'percent': round(100.0 * len(executed) / len(all_files), 1) if all_files else 0.0,
+        'fast_smoke': fast,
+        'not_exercised': sorted(set(all_files) - set(executed)),
+    }
+    return unit, service, coverage
 
 
 def find_python(explicit: str | None) -> Path:
@@ -99,7 +155,15 @@ def run(command: list[str], cwd: Path, env: dict[str, str], timeout: int) -> dic
             'stdout': out[-8000:], 'stderr': err[-8000:]}
 
 
-def pytest_layer(python: Path, files: list[str], output: Path, name: str) -> dict:
+#: A full backend layer runs ~120 test files in one process. Measured 2026-11-12:
+#: 1267 s for the whole suite on this host, and 2339 s on a busy machine. The old
+#: 1800 s ceiling timed out a legitimate full-suite gate run (2026-11-13), which is
+#: worse than a slow gate: it turns a green build into an unexplained failure.
+FULL_LAYER_TIMEOUT = 3600
+
+
+def pytest_layer(python: Path, files: list[str], output: Path, name: str,
+                 timeout: int = FULL_LAYER_TIMEOUT) -> dict:
     """Run one pytest layer in an isolated temp root inside the repo.
 
     ``TMPDIR`` and ``--basetemp`` must both point inside the repository: the sandbox
@@ -110,19 +174,32 @@ def pytest_layer(python: Path, files: list[str], output: Path, name: str) -> dic
     temp.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, TMPDIR=str(temp), PYTHONDONTWRITEBYTECODE='1')
     env.pop('HARNESS_DATABASE_URL', None)
-    result = run([str(python), '-m', 'pytest', '-q', '--basetemp', str(temp / 'bt'), *files],
-                 BACKEND, env, timeout=1800)
+    # -rs prints each skip with its reason, so the gate can tell the two declared opt-in
+    # live-provider smokes from a path that was silently not exercised.
+    result = run([str(python), '-m', 'pytest', '-q', '-rs', '--basetemp', str(temp / 'bt'),
+                  *files], BACKEND, env, timeout=timeout)
     result['layer'] = name
     result['passed'] = result['exit'] == 0
-    # pytest exits 0 when tests skip. The published promise is that "a skip is never
-    # counted as a pass", and until this line the gate could not back that sentence: it
-    # read the exit code only, so a layer whose PostgreSQL half skipped was green. Record
-    # the count and let the verdict block on it, without pretending the runner failed.
-    skipped = re.search(r'(\d+) skipped', result.get('stdout') or '')
-    result['skipped_tests'] = int(skipped.group(1)) if skipped else 0
-    if result['skipped_tests']:
-        result['skipped_reason'] = (f'{result["skipped_tests"]} test(s) skipped inside this '
-                                    'layer; a skip is not a pass')
+    result['test_files'] = len(files)
+    stdout = result.get('stdout') or ''
+    skipped = re.search(r'(\d+) skipped', stdout)
+    total_skipped = int(skipped.group(1)) if skipped else 0
+    reasons = re.findall(r'^SKIPPED \[\d+\] (.+)$', stdout, flags=re.MULTILINE)
+    declared = [r for r in reasons
+                if any(marker in r for marker in DECLARED_SKIP_REASONS)]
+    undeclared = [r for r in reasons
+                  if not any(marker in r for marker in DECLARED_SKIP_REASONS)]
+    result['declared_skips'] = declared
+    result['skipped_tests'] = total_skipped
+    # A pytest summary with no -rs detail (older runner, or output truncated) still has
+    # to fail closed: any skip we cannot attribute to a declared opt-in reason blocks.
+    result['unattributed_skips'] = max(0, total_skipped - len(declared))
+    result['blocking_skips'] = undeclared + (
+        [f'{result["unattributed_skips"]} skip(s) with no attributable declared reason']
+        if result['unattributed_skips'] else [])
+    if result['blocking_skips']:
+        result['skipped_reason'] = (f'{len(result["blocking_skips"])} undeclared skip(s) inside '
+                                    'this layer; a skip is not a pass')
     return result
 
 
@@ -200,14 +277,26 @@ def mutation_check(python: Path, output: Path) -> dict:
     return result
 
 
-def summarise(rows: list[dict], strict: bool, extras: list[dict] | None = None) -> tuple[bool, list[str]]:
+def summarise(rows: list[dict], strict: bool, extras: list[dict] | None = None,
+              coverage: dict | None = None) -> tuple[bool, list[str]]:
     """Decide the release verdict from the layer evidence.
 
     A skipped layer blocks the release unconditionally: "we did not run the UI tests" is
-    not a green build. ``--strict`` additionally promotes advisory checks (the dependency
-    audit) into blockers; without it they are reported but do not decide the gate.
+    not a green build. A **subset** of the backend suite also blocks it: publishing a
+    nine-file PASS as a release verdict is the 7.4% failure this gate now exists to
+    prevent. ``--strict`` additionally promotes advisory checks (the dependency audit)
+    into blockers; without it they are reported but do not decide the gate.
     """
     blockers: list[str] = []
+    if coverage:
+        if coverage.get('fast_smoke'):
+            blockers.append(
+                f'backend coverage: --fast smoke ran {coverage["executed"]} of '
+                f'{coverage["discovered"]} test files ({coverage["percent"]}%). '
+                'A smoke is not a release verdict; re-run without --fast.')
+        elif coverage.get('not_exercised'):
+            blockers.append(f'backend coverage: {len(coverage["not_exercised"])} test file(s) '
+                            'were discovered but not executed by any layer')
     for row in rows:
         name = row.get('layer')
         if row.get('skipped'):
@@ -215,12 +304,12 @@ def summarise(rows: list[dict], strict: bool, extras: list[dict] | None = None) 
             continue
         if not row.get('passed'):
             blockers.append(f'{name}: failed (exit {row.get("exit")})')
-        # A test-level skip is a blocker whatever --strict says: the front page promises
-        # that a skip is never counted as a pass, and this is the only place that promise
-        # can be kept. Without --strict the advisory *checks* stay advisory; skipped
-        # *tests* do not.
-        if row.get('skipped_tests'):
-            blockers.append(f'{name}: {row["skipped_tests"]} test(s) skipped — '
+        # Only *undeclared* skips block. The two opt-in live-provider smokes are declared,
+        # off by design and recorded with their reasons; a PostgreSQL half that quietly
+        # skipped, or any other untested path, still fails the gate. Declared skips are
+        # never hidden -- they are written into gate.json.
+        if row.get('blocking_skips'):
+            blockers.append(f'{name}: {len(row["blocking_skips"])} undeclared skip(s) — '
                             'a skip is not a pass')
         if name == 'native-ui':
             gate = row.get('gate') or {}
@@ -239,6 +328,12 @@ def render_markdown(document: dict) -> str:
              f"**Run:** {document['runId']}  ",
              f"**Started:** {document['startedAt']}  ",
              f"**Verdict:** **{'PASS' if document['passed'] else 'FAIL'}**", '']
+    cov = document.get('coverage') or {}
+    if cov:
+        lines += [f"**Backend test-file coverage:** {cov['executed']}/{cov['discovered']} "
+                  f"files ({cov['percent']}%)"
+                  + (' — **FAST SMOKE, not a release verdict**' if cov.get('fast_smoke') else ''),
+                  '']
     lines += ['| Layer | Result | Time | Detail |', '|---|---|---:|---|']
     for row in document['results']:
         if row.get('skipped'):
@@ -251,6 +346,10 @@ def render_markdown(document: dict) -> str:
                 detail = (f"{gate.get('total', 0)}/10 journeys; "
                           f"failed={gate.get('failed', [])} gaps={gate.get('gaps', [])} "
                           f"blocked={gate.get('blocked', [])}")
+            elif row.get('test_files'):
+                detail += f"; {row['test_files']} test files"
+                if row.get('declared_skips'):
+                    detail += f"; {len(row['declared_skips'])} declared opt-in skip(s)"
         lines.append(f"| {row['layer']} | {verdict} | {row.get('seconds', 0)}s | {detail} |")
     if document.get('blockers'):
         lines += ['', '## Blockers', '']
@@ -278,6 +377,9 @@ def main() -> int:
     parser.add_argument('--skip-ui', action='store_true')
     parser.add_argument('--no-audit', action='store_true')
     parser.add_argument('--mutation', action='store_true')
+    parser.add_argument('--fast', action='store_true',
+                        help='Run only the legacy 9-file smoke. This can NEVER produce a '
+                             'release verdict; use it for a quick local check only.')
     parser.add_argument('--strict', action='store_true', help='Skips fail the gate too')
     parser.add_argument('--ui-timeout', type=int, default=900)
     args = parser.parse_args()
@@ -292,11 +394,32 @@ def main() -> int:
     output = (args.output or ROOT / 'outputs/quality' / run_id).resolve()
     output.mkdir(parents=True, exist_ok=True)
 
+    unit_files, service_files, coverage = split_backend_layers(args.fast)
+    # Coverage must describe what was actually executed, not what a full run would have
+    # executed. A --layers 3 run cannot claim the backend files it never launched.
+    backend_layers = [n for n in ('unit', 'integration') if n in
+                      ({'unit'} if '1' in layers else set()) |
+                      ({'integration'} if '2' in layers else set())]
+    all_files = discover_test_files()
+    executed = set()
+    if '1' in layers:
+        executed.update(unit_files)
+    if '2' in layers:
+        executed.update(service_files)
+    coverage = dict(coverage, executed=len(executed & set(all_files)),
+                    percent=round(100.0 * len(executed & set(all_files)) / len(all_files), 1)
+                    if all_files else 0.0,
+                    not_exercised=sorted(set(all_files) - executed),
+                    backend_layers_run=backend_layers)
+    if not args.fast and ('1' not in layers or '2' not in layers):
+        coverage['partial_reason'] = ('both backend layers (1 and 2) are required for a '
+                                      'full-suite verdict')
+
     results: list[dict] = []
     if '1' in layers:
-        results.append(pytest_layer(python, UNIT_TESTS, output, 'unit'))
+        results.append(pytest_layer(python, unit_files, output, 'unit'))
     if '2' in layers:
-        results.append(pytest_layer(python, INTEGRATION_TESTS, output, 'integration'))
+        results.append(pytest_layer(python, service_files, output, 'integration'))
     if '3' in layers or '4' in layers:
         results.append(native_layer(output, args.ui_timeout, args.skip_ui, args.app, python))
 
@@ -306,9 +429,9 @@ def main() -> int:
     if args.mutation:
         extras.append(mutation_check(python, output))
 
-    passed, blockers = summarise(results, args.strict, extras)
+    passed, blockers = summarise(results, args.strict, extras, coverage)
     document = {'runId': run_id, 'startedAt': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
-                'python': str(python), 'layers': sorted(layers),
+                'python': str(python), 'layers': sorted(layers), 'coverage': coverage,
                 'results': results, 'extras': extras,
                 'blockers': blockers, 'passed': passed}
     (output / 'gate.json').write_text(json.dumps(document, indent=2) + '\n')

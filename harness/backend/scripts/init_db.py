@@ -73,6 +73,11 @@ from app.database_backup import (MAINTENANCE_LOCK_NAME, BackupError,
 # there. Keep this list in step with any new out-of-``db`` model.
 from app import course_builder  # noqa: F401  - registers ``created_courses``
 from app import assessment_book, perspectives  # noqa: F401 - register unit_grades, perspective_reviews
+# Measurement asks the learner for evidence (a cold probe, an effort rating) and must keep the
+# conditions it was issued under, so it owns a real table. Without this import a fresh
+# database is created without ``measurement_probes`` and the first probe 500s - which tests
+# would not catch, because the test app imports the router, which imports the model.
+from app.measurement import models as measurement_models  # noqa: F401
 
 #: Versions this migration path knows how to bring forward.
 KNOWN_VERSIONS = (None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)

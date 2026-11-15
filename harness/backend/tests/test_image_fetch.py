@@ -355,6 +355,34 @@ def test_support_ranks_candidates_without_rejecting_any():
     The two candidates differ in area on purpose, so the two orderings cannot agree by
     accident: without support the bigger file wins, with support the one that mentions the
     summary wins. Both are still accepted - ranking must never become a second gate.
+
+    The concept is deliberately **two words**. A separate rule refuses *single-word*
+    concepts, because a full-text image search for "Overconfidence" returns a tapestry
+    named after the word rather than the idea. That is a homonym gate, not a ranking gate;
+    pinning it with a single-word fixture here would conflate the two and make this test
+    fail for a reason it is not about. See ``test_single_word_homonym_gate_is_not_ranking``.
+    """
+    plain = _cleared_candidate(source_id='plain', title='Cell osmosis power station',
+                               description='a pressure-retarded osmosis plant in a cell',
+                               tags=[], width=1600, height=1200)
+    biology = _cleared_candidate(source_id='bio', title='Cell osmosis in a red blood cell',
+                                 description='water crosses the membrane of a cell',
+                                 tags=['osmosis', 'cell'], width=1200, height=800)
+    accepted, rejected = media.filter_candidates([plain, biology], 'Cell osmosis',
+                                                 support='water moves across a cell membrane')
+    assert not rejected, [c.rejected for c in rejected]
+    assert [c.source_id for c in accepted] == ['bio', 'plain'], 'support did not reorder'
+    # With no support the ordering is the old one: pixel area first.
+    by_area, _ = media.filter_candidates([plain, biology], 'Cell osmosis')
+    assert by_area[0].source_id == 'plain'
+
+
+def test_single_word_homonym_gate_is_not_ranking():
+    """A one-word concept is refused by name, not by the support ranking.
+
+    Kept beside the ranking test on purpose: the two rules are independent, and a
+    regression in either should be attributable. Without this, adapting the ranking
+    fixture to two words could hide the homonym rule disappearing entirely.
     """
     plain = _cleared_candidate(source_id='plain', title='Osmosis power station',
                                description='a pressure-retarded osmosis plant', tags=[],
@@ -364,10 +392,19 @@ def test_support_ranks_candidates_without_rejecting_any():
                                  tags=['osmosis', 'cell'], width=1200, height=800)
     accepted, rejected = media.filter_candidates([plain, biology], 'Osmosis',
                                                  support='water moves across a cell membrane')
-    assert not rejected, [c.rejected for c in rejected]
-    assert [c.source_id for c in accepted] == ['bio', 'plain'], 'support did not reorder'
-    # With no support the ordering is the old one: pixel area first.
-    by_area, _ = media.filter_candidates([plain, biology], 'Osmosis')
+    assert not accepted
+    assert rejected and all('common word' in c.rejected for c in rejected)
+    # The gate is about the query being one word, not about the summary: with no
+    # support the same single-word concept is still ranked normally. Fresh objects:
+    # ``filter_candidates`` annotates its candidates in place, so reusing the rejected
+    # pair would report the previous refusal a second time.
+    fresh_plain = _cleared_candidate(source_id='plain', title='Osmosis power station',
+                                     description='a pressure-retarded osmosis plant', tags=[],
+                                     width=1600, height=1200)
+    fresh_biology = _cleared_candidate(source_id='bio', title='Osmosis in a red blood cell',
+                                       description='water crosses the membrane of a cell',
+                                       tags=['osmosis', 'cell'], width=1200, height=800)
+    by_area, _ = media.filter_candidates([fresh_plain, fresh_biology], 'Osmosis')
     assert by_area[0].source_id == 'plain'
 
 

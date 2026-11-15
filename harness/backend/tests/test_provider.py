@@ -122,3 +122,45 @@ def test_a_large_artefact_can_raise_the_reply_guard_for_one_call(monkeypatch):
     assert provider.chat(_settings(), [{'role': 'user', 'content': 'x'}]) is None
     assert provider.chat(_settings(), [{'role': 'user', 'content': 'x'}],
                          max_reply_chars=len(big) + 10) == big
+
+
+def test_ollama_tool_calls_use_the_v1_openai_compatible_endpoint(monkeypatch, tmp_path):
+    """A local teacher must reach Ollama's tool-capable /v1 surface, not bare /chat.
+
+    Measured on this host: ``/chat/completions`` on the bare 11434 base is a 404,
+    while ``/v1/chat/completions`` emits a well-formed native tool call. The Ollama
+    preset stores a bare base URL, so the provider has to insert /v1 itself or the
+    teacher-agent silently loses every tool on a local (offline-capable) model.
+    """
+    _install(monkeypatch, content='')
+    _Client.body = {'choices': [{'message': {
+        'content': '', 'tool_calls': [{'id': 'c1', 'function': {
+            'name': 'whiteboard_write',
+            'arguments': '{"board_id": "b1", "text": "reinforcement"}'}}]},
+        'finish_reason': 'tool_calls'}],
+        'usage': {'prompt_tokens': 10, 'completion_tokens': 5, 'total_tokens': 15}}
+    settings = _settings(provider='ollama', provider_url='http://127.0.0.1:11434',
+                         data_dir=tmp_path)
+    result = provider.chat_tools(settings, [{'role': 'user', 'content': 'write it'}],
+                                 tools=[{'name': 'whiteboard_write',
+                                         'parameters': {'type': 'object'}}])
+    assert _Client.sent['url'] == 'http://127.0.0.1:11434/v1/chat/completions'
+    assert result is not None and result['tool_calls'][0]['name'] == 'whiteboard_write'
+
+
+def test_ollama_base_url_already_carrying_v1_is_not_doubled(monkeypatch, tmp_path):
+    """An administrator-supplied base with /v1 must stay single-v1."""
+    _install(monkeypatch, content='ok')
+    settings = _settings(provider='ollama', provider_url='http://host:11434/v1',
+                         data_dir=tmp_path)
+    provider.chat_tools(settings, [{'role': 'user', 'content': 'hi'}], tools=[])
+    assert _Client.sent['url'] == 'http://host:11434/v1/chat/completions'
+
+
+def test_openai_provider_base_url_is_untouched_by_ollama_logic(monkeypatch, tmp_path):
+    """The hosted path keeps its exact base URL; no /v1 is injected."""
+    _install(monkeypatch, content='ok')
+    settings = _settings(provider='openai', provider_url='https://api.deepseek.com/v1',
+                         data_dir=tmp_path)
+    provider.chat_tools(settings, [{'role': 'user', 'content': 'hi'}], tools=[])
+    assert _Client.sent['url'] == 'https://api.deepseek.com/v1/chat/completions'

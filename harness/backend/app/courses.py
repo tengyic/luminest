@@ -14,11 +14,14 @@ Two design decisions are load-bearing here.
    were about Newton's second law. So the subject kind is explicit, and only
    ``mathematics`` courses route through the symbolic engine.
 
-2. **A graph is not a course.** The algebra pack has 164 nodes but only 30 authored
-   lessons. The graph gives structure; the lesson layer gives depth. Courses that
-   have no authored lessons are still real courses - they are simply served by
-   generated content rather than hand-written content, and the registry says so
-   rather than pretending otherwise.
+2. **A graph is not a course.** The algebra pack has 164 nodes but only 38 authored
+   lessons (30 originals plus one complete hand-written unit on exponents, radicals
+   and irrational numbers in ``authored_unit_exponents.py``). The graph gives structure;
+   the lesson layer gives depth. Courses that have no authored lessons are still real
+   courses - they are simply served by generated content rather than hand-written
+   content, and the registry says so rather than pretending otherwise. Run
+   ``scripts/check_lesson_coverage.py`` for the measured share; it is a fact that
+   changes as units are written, not a constant to hardcode in prose.
 """
 
 from __future__ import annotations
@@ -392,7 +395,7 @@ def graph_for(course_id: str) -> KnowledgeGraph:
     nothing about hand-authored lessons - ``has_lesson`` is written by
     ``curriculum`` when it joins the two layers - so a graph loaded straight from the
     pack reports every node as outline-only. That made the course picker claim the one
-    course with 30 authored lessons had none, which is precisely the number a learner
+    course with authored lessons had none, which is precisely the number a learner
     uses to decide whether a course can teach them anything.
     """
     spec = course(course_id)

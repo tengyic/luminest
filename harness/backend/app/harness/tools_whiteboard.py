@@ -222,3 +222,67 @@ def whiteboard_place_image(ctx, board_id: str, query: str, x: float = 0, y: floa
                                   'licence_class': asset.get('licence_class', '')}],
                       notes=['The image was downloaded into this instance\'s cleared '
                              'cache; the board references it by content hash.'])
+
+
+def whiteboard_draw_visual(ctx, board_id: str, type: str, description: str = '',
+                           spec: dict | None = None, mode: str = 'description',
+                           title: str = '', w: float = 0, h: float = 0) -> ToolResult:
+    """Draw a structured visual on the shared board from a description.
+
+    The tutor's vector tools (``whiteboard_apply``) are fine for a freehand sketch and
+    hopeless for a parabola, a PPC or a molecule. This tool is the bridge to the
+    whiteboard draw agent: it reuses that agent's resolver and its fail-close validator,
+    but writes the resulting ``visual`` node to the *lesson* board the learner is looking
+    at instead of the agent's private scratch canvas. A description that cannot be turned
+    into a faithful spec is refused with the blocking features, and nothing is drawn.
+    """
+    gate = _gate(ctx, 'draw_diagram')
+    if gate is not None:
+        return gate
+    settings = _settings(ctx)
+    if settings is None:
+        return ToolResult('draw_diagram', False, error='No settings are bound to this call')
+    from . import whiteboard_agent
+
+    content: dict = {'type': type, 'mode': mode}
+    if description:
+        content['description'] = description
+    if spec is not None:
+        content['spec'] = spec
+    if title:
+        content['title'] = title
+    if w:
+        content['w'] = w
+    if h:
+        content['h'] = h
+
+    agent = whiteboard_agent.WhiteboardDrawAgent(settings, owner_id=_owner(ctx))
+    resolved, failure = agent.resolve({'id': 'tutor-draw', 'region': 'scratch',
+                                       'content': content})
+    if failure is not None:
+        blocking = failure.get('blocking') or ['the drawing could not be resolved']
+        return ToolResult('draw_diagram', False, refused=blocking[0], notes=blocking)
+
+    # Stack visuals down the canvas so a second diagram does not cover the first.
+    nid = legacy.concept_node_id(board_id)
+    doc = node_boards.load(settings, nid) if nid else None
+    y = 120.0
+    if doc:
+        placed = [float(n.get('y', 0)) for n in doc.get('nodes', [])
+                  if n.get('kind') == 'visual']
+        if placed:
+            y = max(placed) + 320.0
+
+    node = {'kind': 'visual', 'x': 120.0, 'y': y,
+            'w': resolved['w'], 'h': resolved['h'], 'payload': resolved['payload']}
+    updated = _apply_nodes(ctx, board_id, [node])
+    if updated is None:
+        return ToolResult('draw_diagram', False,
+                          refused='The board id is malformed, or the board could not be '
+                                  'created/updated, so nothing was drawn.')
+    payload = resolved['payload']
+    return ToolResult('draw_diagram', True,
+                      {'board_id': updated['id'], 'version': updated['version'],
+                       'type': payload['type'], 'title': payload.get('title', ''),
+                       'payload': payload},
+                      notes=[f'Drew a {payload["type"]} visual on the shared board.'])

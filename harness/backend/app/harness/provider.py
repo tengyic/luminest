@@ -28,6 +28,50 @@ MAX_REPLY_CHARS = 40000
 _JSON_BLOCK = re.compile(r'\{.*\}', re.S)
 
 
+def error_detail(exc: BaseException, limit: int = 160) -> str:
+    """A short, bounded reason for a provider failure, for diagnosis only.
+
+    A valid key whose account has run out of credit answers HTTP 402 with
+    ``{"error": {"message": "Insufficient Balance"}}``. Without this, every
+    transport failure looks the same in the ledger and the Settings screen
+    advises checking the base URL for an account that simply needs topping up.
+    The text is never used to teach; it only labels a declared fallback.
+
+    Never raises: this runs inside an exception handler, and a malformed error
+    body must not replace one failure with another.
+    """
+    response = getattr(exc, 'response', None)
+    status = getattr(response, 'status_code', None)
+    message = ''
+    if response is not None:
+        try:
+            body = response.json()
+        except (ValueError, AttributeError, TypeError):
+            body = None
+        if isinstance(body, Mapping):
+            err = body.get('error')
+            if isinstance(err, Mapping):
+                message = str(err.get('message') or err.get('detail') or '')
+            elif isinstance(err, str):
+                message = err
+            if not message:
+                message = str(body.get('message') or body.get('detail') or '')
+        if not message:
+            message = ' '.join(str(getattr(response, 'text', '') or '').split())[:limit]
+    # DeepSeek appends "(request_id: <uuid>)" to billing errors. It is useful in a
+    # support ticket and noise in a learner-facing fallback, so keep the reason and
+    # drop the identifier rather than showing a UUID in a chat bubble.
+    message = re.sub(r'\s*\(request_id:\s*[^)]*\)', '', message).strip()
+    parts: list[str] = []
+    if status:
+        parts.append(f'HTTP {status}')
+    if message:
+        parts.append(message[:limit])
+    if not parts:
+        parts.append(type(exc).__name__)
+    return ': '.join(parts)
+
+
 def meter_usage(usage_out, *, started=None, body=None, outcome='ok') -> None:
     """Fill in the caller's usage dict. A no-op when no dict was passed.
 
@@ -133,8 +177,11 @@ def chat(settings, messages: Sequence[dict[str, Any]], *, max_tokens: int = 900,
                 text = (choice.get('message') or {}).get('content')
                 finish_reason = str(choice.get('finish_reason') or '')
                 meter_usage(usage_out, started=started, body=body)
-    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
+    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:
+        detail = error_detail(exc)
         meter_usage(usage_out, started=started, outcome='error')
+        if usage_out is not None:
+            usage_out['error_detail'] = detail
         return None
     if usage_out is not None and finish_reason:
         # Recorded before the emptiness check: "ran out of room" and "said nothing" are
@@ -172,19 +219,26 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
     answer text, because surfacing a chain of thought is a product decision, not a
     provider accident.
 
-    Only the OpenAI-compatible endpoint is wired: that is the protocol DeepSeek and every
-    other hosted provider speak. The Ollama path keeps returning ``None`` rather than
-    pretending tool support it may not have.
+    Both wire flavours are OpenAI-shaped. Ollama exposes its *own* OpenAI-compatible
+    ``/v1/chat/completions`` on the same host as ``/api/chat``; that is the endpoint
+    that carries ``tools`` and returns ``message.tool_calls``. Measured on this host
+    with qwen2.5:1.5b: ``/api/chat`` silently answered in prose even when tools were
+    supplied, while ``/v1/chat/completions`` emitted a well-formed
+    ``whiteboard_write`` call. A local instance therefore has the same teacher-agent
+    capability as a hosted one rather than a prose-only tutor.
     """
     if not available(settings):
         meter_usage(usage_out, outcome='fallback')
         return None
     cfg = model_config.effective(settings)
-    if cfg.provider == 'ollama':
-        meter_usage(usage_out, outcome='fallback')
-        return None
     started = time.monotonic()
     headers = {'Authorization': f'Bearer {cfg.provider_key}'} if cfg.provider_key else {}
+    # Ollama's OpenAI-compatible surface lives under /v1, while its native /api/chat
+    # (used by chat() above) does not carry tools. The preset base URL is bare
+    # ``http://host:11434``; add /v1 unless an administrator already supplied it.
+    completions_base = cfg.provider_url.rstrip('/')
+    if cfg.provider == 'ollama' and not completions_base.endswith('/v1'):
+        completions_base += '/v1'
 
     def _spec(tool: Mapping[str, Any]) -> Mapping[str, Any]:
         """Accept either a raw tool spec ``{'name', 'description', 'parameters'}`` or an
@@ -213,7 +267,7 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
     try:
         with httpx.Client(timeout=cfg.provider_timeout, follow_redirects=False,
                           trust_env=False) as client:
-            response = client.post(cfg.provider_url.rstrip('/') + '/chat/completions', json={
+            response = client.post(completions_base + '/chat/completions', json={
                 'model': cfg.provider_model, 'messages': content_locale.apply(messages),
                 'tools': wire_tools, 'tool_choice': tool_choice,
                 'max_tokens': max_tokens, 'temperature': temperature}, headers=headers)
@@ -222,8 +276,11 @@ def chat_tools(settings, messages: Sequence[dict[str, Any]], *, tools: Sequence[
                 meter_usage(usage_out, started=started, outcome='error')
                 return None
             body = response.json()
-    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError):
+    except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:
+        detail = error_detail(exc)
         meter_usage(usage_out, started=started, outcome='error')
+        if usage_out is not None:
+            usage_out['error_detail'] = detail
         return None
     choice = body.get('choices', [{}])[0]
     message = choice.get('message') or {}

@@ -1460,6 +1460,166 @@ def _import_align(alignment) -> str:
 # --------------------------------------------------------------------- curriculum
 
 
+#: Where each layout puts its boxes: ``(x, y, w, h, point_size)``.
+#:
+#: Before this table every slide used one geometry - title at 48,36 and a single bullets
+#: box at 48,132 - so a title slide, a figure slide and a summary all looked identical and
+#: the deck read as a text document with page breaks. The slide is 960x540 with a 48pt
+#: margin; these are the compositions, not a template file, so nothing depends on a binary.
+LAYOUT_GEOMETRY: dict[str, dict[str, tuple[int, int, int, int, int]]] = {
+    'title': {
+        'title': (48, 210, 864, 110, 44),
+        'bullets': (48, 330, 700, 90, 20),
+    },
+    'section': {
+        'title': (48, 236, 864, 90, 38),
+        'bullets': (48, 336, 700, 80, 18),
+    },
+    'idea': {
+        'title': (48, 36, 864, 78, 34),
+        # A 288pt column could not hold a wide diagram: the source pictures in the shipped
+        # pack are around 1600x650, so at that width the subject of the photograph is a
+        # stripe. Text narrows, the picture gets the room.
+        'bullets': (48, 132, 412, 320, 19),
+        'image': (496, 126, 416, 330),
+    },
+    'two_column': {
+        'title': (48, 36, 864, 78, 34),
+        'bullets': (48, 132, 420, 320, 18),
+        'image': (492, 132, 420, 320),
+    },
+    'figure': {
+        'title': (48, 36, 864, 78, 34),
+        'bullets': (48, 132, 400, 300, 17),
+        'image': (468, 126, 444, 330),
+    },
+    'caption': {
+        'title': (48, 36, 864, 70, 30),
+        'image': (48, 120, 480, 330),
+        'bullets': (548, 120, 364, 330, 17),
+    },
+    'check': {
+        'title': (48, 60, 864, 90, 34),
+        'bullets': (48, 180, 760, 260, 20),
+    },
+    'summary': {
+        'title': (48, 48, 864, 82, 34),
+        'bullets': (48, 156, 820, 300, 19),
+    },
+}
+
+
+#: Geometry for a slide whose job is a photograph, chosen by the picture's own aspect.
+#:
+#: Measured against the decks this project is compared to: their picture slides give the
+#: image 44-50% of the page, while a fixed 444x330 slot is 28% and reads as a thumbnail
+#: pinned to the side. A wide image takes a band across the top and the words go under it;
+#: a tall or square one takes a column and the words sit beside it. Nothing here is
+#: invented per image - the aspect comes from the manifest row the media store already holds.
+PHOTO_GEOMETRY: dict[str, dict[str, tuple[int, int, int, int, int]]] = {
+    'wide': {
+        'title': (48, 34, 864, 64, 30),
+        'image': (48, 110, 864, 254),
+        'bullets': (48, 380, 864, 126, 17),
+    },
+    'tall': {
+        'title': (48, 34, 864, 64, 30),
+        'bullets': (48, 116, 348, 400, 17),
+        'image': (416, 104, 496, 420),
+    },
+    #: The opening slide, when the deck has a picture at all. A cover whose right 43% is the
+    #: image is the pattern the reference decks use, and it is the one slide a reader
+    #: definitely sees. The picture is reused, not re-fetched: a second search would cost
+    #: another request for a worse image.
+    'cover': {
+        'title': (48, 186, 452, 130, 40),
+        'bullets': (48, 334, 452, 130, 19),
+        'image': (548, 0, 412, 540),
+    },
+}
+
+
+#: The slide size as a pair, for the rules below. Deliberately *not* named ``CANVAS``: this
+#: module already has a ``CANVAS`` dict that ``new_deck`` copies into every document and the
+#: exporter reads for the .pptx page size, and reusing the name shadowed it -- which made
+#: ``dict(CANVAS)`` raise and took the whole deck route down. The test that caught it exists
+#: for exactly this reason.
+SLIDE_SIZE = (960, 540)
+
+#: Readability floor, in points, for a deck projected on a wall. A body line below this is
+#: unreadable from the back of a room whatever it looks like on a laptop.
+MIN_BODY_PT = 15
+MIN_TITLE_PT = 28
+#: A credit line is read once, by someone looking for it, so its floor is legibility rather
+#: than projection distance.
+MIN_FOOTNOTE_PT = 11
+MAX_BULLETS = 6
+MAX_BULLET_CHARS = 220
+
+
+def lint(doc: dict) -> list[dict]:
+    """Every way this deck breaks the house style, as data rather than opinion.
+
+    A design standard that lives in a document is obeyed until the next person forgets it.
+    These are the rules this project can actually check, so the deck route can refuse a
+    deck that would ship unreadable, and a client can flag one a teacher edited into that
+    state. Absence of violations is not a claim of beauty - only that the floor holds.
+    """
+    width, height = SLIDE_SIZE
+    problems: list[dict] = []
+
+    def note(slide_id: str, rule: str, detail: str) -> None:
+        problems.append({'slide_id': slide_id, 'rule': rule, 'detail': detail[:200]})
+
+    for slide in doc.get('slides') or []:
+        slide_id = str(slide.get('id') or '')
+        elements = slide.get('elements') or []
+        bullets = 0
+        for element in elements:
+            kind = str(element.get('kind') or '')
+            x = float(element.get('x') or 0)
+            y = float(element.get('y') or 0)
+            w = float(element.get('w') or 0)
+            h = float(element.get('h') or 0)
+            if x < 0 or y < 0 or x + w > width or y + h > height:
+                note(slide_id, 'outside_canvas',
+                     f'{kind} at ({x:.0f},{y:.0f}) {w:.0f}x{h:.0f} leaves the {width}x{height} canvas')
+            style = element.get('style') or {}
+            size = float(style.get('size') or 0)
+            role = str(style.get('role') or '')
+            if kind == 'text':
+                paragraphs = ((element.get('text') or {}).get('paragraphs') or [])
+                count = len(paragraphs)
+                if count > 1:
+                    bullets += count
+                for paragraph in paragraphs:
+                    text = ''.join(str(run.get('text') or '')
+                                   for run in (paragraph.get('runs') or []))
+                    if len(text) > MAX_BULLET_CHARS:
+                        note(slide_id, 'bullet_too_long',
+                             f'{len(text)} characters in one bullet (max {MAX_BULLET_CHARS})')
+                if role == 'footnote':
+                    # A credit line is deliberately quiet; it only has to be legible.
+                    if size and size < MIN_FOOTNOTE_PT:
+                        note(slide_id, 'footnote_too_small',
+                             f'{size:.0f}pt footnote (min {MIN_FOOTNOTE_PT})')
+                elif style.get('bold'):
+                    if size and size < MIN_TITLE_PT:
+                        note(slide_id, 'title_too_small', f'{size:.0f}pt title (min {MIN_TITLE_PT})')
+                elif size and size < MIN_BODY_PT:
+                    note(slide_id, 'body_too_small', f'{size:.0f}pt body (min {MIN_BODY_PT})')
+            if kind == 'image':
+                image = element.get('image') or {}
+                if not str(image.get('sha256') or ''):
+                    note(slide_id, 'image_without_bytes', 'an image element names no content hash')
+                if not str(image.get('attribution') or '').strip():
+                    note(slide_id, 'image_without_credit',
+                         'a photograph must carry its author and licence')
+        if bullets > MAX_BULLETS:
+            note(slide_id, 'too_many_bullets', f'{bullets} bullets on one slide (max {MAX_BULLETS})')
+    return problems
+
+
 def from_presentation(payload: dict, *, owner_id: str = '') -> dict:
     """Turn a ``harness.presentation.compose`` payload into an editable deck.
 
@@ -1474,38 +1634,96 @@ def from_presentation(payload: dict, *, owner_id: str = '') -> dict:
     theme = doc['theme']
     ink = theme['colors']['text']
     accent = theme['colors']['accent1']
+    # The deck's one picture, if it has one, so the cover can share it instead of standing
+    # empty. Chosen before the loop because the cover is built first.
+    deck_visual = next((source.get('visual') for source in payload.get('slides', [])
+                        if str((source.get('visual') or {}).get('sha256') or '')), None)
 
     for source in payload.get('slides', []):
         layout = PRESENTATION_LAYOUT.get(str(source.get('layout') or ''), 'idea')
+        visual = source.get('visual') or {}
+        geometry = LAYOUT_GEOMETRY.get(layout, LAYOUT_GEOMETRY['idea'])
+        if visual.get('sha256') and layout in {'figure', 'caption'}:
+            # The picture decides its own slot. ``width``/``height`` come from the manifest
+            # row, so this is a fact about the asset rather than a guess about it.
+            width = float(visual.get('width') or 0)
+            height = float(visual.get('height') or 0)
+            aspect = (width / height) if width and height else 1.4
+            geometry = PHOTO_GEOMETRY['wide' if aspect >= 1.4 else 'tall']
+        elif layout == 'title' and deck_visual:
+            geometry = PHOTO_GEOMETRY['cover']
+            visual = deck_visual
         slide = new_slide(layout)
         slide['notes'] = str(source.get('speaker_notes') or source.get('narration') or '')[:MAX_NOTES]
+        tx, ty, tw, th, tsize = geometry['title']
+        # The running header and the rule under the title. Measured off the lesson decks this
+        # project is compared against: every page carries a small uppercase strip at the top
+        # and a hairline between the title and the body, and that pair is most of what makes
+        # a page read as a slide rather than a paragraph on a canvas.
+        kicker = ' '.join(str(payload.get('title') or '').split())[:64].upper()
+        if kicker:
+            slide['elements'].append(new_text_element(
+                48, 12, 864, 18, kicker,
+                {'size': 11, 'color': '#8a877f', 'role': 'footnote'}))
         slide['elements'].append(new_text_element(
-            48, 36, 864, 78, str(source.get('title') or ''), {
-                'size': 34, 'bold': True, 'color': ink, 'anchor': 'middle'}))
+            tx, ty, tw, th, str(source.get('title') or ''), {
+                'size': tsize, 'bold': True, 'color': ink, 'anchor': 'middle'}))
+        if layout not in {'title', 'section', 'blank'}:
+            slide['elements'].append({
+                'id': _new_id('el'), 'kind': 'shape', 'shape': 'line',
+                'x': tx, 'y': ty + th + 4, 'w': tw, 'h': 0.0, 'rotation': 0.0, 'z': 1,
+                'style': {**DEFAULT_TEXT_STYLE, 'stroke': '#ded9d0', 'fill': None}})
         bullets = [str(b) for b in (source.get('bullets') or []) if str(b).strip()]
+        if len(bullets) > MAX_BULLETS:
+            # Over the layout's capacity the extras go to the notes, not the floor: a ninth
+            # bullet is not deleted, it is moved somewhere a presenter can still read it.
+            slide['notes'] = (slide['notes'] + '\n\n' + ' '.join(bullets[MAX_BULLETS:]))[:MAX_NOTES]
+            bullets = bullets[:MAX_BULLETS]
+        bullets = [b if len(b) <= MAX_BULLET_CHARS
+                   else b[:MAX_BULLET_CHARS - 1].rstrip() + '…' for b in bullets]
+        bx, by, bw, bh, bsize = geometry.get('bullets', (tx, ty + th + 12, tw, 200, 18))
         if bullets:
             paragraphs = [{'runs': [{'text': b, 'style': {}}], 'level': 0,
                            'align': 'left', 'line_spacing': 1.15} for b in bullets]
             slide['elements'].append({
-                'id': _new_id('el'), 'kind': 'text', 'x': 48, 'y': 132, 'w': 560, 'h': 320,
-                'rotation': 0.0, 'z': 1, 'style': {**DEFAULT_TEXT_STYLE, 'size': 19},
+                'id': _new_id('el'), 'kind': 'text', 'x': bx, 'y': by, 'w': bw, 'h': bh,
+                'rotation': 0.0, 'z': 1,
+                'style': {**DEFAULT_TEXT_STYLE, 'size': bsize, 'anchor': 'top'},
                 'text': {'paragraphs': paragraphs}})
         formula = str(source.get('formula') or '').strip()
         if formula:
+            # Directly under the text it belongs to, rather than pinned to y=452: on a
+            # caption layout that fixed row landed inside the picture.
             slide['elements'].append(new_text_element(
-                48, 452, 560, 48, formula, {'size': 20, 'italic': True, 'color': accent}))
-        visual = source.get('visual') or {}
+                bx, min(by + bh + 8, 492), bw, 44, formula,
+                {'size': max(14, bsize + 1), 'italic': True, 'color': accent}))
         if visual.get('sha256'):
-            slide['elements'].append({
-                'id': _new_id('el'), 'kind': 'image', 'x': 624, 'y': 132, 'w': 288, 'h': 320,
-                'rotation': 0.0, 'z': 2, 'style': dict(DEFAULT_TEXT_STYLE),
-                'image': {'sha256': visual['sha256'], 'fit': 'contain',
-                          'alt': str(visual.get('title') or ''),
-                          'attribution': str(visual.get('attribution') or '')}})
+            if 'image' not in geometry:
+                # A layout with no picture slot would have it land on the title. Say so in
+                # the notes instead of drawing a collision nobody can explain later.
+                slide['notes'] = (slide['notes'] + f'\n\n[picture not placed: the {layout} '
+                                  f'layout has no image slot] '
+                                  f'{str(visual.get("attribution") or "")}')[:MAX_NOTES]
+            else:
+                ix, iy, iw, ih = geometry['image'][:4]
+                # A cover band is meant to run edge to edge; an inner figure is meant to be
+                # seen whole. ``cover`` crops, ``contain`` letterboxes, and the choice is a
+                # property of the slot rather than of this particular picture.
+                fit = 'cover' if (layout == 'title' and deck_visual) else 'contain'
+                slide['elements'].append({
+                    'id': _new_id('el'), 'kind': 'image', 'x': ix, 'y': iy, 'w': iw, 'h': ih,
+                    'rotation': 0.0, 'z': 2, 'style': dict(DEFAULT_TEXT_STYLE),
+                    'image': {'sha256': visual['sha256'], 'fit': fit,
+                              'alt': str(visual.get('title') or ''),
+                              'attribution': str(visual.get('attribution') or '')}})
         citation = str(source.get('citation') or '').strip()
         if citation:
+            # ``role`` is what lets the linter tell a 12pt footnote from a 12pt body line:
+            # a credit line is meant to be quiet, and holding it to the projected-reading
+            # floor would force every deck to shout its sources.
             slide['elements'].append(new_text_element(
-                48, 506, 864, 26, citation, {'size': 12, 'color': '#5C6A60'}))
+                48, 506, 864, 26, citation,
+                {'size': 12, 'color': '#5C6A60', 'role': 'footnote'}))
         doc['slides'].append(slide)
 
     return normalise_document(doc, owner_id=owner_id)
