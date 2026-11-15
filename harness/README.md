@@ -6,10 +6,16 @@ data — across a **native macOS app**, a **static web workbench**, and a shared
 **FastAPI backend**. Every external learning resource (textbook, image, video,
 simulation) is gated by a single fail-closed licence policy before it is shown.
 
-> Verified state (2026-11-14): the **native journey gate is all-green — 10/10 journeys
-> pass**, `appExitCode=0`, backend database verified. See
-> [`outputs/native-qa/journey-full-10/`](outputs/native-qa/journey-full-10) and the
-> *Native journey gate* section below.
+> **Verified state**
+>
+> - **2026-11-15 — Closed Alpha**: end-to-end gate **47/47** on a real AP Psychology
+>   course with hard "no fake pass" assertions; backend suite **2451 passed /
+>   0 failed / 2 skipped**; frozen backend smoke **11/11**. See
+>   [*Test evidence*](#test-evidence) below and
+>   [`docs/ALPHA_VERDICT_2026-11-15.md`](docs/ALPHA_VERDICT_2026-11-15.md).
+> - **2026-11-14 — native journey gate**: all-green **10/10 journeys**, `appExitCode=0`,
+>   backend database verified ·
+>   [`outputs/native-qa/journey-full-10/`](outputs/native-qa/journey-full-10).
 
 ---
 
@@ -167,6 +173,53 @@ with zero weakened assertions.
 
 The wrapper reads `journeys-events.json` (not a stub) and ANDs it with
 `journeyGate.allGreen`, so a passing DB registration cannot mask a failed UI journey.
+
+---
+
+## Test evidence
+
+Every number below comes from a reproducible command and a machine-readable/log
+artifact, not from the presence of a file. Run them from `harness/` unless noted.
+
+| Gate | Result | Reproduce | Evidence |
+| --- | --- | --- | --- |
+| Closed-Alpha end-to-end | **47/47 checks**, 0 failed steps | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` | `outputs/alpha_e2e_evidence.json` |
+| Backend full suite | **2451 passed / 0 failed / 2 skipped** (19m33s) | `cd backend && env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q --basetemp=.pytest-basetemp-XXXX -p no:cacheprovider` | `outputs/test_suite_2026-11-15.json`, `backend/.tmp-full-suite-1115-clean.log` |
+| Frozen backend smoke | **11/11** | `python3 scripts/package.py --backend-only --allow-template-legal` | `outputs/closed-beta-2026-11-15/` |
+| Native journey gate | **10/10 journeys**, `appExitCode=0` | see *Native journey gate* above | `outputs/native-qa/journey-full-10/` |
+| Capability register | 47 implemented / 12 partial / 2 external | — | `docs/feature_verification_register.json` |
+
+The gate results and the register are committed, but the raw evidence under `outputs/`
+and `*.log` is intentionally gitignored (local build/QA artifacts). The numbers above
+are therefore embedded in this README and in the tracked
+`docs/ALPHA_VERDICT_2026-11-15.md`; the evidence paths in the table are where the raw
+artifacts land when you reproduce a run locally.
+
+The E2E gate deliberately rejects "HTTP 200 but nothing really happened": it requires a
+model-backed answer, both `stage_surface` **and** `whiteboard_write` dispatched and
+successful, real MP3 bytes from TTS, `transport=stream` from ASR, attribution on shipped
+images, and a cross-account 404. The course source clears the builder's real thresholds
+(2 paragraphs / 80 words / 4 concepts).
+
+Two test-environment notes, stated plainly because they were real failures on the way
+to green, not swept aside:
+
+- The suite is run with `PYTHONPATH` and `NODE_OPTIONS` stripped. The host injects a
+  Python `sitecustomize.py` broker shim and a Node `--require` preload; a 16-minute run
+  made the Node broker's "execution capability expired" produce 5 false failures in
+  `tests/test_web_telemetry_helper.py`. That module passes 7/7 both in isolation and
+  with the preload stripped, and its assertions were **not** weakened. The probe now
+  removes `NODE_OPTIONS` from its own subprocess.
+- An earlier full run had 3 assertion-drift failures from the `Luminfest` → `Luminest`
+  brand rename plus beta cohort fields; those were fixed in `capabilities.py` and its
+  tests (23/23). Failure counts across the three full runs: **3 → 5 → 0**, each
+  attributed, none skipped by just re-running.
+
+These gates are not a claim that every feature is complete. The register still lists
+12 `partial` and 2 `external` capabilities (duplex voice, browser window stream, email
+verification, teacher clone, project workflows and others); mindmap/flashcards had their
+**media pipeline** fixed, while their presentation remains an SVG tree and text cards.
+The full verdict is in `docs/ALPHA_VERDICT_2026-11-15.md`.
 
 ---
 
