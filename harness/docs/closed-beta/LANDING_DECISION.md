@@ -12,7 +12,7 @@ two have **no exact on-disk match** — recorded as unknown rather than invented
 | **today's recreated version (disliked)** | `outputs/luminest-beta/` **and** `outputs/luminest-download-site/` | 0.85 | both created 2026-11-15; `luminest-beta/` has **no `index.html`** (only png + privacy/terms) → blank page; the download site says "learning infrastructure for thinking" |
 | **base44 version** | no exact match | 0.0 | searched `outputs/**`, `reference/**`, `LUMINEST-WEBSITE-PROMPT-PACK.md`, `05_LANDING_PAGE_PROMPT.md`; no base44-named asset. Closest stylistic candidates are the dark generative-UI landings below |
 | **ploy version** | no exact match | 0.0 | same search; no ploy-named asset. `outputs/vela-landing/` is an **empty** directory |
-| **heysristotle like version** | no exact match; closest `outputs/learnyourway-replica/index.html` | 0.45 | Google "Learn Your Way — Immersive Text" 1:1 replica with a conversational/immersive reading surface; `outputs/stitch-landing/` and `outputs/weave-landing/` are dark "Design with AI" generative-UI pages |
+| **conversational / immersive-reading reference** | no exact match; closest `outputs/learnyourway-replica/index.html` | 0.45 | Google "Learn Your Way — Immersive Text" 1:1 replica with a conversational/immersive reading surface; `outputs/stitch-landing/` and `outputs/weave-landing/` are dark "Design with AI" generative-UI pages |
 
 **Not guessed.** The two unmatched names are reported as unknown with the paths
 searched. If those variants live outside this workspace, point me at them and
@@ -24,10 +24,11 @@ I will classify and port them.
 variant with (a) a complete editorial structure, (b) a documented honest-claims
 ledger, (c) real legal pages, and (d) design tokens that are already the product's
 visual language. Tengyi said he would consider the initial or the
-heysristotle-like version more, so **both are delivered live**, not just described:
+conversational / immersive-reading reference more, so **both are delivered live**,
+not just described:
 
 - `/` → Design A, the original editorial hero.
-- `/?variant=aristotle` → Design B, a Socratic-conversation hero carrying the
+- `/?variant=conversation` → Design B, a conversational hero carrying the
   "it asks the question you skipped" idea from the immersive-text replica,
   explicitly labelled *"Illustrative dialogue — not a live model"* so no
   capability is implied.
@@ -67,7 +68,7 @@ See `DISTRIBUTION.md` for the distribution contract.
 
 Both designs are **live and verified**, not described. The switch is the query
 parameter only (`index.html:306`), so locking the default is a one-line edit:
-`params.get('variant') === 'aristotle'` → default to `initial` by removing the
+`params.get('variant') === 'conversation'` → default to `initial` by removing the
 branch, or invert the condition to make the conversational hero the default.
 
 Verified against the running local control server on `http://127.0.0.1:18799`:
@@ -75,14 +76,15 @@ Verified against the running local control server on `http://127.0.0.1:18799`:
 | Route | Result |
 | --- | --- |
 | `/` (Design A, initial) | 200, 25 011 bytes |
-| `/?variant=aristotle` (Design B) | 200, 25 011 bytes, JS-switched hero |
+| `/?variant=conversation` (Design B) | 200, 25 011 bytes, JS-switched hero |
 | `/app/`, `/app/manifest.webmanifest`, `/app/sw.js` | 200 / 200 / 200 (PWA shell real) |
 | `/agreement.html`, `/INSTALL.txt`, `/download-manifest.json` | 200 / 200 / 200 |
 | `/api/health`, `/api/beta/config`, `/api/beta/collect/schema`, `/api/updates/manifest.json` | 200 / 200 / 200 / 200 |
 
 **Recommendation:** keep Design A as the shipped default. Tengyi said he would
-consider the initial *or* the heysristotle-like version; Design A is the only one
-with the complete editorial structure, honest-claims ledger and real legal pages.
+consider the initial *or* the conversational / immersive-reading reference;
+Design A is the only one with the complete editorial structure, honest-claims
+ledger and real legal pages.
 Design B stays one click away. The final aesthetic pick is Tengyi's — the docs do
 not pretend the decision has been made for him.
 
@@ -92,3 +94,33 @@ not pretend the decision has been made for him.
 appId `wbapp_3EiXiwaWSovkxwc1HX78j5`, including one from a clean directory outside
 the workspace with no `.genie` / `applications.yaml` bindings. There is **no public
 link** as of this revision. See `harness/docs/closed-beta/PUBLISH_BLOCKER.md`.
+
+## Brand scrub (2026-11-15, Tengyi's instruction)
+
+> "do not make any aristotle text/str inside the website/html"
+
+Both designs stay live, but **no third-party product or philosopher name appears
+anywhere in the shipped site**. Concretely:
+
+| Before | After |
+| --- | --- |
+| `?variant=aristotle` | `?variant=conversation` |
+| JS condition `'aristotle'` | `'conversation'` |
+| code comment `"hey-...-like" hero` | `Design B: conversational hero` |
+| hero lead `A Socratic reading companion: ...` | `It does not hand over the answer. It finds the one step your reasoning left out and asks about that.` |
+| `?variant=initial` back-link | unchanged (already neutral) |
+
+The Design B hero keeps its content — "It asks the question you skipped.", the
+illustrative dialogue labelled *"Illustrative dialogue — not a live model"*, and
+the Design A / Design B switch. Only the naming changed.
+
+**Guard against reintroduction:** `harness/scripts/package_beta.py` now runs
+`assert_no_banned_brand()` as the last packaging step. It scans every shipped text
+file (`.html/.htm/.txt/.json/.js/.css/.py/.webmanifest/.svg/.md`) for
+`aristotle`, `heysristotle`, `socratic` (case-insensitive) and raises instead of
+shipping. Verified both ways: clean site → `0 banned strings`; injecting a file
+containing the string → `RuntimeError` naming the exact file and line.
+
+All three site copies were updated (`outputs/closed-beta-site/`,
+`/Users/tengyi/luminest-beta-public`,
+`/Users/tengyi/WorkBuddy AI/luminest-beta-publish`).

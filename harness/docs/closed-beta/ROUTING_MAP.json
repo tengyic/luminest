@@ -13,7 +13,7 @@
     },
     "landing": {
       "items": ["B5", "B10"],
-      "handler_spec": "Classify all six landing variants, finalise the design from the initial version with a live aristotle-style alternate, and produce the publishable site plus link.",
+      "handler_spec": "Classify all six landing variants, finalise the design from the initial version with a live conversational alternate, and produce the publishable site plus link.",
       "files": ["outputs/closed-beta-site/**", "harness/docs/closed-beta/LANDING_DECISION.md"],
       "result": "site assembled; variants mapped with confidence; BOTH landing designs live and smoke-tested. Public link NOT published: sites deploy returned SITES_APP_NOT_FOUND / retryable:false for deleted appId wbapp_3EiXiwaWSovkxwc1HX78j5 on three attempts. See PUBLISH_BLOCKER.md"
     },
@@ -46,7 +46,7 @@
     "email_auth": "identifier-only, NO verification email; share code is the credential (Mailer has no SMTP on a small device)",
     "billing": "none; HARNESS_ALPHA_FREE=1 plus billing_required:false in the capability response",
     "brand": "Luminest for user-visible strings; internal identifiers preserved; one-command revert available",
-    "landing": "initial version as default, ?variant=aristotle as the live alternate",
+    "landing": "initial version as default, ?variant=conversation as the live alternate (shipped site carries no third-party brand strings)",
     "cross_platform": "web version / PWA is the real path for iPad, Intel Mac, older macOS, Windows and Linux"
   },
   "merge_order": ["classifier", "access", "landing", "distribution", "webclient", "verify", "deploy"],
