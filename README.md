@@ -170,6 +170,10 @@ Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evi
 
 | Check | Date | Covers | Commit | Result |
 |---|---|---|---|---|
+| **Closed-Alpha end-to-end gate** | 2026-11-15 | A real AP Psychology course, registration → analysis report, over HTTP | `4a83d86` | **47 / 47 checks passed**, 0 failed steps. Rejects an HTTP-200-only pass: model-backed answer, `stage_surface` + `whiteboard_write` both dispatched, real MP3, ASR `transport: stream`, shipped-image attribution, cross-account 404. [Evidence](docs/evidence/closed-alpha-2026-11-15/) |
+| Backend suite — **Closed-Alpha final** | 2026-11-15 | all backend tests, 2,453 collected, one process | `4a83d86` | **2,451 passed / 0 failed / 2 skipped**, 19 m 33 s, `PYTHONPATH`/`NODE_OPTIONS` shims excluded. [Log, json and attribution](docs/evidence/closed-alpha-2026-11-15/) |
+| Frozen backend smoke | 2026-11-15 | `package.py --backend-only`, frozen binary | `4a83d86` | **11/11** — produced the 72 MB arm64 bundle whose sha256 is `52b4a5f5…c28008`; unchanged by the rows below |
+| Native UI layer (gate layer 3) — **supersedes the 2026-11-12 row below** | 2026-11-14 | 10 golden journeys in the rebuilt real app | `60a70bd` | **10/10** — `journeyGate.allGreen`, `appExitCode=0`, `databaseVerified: true`. [Raw summary](docs/evidence/closed-alpha-2026-11-15/native-run-summary-2026-11-14.json) |
 | Backend suite — shipping branch, **after** the fix | 2026-11-12 | all 122 test files, 2,291 collected | `c35d24f` | **2,289 passed / 0 failed / 2 skipped**, 8 warnings, 14 m 49 s, `PYTEST_EXIT=0`. The two skips are explicit opt-in live-provider smokes. [Raw log, collection and reproduction](docs/evidence/full-suite-2026-11-12/) |
 | Backend suite — shipping branch, before the fix | 2026-11-11 | all 122 test files, 2,291 collected | `ab8bcda` | **2,286 passed / 3 failed / 2 skipped.** All three failures were real and were fixed in `a7bfb6d`; the aggregate after the fix is the row above, not an inference |
 | Backend suite — `main` | 2026-11-11 | all 101 test files, 1,838 collected | `bbbe2e4` | **1,835 passed / 1 failed / 2 skipped.** The one failure is `test_packaging_manifest` comparing `requirements.txt` against the *local* venv (Pillow 13.0.0 installed vs 12.3.0 declared, python-multipart 0.0.31 vs 0.0.22) — an environment artefact, not code on `main` |
@@ -177,9 +181,21 @@ Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evi
 | First-person acceptance run | 2026-11-11 | 29 steps, fresh database, unseen topic, provider explicitly unconfigured | `a7bfb6d` | **29 / 29 steps passed** |
 | Native UI layer (gate layer 3) | 2026-11-12 | 10 golden journeys in the rebuilt real app, with an isolated backend and database | `c35d24f` | **NOT GREEN — 6 passed / 1 blocked / 3 failed / 0 gaps**, 3 m 03 s, `databaseVerified: true`. J4 is blocked (no review due on a fresh account); J8/J9/J10 failed. [Evidence and per-journey notes](docs/evidence/native-layer3-2026-11-12/) |
 
+The four newest rows above are from the shipping branch `feature/a11y-i18n`
+(`4a83d86`, plus `60a70bd` for the native fix), **not** from `main` — the same
+branch/commit convention as the older `c35d24f` row. Their raw, redacted outputs and
+the per-number attribution are in [`docs/evidence/closed-alpha-2026-11-15/`](docs/evidence/closed-alpha-2026-11-15/). The 2026-11-12 native row is kept as history; it was superseded by the 10/10 run. The capability register still lists 12 `partial` and 2 `external` items, so no row here claims full coverage or a published beta link.
+
 Reproduce, in order:
 
 ```sh
+# Closed-Alpha final suite (the 2026-11-15 row: 19m33s). Both host shims must be
+# excluded: PYTHONPATH injects the broker sitecustomize.py, NODE_OPTIONS injects a
+# Node preload whose broker credential expires on a long run (5 false failures).
+cd harness/backend
+env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q \
+  --basetemp=.pytest-basetemp-XXXX -p no:cacheprovider
+
 # the full suite, one process (the 2026-11-12 row: 14m49s on this host).
 # TMPDIR and --basetemp must be inside the workspace; PYTHONPATH must be unset.
 mkdir -p outputs/qa/tmp

@@ -1,0 +1,648 @@
+{
+  "accessTokenTtlSeconds": null,
+  "appBinary": {
+    "mtime": 1794620996.8574188,
+    "path": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/native/.build/arm64-apple-macosx/release/LearningHarness",
+    "sha256": "525f181d12e1cfce4b60a474daee95b7db01e54101fdd4902799ce21996fcb6d",
+    "size": 16688528
+  },
+  "appExitCode": 0,
+  "appPID": 91118,
+  "backendPID": 91060,
+  "backendPython": "/Users/tengyi/.workbuddy/binaries/python/versions/3.14.3/bin/python3.14",
+  "captureMode": false,
+  "capturePages": "",
+  "checks": {
+    "actualAssistantReplyRendered": false,
+    "actualAttemptFeedbackRendered": false,
+    "actualOptionAndReasoningPropagated": false,
+    "actualProjectSubmissionAndReflection": false,
+    "actualUserMessagePersisted": false,
+    "backendIssuedSignedInSession": true,
+    "enrolledCourseMatchesRequested": true,
+    "explicitActivityConsentSaved": true,
+    "goalFieldPropagated": false,
+    "isolatedDatabaseExists": true,
+    "lastHeartbeatRecorded": true,
+    "onboardingCompletedThroughRealUi": true,
+    "realForegroundHeartbeat": true,
+    "realPracticeAttempt": true,
+    "registeredNameMatches": true,
+    "registeredPasswordMatchesRealFieldInput": true,
+    "trainingConsentRemainsSeparate": true,
+    "uniqueAccount": true
+  },
+  "command": [
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/native/.build/arm64-apple-macosx/release/LearningHarness",
+    "--ui-test",
+    "--native-qa",
+    "--qa-output",
+    "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/outputs/native-qa/journey-full-10",
+    "--qa-endpoint",
+    "8777"
+  ],
+  "databaseCounts": {
+    "admin_audit_log": 0,
+    "assessments": 0,
+    "attempts": 1,
+    "auth_tokens": 1,
+    "beta_invites": 0,
+    "cohorts": 0,
+    "consent_ledger": 2,
+    "created_courses": 1,
+    "experiment_assignments": 0,
+    "experiment_exposures": 0,
+    "experiments": 0,
+    "feedback": 0,
+    "feedback_events": 0,
+    "flashcards": 12,
+    "harness_runs": 0,
+    "invite_redemptions": 0,
+    "learning_states": 1,
+    "memory_notes": 2,
+    "messages": 0,
+    "perspective_reviews": 0,
+    "playground_runs": 0,
+    "procedure_runs": 1,
+    "projects": 38,
+    "quota_counters": 3,
+    "quota_policies": 0,
+    "rate_buckets": 6,
+    "receipts": 1,
+    "refresh_tokens": 1,
+    "schema_version": 1,
+    "server_secrets": 0,
+    "teacher_style_profiles": 0,
+    "telemetry_events": 6,
+    "tokens": 1,
+    "training_consent_ledger": 0,
+    "unit_grades": 0,
+    "usage_daily_rollup": 0,
+    "usage_ledger": 1,
+    "user_preferences": 1,
+    "users": 1,
+    "waitlist_signups": 0
+  },
+  "databaseVerified": true,
+  "driver": "in-process native AppKit accessibility (no external XCTest)",
+  "expectedAccount": {
+    "email": "native-20261114-095823-af9e1d81@redacted.test",
+    "name": "Native QA 20261114-095823-af9e1d81"
+  },
+  "faultInjection": null,
+  "health": {
+    "harness": {
+      "artefacts": 11,
+      "generation_mode": "openai:deepseek-flash",
+      "memory_half_life_days": 21.0,
+      "memory_kinds": [
+        "episodic",
+        "semantic",
+        "procedural"
+      ],
+      "moves": 9,
+      "sandbox_boundaries": [
+        "path-confinement",
+        "static-guard",
+        "runtime-audit-hook",
+        "seatbelt"
+      ],
+      "tools": 51
+    },
+    "model_status": {
+      "commercial_ready": false,
+      "domain": "mathematics; memory model is principled, mastery prior is not calibrated",
+      "name": "FSRS-6 DSR memory model (upstream defaults v6.3.2) + heuristic BKT mastery",
+      "trained": false
+    },
+    "ready": true,
+    "schema_version": 11,
+    "service": "luminfest-learning-harness",
+    "tutor": {
+      "api_key_set": true,
+      "availability": "configured; failures reported at request time",
+      "model": "deepseek-flash",
+      "provider": "openai",
+      "source": "environment",
+      "state": "configured"
+    }
+  },
+  "journeyGate": {
+    "allGreen": true,
+    "blocked": [],
+    "failed": [],
+    "gaps": [],
+    "missing": [],
+    "passed": [
+      "J1",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6",
+      "J7",
+      "J9",
+      "J10",
+      "J8"
+    ],
+    "total": 10
+  },
+  "journeys": {
+    "account": "native-20261114-095823-af9e1d81@redacted.test",
+    "driver": "in-process AXUIElement against the running SwiftUI app",
+    "generatedAt": "2026-11-14T02:02:09Z",
+    "journeys": [
+      {
+        "checks": [
+          {
+            "detail": "auth.name present before any action",
+            "name": "authentication form is the first surface",
+            "ok": true
+          },
+          {
+            "detail": "signed-in UI observed after pressing Register",
+            "name": "registration replaced the auth form",
+            "ok": true
+          },
+          {
+            "detail": "setup sheet no longer present",
+            "name": "onboarding dismissed",
+            "ok": true
+          },
+          {
+            "detail": "YOUR PLAN visible on the today surface",
+            "name": "a plan is shown after onboarding",
+            "ok": true
+          },
+          {
+            "detail": "nav.today or compact equivalent present",
+            "name": "sidebar navigation is reachable",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 30.623912930488586,
+        "id": "J1",
+        "notes": [],
+        "requirement": "A stranger can install, register and reach a personalised plan.",
+        "status": "pass",
+        "title": "First launch, registration and onboarding"
+      },
+      {
+        "checks": [
+          {
+            "detail": "lesson chrome rendered",
+            "name": "the enrolled course surfaces a concept",
+            "ok": true
+          },
+          {
+            "detail": "present: lesson.read, lesson.deck, lesson.lecture",
+            "name": "lesson actions are offered",
+            "ok": true
+          },
+          {
+            "detail": "lesson.read enabled",
+            "name": "read-aloud control is present and enabled",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 16.69625198841095,
+        "id": "J2",
+        "notes": [],
+        "requirement": "A learner can open a lesson for the enrolled course and see its content.",
+        "status": "pass",
+        "title": "Selecting a course and starting a lesson"
+      },
+      {
+        "checks": [
+          {
+            "detail": "question.option.a present",
+            "name": "a practice question is shown with options",
+            "ok": true
+          },
+          {
+            "detail": "feedback text observed after submit",
+            "name": "feedback names the correct answer or explains the gap",
+            "ok": true
+          },
+          {
+            "detail": "question.next present",
+            "name": "the learner can advance to another question",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 28.739711046218872,
+        "id": "J3",
+        "notes": [],
+        "requirement": "A submitted answer produces evaluated feedback and is recorded.",
+        "status": "pass",
+        "title": "Completing a practice question and receiving grading feedback"
+      },
+      {
+        "checks": [
+          {
+            "detail": "queue heading observed",
+            "name": "the review queue claims to be backend-scheduled",
+            "ok": true
+          },
+          {
+            "detail": "empty-state copy shown with a disabled Start review",
+            "name": "the empty queue is explained",
+            "ok": true
+          },
+          {
+            "detail": "deck built and the grade controls rendered",
+            "name": "a card built in the app becomes due and can be graded",
+            "ok": true
+          },
+          {
+            "detail": "deck is non-empty after grading",
+            "name": "the scheduler returns a next due date instead of a dead end",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 26.660351991653442,
+        "id": "J4",
+        "notes": [],
+        "requirement": "A completed review returns a next due date rather than a dead end.",
+        "status": "pass",
+        "title": "Completing a review and receiving the next scheduled review"
+      },
+      {
+        "checks": [
+          {
+            "detail": "project.text holds the typed marker",
+            "name": "the draft was typed into the real editor",
+            "ok": true
+          },
+          {
+            "detail": "field still holds the draft",
+            "name": "the draft is still there after leaving and returning",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 11.116613984107971,
+        "id": "J5",
+        "notes": [],
+        "requirement": "Draft text survives navigating away and back without an explicit save.",
+        "status": "pass",
+        "title": "Leaving and reopening an autosaved project"
+      },
+      {
+        "checks": [
+          {
+            "detail": "course.create entry point present in the shell header",
+            "name": "the native app offers course creation",
+            "ok": true
+          },
+          {
+            "detail": "Preview ready: 5 concepts, 5 graph nodes and 20 questions. Nothing has been saved yet \u2014 you can still edit your notes.",
+            "name": "a preview shows concepts without persisting a course",
+            "ok": true
+          },
+          {
+            "detail": "course_id: mine_c511d6c7eb",
+            "name": "the app reports a stored course id",
+            "ok": true
+          },
+          {
+            "detail": "status names the enrolment step",
+            "name": "creation is reported as owned but not yet active",
+            "ok": true
+          },
+          {
+            "detail": "enrolment confirmed and the plan reloaded",
+            "name": "the authored course becomes the active course",
+            "ok": true
+          },
+          {
+            "detail": "sidebar reachable after the sheet closes",
+            "name": "the app is still usable after authoring",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 21.995164036750793,
+        "id": "J6",
+        "notes": [],
+        "requirement": "A learner can author a course in the app and reopen it.",
+        "status": "pass",
+        "title": "Creating a course and accessing it again"
+      },
+      {
+        "checks": [
+          {
+            "detail": "new tutor text rendered",
+            "name": "the tutor answers instead of returning an empty bubble",
+            "ok": true
+          },
+          {
+            "detail": "grounding label or curriculum attribution visible",
+            "name": "the reply is labelled when it is not a live model",
+            "ok": true
+          },
+          {
+            "detail": "no stack trace, status code or request id on screen",
+            "name": "no raw provider exception is shown to the learner",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 21.39370906352997,
+        "id": "J7",
+        "notes": [],
+        "requirement": "A missing or failing model still yields a grounded answer, never an empty reply.",
+        "status": "pass",
+        "title": "Using the tutor offline and handling provider failure"
+      },
+      {
+        "checks": [
+          {
+            "detail": "SUBMITTED ANSWERS ONLY caption present",
+            "name": "the measured chart is labelled as submissions only",
+            "ok": true
+          },
+          {
+            "detail": "empty-state copy absent after practice in J3",
+            "name": "real attempts replace the no-practice empty state",
+            "ok": true
+          },
+          {
+            "detail": "an engagement section exists and is not conflated with mastery",
+            "name": "engagement is named separately from learning",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 11.080289959907532,
+        "id": "J9",
+        "notes": [],
+        "requirement": "Insights separates measured outcomes from activity, and says which is which.",
+        "status": "pass",
+        "title": "Viewing Insights and distinguishing learning from engagement"
+      },
+      {
+        "checks": [
+          {
+            "detail": "confirmation observed after enabling activity consent",
+            "name": "a consent change is saved and confirmed",
+            "ok": true
+          },
+          {
+            "detail": "settings.export present and enabled",
+            "name": "data export is offered to the learner",
+            "ok": true
+          },
+          {
+            "detail": "confirmation sheet shown",
+            "name": "deletion requires an explicit confirmation sheet",
+            "ok": true
+          },
+          {
+            "detail": "Delete permanently enabled after the exact phrase was typed",
+            "name": "the destructive action enables only after the exact phrase",
+            "ok": true
+          },
+          {
+            "detail": "sheet dismissed by Cancel",
+            "name": "the confirmation can be abandoned safely",
+            "ok": true
+          },
+          {
+            "detail": "sidebar still reachable",
+            "name": "the account is still signed in after cancelling",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 15.702388048171997,
+        "id": "J10",
+        "notes": [],
+        "requirement": "Consent is changeable, export is reachable, and deletion is gated deliberately.",
+        "status": "pass",
+        "title": "Changing consent, exporting data and deleting an account"
+      },
+      {
+        "checks": [
+          {
+            "detail": "lesson.read enabled",
+            "name": "the read-aloud control is enabled",
+            "ok": true
+          },
+          {
+            "detail": "control switched to Stop reading",
+            "name": "pressing read-aloud produces speech or a named reason",
+            "ok": true
+          },
+          {
+            "detail": "lesson.read.status carries the reason",
+            "name": "the outcome is named by the app, not inferred from a caption",
+            "ok": true
+          },
+          {
+            "detail": "sidebar still reachable",
+            "name": "the app is still responsive afterwards",
+            "ok": true
+          }
+        ],
+        "durationSeconds": 29.940616965293884,
+        "id": "J8",
+        "notes": [
+          "Speech started and the control switched to Stop reading."
+        ],
+        "requirement": "Read-aloud either speaks or refuses with a named reason; it never hangs.",
+        "status": "pass",
+        "title": "Using read-aloud and handling unavailable voice services"
+      }
+    ]
+  },
+  "nativeEvidenceFile": "journeys-events.json",
+  "nativeFailures": [],
+  "nativeStatus": "completed",
+  "output": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/outputs/native-qa/journey-full-10",
+  "permissionPolicy": "Owned loopback backend, own app windows only, no app-state mutation fallback, no stored passwords",
+  "port": 8777,
+  "portSelection": "pinned",
+  "requestedCourse": "integrated_math_1",
+  "requestedPort": 8777,
+  "screenshots": [
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "01-after-register-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 55,
+      "stage": "auth",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "02-signed-in-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 74,
+      "stage": "auth",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "03-onboarding-subject-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 74,
+      "stage": "onboarding",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "04-onboarding-goal-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 42,
+      "stage": "onboarding",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "05-onboarding-pace-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 72,
+      "stage": "onboarding",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "06-onboarding-plan-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 274,
+      "stage": "onboarding",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "07-journey-J1-plan-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 284,
+      "stage": "onboarding",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "08-journey-J2-lesson-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 100,
+      "stage": "journey:J2",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "09-journey-J3-feedback-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 184,
+      "stage": "journey:J3",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "10-journey-J4-flashcard-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 113,
+      "stage": "journey:J4",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "11-journey-J5-project-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 152,
+      "stage": "journey:J5",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "12-journey-J6-authoring-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 164,
+      "stage": "journey:J6",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "13-journey-J7-tutor-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 108,
+      "stage": "journey:J7",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "14-journey-J9-insights-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 179,
+      "stage": "journey:J9",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "15-journey-J10-settings-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 77,
+      "stage": "journey:J10",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    },
+    {
+      "capture": "own NSWindow.contentView.cacheDisplay",
+      "file": "16-journey-J8-voice-window-0.png",
+      "height": 1464,
+      "sampledDistinctColors": 96,
+      "stage": "journey:J8",
+      "suspectedBlank": false,
+      "visualValidation": "pending human inspection; pixel diversity is not visual acceptance",
+      "width": 2640,
+      "windowTitle": "Luminfest"
+    }
+  ],
+  "screenshotsPresent": true,
+  "screenshotsSuspectedBlank": false,
+  "stage": "finished",
+  "stateDirectory": "/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/outputs/native-qa/journey-full-10/state",
+  "status": "passed",
+  "timeoutSeconds": 1800.0,
+  "visualReview": "Inspect actual PNG files; presence and pixel checks are not a human visual acceptance claim"
+}

@@ -1,0 +1,488 @@
+{
+  "generated_at": "2026-11-15T14:17:37.014417+00:00",
+  "base": "http://127.0.0.1:8796",
+  "course": "ap_psychology",
+  "concept": "ap_psychology_acquisition_extinction_and_spontaneous_recovery",
+  "model": "configured at runtime by the operator",
+  "checks": 47,
+  "passed": 47,
+  "failed": 0,
+  "failures": [],
+  "steps": [
+    {
+      "name": "health",
+      "method": "GET",
+      "path": "/api/v1/health",
+      "status": 200,
+      "ok": true,
+      "ms": 2,
+      "excerpt": "{\"ready\": true, \"service\": \"luminfest-learning-harness\", \"schema_version\": 11, \"model_status\": {\"name\": \"FSRS-6 DSR memory model (upstream defaults v6.3.2) + heuristic BKT mastery\", \"trained\": false, \"domain\": \"mathematics; memory model is principled, mastery prior is not calibrated\", \"commercial_ready\": false}, \"tutor\": {\"provider\": \"ollama\", \"model\": \"qwen2.5:1.5b\", \"state\": \"configured\", \"source\": \"environment\", \""
+    },
+    {
+      "name": "register teacher (first account)",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": 201,
+      "ok": true,
+      "ms": 54,
+      "excerpt": "{\"token\": \"HDr3IuQLpj_dUZpiw-eaD7I2jBC2sUZqSfGEb35cIQ-fwPP02X3acA\", \"refresh_token\": \"E2-adt-m5dTIJ-baSBw1L_OaI2GFSrT1bU_DBgH5YglImVQtd21AbEaQteCvsH6z\", \"token_type\": \"Bearer\", \"expires_in\": 3600, \"user\": {\"id\": \"6ebb9382-4c26-474e-96db-f5d74f01d84b\", \"name\": \"Alpha Teacher\", \"email\": \"alpha.teacher.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_co"
+    },
+    {
+      "name": "register second learner",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": 201,
+      "ok": true,
+      "ms": 45,
+      "excerpt": "{\"token\": \"WCj1gdjgf6PVD8kDgKlQjfFHzHaFKK1V0CxVDCVDbc9PW7yA3i4Q-Q\", \"refresh_token\": \"-V5-hxLsO6APlIE7rSXYOU7q4kvuZPPoIBEecN30SO4vxJm4w6SQWi8-luyAbLei\", \"token_type\": \"Bearer\", \"expires_in\": 3600, \"user\": {\"id\": \"b4402d10-0d5d-4e81-9c1b-920c61af8524\", \"name\": \"Alpha Learner\", \"email\": \"alpha.learner.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_co"
+    },
+    {
+      "name": "catalogue of courses",
+      "method": "GET",
+      "path": "/api/v1/courses",
+      "status": 200,
+      "ok": true,
+      "ms": 24,
+      "excerpt": "{\"courses\": [{\"id\": \"integrated_math_1\", \"title\": \"Integrated Mathematics I\", \"subject\": \"Mathematics\", \"subject_kind\": \"mathematics\", \"description\": \"A full-year integrated mathematics course: number and quantity, algebra, functions, geometry and measurement, statistics and probability.\", \"expected_weeks\": 36, \"authored\": true, \"uses_symbolic_engine\": true, \"stats\": {\"concepts\": 164, \"edges\": 183, \"sequence_edges\": ",
+      "course_count": 21,
+      "target_present": true
+    },
+    {
+      "name": "enrol in AP Psychology",
+      "method": "PATCH",
+      "path": "/api/v1/me",
+      "status": 200,
+      "ok": true,
+      "ms": 2,
+      "excerpt": "{\"id\": \"6ebb9382-4c26-474e-96db-f5d74f01d84b\", \"name\": \"Alpha Teacher\", \"email\": \"alpha.teacher.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_consent\": false, \"course_id\": \"ap_psychology\", \"onboarding_complete\": true, \"email_verified\": false, \"role\": \"teacher\", \"status\": \"active\", \"cohort_id\": null}"
+    },
+    {
+      "name": "curriculum (concepts + lessons)",
+      "method": "GET",
+      "path": "/api/v1/curriculum",
+      "status": 200,
+      "ok": true,
+      "ms": 9,
+      "excerpt": "{\"concepts\": [{\"id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"title\": \"Acquisition, extinction and spontaneous recovery\", \"unit\": \"Learning\", \"prerequisites\": [\"ap_psychology_classical_conditioning\"], \"summary\": \"Acquisition builds the association, extinction weakens it when the pairing stops, and spontaneous recovery shows the original learning was suppressed rather than erased.\", \"strand\": ",
+      "concepts": 141,
+      "with_lesson": 141
+    },
+    {
+      "name": "course planning",
+      "method": "GET",
+      "path": "/api/v1/plan",
+      "status": 200,
+      "ok": true,
+      "ms": 16,
+      "excerpt": "{\"course\": {\"id\": \"ap_psychology\", \"title\": \"AP Psychology\", \"subject\": \"Psychology\"}, \"goal\": {\"stated\": \"Build real understanding\", \"operational_target\": \"Mastery at or above 0.85 with at least 3 scored attempts on every concept this course offers, met in prerequisite order.\", \"note\": \"The stated goal is your framing; the operational target is what the harness can actually measure. Reaching the target is evidence t"
+    },
+    {
+      "name": "diagnostic gaps",
+      "method": "GET",
+      "path": "/api/v1/diagnostic/gaps",
+      "status": 200,
+      "ok": true,
+      "ms": 4476,
+      "excerpt": "{\"observations_used\": 0, \"graph_nodes\": 164, \"probe\": {\"concept_id\": \"slope_intercept_form\", \"p_known\": 0.4998, \"version_space\": 20000, \"mode\": \"seeded-sample estimate\", \"why\": \"Maximum-entropy probe over the prerequisite lattice (seeded-sample estimate): 20000 consistent knowledge states (sampled) and this concept splits them closest to 50/50 (P(known)=0.50). KST per Doignon & Falmagne 1985; not ALEKS.\", \"title\": \"L"
+    },
+    {
+      "name": "next question (signed receipt)",
+      "method": "GET",
+      "path": "/api/v1/questions/next?mode=practice",
+      "status": 200,
+      "ok": true,
+      "ms": 82,
+      "excerpt": "{\"id\": \"ap_psych-ap_psychology_ageing_and_cognitive_change-0\", \"concept_id\": \"ap_psychology_ageing_and_cognitive_change\", \"concept_title\": \"Ageing and cognitive change\", \"prompt\": \"Which statement best describes Ageing and cognitive change?\", \"options\": [{\"id\": \"a\", \"text\": \"Assimilation fits new experience into an existing schema and accommodation changes the schema, and the tension between them drives stage change."
+    },
+    {
+      "name": "submit attempt + grade it",
+      "method": "POST",
+      "path": "/api/v1/attempts",
+      "status": 200,
+      "ok": true,
+      "ms": 12,
+      "excerpt": "{\"id\": \"6e575a3b-86d1-4a67-a27b-a791e47200fc\", \"correct\": false, \"correct_answer\": \"Fluid abilities decline earlier than crystallised ones, so vocabulary can hold while processing speed falls.\", \"explanation\": \"The correct option is this course's own summary of Ageing and cognitive change. The other options are the summaries of nearby concepts, which is what makes them plausible.\", \"diagnosis\": {\"category\": \"conceptu"
+    },
+    {
+      "name": "gradebook",
+      "method": "GET",
+      "path": "/api/v1/gradebook",
+      "status": 200,
+      "ok": true,
+      "ms": 18,
+      "excerpt": "{\"course_id\": \"ap_psychology\", \"units\": [{\"key\": \"foundations-history-and-approaches-bc235cc0\", \"strand\": \"Foundations\", \"unit\": \"History and approaches\", \"course_id\": \"ap_psychology\", \"concept_count\": 10, \"standards\": [{\"code\": \"history-and-approaches-506cd298.schools-of-thought-f6d044f5\", \"title\": \"Schools of thought\", \"concept_count\": 10, \"answered\": 0, \"correct\": 0, \"score\": null, \"status\": \"insufficient_evidence"
+    },
+    {
+      "name": "learner dashboard",
+      "method": "GET",
+      "path": "/api/v1/dashboard",
+      "status": 200,
+      "ok": true,
+      "ms": 83,
+      "excerpt": "{\"user\": {\"id\": \"6ebb9382-4c26-474e-96db-f5d74f01d84b\", \"name\": \"Alpha Teacher\", \"email\": \"alpha.teacher.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_consent\": false, \"course_id\": \"ap_psychology\", \"onboarding_complete\": true, \"email_verified\": false, \"role\": \"teacher\", \"status\": \"active\", \"cohort_id\": null}, \"diagnostic_complete\": false, \"headlin"
+    },
+    {
+      "name": "learner analytics",
+      "method": "GET",
+      "path": "/api/v1/analytics",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"daily\": [{\"date\": \"2026-11-15\", \"attempts\": 1, \"correct\": 0, \"active_seconds\": 0.0}], \"dimensions\": [{\"name\": \"Retrieval accuracy\", \"value\": 0.0, \"evidence\": \"1 scored retrieval attempts; task-specific observation, not general intelligence.\", \"status\": \"observed\"}, {\"name\": \"Written explanation coverage\", \"value\": 0.0, \"evidence\": \"0 attempts include learner reasoning; presence does not certify reasoning quality.\","
+    },
+    {
+      "name": "TA prepares the class",
+      "method": "POST",
+      "path": "/api/v1/ta/prepare",
+      "status": 200,
+      "ok": true,
+      "ms": 2211,
+      "excerpt": "{\"concept\": {\"id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"title\": \"Acquisition, extinction and spontaneous recovery\", \"course_id\": \"ap_psychology\"}, \"assets\": {\"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"reviews\": [{\"asset\": \"simulation\", \"verdict\": \"fallback\", \"why\": \"No template matched this concept, so the honest concept map was served instead of a sim"
+    },
+    {
+      "name": "compiled lesson plan",
+      "method": "GET",
+      "path": "/api/v1/procedure/ap_psychology_acquisition_extinction_and_spontaneous_recovery",
+      "status": 200,
+      "ok": true,
+      "ms": 4252,
+      "excerpt": "{\"plan\": {\"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"concept_title\": \"Acquisition, extinction and spontaneous recovery\", \"course_id\": \"ap_psychology\", \"profile\": \"default\", \"version\": \"1\", \"hash\": \"dc7ddfc4f7b3769fa491253923031ea3\", \"enabled\": true, \"budget_minutes\": 20, \"total_minutes\": 11, \"blocks\": [{\"order\": 1, \"kind\": \"diagnostic\", \"label\": \"Quick check\", \"role\": \"commitment\""
+    },
+    {
+      "name": "start the lesson (materialise the deck)",
+      "method": "POST",
+      "path": "/api/v1/procedure/ap_psychology_acquisition_extinction_and_spontaneous_recovery/start",
+      "status": 200,
+      "ok": true,
+      "ms": 3532,
+      "excerpt": "{\"run_id\": \"2d0e8e88-3b13-491a-b1ce-e4171d08e5b7\", \"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"concept_title\": \"Acquisition, extinction and spontaneous recovery\", \"course_id\": \"ap_psychology\", \"hash\": \"dc7ddfc4f7b3769fa491253923031ea3\", \"status\": \"active\", \"budget_minutes\": 20, \"total_minutes\": 11, \"blocks\": [{\"order\": 1, \"kind\": \"diagnostic\", \"label\": \"Quick check\", \"role\": \"commi"
+    },
+    {
+      "name": "live course catalog",
+      "method": "GET",
+      "path": "/api/v1/live/catalog",
+      "status": 200,
+      "ok": true,
+      "ms": 7,
+      "excerpt": "{\"version\": \"1\", \"surfaces\": [\"deck\", \"video\", \"whiteboard\", \"chat\"], \"when\": {\"deck\": \"A generated slide deck (exported .pptx) - ordered, revisitable, built from this concept's own authored lesson.\", \"video\": \"A curated, licence-cleared video played in the browser - orientation for a first exposure to a process or a phenomenon.\", \"whiteboard\": \"The shared Stage board, drawn on live - for a relationship that has to b"
+    },
+    {
+      "name": "live turn state",
+      "method": "GET",
+      "path": "/api/v1/live/ap_psychology_acquisition_extinction_and_spontaneous_recovery/state",
+      "status": 200,
+      "ok": true,
+      "ms": 5,
+      "excerpt": "{\"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"concept_title\": \"Acquisition, extinction and spontaneous recovery\", \"run_id\": \"2d0e8e88-3b13-491a-b1ce-e4171d08e5b7\", \"status\": \"active\", \"current_block\": {\"order\": 1, \"kind\": \"diagnostic\", \"label\": \"Quick check\", \"role\": \"commitment\", \"minutes\": 3, \"title\": \"Quick check\", \"purpose\": \"Answer a few questions so the lesson starts from evid"
+    },
+    {
+      "name": "mind map for the course",
+      "method": "GET",
+      "path": "/api/v1/mindmap/course",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"course_id\": \"ap_psychology\", \"tree\": {\"label\": \"AP Psychology\", \"children\": [{\"label\": \"Learning\", \"children\": [{\"label\": \"Acquisition, extinction and spontaneous recovery\", \"children\": []}, {\"label\": \"Biological constraints on conditioning\", \"children\": []}, {\"label\": \"Classical conditioning\", \"children\": []}, {\"label\": \"Generalisation and discrimination\", \"children\": []}, {\"label\": \"Latent learning and cognitive "
+    },
+    {
+      "name": "mind map interactive page",
+      "method": "GET",
+      "path": "/api/v1/mindmap/ap_psychology_acquisition_extinction_and_spontaneous_recovery/html",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"bytes\": 6115, \"preview\": \"<!doctype html>\\n<html lang=\\\"en\\\"><head><meta charset=\\\"utf-8\\\"><title>Acquisition, \"}"
+    },
+    {
+      "name": "flashcards generated",
+      "method": "POST",
+      "path": "/api/v1/flashcards/generate",
+      "status": 200,
+      "ok": true,
+      "ms": 6,
+      "excerpt": "{\"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"created\": 3, \"skipped_duplicate\": [], \"cards\": [{\"id\": \"941dbd22-826b-4735-b3c1-c2f83475d0a3\", \"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"kind\": \"misconception\", \"front\": \"In “Which statement best describes Acquisition, extinction and spontaneous recovery?”, the answer “Ratio schedules count responses"
+    },
+    {
+      "name": "flashcard review session",
+      "method": "GET",
+      "path": "/api/v1/flashcards/session?concept_id=ap_psychology_acquisition_extinction_and_spontaneous_recovery",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"cards\": [{\"id\": \"941dbd22-826b-4735-b3c1-c2f83475d0a3\", \"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"kind\": \"misconception\", \"front\": \"In “Which statement best describes Acquisition, extinction and spontaneous recovery?”, the answer “Ratio schedules count responses and interval schedules count time, and variable schedules resist extinction better than fixed ones.” is wrong. What e"
+    },
+    {
+      "name": "editable deck from the concept",
+      "method": "GET",
+      "path": "/api/v1/deck/from-concept/ap_psychology_acquisition_extinction_and_spontaneous_recovery",
+      "status": 200,
+      "ok": true,
+      "ms": 7915,
+      "excerpt": "{\"id\": \"deck-adceef97ff4f\", \"title\": \"Acquisition, extinction and spontaneous recovery — narrated deck\", \"theme\": {\"name\": \"Luminfest\", \"fonts\": {\"major\": \"Helvetica Neue\", \"minor\": \"Helvetica Neue\"}, \"colors\": {\"background\": \"#FFFFFF\", \"text\": \"#24312A\", \"accent1\": \"#3E7A55\", \"accent2\": \"#47519C\", \"accent3\": \"#C46A3E\", \"accent4\": \"#7A3E8C\", \"accent5\": \"#2F6E68\", \"accent6\": \"#8F6A1F\"}}, \"canvas\": {\"w\": 960.0, \"h\": 54"
+    },
+    {
+      "name": "real .pptx export",
+      "method": "GET",
+      "path": "/api/v1/deck/deck-adceef97ff4f/export.pptx",
+      "status": 200,
+      "ok": true,
+      "ms": 40,
+      "excerpt": "{\"bytes\": 48848, \"preview\": \"PK\\u0003\\u0004\\u0014\\u0000\\u0000\\u0000\\b\\u0000&�o]X��\\u001a\\u0002\\u0000\\u0000�\\u0014\\u0000\\u0000\\u0013\\u0000\\u0000\\u0000[Content_Types].xml͘Ks�@\\f���\\u0014\\u001e_|��%i��\\u001dL\\u000e}���\\f�\\u0007�\"}"
+    },
+    {
+      "name": "whiteboard drawing agent",
+      "method": "POST",
+      "path": "/api/v1/whiteboard-agent/draw",
+      "status": 200,
+      "ok": true,
+      "ms": 4,
+      "excerpt": "{\"status\": \"DRAWN\", \"code\": \"DRAWN\", \"agent\": \"whiteboard-draw-agent\", \"agent_version\": 1, \"node_id\": \"n-3cf484550b\", \"payload\": {\"type\": \"tex\", \"title\": \"Behaviour = f(consequences)\", \"spec\": {\"latex\": \"P(R) = f(S^{R})\", \"display\": true}, \"status\": \"available\", \"provider\": \"bundled\", \"schema\": 1}, \"provenance\": {\"validator\": \"app.harness.visual_specs.clean_visual_payload\", \"storage\": \"app.harness.board.apply_mutatio"
+    },
+    {
+      "name": "image search for the lesson",
+      "method": "POST",
+      "path": "/api/v1/images/for-lesson",
+      "status": 200,
+      "ok": true,
+      "ms": 4285,
+      "excerpt": "{\"concept_id\": \"ap_psychology_acquisition_extinction_and_spontaneous_recovery\", \"outcome\": \"no_images\", \"images\": [{\"slot\": \"concept\", \"block_index\": 1, \"query\": \"Acquisition, extinction and spontaneous recovery\", \"outcome\": \"no_cleared_candidate\", \"seen\": 0, \"accepted\": 0, \"asset\": null, \"rejections\": [], \"notes\": [\"A candidate is a search hit, not a cleared asset. Nothing is downloaded until its own licence has bee",
+      "outcome": "no_images",
+      "images_found": 3
+    },
+    {
+      "name": "MODEL TEACHER TURN (tools + voice)",
+      "method": "POST",
+      "path": "/api/v1/agent/chat",
+      "status": 200,
+      "ok": true,
+      "ms": 1056,
+      "excerpt": "{\"message\": \"Sure, I can help clarify that for you. To start, can you tell me what classical conditioning involves?\", \"finish_reason\": \"completed\", \"events\": [{\"type\": \"turn_start\"}, {\"type\": \"message_delta\", \"text\": \"Sure, I can help clarify that for you. To start, can you tell me what classical conditioning involves?\"}, {\"type\": \"turn_end\", \"reason\": \"completed\", \"content\": \"Sure, I can help clarify that for you. T",
+      "answered_by": "ollama:qwen2.5:1.5b",
+      "tools": [],
+      "speech": {
+        "kind": "explanation",
+        "delivery": "append",
+        "clips": [
+          {
+            "digest": "c8c6a27adf85abbb",
+            "state": "pending",
+            "url": "/api/v1/media/audio/c8c6a27adf85abbb",
+            "format": "mp3",
+            "provider": "voicestudio",
+            "voice": "default",
+            "model": "omnivoice",
+            "speed": 1.0,
+            "tone": "female, middle-aged, low pitch",
+            "truncated": false,
+            "spoken_chars": 102
+          }
+        ]
+      },
+      "reply_chars": 102,
+      "model_backed": true
+    },
+    {
+      "name": "TTS clip renders to a playable asset",
+      "method": "GET",
+      "path": "/api/v1/media/audio/c8c6a27adf85abbb",
+      "status": 200,
+      "ok": true,
+      "ms": 0,
+      "bytes": 100652,
+      "excerpt": "{\"bytes\": 100652, \"preview\": \"ID3\\u0004\\u0000\\u0000\\u0000\\u0000\\u0000\\\"TSSE\\u0000\\u0000\\u0000\\u000e\\u0000\\u0000\\u0003Lavf61.7.100\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000����\\u0000Jd9�\\u0004�\\u0013\\u0010\\u0001���}P:I�\\u0012cL�\\u0014f�9�JiP�\\u0004\"}"
+    },
+    {
+      "name": "TEACHER ORCHESTRATES A TOOL",
+      "method": "POST",
+      "path": "/api/v1/agent/chat",
+      "status": 200,
+      "ok": true,
+      "ms": 4441,
+      "excerpt": "{\"message\": \"The learner has just written on the shared whiteboard with the following text:\\n\\n**Text on the Whiteboard:**\\n\\\"Extinction and spontaneous recovery are two types of learning processes. Extinction involves the gradual weakening of a conditioned response over time, while spontaneous recovery refers to the reappearance of a previously extinguished conditioned response after a period of time. These concepts",
+      "tools": [
+        "stage_surface",
+        "whiteboard_write"
+      ],
+      "tool_results": [
+        true,
+        true
+      ],
+      "dispatched": true
+    },
+    {
+      "name": "LIVE ASR (barge-in audio -> transcript)",
+      "method": "POST",
+      "path": "/api/v1/live/ap_psychology_acquisition_extinction_and_spontaneous_recovery/asr",
+      "status": 200,
+      "ok": true,
+      "ms": 2378,
+      "excerpt": "{\"ok\": true, \"text\": \"这道题的答案是什么。\", \"reason\": \"\", \"next_action\": \"\", \"fallback\": \"\", \"provider\": \"voicestudio\", \"transport\": \"stream\", \"model\": \"streaming-asr\", \"stt_ms\": 2360.0, \"latency_ms\": 2370, \"surface\": {\"compiled\": \"chat\", \"live\": \"chat\", \"hold\": true}, \"turn\": {\"path\": \"/api/v1/agent/stream\", \"body\": {\"message\": \"这道题的答案是什么。\", \"speak\": true, \"interrupted\": true, \"context\": {\"concept_id\": \"ap_psychology_acquisi",
+      "transport": "stream",
+      "server_latency_ms": 2370,
+      "transcript": "这道题的答案是什么。",
+      "live": true
+    },
+    {
+      "name": "textbook catalogue",
+      "method": "GET",
+      "path": "/api/v1/textbooks/catalogue",
+      "status": 200,
+      "ok": true,
+      "ms": 7,
+      "excerpt": "{\"summary\": {\"retrieved_at\": \"2026-11-10T11:59:48Z\", \"catalogue_books\": 129, \"generated_policies\": 117, \"unlicensed\": 11, \"evidence_id\": \"openstax_full_catalogue_2026_11_10\", \"books_audited\": 129, \"text_eligible\": 38, \"noncommercial_link_only\": 80, \"unlicensed_refused\": 11}, \"books\": [{\"slug\": \"additive-manufacturing-essentials\", \"title\": \"OpenStax Additive Manufacturing Essentials\", \"url\": \"https://openstax.org/deta"
+    },
+    {
+      "name": "licensed image library",
+      "method": "GET",
+      "path": "/api/v1/images/library",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"assets\": [], \"total\": 0, \"query\": \"\", \"pipeline\": {\"providers\": [\"openverse\", \"wikimedia\", \"met\", \"nasa\"], \"enabled\": true, \"cache_dir\": \"/Users/tengyi/WorkBuddy AI/2026-10-10-18-14-50/harness/.tmp/alpha-gate-final/media/images\", \"thresholds\": {\"min_width\": 800, \"min_height\": 500, \"min_aspect\": 0.4, \"max_aspect\": 3.0, \"max_bytes\": 12582912, \"search_depth\": 20, \"max_fetch_per_call\": 6, \"max_lesson_images\": 3}, \"lice"
+    },
+    {
+      "name": "capability matrix",
+      "method": "GET",
+      "path": "/api/v1/capabilities",
+      "status": 200,
+      "ok": true,
+      "ms": 10,
+      "excerpt": "{\"tiers\": [\"free\", \"plus\"], \"principal\": {\"authenticated\": true, \"user_id\": \"6ebb9382-4c26-474e-96db-f5d74f01d84b\", \"tier\": \"free\"}, \"paid_plan\": {\"period\": \"month\", \"requests\": 2000, \"total_tokens\": 2000000, \"enforcement\": \"soft\", \"meter\": \"usage_ledger (append-only; every provider call is recorded, including fallbacks and errors)\", \"note\": \"Metering is observational during the Beta: it records usage and reports it "
+    },
+    {
+      "name": "model configuration surface",
+      "method": "GET",
+      "path": "/api/v1/settings/model-config",
+      "status": 200,
+      "ok": true,
+      "ms": 2,
+      "excerpt": "{\"state\": \"configured\", \"configured\": true, \"source\": \"environment\", \"provider\": \"ollama\", \"model\": \"qwen2.5:1.5b\", \"base_url\": \"http://127.0.0.1:11434\", \"api_key_set\": true, \"timeout\": 180.0, \"label\": \"ollama:qwen2.5:1.5b\", \"environment_provider\": \"ollama\", \"runtime_override\": false, \"catalog\": [{\"id\": \"deepseek\", \"label\": \"DeepSeek\", \"wire\": \"openai\", \"base_url\": \"https://api.deepseek.com\", \"models\": [\"deepseek-fla"
+    },
+    {
+      "name": "course creation preview from textbook-length source",
+      "method": "POST",
+      "path": "/api/v1/create/preview",
+      "status": 200,
+      "ok": true,
+      "ms": 6,
+      "excerpt": "{\"course_id\": \"mine_836228777f\", \"title\": \"Classical Conditioning\", \"subject\": \"Your material\", \"level\": \"custom\", \"source\": {\"kind\": \"text\", \"label\": \"Pasted text\", \"url\": \"\", \"byte_size\": 1803, \"format\": \"text\", \"characters\": 1803}, \"source_rights\": {\"name\": \"Learner-supplied source material\", \"url\": \"\", \"licence\": \"Supplied by the learner for their own account; not redistributed by Luminfest\", \"licence_class\": \"cc"
+    },
+    {
+      "name": "course creation: build and store",
+      "method": "POST",
+      "path": "/api/v1/create/course",
+      "status": 201,
+      "ok": true,
+      "ms": 8,
+      "excerpt": "{\"course\": {\"id\": \"mine_97bd1406ee\", \"title\": \"Alpha Conditioning Course\", \"subject\": \"Psychology\", \"level\": \"intro\", \"authored\": false, \"generated\": true, \"custom\": true, \"expected_weeks\": 1, \"source\": {\"kind\": \"text\", \"label\": \"Pasted text\", \"url\": \"\", \"format\": \"text\", \"characters\": 1803}, \"concepts\": 6, \"questions\": 24, \"stats\": {\"concepts\": 6, \"edges\": 0, \"sequence_edges\": 5, \"strands\": 1, \"units\": 1, \"topics\": ",
+      "concepts": 6,
+      "questions": 24
+    },
+    {
+      "name": "course authoring blueprint (dry run)",
+      "method": "POST",
+      "path": "/api/v1/author/courses",
+      "status": 200,
+      "ok": true,
+      "ms": 16,
+      "excerpt": "{\"ok\": false, \"stored\": false, \"problems\": {\"blocking\": [], \"advisory\": []}, \"course\": {\"id\": \"alpha_skill_probe\", \"title\": \"Alpha Skill Probe\", \"units\": 3, \"concepts\": 9, \"questions\": 36, \"profile\": \"default\", \"author\": \"6ebb9382-4c26-474e-96db-f5d74f01d84b\", \"digest\": \"6ab51416248715d9\", \"notes\": [\"concept_1_1: no misconception item; the course does not supply three other repairs to use as distractors\", \"concept_1_",
+      "audit_ok": false
+    },
+    {
+      "name": "measurement contract",
+      "method": "GET",
+      "path": "/api/v1/measurement",
+      "status": 200,
+      "ok": true,
+      "ms": 8,
+      "excerpt": "{\"probes\": {\"cold\": {\"title\": \"Cold retrieval check\", \"measures\": \"Storage strength under the same conditions as an unaided test.\", \"why\": \"Feedback, lesson text and a tutor all raise measured accuracy while leaving what is retained unchanged or worse (Soderstrom & Bjork 2015; Bastani et al. 2024 found practice +48% and unaided exam -17%). Only an unsupported answer separates the two.\", \"learner_facing\": \"A quick rec"
+    },
+    {
+      "name": "learning-efficiency report",
+      "method": "GET",
+      "path": "/api/v1/measurement/report",
+      "status": 200,
+      "ok": true,
+      "ms": 8,
+      "excerpt": "{\"scope\": \"Within-person measurement of rate and retention from this account's own attempts. Not a normed ability score, not a comparison to other learners, and not a prediction of an external exam. Every figure carries the aid conditions it was measured under; an aided figure is evidence about performance with support, never about unaided skill.\", \"evidence\": {\"attempts\": 1, \"episodes\": 1, \"aid\": {\"total\": 1, \"unaid"
+    },
+    {
+      "name": "cold probe budget",
+      "method": "GET",
+      "path": "/api/v1/measurement/probe/next",
+      "status": 200,
+      "ok": true,
+      "ms": 4,
+      "excerpt": "{\"due\": false, \"reason\": \"no_eligible_concept\", \"concept_id\": null, \"why\": \"No concept has both 3 practice attempts and an item the learner has not just seen.\"}"
+    },
+    {
+      "name": "estimator benchmark (study benchmarks)",
+      "method": "GET",
+      "path": "/api/v1/measurement/bench",
+      "status": 200,
+      "ok": true,
+      "ms": 2162,
+      "excerpt": "{\"suite\": \"learning-efficiency estimator recovery\", \"validates\": \"estimator\", \"learners\": 200, \"passed\": 5, \"total\": 5, \"ok\": true, \"checks\": [{\"check\": \"recovery\", \"question\": \"Does the estimator return the learning rate that was set?\", \"learners\": 200, \"estimated\": 200, \"median_bias\": 0.00672, \"mean_absolute_error_identifiable\": 0.03443, \"mean_absolute_error_saturated\": 0.21375, \"saturated\": 137, \"rank_correlation\""
+    },
+    {
+      "name": "second learner profile",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 200,
+      "ok": true,
+      "ms": 4,
+      "excerpt": "{\"id\": \"b4402d10-0d5d-4e81-9c1b-920c61af8524\", \"name\": \"Alpha Learner\", \"email\": \"alpha.learner.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_consent\": false, \"course_id\": \"integrated_math_1\", \"onboarding_complete\": false, \"email_verified\": false, \"role\": \"learner\", \"status\": \"active\", \"cohort_id\": null}",
+      "learner_course": "integrated_math_1"
+    },
+    {
+      "name": "second learner dashboard",
+      "method": "GET",
+      "path": "/api/v1/dashboard",
+      "status": 200,
+      "ok": true,
+      "ms": 28,
+      "excerpt": "{\"user\": {\"id\": \"b4402d10-0d5d-4e81-9c1b-920c61af8524\", \"name\": \"Alpha Learner\", \"email\": \"alpha.learner.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_consent\": false, \"course_id\": \"integrated_math_1\", \"onboarding_complete\": false, \"email_verified\": false, \"role\": \"learner\", \"status\": \"active\", \"cohort_id\": null}, \"diagnostic_complete\": false, \"he"
+    },
+    {
+      "name": "cross-account deck is refused",
+      "method": "GET",
+      "path": "/api/v1/deck/deck-adceef97ff4f",
+      "status": 404,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"detail\": \"Deck not found\"}",
+      "isolated": true
+    },
+    {
+      "name": "own courses (learner)",
+      "method": "GET",
+      "path": "/api/v1/my-courses",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"courses\": [], \"enrolled\": \"integrated_math_1\", \"count\": 0, \"note\": \"These are your own courses. They are stored on your account, are never added to the shared catalogue, and another learner cannot see or delete them.\"}"
+    },
+    {
+      "name": "second learner enrols in physics",
+      "method": "PATCH",
+      "path": "/api/v1/me",
+      "status": 200,
+      "ok": true,
+      "ms": 3,
+      "excerpt": "{\"id\": \"b4402d10-0d5d-4e81-9c1b-920c61af8524\", \"name\": \"Alpha Learner\", \"email\": \"alpha.learner.1794752210@redacted.test\", \"goal\": \"Build real understanding\", \"daily_minutes\": 20, \"telemetry_consent\": false, \"training_consent\": false, \"course_id\": \"physics\", \"onboarding_complete\": true, \"email_verified\": false, \"role\": \"learner\", \"status\": \"active\", \"cohort_id\": null}"
+    },
+    {
+      "name": "shipped textbook photograph attaches offline",
+      "method": "POST",
+      "path": "/api/v1/images/for-lesson",
+      "status": 200,
+      "ok": true,
+      "ms": 4326,
+      "excerpt": "{\"concept_id\": \"physics_acceleration_as_the_rate_of_change_of_velocity\", \"outcome\": \"ok\", \"images\": [{\"slot\": \"concept\", \"block_index\": 1, \"query\": \"Acceleration as the Rate of Change of Velocity\", \"outcome\": \"shipped\", \"via\": \"shipped\", \"seen\": 1, \"accepted\": 1, \"asset\": {\"sha256\": \"c5a0e089d52b4f30417954a6c49d5a5755e1dca5dcf178b0503f9ea1bee9bad6\", \"url\": \"/api/v1/media/images/c5a0e089d52b4f30417954a6c49d5a5755e1dca",
+      "outcome": "ok",
+      "licence": "CC BY-SA 4.0",
+      "credit": "\"RadartimeVStangentfffAcceleration.jpg\" by P. Fraundorf — CC BY-SA 4.0 (https://creativeco",
+      "verified": true
+    }
+  ]
+}

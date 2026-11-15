@@ -1,0 +1,10 @@
+{
+  "command": "cd backend && env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q --basetemp=.pytest-basetemp-1115e -p no:cacheprovider",
+  "passed": 2451,
+  "failed": 0,
+  "skipped": 2,
+  "total": 2453,
+  "duration": "1173.60s (0:19:33)",
+  "log": "backend/.tmp-full-suite-1115-clean.log",
+  "note": "final clean run. Earlier runs: 2448/3 (brand+cohort assertion drift, fixed) and 2446/5 (WorkBuddy sandbox broker 'execution capability expired' in Node subprocesses, fixed by making the telemetry probe hermetic). Host PYTHONPATH and NODE_OPTIONS shims are excluded."
+}
