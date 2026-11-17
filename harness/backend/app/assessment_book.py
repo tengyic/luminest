@@ -34,11 +34,12 @@ registration comment in ``scripts/init_db.py``.
 from __future__ import annotations
 
 import hashlib
+import os
 import re
 from collections import defaultdict
 
 from sqlalchemy import (JSON, Float, ForeignKey, Index, Integer, String, Text,
-                        UniqueConstraint)
+                        UniqueConstraint, select)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .db import Base, now_ts, uid
@@ -56,6 +57,80 @@ SCOPE_NOTE = (
     'Not an accredited, proctored, externally moderated or AP/official grade. '
     'Scores come from server-graded attempts only; no unsubmitted item is counted.'
 )
+
+
+class ProjectGrade(Base):
+    """Append-only human rubric judgement for a submitted project.
+
+    A second score supersedes the first but never rewrites it. No automated
+    correctness, creativity or integrity judgement is stored here.
+    """
+    __tablename__ = 'project_grades'
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    project_id: Mapped[str] = mapped_column(String(36), index=True)
+    criteria: Mapped[list] = mapped_column(JSON)
+    total: Mapped[float] = mapped_column(Float)
+    max_total: Mapped[float] = mapped_column(Float)
+    status: Mapped[str] = mapped_column(String(30))
+    rationale: Mapped[str] = mapped_column(Text)
+    reviewer_email: Mapped[str] = mapped_column(String(254))
+    supersedes: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+    def public(self) -> dict:
+        return {'id': self.id, 'project_id': self.project_id, 'criteria': self.criteria,
+                'total': self.total, 'max_total': self.max_total, 'status': self.status,
+                'rationale': self.rationale, 'reviewer_email': self.reviewer_email,
+                'supersedes': self.supersedes, 'created_at': self.created_at,
+                'scope': 'Configured human reviewer judgement against the visible rubric. '
+                         'Not automated correctness, accreditation or proof of unaided work.'}
+
+
+def reviewer_emails() -> frozenset[str]:
+    """Configured summative reviewers. No account is a reviewer by default."""
+    return frozenset(email.strip().casefold() for email in
+                     os.getenv('HARNESS_REVIEWERS', '').split(',') if email.strip())
+
+
+def score_project(db, project, criteria: list[dict], status: str,
+                  rationale: str, reviewer_email: str) -> ProjectGrade:
+    """Record a rubric score. Every score is a new row; an override links to its predecessor."""
+    rubric = {item['id']: float(item['max_points']) for item in (project.rubric or [])}
+    if not rubric or {row['criterion_id'] for row in criteria} != set(rubric):
+        raise ValueError('Score every visible rubric criterion exactly once')
+    ordered = []
+    for row in sorted(criteria, key=lambda item: item['criterion_id']):
+        points = float(row['points'])
+        if not 0 <= points <= rubric[row['criterion_id']]:
+            raise ValueError(f'Points for {row["criterion_id"]} exceed the rubric ceiling')
+        if len(str(row.get('rationale', '')).strip()) < 3:
+            raise ValueError('Each criterion needs a short reviewer rationale')
+        ordered.append({'criterion_id': row['criterion_id'], 'points': points,
+                        'rationale': str(row['rationale']).strip()[:2000]})
+    # Scope the predecessor lookup to the project's owner: the tenant guard rejects a
+    # project_id-only predicate, and a grade chain must never cross accounts even if two
+    # projects ever shared an id.
+    previous = db.scalar(select(ProjectGrade)
+                         .where(ProjectGrade.user_id == project.user_id,
+                                ProjectGrade.project_id == project.id)
+                         .order_by(ProjectGrade.created_at.desc(), ProjectGrade.id.desc()))
+    record = ProjectGrade(user_id=project.user_id, project_id=project.id, criteria=ordered,
+                          total=float(sum(row['points'] for row in ordered)),
+                          max_total=float(sum(rubric.values())), status=status,
+                          rationale=rationale.strip()[:4000], reviewer_email=reviewer_email,
+                          supersedes=previous.id if previous else None)
+    db.add(record)
+    db.flush()
+    return record
+
+
+def project_grade_history(db, user_id: str, project_id: str) -> list[ProjectGrade]:
+    """All recorded judgements, oldest first, so an override is visible as such."""
+    return list(db.scalars(select(ProjectGrade).where(
+        ProjectGrade.user_id == user_id, ProjectGrade.project_id == project_id)
+        .order_by(ProjectGrade.created_at, ProjectGrade.id)))
 
 
 def slug(value: str) -> str:
