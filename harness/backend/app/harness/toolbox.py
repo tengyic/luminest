@@ -34,6 +34,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
+from .. import declarative_ui
 from ..curriculum import (CONCEPTS, GRAPH_TO_LESSON, KNOWLEDGE_GRAPH, LESSON_TARGETS,
                           QUESTIONS)
 from ..ingest import policy
@@ -49,6 +50,153 @@ from .teaching import surface as surface_router
 #: ``link_only``  may name an outside source but must never return its text;
 #: ``sandboxed`` executes learner-supplied code inside a restricted workspace.
 POSTURES = ('internal', 'personal', 'ingestible', 'embed_only', 'link_only', 'sandboxed')
+
+_TYPE_NAMES = {
+    'str': 'string', 'int': 'integer', 'float': 'number', 'bool': 'boolean',
+    'list': 'array', 'dict': 'object', 'object': 'object', 'any': 'object',
+}
+
+
+def _split_top_level(text: str, separator: str) -> list[str]:
+    """Split on a separator that is not inside brackets or a quoted string.
+
+    The catalogue uses compact annotations such as ``[{heading, bullets, notes}]``.
+    A plain ``str.split(',')`` turns one argument into three, which silently publishes a
+    contract the tool cannot satisfy. Depth tracking keeps one argument as one argument.
+    """
+    parts: list[str] = []
+    depth = 0
+    quote: str | None = None
+    escaped = False
+    start = 0
+    for index, char in enumerate(text):
+        if quote:
+            if escaped:
+                escaped = False
+            elif char == '\\':
+                escaped = True
+            elif char == quote:
+                quote = None
+            continue
+        if char in ('"', "'"):
+            quote = char
+        elif char in '([{':
+            depth += 1
+        elif char in ')]}':
+            depth = max(0, depth - 1)
+        elif char == separator and depth == 0:
+            parts.append(text[start:index])
+            start = index + 1
+    parts.append(text[start:])
+    return parts
+
+
+def _annotation_schema(annotation: str) -> dict[str, Any]:
+    """Translate one catalogue annotation into a JSON Schema fragment."""
+    token = annotation.strip().replace(' ', '')
+    if not token:
+        return {'type': 'object'}
+    nullable = False
+    if token.startswith('Optional[') and token.endswith(']'):
+        nullable = True
+        token = token[len('Optional['):-1]
+
+    branches: list[dict[str, Any]] = []
+    for part in _split_top_level(token, '|'):
+        if part == 'None':
+            nullable = True
+            continue
+        if part.startswith('[') and part.endswith(']'):
+            branches.append({'type': 'array', 'items': _annotation_schema(part[1:-1])})
+            continue
+        generic = re.match(r'^(?:list|tuple|set|Sequence|Iterable)\[(.*)\]$', part)
+        if generic:
+            branches.append({'type': 'array', 'items': _annotation_schema(generic.group(1))})
+            continue
+        if part.startswith('{') and part.endswith('}'):
+            fields = [field.strip() for field in _split_top_level(part[1:-1], ',')]
+            branches.append({'type': 'object',
+                             'properties': {field: {} for field in fields if field}})
+            continue
+        base = re.match(r'^[A-Za-z_][A-Za-z_0-9]*', part)
+        branches.append({'type': _TYPE_NAMES.get((base.group(0) if base else part).casefold(),
+                                                 'object')})
+    if not branches:
+        branches = [{'type': 'null'}]
+    if nullable:
+        branches.append({'type': 'null'})
+    return branches[0] if len(branches) == 1 else {'anyOf': branches}
+
+
+def _default_value(raw: str) -> tuple[bool, Any]:
+    """Return whether a default was written and its JSON-compatible value."""
+    if not raw.strip():
+        return False, None
+    # Several signatures add a prose hint after the default, e.g.
+    # ``concept_id: str = "" (omit when one lesson is open)``.
+    value = re.split(r'\s+\(', raw.strip(), maxsplit=1)[0].strip()
+    if value in {'true'}:
+        return True, True
+    if value in {'false'}:
+        return True, False
+    if value in {'null', 'None'}:
+        return True, None
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in ('"', "'"):
+        return True, value[1:-1]
+    if value.startswith(('[', '{')):
+        try:
+            return True, json.loads(value)
+        except (ValueError, TypeError):
+            return True, value
+    for caster in (int, float):
+        try:
+            return True, caster(value)
+        except ValueError:
+            pass
+    return True, value
+
+
+def argument_json_schema(signature: str) -> dict[str, Any]:
+    """Compile the human-readable signature into a checkable JSON Schema object.
+
+    The catalogue has always printed signatures to the model; deriving the schema from
+    that same string keeps the prompt and the validator from drifting apart. Unknown
+    annotations are admitted as unconstrained values rather than guessed at.
+    """
+    properties: dict[str, Any] = {}
+    required: list[str] = []
+    for part in _split_top_level(signature, ','):
+        part = part.strip()
+        if not part:
+            continue
+        pieces = _split_top_level(part, ':')
+        if len(pieces) < 2:
+            continue
+        name = pieces[0].strip()
+        if not name:
+            continue
+        rest = ':'.join(pieces[1:])
+        assignment = _split_top_level(rest, '=')
+        annotation = assignment[0]
+        default = '='.join(assignment[1:]) if len(assignment) > 1 else ''
+        schema = _annotation_schema(annotation)
+        has_default, value = _default_value(default)
+        if has_default:
+            schema['default'] = value
+        else:
+            required.append(name)
+        properties[name] = schema
+    return {'type': 'object', 'properties': properties, 'required': required,
+            'additionalProperties': False}
+
+
+def return_json_schema(description: str) -> dict[str, Any]:
+    """A deliberately loose return contract: field names are checkable, values are not."""
+    fields = re.findall(r'[A-Za-z_][A-Za-z_0-9]*', description)
+    reserved = {'str', 'int', 'float', 'bool', 'list', 'dict', 'None', 'true', 'false'}
+    names = [field for field in dict.fromkeys(fields) if field not in reserved]
+    return {'type': 'object', 'description': description,
+            'properties': {name: {} for name in names}, 'additionalProperties': True}
 
 
 @dataclass(frozen=True)
@@ -70,10 +218,24 @@ class ToolSpec:
     posture: str
     returns: str
     requires: tuple[str, ...] = ()
+    #: Advisory per-call budget published with the contract. The generic dispatcher
+    #: cannot interrupt a blocking Python call safely, so this is reported, not enforced.
+    timeout_seconds: float = 15.0
+
+    @property
+    def argument_schema(self) -> dict[str, Any]:
+        return argument_json_schema(self.arguments)
+
+    @property
+    def return_schema(self) -> dict[str, Any]:
+        return return_json_schema(self.returns)
 
     def to_dict(self) -> dict[str, Any]:
         return {'name': self.name, 'summary': self.summary, 'arguments': self.arguments,
                 'posture': self.posture, 'returns': self.returns,
+                'argument_json_schema': self.argument_schema,
+                'return_json_schema': self.return_schema,
+                'timeout_seconds': self.timeout_seconds,
                 'requires': list(self.requires), 'available': available(self)}
 
     def signature(self) -> str:
@@ -554,6 +716,63 @@ def build_figure(ctx: ToolContext, concept_id: str,
     return ToolResult('build_figure', True, payload, citations=[_node_citation(node)],
                       notes=['Generated by the symbolic engine from the concept classification; '
                              'no model inference is involved.'])
+
+
+def validate_interactive(ctx: ToolContext, spec: Mapping[str, Any]) -> ToolResult:
+    """Check a model-produced interactive spec against the approved vocabulary.
+
+    A validated spec is not yet a rendered artifact; it is a refusal or a normalized
+    description the native client can render. Keeping validation as a tool makes the
+    boundary auditable: the model sees the same contract the dispatcher enforces.
+
+    A refusal carries the vocabulary back. A closed vocabulary that only says "no" is a
+    vocabulary the model cannot converge on, and a local model asked to guess component
+    names invents them; returning the allowed set is what makes the second attempt cheap.
+    """
+    try:
+        validated = declarative_ui.validate(spec)
+    except ValueError as exc:
+        vocabulary = declarative_ui.registry()
+        return ToolResult('validate_interactive', False,
+                          data={'components': sorted(vocabulary['components']),
+                                'operators': vocabulary['expression']['operators'],
+                                'limits': vocabulary['limits'],
+                                'retry': 'Resend the same spec using only these '
+                                         'components and operators.'},
+                          refused=f'Interactive spec rejected: {exc}',
+                          error='The declarative UI vocabulary is closed.')
+    return ToolResult('validate_interactive', True, validated,
+                      notes=['Validated against the published component registry. No script, '
+                             'markup, URL or file access was accepted.'])
+
+
+def emit_interactive(ctx: ToolContext, spec: Mapping[str, Any],
+                     concept_id: str = '') -> ToolResult:
+    """Validate a model-produced spec and persist it as a native interactive artifact.
+
+    This is the generative-interactive boundary: the model supplies only a declarative
+    description, the closed validator refuses anything outside the vocabulary, and the
+    runtime stores the accepted description under the authenticated learner before the
+    client ever renders it. The returned ``artifact_id`` is the handle the tutor turn
+    carries and the client uses to write bounded interaction evidence.
+    """
+    from .. import interactive_runtime
+
+    if getattr(ctx, 'db', None) is None or getattr(ctx, 'user', None) is None:
+        return ToolResult('emit_interactive', False,
+                          refused='Interactive artifacts require an authenticated learner.',
+                          error='No database session or principal is bound to this call.')
+    try:
+        payload = interactive_runtime.persist_artifact(
+            ctx.db, ctx.user, spec, concept_id=concept_id, source='model')
+    except (ValueError, TypeError) as exc:
+        return ToolResult('emit_interactive', False,
+                          refused=f'Interactive spec rejected: {exc}',
+                          error='The declarative UI vocabulary is closed.')
+    return ToolResult('emit_interactive', True, payload,
+                      notes=['Validated and stored as an artifact under this learner. '
+                             'The client renders the stored spec inline in this tutor turn; '
+                             'interaction frames are evidence, not Attempts or grades.'])
 
 
 def deck_control(ctx: ToolContext, concept_id: str = '', action: str = 'next',
@@ -1205,6 +1424,25 @@ _register(ToolSpec('build_figure',
                    'concept_id: str, overrides: dict = {}', 'internal',
                    '{expression, parameters, series, parts, marks, features, steps}'),
           build_figure)
+_register(ToolSpec('validate_interactive',
+                   'Validate a model-produced declarative interaction against the approved '
+                   'native component vocabulary. Refuses scripts, markup, network and file '
+                   'access with a named reason; returns a normalized spec when accepted.',
+                   'spec: dict', 'internal',
+                   '{schema_version, title, components, inputs, note} or refusal'),
+          validate_interactive)
+_register(ToolSpec('emit_interactive',
+                   'Create a real native interaction for the learner from a validated '
+                   'declarative spec. Use it when dragging, choosing or watching a derived '
+                   'readout teaches better than prose: it persists the spec and returns an '
+                   'artifact_id that the tutor turn renders inline. Never include scripts, '
+                   'markup, URLs or file paths; call validate_interactive first if you are '
+                   'unsure of the approved component and expression vocabulary — a refusal '
+                   'returns it.',
+                   'spec: dict, concept_id: str = ""', 'internal',
+                   '{artifact_id, spec, schema_version, source, concept_id, title, '
+                   'created_at} or refusal'),
+          emit_interactive)
 _register(ToolSpec('deck_control',
                    'Move the slide deck the learner has open: next, prev, first, last or '
                    'goto. Say which slide you moved to in the same turn, because the '
@@ -1685,6 +1923,53 @@ def _ground_identifiers(ctx: 'ToolContext', fn: Callable, arguments: dict) -> tu
     return grounded, replaced
 
 
+def _callable_schema(fn: Callable[..., Any]) -> dict[str, Any]:
+    """A permissive contract for a synthetic registry entry used by a test seam.
+
+    Production entries are ``ToolSpec`` objects and carry the full schema. A monkeypatched
+    probe still deserves the unknown-argument gate; it just has no published types to
+    enforce, so its declared parameters are admitted as unconstrained values.
+    """
+    properties: dict[str, Any] = {}
+    required: list[str] = []
+    for name, parameter in inspect.signature(fn).parameters.items():
+        if name == 'ctx' or parameter.kind in (inspect.Parameter.VAR_POSITIONAL,
+                                               inspect.Parameter.VAR_KEYWORD):
+            continue
+        properties[name] = {}
+        if parameter.default is inspect.Parameter.empty:
+            required.append(name)
+    return {'type': 'object', 'properties': properties, 'required': required,
+            'additionalProperties': False}
+
+
+def _schema_accepts(schema: Mapping[str, Any], value: Any) -> bool:
+    """Check the declared type without coercing model output behind its back."""
+    if 'anyOf' in schema:
+        return any(_schema_accepts(branch, value) for branch in schema['anyOf'])
+    declared = schema.get('type')
+    if declared is None or value is None:
+        return True
+    checks = {
+        'string': lambda v: isinstance(v, str),
+        'integer': lambda v: isinstance(v, int) and not isinstance(v, bool),
+        'number': lambda v: isinstance(v, (int, float)) and not isinstance(v, bool),
+        'boolean': lambda v: isinstance(v, bool),
+        'array': lambda v: isinstance(v, (list, tuple)),
+        'object': lambda v: isinstance(v, dict),
+    }
+    if not checks.get(declared, lambda _: True)(value):
+        return False
+    items = schema.get('items')
+    if items is not None and isinstance(value, (list, tuple)):
+        return all(_schema_accepts(items, item) for item in value)
+    properties = schema.get('properties')
+    if properties and isinstance(value, dict):
+        return all(_schema_accepts(child, value[key])
+                   for key, child in properties.items() if key in value)
+    return True
+
+
 def invoke(ctx: ToolContext, name: str, arguments: Mapping[str, Any] | None = None) -> ToolResult:
     """Call a tool by name. Unknown names are a refusal, never a silent no-op.
 
@@ -1712,6 +1997,18 @@ def invoke(ctx: ToolContext, name: str, arguments: Mapping[str, Any] | None = No
                   'decision_tool': surface_router.NEUTRAL_DECISION_TOOL})
     spec, fn = entry
     arguments, grounded = _ground_identifiers(ctx, fn, dict(arguments or {}))
+    schema = getattr(spec, 'argument_schema', None) or _callable_schema(fn)
+    unknown = sorted(set(arguments) - set(schema['properties']))
+    if unknown:
+        return ToolResult(name, False,
+                          refused=(f'Bad arguments for {name}: '
+                                   f'unknown arguments: {", ".join(unknown)}'),
+                          error='Arguments must match the published tool schema.')
+    for key, value in arguments.items():
+        if not _schema_accepts(schema['properties'][key], value):
+            return ToolResult(name, False,
+                              refused=f'Bad argument type for {name}.{key}: {type(value).__name__}',
+                              error='Arguments must match the published tool schema.')
     try:
         result = fn(ctx, **arguments)
     except TypeError as exc:
