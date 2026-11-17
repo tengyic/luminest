@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-16T20:52:32+0800",
+  "generated_by": "general-purpose-1",
+  "source_tree": "harness (legacy learning harness v1.4.0, schema v13)",
+  "description": "Machine-readable inventory of legacy harness modules proposed for reuse in a clean Luminest 2.0 repository. This is a decision register, not a dependency declaration: harness/ is preserved as read-only reference and no 2.0 build imports from it at runtime. Every non-exclude entry must be assigned an owner before porting.",
+  "reuse_modes": {
+    "reference": "Read for design decisions and contracts; do not copy code.",
+    "port": "Move the module largely intact into the 2.0 tree with tests.",
+    "adapt": "Reimplement the idea against 2.0 interfaces; behaviour and policy must be re-reviewed.",
+    "exclude": "Do not reuse; reason recorded to prevent silent reintroduction."
+  },
+  "entries": [
+    {
+      "id": "LR-001",
+      "source_path": "backend/app/user_scope.py",
+      "target_subsystem": "2.0 tenant isolation / data access guard",
+      "reuse_mode": "adapt",
+      "owner": "2.0 backend lead",
+      "rationale": "Structurally enforces user_id/PK scoping on ORM SELECTs via the do_orm_execute hook; USER_SCOPED_TABLES is a reviewed decision list that already includes the v13 learner-owned tables. The pattern is worth carrying forward, but the table list and allowance set must be rebuilt for the 2.0 schema.",
+      "risk": {
+        "level": "medium",
+        "note": "Guard covers ORM reads only; raw SQL and writes stay review-bounded. A new 2.0 user-owned table added to the schema but not the list reopens the leak. unscoped() audit trail is process-local and not shipped to a durable audit log."
+      }
+    },
+    {
+      "id": "LR-002",
+      "source_path": "backend/app/security.py",
+      "target_subsystem": "2.0 authentication / session resolver",
+      "reuse_mode": "adapt",
+      "owner": "2.0 backend lead",
+      "rationale": "Single resolve_account path plus the route-graph guard and HTTP-boundary refusal make the auth check structural rather than a per-module convention. Reimplement the single-resolver design in 2.0 rather than copying route-specific rate ceilings.",
+      "risk": {
+        "level": "medium",
+        "note": "Tightly coupled to the erasure ledger and the PUBLIC_ROUTES decision list; both must be re-derived for 2.0. Argon2/TTL parameters are policy choices that need a fresh review, not silent inheritance."
+      }
+    },
+    {
+      "id": "LR-003",
+      "source_path": "backend/app/account_erasure.py",
+      "target_subsystem": "2.0 data erasure / privacy operations",
+      "reuse_mode": "adapt",
+      "owner": "2.0 backend lead + privacy owner",
+      "rationale": "Deletion policy is expressed as data, backed by foreign-key cascade inspection and an external append-only erasure ledger that survives snapshot restores. The 'ledger outside the database' idea is important and should inform 2.0.",
+      "risk": {
+        "level": "high",
+        "note": "Plaintext backup retention leaves a residual window; the exported policy is deliberately not a flat 'erased after N days' promise. Requires privacy/legal review before any 2.0 claim."
+      }
+    },
+    {
+      "id": "LR-004",
+      "source_path": "backend/app/db.py",
+      "target_subsystem": "2.0 persistence substrate",
+      "reuse_mode": "reference",
+      "owner": "2.0 backend lead",
+      "rationale": "Declares SCHEMA_VERSION = 13 and the full ORM model set including the v13 substrate. Useful as the authoritative map of legacy tables and their tenancy decisions; 2.0 must declare its own version and models.",
+      "risk": {
+        "level": "low",
+        "note": "Version number is legacy truth, not 2.0 truth. Do not reuse the value; re-check at port time because backend engineers are editing this file in parallel."
+      }
+    },
+    {
+      "id": "LR-005",
+      "source_path": "backend/migrations/012_2_0_substrate.sql",
+      "target_subsystem": "2.0 schema substrate",
+      "reuse_mode": "reference",
+      "owner": "2.0 backend lead",
+      "rationale": "Already named for 2.0; defines the interactive-artifact, learner-graph and BKT-registry tables and states the additive, no-rewrite discipline plus the tenancy rule. Read it as the bridge from legacy v12 to the v13 substrate.",
+      "risk": {
+        "level": "medium",
+        "note": "PostgreSQL reference DDL with legacy numbering; do not execute blindly in a 2.0 database. Being edited in parallel by backend engineers - re-read before relying on exact columns."
+      }
+    },
+    {
+      "id": "LR-006",
+      "source_path": "backend/scripts/init_db.py",
+      "target_subsystem": "2.0 migration discipline",
+      "reuse_mode": "reference",
+      "owner": "2.0 backend lead",
+      "rationale": "Non-destructive initializer: create new tables, add new columns, never rewrite or drop existing rows, and accept every historical version so operators are not forced into hand edits. The discipline is the reusable asset.",
+      "risk": {
+        "level": "medium",
+        "note": "File is owned by backend engineers in this audit and is not edited here. The ADDED_COLUMNS map and landmarks are legacy-specific, not a generic migrator."
+      }
+    },
+    {
+      "id": "LR-007",
+      "source_path": "backend/app/declarative_ui.py",
+      "target_subsystem": "2.0 generated interactions / closed vocabulary",
+      "reuse_mode": "port",
+      "owner": "2.0 interaction owner",
+      "rationale": "A small, dependency-free closed vocabulary (components, expression enum, arity/limits) with validate/evaluate and an evidence block that explicitly refuses to call itself a grade. Refusal is the security feature; this is the cleanest port candidate in the tree.",
+      "risk": {
+        "level": "low",
+        "note": "Port together with its tests and keep the schema_version contract in sync with the native renderer. Any widened vocabulary is a new security decision, not a routine change."
+      }
+    },
+    {
+      "id": "LR-008",
+      "source_path": "backend/app/interactive_runtime.py",
+      "target_subsystem": "2.0 interaction artifact persistence",
+      "reuse_mode": "adapt",
+      "owner": "2.0 interaction owner",
+      "rationale": "Persists a validated model spec under the authenticated learner and records append-only evidence frames bound to that artifact and its declared inputs; rejects client-supplied specs at the evidence route.",
+      "risk": {
+        "level": "medium",
+        "note": "Depends on legacy db models and user_scope membership; both must be re-established in 2.0 before the guarantee holds."
+      }
+    },
+    {
+      "id": "LR-009",
+      "source_path": "backend/app/learner_graph.py",
+      "target_subsystem": "2.0 learner model / concept graph",
+      "reuse_mode": "adapt",
+      "owner": "2.0 learning-science owner",
+      "rationale": "Exposes a per-learner four-facet concept graph with provenance and honest unknowns on top of the v13 facets/edges/evidence-ledger tables.",
+      "risk": {
+        "level": "medium",
+        "note": "Facet semantics and evidence-ledger provenance are learning-science policy, not just data plumbing; do not inherit estimates without re-review."
+      }
+    },
+    {
+      "id": "LR-010",
+      "source_path": "backend/app/bkt_registry.py",
+      "target_subsystem": "2.0 model governance / BKT registry",
+      "reuse_mode": "adapt",
+      "owner": "2.0 model-governance owner",
+      "rationale": "Turns offline fitting into a governed production boundary: candidate/shadow/active/rolled_back lifecycle, visible metrics gates, digest and licence tracking, reason+actor events, and a documented built-in fallback.",
+      "risk": {
+        "level": "medium",
+        "note": "Gate thresholds (20 sequences, 10 students, calibration 0.10, logloss vs baseline) are policy choices requiring sign-off in 2.0. No efficacy certification is implied by a passing gate."
+      }
+    },
+    {
+      "id": "LR-011",
+      "source_path": "backend/ml/bkt.py",
+      "target_subsystem": "2.0 offline evaluation baseline",
+      "reuse_mode": "reference",
+      "owner": "2.0 learning-science owner",
+      "rationale": "Legible standard BKT with exact forward/backward Baum-Welch fitting on training students and held-out scoring. Explicitly a correct evaluation harness rather than a leaderboard model.",
+      "risk": {
+        "level": "low",
+        "note": "Research/baseline code. Do not promote an offline fit directly into serving; the production registry boundary must stay."
+      }
+    },
+    {
+      "id": "LR-012",
+      "source_path": "backend/app/training.py",
+      "target_subsystem": "2.0 consent ledger / minimized training export",
+      "reuse_mode": "adapt",
+      "owner": "2.0 privacy owner",
+      "rationale": "Server-side consent ledger with pseudonymised, minimized exports, HMAC-signed manifests, fresh-consent verification and explicit automatic_promotion: False. The consent/export boundary is the reusable design.",
+      "risk": {
+        "level": "high",
+        "note": "Consent policy (training-v1), per-user/qualified-user thresholds and HMAC secret handling need legal/privacy review. Opt-out cannot undo an already trained artifact; no efficacy claim may be derived from an export."
+      }
+    },
+    {
+      "id": "LR-013",
+      "source_path": "backend/app/harness/toolbox.py",
+      "target_subsystem": "2.0 agent tool registry / dispatcher",
+      "reuse_mode": "adapt",
+      "owner": "2.0 agent owner",
+      "rationale": "Posture model, JSON Schemas compiled from the published signature, single-point surface-boundary refusal, identifier grounding with trace notes, and strict unknown-name/argument validation. The dispatcher is the enforcement point worth preserving.",
+      "risk": {
+        "level": "high",
+        "note": "Very large surface with per-tool behaviour; port postures and validation first, then review tool-by-tool. Advisory timeouts are reported, not enforced."
+      }
+    },
+    {
+      "id": "LR-014",
+      "source_path": "backend/app/harness/agent_loop.py",
+      "target_subsystem": "2.0 agent turn loop",
+      "reuse_mode": "adapt",
+      "owner": "2.0 agent owner",
+      "rationale": "Turn orchestration with a closed set of contract event types, developer-mode-only reasoning channel, lazy event emission and server-side cancellation ledgers; feeds refusals back to the model with a recovery decision.",
+      "risk": {
+        "level": "high",
+        "note": "Event/cancellation contracts must match the 2.0 streaming client exactly; token-level streaming is deliberately not faked in the legacy path."
+      }
+    },
+    {
+      "id": "LR-015",
+      "source_path": "backend/app/model_config.py",
+      "target_subsystem": "2.0 runtime model configuration",
+      "reuse_mode": "adapt",
+      "owner": "2.0 platform owner",
+      "rationale": "Runtime override in the data directory takes effect without restart, with environment fallback, a small verified provider catalogue, and GET exposing only api_key_set. Clear separation of configuration from training.",
+      "risk": {
+        "level": "medium",
+        "note": "Persisted key shares the database trust boundary; on-disk permissions are an operator responsibility. 2.0 should re-decide whether to persist keys at all."
+      }
+    },
+    {
+      "id": "LR-016",
+      "source_path": "backend/app/config.py",
+      "target_subsystem": "2.0 production boot enforcement",
+      "reuse_mode": "adapt",
+      "owner": "2.0 platform owner",
+      "rationale": "Fail-closed production settings: PostgreSQL, strong secret, explicit allowed hosts, HTTPS remote tutor, mandatory configured model, and consent/invite gates. Good example of refusing to boot into an unsafe configuration.",
+      "risk": {
+        "level": "medium",
+        "note": "Exact gates are legacy deployment assumptions; the 2.0 topology (including remote voice) is not settled, so do not copy the values as-is."
+      }
+    },
+    {
+      "id": "LR-017",
+      "source_path": "native/Sources/LearningHarness/BackendLauncher.swift",
+      "target_subsystem": "2.0 native launcher / backend handshake",
+      "reuse_mode": "port",
+      "owner": "2.0 native owner",
+      "rationale": "Adopts a server only after service-identity, readiness and three-valued schema-version checks against a compile-time expected version; drift is a red test rather than a shipped mismatch. Self-contained and high-value.",
+      "risk": {
+        "level": "low",
+        "note": "expectedSchemaVersion is 13 in the legacy tree and must be re-pinned to the 2.0 schema; 'absent version' adoption is a deliberate compatibility decision to re-confirm."
+      }
+    },
+    {
+      "id": "LR-018",
+      "source_path": "native/Sources/LearningHarness/DeclarativeInteractiveView.swift",
+      "target_subsystem": "2.0 native interaction renderer",
+      "reuse_mode": "port",
+      "owner": "2.0 native owner",
+      "rationale": "Renders only the closed declarative vocabulary and posts bounded evidence frames (guarded on touched state and an artifact id); pairs with LR-007.",
+      "risk": {
+        "level": "medium",
+        "note": "Must track the registry schema_version and the evidence endpoint contract; renderer and validator cannot drift independently."
+      }
+    },
+    {
+      "id": "LR-019",
+      "source_path": "scripts/package.py",
+      "target_subsystem": "2.0 build / release gate",
+      "reuse_mode": "reference",
+      "owner": "2.0 release owner",
+      "rationale": "Contains the schema-parity guard (frozen backend SCHEMA_VERSION must equal source), dependency consistency check, legal-placeholder gate and artifact ledger. The guard patterns are worth carrying into the 2.0 release gate.",
+      "risk": {
+        "level": "medium",
+        "note": "Do not copy wholesale: package.py is a large legacy packager with dev-only escape hatches (--allow-template-legal). Signing/notarization remain unresolved and are not achieved by this script."
+      }
+    },
+    {
+      "id": "LR-020",
+      "source_path": "docs/MEASUREMENT.md",
+      "target_subsystem": "2.0 measurement / evidence model",
+      "reuse_mode": "reference",
+      "owner": "2.0 learning-science owner",
+      "rationale": "Documents the conditional measurement discipline (record assistance conditions; do not treat practice accuracy as learning) behind the analytics dimension statuses. Contracts and rationale, not code.",
+      "risk": {
+        "level": "low",
+        "note": "Documentation only; any 2.0 estimator claims need their own evidence."
+      }
+    },
+    {
+      "id": "LR-021",
+      "source_path": "backend/app/main.py",
+      "target_subsystem": "2.0 API composition",
+      "reuse_mode": "exclude",
+      "owner": "2.0 backend lead",
+      "rationale": "The legacy monolith (~280 KB) mixes routing, middleware, guards and business logic. Its route inventory is documented in docs/API.md; individual handlers should be re-derived, not copied en masse.",
+      "risk": {
+        "level": "high",
+        "note": "Copying the file would import legacy ordering, middleware and route-specific decisions that need individual review. Re-read at port time - this file is being edited in parallel."
+      }
+    },
+    {
+      "id": "LR-022",
+      "source_path": "beta_control/server.py",
+      "target_subsystem": "2.0 beta control / download gating",
+      "reuse_mode": "exclude",
+      "owner": "operator / owner",
+      "rationale": "Token-gated beta control server with a version constant tied to the 1.4.0-beta line and server-side download gating. It is an operator-facing service requiring credentials and a deployment decision, not reference code for the 2.0 product tree.",
+      "risk": {
+        "level": "high",
+        "note": "Off-limits for editing in this audit and dependent on real beta credentials/tokens. No public release or download link is established by it."
+      }
+    },
+    {
+      "id": "LR-023",
+      "source_path": "model/provenance.json",
+      "target_subsystem": "2.0 research model artifact",
+      "reuse_mode": "exclude",
+      "owner": "2.0 model-governance owner",
+      "rationale": "Provenance for a research-only EdNet English/TOEIC artifact with CC BY-NC licence, no commercial rights or readiness certification, and an explicit note that it is not evidence for mathematics.",
+      "risk": {
+        "level": "high",
+        "note": "NC-licensed research data/derivatives must remain separate from any product model; do not promote it into a math model or a public release."
+      }
+    }
+  ]
+}

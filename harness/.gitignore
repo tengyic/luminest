@@ -60,6 +60,10 @@ ui-tests/test-state/
 .venv*/
 .tmp*/
 /model/tmp*/
+# Test-harness scratch written by the newer suites (full final runs, per-worker data
+# directories holding a complete SQLite database). `.tmp*/` above does not match these
+# because the name begins with `.test`, not `.tmp`, so they need their own rule.
+.test-tmp/
 backend/.stash/
 backend/.probe_policy.py
 

@@ -57,7 +57,12 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SITE = os.path.abspath(os.environ.get("LUMINEST_SITE_DIR", os.path.join(ROOT, "site")))
+# A packaged site keeps index.html next to server.py, while a dev checkout may
+# keep it under <ROOT>/site. Prefer an explicit override, then detect which
+# layout is actually on disk. The publish sandbox cannot set env vars, so the
+# detection fallback is what makes the deployed bundle serve its own pages.
+_DEFAULT_SITE = ROOT if os.path.isfile(os.path.join(ROOT, "index.html")) else os.path.join(ROOT, "site")
+SITE = os.path.abspath(os.environ.get("LUMINEST_SITE_DIR", _DEFAULT_SITE))
 DB_PATH = os.path.abspath(os.environ.get("LUMINEST_BETA_DB", os.path.join(ROOT, "beta.db")))
 ADMIN_TOKEN = os.environ.get("LUMINEST_BETA_ADMIN_TOKEN", "")
 BACKEND_URL = os.environ.get("LUMINEST_BACKEND_URL", "http://127.0.0.1:8766").rstrip("/")

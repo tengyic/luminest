@@ -109,13 +109,13 @@ def main() -> int:
         ('Study-benchmark data collection', 'PASS',
          'MEASURE-01/02：learning-efficiency report、cold probe、estimator bench；'
          'Soderström & Bjork 2015 / Bastani 2024 / Kestin 2025', 'ok'),
-        ('Multiuser + database', 'PASS', 'schema 11、双账号隔离（跨账号 deck 404）、'
+        ('Multiuser + database', 'PASS', 'schema 13、双账号隔离（跨账号 deck 404）、'
          '生产切 PostgreSQL + 强 secret', 'ok'),
         ('Model configuration + live voice API', 'PASS',
          '/settings/model-config 热更新、Ollama / OpenAI 双线；VoiceStudio 流式端点', 'ok'),
         ('Closed Beta server connection', 'PARTIAL',
-         'beta_control + webapp 已落地，但冻结二进制仅绑 loopback；'
-         'TLS + PostgreSQL 托管链路未做端到端验收；站点发布被平台拒绝，无公开链接', 'warn'),
+         'beta_control + webapp 已落地，公开站点已上线（sharecode 门禁）；但冻结二进制仅绑'
+         ' loopback，TLS + PostgreSQL 托管链路与下载 token 兑换未做端到端验收', 'warn'),
     ]
 
     cap_rows = '\n'.join(
@@ -218,7 +218,7 @@ header{{flex-direction:column}}.stamp{{text-align:left}}}}
 
 <div class="kpis">
  <div class="kpi good"><div class="n">{passed}<small>/{checks}</small></div><div class="l">端到端 HTTP 检查 · AP Psychology 全流程</div></div>
- <div class="kpi"><div class="n">53</div><div class="l">已注册工具 · schema 11 · 21 门课 / 141 概念</div></div>
+ <div class="kpi"><div class="n">55</div><div class="l">已注册工具（54 随包可发） · schema 13 · 21 门课 / 2 205 概念</div></div>
  <div class="kpi good"><div class="n">{(asr.get('server_latency_ms') or 0):,}<small> ms</small></div><div class="l">实时 ASR 流式转写（原批量约 20,000 ms）</div></div>
  <div class="kpi warn"><div class="n">{partial + external}</div><div class="l">仍未验收能力（partial {partial} / external {external}）</div></div>
 </div>
@@ -266,10 +266,12 @@ header{{flex-direction:column}}.stamp{{text-align:left}}}}
 <span class="hl">{passed}/{checks} 项真实 HTTP 检查全绿</span>，含"教师自主派发两个工具并都成功"与
 "随包许可图片带署名离线装配"两项硬断言。分发包一键启动已实测。</p>
 <p><strong>Closed Beta：具备条件，但未完成托管验收。</strong> 代码、配置层、beta_control、
-Web 客户端、多用户隔离与测量数据采集都在；但冻结二进制刻意只绑 loopback，
-<span class="hl">TLS + PostgreSQL + 邀请码 + 远程语音网关的生产链路没有做端到端实测</span>。
+Web 客户端、多用户隔离与测量数据采集都在；公开站点已上线并实测（无 sharecode 403、带
+<span class="hl">sharecode 200，<code>/api/health</code> 返回 1.4.0-beta.1</span>），但冻结二进制刻意只绑
+loopback，<span class="hl">TLS + PostgreSQL + 邀请码 + 远程语音网关的生产链路没有做端到端实测</span>，
+<code>/downloads/*</code> 仍需兑换后的 token（页面 sharecode 不够），vanity 域名 404。
  duplex voice (OpenAI Realtime)、邮箱验证、教师档案/克隆、单元项目与浏览器窗口流仍是 partial。
- 站点发布工具对已删除的 appId 返回 SITES_APP_NOT_FOUND，三次尝试均失败，<span class="hl">目前没有公开链接，不能称为已发布</span>。</p>
+ 准确的说法是"公开可访问"，而不是"已交付给外部用户"。</p>
 <p><strong>本判定刻意不含：</strong> 法律合同、商业计划、定价、授权与许可条款。
 签名/公证、法律文本占位符同样未清，属于发布闸门而非代码缺陷。</p>
 </div></section>

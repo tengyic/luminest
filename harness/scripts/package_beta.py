@@ -28,7 +28,22 @@ OUTPUTS = os.path.join(WORKSPACE, "outputs")
 SITE = os.path.join(OUTPUTS, "closed-beta-site")
 WEBAPP_DIST = os.path.join(HARNESS, "webapp", "dist")
 BETA_SERVER = os.path.join(HARNESS, "beta_control", "server.py")
+CAPTURES_SRC = os.path.join(OUTPUTS, "app-screenshots", "web")
+ART_SRC = os.path.join(OUTPUTS, "art-sources")
+ART_WEB = os.path.join(ART_SRC, "web")
+REFERENCE_ASSETS_SRC = os.path.join(OUTPUTS, "reference-style-assets")
+REFERENCE_ASSETS_WEB = os.path.join(REFERENCE_ASSETS_SRC, "web")
 VERSION = "1.4.0"
+
+# Real app captures, not renders. Source: outputs/app-screenshots/presentation/
+# (2640x1720 release-build captures), downscaled to 1200px JPEG for the web.
+# Provenance and blank checks live in outputs/app-screenshots/MANIFEST.md.
+CAPTURE_NAMES = [
+    "01-today", "02-knowledge-map", "03-practice-question",
+    "04-practice-feedback", "05-grounded-tutor", "06-projects",
+    "07-project-feedback", "08-daily-review", "09-insights",
+    "10-course-picker", "11-setup-goal", "12-setup-pace",
+]
 
 ARTIFACTS = [
     ("Luminest-arm64.dmg", "050f5db45cbd3bb31a62e2f030ef25362e37cb6cd11d8093eb7065d7ef318838",
@@ -120,6 +135,126 @@ def copy_static() -> None:
     print("  control server -> server.py")
 
 
+def copy_captures() -> None:
+    """Ship the twelve real app frames and record their measured sha256."""
+    dest = os.path.join(SITE, "assets", "captures")
+    os.makedirs(dest, exist_ok=True)
+    rows = []
+    for name in CAPTURE_NAMES:
+        src = os.path.join(CAPTURES_SRC, name + ".jpg")
+        ensure(os.path.isfile(src), "missing real capture: " + src)
+        size = os.path.getsize(src)
+        # A blank frame compresses to a few KB; 20 KB is a deliberately loose
+        # floor that still catches an empty or solid-colour capture.
+        ensure(size > 20_000, "capture looks blank: %s (%d bytes)" % (src, size))
+        shutil.copy2(src, os.path.join(dest, name + ".jpg"))
+        rows.append({"name": name + ".jpg", "bytes": size, "sha256": sha256(src)})
+    with open(os.path.join(SITE, "assets", "captures.json"), "w", encoding="utf-8") as fh:
+        json.dump({
+            "source": "outputs/app-screenshots/presentation/*.png",
+            "provenance": "outputs/app-screenshots/MANIFEST.md",
+            "captured": "2026-10-19",
+            "method": "release-build window capture, geometric resize only, no retouching",
+            "frames": rows,
+        }, fh, indent=2)
+        fh.write("\n")
+    print("  captures -> assets/captures/ (%d real frames, sha256 recorded)" % len(rows))
+
+
+def copy_art() -> None:
+    """Ship the decorative artworks, carrying their licence evidence with them.
+
+    Fail-close: only works whose Commons metadata says Public domain / CC0 / PD-*
+    and which are not marked copyrighted may be written into the site. A missing
+    provenance record or a missing file aborts the whole build.
+    """
+    manifest_path = os.path.join(ART_SRC, "art.json")
+    ensure(os.path.isfile(manifest_path), "missing art provenance: " + manifest_path)
+    with open(manifest_path, "r", encoding="utf-8") as fh:
+        provenance = json.load(fh)
+    works = provenance.get("works", [])
+    ensure(len(works) == 8, "expected 8 licensed works, found %d" % len(works))
+
+    dest = os.path.join(SITE, "assets", "art")
+    os.makedirs(dest, exist_ok=True)
+    shipped = []
+    for work in works:
+        slug = work["slug"]
+        lic = (work.get("licence", "") + " " + work.get("usage_terms", "")).lower()
+        ensure(any(t in lic for t in ("public domain", "cc0", "pd-old", "pd-art")),
+               "art licence not verifiably free: %s (%r)" % (slug, work.get("licence")))
+        ensure(str(work.get("copyrighted_flag", "")).lower() not in ("true", "yes"),
+               "art marked copyrighted: " + slug)
+        ensure(work.get("source_page", "").startswith("https://commons.wikimedia.org/wiki/"),
+               "art missing Commons source page: " + slug)
+        src = os.path.join(ART_WEB, slug + ".jpg")
+        ensure(os.path.isfile(src), "missing art asset: " + src)
+        ensure(os.path.getsize(src) > 15_000, "art asset looks empty: " + src)
+        shutil.copy2(src, os.path.join(dest, slug + ".jpg"))
+        path = os.path.join(dest, slug + ".jpg")
+        row = dict(work)
+        row["shipped_file"] = "assets/art/" + slug + ".jpg"
+        row["shipped_bytes"] = os.path.getsize(path)
+        row["shipped_sha256"] = sha256(path)
+        shipped.append(row)
+
+    with open(os.path.join(SITE, "assets", "art.json"), "w", encoding="utf-8") as fh:
+        json.dump({
+            "source": provenance.get("source"),
+            "policy": provenance.get("policy"),
+            "retrieved_at": provenance.get("retrieved_at"),
+            "count": len(shipped),
+            "works": shipped,
+        }, fh, indent=2)
+        fh.write("\n")
+    print("  art -> assets/art/ (%d PD/CC0 works, licence evidence + sha256)" % len(shipped))
+
+
+def copy_reference_style() -> None:
+    """Ship the open-licensed reference-style assets with fail-close evidence."""
+    manifest_path = os.path.join(REFERENCE_ASSETS_SRC, "assets.json")
+    ensure(os.path.isfile(manifest_path), "missing reference-style provenance: " + manifest_path)
+    with open(manifest_path, "r", encoding="utf-8") as fh:
+        provenance = json.load(fh)
+    works = provenance.get("works", [])
+    ensure(len(works) >= 8, "expected at least 8 reference-style assets, found %d" % len(works))
+
+    dest = os.path.join(SITE, "assets", "reference-style")
+    os.makedirs(dest, exist_ok=True)
+    shipped = []
+    for work in works:
+        slug = work["slug"]
+        lic = (work.get("licence", "") + " " + work.get("usage_terms", "")).lower()
+        ensure(any(t in lic for t in ("public domain", "cc0", "pd-old", "pd-art", "pd-us")),
+               "reference-style licence not verifiably free: %s (%r)" %
+               (slug, work.get("licence")))
+        ensure(str(work.get("copyrighted_flag", "")).lower() not in ("true", "yes"),
+               "reference-style asset marked copyrighted: " + slug)
+        ensure(work.get("source_page", "").startswith("https://commons.wikimedia.org/wiki/"),
+               "reference-style asset missing Commons source page: " + slug)
+        src = os.path.join(REFERENCE_ASSETS_WEB, slug + ".jpg")
+        ensure(os.path.isfile(src), "missing reference-style asset: " + src)
+        ensure(os.path.getsize(src) > 5_000, "reference-style asset looks empty: " + src)
+        path = os.path.join(dest, slug + ".jpg")
+        shutil.copy2(src, path)
+        row = dict(work)
+        row["shipped_file"] = "assets/reference-style/" + slug + ".jpg"
+        row["shipped_bytes"] = os.path.getsize(path)
+        row["shipped_sha256"] = sha256(path)
+        shipped.append(row)
+
+    with open(os.path.join(SITE, "assets", "reference-style.json"), "w", encoding="utf-8") as fh:
+        json.dump({
+            "source": provenance.get("source"),
+            "policy": provenance.get("policy"),
+            "retrieved_at": provenance.get("retrieved_at"),
+            "count": len(shipped),
+            "works": shipped,
+        }, fh, indent=2)
+        fh.write("\n")
+    print("  reference-style -> assets/reference-style/ (%d PD/CC0 works)" % len(shipped))
+
+
 def write_manifest(rows: list[dict]) -> None:
     updates = os.path.join(SITE, "updates")
     os.makedirs(updates, exist_ok=True)
@@ -197,6 +332,9 @@ def main() -> int:
     rows = copy_artifacts(args.no_artifacts)
     copy_webapp()
     copy_static()
+    copy_captures()
+    copy_art()
+    copy_reference_style()
     write_manifest(rows)
     assert_no_banned_brand()
     print("Done. Version %s, %d verified artifacts." % (VERSION, len(rows)))

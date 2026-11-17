@@ -77,3 +77,12 @@ node_modules/
 /harness/beta_control/seed_codes.json
 # Per-run classifier/orchestrator snapshots are coordination state, not documentation.
 /harness/docs/closed-beta/ROUTING_MAP-*.json
+# Per-run verification and merge reports are written by whichever workstream is mid-flight.
+# They describe a moment, are superseded within the hour, and are indexed by nothing.
+/harness/docs/closed-beta/VERIFICATION-*.md
+/harness/docs/closed-beta/MERGE_REPORT-*.md
+
+# A second git root: the LUMINest 0.1.0 backend recovered from the installed app, kept for
+# Phase 7/8 analysis. It has its own history and no remote; committing it here would
+# record a gitlink that clones back as an empty directory.
+/luminest-0.1.0-continuation/
