@@ -75,10 +75,19 @@ green run are kept: the earlier row stays on the front page as history.
   2 `external` items. Duplex voice, browser window stream, email verification, teacher
   clone, project workflows and others remain partial; mindmap/flashcards had their
   **media pipeline** fixed, while their presentation is still an SVG tree and text cards.
-- No public beta link exists. A site publish attempt returned `SITES_APP_NOT_FOUND` for
-  the deleted appId three times; the landing decision's earlier "published" claim was
-  corrected. Closed Beta is ready-but-not-accepted: TLS + PostgreSQL + invite codes +
-  a remote voice gateway have not been exercised end-to-end.
+- **A public beta link now exists; this retracts an earlier claim that none did.** On
+  2026-11-17 the landing page was probed independently:
+  `GET https://wbapp-i2nxsckskaquxjurlmkfnp.app.workbuddy.host/` returns **403** without a
+  share code and **200** with `?sharecode=<code>`, `<title>Luminest — closed beta</title>`;
+  `/api/health` returns `{"status":"ok","version":"1.4.0-beta.1"}`; `/app/`,
+  `/agreement.html`, `/download-manifest.json` and `/api/updates/manifest.json` all return
+  200. The 2026-11-15 `SITES_APP_NOT_FOUND` block was cleared by publishing from a new
+  session, so the earlier "no public link" sentence was wrong.
+  What is still **not** true: `/downloads/*` refuses the page share code and needs a
+  redeemed `token` (`beta_control/server.py:592-599`), the vanity host
+  `luminest.app.workbuddy.host` is 404, and no external learner has been onboarded against a
+  remote backend. Closed Beta remains ready-but-not-accepted: TLS + PostgreSQL + invite
+  codes + a remote voice gateway have not been exercised end-to-end.
 - No legal contracts, commercial plans, pricing or licensing terms are decided here.
 
 The full technical verdict is `docs/ALPHA_VERDICT_2026-11-15.md` (on the shipping branch).

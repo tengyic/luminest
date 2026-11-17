@@ -184,7 +184,7 @@ Evidence is committed, dated and machine-readable in [`docs/evidence/`](docs/evi
 The four newest rows above are from the shipping branch `feature/a11y-i18n`
 (`4a83d86`, plus `60a70bd` for the native fix), **not** from `main` — the same
 branch/commit convention as the older `c35d24f` row. Their raw, redacted outputs and
-the per-number attribution are in [`docs/evidence/closed-alpha-2026-11-15/`](docs/evidence/closed-alpha-2026-11-15/). The 2026-11-12 native row is kept as history; it was superseded by the 10/10 run. The capability register still lists 12 `partial` and 2 `external` items, so no row here claims full coverage or a published beta link.
+the per-number attribution are in [`docs/evidence/closed-alpha-2026-11-15/`](docs/evidence/closed-alpha-2026-11-15/). The 2026-11-12 native row is kept as history; it was superseded by the 10/10 run. The capability register still lists 12 `partial` and 2 `external` items, so no row here claims full coverage. A public landing page does exist and was probed on 2026-11-17 (403 without a share code, 200 with one, `/api/health` reporting `1.4.0-beta.1`), but the build download needs a redeemed token and no external learner has been onboarded against a remote backend — see the SUMMARY for the exact probe table.
 
 Reproduce, in order:
 
