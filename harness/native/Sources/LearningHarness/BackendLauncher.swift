@@ -97,7 +97,7 @@ enum HealthVerdict: Equatable {
     /// without touching this constant. ``BackendLauncherTests`` parses
     /// ``backend/app/db.py`` and fails when the two disagree, so drift is a red test
     /// rather than a shipped mismatch.
-    nonisolated static let expectedSchemaVersion = 11
+    nonisolated static let expectedSchemaVersion = 13
 
     /// True when nothing is listening on 127.0.0.1:``port``.
     ///

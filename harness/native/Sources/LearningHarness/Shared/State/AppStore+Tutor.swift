@@ -53,6 +53,10 @@ extension AppStore {
             // fabricated answer.
             var notice: JSON = .null
             var events: [JSON] = []
+            // Declarative interactives declared by this turn. They travel on the
+            // assistant message so the chat can render them inline; the learner's
+            // input state is later posted to /interactive/evidence by the view.
+            var interactive: [JSON] = []
             var streamed = false
             do {
                 for try await event in api.serverEvents("/agent/stream", body: request) {
@@ -75,6 +79,7 @@ extension AppStore {
                         reason = event.payload["reason"].string
                         speechDescriptor = event.payload["speech"]
                         notice = event.payload["notice"]
+                        interactive = event.payload["interactive"].array
                     default:
                         break
                     }
@@ -92,6 +97,7 @@ extension AppStore {
                 reason = result["finish_reason"].string
                 speechDescriptor = result["speech"]
                 notice = result["notice"]
+                interactive = result["interactive"].array
                 events = result["events"].array
                 for event in events {
                     switch event["type"].string {
@@ -113,7 +119,13 @@ extension AppStore {
             guard epoch == version, id == selectedConcept else { return }
             messages.append(try JSON.make(["role": "user", "content": text]))
             if !reply.isEmpty {
-                messages.append(try JSON.make(["role": "assistant", "content": reply]))
+                // Built as a JSON object directly (rather than JSON.make) because the
+                // interactive declarations are already `JSON` values, which are not
+                // JSONSerialization-compatible `Any` inputs to JSON.make.
+                var assistant: [String: JSON] = ["role": .string("assistant"),
+                                                 "content": .string(reply)]
+                if !interactive.isEmpty { assistant["interactive"] = .array(interactive) }
+                messages.append(.object(assistant))
             }
             // The media the tutor's own tools surfaced, read off the turn's events.
             // Taken from the events rather than a second search: what the trace says the
@@ -131,6 +143,44 @@ extension AppStore {
             connected = true
             if !speechDescriptor.isNull { playSpeech(speechDescriptor, version: version) }
         } catch { if epoch == version { record(error) } }
+    }
+
+    /// Record one evidence frame for a declared interactive.
+    ///
+    /// Only the learner's raw input state is sent - never the spec, readouts or
+    /// feedback. The backend re-evaluates the frame against the artifact's own spec,
+    /// so the authority for recorded evidence stays there. Values are narrowed to
+    /// JSONSerialization-compatible scalars (numbers and strings) before they reach
+    /// `api.json`; anything else is dropped rather than risking a serialization crash.
+    /// A failed frame is a side-channel error, not a failed tutor turn, so it never
+    /// appends a message or fabricates a reply.
+    func recordInteractiveEvidence(artifactID: String, state: [String: JSON]) async {
+        let version = epoch
+        guard !artifactID.isEmpty else { return }
+        do {
+            _ = try await api.json("/interactive/evidence", method: "POST",
+                                   body: ["artifact_id": artifactID,
+                                          "state": Self.evidenceState(state)])
+        } catch {
+            // Epoch changes mean the learner signed out / switched concepts; a frame
+            // from the old session is stale and must be dropped silently.
+            if epoch == version { record(error) }
+        }
+    }
+
+    /// Narrow learner input state to JSONSerialization-compatible scalars. Only
+    /// numbers and strings are valid evidence values; nested/other JSON is dropped
+    /// so `api.json` can always serialize the body.
+    nonisolated static func evidenceState(_ state: [String: JSON]) -> [String: Any] {
+        var out: [String: Any] = [:]
+        for (key, value) in state {
+            switch value {
+            case .number(let n): out[key] = n
+            case .string(let s): out[key] = s
+            default: break
+            }
+        }
+        return out
     }
 
     /// The licence-cleared media a turn surfaced, from its own event trace.

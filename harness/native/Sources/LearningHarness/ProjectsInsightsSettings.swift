@@ -28,7 +28,7 @@ struct ProjectEditor: View {
     let project: JSON
     @State private var text = ""
     @State private var reflection = ""
-    @State private var usedAI = false
+    @State private var assistanceLevel: AssistanceLevel = .none
     @State private var disclosureConfirmed = false
     /// A draft belongs to an account, not to a window. Scoping it to the signed-in
     /// user id keeps two learners on one Mac from reading each other's unsubmitted
@@ -41,7 +41,8 @@ struct ProjectEditor: View {
     private func saveDraft() {
         ProjectDrafts.save(account: draftAccount, project: projectID,
                            draft: .init(text: text, reflection: reflection,
-                                        usedAI: usedAI, confirmed: disclosureConfirmed,
+                                        assistanceLevel: assistanceLevel,
+                                        confirmed: disclosureConfirmed,
                                         updatedAt: Date().timeIntervalSinceReferenceDate))
     }
     var body: some View {
@@ -55,9 +56,22 @@ struct ProjectEditor: View {
                     Text("Reflect on your process").font(.system(size: 12, weight: .semibold))
                     Text("What changed in your understanding? What would you try differently?").font(.system(size: 11)).foregroundStyle(Palette.secondary)
                     TextEditor(text: $reflection).font(.system(size: 12)).scrollContentBackground(.hidden).padding(10).frame(height: 90).background(Palette.background, in: RoundedRectangle(cornerRadius: 12)).accessibilityIdentifier("project.reflection")
-                    Toggle("I used AI assistance in this project", isOn: $usedAI).toggleStyle(.checkbox).font(.system(size: 12)).accessibilityIdentifier("project.ai_disclosure")
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("AI assistance used").font(.system(size: 12, weight: .semibold))
+                        Picker("AI assistance used", selection: $assistanceLevel) {
+                            ForEach(AssistanceLevel.allCases) { level in
+                                Text(level.label).tag(level)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .accessibilityIdentifier("project.ai_disclosure")
+                        Text(assistanceLevel.detail)
+                            .font(.system(size: 10))
+                            .foregroundStyle(Palette.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                     Toggle("I confirm this declaration reflects my process", isOn: $disclosureConfirmed).toggleStyle(.checkbox).font(.system(size: 11)).foregroundStyle(Palette.secondary)
-                    Button("Submit project") { store.run { await store.submitProject(id: project["id"].string, text: text, disclosure: usedAI, reflection: reflection) } }.buttonStyle(LuminfestButtonStyle()).disabled(store.busy || text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !disclosureConfirmed).accessibilityIdentifier("project.submit")
+                    Button("Submit project") { store.run { await store.submitProject(id: project["id"].string, text: text, assistanceLevel: assistanceLevel, reflection: reflection) } }.buttonStyle(LuminfestButtonStyle()).disabled(store.busy || text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || reflection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || !disclosureConfirmed).accessibilityIdentifier("project.submit")
                 }
             }
             VStack(spacing: 17) {
@@ -75,17 +89,20 @@ struct ProjectEditor: View {
             if let draft = ProjectDrafts.load(account: draftAccount, project: projectID) {
                 text = draft.text
                 reflection = draft.reflection
-                usedAI = draft.usedAI
+                assistanceLevel = draft.assistanceLevel
                 disclosureConfirmed = draft.confirmed
             } else {
                 text = project["submission"].text("text", fallback: project["submission"].string)
                 reflection = project["reflection"].string
-                usedAI = project["ai_disclosure"].string.hasPrefix("AI assistance was used")
+                let stored = project.text("assistance_level")
+                assistanceLevel = AssistanceLevel(rawValue: stored)
+                    ?? (project["ai_disclosure"].string.hasPrefix("No AI assistance")
+                        ? .none : .researchOnly)
             }
         }
         .onChange(of: text) { _, _ in saveDraft() }
         .onChange(of: reflection) { _, _ in saveDraft() }
-        .onChange(of: usedAI) { _, _ in saveDraft() }
+        .onChange(of: assistanceLevel) { _, _ in saveDraft() }
         .onChange(of: disclosureConfirmed) { _, _ in saveDraft() }
         // A draft must survive the learner leaving the editor, regardless of how the edit was made.
         // Programmatic input (the QA harness sets values through accessibility) does not always fire
@@ -139,11 +156,127 @@ struct InsightsView: View {
                     }
                 }
             }
+            MeasurementCard()
             GradebookCard()
             PerspectiveCard()
         }
     }
 }
+
+/// The estimators the backend already computes, with their evidence limits attached.
+///
+/// The audit gap was not the maths — `app.measurement.report` has always refused to
+/// invent a retention figure — but that the insights screen never showed the reading.
+/// A bare number would have made that worse, so this card renders status first and keeps
+/// the scope and `cannot_claim` lines beside every estimate.
+private struct MeasurementCard: View {
+    @EnvironmentObject var store: AppStore
+
+    private var summary: JSON { store.analytics["measurement_summary"] }
+    private var unavailableReason: String {
+        if summary.isNull { return "This backend does not publish measurement estimators." }
+        return summary.text("reason")
+    }
+
+    var body: some View {
+        Card {
+            VStack(alignment: .leading, spacing: 16) {
+                SectionHeading(title: "What can actually be measured", detail: "ESTIMATORS")
+                if !unavailableReason.isEmpty {
+                    Text(unavailableReason)
+                        .font(.system(size: 12))
+                        .foregroundStyle(Palette.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("insights.measurement.unavailable")
+                } else {
+                    Text(summary.text("scope", fallback: "Every figure below carries its own evidence limit."))
+                        .font(.system(size: 11))
+                        .foregroundStyle(Palette.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Divider()
+                    measurementLine("Learning rate",
+                                     reading: summary["learning_rate"],
+                                     identifier: "insights.measurement.learningRate")
+                    measurementLine("Time to criterion",
+                                     reading: summary["time_to_criterion"],
+                                     identifier: "insights.measurement.timeToCriterion")
+                    measurementLine("Retention",
+                                     reading: summary["retention"],
+                                     identifier: "insights.measurement.retention")
+                    if !summary["cannot_claim"].array.isEmpty {
+                        Divider()
+                        Text("Not established yet")
+                            .font(.system(size: 12, weight: .semibold))
+                        ForEach(Array(summary["cannot_claim"].array.enumerated()), id: \.offset) { index, claim in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(claim.text("claim"))
+                                    .font(.system(size: 11, weight: .medium))
+                                Text(claim.text("why_not"))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(Palette.secondary)
+                                Text("To settle: " + claim.text("to_settle"))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(Palette.secondary)
+                            }
+                            .padding(.vertical, 4)
+                            .accessibilityIdentifier("insights.measurement.cannotClaim.\(index)")
+                        }
+                    }
+                }
+            }
+        }
+        .accessibilityIdentifier("insights.measurement")
+    }
+
+    private func measurementLine(_ title: String, reading: JSON,
+                                 identifier: String) -> some View {
+        let status = statusLabel(reading)
+        let evidence = evidenceLabel(reading)
+        let detail = reading.text("note", fallback: reading.text("next_action"))
+        return VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text(title).font(.system(size: 12, weight: .medium))
+                Spacer()
+                Tag(text: status, color: statusColor(status))
+                    .accessibilityIdentifier(identifier + ".status")
+            }
+            if !evidence.isEmpty {
+                Text(evidence)
+                    .font(.system(size: 10))
+                    .foregroundStyle(Palette.secondary)
+            }
+            if !detail.isEmpty {
+                Text(detail)
+                    .font(.system(size: 10))
+                    .foregroundStyle(Palette.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityIdentifier(identifier)
+    }
+
+    private func statusLabel(_ reading: JSON) -> String {
+        let raw = reading.text("status", fallback: "not_available")
+        return raw.replacingOccurrences(of: "_", with: " ").capitalized
+    }
+
+    private func statusColor(_ status: String) -> Color {
+        if status == "Measured" { return Palette.accentTeal.deep }
+        if status == "Not measured" { return Palette.accentOchre.deep }
+        return Palette.muted
+    }
+
+    private func evidenceLabel(_ reading: JSON) -> String {
+        let minimum = reading["minimum"].int
+        if minimum > 0 {
+            return "\(reading["observations"].int) of \(minimum) observations recorded."
+        }
+        let delay = reading["delay_days"].int
+        if delay > 0 { return "Delayed check after \(delay) days." }
+        return ""
+    }
+}
+
 struct SettingsPage: View {
     @EnvironmentObject var store: AppStore
     /// Injected once at the scene root. Declared here because the picker itself has to

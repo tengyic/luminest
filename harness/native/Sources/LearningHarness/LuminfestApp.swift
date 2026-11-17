@@ -110,15 +110,25 @@ struct RootView: View {
     @EnvironmentObject var localization: Localization
     var body: some View {
         Group {
-            if store.restoring { VStack(spacing: 20) { Image(systemName: "sun.max.fill").font(.system(size: 38)).foregroundStyle(Palette.forest); ProgressView("Opening your learning space…") }.frame(maxWidth: .infinity, maxHeight: .infinity) }
-            else if store.authenticated {
+            switch store.lifecycle {
+            case .restoring:
+                VStack(spacing: 20) {
+                    Image(systemName: "sun.max.fill")
+                        .font(.system(size: 38))
+                        .foregroundStyle(Palette.forest)
+                    ProgressView("Opening your learning space…")
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            case .onboarding:
+                OnboardingView()
+            case .courseSetup:
                 // First run is a branch, not a sheet. See `AppStore.inCourseSetup` for why: a sheet
                 // raised in the same update cycle as this swap is intermittently dropped, which
                 // silently enrolled new learners in the default course.
-                if store.inCourseSetup { CourseSetupView() }
-                else { TourHost { AppShell() } }
+                CourseSetupView()
+            case .shell:
+                TourHost { AppShell() }
             }
-            else { OnboardingView() }
         }
         .foregroundStyle(Palette.ink).font(.system(size: 13))
         // The locale travels with the words. It governs dates, numbers and measurements —

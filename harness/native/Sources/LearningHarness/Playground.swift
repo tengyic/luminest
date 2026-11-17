@@ -202,6 +202,11 @@ struct PlaygroundCard: View {
                 if store.playgroundBusy {
                     ProgressView().controlSize(.small)
                 } else {
+                    Button("Native runtime demo") {
+                        store.run { await store.loadInteractiveExample() }
+                    }
+                    .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                    .accessibilityIdentifier("playground.declarative")
                     Button(games.isEmpty ? "Load games" : "Open the playground") { store.openPlayground() }
                         .buttonStyle(LuminfestButtonStyle(primary: false))
                         .accessibilityIdentifier("playground.open")
@@ -243,6 +248,29 @@ struct PlaygroundCard: View {
         // Fetch once, on first sight. Guarded on the payload so switching concepts - which
         // re-renders this card - does not re-request a catalogue that has not changed.
         .task { if store.playground.isNull { await store.loadPlayground() } }
+        .sheet(isPresented: $store.showInteractive) {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack {
+                    Text("Declarative runtime").font(.system(size: 17, weight: .semibold))
+                    Spacer()
+                    Button("Done") { store.showInteractive = false }
+                        .buttonStyle(LuminfestButtonStyle(primary: false, compact: true))
+                        .accessibilityIdentifier("declarative.done")
+                }
+                Text("This spec was validated by the backend and is rendered natively from the approved component registry. It is an authored probe, not a generated grade.")
+                    .font(.system(size: 10))
+                    .foregroundStyle(Palette.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                ScrollView {
+                    if !store.interactiveSpec.isNull {
+                        DeclarativeInteractiveView(spec: store.interactiveSpec)
+                    }
+                }
+            }
+            .padding(24)
+            .frame(minWidth: 520, minHeight: 420)
+            .background(Palette.background)
+        }
     }
 
     private func gameRow(_ game: JSON) -> some View {

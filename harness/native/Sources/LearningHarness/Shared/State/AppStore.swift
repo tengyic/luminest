@@ -2,6 +2,29 @@ import Foundation
 import AppKit
 import Combine
 
+/// The one decision the window shell has to make: which whole-screen state is showing.
+///
+/// These used to be four Bools (`restoring`, `authenticated`, `inCourseSetup`, and the
+/// implicit signed-in shell). Every branch could be reasoned about alone and still disagree
+/// with the others at the frame where two flags changed. Resolution lives in one pure
+/// function, so the ordering is testable and every caller asks the same question.
+enum AppLifecycle: Equatable {
+    case restoring
+    case onboarding
+    case courseSetup
+    case shell
+
+    /// The order is a policy, not a coincidence: an in-flight restore outranks a cached
+    /// account, and a first-run course choice outranks the ordinary shell.
+    static func resolve(restoring: Bool, authenticated: Bool,
+                        inCourseSetup: Bool) -> AppLifecycle {
+        if restoring { return .restoring }
+        if !authenticated { return .onboarding }
+        if inCourseSetup { return .courseSetup }
+        return .shell
+    }
+}
+
 /// One voice the Settings picker can offer. Mirrors the backend's ``VOICE_PRESETS`` so the
 /// picker renders even before the first ``/voice/voices`` fetch lands, and so the chosen
 /// preset's ``tone`` is known client-side (the server only sees the resolved ``voice`` and
@@ -347,6 +370,11 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     /// shell presents them once, over everything, rather than inside one page.
     let rewards = RewardCenter()
     var authenticated: Bool { !user["id"].string.isEmpty }
+    /// The shell's single source of truth for which full-screen state to present.
+    var lifecycle: AppLifecycle {
+        .resolve(restoring: restoring, authenticated: authenticated,
+                 inCourseSetup: inCourseSetup)
+    }
     var concepts: [JSON] { curriculum["concepts"].array }
     var currentConcept: JSON { concepts.first { $0["id"].string == selectedConcept } ?? .null }
 
@@ -365,6 +393,10 @@ struct VoiceOption: Identifiable, Codable, Hashable {
     /// whole catalogue - so it is loaded once and reused.
     @Published var playground: JSON = .null
     @Published var playgroundBusy = false
+    /// A validated declarative runtime spec, fetched from the backend and rendered natively.
+    /// It is an authored probe today; a generated spec will enter through the same shape.
+    @Published var interactiveSpec: JSON = .null
+    @Published var showInteractive = false
     /// Whether the gallery sheet is up, and which game (if any) it should open on arrival.
     @Published var showPlayground = false
     @Published var playgroundSlug: String?
@@ -759,6 +791,7 @@ struct VoiceOption: Identifiable, Codable, Hashable {
         courses = .null; plan = .null; showCourseSetup = false; setupBusy = false; setupError = nil; setupDismissed = false
         selectedConcept = ""; page = .today; showQuestion = false; question = .null; attempt = .null
         playground = .null; playgroundSlug = nil; showPlayground = false
+        interactiveSpec = .null; showInteractive = false
         busy = false; authBusy = false; chatBusy = false; questionBusy = false; restoring = false
         answerOption = ""; answerText = ""; reasoning = ""; frozenAnswer = nil; activeSeconds = 0; error = nil; notice = nil; retryAction = nil
     }

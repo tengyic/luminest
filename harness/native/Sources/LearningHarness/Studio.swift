@@ -801,6 +801,23 @@ struct TutorPanel: View {
                                 // learner the asterisks and hashes the tutor wrote; this
                                 // parses the blocks and draws them as blocks.
                                 MarkdownText(message.text("content", fallback: message.text("message", fallback: message.text("text"))), size: 12)
+                                // Declarative interactives declared by this tutor turn,
+                                // drawn inline in the same bubble. Each entry wraps a
+                                // validated spec plus the artifact id used to record the
+                                // learner's input frames. User messages never carry one.
+                                if message["role"].string != "user" {
+                                    ForEach(Array(message["interactive"].array.enumerated()), id: \.offset) { _, entry in
+                                        let artifactID = entry["artifact_id"].string
+                                        DeclarativeInteractiveView(
+                                            spec: entry["spec"],
+                                            artifactID: artifactID.isEmpty ? nil : artifactID,
+                                            onEvidence: { state in
+                                                guard !artifactID.isEmpty else { return }
+                                                store.run { await store.recordInteractiveEvidence(artifactID: artifactID, state: state) }
+                                            }
+                                        )
+                                    }
+                                }
                                 ForEach(Array((message["citations"].isNull ? message["grounding"].array : message["citations"].array).enumerated()), id: \.offset) { _, source in SafeLessonLink(title: source.text("title", fallback: "Source"), rawURL: source.text("url", fallback: source.string)) }
                                 if message["role"].string != "user" && message["grounding"].isNull && message["citations"].isNull {
                                     ForEach(Array(store.lesson["blocks"].array.prefix(1).enumerated()), id: \.offset) { _, block in SafeLessonLink(title: "Current curriculum reference", rawURL: block["source_url"].string) }

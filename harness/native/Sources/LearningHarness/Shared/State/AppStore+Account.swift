@@ -36,18 +36,43 @@ extension AppStore {
             await refresh()
         } catch { if epoch == version { record(error) } }
     }
-    func submitProject(id: String, text: String, disclosure: Bool, reflection: String) async {
+    func submitProject(id: String, text: String, assistanceLevel: AssistanceLevel,
+                       reflection: String) async {
         let version = epoch
         busy = true; error = nil
         defer { if epoch == version { busy = false } }
         do {
-            _ = try await api.json("/projects/" + id.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)! + "/submit", method: "POST", body: ["text": text, "ai_disclosure": disclosure ? "AI assistance was used; the learner remains responsible for the submitted explanation." : "No AI assistance was used in this project.", "reflection": reflection])
+            let body: [String: Any] = [
+                "text": text,
+                "ai_disclosure": assistanceLevel.disclosureSentence,
+                "assistance_level": assistanceLevel.rawValue,
+                "reflection": reflection,
+            ]
+            _ = try await api.json("/projects/" + id.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)! + "/submit", method: "POST", body: body)
             guard epoch == version else { return }
             await load("/projects") { self.projects = $0 }
             guard epoch == version, authenticated else { return }
             notice = "Project submitted. Your feedback is ready."
         } catch { if epoch == version { record(error) } }
     }
+    /// Fetch a backend-validated declarative spec and present the native renderer.
+    ///
+    /// The example is authored, not model-generated. It is here so the renderer, the
+    /// validator and the registry are exercised through the same authenticated path a
+    /// generated spec will use when it is wired into a lesson.
+    func loadInteractiveExample() async {
+        guard authenticated else { return }
+        let version = epoch
+        do {
+            let spec = try await api.json(
+                "/interactive/example",
+                query: [URLQueryItem(name: "concept_id", value: selectedConcept)])
+            guard epoch == version else { return }
+            interactiveSpec = spec
+            showInteractive = true
+        } catch { if epoch == version { record(error) } }
+    }
+
     func exportAccount() async {
         let version = epoch
         do {
