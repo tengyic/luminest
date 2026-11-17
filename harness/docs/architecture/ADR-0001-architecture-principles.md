@@ -177,13 +177,17 @@ The same principle already binds token lifetimes: `Settings.access_token_ttl` an
 `security.ACCESS_TTL_SECONDS` were found disagreeing (7 days vs 1 hour) and now a test
 pins them equal (`backend/tests/test_security_contract.py:24-31`).
 
-**Where it is not yet true.** The Swift launcher states the schema version a second time:
-`expectedSchemaVersion = 11` at `native/Sources/LearningHarness/BackendLauncher.swift:100`,
-against `SCHEMA_VERSION = 11` at `backend/app/db.py:75`. `native/Tests/.../BackendLauncherTests.swift:82-98`
-hardcodes 11 as well, so the Swift constant and its test would move together and neither
-would notice the backend moving. That is the counter-example, not the model;
-[ADR-0006](ADR-0006-no-duplicated-business-logic.md) records the missing binding and this
-pass adds one (`test_swift_schema_mirror_matches_the_backend`).
+**Where it is not yet true.** The Swift launcher still states the schema version a second
+time: `expectedSchemaVersion = 13` at `native/Sources/LearningHarness/BackendLauncher.swift:100`,
+against `SCHEMA_VERSION = 13` at `backend/app/db.py:75`. The verdict-logic tests at
+`native/Tests/.../BackendLauncherTests.swift:82-98` pass an explicit expected value (11 in
+those fixtures), so on their own they would move with the constant and not notice the
+backend. A separate drift guard now reads `SCHEMA_VERSION` out of `backend/app/db.py` and
+asserts equality with the Swift constant (`testExpectedSchemaVersionMatchesTheBackendSource`,
+`BackendLauncherTests.swift:216-238`). That guard catches the drift but the duplication
+remains, so this is still the counter-example, not the model.
+[ADR-0006](ADR-0006-no-duplicated-business-logic.md) recorded the missing binding (that ADR
+is not present in this tree); the binding here is the test named above.
 
 **Enforcement status:** tests for retention and TTL; a new guard for the schema mirror; no
 general mechanism.

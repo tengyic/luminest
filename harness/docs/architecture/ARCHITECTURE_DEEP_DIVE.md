@@ -3,14 +3,15 @@
 **Scope.** The control flow, algorithms, tool surface and stack of the Luminest
 learning harness, with the constants that actually run. Every claim below cites a
 file and, where it matters, a line. Verified against the working tree on
-**2026-11-16** by reading the code, not by reading other docs.
+**2026-11-17** (schema 13) by reading the code, not by reading other docs.
 
 **Notation.** `path:line` is relative to `harness/`. Formulas are transcribed from
 the implementation (variable names kept) so they can be checked against the source.
 
-> **A note on an existing dead reference.** `docs/architecture/INDEX.md:10` points at
-> `../../ARCHITECTURE.md`, which does not exist in this tree. This document is the
-> missing overview; `INDEX.md` remains the capability→file→test map.
+> **A note on a reference that used to be dead.** `docs/architecture/INDEX.md` pointed at
+> `../../ARCHITECTURE.md`, which never existed in this tree. It now points here, and
+> `backend/tests/test_architecture_guards.py` fails the suite if either document links to
+> a file that is not there.
 
 ---
 
@@ -28,7 +29,7 @@ Four cooperating surfaces, one backend, one licence policy:
 ┌──────────────────────────────────────────────────┐
 │ FastAPI app  (create_app --factory)              │
 │  auth → context → prompt assembly → agent loop    │
-│  → toolbox (53 tools) → post-processing           │
+│  → toolbox (55 tools) → post-processing           │
 ├──────────────────────────────────────────────────┤
 │ teaching layer: decision scorer · procedure FSM   │
 │ algorithms: FSRS-6 DSR · BKT mastery · grading    │
@@ -218,10 +219,12 @@ bytes; empty or over-long text.
 
 ### 3.1 Size and groups
 
-**53 tools registered** in `toolbox.REGISTRY` (`app/harness/toolbox.py:1010`).
-**52 available** in a stock environment: `browser_snapshot` declares
-`requires=('playwright',)` (`:1436`) and is filtered out when Playwright is absent
-(`available_specs`, `:1025-1044`).
+**55 tools registered** in `toolbox.REGISTRY` (`app/harness/toolbox.py:1219`).
+**54 available in the frozen bundle**: `browser_snapshot` declares
+`requires=('playwright',)` (`:1663`) and is filtered out when Playwright is absent
+(`available_specs`, `:1244`). This development venv has Playwright installed, so a
+local `available_specs()` here returns all 55 — the 54 is the shipped number, not a
+claim about a workstation.
 
 | Group | n | Tools |
 |---|---|---|
@@ -243,7 +246,7 @@ a tool touches the outside world.
 ### 3.2 `invoke` — the single choke point
 
 `toolbox.py:1688`. Every tool call from the loop goes through it, which is why the
-cross-cutting rules live in one place rather than in 53 tools:
+cross-cutting rules live in one place rather than in 55 tools:
 
 ```python
 entry = REGISTRY.get(name)                       # unknown → refused
@@ -622,12 +625,18 @@ The threshold applies to `earned`, so the unit bonus (≤ 0.15) can reorder cand
 ## 7. Data model and tenancy
 
 `app/db.py`, SQLAlchemy 2.x typed ORM (`Mapped[...] = mapped_column(...)`),
-`SCHEMA_VERSION = 11` (`:75`).
+`SCHEMA_VERSION = 13` (`:75`).
 
-**41 tables**: 37 `__tablename__` in `db.py`, plus `created_courses`
-(`course_builder.py:1771`), `unit_grades` (`assessment_book.py:196`),
+**49 tables** at schema 13: 44 `__tablename__` in `db.py`, plus five declared beside the
+feature that owns them — `created_courses` (`course_builder.py:1771`), `unit_grades`
+(`assessment_book.py:271`), `project_grades` (`assessment_book.py:68`),
 `perspective_reviews` (`perspectives.py:106`), `measurement_probes`
-(`measurement/models.py:55`). Boards are **files**, not tables.
+(`measurement/models.py:55`). The v12→v13 substrate added seven of them:
+`interactive_artifacts`/`interactive_evidence`, `learner_concept_facets`/
+`learner_concept_edges`/`concept_evidence_ledger`, and `bkt_model_registry`/
+`bkt_model_events`. Boards are **files**, not tables. Cross-checked by reconciling every
+declared `__tablename__` against a freshly created database: 49 declared, 49 created,
+zero in either direction.
 
 Core rows and the invariant each carries:
 
@@ -686,8 +695,9 @@ Scale, for orientation: backend `app/` ≈ 180 `.py` files / ~84k lines (`main.p
 4,527); native 76 `.swift` files / ~27k lines; web 8 files / ~3.5k lines.
 
 **Route surface.** `main.py` declares 131 handlers inline; 18 feature-router modules are
-dynamically imported (`app/feature_routers.py:27-61`). `scripts/api_surface.py` reports
-**226 route registrations** (see `docs/architecture/INDEX.md`). Because routers are
+dynamically imported (`app/feature_routers.py:27-61`). `backend/scripts/api_surface.py` reports
+**274 route registrations** (method×path, per `backend/scripts/api_surface.py`; see
+`docs/architecture/INDEX.md`). Because routers are
 imported by name, `package.py` must emit each as a `--hidden-import`; the comment at
 `main.py:4508-4515` records the incident where a frozen build silently shipped with no
 feature routes.
@@ -760,7 +770,97 @@ refusal rather than quietly adding the fourth thing.
 
 ---
 
-## 11. Honest limits
+## 11. The 2.0 substrate (schema 13)
+
+On 2026-11-16 the tree gained a second, narrower runtime: the part of the 2.0
+specification that could be built without a second repository. Four modules, seven
+tables, two tools and one column. The design rule is the one from §1, applied to
+generated UI instead of generated prose: **the model supplies description, the server
+owns execution.**
+
+### 11.1 `declarative_ui` — a closed vocabulary instead of generated code
+
+`app/declarative_ui.py` is the *approved vocabulary* a model may emit when a drag or a
+derived readout teaches better than prose. Component types are exactly
+`slider | number | choice | text | readout | feedback | reset`; an expression is a number,
+`{"const": …}`, `{"ref": input_id}`, or `{"op": …}` over a 16-operator enum
+(`add sub mul div min max abs eq ne lt le gt ge and or not`). There is no `eval`, no
+imports, no DOM, no network and no file path — the module never executes model text, so
+validation is decidable before anything renders.
+
+Limits are constants, not conventions: `MAX_COMPONENTS = 40`, `MAX_INPUTS = 16`,
+`MAX_EXPRESSION_DEPTH = 8`, `MAX_OPTIONS = 8`, `MAX_STRING = 400`, ids matching
+`^[A-Za-z][A-Za-z0-9_]{0,31}$`.
+
+Three functions hold up the contract, and they are the same three things: `registry()`
+publishes what may be rendered (also served at `GET /api/v1/interactive/registry`),
+`validate()` normalises an untrusted spec or raises a named reason, and `evaluate()`
+recomputes readouts and feedback from learner state and returns evidence that says
+explicitly that it is *not a receipt-bound answer, and not a grade*
+(`declarative_ui.py:359`).
+
+### 11.2 `interactive_runtime` — persistence is the boundary
+
+`persist_artifact()` validates and stores the spec as an `interactive_artifacts` row
+*before* the client sees it. `record_evidence()` appends an `interactive_evidence` row
+evaluated against the **stored** artifact, never against a spec the client just sent.
+Neither is an `Attempt`. That separation is the whole point: interaction state is teaching
+evidence with a named source and a bounded vocabulary, not a correctness receipt, and it
+must not become one by accident.
+
+### 11.3 Two tools, and a refusal that teaches
+
+`validate_interactive(spec)` and `emit_interactive(spec, concept_id)` are ordinary
+registry tools, so they pass the same `invoke` gate as everything else. A refusal returns
+the vocabulary — components, operators, limits, and a "resend using only these"
+instruction — because a closed vocabulary that only says *no* is unlearnable, and a local
+model asked to guess component names invents them on every retry.
+
+`emit_interactive` used to instruct the model to *call `interactive_registry`*, which was
+an HTTP route and never a tool; a model obeying that sentence produced a call the
+dispatcher could not resolve. The description now names `validate_interactive`, and
+`tests/test_tool_contracts.py` scans every description for the imperative "call X"/"use X"
+form and fails when X is not a registered tool.
+
+### 11.4 `learner_graph` — four facets, one transparent step
+
+Schema 13 adds per-learner estimates for `conceptual | procedural | calculation |
+retrieval`, each with typed `learner_concept_edges` and an append-only
+`concept_evidence_ledger`. The update is a bounded heuristic — `PRIOR = 0.15`, clamped to
+`[0.01, 0.99]`, ledger capped at `MAX_LEDGER = 200` — and the payload says so rather than
+implying a calibrated model. A facet may disagree with `learning_states` and explain why;
+it is never a second mastery score, and `learning_states` remains the receipt-bound answer
+state.
+
+### 11.5 `bkt_registry` — governance for parameters that touch learners
+
+`ml/bkt.py` answers "can these parameters be estimated". `bkt_registry` answers a
+different question — "which parameters may affect a learner right now" — and needs a
+different control. Stages are `candidate → shadow → active → rolled_back`. Promotion out
+of shadow is machine-checked against three gates (`MIN_HELD_OUT_SEQUENCES = 20`,
+`MIN_HELD_OUT_STUDENTS = 10`, `MAX_CALIBRATION_ERROR = 0.10`); promotion records
+`previous_version`, so rollback restores a *reviewed* state instead of an undocumented
+default. Parameters are bounded to `(0, 1)` before use and no model file is ever loaded
+from a client-supplied path.
+
+### 11.6 `projects.assistance_level` — a disclosure, not an inference
+
+`Submission.assistance_level` is one of `none | research_only | hints_only |
+feedback_only`. It is what the learner *declared*, never something the server infers from
+behaviour, and `project_grades` records reviewer judgement against those declared
+conditions so a grade can be read in the light of the help that was allowed.
+
+### 11.7 What this substrate is not
+
+`docs/LUMINEST_2_REPOSITORY_POLICY.md` is explicit, and this paragraph repeats it because
+a schema bump is easy to mistake for a shipped release: the separate 2.0 repository **does
+not exist**. No push, tag, release or public URL was created by this work. `harness/` is
+still the only tree and still the 1.4.0 line; the policy document describes a boundary an
+operator has to execute, not one that has been executed.
+
+---
+
+## 12. Honest limits
 
 Architecture decisions worth knowing before extending:
 
@@ -770,8 +870,8 @@ Architecture decisions worth knowing before extending:
    it is a single argmax. The lesson sequence is a state machine in `procedure_service`.
 3. **BKT constants are duplicated.** Runtime `guess = 0.25`; `ml/bkt.py` uses `0.20`.
    Mastery figures from an offline BKT fit are therefore not directly comparable.
-4. **53 registered / 52 available.** `browser_snapshot` needs Playwright, which the
-   shipped bundle excludes.
+4. **55 registered / 54 shipped.** `browser_snapshot` needs Playwright, which the
+   shipped bundle excludes; a workstation venv that has Playwright exposes all 55.
 5. **`INDEX.md` links a missing `ARCHITECTURE.md`** — this document fills that gap.
 6. **PNG/PDF are client-side.** Any doc that says the server exports PNG/PDF is wrong.
 7. **Not notarized by default.** `package.py` is ad-hoc signed by default and says so;
@@ -785,12 +885,12 @@ would otherwise lose an afternoon.
 
 ---
 
-## 12. File map
+## 13. File map
 
 ```
 backend/app/
 ├── main.py                     app factory, 131 inline routes, prompt assembly, post-processing
-├── db.py                       41-table model, SCHEMA_VERSION = 11
+├── db.py                       49-table model, SCHEMA_VERSION = 13
 ├── learning.py                 mastery update, grading support, diagnosis, recommendation
 ├── memory.py                   FSRS-6 DSR scheduler
 ├── course_builder.py           intake validation, concept extraction, persistence
@@ -805,7 +905,7 @@ backend/app/
 └── harness/
     ├── agent_loop.py           run_agent (8/24 steps, 7 event types)
     ├── provider.py             chat / chat_tools, Ollama /v1 rule
-    ├── toolbox.py              53 tools, invoke gate, identifier grounding
+    ├── toolbox.py              55 tools, invoke gate, identifier grounding
     ├── loop.py                 9-move scorer (one-shot)
     ├── teaching/procedure.py   compile_procedure, activity vocabulary
     ├── teaching/surface.py     surface ownership + switch rules
@@ -830,6 +930,9 @@ scripts/package.py              PyInstaller onedir, codesign, notarytool
 ---
 
 **How to check this document.** Every constant above can be re-read with
-`grep -n` on the cited file. The counts (53 tools, 41 tables, 226 routes, 37+4 models)
-are reproducible from `toolbox.REGISTRY`, `db.__tablename__`, and
-`backend/scripts/api_surface.py`. If a number here disagrees with the code, the code wins.
+`grep -n` on the cited file. The counts (55 tools, 49 tables, 274 routes, 49 models)
+are reproducible from `toolbox.REGISTRY`, `db.__tablename__` plus the four models
+declared beside their feature, and `backend/scripts/api_surface.py`. If a number here
+disagrees with the code, the code wins — that sentence exists because it has already
+happened once: this document said 53 tools / 41 tables / 226 routes while the tree had
+moved to 55 / 49 / 274.

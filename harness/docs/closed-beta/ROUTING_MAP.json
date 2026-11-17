@@ -15,7 +15,7 @@
       "items": ["B5", "B10"],
       "handler_spec": "Classify all six landing variants, finalise the design from the initial version with a live conversational alternate, and produce the publishable site plus link.",
       "files": ["outputs/closed-beta-site/**", "harness/docs/closed-beta/LANDING_DECISION.md"],
-      "result": "site assembled; variants mapped with confidence; BOTH landing designs live and smoke-tested. Public link NOT published: sites deploy returned SITES_APP_NOT_FOUND / retryable:false for deleted appId wbapp_3EiXiwaWSovkxwc1HX78j5 on three attempts. See PUBLISH_BLOCKER.md"
+      "result": "site assembled; variants mapped with confidence; BOTH landing designs live and smoke-tested. Initially blocked: sites deploy returned SITES_APP_NOT_FOUND / retryable:false for deleted appId wbapp_3EiXiwaWSovkxwc1HX78j5 on three attempts. RESOLVED 2026-11-16 in a new WorkBuddy task: new app wbapp_i2NXsCksKaquxJUrLmkFNP published with a verified share link. See PUBLISH_BLOCKER.md"
     },
     "distribution": {
       "items": ["B7", "B8"],

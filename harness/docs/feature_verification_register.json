@@ -2,7 +2,7 @@
   "program": "Program 1 — Stabilization and correctness",
   "product": "Luminest / Luminfest Learning Harness",
   "version": 1,
-  "updated": "2026-11-15",
+  "updated": "2026-11-17",
   "purpose": "One register for the whole application: what the learner sees, where it is implemented natively, where it is implemented on the server, what it persists, what proves it, and the measurable condition that makes it done.",
   "boundaries": {
     "database_security": "A parallel agent owns database/tenant security hardening. This register records the current expected path and the existing security tests, but makes no change to security code and does not claim that hardening is complete.",
@@ -295,6 +295,17 @@
           "data": "unit_grades table: frozen standards snapshot, score, max_score, percent, standards_met/total, attempt count, scope_note. Scored from Attempt rows filtered by main.graded_attempts.",
           "tests": "backend/tests/test_assessment_and_perspectives.py — declares standards, refuses a grade with no evidence, refuses a grade with partial evidence, freezes once, upserts rather than duplicating, and hides another course’s unit.",
           "acceptance": "A unit with any standard below 2 graded attempts has percent=null and POST /grade returns 409 with the missing standards; once every standard has evidence a frozen grade is stored and re-grading updates the same row. Remaining delta: standards are this course’s declared objectives, not external academic standards (Common Core/AP alignment), and the grade is explicitly formative and non-accredited."
+        },
+        {
+          "id": "ASSESS-05",
+          "name": "Human project rubric grading with a disclosed assistance level",
+          "status": "partial",
+          "user_facing": "A learner declares which level of AI help they used (none / research only / hints only / feedback only) when submitting a project. A configured reviewer scores the visible rubric criteria, and a second score supersedes the first without erasing it.",
+          "native": "Learner side: the four-level disclosure is carried by ProjectDrafts.swift and the submission payload. Reviewer side: absent — no SwiftUI surface calls /projects/{id}/grade, so scoring is HTTP-only today. That is why this row is partial rather than implemented.",
+          "backend": "backend/app/assessment_book.py (ProjectGrade, score_project, project_grade_history, reviewer_emails gated by HARNESS_REVIEWERS); POST /api/v1/projects/{project_id}/grade and GET .../grades in backend/app/main.py.",
+          "data": "project_grades (append-only, supersedes chain) and projects.assistance_level (schema 12). The formative checklist feedback is never rewritten by a grade, and no automated correctness judgement is stored.",
+          "tests": "backend/tests/test_project_grading.py (override chain, non-reviewer refusal, formative feedback untouched); native/Tests/LearningHarnessTests/AssistanceLevelTests.swift.",
+          "acceptance": "A second score produces a new row whose supersedes points at the first, the first still reads back unchanged, and a caller who is not a configured reviewer is refused."
         }
       ]
     },
@@ -456,6 +467,17 @@
           "data": "Simulation map packs (provider, url, observable=false).",
           "tests": "backend/tests/test_playground_attribution.py; test_sims_check.py.",
           "acceptance": "An external simulation is always observable=false and never feeds mastery; attribution is present; a missing simulation returns the named gap, not a generic link."
+        },
+        {
+          "id": "PLAY-05",
+          "name": "Model-emitted declarative interactions",
+          "status": "partial",
+          "user_facing": "The tutor can build a small native interaction — sliders, choices, derived readouts, authored feedback — when manipulating a value teaches better than prose, and can record what the learner did with it.",
+          "native": "DeclarativeInteractiveView.swift renders the published vocabulary and recomputes readouts locally; it is wired from Studio.swift and Playground.swift and posts debounced evidence only when an artifact id is present. No recorded journey yet drives a real tutor turn that emits one, so this is partial.",
+          "backend": "backend/app/declarative_ui.py (registry / validate / evaluate over a closed component vocabulary and a 16-operator expression enum), backend/app/interactive_runtime.py (persist artifact, append evidence), the validate_interactive and emit_interactive tools, and GET /interactive/registry, /interactive/example, POST /interactive/validate, /evaluate, /evidence, GET /interactive/artifacts/{id}.",
+          "data": "interactive_artifacts (validated spec, schema_version, source) and interactive_evidence (append-only frames). Deliberately not an Attempt and not a grade; a refusal returns the vocabulary so a model can converge.",
+          "tests": "backend/tests/test_declarative_ui.py (vocabulary, limits, no script/markup/URL), test_generative_interactive.py (HTTP flow, evidence against the stored artifact), test_tool_contracts.py (dispatcher and description guard); native/Tests/LearningHarnessTests/InteractiveEvidenceTests.swift.",
+          "acceptance": "A spec containing a script, markup, URL or file path is refused with a named reason plus the allowed components and operators; an accepted spec is rendered from the stored artifact, never from a client-supplied one."
         }
       ]
     },
@@ -517,6 +539,17 @@
           "data": "db.py UsageLedger, UsageDailyRollup, QuotaCounter.",
           "tests": "backend/tests/test_metering.py; test_capabilities.py.",
           "acceptance": "Every tutor turn writes one UsageLedger row, including offline fallback with outcome=fallback and zero tokens; latency and provider/model are recorded; a failed write does not silently disappear."
+        },
+        {
+          "id": "INSIGHT-06",
+          "name": "Per-learner four-facet concept graph",
+          "status": "partial",
+          "user_facing": "Per-concept estimates for conceptual, procedural, calculation and retrieval facets, each carrying the evidence that moved it and allowed to disagree with the receipt-bound mastery state.",
+          "native": "Absent. GET /api/v1/learner-graph has no SwiftUI reader yet, which is why this row is partial.",
+          "backend": "backend/app/learner_graph.py (facet_for, estimate_after, snapshot); GET /api/v1/learner-graph.",
+          "data": "learner_concept_facets, learner_concept_edges and concept_evidence_ledger (schema 13). The update is a bounded transparent heuristic, not a calibrated psychometric model, and the payload says so; the ledger caps at 200 entries.",
+          "tests": "backend/tests/test_learner_graph_bkt.py.",
+          "acceptance": "Every facet update writes a ledger row naming its source, and the estimate stays inside [0.01, 0.99] rather than saturating at 0 or 1."
         }
       ]
     },
@@ -556,6 +589,17 @@
           "data": "Synthetic learners with a known learning rate. No learner data is read.",
           "tests": "backend/tests/test_measurement.py::test_the_estimator_benchmark_passes_its_own_checks.",
           "acceptance": "Five checks over seeded synthetic cohorts: recovery (rank correlation >= 0.60, |median bias| <= 0.02, MAE <= 0.06 on identifiable curves), coverage (empirical 0.80-0.98 for a nominal 0.90), discrimination (Cohen's d >= 0.8 between flat and improving), aided inflation (support inflates accuracy and the gap estimator tracks it within 0.04), and null false-positive rate <= 0.12. The suite validates the estimator only, and says so in its own payload."
+        },
+        {
+          "id": "MEASURE-04",
+          "name": "BKT model registry and promotion gate",
+          "status": "partial",
+          "user_facing": "Which BKT parameter set is serving, shadowing or awaiting review, the gates a promotion must clear, and the version it replaced so a rollback restores a reviewed state.",
+          "native": "Absent; the surface is admin HTTP (require_admin) only.",
+          "backend": "backend/app/bkt_registry.py (register_candidate, promote_to_shadow, promote_to_active, rollback_active, promotion_gate); GET /api/v1/bkt/registry, POST /api/v1/bkt/models, POST /api/v1/bkt/models/{version}/promote and /rollback.",
+          "data": "bkt_model_registry and bkt_model_events (schema 13, append-only events). Parameters are bounded to (0, 1) before use and no model file is loaded from a client-supplied path.",
+          "tests": "backend/tests/test_learner_graph_bkt.py.",
+          "acceptance": "Promotion out of shadow fails unless held-out sequences >= 20, held-out learners >= 10 and calibration error <= 0.10; rollback restores the recorded previous version rather than an undocumented default."
         }
       ]
     },
