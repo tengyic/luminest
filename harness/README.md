@@ -8,7 +8,15 @@ simulation) is gated by a single fail-closed licence policy before it is shown.
 
 > **Verified state**
 >
-> - **2026-11-15 — Closed Alpha**: end-to-end gate **47/47** on a real AP Psychology
+> - **2026-11-17 — schema 13 at `6cd5733`**: backend suite **2482 passed / 0 failed /
+>   2 skipped** (2484 collected, 32 m 33 s); native **140/140**; end-to-end gate
+>   **45/47**. Both gate failures share one external cause: the configured provider
+>   answered **HTTP 402 Insufficient Balance**, so no model turn and therefore no tool
+>   dispatch could happen. The harness served its *labelled* grounded fallback
+>   (`answered_by: model-unavailable`) instead of presenting prose as a model reply — the
+>   gate correctly refused to count it. With a funded provider this gate is 47/47; the
+>   failure is credit, not code, and it is recorded as such rather than re-run until green.
+> - **2026-11-15 — Closed Alpha (provider funded)**: end-to-end gate **47/47** on a real AP Psychology
 >   course with hard "no fake pass" assertions; backend suite **2451 passed /
 >   0 failed / 2 skipped**; frozen backend smoke **11/11**. See
 >   [*Test evidence*](#test-evidence) below and
@@ -183,17 +191,19 @@ artifact, not from the presence of a file. Run them from `harness/` unless noted
 
 | Gate | Result | Reproduce | Evidence |
 | --- | --- | --- | --- |
-| Closed-Alpha end-to-end | **47/47 checks**, 0 failed steps | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` | `outputs/alpha_e2e_evidence.json` |
-| Backend full suite | **2451 passed / 0 failed / 2 skipped** (19m33s) | `cd backend && env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q --basetemp=.pytest-basetemp-XXXX -p no:cacheprovider` | `outputs/test_suite_2026-11-15.json`, `backend/.tmp-full-suite-1115-clean.log` |
+| Closed-Alpha end-to-end | **45/47 checks** at `6cd5733` — the two failures are one cause: provider **HTTP 402 Insufficient Balance**, so no model turn / tool dispatch ran. **47/47** on a funded provider (2026-11-15) | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` | `outputs/alpha_e2e_evidence.json` |
+| Backend full suite | **2482 passed / 0 failed / 2 skipped** (2484 collected, 32m33s, 2026-11-17) | `cd backend && env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q --basetemp=.pytest-basetemp-XXXX -p no:cacheprovider` | summary embedded here; raw log stays local (see note below) |
+| Native unit tests | **140 passed / 0 failed** (3.9 s) | `cd native && env -u PYTHONPATH swift test --disable-sandbox` | — |
 | Frozen backend smoke | **11/11** | `python3 scripts/package.py --backend-only --allow-template-legal` | `outputs/closed-beta-2026-11-15/` |
 | Native journey gate | **10/10 journeys**, `appExitCode=0` | see *Native journey gate* above | `outputs/native-qa/journey-full-10/` |
-| Capability register | 47 implemented / 12 partial / 2 external | — | `docs/feature_verification_register.json` |
+| Capability register | 47 implemented / 16 partial / 2 external | `python3 scripts/verify_feature_register.py --check` | `docs/feature_verification_register.json` |
 
-The gate results and the register are committed, but the raw evidence under `outputs/`
-and `*.log` is intentionally gitignored (local build/QA artifacts). The numbers above
-are therefore embedded in this README and in the tracked
-`docs/ALPHA_VERDICT_2026-11-15.md`; the evidence paths in the table are where the raw
-artifacts land when you reproduce a run locally.
+The register and the verdict document are committed. The raw evidence under `outputs/`
+and `*.log` is intentionally gitignored (local build/QA artifacts), so the `outputs/…`
+paths in the table are **where the artifact lands when you reproduce a run locally** —
+they are not clickable on GitHub. The numbers are therefore embedded in this README and
+in the tracked `docs/ALPHA_VERDICT_2026-11-15.md`; if a number here ever disagrees with
+the tree, the tree wins.
 
 The E2E gate deliberately rejects "HTTP 200 but nothing really happened": it requires a
 model-backed answer, both `stage_surface` **and** `whiteboard_write` dispatched and
@@ -216,7 +226,7 @@ to green, not swept aside:
   attributed, none skipped by just re-running.
 
 These gates are not a claim that every feature is complete. The register still lists
-12 `partial` and 2 `external` capabilities (duplex voice, browser window stream, email
+16 `partial` and 2 `external` capabilities (duplex voice, browser window stream, email
 verification, teacher clone, project workflows and others); mindmap/flashcards had their
 **media pipeline** fixed, while their presentation remains an SVG tree and text cards.
 The full verdict is in `docs/ALPHA_VERDICT_2026-11-15.md`.
