@@ -242,10 +242,26 @@ class ChatInput(Input):
     teacher_profile: TeacherStyleProfile | None = None
 
 
+AssistanceLevel = Literal['none', 'research_only', 'hints_only', 'feedback_only']
+
+
 class Submission(Input):
     text: str = Field(min_length=10, max_length=20000)
     ai_disclosure: str = Field(min_length=1, max_length=2000)
     reflection: str = Field(min_length=1, max_length=5000)
+    assistance_level: AssistanceLevel = 'none'
+
+
+class CriterionScore(Input):
+    criterion_id: str = Field(min_length=1, max_length=64)
+    points: float = Field(ge=0)
+    rationale: str = Field(min_length=3, max_length=2000)
+
+
+class GradeSubmission(Input):
+    criteria: list[CriterionScore] = Field(min_length=1, max_length=12)
+    status: Literal['graded', 'needs_revision']
+    rationale: str = Field(min_length=3, max_length=4000)
 
 
 class Event(Input):
@@ -256,7 +272,8 @@ class Event(Input):
     # recordExternalSimulationOpened() had never once landed. A type belongs in this list the
     # moment anything emits it, not the moment a reader remembers.
     type: Literal['heartbeat', 'lesson_view', 'simulation_interaction', 'modality_selected',
-                  'interaction', 'external_simulation_opened']
+                  'interaction', 'external_simulation_opened', 'question_presented',
+                  'hint_viewed', 'explanation_viewed']
     occurred_at: datetime
     payload: dict = Field(default_factory=dict)
 

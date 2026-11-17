@@ -20,8 +20,9 @@ TEACHING_CONDUCT = (
     'guarantees about this product): '
     'Dialogue - never give the full answer first. Use the ladder pump ("say more about how '
     'you got there"), then hint (narrow the space, do not solve it), then prompt (ask for '
-    'the specific missing sub-step), and assert (state the step) only after three failed '
-    'cycles - the same three-failure threshold that :mod:`app.harness.socratic` computes, '
+    'the specific missing sub-step), probe (self-explain or try a fresh variant), and assert '
+    '(state the step) only after four failed cycles - the same four-failure threshold that '
+    ':mod:`app.harness.socratic` computes, '
     'which the server evaluates from the learner\'s own record and passes to you as state. '
     'Always elicit '
     'self-explanation ("why did that step preserve the relationship?"); '
@@ -62,7 +63,7 @@ TEACHING_CONDUCT = (
 
 #: The conduct as a short list, for a client's transparency panel.
 CONDUCT_RULES = (
-    {'rule': 'dialogue', 'text': 'Answer last: pump, hint, prompt, then assert after three failed cycles.',
+    {'rule': 'dialogue', 'text': 'Answer last: pump, hint, prompt, probe, then assert after four failed cycles.',
      'evidence': 'Graesser/AutoTutor dialogue moves; Bastani et al., PNAS 2025 '
                  '(https://doi.org/10.1073/pnas.2422633122) for the harm that answer-first '
                  'tutoring causes - the guardrail removes the harm, it does not prove a gain'},

@@ -201,7 +201,7 @@ def _next_action(concept: dict, index: int = 5) -> str:
 
 
 def diagnose(question, correct, option_id, response_confidence=None):
-    from .curriculum import CONCEPTS
+    from .curriculum import CONCEPTS, QUESTIONS
     evidence = question.get('distractor_diagnoses', {}).get(option_id)
     if correct:
         result = {'category': 'supported_correct', 'confidence': 0.6,
@@ -218,8 +218,35 @@ def diagnose(question, correct, option_id, response_confidence=None):
                   'next_action': (CONCEPTS.get(question['concept_id']) or {}).get('hint', 'Re-read the core idea.')
                                  + ' Explain the method on a fresh variant.',
                   'alternatives': ['A skipped response', 'Formatting mismatch', 'Uncertain knowledge']}
+    # One response supports several competing processes. Keep the historical primary
+    # category for compatibility, but publish the alternatives as confidence-rated
+    # hypotheses and require an independent cross-probe before any is acted on.
+    primary = float(result['confidence'])
+    hypotheses = [{'category': result['category'], 'confidence': primary,
+                   'role': 'primary',
+                   'evidence': 'authored_distractor' if evidence else 'response_only'}]
+    for label, factor in zip(result.get('alternatives', []), (0.5, 0.3, 0.18)):
+        hypotheses.append({'category': label, 'confidence': round(primary * factor, 3),
+                           'role': 'alternative', 'evidence': 'competing_explanation'})
+    probe_id = next((q['id'] for q in QUESTIONS.values()
+                     if q.get('concept_id') == question.get('concept_id')
+                     and q['id'] != question.get('id')), None)
+    cross_probe = {
+        'action': 'fresh_variant' if probe_id else 'explain_back',
+        'question_id': probe_id,
+        'reason': ('A single distractor choice cannot distinguish the hypotheses. '
+                   'Ask for a fresh variant before treating any category as established.'),
+        'contingency': 'If the next response disagrees, replace rather than accumulate the hypothesis.',
+    }
+    adjusted = primary
+    if isinstance(response_confidence, (int, float)) and not isinstance(response_confidence, bool):
+        adjusted = round(min(0.85, max(0.05, primary * (0.6 + 0.8 * response_confidence))), 3)
     return {**result, 'response_confidence': response_confidence,
-            'scope': 'Task-level hypothesis; confidence is a heuristic, not calibrated diagnostic probability.'}
+            'hypotheses': hypotheses,
+            'confidence_with_self_rating': adjusted,
+            'taxonomy': sorted({h['category'] for h in hypotheses}),
+            'cross_probe': cross_probe,
+            'scope': 'Task-level hypotheses; every confidence is a heuristic, not a calibrated diagnostic probability.'}
 
 
 def recommend(states: dict, questions: list, mode: str, calibration=None, target=0.7):

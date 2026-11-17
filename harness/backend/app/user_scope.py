@@ -87,7 +87,15 @@ USER_SCOPED_TABLES: frozenset[str] = frozenset({
     'experiment_assignments',
     'experiment_exposures',
     'usage_daily_rollup',          # PK includes user_id
+    'project_grades',              # v12: human rubric judgements belong to the learner
+    'interactive_artifacts',       # v13: model-emitted generated interactions
+    'interactive_evidence',        # v13: append-only interaction frames
+    'learner_concept_facets',      # v13: per-learner multi-dimensional concept state
+    'learner_concept_edges',       # v13: per-learner typed concept relations
+    'concept_evidence_ledger',     # v13: append-only provenance for facet updates
 })
+# A future fan-out monitor table must be added here in the same change that creates it;
+# listing a table before it exists would make the guard's own completeness test fail.
 
 #: Deliberately NOT guarded (see module docstring): ``feedback`` and
 #: ``usage_ledger`` have a nullable ``user_id``; ``feedback_events`` and

@@ -34,6 +34,14 @@ GRAPH_SCHEMA = 1
 #: Ordered tiers. Order matters: ``foundation`` is assumed to precede ``core``.
 TIERS = ('foundation', 'core', 'extension')
 
+#: Only ``hard_prerequisite`` gates progression. The rest inform explanation,
+#: ordering and review; treating them as blockers would silently narrow a course.
+RELATIONSHIP_KINDS = (
+    'hard_prerequisite', 'recommended_predecessor', 'corequisite', 'related_concept',
+    'conceptual_relation', 'application_relation', 'transfer_target', 'sequence',
+)
+BLOCKING_RELATIONSHIPS = frozenset({'hard_prerequisite'})
+
 _SLUG_STRIP = re.compile(r'[^a-z0-9]+')
 
 
@@ -57,6 +65,20 @@ def _coerce_id_list(value: Any) -> list[str]:
     if isinstance(value, str):
         return [value] if value.strip() else []
     return [str(item) for item in value or []]
+
+
+def _coerce_relationships(value: Any) -> list[dict[str, str]]:
+    """Keep typed edges as {concept_id, kind}; never invent a kind from a bare id."""
+    rows = []
+    for item in value or []:
+        if isinstance(item, str):
+            continue  # a bare id is already represented by the legacy lists
+        if isinstance(item, Mapping):
+            concept_id = str(item.get('concept_id') or item.get('id') or '').strip()
+            kind = str(item.get('kind') or item.get('relationship') or '').strip()
+            if concept_id and kind:
+                rows.append({'concept_id': concept_id, 'kind': kind})
+    return rows
 
 
 @dataclass
@@ -84,6 +106,8 @@ class ConceptNode:
     difficulty: int = 3
     prerequisites: list[str] = field(default_factory=list)
     sequence_predecessors: list[str] = field(default_factory=list)
+    #: Typed authored edges. Mirrors the two legacy lists without changing their meaning.
+    relationships: list[dict[str, str]] = field(default_factory=list)
     keywords: list[str] = field(default_factory=list)
     summary: str = ''
     #: True when a fully authored lesson exists for this node (see ``lesson_id``).
@@ -106,6 +130,7 @@ class ConceptNode:
         payload.setdefault('unit', 'Unclassified')
         payload['prerequisites'] = _coerce_id_list(payload.get('prerequisites'))
         payload['sequence_predecessors'] = _coerce_id_list(payload.get('sequence_predecessors'))
+        payload['relationships'] = _coerce_relationships(payload.get('relationships'))
         payload['keywords'] = _coerce_id_list(payload.get('keywords'))
         try:
             payload['difficulty'] = int(payload.get('difficulty', 3))
@@ -205,6 +230,19 @@ class KnowledgeGraph:
         node = self.nodes[concept]
         if predecessor not in node.sequence_predecessors:
             node.sequence_predecessors.append(predecessor)
+
+    def link_relation(self, source: str, concept: str, kind: str) -> None:
+        """Add a typed authored edge. Non-blocking kinds never enter ``prerequisites``."""
+        if kind not in RELATIONSHIP_KINDS:
+            raise ValueError(f'unknown relationship kind {kind!r}')
+        node = self.nodes[concept]
+        edge = {'concept_id': source, 'kind': kind}
+        if edge not in node.relationships:
+            node.relationships.append(edge)
+        if kind in BLOCKING_RELATIONSHIPS:
+            self.link(source, concept)
+        elif kind == 'sequence':
+            self.link_sequence(source, concept)
 
     def merge(self, other: 'KnowledgeGraph', *, replace: bool = False) -> None:
         for node in other.nodes.values():
@@ -312,6 +350,17 @@ class KnowledgeGraph:
                 elif prerequisite not in self.nodes:
                     issues.append(Issue('unknown_prerequisite', node.id,
                                         f'prerequisite {prerequisite!r} is not a known concept'))
+            for edge in node.relationships:
+                source, kind = edge.get('concept_id'), edge.get('kind')
+                if kind not in RELATIONSHIP_KINDS:
+                    issues.append(Issue('unknown_relationship', node.id,
+                                        f'relationship kind {kind!r} is not approved', 'warning'))
+                elif source == node.id:
+                    issues.append(Issue('self_loop', node.id,
+                                        f'concept lists itself as {kind}'))
+                elif source not in self.nodes:
+                    issues.append(Issue('unknown_relationship_concept', node.id,
+                                        f'{kind} source {source!r} is not a known concept'))
             for predecessor in node.sequence_predecessors:
                 if predecessor == node.id:
                     issues.append(Issue('self_loop', node.id, 'Concept lists itself as a sequence predecessor'))
@@ -580,6 +629,12 @@ class KnowledgeGraph:
         if include_edges:
             payload['edges'] = [{'from': a, 'to': b, 'kind': 'prerequisite'} for a, b in self.edges]
             payload['edges'] += [{'from': a, 'to': b, 'kind': 'sequence'} for a, b in self.sequence_edges]
+            for node in self.nodes.values():
+                for edge in node.relationships:
+                    entry = {'from': edge['concept_id'], 'to': node.id,
+                             'kind': edge['kind'], 'gates': edge['kind'] in BLOCKING_RELATIONSHIPS}
+                    if entry not in payload['edges']:
+                        payload['edges'].append(entry)
         return payload
 
 

@@ -9,8 +9,8 @@ distinct moves, associated with large tutoring gains (Graesser et al.; Nye, Grae
 Two rules are load-bearing and are enforced here rather than left to the prompt:
 
 * **The answer is not revealed before the ladder has been worked.** ``reveal_answer`` is
-  True only at the assertion rung, which is reached after three failed cycles (pump at 0,
-  hint at 1, prompt at 2, assert at 3). This gives the harness a checkable answer-leakage
+  True only at the assertion rung, which is reached after four failed cycles (pump at 0,
+  hint at 1, prompt at 2, probe at 3, assert at 4). This gives the harness a checkable answer-leakage
   guard instead of a hope. The number here is load-bearing: it is also stated in
   :mod:`app.harness.conduct`, which is injected into two system prompts, and
   :func:`describe` publishes it to the transparency panel. All three must agree, or the
@@ -25,7 +25,7 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 #: The dialogue moves, in the order they escalate.
-LADDER = ('pump', 'hint', 'prompt', 'assert')
+LADDER = ('pump', 'hint', 'prompt', 'probe', 'assert')
 
 #: How many failed cycles before the tutor may state the step outright. This equals the
 #: index of ``assert`` in :data:`LADDER` and is asserted by the tests; the conduct block
@@ -37,6 +37,7 @@ MOVE_MEANING = {
     'pump': 'Invite more of the learner\'s own thinking ("say more about how you got there").',
     'hint': 'Narrow the space without solving it.',
     'prompt': 'Ask for the specific missing sub-step.',
+    'probe': 'Ask for a self-explanation or a fresh variant before stating the step.',
     'assert': 'State the step itself, because the ladder has been worked.',
 }
 
@@ -109,6 +110,10 @@ def step(state: Mapping[str, Any]) -> dict[str, Any]:
     if failures == 2:
         return _result('prompt', False,
                        'Two failed cycles; ask for the specific missing sub-step.')
+    if failures == 3:
+        return _result('probe', False,
+                       'Three failed cycles; ask the learner to explain or try a fresh variant '
+                       'before giving the step away.')
     return _result('assert', True,
                    f'{failures} failed cycles: the ladder has been worked, so state the step.')
 

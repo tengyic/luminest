@@ -11,7 +11,8 @@ engine's own contract, plus the structural integrity of every shipped pack.
 import pytest
 
 from app.courses import COURSES, graph_for
-from app.knowledge_graph import (GRAPH_SCHEMA, ConceptNode, KnowledgeGraph,
+from app.knowledge_graph import (GRAPH_SCHEMA, BLOCKING_RELATIONSHIPS,
+                                 RELATIONSHIP_KINDS, ConceptNode, KnowledgeGraph,
                                  Taxonomy, load_pack, slug)
 
 
@@ -38,6 +39,25 @@ def test_prerequisite_and_sequence_edges_are_tracked_separately():
     assert graph.sequence_children('a') == ['b']
     assert graph.ancestors('c') == ['a', 'b']
     assert graph.descendants('a') == ['b', 'c']
+
+
+def test_typed_relationships_are_published_and_only_hard_prerequisites_block():
+    graph = _chain()
+    graph.link_relation('a', 'c', 'corequisite')
+    graph.link_relation('b', 'c', 'application_relation')
+    assert len(RELATIONSHIP_KINDS) >= 6
+    assert BLOCKING_RELATIONSHIPS == {'hard_prerequisite'}
+    # Soft edges appear in the payload and node record but never in the gating list.
+    payload = graph.to_payload()
+    kinds = {edge['kind'] for edge in payload['edges']}
+    assert {'corequisite', 'application_relation'} <= kinds
+    assert all(edge['gates'] is False for edge in payload['edges']
+               if edge['kind'] in {'corequisite', 'application_relation'})
+    assert graph.parents('c') == ['b']  # typed soft edges did not become prerequisites
+    with pytest.raises(ValueError):
+        graph.link_relation('a', 'c', 'eval')
+    graph.nodes['c'].relationships.append({'concept_id': 'nope', 'kind': 'related_concept'})
+    assert any(issue.kind == 'unknown_relationship_concept' for issue in graph.validate())
 
 
 def test_duplicate_ids_are_rejected_unless_replaced():

@@ -99,6 +99,8 @@ TOOL_LABELS: dict[str, str] = {
     'generate_slides': 'Building a slide deck',
     'write_simulation': 'Building a simulation',
     'edit_simulation': 'Adjusting the simulation',
+    'validate_interactive': 'Checking the interaction design',
+    'emit_interactive': 'Building an interaction you can use',
     'find_game': 'Finding a game',
     # speaking
     'text_to_speech': 'Speaking',
@@ -140,19 +142,24 @@ def tool_label(name: str) -> str:
 
 
 def tools_payload(specs: Iterable[Any]) -> list[dict[str, Any]]:
-    """Turn tool specs into the OpenAI ``tools`` wire format.
+    """Publish each tool's checked JSON Schema, not a permissive placeholder.
 
-    The catalogue's ``arguments`` and ``returns`` strings are prose for the model, not a
-    JSON Schema, so the declared schema stays permissive (``additionalProperties``) and
-    the prose carries the real contract. A schema invented here would be a second,
-    drifting copy of the truth.
+    The dispatcher validates calls against ``ToolSpec.argument_schema``; publishing a
+    different schema to the model would make the contract two documents that drift.
+    The prose fields remain in the description because they explain intent, posture and
+    the shape of a result, which a structural schema deliberately cannot say.
     """
     wire = []
     for spec in specs:
         description = ' '.join(part for part in (spec.summary, spec.arguments, spec.returns) if part)
+        schema = getattr(spec, 'argument_schema', None)
+        if not isinstance(schema, dict) or not schema.get('properties'):
+            # A synthetic spec built by a test or an extension does not get to weaken
+            # the real catalogue: keep the old permissive shape only for objects that
+            # do not publish a schema at all.
+            schema = {'type': 'object', 'properties': {}, 'additionalProperties': True}
         wire.append({'type': 'function', 'function': {
-            'name': spec.name, 'description': description,
-            'parameters': {'type': 'object', 'properties': {}, 'additionalProperties': True}}})
+            'name': spec.name, 'description': description, 'parameters': schema}})
     return wire
 
 

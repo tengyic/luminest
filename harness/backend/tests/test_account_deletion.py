@@ -31,12 +31,14 @@ from app import deck as deck_store
 from app.config import Settings
 from app.database_backup import create_sqlite_backup, restore_sqlite_backup, sqlite_path_from_engine
 from app.course_builder import CreatedCourse
-from app.db import (Assessment, Attempt, AuthToken, BetaInvite, ConsentLedger,
-                    Experiment, ExperimentAssignment, ExperimentExposure, Feedback, Flashcard,
-                    HarnessRun, InviteRedemption, MemoryNote, Message, PlaygroundRun,
-                    ProcedureRun, Project, QuotaCounter, Receipt, RefreshToken, State,
-                    TeacherStyleProfile, TelemetryEvent, Token, TrainingConsent, UsageDailyRollup,
-                    UsageLedger, UserPreference, WaitlistSignup, now_ts, uid)
+from app.db import (Assessment, Attempt, AuthToken, BetaInvite, ConceptEvidenceLedger,
+                    ConsentLedger, Experiment, ExperimentAssignment, ExperimentExposure, Feedback,
+                    Flashcard, HarnessRun, InteractiveArtifact, InteractiveEvidence,
+                    InviteRedemption, LearnerConceptEdge, LearnerConceptFacet, MemoryNote,
+                    Message, PlaygroundRun, ProcedureRun, Project, QuotaCounter, Receipt,
+                    RefreshToken, State, TeacherStyleProfile, TelemetryEvent, Token,
+                    TrainingConsent, UsageDailyRollup, UsageLedger, UserPreference,
+                    WaitlistSignup, now_ts, uid)
 from app.harness import board as board_store
 from app.harness import media as media_store
 from app.main import create_app
@@ -131,6 +133,23 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
                             contact_email='one@example.test')
         ledger = UsageLedger(user_id=user_id, feature='other', provider='offline',
                              total_tokens=10, cost_micros=5)
+        project = Project(user_id=user_id, concept_id='fractions', submission='my work')
+        artifact = InteractiveArtifact(user_id=user_id, concept_id='fractions',
+                                       title='Generated probe', spec={})
+        db.add(artifact)
+        db.flush()
+        db.add_all([
+            InteractiveEvidence(user_id=user_id, artifact_id=artifact.id,
+                                concept_id='fractions', state={}, evidence={}),
+            LearnerConceptFacet(user_id=user_id, concept_id='fractions',
+                                facet='conceptual', mastery=0.4, attempts=1, evidence={}),
+            LearnerConceptEdge(user_id=user_id, source_id='fractions',
+                               target_id='ratios', relation='related_concept',
+                               weight=0.5, evidence={}),
+            ConceptEvidenceLedger(user_id=user_id, concept_id='fractions',
+                                  facet='conceptual', source_type='attempt',
+                                  source_id='seed', weight=1.0, payload={}),
+        ])
         db.add_all([
             Token(digest=uid(), user_id=user_id, expires_at=now_ts() + 3600),
             RefreshToken(digest=uid(), user_id=user_id, session_digest='s', expires_at=now_ts() + 3600),
@@ -141,7 +160,7 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
             assessment, receipt,
             attempt,
             Message(user_id=user_id, concept_id='fractions', role='user', content='why?'),
-            Project(user_id=user_id, concept_id='fractions', submission='my work'),
+            project,
             TelemetryEvent(user_id=user_id, client_id='c1', type='tap', payload={},
                            occurred_at='2026-01-01T00:00:00Z'),
             MemoryNote(user_id=user_id, kind='episodic', concept_id='fractions', text='asked why'),
@@ -180,6 +199,13 @@ def seed_every_user_table(factory, user_id: str) -> dict[str, str]:
                 value=None, reason='seeded for the erasure check', issued_at=now_ts()),
             course, feedback, ledger,
         ])
+        db.flush()
+        # A reviewer grade is learner-owned personal evidence. Seeding it here keeps the
+        # cascade check load-bearing for the project_grades table as well.
+        db.add(assessment_book.ProjectGrade(
+            user_id=user_id, project_id=project.id, criteria=[], total=1, max_total=2,
+            status='reviewed', rationale='seeded for the erasure check',
+            reviewer_email='reviewer@example.test'))
         db.commit()
         marked['feedback'] = feedback.id
         marked['usage_ledger'] = str(ledger.id)

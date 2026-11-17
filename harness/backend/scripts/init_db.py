@@ -42,6 +42,18 @@ v10 -> v11 added the ``procedure_runs`` table: one compiled lesson procedure per
           routes. A brand-new table, so no existing row or column changes. See
           ``migrations/010_lesson_procedure.sql``.
 
+v11 -> v12 added ``project_grades``: append-only human rubric judgements with a
+          ``supersedes`` chain, so a review can correct an earlier score without erasing
+          it. ``projects.assistance_level`` records one of four disclosed AI-assistance
+          levels. The formative checklist feedback is unchanged and is never replaced by
+          a grade. See ``migrations/011_project_grading.sql``.
+
+v12 -> v13 added the Luminest 2.0 substrate: persisted generated interactions and their
+          evidence, the per-learner multi-dimensional concept graph with an append-only
+          provenance ledger, and a BKT model registry with append-only promotion events.
+          All are new tables, so no existing row changes. See
+          ``migrations/012_2_0_substrate.sql``.
+
 ``create_all`` creates missing *tables* but never adds a column to a table that already
 exists, so any column added to a table that shipped in an earlier version must also be
 listed in ``ADDED_COLUMNS`` below. Omitting it means the column appears on a freshly
@@ -80,7 +92,7 @@ from app import assessment_book, perspectives  # noqa: F401 - register unit_grad
 from app.measurement import models as measurement_models  # noqa: F401
 
 #: Versions this migration path knows how to bring forward.
-KNOWN_VERSIONS = (None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
+KNOWN_VERSIONS = (None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
 
 #: Columns added to tables that already exist in shipped databases. ``create_all`` cannot
 #: add a column to an existing table, so each one is applied explicitly. Every entry is
@@ -129,6 +141,11 @@ ADDED_COLUMNS = {
     'assessments': (
         ('delay_days', "integer"),
     ),
+    # v12. A disclosed assistance level travels with the submission. Existing rows
+    # mean "unrecorded", which is represented as 'none' only for new submissions.
+    'projects': (
+        ('assistance_level', "text NOT NULL DEFAULT 'none'"),
+    ),
 }
 
 #: The first version each piece of schema appeared in. ``ADDED_COLUMNS`` says how to add a
@@ -153,6 +170,15 @@ SCHEMA_LANDMARKS: dict[str, int] = {
     'experiment_exposures': 8,
     'flashcards': 9,
     'procedure_runs': 11,
+    'project_grades': 12,
+    'projects.assistance_level': 12,
+    'interactive_artifacts': 13,
+    'interactive_evidence': 13,
+    'learner_concept_facets': 13,
+    'learner_concept_edges': 13,
+    'concept_evidence_ledger': 13,
+    'bkt_model_registry': 13,
+    'bkt_model_events': 13,
 }
 
 

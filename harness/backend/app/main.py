@@ -12,6 +12,7 @@ import secrets
 import threading
 import time
 from contextlib import asynccontextmanager
+from types import SimpleNamespace
 from datetime import datetime, timedelta, timezone
 from fractions import Fraction
 from pathlib import Path
@@ -27,10 +28,13 @@ from starlette.middleware.trustedhost import TrustedHostMiddleware
 from . import account_erasure
 from . import content_locale
 
-from . import (accounts, assessment_book, courses, curriculum_route, experiments, figures,
-               harness, learning, learning_science, lecture, model_config, perspectives,
-               planner, procedure_service, schemas, simulation_map, teacher_clone, tutor)
+from . import (accounts, assessment_book, bkt_registry, courses, curriculum_route,
+               declarative_ui, experiments, figures, harness, interactive_runtime,
+               learner_graph, learning, learning_science, lecture, model_config,
+               perspectives, planner, procedure_service, schemas, simulation_map,
+               teacher_clone, tutor)
 from .harness import agent_loop
+from .harness import socratic as socratic_ladder
 from .harness import ta as ta_jobs
 from .harness import board as node_boards
 from .harness import diagram as board_diagram
@@ -419,7 +423,45 @@ def transfer_block(db, user):
     }
 
 
-def analytics_data(db, user):
+def emit_observation(db, user, event_type, payload):
+    """Record a server-side instructional observation, consent permitting.
+
+    A question presentation is a fact the server knows; a hint or explanation being
+    *viewed* is not, so those two kinds are only accepted from the client's event
+    stream and are described as client-reported rather than observed.
+    """
+    if not user.telemetry_consent:
+        return
+    db.add(TelemetryEvent(user_id=user.id, client_id='server:' + uid(), type=event_type,
+                          payload=payload, occurred_at=datetime.now(timezone.utc).isoformat(),
+                          received_at=now_ts(), active_seconds=0.0))
+
+
+def socratic_turn(db, user, concept_id: str, message: str) -> dict:
+    """Compute the live dialogue move from this learner's own recent attempts.
+
+    The ladder used to be prompt-state only. This makes the same policy a returned,
+    persisted decision: the chat reply reports the move and whether answer disclosure
+    is permitted, and the hint count is recorded on the learner's state row.
+    """
+    rows = db.scalars(select(Attempt).where(Attempt.user_id == user.id,
+        Attempt.concept_id == concept_id).order_by(Attempt.created_at.desc()).limit(8)).all()
+    failures = 0
+    for attempt in rows:
+        if attempt.correct:
+            break
+        failures += 1
+    state = socratic_ladder.state_from_evidence({'consecutive_failures': failures})
+    state['asked_for_explanation'] = any(phrase in message.casefold() for phrase in (
+        'show me', 'just tell me', 'give me the answer', 'worked answer'))
+    move = socratic_ladder.step(state)
+    return {'move': move['move'], 'ladder_position': move['ladder_position'],
+            'say': move['say'], 'reason': move['reason'],
+            'reveal_answer_permitted': socratic_ladder.may_reveal_answer(state),
+            'consecutive_failures': failures, 'source': 'socratic-live-v1'}
+
+
+def analytics_data(db, user, include_measurement=False):
     attempts = sorted(own_rows(db, Attempt, user), key=lambda a: a.created_at)
     events = own_rows(db, TelemetryEvent, user)
     daily = {}
@@ -443,10 +485,31 @@ def analytics_data(db, user):
     for attempt in attempts:
         if not attempt.correct:
             errors[attempt.category] = errors.get(attempt.category, 0)+1
-    return {'daily': [daily[k] for k in sorted(daily)],
-            'dimensions': dimensions(attempts, own_rows(db, perspectives.PerspectiveReview, user)),
-            'errors': [{'category': k, 'count': v} for k, v in sorted(errors.items())], 'streak': streak,
-            'focus_note': 'Active seconds are consented foreground-window intervals, capped at 15 seconds per validated server interval. They do not measure cognitive attention.'}
+    payload = {'daily': [daily[k] for k in sorted(daily)],
+               'dimensions': dimensions(attempts, own_rows(db, perspectives.PerspectiveReview, user)),
+               'errors': [{'category': k, 'count': v} for k, v in sorted(errors.items())], 'streak': streak,
+               'focus_note': 'Active seconds are consented foreground-window intervals, capped at 15 seconds per validated server interval. They do not measure cognitive attention.'}
+    if include_measurement:
+        # The estimators already exist in measurement/report.py; the audit gap was that
+        # the insights screen never showed them. Keep the payload compact and carry the
+        # scope/cannot-claim notes with the numbers rather than presenting bare estimates.
+        from .measurement import report as measurement_report
+        try:
+            reading = measurement_report.read(db, user)
+            payload['measurement_summary'] = {
+                'learning_rate': reading['efficiency']['learning_rate'],
+                'time_to_criterion': reading['efficiency']['time_to_criterion'],
+                'retention': reading['retention'],
+                'cannot_claim': reading['cannot_claim'],
+                'scope': reading['scope'],
+                'source': 'app.measurement.report',
+            }
+        except Exception as exc:  # a display must degrade, never invent numbers
+            payload['measurement_summary'] = {
+                'available': False,
+                'reason': f'The measurement reading could not be computed: {type(exc).__name__}.',
+            }
+    return payload
 
 
 def project_json(row):
@@ -456,8 +519,18 @@ def project_json(row):
         'rubric': ['State the idea in your own words.', 'Work one concrete example end to end.',
                    'Name one thing you are still unsure about, and disclose any AI assistance.'],
     }
+    rubric = template.get('rubric') or []
+    criteria = [{'id': f'r{index + 1}', 'label': criterion if isinstance(criterion, str)
+                 else str(criterion.get('label', f'Criterion {index + 1}')),
+                 'max_points': 4,
+                 'description': criterion if isinstance(criterion, str)
+                 else str(criterion.get('description', ''))}
+                for index, criterion in enumerate(rubric)]
     return {'id': row.id, 'concept_id': row.concept_id, **template, 'status': row.status,
-            'submission': row.submission, 'feedback': row.feedback, 'reflection': row.reflection, 'ai_disclosure': row.ai_disclosure}
+            'rubric_criteria': criteria,
+            'assistance_level': row.assistance_level,
+            'submission': row.submission, 'feedback': row.feedback, 'reflection': row.reflection,
+            'ai_disclosure': row.ai_disclosure}
 
 
 def memory_digest_for(db, user, concept_id):
@@ -1677,6 +1750,9 @@ def create_app(settings=None):
                 receipt = Receipt(id=uid(), user_id=user.id, question_id=item['id'], mode=mode,
                                   assessment_id=None, issued_at=now, expires_at=now+settings.receipt_ttl)
                 db.add(receipt)
+                emit_observation(db, user, 'question_presented', {
+                    'question_id': item['id'], 'concept_id': item['concept_id'],
+                    'mode': mode, 'source': 'interleaved_practice'})
                 item_reason = (f"Interleaved practice: {item['source']} from family "
                                f"\"{item['family']}\", mixed with other families in one set.")
                 items.append(public_question(item, receipt, app.state.signing_secret,
@@ -1699,6 +1775,9 @@ def create_app(settings=None):
                           assessment_id=assessment.id if assessment else None, issued_at=now,
                           expires_at=min(now+settings.receipt_ttl, assessment.expires_at) if assessment else now+settings.receipt_ttl)
         db.add(receipt)
+        emit_observation(db, user, 'question_presented', {
+            'question_id': question['id'], 'concept_id': question['concept_id'],
+            'mode': mode, 'source': 'question_selection'})
         if mode == 'transfer' and assessment:
             progress['transfer'] = {'delay_days': assessment.delay_days,
                                     'research_note': learning_science.TRANSFER_RESEARCH_NOTE}
@@ -1783,6 +1862,18 @@ def create_app(settings=None):
         category = diagnosis['category']
         state_row.data = {**state_row.data, 'response_confidence': confidence,
                           'next_check': {**diagnosis, 'question_id': question['id']} if not correct or (confidence is not None and confidence < 0.5) else None}
+        # A BKT model is a served artifact, not an offline notebook: the registry decides
+        # which parameters may affect this answer. A shadow model records a comparison
+        # prediction but never changes mastery or the learner-facing DSR state.
+        # Read the registry without autoflushing the not-yet-flushed learning state.
+        # Four concurrent submissions of one idempotency key all create a State object;
+        # the first flush wins and the losers must reach the explicit duplicate check
+        # below, not die on an accidental autoflush here.
+        with db.no_autoflush:
+            active_params, active_version, shadow_params, shadow_version = bkt_registry.serving_models(db)
+            state_row.data = bkt_registry.update_state(
+                state_row.data, correct, active=active_params, active_version=active_version,
+                shadow=shadow_params, shadow_version=shadow_version)
         assessment = db.get(Assessment, receipt.assessment_id) if receipt.assessment_id else None
         if assessment:
             if assessment.complete or assessment.expires_at <= now:
@@ -1829,6 +1920,28 @@ def create_app(settings=None):
             if winner and winner.payload_hash == payload_hash:
                 return winner.response
             raise HTTPException(409, 'Idempotency key was already used for a different submission')
+        # The per-learner graph is written from the same durable attempt, with a ledger row
+        # naming that attempt as provenance. It is additive: the receipt-bound answer path
+        # above remains the authority for mastery and grading.
+        with db.no_autoflush:
+            graph_update = learner_graph.update_from_attempt(
+                db, user, attempt_id=aid, concept_id=question['concept_id'],
+                question=question, diagnosis=diagnosis, correct=correct,
+                confidence=confidence, mode=receipt.mode, now=now)
+        if not withheld:
+            result['model_estimates'] = {
+                'facet': graph_update['facet'],
+                'facet_estimate': graph_update['estimate'],
+                'bkt': state_row.data['bkt'],
+                'bkt_shadow': state_row.data.get('bkt_shadow'),
+                'note': ('Teaching estimates from recorded evidence. They are not grades, '
+                         'certified mastery, or a claim about unaided work.'),
+            }
+        # Keep the stored response identical to what the learner was shown, including
+        # the additive estimates. An idempotent replay serves this row verbatim; if it
+        # carried the pre-estimate response, the same client_event_id would appear to
+        # return two different answers.
+        db.get(Attempt, aid).response = dict(result)
         if exam_complete:
             result['item_breakdown'] = exam_breakdown(db, assessment)
             db.get(Attempt, aid).response = dict(result)
@@ -1928,7 +2041,155 @@ def create_app(settings=None):
     @app.get(API+'/analytics')
     def analytics(auth=Depends(authenticated)):
         block_exam_help(*auth)
-        return analytics_data(*auth)
+        return analytics_data(*auth, include_measurement=True)
+
+    # ------------------------------------------------ declarative interactive runtime
+    # G8's smallest honest shape: a published component vocabulary, a validator that
+    # refuses anything outside it, and an evaluator that recomputes state without
+    # executing model text. These routes are the contract the native renderer uses; they
+    # deliberately do not accept scripts, markup, URLs or file paths.
+    @app.get(API+'/interactive/registry')
+    def interactive_registry(auth=Depends(authenticated)):
+        return declarative_ui.registry()
+
+    @app.get(API+'/interactive/example')
+    def interactive_example(concept_id: str = '', auth=Depends(authenticated)):
+        """A validated native-renderable spec, for exercising the runtime end to end.
+
+        This is an authored probe, not model output. It exists so the native renderer has
+        a real contract to consume before a generated spec is wired into a lesson; the
+        validator and renderer are the same ones a generated spec will use.
+        """
+        title = concept_title(concept_id) if concept_id else 'Fractions'
+        spec = {
+            'schema_version': declarative_ui.SCHEMA_VERSION,
+            'title': f'Probe: {title}',
+            'concept_id': concept_id or None,
+            'components': [
+                {'id': 'a', 'type': 'slider', 'label': 'First factor',
+                 'min': 0, 'max': 10, 'step': 1, 'initial': 2},
+                {'id': 'b', 'type': 'slider', 'label': 'Second factor',
+                 'min': 0, 'max': 10, 'step': 1, 'initial': 3},
+                {'id': 'product', 'type': 'readout', 'label': 'Product',
+                 'expr': {'op': 'mul', 'args': [{'ref': 'a'}, {'ref': 'b'}]}},
+                {'id': 'check', 'type': 'feedback',
+                 'when': {'op': 'eq', 'args': [{'ref': 'product'}, 12]},
+                 'correct': 'Twelve. What changed when one factor doubled?',
+                 'incorrect': 'Not twelve yet. Move one factor and watch the product.'},
+                {'id': 'reset', 'type': 'reset'},
+            ],
+        }
+        return declarative_ui.validate(spec)
+
+    @app.post(API+'/interactive/validate')
+    def interactive_validate(payload: dict, auth=Depends(authenticated)):
+        try:
+            return declarative_ui.validate(payload)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc))
+
+    @app.post(API+'/interactive/evaluate')
+    def interactive_evaluate(payload: dict, auth=Depends(authenticated)):
+        try:
+            validated = declarative_ui.validate(payload.get('spec'))
+            return declarative_ui.evaluate(validated, payload.get('state') or {})
+        except (ValueError, TypeError, KeyError) as exc:
+            raise HTTPException(422, f'Invalid interactive spec or state: {exc}')
+
+    @app.post(API+'/interactive/evidence')
+    def interactive_evidence(payload: dict, auth=Depends(authenticated)):
+        """Record one frame from a stored interaction, never a client-supplied spec.
+
+        The artifact is looked up under the authenticated learner, the state is checked
+        against that artifact's declared inputs, and the frame is evaluated by the same
+        closed evaluator the renderer used. The row is evidence of an authored task, not
+        an ``Attempt`` and not a grade.
+        """
+        db, user = auth
+        try:
+            result = interactive_runtime.record_evidence(
+                db, user, str(payload.get('artifact_id') or ''), payload.get('state'))
+        except interactive_runtime.InteractiveRefused as exc:
+            raise HTTPException(422, str(exc))
+        db.commit()
+        return result
+
+    @app.get(API+'/interactive/artifacts/{artifact_id}')
+    def interactive_artifact(artifact_id: str, auth=Depends(authenticated)):
+        """Reload one generated artifact the learner is allowed to see."""
+        from .db import InteractiveArtifact
+        db, user = auth
+        row = db.scalar(select(InteractiveArtifact).where(
+            InteractiveArtifact.id == artifact_id,
+            InteractiveArtifact.user_id == user.id))
+        if row is None:
+            raise HTTPException(404, 'No such interactive artifact')
+        return interactive_runtime.artifact_payload(row)
+
+    # ------------------------------------------------ learner graph and BKT registry
+    @app.get(API+'/learner-graph')
+    def learner_graph_route(concept_id: str = '', auth=Depends(authenticated)):
+        """This learner's four-facet concept graph, with provenance and honest unknowns."""
+        db, user = auth
+        return learner_graph.snapshot(db, user, concept_id)
+
+    @app.get(API+'/bkt/registry')
+    def bkt_registry_route(auth=Depends(authenticated)):
+        """Which BKT parameters are serving, shadowing or waiting for review."""
+        return bkt_registry.snapshot(auth[0])
+
+    @app.post(API+'/bkt/models')
+    def bkt_register(payload: dict, auth=Depends(authenticated)):
+        db, user = auth
+        require_admin(user)
+        try:
+            result = bkt_registry.register_candidate(
+                db, version=str(payload.get('version') or ''),
+                artifact_path=str(payload.get('artifact_path') or ''),
+                digest=str(payload.get('digest') or ''),
+                metrics=payload.get('metrics') or {},
+                licence_note=str(payload.get('licence_note') or ''),
+                actor=str(getattr(user, 'email', '') or 'admin'))
+        except bkt_registry.RegistryRefused as exc:
+            raise HTTPException(422, str(exc))
+        db.commit()
+        return result
+
+    @app.post(API+'/bkt/models/{version}/promote')
+    def bkt_promote(version: str, payload: dict, auth=Depends(authenticated)):
+        db, user = auth
+        require_admin(user)
+        actor = str(getattr(user, 'email', '') or 'admin')
+        reason = str(payload.get('reason') or '').strip()
+        if not reason:
+            raise HTTPException(422, 'A promotion reason is required')
+        try:
+            if payload.get('stage') == 'shadow':
+                result = bkt_registry.promote_to_shadow(db, version, reason=reason, actor=actor)
+            elif payload.get('stage') == 'active':
+                result = bkt_registry.promote_to_active(db, version, reason=reason, actor=actor)
+            else:
+                raise HTTPException(422, 'stage must be shadow or active')
+        except bkt_registry.RegistryRefused as exc:
+            raise HTTPException(422, str(exc))
+        db.commit()
+        return result
+
+    @app.post(API+'/bkt/models/{version}/rollback')
+    def bkt_rollback(version: str, payload: dict, auth=Depends(authenticated)):
+        db, user = auth
+        require_admin(user)
+        reason = str(payload.get('reason') or '').strip()
+        if not reason:
+            raise HTTPException(422, 'A rollback reason is required')
+        try:
+            result = bkt_registry.rollback_active(
+                db, version, reason=reason,
+                actor=str(getattr(user, 'email', '') or 'admin'))
+        except bkt_registry.RegistryRefused as exc:
+            raise HTTPException(422, str(exc))
+        db.commit()
+        return result
 
     # ------------------------------------------------------- assessment book & perspectives
     # Two gaps the November 8 audit named: no unit-level grade book judged against
@@ -2410,6 +2671,17 @@ def create_app(settings=None):
                               outcome=usage.get('outcome', 'ok'),
                               prompt_tokens=usage.get('prompt_tokens', 0),
                               completion_tokens=usage.get('completion_tokens', 0))
+        dialogue = socratic_turn(db, user, payload.concept_id, payload.message)
+        state_row = db.scalar(select(State).where(State.user_id == user.id,
+                                                  State.concept_id == payload.concept_id))
+        if state_row is None:
+            state_row = State(user_id=user.id, concept_id=payload.concept_id, data={})
+            db.add(state_row)
+        state_data = dict(state_row.data or {})
+        state_data['last_dialogue'] = dialogue
+        if dialogue['move'] in {'hint', 'prompt', 'probe'}:
+            state_data['hints_used'] = int(state_data.get('hints_used') or 0) + 1
+        state_row.data = state_data
         now = now_ts()
         db.add(Message(user_id=user.id, concept_id=payload.concept_id, session_id=payload.session_id,
                        role='user', content=payload.message, created_at=now))
@@ -2418,7 +2690,8 @@ def create_app(settings=None):
         db.add(reply)
         db.commit()
         return {'id': reply.id, 'role': 'assistant', 'content': content, 'created_at': iso(reply.created_at),
-                'provider': provider, 'grounding': grounding, 'suggested_actions': actions}
+                'provider': provider, 'grounding': grounding, 'suggested_actions': actions,
+                'dialogue': dialogue}
 
     @app.get(API+'/projects')
     def projects(auth=Depends(authenticated)):
@@ -2443,6 +2716,7 @@ def create_app(settings=None):
         if not row:
             raise HTTPException(404, 'Project not found')
         row.submission, row.ai_disclosure, row.reflection = payload.text, payload.ai_disclosure, payload.reflection
+        row.assistance_level = payload.assistance_level
         row.status, row.updated_at = 'submitted', now_ts()
         template = concept_meta(row.concept_id)
         evidence = []
@@ -2458,6 +2732,40 @@ def create_app(settings=None):
                         + '\nReflection and AI disclosure were recorded for your own review.')
         db.commit()
         return project_json(row)
+
+    @app.post(API+'/projects/{project_id}/grade')
+    def grade_project(project_id: str, payload: schemas.GradeSubmission, auth=Depends(authenticated)):
+        db, user = auth
+        if (user.email or '').casefold() not in assessment_book.reviewer_emails():
+            raise HTTPException(403, 'Summative grading requires a configured reviewer account. '
+                                     'The rubric and formative feedback remain available.')
+        row = db.scalar(select(Project).where(Project.id == project_id).with_for_update())
+        if not row:
+            raise HTTPException(404, 'Project not found')
+        if not row.submission:
+            raise HTTPException(409, 'No submission has been recorded for this project')
+        rubric = project_json(row)['rubric_criteria']
+        subject = SimpleNamespace(id=row.id, user_id=row.user_id, rubric=rubric)
+        try:
+            record = assessment_book.score_project(db, subject,
+                [criterion.model_dump() for criterion in payload.criteria],
+                payload.status, payload.rationale, user.email)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+        row.status = 'graded' if payload.status == 'graded' else 'revision_requested'
+        db.commit()
+        return {'grade': record.public(), 'formative_feedback': row.feedback,
+                'scope': assessment_book.SCOPE_NOTE}
+
+    @app.get(API+'/projects/{project_id}/grades')
+    def project_grades(project_id: str, auth=Depends(authenticated)):
+        db, user = auth
+        row = db.scalar(select(Project).where(Project.id == project_id))
+        if not row or (row.user_id != user.id
+                       and (user.email or '').casefold() not in assessment_book.reviewer_emails()):
+            raise HTTPException(404, 'Project not found')
+        return {'grades': [grade.public() for grade in
+                           assessment_book.project_grade_history(db, row.user_id, project_id)]}
 
     @app.post(API+'/events')
     def events(payload: schemas.Events, auth=Depends(authenticated)):
@@ -2489,7 +2797,14 @@ def create_app(settings=None):
                        # An external (PhET) simulation reports nothing back to the app, so the
                        # only honest event is the fact that the learner opened it: no parameter,
                        # no value, no fabricated interaction data.
-                       'external_simulation_opened': {'concept_id'}}[event.type]
+                       'external_simulation_opened': {'concept_id'},
+                       # Presentations are normally recorded by the server; accepting the
+                       # client copy allows offline replay to reconcile without inventing
+                       # a view. Hints and explanations are client-reported only: the
+                       # server can send them but cannot know whether they were looked at.
+                       'question_presented': {'concept_id', 'question_id', 'mode', 'source'},
+                       'hint_viewed': {'concept_id', 'question_id', 'ladder_move', 'source'},
+                       'explanation_viewed': {'concept_id', 'question_id', 'mode'}}[event.type]
             # An interaction is validated by its own module rather than by this generic field
             # check, so a refused field is named ("an interaction may not carry window")
             # instead of collapsing into "unexpected fields" - the message is the difference
@@ -2507,6 +2822,8 @@ def create_app(settings=None):
                     raise HTTPException(422, 'Event requires a concept_id from your own course')
                 if event.type == 'modality_selected' and event.payload.get('modality') not in {'reading', 'simulation', 'worked_example', 'retrieval'}:
                     raise HTTPException(422, 'Unsupported learner-selected modality')
+                if event.type == 'hint_viewed' and event.payload.get('ladder_move') not in (None, *socratic_ladder.LADDER):
+                    raise HTTPException(422, 'Unsupported Socratic ladder move')
                 if event.type == 'simulation_interaction':
                     value = event.payload.get('value')
                     # A concept map has no tunable parameters, so any interaction naming a
@@ -3553,7 +3870,17 @@ def create_app(settings=None):
                   'the learner\'s current idea when useful, explain or model one step '
                   'when needed, fade support, give specific feedback, and check recall '
                   'or transfer. Honor an explicit request for a worked explanation. '
-                  'Never claim unobserved mastery or diagnose a misconception as fact.')
+                  'Never claim unobserved mastery or diagnose a misconception as fact. '
+                  # G8: the model is the author, not the renderer. Without this contract
+                  # it answers "build me something interactive" in prose and the native
+                  # runtime never sees a spec. The vocabulary is published by a tool so
+                  # the instruction cannot silently drift from the validator.
+                  'When a learner should manipulate values, choose options, or watch a '
+                  'derived readout to understand the idea, call interactive_registry if '
+                  'needed and then emit_interactive with a closed-vocabulary spec. The '
+                  'artifact renders inline in this tutor turn. Never invent component '
+                  'types, scripts, markup, URLs or file paths; use plain prose when the '
+                  'interaction would not add teaching value.')
         if payload.speak:
             # The reply will be read aloud by a speech engine, so it has to be written
             # for the ear: short sentences, no tables, no code, no LaTeX. Saying this in
@@ -3715,11 +4042,27 @@ def create_app(settings=None):
         tools = agent_loop.tools_payload(harness.toolbox.available_specs())
         usage: dict = usage_out if usage_out is not None else {}
         final: dict = {}
+        # Persisted interactions are turn artifacts, not side notes in the event trace.
+        # Collect the successful emit results and attach them to the closing event, so
+        # the native chat can render them inside the assistant message that produced
+        # them. A refused emit cannot produce an artifact and contributes nothing.
+        interactives: list[dict] = []
         try:
             for event in agent_loop.run_agent(
                     settings, agent_messages(payload, user, db), agent_registry(), ctx,
                     tools=tools, developer_mode=payload.developer_mode, usage_out=usage,
                     cancelled=cancelled):
+                if (event['type'] == 'tool_result'
+                        and event.get('name') == 'emit_interactive'
+                        and event.get('ok')):
+                    artifact = (event.get('data') or {}).get('data') or {}
+                    if isinstance(artifact, dict) and artifact.get('artifact_id'):
+                        interactives.append({
+                            'artifact_id': artifact['artifact_id'],
+                            'spec': artifact.get('spec') or {},
+                            'concept_id': artifact.get('concept_id') or '',
+                            'source': artifact.get('source') or 'model',
+                        })
                 if event['type'] == 'turn_end':
                     # Held back: the fallback, the ledger and the speech request all
                     # rewrite the closing event, and a client must never see the
@@ -3791,6 +4134,8 @@ def create_app(settings=None):
                             'url': '', 'digest': ''}
                 final['speech'] = harness.speech.classify(
                     clip, 'answer' if payload.interrupted else 'explanation')
+            if interactives:
+                final['interactive'] = interactives
             yield final
         finally:
             # The ledger's CHECK admits ok/fallback/error/refused only (there is no
@@ -3984,6 +4329,10 @@ def create_app(settings=None):
                 # turn actually answered. Never prose in ``message``: it is not an answer.
                 'notice': final.get('notice'),
                 'speech': final.get('speech') or None,
+                # The same assistant-message attachments SSE receives on turn_end; the
+                # JSON fallback needs them too, or an older client would silently drop
+                # every generated interaction when streaming is unavailable.
+                'interactive': final.get('interactive') or [],
                 'media': media_from_events(events, settings),
                 'usage': {key: usage.get(key, 0) for key in
                           ('prompt_tokens', 'completion_tokens', 'total_tokens')}}

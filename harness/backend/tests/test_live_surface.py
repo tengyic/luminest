@@ -311,7 +311,10 @@ def test_neutral_tools_and_the_decision_tool_work_on_every_surface(monkeypatch):
         called['args'] = kwargs
         return toolbox.ToolResult('probe', True, {'ok': True})
 
-    spec = toolbox.ToolSpec('probe', 'A neutral probe.', '', 'internal', '{}')
+    # The dispatcher enforces the published contract, so the synthetic probe must
+    # declare the arguments this surface-routing test sends it.
+    spec = toolbox.ToolSpec('probe', 'A neutral probe.',
+                            'x: str = "", surface: str = ""', 'internal', '{}')
     monkeypatch.setitem(toolbox.REGISTRY, 'probe', (spec, fake))
     for active in surface_router.SURFACES:
         ctx = toolbox.ToolContext(surface=active)

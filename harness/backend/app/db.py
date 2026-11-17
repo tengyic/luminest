@@ -72,7 +72,7 @@ class User(Base):
     terms_version: Mapped[str | None] = mapped_column(String(32), nullable=True)
 
 
-SCHEMA_VERSION = 11
+SCHEMA_VERSION = 13
 
 
 class SchemaVersion(Base):
@@ -243,6 +243,8 @@ class Project(Base):
     feedback: Mapped[str | None] = mapped_column(Text, nullable=True)
     ai_disclosure: Mapped[str | None] = mapped_column(Text, nullable=True)
     reflection: Mapped[str | None] = mapped_column(Text, nullable=True)
+    #: One of the four disclosed assistance levels; never an inference about AI use.
+    assistance_level: Mapped[str] = mapped_column(String(30), default='none')
     updated_at: Mapped[float] = mapped_column(Float, default=now_ts)
 
 
@@ -784,6 +786,124 @@ class ProcedureRun(Base):
     )
 
 
+# --------------------------------------------------------------------- v13: 2.0 substrate
+class InteractiveArtifact(Base):
+    """A model-emitted declarative spec after validation, kept as a real artifact."""
+
+    __tablename__ = 'interactive_artifacts'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    concept_id: Mapped[str] = mapped_column(String(80), default='', index=True)
+    title: Mapped[str] = mapped_column(String(160))
+    spec: Mapped[dict] = mapped_column(JSONBType)
+    schema_version: Mapped[int] = mapped_column(Integer, default=1)
+    source: Mapped[str] = mapped_column(String(30), default='model')
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+
+class InteractiveEvidence(Base):
+    """Append-only frames from a generated interaction; never an Attempt."""
+
+    __tablename__ = 'interactive_evidence'
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    artifact_id: Mapped[str] = mapped_column(String(36), index=True)
+    concept_id: Mapped[str] = mapped_column(String(80), default='', index=True)
+    state: Mapped[dict] = mapped_column(JSONBType)
+    evidence: Mapped[dict] = mapped_column(JSONBType)
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+
+class LearnerConceptFacet(Base):
+    """One learner's estimate for one dimension of one concept."""
+
+    __tablename__ = 'learner_concept_facets'
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    concept_id: Mapped[str] = mapped_column(String(80), index=True)
+    facet: Mapped[str] = mapped_column(String(24))
+    mastery: Mapped[float] = mapped_column(Float, default=0.15)
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    evidence: Mapped[dict] = mapped_column(JSONBType, default=dict)
+    updated_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+    __table_args__ = (
+        CheckConstraint("facet IN ('conceptual','procedural','calculation','retrieval')",
+                        name='learner_concept_facets_facet_ck'),
+        UniqueConstraint('user_id', 'concept_id', 'facet',
+                         name='learner_concept_facets_uq'),
+    )
+
+
+class LearnerConceptEdge(Base):
+    """A learner-specific, provenance-bearing relation between two concepts."""
+
+    __tablename__ = 'learner_concept_edges'
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    source_id: Mapped[str] = mapped_column(String(80), index=True)
+    target_id: Mapped[str] = mapped_column(String(80), index=True)
+    relation: Mapped[str] = mapped_column(String(32))
+    weight: Mapped[float] = mapped_column(Float, default=0.0)
+    evidence: Mapped[dict] = mapped_column(JSONBType, default=dict)
+    updated_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+    __table_args__ = (
+        UniqueConstraint('user_id', 'source_id', 'target_id', 'relation',
+                         name='learner_concept_edges_uq'),
+    )
+
+
+class ConceptEvidenceLedger(Base):
+    """Append-only provenance for every facet update. No row is rewritten."""
+
+    __tablename__ = 'concept_evidence_ledger'
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'), index=True)
+    concept_id: Mapped[str] = mapped_column(String(80), index=True)
+    facet: Mapped[str] = mapped_column(String(24))
+    source_type: Mapped[str] = mapped_column(String(30))
+    source_id: Mapped[str] = mapped_column(String(80), default='')
+    weight: Mapped[float] = mapped_column(Float, default=1.0)
+    payload: Mapped[dict] = mapped_column(JSONBType, default=dict)
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+
+class BktModel(Base):
+    """Production BKT registry: candidate → shadow → active → rolled_back."""
+
+    __tablename__ = 'bkt_model_registry'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=uid)
+    version: Mapped[str] = mapped_column(String(40), unique=True)
+    artifact_path: Mapped[str] = mapped_column(Text)
+    digest: Mapped[str] = mapped_column(String(64))
+    metrics: Mapped[dict] = mapped_column(JSONBType, default=dict)
+    stage: Mapped[str] = mapped_column(String(20), default='candidate')
+    licence_note: Mapped[str] = mapped_column(Text, default='')
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+    promoted_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+    #: The active model this one replaced, so a rollback restores a known state instead
+    #: of leaving production on an implicit default nobody approved.
+    previous_version: Mapped[str | None] = mapped_column(String(40), nullable=True)
+
+    __table_args__ = (
+        CheckConstraint("stage IN ('candidate','shadow','active','rolled_back')",
+                        name='bkt_registry_stage_ck'),
+    )
+
+
+class BktModelEvent(Base):
+    """Append-only promotion/shadow/rollback decisions for the BKT registry."""
+
+    __tablename__ = 'bkt_model_events'
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    model_id: Mapped[str] = mapped_column(String(36), index=True)
+    event: Mapped[str] = mapped_column(String(30))
+    reason: Mapped[str] = mapped_column(Text)
+    actor: Mapped[str] = mapped_column(String(80), default='system')
+    created_at: Mapped[float] = mapped_column(Float, default=now_ts)
+
+
 # --------------------------------------------------------------------- index parity
 #: ``Base.metadata`` is what ``scripts/init_db.py`` builds. So a *fresh* database - which is
 #: every development database, and any production database created by ``init_db.py`` - has
@@ -847,6 +967,28 @@ BETA_INDEXES: tuple = (
     # -- lesson procedures: "this learner's active lesson on this concept" -----
     Index('procedure_runs_active_idx', ProcedureRun.__table__.c.user_id,
           ProcedureRun.__table__.c.concept_id, ProcedureRun.__table__.c.status),
+    # -- v13: generated interactions and their append-only evidence ------------
+    Index('interactive_artifacts_user_created_idx',
+          InteractiveArtifact.__table__.c.user_id,
+          desc(InteractiveArtifact.__table__.c.created_at)),
+    Index('interactive_evidence_artifact_idx',
+          InteractiveEvidence.__table__.c.user_id,
+          InteractiveEvidence.__table__.c.artifact_id,
+          InteractiveEvidence.__table__.c.created_at),
+    # -- v13: learner-owned concept graph and provenance -----------------------
+    Index('learner_concept_facets_user_concept_idx',
+          LearnerConceptFacet.__table__.c.user_id,
+          LearnerConceptFacet.__table__.c.concept_id),
+    Index('learner_concept_edges_user_source_idx',
+          LearnerConceptEdge.__table__.c.user_id,
+          LearnerConceptEdge.__table__.c.source_id),
+    Index('concept_evidence_ledger_provenance_idx',
+          ConceptEvidenceLedger.__table__.c.user_id,
+          ConceptEvidenceLedger.__table__.c.concept_id,
+          ConceptEvidenceLedger.__table__.c.created_at),
+    # -- v13: registry event history is read by model version ------------------
+    Index('bkt_model_events_model_idx', BktModelEvent.__table__.c.model_id,
+          BktModelEvent.__table__.c.created_at),
     # -- quota_policies: see the note on the unique index below ----------------
     Index('quota_policies_global_unique', QuotaPolicy.__table__.c.period, unique=True,
           postgresql_where=text("is_active AND scope = 'global'"),

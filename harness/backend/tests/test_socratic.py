@@ -15,7 +15,8 @@ def test_the_ladder_escalates_one_rung_per_failed_cycle():
     assert socratic.step({'consecutive_failures': 0})['move'] == 'pump'
     assert socratic.step({'consecutive_failures': 1})['move'] == 'hint'
     assert socratic.step({'consecutive_failures': 2})['move'] == 'prompt'
-    assert socratic.step({'consecutive_failures': 3})['move'] == 'assert'
+    assert socratic.step({'consecutive_failures': 3})['move'] == 'probe'
+    assert socratic.step({'consecutive_failures': 4})['move'] == 'assert'
     # Past the last rung it stays at assertion rather than inventing a new move.
     assert socratic.step({'consecutive_failures': 9})['move'] == 'assert'
 
@@ -85,14 +86,14 @@ def test_the_prompt_conduct_and_the_server_guard_state_the_same_threshold():
     the ladder, ``describe()`` and both injected conduct blocks - on one number.
     """
     threshold = socratic.LADDER.index('assert')
-    assert socratic.ASSERT_AFTER_FAILURES == threshold == 3
+    assert socratic.ASSERT_AFTER_FAILURES == threshold == 4
     assert socratic.describe()['assert_after_failures'] == threshold
 
-    assert 'three failed cycles' in conduct.TEACHING_CONDUCT
-    assert 'two failed cycles' not in conduct.TEACHING_CONDUCT
+    assert 'four failed cycles' in conduct.TEACHING_CONDUCT
+    assert 'three failed cycles' not in conduct.TEACHING_CONDUCT
     dialogue_rules = [r for r in conduct.CONDUCT_RULES if r['rule'] == 'dialogue']
     assert len(dialogue_rules) == 1
-    assert 'three failed cycles' in dialogue_rules[0]['text']
+    assert 'four failed cycles' in dialogue_rules[0]['text']
 
     for failures in range(6):
         expected_reveal = failures >= threshold
