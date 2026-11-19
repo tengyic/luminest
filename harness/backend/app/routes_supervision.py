@@ -187,9 +187,14 @@ def _notice(reading: dict[str, Any]) -> dict[str, Any]:
     if kind == 'continue':
         return {'say': False, 'kind': 'notification', 'delivery': 'idle_only',
                 'reason': 'Nothing to say: the learner is working.'}
-    text = str(move.get('say') or move.get('why') or '').strip()
+    # The move's ``say`` field is an imperative instruction TO THE TEACHER MODEL
+    # ("Ask for a prediction about the next step, not for an explanation of the whole
+    # thing."). It is part of the decision trace, never learner copy. Speaking it put
+    # that instruction in Lumi's bubble. Use only vetted learner-facing lines, and stay
+    # silent when a move has none -- a quiet tutor beats one reading its own notes.
+    text = supervision.learner_notice(kind, float(reading.get('at') or 0))
     if not text:
         return {'say': False, 'kind': 'notification', 'delivery': 'idle_only',
-                'reason': 'The move has no sentence attached.'}
+                'reason': 'This move has no learner-facing sentence to speak.'}
     return {'say': True, 'text': text, 'kind': 'notification',
             'delivery': speech.DELIVERY['notification'], 'move': kind}

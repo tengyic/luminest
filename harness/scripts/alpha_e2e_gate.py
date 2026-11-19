@@ -234,9 +234,27 @@ def main() -> int:
         clips = ((turn.get('speech') or {}).get('clips') or []) if isinstance(turn, dict) else []
         if clips:
             url = clips[0].get('url') or ''
-            deadline = time.monotonic() + 30.0
+            digest = clips[0].get('digest') or ''
+            # The state endpoint is the poll-friendly contract: a 404 on the bytes
+            # route is ambiguous (still rendering vs never will), and a cold local
+            # engine can take longer than the old 30 s byte window. Poll the state
+            # first, then prove the bytes are actually playable.
+            state_url = f"/api/v1/media/audio/{digest}/state" if digest else ''
+            deadline = time.monotonic() + 180.0
             clip, ctype, status, ready = None, '', 0, False
+            last_state = ''
             while time.monotonic() < deadline and url:
+                if state_url:
+                    s_state, state_doc, _ = g.req('GET', state_url)
+                    last_state = str(state_doc.get('state', '')) if isinstance(state_doc, dict) else str(state_doc)
+                    if last_state in ('failed', 'error', 'unavailable'):
+                        clip = state_doc
+                        ctype = 'application/json'
+                        status = s_state
+                        break
+                    if last_state != 'ready':
+                        time.sleep(1.0)
+                        continue
                 status, clip, ctype = g.req('GET', url)
                 # The audio endpoint serves the rendered bytes directly. A JSON
                 # state envelope is not its contract: an ID3/MPEG header in the

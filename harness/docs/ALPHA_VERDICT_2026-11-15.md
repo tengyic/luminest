@@ -29,7 +29,8 @@
 | 后端全量测试 | **2482 passed / 0 failed / 2 skipped**（收集 2484，32m33s） | 同 1.2 的命令，`--basetemp=.pytest-basetemp-1117d` |
 | 原生单测 | **140 passed / 0 failed**（3.9s） | `cd native && env -u PYTHONPATH swift test --disable-sandbox` |
 | 能力登记册 | 14 区 65 项：47 implemented / **16 partial** / 2 external | `python3 scripts/verify_feature_register.py --check` |
-| Closed-Alpha E2E gate | **47/47**，0 失败步骤（2026-11-19，provider 有额度） | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` |
+| Closed-Alpha E2E gate | **47/47**，0 失败步骤（2026-11-19，provider 有额度；本地 Ollama 复核亦 47/47） | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` |
+| 监督通知定向回归 | **175 passed**（2026-11-19，含"教师指令绝不出现在学员气泡"） | `cd backend && TMPDIR=… .venv/bin/python -m pytest tests/test_interruption.py tests/test_voice_presets.py tests/test_supervision.py tests/test_classroom.py tests/test_provider.py tests/test_teaching_diagnosis.py tests/test_agent_loop.py tests/test_api.py` |
 
 关于同一份代码的两次 gate，两个日期都留着，因为它们不是同一个事实：
 
@@ -63,6 +64,9 @@
 2. **测量冷测预算 500**：`_cold_decision` 把 `episodes.label_attempts` 返回的 dict 当 ORM 行读 `row.question_id`，第一个有答题记录的用户就让 `/measurement/probe/next` 崩掉。改为 `.get()` 并加回归测试。
 3. **工具标识符未被服务端绑定**：1.5B 模型会把 schema 示例（`board_id_example`）或自己编的短 id（`lesson_1`）填进 `board_id`，白板工具正确地拒绝，但表现为"白板坏了"。在 `toolbox.invoke` 这一唯一闸口，用白板层自己的 ID 校验器判定不可解析的地址，替换成 live lesson 的真实 ID；真实显式 ID 一律不动，替换会写进 tool result 的 notes 以便审计。9 项回归测试。
 4. **课时图片不走随包图库**：`fetch_for_lesson` 直接联网搜索，对已有随包许可图的物理概念也报 `no_images`。改为先用 `photograph_for_concept` 装配一张随包图填概念槽，其余槽仍走正常许可搜索；2 项回归测试。
+5. **Lumi 气泡念出教师自己的指令**（用户截图指出的"反复胡说"）：`supervision.py` 里每个 `move['say']` 都是**写给教师模型的祈使指令**（"Ask for a prediction about the next step, not for an explanation of the whole thing."），但 `_notice()` 把它当成 `notice['text']` 发出去，原生端既显示又朗读。旧测试只传 `why`、不传 `say`，所以从没覆盖到这条路径。新增 `LEARNER_NOTICES`（每种 move 三句经审定的学员用语）与 `learner_notice(kind, now)`（按冷却窗口轮换，两次通知不会重复同一句）；`_notice()` 只用学员用语，无对应文案则**保持沉默**，绝不回退 `say`/`why`。含回归测试：指令文本绝不出现在通知里、只有指令的未知 move 保持沉默。
+
+**同批证据**：175 项定向测试通过（interruption / voice presets / supervision / classroom / provider / teaching diagnosis / agent loop / API）；对真实 supervisor 八种状态的扫描无任何指令泄漏、文案按窗口轮换；fresh schema-13 后端上 E2E gate **47/47**。`TEACHER ORCHESTRATES A TOOL` 在中间一次运行里因 1.5B 模型给 `stage_surface` 编造了多余参数 `compiled_surface` 而工具正确拒绝、模型随后解释而非重试——已确认 agent loop 会把完整拒绝原因回喂且允许多步；这是模型波动（同模型前一次与后一次均通过），**没有**加自动重试，因为盲重放可能重复真实副作用。gate 自身的 TTS 轮询也修正为按设计的 `/media/audio/{digest}/state` 轮询 180 s（冷引擎可超 40 s），再校验 ID3 字节。
 
 另外修了 gate 自身的三处假通过：源文本只有 1 段导致 422、TTS 把 MP3 字节响应当 JSON 状态读、以及"HTTP 200 就算教师编排成功"。现在 gate 会拒绝"答案是兜底文本""没派发工具""ASR 走了批量回退"。
 

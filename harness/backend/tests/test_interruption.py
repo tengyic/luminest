@@ -15,6 +15,7 @@ Three things are pinned here:
 """
 
 from app.harness import speech
+from app.harness.teaching import supervision
 from app.routes_supervision import _notice
 
 from test_tutor_voice import agent_client, system_of  # noqa: F401 - fixtures and helpers
@@ -75,10 +76,38 @@ def test_the_interval_check_stays_silent_when_the_learner_is_working():
 
 def test_a_nudge_is_offered_as_an_idle_only_notification():
     notice = _notice({'move': {'kind': 'nudge', 'why': 'You have not moved for a while.'},
-                      'quiet': False})
+                      'quiet': False, 'at': 0})
     assert notice['say'] is True
-    assert notice['text'] == 'You have not moved for a while.'
+    assert notice['text'] == supervision.LEARNER_NOTICES['nudge'][0]
     assert notice['delivery'] == 'idle_only'
+
+
+def test_a_teacher_directive_is_never_spoken_to_the_learner():
+    """The bug this pins: a move's ``say`` is an instruction TO THE MODEL.
+
+    It used to be shipped as ``notice['text']``, so Lumi displayed and spoke
+    "Ask for a prediction about the next step, not for an explanation of the whole
+    thing." -- the teacher's own note to itself, addressed to the learner.
+    """
+    directive = ('Ask for a prediction about the next step, not for an explanation '
+                 'of the whole thing.')
+    notice = _notice({'move': {'kind': 'nudge', 'say': directive,
+                               'why': 'A small answerable question re-enters the task.'},
+                      'quiet': False, 'at': 0})
+    assert notice['say'] is True
+    assert notice['text'] != directive
+    assert 'Ask for a prediction' not in notice['text']
+    assert notice['text'] in supervision.LEARNER_NOTICES['nudge']
+
+
+def test_an_unknown_move_with_only_a_directive_stays_silent():
+    """No vetted learner copy means no notice -- never fall back to ``say``/``why``."""
+    notice = _notice({'move': {'kind': 'unknown_kind',
+                               'say': 'Offer a two-minute break.',
+                               'why': 'They were away.'},
+                      'quiet': False, 'at': 0})
+    assert notice['say'] is False
+    assert 'learner-facing' in notice['reason']
 
 
 def test_a_notice_inside_its_cooldown_is_withheld():

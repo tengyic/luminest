@@ -69,6 +69,59 @@ LATENCY_ANOMALY_RATIO = 0.35
 #: still there?" every thirty seconds is worse than one that says nothing.
 NOTICE_COOLDOWN_SECONDS = 180.0
 
+#: What a learner actually hears when the supervisor chooses to speak.
+#:
+#: These are deliberately separate from a move's ``say`` field. ``say`` is an instruction
+#: *to the teacher model* ("Offer a two-minute break. Do not ask where they went.") and is
+#: part of the decision trace; it is not a sentence a person should be shown or spoken.
+#: Surfacing it verbatim produced the bubble "Ask for a prediction about the next step, \n#: not for an explanation of the whole thing." -- an instruction to the tutor, addressed
+#: to the learner. Several phrasings per kind keep a long idle stretch from replaying one
+#: identical line; the cooldown guarantees consecutive notices land in different buckets.
+LEARNER_NOTICES: dict[str, tuple[str, ...]] = {
+    'offer_break': ('Would a short break help?',
+                    'Want to pause for a couple of minutes?',
+                    'A quick break might help - want one?'),
+    'retrieval': ('Want to try one quick question from what you just saw?',
+                  'Recall one thing from the last step - no notes needed.',
+                  'One quick question from memory: what do you remember?'),
+    'nudge': ('Want to try the next small step together?',
+              'Need a hand getting started again?',
+              'Pick up where you left off - want a nudge?'),
+    'hint': ('Want a hint on where to start?',
+             'Shall we break the next step into smaller pieces?',
+             'Want me to show the first move?'),
+    'explain': ('Want me to walk through the tricky bit?',
+                'Shall we work one example together?',
+                'Want a clearer explanation of this part?'),
+    'ask_reason': ('Can you say why that works, in your own words?',
+                   'What made that the right step?',
+                   'Explain it back to me in one sentence.'),
+    'variant': ("Let's try a slightly different version of that.",
+                'One more on the same idea, with a small twist.',
+                'Want to try the variant before we move on?'),
+    'explain_back': ('Can you explain how you got that?',
+                     'Say the reasoning behind your answer.',
+                     'Walk me through why that is right.'),
+}
+
+
+def learner_notice(kind: str, now: float) -> str:
+    """The learner-facing sentence for this move at this moment, or ``''``.
+
+    Never falls back to the move's ``say`` or ``why``. A decision with no vetted
+    learner copy stays silent: a tutor that says nothing is better than one that reads
+    its own instructions aloud. The variant is chosen by the cooldown window, so notices
+    that are at least one cooldown apart do not replay the same phrasing.
+    """
+    lines = LEARNER_NOTICES.get(str(kind or '').strip().casefold(), ())
+    if not lines:
+        return ''
+    try:
+        window = int(float(now) // NOTICE_COOLDOWN_SECONDS)
+    except (TypeError, ValueError, OverflowError):
+        window = 0
+    return lines[window % len(lines)]
+
 #: Stated in every payload so a client cannot present a reading as a punishment and claim
 #: the engine endorsed it.
 POSTURE = {

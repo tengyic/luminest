@@ -102,8 +102,8 @@ def test_assess_pops_voice_preferences_before_the_supervisor(client, monkeypatch
 
     def fake_assess(signals, last_notice_at=None):
         seen_signals.update(signals)
-        return {'state': 'drifting', 'quiet': False,
-                'move': {'kind': 'prompt', 'say': 'Say why that step works.',
+        return {'state': 'drifting', 'quiet': False, 'at': 0,
+                'move': {'kind': 'nudge', 'say': 'Ask them to try the next step.',
                          'why': 'The learner has been idle.'}}
 
     def fake_notice_speech(settings, text, *, voice='', tone=''):
@@ -120,7 +120,9 @@ def test_assess_pops_voice_preferences_before_the_supervisor(client, monkeypatch
     assert 'voice' not in seen_signals and 'tone' not in seen_signals
     assert 'mastery' in seen_signals and 'mastery_known' in seen_signals
     assert response.json()['notice']['say'] is True
-    assert notices == [('Say why that step works.', 'mentor', 'calm, low pitch')]
+    # Learner-facing copy, never the model directive in the move's ``say`` field.
+    from app.harness.teaching.supervision import LEARNER_NOTICES
+    assert notices == [(LEARNER_NOTICES['nudge'][0], 'mentor', 'calm, low pitch')]
 
 
 def test_notice_speech_forwards_the_selection_to_the_renderer(monkeypatch):
