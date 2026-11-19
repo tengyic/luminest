@@ -10,7 +10,7 @@
 
 | 对象               | 判定                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------ |
-| **Closed Alpha** | **技术封版成立**。一门真实课程（AP Psychology）从注册到分析报表全程跑通，端到端 HTTP 检查 **47/47**（provider 有额度的前提下），含六项"不许假通过"的强断言。2026-11-17 在 schema 13 上复核为 **45/47**，差额两条同源于 provider `HTTP 402`，见 §1.1。 |
+| **Closed Alpha** | **技术封版成立**。一门真实课程（AP Psychology）从注册到分析报表全程跑通，端到端 HTTP 检查 **47/47**，含六项"不许假通过"的强断言。schema 13 上两次复核：2026-11-19 **47/47**；2026-11-17 **45/47**，差额两条同源于 provider `HTTP 402`（额度，非代码），见 §1.1。 |
 | **Closed Beta**  | **具备条件，未验收**。代码与配置层齐备，但对外服务链路（TLS + PostgreSQL + 邀请码 + 远程语音网关）没有做端到端实测；冻结二进制刻意只绑 loopback。 |
 | **可交付物**         | 72 MB 一键启动包 + 安装说明 + 进度分析报告 + GitHub 推送，均已产出并实测。                                           |
 
@@ -22,14 +22,21 @@
 
 ## 1. 证据链（全部可复现）
 
-### 1.1 2026-11-17 复核（schema 13，HEAD `6cd5733`）
+### 1.1 2026-11-17 / 11-19 复核（schema 13，HEAD `6cd5733` → `71c8b75`）
 
 | 证据 | 结果 | 复现 |
 | --- | --- | --- |
 | 后端全量测试 | **2482 passed / 0 failed / 2 skipped**（收集 2484，32m33s） | 同 1.2 的命令，`--basetemp=.pytest-basetemp-1117d` |
 | 原生单测 | **140 passed / 0 failed**（3.9s） | `cd native && env -u PYTHONPATH swift test --disable-sandbox` |
 | 能力登记册 | 14 区 65 项：47 implemented / **16 partial** / 2 external | `python3 scripts/verify_feature_register.py --check` |
-| Closed-Alpha E2E gate | **45/47**。两条失败同源：provider 返回 **HTTP 402 Insufficient Balance**（request_id `d5c03a5a-1278-491a-bb56-ac834f44e6b9`），没有模型回合就没有工具派发。harness 交付的是**标注过的** grounded fallback（`answered_by: model-unavailable`），gate 正确地拒绝把它算成模型回复。充值后同一 gate 为 47/47。**这是额度问题，不是代码缺陷；不重跑到绿为止。** | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` |
+| Closed-Alpha E2E gate | **47/47**，0 失败步骤（2026-11-19，provider 有额度） | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` |
+
+关于同一份代码的两次 gate，两个日期都留着，因为它们不是同一个事实：
+
+- **2026-11-17（余额耗尽）**：**45/47**。两条失败同源——provider 返回 **HTTP 402 Insufficient Balance**（request_id `d5c03a5a-1278-491a-bb56-ac834f44e6b9`），没有模型回合就没有工具派发。harness 交付的是**标注过的** grounded fallback（`answered_by: model-unavailable`），gate 正确地拒绝把它算成模型回复。
+- **2026-11-19（充值后）**：**47/47**。两条检查由真实模型工作通过，不是重跑到绿：`MODEL TEACHER TURN` → `answered_by: openai:deepseek-flash`，tools `check_understanding` + `inspect_prerequisites`；`TEACHER ORCHESTRATES A TOOL` → `stage_surface` / `whiteboard_read` / `whiteboard_write` 均被派发（结果 `True / False / True`，`whiteboard_read` 在空板上读空是预期）。
+
+这条记录的意义：**402 暴露的是额度，不是代码缺陷**；把 45/47 重跑到绿会掩盖掉"降级是被标注的"这个正确行为。
 
 ### 1.2 2026-11-15 当次运行（schema 11，历史记录，原样保留）
 

@@ -8,14 +8,21 @@ simulation) is gated by a single fail-closed licence policy before it is shown.
 
 > **Verified state**
 >
-> - **2026-11-17 — schema 13 at `6cd5733`**: backend suite **2482 passed / 0 failed /
->   2 skipped** (2484 collected, 32 m 33 s); native **140/140**; end-to-end gate
->   **45/47**. Both gate failures share one external cause: the configured provider
->   answered **HTTP 402 Insufficient Balance**, so no model turn and therefore no tool
->   dispatch could happen. The harness served its *labelled* grounded fallback
->   (`answered_by: model-unavailable`) instead of presenting prose as a model reply — the
->   gate correctly refused to count it. With a funded provider this gate is 47/47; the
->   failure is credit, not code, and it is recorded as such rather than re-run until green.
+> - **2026-11-19 — schema 13, provider funded**: end-to-end gate **47/47 checks, 0
+>   failed steps** on a real AP Psychology course. The two checks that failed on
+>   2026-11-17 now pass on genuine model work, not on a retry-until-green:
+>   `MODEL TEACHER TURN` → `answered_by: openai:deepseek-flash`, tools
+>   `check_understanding` + `inspect_prerequisites`; `TEACHER ORCHESTRATES A TOOL` →
+>   `stage_surface`, `whiteboard_read`, `whiteboard_write` dispatched. Backend suite
+>   **2482 passed / 0 failed / 2 skipped** (2484 collected, 32 m 33 s); native
+>   **140/140**.
+> - **2026-11-17 — schema 13 at `6cd5733`, provider out of credit**: same tree, gate
+>   **45/47**. Both failures were one external cause: the provider answered **HTTP 402
+>   Insufficient Balance**, so no model turn and therefore no tool dispatch could happen.
+>   The harness served its *labelled* grounded fallback (`answered_by:
+>   model-unavailable`) rather than passing prose off as a model reply, and the gate
+>   correctly refused to count it. Kept here because "45/47 caused by a 402" and
+>   "47/47" are different facts about the same code.
 > - **2026-11-15 — Closed Alpha (provider funded)**: end-to-end gate **47/47** on a real AP Psychology
 >   course with hard "no fake pass" assertions; backend suite **2451 passed /
 >   0 failed / 2 skipped**; frozen backend smoke **11/11**. See
@@ -191,7 +198,7 @@ artifact, not from the presence of a file. Run them from `harness/` unless noted
 
 | Gate | Result | Reproduce | Evidence |
 | --- | --- | --- | --- |
-| Closed-Alpha end-to-end | **45/47 checks** at `6cd5733` — the two failures are one cause: provider **HTTP 402 Insufficient Balance**, so no model turn / tool dispatch ran. **47/47** on a funded provider (2026-11-15) | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` | `outputs/alpha_e2e_evidence.json` |
+| Closed-Alpha end-to-end | **47/47 checks, 0 failed steps** (2026-11-19, provider funded). Was 45/47 on 2026-11-17 on the same code, both failures caused by provider **HTTP 402** | `python3 scripts/alpha_e2e_gate.py --base http://127.0.0.1:<port> --course ap_psychology` | `outputs/alpha_e2e_evidence.json` |
 | Backend full suite | **2482 passed / 0 failed / 2 skipped** (2484 collected, 32m33s, 2026-11-17) | `cd backend && env -u PYTHONPATH -u NODE_OPTIONS .venv/bin/python -m pytest -q --basetemp=.pytest-basetemp-XXXX -p no:cacheprovider` | summary embedded here; raw log stays local (see note below) |
 | Native unit tests | **140 passed / 0 failed** (3.9 s) | `cd native && env -u PYTHONPATH swift test --disable-sandbox` | — |
 | Frozen backend smoke | **11/11** | `python3 scripts/package.py --backend-only --allow-template-legal` | `outputs/closed-beta-2026-11-15/` |
