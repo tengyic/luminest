@@ -35,6 +35,50 @@ REFERENCE_ASSETS_SRC = os.path.join(OUTPUTS, "reference-style-assets")
 REFERENCE_ASSETS_WEB = os.path.join(REFERENCE_ASSETS_SRC, "web")
 VERSION = "1.4.1"
 
+# The published site uses one public port. server.py proxies /api/v1/* to a
+# FastAPI backend on loopback:8766; publishing the site without starting that
+# backend is exactly what produced 502 "backend unreachable" on the web client.
+# This launcher starts both processes and gates the public port on backend
+# health. Provider key comes from the operator's environment, never from a file
+# under SITE, so nothing secret is published.
+_START_SH = r'''#!/bin/sh
+set -eu
+HERE=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+: "${PORT:=8788}"
+: "${BACKEND_PORT:=8766}"
+PYTHON=${PYTHON:-python3}
+if [ -x "$HERE/venv/bin/python" ]; then PYTHON="$HERE/venv/bin/python"; fi
+if [ ! -f "$HERE/backend/app/main.py" ]; then
+  echo "start.sh: backend source missing at $HERE/backend" >&2; exit 1
+fi
+export HARNESS_ENV="${HARNESS_ENV:-production}"
+export HARNESS_DATA_DIR="${HARNESS_DATA_DIR:-$HERE/.data}"
+export HARNESS_TUTOR_PROVIDER="${HARNESS_TUTOR_PROVIDER:-}"
+mkdir -p "$HARNESS_DATA_DIR"
+echo "start.sh: starting backend on 127.0.0.1:$BACKEND_PORT"
+cd "$HERE/backend"
+"$PYTHON" -m uvicorn app.main:create_app --factory --host 127.0.0.1 --port "$BACKEND_PORT" &
+BACKEND_PID=$!
+cleanup() { kill "$BACKEND_PID" 2>/dev/null || true; }
+trap cleanup EXIT INT TERM
+echo "start.sh: waiting for backend health"
+i=0
+while [ "$i" -lt 60 ]; do
+  if "$PYTHON" - "$BACKEND_PORT" <<'PY' >/dev/null 2>&1
+import sys, urllib.request
+with urllib.request.urlopen("http://127.0.0.1:%s/api/v1/health" % sys.argv[1], timeout=2) as r:
+    sys.exit(0 if r.status == 200 else 1)
+PY
+  then echo "start.sh: backend healthy"; break; fi
+  i=$((i + 1)); sleep 1
+done
+if [ "$i" -ge 60 ]; then echo "start.sh: backend failed to become healthy after 60s" >&2; exit 1; fi
+echo "start.sh: starting control server on 0.0.0.0:$PORT"
+cd "$HERE"
+export LUMINEST_BACKEND_URL="http://127.0.0.1:$BACKEND_PORT"
+exec "$PYTHON" server.py
+'''
+
 # Real app captures, not renders. Source: outputs/app-screenshots/presentation/
 # (2640x1720 release-build captures), downscaled to 1200px JPEG for the web.
 # Provenance and blank checks live in outputs/app-screenshots/MANIFEST.md.
@@ -139,6 +183,11 @@ def copy_static() -> None:
             print("  asset -> %s" % os.path.relpath(dst, SITE))
     shutil.copy2(BETA_SERVER, os.path.join(SITE, "server.py"))
     print("  control server -> server.py")
+    launcher = os.path.join(SITE, "start.sh")
+    with open(launcher, "w", encoding="utf-8") as fh:
+        fh.write(_START_SH)
+    os.chmod(launcher, 0o755)
+    print("  single-port launcher -> start.sh")
 
 
 def copy_captures() -> None:
