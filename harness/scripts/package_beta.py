@@ -33,7 +33,7 @@ ART_SRC = os.path.join(OUTPUTS, "art-sources")
 ART_WEB = os.path.join(ART_SRC, "web")
 REFERENCE_ASSETS_SRC = os.path.join(OUTPUTS, "reference-style-assets")
 REFERENCE_ASSETS_WEB = os.path.join(REFERENCE_ASSETS_SRC, "web")
-VERSION = "1.4.0"
+VERSION = "1.4.1"
 
 # Real app captures, not renders. Source: outputs/app-screenshots/presentation/
 # (2640x1720 release-build captures), downscaled to 1200px JPEG for the web.
@@ -45,11 +45,17 @@ CAPTURE_NAMES = [
     "10-course-picker", "11-setup-goal", "12-setup-pace",
 ]
 
+# 1.4.1 (2026-11-25) is a re-assembly of the 2026-11-24 release candidate, not a new
+# compile: --skip-native-build --skip-backend-build reused the same arm64 executable and
+# the frozen schema-13 backend. The version string had to change because publishing new
+# bytes under 1.4.0 would leave installed 1.4.0 builds believing they were current.
+# Hashes below are measured from the artifacts actually produced by that reassembly and
+# recorded in outputs/.packaging/package-result.json; a drift still fails the build.
 ARTIFACTS = [
-    ("Luminest-arm64.dmg", "050f5db45cbd3bb31a62e2f030ef25362e37cb6cd11d8093eb7065d7ef318838",
-     96483349, "macOS disk image"),
-    ("Luminest-arm64.zip", "d435e68f435604fcff243e105f600229c253be4cb0820c418f89bd05e0b6c284",
-     91942918, "macOS app archive"),
+    ("Luminest-arm64.dmg", "b08864a35b3ed666bc6c2ee7d469dc9ff47b196921bfcf2877442a7ae3e5f2ae",
+     98443979, "macOS disk image"),
+    ("Luminest-arm64.zip", "3f7f3035626db9007759228b37fef467b93ac607aaa13d737e4abebe957bdab0",
+     94213522, "macOS app archive"),
 ]
 
 DEMO_SEED = {
@@ -265,7 +271,10 @@ def write_manifest(rows: list[dict]) -> None:
         "published_at": int(time.time()),
         "min_macos": "14.0",
         "platform": "macOS 14+ / Apple Silicon (arm64)",
-        "release_notes": "Closed beta 1. Share-code access, no billing, remote update manifest.",
+        "release_notes": ("1.4.1: rebuilt from the 2026-11-24 candidate with schema 13, "
+                          "215 verified visual assets and the supervision fix that keeps "
+                          "teacher directives out of Lumi's speech bubble. Version bumped "
+                          "so installed 1.4.0 builds are told a new build exists."),
         "artifacts": [{"url": r["url"], "sha256": r["sha256"],
                        "bytes": r["bytes"], "name": r["name"]} for r in rows],
         "web_version_url": "/app/",
